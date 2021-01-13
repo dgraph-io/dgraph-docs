@@ -11,7 +11,7 @@ set -e
 
 # Important for clean builds on Netlify
 if ! git remote | grep -q origin ; then
-    git remote add origin https://github.com/dgraph-io/dgraph.git
+    git remote add origin https://github.com/dgraph-io/dgraph-docs.git
     git fetch --all
 fi
 
