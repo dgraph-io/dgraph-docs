@@ -45,9 +45,6 @@ NEW_VERSIONS=(
 # these versions use old theme
 OLD_VERSIONS=(
 	'v20.03'
-	'v1.2.2'
-	'v1.1.1'
-	'v1.0.18'
 )
 
 VERSIONS_ARRAY=("${NEW_VERSIONS[@]}" "${OLD_VERSIONS[@]}")
