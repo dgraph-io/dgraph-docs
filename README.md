@@ -1,4 +1,4 @@
-# Dgraph Wiki
+# Dgraph Documentation
 
 If you are looking for Dgraph documentation, you might find https://dgraph.io/docs/ much more readable.
 
