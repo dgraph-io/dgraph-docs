@@ -69,16 +69,18 @@ rebuild() {
 	VERSION_STRING=$(joinVersions)
 	# In Unix environments, env variables should also be exported to be seen by Hugo
 	export CURRENT_BRANCH=${1}
-	export CURRENT_VERSION=${3}
+	export CURRENT_VERSION=${2}
+	export CURRENT_LATEST_TAG=${3}
 	export VERSIONS=${VERSION_STRING}
 	export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
-        export CANONICAL_PATH="$HOST"
+	export CANONICAL_PATH="$HOST"
 
 	HUGO_TITLE="Dgraph Doc ${2}"\
 		CANONICAL_PATH=${HOST}\
 		VERSIONS=${VERSION_STRING}\
 		CURRENT_BRANCH=${1}\
-		CURRENT_VERSION=${3} ${HUGO} \
+		CURRENT_LATEST_TAG=${3}\
+		CURRENT_VERSION=${2} ${HUGO} \
 		--destination="${PUBLIC}"/"$dir"\
 		--baseURL="$HOST"/"$dir" 1> /dev/null
 }
