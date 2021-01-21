@@ -69,7 +69,7 @@ rebuild() {
 	VERSION_STRING=$(joinVersions)
 	# In Unix environments, env variables should also be exported to be seen by Hugo
 	export CURRENT_BRANCH=${1}
-	export CURRENT_VERSION=${2}
+	export CURRENT_VERSION=${3}
 	export VERSIONS=${VERSION_STRING}
 	export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
         export CANONICAL_PATH="$HOST"
@@ -78,7 +78,7 @@ rebuild() {
 		CANONICAL_PATH=${HOST}\
 		VERSIONS=${VERSION_STRING}\
 		CURRENT_BRANCH=${1}\
-		CURRENT_VERSION=${2} ${HUGO} \
+		CURRENT_VERSION=${3} ${HUGO} \
 		--destination="${PUBLIC}"/"$dir"\
 		--baseURL="$HOST"/"$dir" 1> /dev/null
 }
@@ -122,12 +122,12 @@ checkAndUpdate()
 
 	if branchUpdated "$branch" ; then
 		git merge -q origin/"$branch"
-		rebuild "$branch" "$tag"
+		rebuild "$branch" $version "$tag"
 	fi
 
 	folder=$(publicFolder "$version")
 	if [ "$firstRun" = 1 ] || [ "$themeUpdated" = 0 ] || [ ! -d "$folder" ] ; then
-		rebuild "$branch" "$tag"
+		rebuild "$branch" $version "$tag"
 	fi
 }
 
@@ -181,7 +181,12 @@ while true; do
 
 	for version in "${OLD_VERSIONS[@]}"
 	do
-		checkAndUpdate "$version"
+		latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+		SETO="${latest_version:-master}" 
+		checkAndUpdate "$version" "$SETO"
+		echo "version => '$version'"
+		echo "latest_version => '$SETO'"
+		latest_version=''
 	done
 
 	echo -e "$(date)  Done checking branches.\n"
