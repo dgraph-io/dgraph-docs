@@ -157,9 +157,12 @@ while true; do
 	echo -e "$(date)  Starting to check branches."
 	git remote update > /dev/null
 
+    latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+
 	for version in "${NEW_VERSIONS[@]}"
 	do
-		checkAndUpdate "$version"
+		checkAndUpdate "$latest_version"
+		latest_version=''
 	done
 
 	# Lets check if the old theme was updated.
