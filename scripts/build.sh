@@ -35,10 +35,11 @@ NEW_THEME="${NEW_THEME:-master}"
 # and then the older versions in descending order, such that the
 # build script can place the artifact in an appropriate location.
 
-
 # these versions use new theme
 NEW_VERSIONS=(
-	'master'
+        'v20.11'
+        'master'
+        'v20.07'
 )
 
 # these versions use old theme
@@ -68,16 +69,18 @@ rebuild() {
 	VERSION_STRING=$(joinVersions)
 	# In Unix environments, env variables should also be exported to be seen by Hugo
 	export CURRENT_BRANCH=${1}
-	export CURRENT_VERSION=${3}
+	export CURRENT_VERSION=${2}
+	export CURRENT_LATEST_TAG=${3}
 	export VERSIONS=${VERSION_STRING}
 	export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
-        export CANONICAL_PATH="$HOST"
+	export CANONICAL_PATH="$HOST"
 
 	HUGO_TITLE="Dgraph Doc ${2}"\
 		CANONICAL_PATH=${HOST}\
 		VERSIONS=${VERSION_STRING}\
 		CURRENT_BRANCH=${1}\
-		CURRENT_VERSION=${3} ${HUGO} \
+		CURRENT_LATEST_TAG=${3}\
+		CURRENT_VERSION=${2} ${HUGO} \
 		--destination="${PUBLIC}"/"$dir"\
 		--baseURL="$HOST"/"$dir" 1> /dev/null
 }
@@ -159,7 +162,7 @@ while true; do
 
 	for version in "${NEW_VERSIONS[@]}"
 	do
-		latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+	    latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
 		SETO="${latest_version:-master}" 
 		checkAndUpdate "$version" "$SETO"
 		echo "version => '$version'"
