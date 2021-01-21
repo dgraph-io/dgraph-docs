@@ -159,7 +159,12 @@ while true; do
 
 	for version in "${NEW_VERSIONS[@]}"
 	do
-		checkAndUpdate "$version"
+	    latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+		SETO="${latest_version:-master}" 
+		checkAndUpdate "$SETO"
+		echo "version => '$version'"
+		echo "latest_version => '$SETO'"
+		latest_version=''
 	done
 
 	# Lets check if the old theme was updated.
