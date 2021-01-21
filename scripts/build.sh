@@ -112,6 +112,7 @@ checkAndUpdate()
 {
 	local version="$1"
 	local branch=""
+	local tag="$2"
 
 	if [[ $version == "master" ]]; then
 		branch="master"
@@ -121,12 +122,12 @@ checkAndUpdate()
 
 	if branchUpdated "$branch" ; then
 		git merge -q origin/"$branch"
-		rebuild "$branch" "$version"
+		rebuild "$branch" "$tag"
 	fi
 
 	folder=$(publicFolder "$version")
 	if [ "$firstRun" = 1 ] || [ "$themeUpdated" = 0 ] || [ ! -d "$folder" ] ; then
-		rebuild "$branch" "$version"
+		rebuild "$branch" "$tag"
 	fi
 }
 
@@ -159,7 +160,12 @@ while true; do
 
 	for version in "${NEW_VERSIONS[@]}"
 	do
-		checkAndUpdate "$version"
+	    latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+		SETO="${latest_version:-master}" 
+		checkAndUpdate "$version" "$SETO"
+		echo "version => '$version'"
+		echo "latest_version => '$SETO'"
+		latest_version=''
 	done
 
 	# Lets check if the old theme was updated.
