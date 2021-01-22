@@ -55,15 +55,9 @@ go tool pprof http://<IP>:<HTTP_PORT>/debug/pprof/block
 
 The HTTP page `/debug/pprof/` is available at the HTTP port of a Dgraph Zero or Dgraph Alpha. From this page a link to the "full goroutine stack dump" is available (e.g., on a Dgraph Alpha this page would be at `http://localhost:8080/debug/pprof/goroutine?debug=2`). Looking at the full goroutine stack can be useful to understand goroutine usage at that moment.
 
-## debuginfo
+## Profiling Information with `debuginfo`
 
-Context
-
-Sometimes (very frequently) users report issues with memory and CPU consumptions while using Dgraph. Apart from asking what they are doing, type of workload, logs we also ask for profiles. To get these profiles the user has to send a request to the server and this has to be done for CPU and Memory profiles. We also have goroutine profiles that need to be requested via curl, wget or go. We have documentation on how to get them here but sometimes it gets frustrating to send several requests when we ask them.
-
-To simplify this process, we have a command called `debuginfo` that collects all the profiles we need
-
-### How does it work
+Instead of sending a request to the server for each CPU, Memory, and goroutine profile, you can use the `debuginfo` command that collects all the profiles you need in one go.
 
 You can run the command like this:
 
@@ -71,51 +65,7 @@ You can run the command like this:
 dgraph debuginfo -a <alpha_address:port> -z <zero_address:port> -d <path_to_dir_to_store_profiles> 
 ```
 
-It comes with the following flags:
-
-```
-  -a, --alpha string       Address of running dgraph alpha. (default "localhost:8080")
-  -x, --archive            Whether to archive the generated report (default true)
-  -d, --directory string   Directory to write the debug info into.
-  -h, --help               help for debuginfo
-  -p, --profiles strings   List of pprof profiles to dump in the report. (default [goroutine,heap,threadcreate,block,mutex,profile,trace])
-  -s, --seconds uint32     Duration for time-based profile collection. (default 15)
-  -z, --zero string        Address of running dgraph zero.
-```
-
-The flags are self-explanatory, btw I’d like to spend a couple of words on the following flags:
-
-The “-p” flag (profile flag)
-
- By default, it collects `goroutine`, `heap`, `threadcreate`, `block`, `mutex`, `profile`, `trace` - Anyway if needed you can collect some of them (not necessarily all) with a similar command:
-
-```sh
-dgraph debuginfo -p goroutine,heap
-```
-
-This command will collect only goroutine and heap profiles
-
-The “-s” flag (seconds flag)
-
-By default is set to 15seconds and that should be fine for all the profiles that we are collecting except for the cpu profile, this profile needs at least 30sec to be collected therefore when we want to collect it (most of the times) we need to tune the -s flag as follows:
-
-```sh
-dgraph debug info -s 30
-```
-
-I’m working on fixing that to set it to a default value of 30sec so we dont need to specify this flag. Anyway for the time being that flag is required if we want to collect a cpu profile. 
-
-If we miss that flag we will get a context deadline exceeded:
-
-```log
-I0120 14:06:49.840613   13589 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/profile?duration=15
-I0120 14:06:49.840622   13589 pprof.go:74] please wait... (15s)
-E0120 14:07:14.341613   13589 pprof.go:58] error while saving pprof profile from http://localhost:8080/debug/pprof/profile?duration=15: http fetch: Get "http://localhost:8080/debug/pprof/profile?duration=15": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
-```
-
-What is the output you will get when running that command:
-
-Your output will look like:
+Your output should look like:
 
 ```log
 [Decoder]: Using assembly version of decoder
@@ -145,9 +95,54 @@ I0120 14:58:14.792110   15018 pprof.go:62] saving trace profile in /tmp/dgraph-d
 I0120 14:58:14.799585   15018 run.go:115] Debuginfo archive successful: dgraph-debuginfo121781350.tar.gz
 ```
 
-as you can see at the end it will say where this tarball dir has been saved. In my case it has been saved in `/tmp/dgraph-debuginfo121781350/alpha_trace.gz` because I did not specify the -d flag to give a custom path
+When the command finishes, `debuginfo` returns the tarball's file name. In this example, it was saved in `/tmp/dgraph-debuginfo121781350/alpha_trace.gz`.
 
-### What does each profile mean
+### Command parameters
+
+```
+  -a, --alpha string       Address of running dgraph alpha. (default "localhost:8080")
+  -x, --archive            Whether to archive the generated report (default true)
+  -d, --directory string   Directory to write the debug info into.
+  -h, --help               help for debuginfo
+  -p, --profiles strings   List of pprof profiles to dump in the report. (default [goroutine,heap,threadcreate,block,mutex,profile,trace])
+  -s, --seconds uint32     Duration for time-based profile collection. (default 15)
+  -z, --zero string        Address of running dgraph zero.
+```
+
+#### The profile flag (`-p`)
+
+By default, `debuginfo` collects:
+- `goroutine`
+- `heap`
+- `threadcreate` 
+- `block` 
+- `mutex` 
+- `profile`
+- `trace`
+
+If needed, you can collect some of them (not necessarily all). For example, this command will collect only `goroutine` and `heap` profiles:
+
+```sh
+dgraph debuginfo -p goroutine,heap
+```
+
+#### The seconds flag (`-s`)
+
+By default, the flag is set to 15 seconds. If you are collecting the CPU profile, this profile needs at least 30 seconds to be collected, therefore when you want to collect it, you need to set the `-s` flag as follows:
+
+```sh
+dgraph debug info -s 30
+```
+
+If you don't set the flag, when collecting a CPU profile you'll will get a `context deadline exceeded`:
+
+```log
+I0120 14:06:49.840613   13589 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/profile?duration=15
+I0120 14:06:49.840622   13589 pprof.go:74] please wait... (15s)
+E0120 14:07:14.341613   13589 pprof.go:58] error while saving pprof profile from http://localhost:8080/debug/pprof/profile?duration=15: http fetch: Get "http://localhost:8080/debug/pprof/profile?duration=15": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+```
+
+### Profiles details
 
 - `cpu profile`: CPU profile determines where a program spends its time while actively consuming CPU cycles (as opposed to while sleeping or waiting for I/O).
 
@@ -161,13 +156,5 @@ as you can see at the end it will say where this tarball dir has been saved. In 
 
 - `mutex`: Mutex profile reports the lock contentions. When you think your CPU is not fully utilized due to a mutex contention, use this profile. 
 
-- `trace`:  this capture a wide range of runtime events.  Execution tracer is a tool to detect latency and utilization problems. You can examine how well the CPU is utilized, and when networking or syscalls are a cause of preemption for the goroutines.
-
-Tracer is useful to:
-
-Understand how your goroutines execute.
-
-Understand some of the core runtime events such as GC runs.
-
-Identify poorly parallelized execution.
-
+- `trace`: this capture a wide range of runtime events. Execution tracer is a tool to detect latency and utilization problems. You can examine how well the CPU is utilized, and when networking or syscalls are a cause of preemption for the goroutines.
+Tracer is useful to identify poorly parallelized execution, understand some of the core runtime events, and how your goroutines execute.
