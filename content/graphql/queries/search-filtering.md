@@ -1,12 +1,13 @@
 +++
 title = "Search and Filtering"
+description = " Queries generated for a GraphQL type allow you to generate a single list of objects for a type. You can also query a list of objects using GraphQL."
 weight = 2
 [menu.main]
     parent = "graphql-queries"
     name = "Search and Filtering"
 +++
 
-Queries generated for a GraphQL type allow you to generate a single of list of
+Queries generated for a GraphQL type allow you to generate a single list of
 objects for a type.
 
 ### Get a single object

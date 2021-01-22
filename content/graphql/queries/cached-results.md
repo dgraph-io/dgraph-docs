@@ -1,5 +1,6 @@
 +++
 title = "Cached Results"
+description = "Cached results can serve read-heavy workloads with complex queries to improve performance. This refers to external caching at the browser/CDN level"
 weight = 6
 [menu.main]
     parent = "graphql-queries"
