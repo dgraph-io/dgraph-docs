@@ -131,7 +131,7 @@ dgraph debuginfo -p goroutine,heap
 By default, the flag is set to 15 seconds. If you are collecting the CPU profile, this profile needs at least 30 seconds to be collected, therefore when you want to collect it, you need to set the `-s` flag as follows:
 
 ```sh
-dgraph debug info -s 30
+dgraph debuginfo -s 30
 ```
 
 If you don't set the flag, when collecting a CPU profile you'll will get a `context deadline exceeded` error:
