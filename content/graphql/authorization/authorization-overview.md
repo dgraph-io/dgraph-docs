@@ -1,12 +1,13 @@
 +++
 title = "Overview"
+description = "Dgraph’s GraphQL implementation comes with built-in authorization. It allows you to annotate your schema with rules that determine who can access or mutate the data."
 weight = 1
 [menu.main]
     parent = "authorization"
     identifier = "authorization-overview"
 +++
 
-Dgraph GraphQL comes with built-in authorization. It allows you to annotate your schema with rules that determine who can access or mutate the data.
+Dgraph's GraphQL implementation comes with built-in authorization. It allows you to annotate your schema with rules that determine who can access or mutate the data.
 
 First, let's get some concepts defined. There are two important concepts in what's often called 'auth':
 

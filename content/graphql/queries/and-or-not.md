@@ -1,13 +1,13 @@
 +++
 title = "And, Or and Not"
-description = "Every search filter contains `and`, `or` and `not` operators."
+description = "Every GraphQL search filter can use AND, OR and NOT operators."
 weight = 5
 [menu.main]
     parent = "graphql-queries"
     name = "And, Or and Not"
 +++
 
-Every search filter contains `and`, `or` and `not` operators.
+Every GraphQL search filter can use `and`, `or` and `not` operators.
 
 GraphQL syntax uses infix notation, so: "a and b" is `a, and: { b }`, "a or b or c" is `a, or: { b, or: c }`, and "not" is a prefix (`not:`).
 
