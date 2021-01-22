@@ -99,7 +99,7 @@ When the command finishes, `debuginfo` returns the tarball's file name. In this 
 
 ### Command parameters
 
-```
+```txt
   -a, --alpha string       Address of running dgraph alpha. (default "localhost:8080")
   -x, --archive            Whether to archive the generated report (default true)
   -d, --directory string   Directory to write the debug info into.
@@ -134,7 +134,7 @@ By default, the flag is set to 15 seconds. If you are collecting the CPU profile
 dgraph debug info -s 30
 ```
 
-If you don't set the flag, when collecting a CPU profile you'll will get a `context deadline exceeded`:
+If you don't set the flag, when collecting a CPU profile you'll will get a `context deadline exceeded` error:
 
 ```log
 I0120 14:06:49.840613   13589 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/profile?duration=15
