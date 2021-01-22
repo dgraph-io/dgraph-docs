@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T19:35:35+11:00"
 title = "Get started with Dgraph"
+description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph docs have the information you need."
 aliases = ["/contribute"]
 [menu.main]
   name = "Home"
