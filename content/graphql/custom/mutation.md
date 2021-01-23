@@ -1,7 +1,6 @@
 +++
 title = "Custom Mutations"
-description = "With custom mutations, you can use custom logic to define values for one or more
-fields in a mutation."
+description = "With custom mutations, you can use custom logic to define values for one or more fields in a mutation."
 weight = 4
 [menu.main]
     parent = "custom"

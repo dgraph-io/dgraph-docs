@@ -1,7 +1,6 @@
 +++
 title = "Custom DQL"
-description = "Dgraph Query Language (DQL) includes support for custom logic. Specify the DQL query you want to execute and Dgraph’s GraphQL API will execute it.
-"
+description = "Dgraph Query Language (DQL) includes support for custom logic. Specify the DQL query you want to execute and the Dgraph GraphQL API will execute it."
 weight = 6
 [menu.main]
     parent = "custom"
