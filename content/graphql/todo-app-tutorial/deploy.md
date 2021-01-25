@@ -1,6 +1,6 @@
 +++
 title = "Deploying on Slash GraphQL"
-weight = 6
+weight = 7
 [menu.main]
     parent = "todo-app-tutorial"
 +++
