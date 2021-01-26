@@ -199,7 +199,7 @@ Using the `between` filter, you could fetch records for students who are between
 **Query**:
 
 ```graphql
-queryStudent(fitler: {age: between: {min: 10, max: 20}}){
+queryStudent(filter: {age: between: {min: 10, max: 20}}){
     age
     name
 }
@@ -211,7 +211,7 @@ alphabetically between `ba` and `hz`:
 **Query**:
 
 ```graphql
-queryStudent(fitler: {name: between: {min: "ba", max: "hz"}}){
+queryStudent(filter: {name: between: {min: "ba", max: "hz"}}){
     age
     name
 }
