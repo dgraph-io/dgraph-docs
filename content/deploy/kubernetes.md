@@ -225,7 +225,7 @@ helm install my-release dgraph/dgraph
 The above command will install the latest available dgraph docker image. In order to install the older versions:
 
 ```sh
-helm install my-release dgraph/dgraph --set image.tag="latest"
+helm install my-release dgraph/dgraph --set image.tag="{{< version >}}"
 ```
 
 By default zero and alpha services are exposed only within the kubernetes cluster as
