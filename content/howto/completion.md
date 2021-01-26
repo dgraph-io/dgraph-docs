@@ -27,7 +27,7 @@ echo $0
 and the output should look like:
 
 ```sh
-omar@workstation:~/Desktop/dgraph$ echo $0
+user@workstation:~/Desktop/dgraph$ echo $0
 bash
 ```
 
@@ -95,7 +95,7 @@ source ~/.bashrc
 Now you can start typing `dgraph` and press <kbd>tab</kbd> to get auto-completion and suggestions:
 
 ```txt
-omar@workstation:~/Desktop/dgraph$ dgraph 
+user@workstation:~/Desktop/dgraph$ dgraph 
 acl            cert           debug          increment      migrate        tool           zero
 alpha          completion     debuginfo      live           raftmigrate    upgrade        
 bulk           conv           export_backup  lsbackup       restore        version   
