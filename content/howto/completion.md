@@ -27,7 +27,7 @@ echo $0
 and the output should look like:
 
 ```sh
-user@workstation:~/Desktop/dgraph$ echo $0
+user@workstation:~/dgraph$ echo $0
 bash
 ```
 
