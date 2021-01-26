@@ -271,7 +271,7 @@ When the new cluster (that uses the upgraded version of Dgraph) is up and runnin
 6. Start a new Dgraph cluster using the restored data directories
 7. Upgrade ACL data using the following command:
 
-```
+```sh
 dgraph upgrade --acl -a localhost:9080 -u groot -p password
 ```
 
@@ -283,7 +283,7 @@ dgraph upgrade --acl -a localhost:9080 -u groot -p password
 5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using upgraded `dgraph` binary
 6. Start a new Dgraph cluster using the restored data directories
 7. Upgrade ACL data using the following command:
-    ```
+    ```sh
     dgraph upgrade --acl -a localhost:9080 -u groot -p password -f v20.03.0 -t v20.07.0
     ```
     This is required because previously the type-names `User`, `Group` and `Rule` were used by ACL.
