@@ -1,5 +1,6 @@
 +++
 title = "Quick Start"
+description = "Go from nothing to a running GraphQL API in just two steps. Just define the schema of your graph and how you’d like to search it; Dgraph does the rest."
 weight = 1
 [menu.main]
   name = "Quick Start"
@@ -246,7 +247,7 @@ query {
 We started with nothing more than the definition of three GraphQL types, yet already we have a running GraphQL API that keeps usernames unique, can run queries and mutations, and we are on our way for an e-commerce app.  
 
 There's much more that could be done: we can build in more types, more powerful search, build in queries that work through the graph like a recommendation system, and more.  Keep learning about GraphQL with Dgraph to find out about great things you can do.
-
+<!-- TBD fix the "Where Next" section below to link to the correct locations -->
 ## Where Next
 
 Depending on if you need a bit more of a walkthrough or if you're off and running, you should checkout the worked example or the sample React app.

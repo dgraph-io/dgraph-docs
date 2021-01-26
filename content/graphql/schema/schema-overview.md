@@ -1,5 +1,6 @@
 +++
 title = "Overview"
+description = "These documents describe all the things that you can put in your input GraphQL schema, and what gets generated from that."
 weight = 1
 [menu.main]
     parent = "schema"

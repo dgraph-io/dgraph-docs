@@ -1,5 +1,6 @@
 +++
 title = "How GraphQL works within Dgraph"
+description = "Dgraph is a GraphQL database. But what does that mean? You design, iterate, and scale your application - all with GraphQL."
 weight = 2
 [menu.main]
   name = "How GraphQL works within Dgraph"

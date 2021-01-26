@@ -1,5 +1,6 @@
 +++
 title = "GraphQL Variables"
+description = "Variables simplify GraphQL queries and mutations by letting you pass data separately."
 weight = 3
 [menu.main]
     parent = "api"
@@ -7,7 +8,7 @@ weight = 3
     identifier = "graphql-variables"
 +++
 
-Variables provides the benefit to simplify the GraphQL queries and mutations by allowing us to pass data into separate variables. A GraphQL request can be split into two sections: Query and Variables.
+Variables simplify GraphQL queries and mutations by letting you pass data separately. A GraphQL request can be split into two sections: one for the query or mutation, and another for variables.
 
 Variables can be declared after the `query` or `mutation` and are passed like arguments to a function and begin with `$`.
 

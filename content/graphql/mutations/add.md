@@ -1,12 +1,13 @@
 +++
 title = "Add Mutations"
+description = "Add mutations allows you to add new objects of a particular type. Dgraph automatically generates input and return types in the schema for the add mutation"
 weight = 2
 [menu.main]
     parent = "graphql-mutations"
     name = "Add"
 +++
 
-Add Mutations allows you to add new objects of a particular type.
+Add mutations allows you to add new objects of a particular type.
 
 We use the following schema to demonstrate some examples.
 
@@ -27,7 +28,8 @@ type Post {
 }
 ```
 
-Dgraph automatically generates input and return type in the schema for the add mutation.
+Dgraph automatically generates input and return types in the schema for the add mutation, 
+as shown below:
 ```graphql
 addPost(input: [AddPostInput!]!): AddPostPayload
 

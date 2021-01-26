@@ -1,11 +1,12 @@
 +++
 title = "Mutations"
+description = "Mutations with authorization work like queries. But mutations involve a state change in the database, so you need to understand when the rules are applied."
 weight = 3
 [menu.main]
     parent = "authorization"
 +++
 
-Mutations with auth work similarly to query.  However, mutations involve a state change in the database, so it's important to understand when the rules are applied and what they mean.
+Mutations with authorization work like queries. But mutations involve a state change in the database, so it's important to understand when the rules are applied and what they mean.
 
 ## Add
 

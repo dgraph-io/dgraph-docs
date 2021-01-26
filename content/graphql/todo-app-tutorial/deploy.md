@@ -1,11 +1,10 @@
 +++
 title = "Deploying on Slash GraphQL"
+description = "In just two steps on Slash GraphQL (deployment & schema), you get a GraphQL API that you can easily use in any application."
 weight = 6
 [menu.main]
     parent = "todo-app-tutorial"
 +++
-
-*You can join the waitlist for Slash GraphQL [here](https://dgraph.io/slash-graphql).*
 
 Let's now deploy our fully functional app on Slash GraphQL [slash.dgraph.io](https://slash.dgraph.io).
 
