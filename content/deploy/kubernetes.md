@@ -224,7 +224,7 @@ helm install my-release dgraph/dgraph
 The above command will install a recent version of the dgraph docker image. You can set the version an explicit version, such as:
 
 ```sh
-helm install my-release dgraph/dgraph --set image.tag="v1.2.6"
+helm install my-release dgraph/dgraph --set image.tag="{{< version >}}"
 ```
 
 {{% notice "warning" %}}When configuring dgraph image tag, be careful not to use `latest` or `master` in a production environment. These tags may have the dgraph version change, causing a mixed version dgraph cluster that can lead to an outage and potential data loss.{{% /notice %}}
