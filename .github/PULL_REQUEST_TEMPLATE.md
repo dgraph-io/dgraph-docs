@@ -1,17 +1,17 @@
 
 <!--
-Your title must be in the following format: topic(Area): Feature
-Topic must be one of build|ci|docs|feat|fix|perf|refactor|chore|test
+Your title must be in the following format: topic(area): details
+- The "topic" should be be one of the following: Docs, Nav or Chore
+- The "area" is the feature (i.e., GraphQL"), area of the docs (i.e., "Deployment"), or "Other" (for typo fixes and other bug-fix PRs). 
 
 Sample Titles:
-feat(Enterprise): Backups can now get credentials from IAM
-fix(Query): Skipping floats that cannot be Marshalled in JSON
-perf: [Breaking] json encoding is now 35% faster if SIMD is present
-chore: all chores/tests will be excluded from the CHANGELOG
+Docs (GraphQL): Document the @deprecated annotation Chore (Other): cherry-pick updates from master to release/v20.11
+
+Please develop in the `master` branch when you can, so that we cherry-pick out of `master`, not into `master`.
 
 Please add a description with these things:
-1. A good description explaining the problem and what you changed.
-2. If it fixes any GitHub issues, say "Fixes #GitHubIssue".
-3. If it corresponds to a Jira issue, say "Fixes DGRAPH-###".
-4. If this is a breaking change, please put "[Breaking]" in the title. In the description, please put a note with exactly who these changes are breaking for.
+1. A brief, clear description explaining the problem and what you changed.
+2. Link to any related PRs or discuss.dgraph.io posts.
+3. If this PR corresponds to a Jira issue, include "Fixes DGRAPH-###" or "Per Dgraph-###" in the PR description.
+3. If this is a breaking change, please put "[Breaking]" in the title. In the description, please put a note with exactly who these changes are breaking for.
 -->
