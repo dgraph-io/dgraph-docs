@@ -1,11 +1,11 @@
 +++
-title = "Using Firebase"
+title = "Using Firebase Authentication"
 weight = 6
 [menu.main]
     parent = "todo-app-tutorial"
 +++
 
-We will be using a Firebase integrated [Todo app](https://github.com/dgraph-io/graphql-sample-apps/tree/master/todo-react-firebase) for this step.
+In this step, we will add Firebase authentication per the sample [Todo app with Firebase Authentication](https://github.com/dgraph-io/graphql-sample-apps/tree/master/todo-react-firebase).
 
 ### Create Project
 
@@ -15,13 +15,13 @@ Let's start by going to the Firebase [website](https://firebase.google.com/) and
 
 ![Firebase Dashboard](/images/graphql/tutorial/todo/firebase-dashboard.png)
 
-In the Authentication section, enable `Email/Password` signin. You can add custom domain to `Authorized domains` below according to where you want to deploy your app. By defaut localhost is added to the list. 
+In the **Authentication** section, enable `Email/Password` signin. You can add a custom domain to `Authorized domains` below according to where you want to deploy your app. By defaut localhost is added to the list. 
 
 ![Authentication Section](/images/graphql/tutorial/todo/firebase-domains.png)
 
-Now we want to use the JWT that Firebase generates, but we also need to add custom claims to that token which will be used by our auth rules.
+Now we want to use the JWT that Firebase generates, but we also need to add custom claims to that token which will be used by our authorization rules.
 
-In order to add custom claims to the JWT we need to host a cloud function which will insert claims to the JWT on user creation. This is our cloud function which inserts `USER`: `email` claim under the Namespace `https://dgraph.io/jwt/claims`.
+To add custom claims to the JWT we need to host a cloud function which will insert claims into the JWT on user creation. This is our cloud function which inserts `USER`: `email` claim under the Namespace `https://dgraph.io/jwt/claims`.
 
 ```javascript
 const functions = require('firebase-functions');
@@ -47,7 +47,7 @@ exports.addUserClaim = functions.https.onCall((data, context) => {
 
 ### Using the Firebase CLI
 
-Clone the Todo firebase app repo and try to deploy the function to the firebase project created above.
+Clone the Todo Firebase app repo and try to deploy the function to the Firebase project created above.
 
 ```
 git clone https://github.com/dgraph-io/graphql-sample-apps.git
@@ -55,8 +55,8 @@ cd graphql-sample-apps/todo-react-firebase
 npm i
 ```
 
-- Install the firebase CLI tool `npm install -g firebase-tools`.
-- Login into firebase from the CLI `firebase login`.
+- Install the Firebase CLI tool `npm install -g firebase-tools`.
+- Login into Firebase from the CLI `firebase login`.
 - Run `firebase init functions` then select an existing project (that you created above).
 - Select language as `JavaScript` for this example.
 - Replace `index.js` with the snippet above.
@@ -91,13 +91,13 @@ Setup your Firebase configuration and `Dgraph GraphQL/ Slash GraphQL` endpoint i
 }
 ```
 
-Authentication with Firebase is done through the `JWKURL`, where the Json Web Key sets are hosted by Firebase. Since Firebase shares the JWKs among multiple tenants, you must provide your Firebase `project-Id` to the `Audience` field. So the `Dgraph.Authorization` header will look like this:
+Authentication with Firebase is done through the `JWKURL`, where the JSON Web Key sets are hosted by Firebase. Since Firebase shares the JWKs among multiple tenants, you must provide your Firebase `project-Id` to the `Audience` field. So the `Dgraph.Authorization` header will look like this:
 
 ```
 {"Header":"your-header", "Namespace":"namespace-of-custom-claims","JWKURL": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com", "Audience":[your-projectID]}
 ```
 
-You don't need to set the `VerificationKey` and `Algo` in the `Authorization` header. Doing so will result in error.
+You don't need to set the `VerificationKey` and `Algo` in the `Authorization` header. Doing so will cause an error.
 
 Update the [schema](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/schema.graphql), add the Authorization header (update the project-Id) -
 
@@ -137,7 +137,8 @@ Resubmit the updated schema to Dgraph or Slash GraphQL.
 
 ### React App
 
-Take a look at [base.js](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/base.js) which is used to initialize the Firebase app with the given config.
+For an example of how to initialize the Firebase app with the updated configuration (`config`) settings, see
+[base.js](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/base.js).
 
 ```javascript
 import firebase from "firebase/app";
@@ -157,7 +158,7 @@ const app  = firebase.initializeApp({
 export default app;
 ```
 
-Take a look at [Auth.js](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/Auth.js) to understand how client gets the token and sends it along with every GraphQL request. We can see from the code that whenever there will be `state` change, `currentUser` will be set to the `new user` and context will return `App` with the new `idToken`. `App` will initialize the Apollo Client which will send this `idToken` in header along with every GraphQL request.
+To understand how the client gets the token and sends it along with each GraphQL request, see [Auth.js](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/Auth.js). We can see from the code that whenever there will be `state` change, `currentUser` will be set to the `new user` and context will return `App` with the new `idToken`. `App` will initialize the Apollo Client which will send this `idToken` in header along with every GraphQL request.
 
 ```javascript
 import React, { useEffect, useState } from "react";
@@ -203,7 +204,7 @@ export const AuthProvider = ({ children }) => {
 };
 ```
 
-Take a look at [App.js](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/App.js) to see the Apollo Client setup.
+To review the Apollo Client setup, see [App.js](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/App.js).
 
 ```javascript
 ...
@@ -261,7 +262,7 @@ const App = ({idToken}) => {
 export default App
 ```
 
-Now that we a basic understanding of how to integrate Firebase auth in our app, let's see it in action!
+Now that we have a basic understanding of how to integrate Firebase authentication in our app, let's see it in action!
 
 ```
 npm start
