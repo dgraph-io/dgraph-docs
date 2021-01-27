@@ -1,7 +1,7 @@
 +++
 title = "Deploying on Slash GraphQL"
 description = "In just two steps on Slash GraphQL (deployment & schema), you get a GraphQL API that you can easily use in any application."
-weight = 6
+weight = 7
 [menu.main]
     parent = "todo-app-tutorial"
 +++
