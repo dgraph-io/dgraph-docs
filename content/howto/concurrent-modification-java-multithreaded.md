@@ -14,7 +14,7 @@ Step 1: Start a new terminal and launch Dgraph with the following command line.
 ```sh
 docker run -it -p 8080:8080 -p 9080:9080 dgraph/standalone:master
 ```
-Step 2: Checkout the source code from the 'samples' directory in dgraph4j repository (https://github.com/dgraph-io/dgraph4j). This particular example can found at the path "samples/concurrent-modification". In order to run this example, execute the following maven command from the 'concurrent-modification' folder.
+Step 2: Checkout the source code from the 'samples' directory in [dgraph4j repository](https://github.com/dgraph-io/dgraph4j). This particular example can found at the path "samples/concurrent-modification". In order to run this example, execute the following maven command from the 'concurrent-modification' folder.
 ```sh
 mvn clean install exec:java
 ```
