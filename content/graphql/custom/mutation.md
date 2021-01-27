@@ -1,9 +1,13 @@
 +++
 title = "Custom Mutations"
+description = "With custom mutations, you can use custom logic to define values for one or more fields in a mutation."
 weight = 4
 [menu.main]
     parent = "custom"
 +++
+
+With custom mutations, you can use custom logic to define values for one or more
+fields in a mutation.
 
 Let's say we have an application about authors and posts.  Logged in authors can add posts, but we want to do some input validation and add extra value when a post is added.  The key types might be as follows.
 
@@ -20,7 +24,7 @@ type Post {
 }
 ```
 
-Dgraph generates an `addPost` mutation from those types, but we want to do something extra.  We don't want the `author` to come in with the mutation, that should get filled in from the JWT of the logged in user.  Also, the `datePublished` shouldn't be in the input; it should be set as the current time at point of mutation.  Maybe we also have some community guidelines about what might constitute an offensive `title` or `text` in a post. Maybe users can only post if they have enough community credit.
+Dgraph generates an `addPost` mutation from those types, but we want to do something extra.  We don't want the `author` field to come in with the mutation, that should get filled in from the JWT of the logged in user.  Also, the `datePublished` shouldn't be in the input; it should be set as the current time at point of mutation.  Maybe we also have some community guidelines about what might constitute an offensive `title` or `text` in a post. Maybe users can only post if they have enough community credit.
 
 We'll need custom code to do all that, so we can write a custom function that takes in only the title and text of the new post.  Internally, it can check that the title and text satisfy the guidelines and that this user has enough credit to make a post. If those checks pass, it then builds a full post object by adding the current time as the `datePublished` and adding the `author` from the JWT information it gets from the forward header.  It can then call the `addPost` mutation constructed by Dgraph to add the post into Dgraph and returns the resulting post as its GraphQL output.
 

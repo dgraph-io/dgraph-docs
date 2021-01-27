@@ -1,12 +1,14 @@
 +++
-title = "Overview"
+title = "Custom Resolvers Overview"
+description = "Dgraph creates a GraphQL API from nothing more than GraphQL types. To customize the behavior of your schema, you can implement custom resolvers."
 weight = 1
 [menu.main]
     parent = "custom"
     identifier = "custom-resolvers-overview"
+    name = "Overview"
 +++
 
-Dgraph creates a GraphQL API from nothing more than GraphQL types.  That's great, and gets you moving fast from an idea to a running app.  However, at some point, as your app develops, you might want to customize the behaviour of your schema.
+Dgraph creates a GraphQL API from nothing more than GraphQL types.  That's great, and gets you moving fast from an idea to a running app.  However, at some point, as your app develops, you might want to customize the behavior of your schema.
 
 In Dgraph, you do that with code (in any language you like) that implements custom resolvers.
 

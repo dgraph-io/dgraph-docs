@@ -1,5 +1,6 @@
 +++
 title = "Overview"
+description = "Dgraph automatically generates GraphQL queries for each type that you define in your schema. There are three types of queries generated for each type."
 weight = 1
 [menu.main]
     parent = "graphql-queries"
@@ -9,7 +10,7 @@ weight = 1
 How to use queries to fetch data from Dgraph.
 
 Dgraph automatically generates GraphQL queries for each type that you define in
-your schema. There are three types of of queries generated for each type.
+your schema. There are three types of queries generated for each type.
 
 Example
 

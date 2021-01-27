@@ -1,5 +1,6 @@
 +++
 title = "Overview"
+description = "Dgraph gives you GraphQL. You’re always working with GraphQL, not a translation layer. Here's all the GraphQL documentation that you might need."
 weight = 1
 [menu.main]
   name = "Overview"

@@ -1,5 +1,6 @@
 +++
 title = "Overview"
+description = "The documentation in this section covers the API served at /graphql. This is where you’ll find the GraphQL API for the types you’ve added."
 weight = 1
 [menu.main]
     parent = "api"

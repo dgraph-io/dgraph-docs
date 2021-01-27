@@ -1,12 +1,13 @@
 +++
 title = "Search and Filtering"
+description = " Queries generated for a GraphQL type allow you to generate a single list of objects for a type. You can also query a list of objects using GraphQL."
 weight = 2
 [menu.main]
     parent = "graphql-queries"
     name = "Search and Filtering"
 +++
 
-Queries generated for a GraphQL type allow you to generate a single of list of
+Queries generated for a GraphQL type allow you to generate a single list of
 objects for a type.
 
 ### Get a single object
@@ -199,7 +200,7 @@ Using the `between` filter, you could fetch records for students who are between
 **Query**:
 
 ```graphql
-queryStudent(fitler: {age: between: {min: 10, max: 20}}){
+queryStudent(filter: {age: between: {min: 10, max: 20}}){
     age
     name
 }
@@ -211,7 +212,7 @@ alphabetically between `ba` and `hz`:
 **Query**:
 
 ```graphql
-queryStudent(fitler: {name: between: {min: "ba", max: "hz"}}){
+queryStudent(filter: {name: between: {min: "ba", max: "hz"}}){
     age
     name
 }
