@@ -6,7 +6,7 @@ please see https://dgraph.io/docs/.
 ## Contribution guidelines
 
 As a contributor to Dgraph documentation, we ask that you do the following:
-- **Label your PR for easy management**: Your PR title should be in the following format: **Topic (area): details**. The **topic** is either "Docs", "Nav" (aka, navigation), "Mgmt" (repo admin, build) or "Chore" (for cherry-picks). The **area** is the feature (i.e. "GraphQL"), area of the docs (i.e., "Deployment"), or "Other" (for typo fixes and other bugfix PRs). So, example PR names include: *Docs (GraphQL): Document the @deprecated annotation* or *Chore (Other): cherry-pick updates from `master` to `release/v20.11`*
+- **Label your PR for easy management**: Your PR title should be in the following format: **Topic (area): details**. The **topic** is either "Docs", "Nav" (aka, navigation), or "Chore" (for build fixes, cherry-picks, etc). The **area** is the feature (i.e. "GraphQL"), area of the docs (i.e., "Deployment"), or "Other" (for typo fixes and other bugfix PRs). So, example PR names include: *Docs (GraphQL): Document the @deprecated annotation* or *Chore (Other): cherry-pick updates from `master` to `release/v20.11`*
 - **Develop in the `master` branch first**: Make any changes applicable to the current (recently-released) version of Dgraph in the `master` branch first, and then cherry-pick those changes to the correct release branch (for example, `release/v20.11`).
 
  **Exception**: Changes that *only* apply to older Dgraph versions (for example `release/v20.07`), can occur directly in a release branch, but will not be cherry-picked forward.
