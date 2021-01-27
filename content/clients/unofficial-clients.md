@@ -13,6 +13,7 @@ These third-party clients are contributed by the community and are not officiall
 ## C\#
 
 - https://github.com/AlexandreDaSilva/DgraphNet
+- https://github.com/schivei/dgraph4net
 
 ## Dart
 
