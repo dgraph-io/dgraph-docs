@@ -1,5 +1,6 @@
 +++
 title = "Requests and Responses"
+description = "Get the structure for GraphQL requests and responses, how to enable compression for them, and configuration options for extensions."
 weight = 2
 [menu.main]
     parent = "api"

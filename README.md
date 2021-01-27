@@ -1,4 +1,4 @@
-# Dgraph Wiki
+# Dgraph Documentation
 
 If you are looking for Dgraph documentation, you might find https://dgraph.io/docs/ much more readable.
 
@@ -10,23 +10,24 @@ We use [Hugo](https://gohugo.io/) for our documentation.
 
 1. Download and install the latest patch of hugo version v0.69.x from [here](https://github.com/gohugoio/hugo/releases/).
 
-2. From within the `wiki` folder, run the command below to get the theme.
+2. Run the command below to get the theme.
 
 ```
 pushd themes && git clone https://github.com/dgraph-io/hugo-docs && popd
 ```
 
-3. Run `./scripts/local.sh` within the `wiki` folder and visit `http://localhost:1313` to see the
-documentation site.
+3. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the
+   documentation site.
 
-(Optional) To run queries *within* the documentation using a different Dgraph instance, set the `DGRAPH_ENDPOINT` environment variable before starting the local web server:
+(Optional) To run queries _within_ the documentation using a different Dgraph instance, set the `DGRAPH_ENDPOINT` environment variable before starting the local web server:
+
 ```
 DGRAPH_ENDPOINT="http://localhost:8080/query?latency=true" ./scripts/local.sh
 ```
 
 Now you can make changes to the docs and see them being updated instantly thanks to Hugo.
 
-* While running locally, the version selector does not work because you need to build the documentation and serve it behind a reverse proxy to have multiple versions.
+- While running locally, the version selector does not work because you need to build the documentation and serve it behind a reverse proxy to have multiple versions.
 
 ### Running locally with Docker
 
@@ -41,7 +42,6 @@ sh scripts/docker.sh
 ### Branch
 
 Depending on what branch you are on, some code examples will dynamically change. For instance, go-grpc code examples will have different import path depending on branch name.
-
 
 ## Runnable
 

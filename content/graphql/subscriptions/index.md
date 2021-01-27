@@ -1,5 +1,6 @@
 +++
 title = "GraphQL Subscriptions"
+description = "Subscriptions allow clients to listen to real-time messages from the server. In GraphQL, it’s straightforward to enable subscriptions on any type."
 weight = 8
 [menu.main]
   name = "Subscriptions"
@@ -7,13 +8,13 @@ weight = 8
   parent = "graphql"
 +++
 
-Subscriptions allow clients to listen to real-time messages from the server. The client connects to the server via a bi-directional communication channel using WebSocket and sends a subscription query that specifies which event it is interested in. When an event is triggered, the server executes the stored GraphQL query, and the result is sent through the same communication channel back to the client.
+Subscriptions allow clients to listen to real-time messages from the server. The client connects to the server with a bi-directional communication channel using WebSocket and sends a subscription query that specifies which event it is interested in. When an event is triggered, the server executes the stored GraphQL query, and the result is sent through the same communication channel back to the client.
 
 The client can unsubscribe by sending a message to the server. The server can also unsubscribe at any time due to errors or timeout. Another significant difference between queries/mutations and a subscription is that subscriptions are stateful and require maintaining the GraphQL document, variables, and context over the lifetime of the subscription.
 
 ![Subscription](/images/graphql/subscription_flow.png "Subscription in GraphQL")
 
-## Enable Subscriptions
+## How to Enable Subscriptions in GraphQL
 
 In GraphQL, it's straightforward to enable subscriptions on any type. We add the directive `@withSubscription` in the schema along with the type definition.
 
@@ -39,11 +40,11 @@ Here is an excellent blog explaining in detail on [how to set up GraphQL Subscri
 ## Authorization with Subscriptions
 
 Authorization adds more power to GraphQL subscriptions. You can use all the features of authorization that are there for queries.
-In addition to them, You can also specify the timeout of the subscription in the JWT after which the subscription automatically terminates.
+Additionally, you can specify when the subscription automatically terminates (the "timeout" of the subscription) in the JWT. 
 
 ## Example 
 
-### schema
+### Schema
 Consider following Schema, it has both `@withSubscription` and `@auth` directive defined on type Todo. Auth rule enforces that only todo's of owner `$USER` is visible which will be given in the JWT.
 
 ```graphql

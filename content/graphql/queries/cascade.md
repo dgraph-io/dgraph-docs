@@ -1,9 +1,10 @@
 +++
-title = "Cascade"
+title = "@cascade Directive"
+description = "The @cascade directive can be applied to fields. With the @cascade directive, nodes that don’t have all fields specified in the query are removed."
 weight = 8
 [menu.main]
     parent = "graphql-queries"
-    name = "Cascade"
+    name = "@cascade Directive"
 +++
 
 The `@cascade` directive can be applied to fields. With the `@cascade`
@@ -67,14 +68,14 @@ The query below only return those `posts` which have a non-null `text` field.
 
 ```graphql
 {
-        queryAuthor {
-		reputation
-		name
-		posts @cascade(fields:["text"]) {
-		   title
-		   text
-		}
-	}
+    queryAuthor {
+        reputation
+        name
+        posts @cascade(fields:["text"]) {
+           title
+           text
+        }
+    }
 }
 ```
 
@@ -86,14 +87,14 @@ For example, the query below ensures that an author has the `reputation` and `na
 
 ```graphql
 {
-      queryAuthor @cascade(fields:["reputation","name"]) {
+    queryAuthor @cascade(fields:["reputation","name"]) {
         reputation
         name
         dob
         posts @cascade(fields:["text"]) {
             title
             text
-            }
         }
+    }
 }
 ```

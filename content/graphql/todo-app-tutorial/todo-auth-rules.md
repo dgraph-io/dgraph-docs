@@ -1,13 +1,14 @@
 +++
-title = "Auth Rules"
+title = "Authorization Rules"
+description = "Use the @auth directive to limit access to the user’s to-dos. This step in the GraphQL tutorial walks you through authorization rules."
 weight = 4
 [menu.main]
     parent = "todo-app-tutorial"
 +++
 
-In the current state of the app, we can view anyone's todos, but we want our todos to be private to us. Let's do that using the `auth` directive to limit that to the user's todos.
+In the current state of the app, we can view anyone's todos, but we want our to-dos to be private to us. Let's do that using the `@auth` directive to limit that to the user's to-dos.
 
-We want to limit the user to its own todos, so we will define the query in `auth` to filter depending on the user's username.
+We want to limit the user to its own to-dos, so we will define the query in `auth` to filter depending on the user's username.
 
 Let's update the schema to include that, and then let's understand what is happening there -
 

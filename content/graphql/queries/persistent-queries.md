@@ -1,5 +1,6 @@
 +++
 title = "Persistent Queries"
+description = "Persistent queries significantly improve the performance of an application as the smaller hash signature reduces bandwidth utilization."
 weight = 4
 [menu.main]
     parent = "graphql-queries"

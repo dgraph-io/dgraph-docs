@@ -1,15 +1,16 @@
 +++
 title = "IDs"
+description = "There are two types of identity built into Dgraph. Those are accessed using the ID scalar type and the @id directive."
 weight = 3
 [menu.main]
     parent = "schema"
 +++
 
-There's two types of identity built into Dgraph.  Those are accessed via the `ID` scalar type and the `@id` directive.
+There are two types of identity built into Dgraph. Those are accessed using the `ID` scalar type and the `@id` directive.
 
 ### The ID type
 
-In Dgraph, every node has a unique 64 bit identifier.  You can, but don't have to, expose that in GraphQL via the `ID` type.  `ID`s are auto-generated, immutable and never reused.  Each type can have at most one `ID` field.
+In Dgraph, every node has a unique 64-bit identifier that you can expose in GraphQL using the `ID` type. `ID`s are auto-generated, immutable and never reused. Each type can have at most one `ID` field.
 
 The `ID` type works great for things that you'll want to refer to via an id, but don't need to set the identifier externally.  Examples are things like posts, comments, tweets, etc. 
 
