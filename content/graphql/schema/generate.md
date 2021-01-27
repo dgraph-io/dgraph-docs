@@ -1,5 +1,6 @@
 +++
 title = "The @generate directive"
+description = "The @generate directive specifies which GraphQL APIs are generated for a given type. Without it, all queries & mutations are generated except subscription."
 weight = 6
 [menu.main]
     parent = "schema"

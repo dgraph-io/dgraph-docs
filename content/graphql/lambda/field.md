@@ -1,5 +1,6 @@
 +++
 title = "Lambda Fields"
+description = "Start with lambda resolvers by defining it in your GraphQL schema. Then define your JavaScript mutation function and add it as a resolver in your JS source code."
 weight = 2
 [menu.main]
     parent = "lambda"
@@ -42,16 +43,16 @@ type Droid implements Character {
 
 ### Resolvers
 
-Once the schema is ready, you can define your JavaScript mutation function and add it as resolver in your JS source code. 
+Once the schema is ready, you can define your JavaScript mutation function and add it as a resolver in your JS source code. 
 To add the resolver you can use either the `addGraphQLResolvers` or `addMultiParentGraphQLResolvers` methods.
 
-For example, to define JavaScript lambda functions for 
+For example, to define JavaScript lambda functions for... 
 - `Author`, 
 - `Character`, 
 - `Human`, and 
 - `Droid`
 
-and add them as resolvers:
+...and add them as resolvers, do the following:
 
 ```javascript
 const authorBio = ({parent: {name, dob}}) => `My name is ${name} and I was born on ${dob}.`

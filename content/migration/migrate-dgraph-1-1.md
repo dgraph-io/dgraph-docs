@@ -31,7 +31,7 @@ The new `uid` syntax is consistent with that used for other types. For example,
 
 To migrate existing schemas from Dgraph v1.0 to newer Dgraph versions, update
 the schema file from an export so all predicates of type `uid` are changed to
-`[uid]`. Then, use the updated schema when loading data into Dgraph v1.1. 
+`[uid]`. Then, use the updated schema when loading data into Dgraph {{< version >}}. 
 
 For example, you could start with the following schema in Dgraph v1.0:
 
@@ -142,7 +142,7 @@ have changed in newer Dgraph versions.
 
 ### File input flags
 
-In Dgraph v1.1, both the Dgraph Live Loader and Dgraph Bulk Loader tools support loading data in either RDF format or JSON format. To simplify the command-line interface for these tools, the `-r`/`--rdfs` flag has been removed in favor of `-f/--files`. The new flag accepts file or directory paths for either data format. By default, the tools will infer the file type based on the file suffix, e.g., `.rdf` and `.rdf.gz` or `.json` and `.json.gz` for RDF data or JSON data, respectively. To ignore the filenames and set the format explicitly, the `--format` flag can be set to `rdf` or `json`.
+In Dgraph {{< version >}}, both the Dgraph Live Loader and Dgraph Bulk Loader tools support loading data in either RDF format or JSON format. To simplify the command-line interface for these tools, the `-r`/`--rdfs` flag has been removed in favor of `-f/--files`. The new flag accepts file or directory paths for either data format. By default, the tools will infer the file type based on the file suffix, e.g., `.rdf` and `.rdf.gz` or `.json` and `.json.gz` for RDF data or JSON data, respectively. To ignore the filenames and set the format explicitly, the `--format` flag can be set to `rdf` or `json`.
 
 File input example for Dgraph v1.0:
 
@@ -218,7 +218,7 @@ curl -H 'X-Dgraph-Vars: {"$name": "Alice"}' localhost:8080/query -d 'query qWith
 }
 ```
 
-GraphQL variable example for Dgraph v1.1:
+GraphQL variable example for Dgraph {{< version >}}:
 
 ```sh
 curl -H 'Content-Type: application/json' localhost:8080/query -d '{

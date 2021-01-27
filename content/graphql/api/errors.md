@@ -1,5 +1,6 @@
 +++
 title = "GraphQL Error Propagation"
+description = "Before returning query and mutation results, Dgraph uses the types in the schema to apply GraphQL value completion and error handling."
 weight = 6
 [menu.main]
     parent = "api"

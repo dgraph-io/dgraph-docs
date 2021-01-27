@@ -1,5 +1,6 @@
 +++
 title = "Types"
+description = "How to use GraphQL types to set a GraphQL schema for the Dgraph database. Includes scalars, enums, types, interfaces, union, password, & geolocation types."
 weight = 2
 [menu.main]
     parent = "schema"

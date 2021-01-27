@@ -1,5 +1,6 @@
 +++
 title = "Documentation and Comments"
+description = "Dgraph accepts GraphQL documentation comments, which get passed through to the generated API and shown as documentation in GraphQL tools."
 weight = 7
 [menu.main]
     parent = "schema"

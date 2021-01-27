@@ -1,12 +1,14 @@
 +++
-title = "Overview"
+title = "Mutations Overview"
+description = "Mutations can be used to insert, update, or delete data. Dgraph automatically generates GraphQL mutation for each type that you define in your schema."
 weight = 1
 [menu.main]
     parent = "graphql-mutations"
     identifier = "mutations-overview"
+    name = "Overview"
 +++
 
-Mutation allows us to modify server-side data, and it also returns an object based on the operation performed. It can be used to insert, update, or delete data. Dgraph automatically generates GraphQL mutation for each type that you define in your schema. The mutation field returns an object type that allows you to query for nested fields. This can be useful for fetching an object's new state after an add/update or get the old state of an object before a delete.
+Mutations allow you to modify server-side data, and it also returns an object based on the operation performed. It can be used to insert, update, or delete data. Dgraph automatically generates GraphQL mutations for each type that you define in your schema. The mutation field returns an object type that allows you to query for nested fields. This can be useful for fetching an object's new state after an add/update, or to get the old state of an object before a delete.
 
 **Example**
 

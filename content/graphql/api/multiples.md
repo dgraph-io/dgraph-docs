@@ -1,12 +1,13 @@
 +++
 title = "Multiple GraphQL Operations in a Request"
+description = "GraphQL requests can contain one or more operations. Operations include query, mutation, or subscription."
 weight = 5
 [menu.main]
     parent = "api"
     name = "Multiple GraphQL Operations in a Request"
 +++
 
-GraphQL requests can contain one or more operations. Operations are one of `query`, `mutation`, or `subscription`. If a request only has one operation, then it can be unnamed like the following:
+GraphQL requests can contain one or more operations. Operations include `query`, `mutation`, or `subscription`. If a request only has one operation, then it can be unnamed like the following:
 
 ## Single Operation
 

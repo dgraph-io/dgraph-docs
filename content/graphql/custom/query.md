@@ -1,5 +1,6 @@
 +++
 title = "Custom Queries"
+description = "A custom query takes any number of scalar arguments and constructs the path, parameters, and body of the request that's sent to the remote endpoint."
 weight = 3
 [menu.main]
     parent = "custom"
@@ -7,10 +8,10 @@ weight = 3
 
 Let's say we want to integrate our app with an existing external REST API.  There's a few things we need to know:
 
-* the URL of the API, the path and any parameters required
-* the shape of the resulting JSON data
-* the method (GET, POST, etc.), and
-* what authorization we need to pass to the external endpoint
+* The URL of the API, the path and any parameters required
+* The shape of the resulting JSON data
+* The method (GET, POST, etc.), and
+* What authorization we need to pass to the external endpoint
 
 The custom query can take any number of scalar arguments and use those to construct the path, parameters and body (we'll see an example of that in the custom mutation section) of the request that gets sent to the remote endpoint.
 

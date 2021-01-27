@@ -1,22 +1,23 @@
 +++
 title = "And, Or and Not"
+description = "Every GraphQL search filter can use AND, OR and NOT operators."
 weight = 5
 [menu.main]
     parent = "graphql-queries"
     name = "And, Or and Not"
 +++
 
-Every search filter contains `and`, `or` and `not`.
+Every GraphQL search filter can use `and`, `or` and `not` operators.
 
-GraphQL's syntax is used to write these infix style, so "a and b" is written `a, and: { b }`, and "a or b or c" is written `a, or: { b, or: c }`.  Not is written prefix.
+GraphQL syntax uses infix notation, so: "a and b" is `a, and: { b }`, "a or b or c" is `a, or: { b, or: c }`, and "not" is a prefix (`not:`).
 
-The posts that do not have "GraphQL" in the title.
+Example: Posts that do not have "GraphQL" in the title.
 
 ```graphql
 queryPost(filter: { not: { title: { allofterms: "GraphQL"} } } ) { ... }
 ```
 
-The posts that have "GraphQL" or "Dgraph" in the title.
+Example: Posts that have "GraphQL" or "Dgraph" in the title.
 
 ```graphql
 queryPost(filter: {
@@ -25,7 +26,7 @@ queryPost(filter: {
   } ) { ... }
 ```
 
-The posts that have "GraphQL" and "Dgraph" in the title.
+Example: Posts that have "GraphQL" and "Dgraph" in the title.
 
 ```graphql
 queryPost(filter: {
@@ -34,7 +35,7 @@ queryPost(filter: {
   } ) { ... }
 ```
 
-The and is implicit for a single filter object, if the fields don't overlap.  For example, above the `and` is required because `title` is in both filters, where as below, `and` is not required.
+The "and" operator is implicit for a single filter object, if the fields don't overlap.  For example, above the `and` is required because `title` is in both filters, whereas below, `and` is not required.
 
 ```graphql
 queryPost(filter: {
@@ -43,7 +44,7 @@ queryPost(filter: {
   } ) { ... }
 ```
 
-The posts that have "GraphQL" in the title, or have the tag "GraphQL" and mention "Dgraph" in the title
+Example: Posts that have "GraphQL" in the title, or have the tag "GraphQL" and mention "Dgraph" in the title
 
 ```graphql
 queryPost(filter: {
