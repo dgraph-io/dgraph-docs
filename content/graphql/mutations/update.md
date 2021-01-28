@@ -28,7 +28,7 @@ type Post {
 }
 ```
 
-Dgraph automatically generates input and return types in the schema for the update mutation. Update mutation takes `filter` as an input to select specific objects. You can specify `set` and `remove` operations on fields belonging to the filtered objects. It returns the state of the objects after updating.
+Dgraph automatically generates input and return types in the schema for the update mutation. Update mutations take `filter` as an input to select specific objects. You can specify `set` and `remove` operations on fields belonging to the filtered objects. It returns the state of the objects after updating.
 
 {{% notice "note" %}}
 Executing an empty `remove {}` statement is equivalent to `remove *` and will delete everything for the predicate in the specified filter.
@@ -51,7 +51,8 @@ type UpdatePostPayload {
 
 ### Set
 
-**Example**: Update `set` mutation using variables
+For example, an update `set` mutation using variables:
+
 ```graphql
 mutation updatePost($patch: UpdatePostInput!) {
   updatePost(input: $patch) {
@@ -78,7 +79,8 @@ Variables:
 
 ### Remove
 
-**Example**: Update `remove` mutation using variables
+For example an update `remove` mutation using variables:
+
 ```graphql
 mutation updatePost($patch: UpdatePostInput!) {
   updatePost(input: $patch) {
