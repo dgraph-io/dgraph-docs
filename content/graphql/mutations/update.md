@@ -7,7 +7,7 @@ weight = 3
     name = "Update"
 +++
 
-Update mutations let you to update existing objects of a particular type. With update mutations, you can filter nodes and set and remove any field belonging to a type.
+Update mutations let you update existing objects of a particular type. With update mutations, you can filter nodes and set or remove any field belonging to a type.
 
 We use the following schema to demonstrate some examples.
 
@@ -28,7 +28,12 @@ type Post {
 }
 ```
 
-Dgraph automatically generates input and return type in the schema for the update mutation. Update mutation takes filter as an input to select specific objects. You can specify set and remove operation on fields belonging to the filtered objects. It returns the state of the objects after updation.
+Dgraph automatically generates input and return types in the schema for the update mutation. Update mutations take `filter` as an input to select specific objects. You can specify `set` and `remove` operations on fields belonging to the filtered objects. It returns the state of the objects after updating.
+
+{{% notice "note" %}}
+Executing an empty `remove {}` statement is equivalent to `remove *` and will delete everything for the predicate in the specified filter.
+{{% /notice %}}
+
 ```graphql
 updatePost(input: UpdatePostInput!): UpdatePostPayload
 
@@ -44,7 +49,10 @@ type UpdatePostPayload {
 }
 ```
 
-**Example**: Update set mutation using variables
+### Set
+
+For example, an update `set` mutation using variables:
+
 ```graphql
 mutation updatePost($patch: UpdatePostInput!) {
   updatePost(input: $patch) {
@@ -69,7 +77,10 @@ Variables:
 }
 ```
 
-**Example**: Update remove mutation using variables
+### Remove
+
+For example an update `remove` mutation using variables:
+
 ```graphql
 mutation updatePost($patch: UpdatePostInput!) {
   updatePost(input: $patch) {
@@ -94,6 +105,6 @@ Variables:
 }
 ```
 
-## Examples
+### Examples
 
 You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/master/graphql/resolve/update_mutation_test.yaml) for more examples.
