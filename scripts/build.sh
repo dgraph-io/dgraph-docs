@@ -34,12 +34,17 @@ NEW_THEME="${NEW_THEME:-master}"
 # and then the older versions in descending order, such that the
 # build script can place the artifact in an appropriate location.
 
-getMajorVersions=$(curl -s https://get.dgraph.io/latest | grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' | sed  "s/\"/\'/g"  | sed  "s/\,/ /g" | sed  "s/'v20.03'/ /g")
+getMajorVersions=$(curl -s https://get.dgraph.io/latest | grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' | sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g")
+
+MAJOR_VERSIONS=(
+		$getMajorVersions
+)
 
 # these versions use new theme
 NEW_VERSIONS=(
+	    ${MAJOR_VERSIONS:0}
         'master'
-		$getMajorVersions
+		${MAJOR_VERSIONS[@]:1}
 )
 
 # these versions use old theme
