@@ -62,6 +62,10 @@ A lambda resolver is a user-defined JavaScript function that performs custom act
 - `self.addGraphQLResolvers`
 - `self.addMultiParentGraphQLResolvers`
 
+{{% notice "tip" %}}
+Functions `self.addGraphQLResolvers` and `self.addMultiParentGraphQLResolvers` can be called multiple times in your resolver code.
+{{% /notice %}}
+
 ### addGraphQLResolvers
 
 The `self.addGraphQLResolvers` method takes an object as an argument, which maps a resolver name to the resolver function that implements it. The resolver functions registered using `self.addGraphQLResolvers` receive `{ parent, args, graphql, dql }` as argument:
@@ -151,7 +155,7 @@ self.addMultiParentGraphQLResolvers({
 ```
 
 {{% notice "note" %}}
-Webpack is required to use the sample `rank()` function.
+Webpack is required to execute `sortBy()` in the sample `rank()` function.
 {{% /notice %}}
 
 Another resolver example using a `dql` call:
