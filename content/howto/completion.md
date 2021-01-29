@@ -100,29 +100,3 @@ acl            cert           debug          increment      migrate        tool 
 alpha          completion     debuginfo      live           raftmigrate    upgrade        
 bulk           conv           export_backup  lsbackup       restore        version   
 ```
-
-## Zsh shell
-
-`(PROCEDURE TO BE ADDED by Daniel Mai )`
-
-Output for dgraph completion zsh --help
-
-```
-dgraph completion zsh --help
-[Decoder]: Using assembly version of decoder
-Page Size: 4096
- To generate zsh completion run:
-dgraph completion zsh > _dgraph
-
-Then install the completion file somewhere in your $fpath or
-$_compdir paths. You must enable the compinit and compinstall plugins.
-
-For more information, see the official Zsh docs:
-http://zsh.sourceforge.net/Doc/Release/Completion-System.html
- 
-Usage:
-  dgraph completion zsh [flags] 
-
-Flags:
-  -h, --help   help for zsh
-```
