@@ -30,6 +30,10 @@ type Mutation {
 Once the schema is ready, you can define your JavaScript mutation function and add it as resolver in your JS source code. 
 To add the resolver you can use either the `addGraphQLResolvers` or `addMultiParentGraphQLResolvers` methods.
 
+{{% notice "tip" %}}
+This example uses `graphql` for the resolver function. You can find additional resolver examples using `dql` in the [Lambda queries article]({{< relref "query.md" >}}), and using `parent` in the [Lambda fields article]({{< relref "mutation.md" >}}).
+{{% /notice %}}
+
 For example, to define the JavaScript `newAuthor()` lambda function and add it as resolver:
 
 ```javascript

@@ -30,6 +30,10 @@ type Query {
 Once the schema is ready, you can define your JavaScript query function and add it as resolver in your JS source code. 
 To add the resolver you can use either the `addGraphQLResolvers` or `addMultiParentGraphQLResolvers` methods.
 
+{{% notice "tip" %}}
+This example uses `dql` for the resolver function. You can find additional resolver examples using `parent` in the [Lambda fields article]({{< relref "query.md" >}}), and using `graphql` in the [Lambda mutations article]({{< relref "mutation.md" >}}).
+{{% /notice %}}
+
 For example, to define the JavaScript `authorsByName()` lambda function and add it as resolver:
 
 ```javascript
