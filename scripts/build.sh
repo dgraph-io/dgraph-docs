@@ -27,7 +27,6 @@ HUGO="${HUGO:-hugo}"
 OLD_THEME="${OLD_THEME:-old-theme}"
 NEW_THEME="${NEW_THEME:-master}"
 
-# TODO - Maybe get list of released versions from Github API and filter
 # those which have docs.
 
 # Place the latest version at the beginning so that version selector can
@@ -35,11 +34,12 @@ NEW_THEME="${NEW_THEME:-master}"
 # and then the older versions in descending order, such that the
 # build script can place the artifact in an appropriate location.
 
+getMajorVersions=$(curl -s https://get.dgraph.io/latest | grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' | sed  "s/\"/\'/g"  | sed  "s/\,/ /g" | sed  "s/'v20.03'/ /g")
+
 # these versions use new theme
 NEW_VERSIONS=(
-        'v20.11'
         'master'
-        'v20.07'
+		$getMajorVersions
 )
 
 # these versions use old theme
