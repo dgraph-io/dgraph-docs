@@ -6,12 +6,12 @@ weight = 3
     parent = "schema"
 +++
 
-There are two types of identity built into Dgraph, implemented as the `ID` scalar type and the `@id` directive.
+There are two types of identifiers built into Dgraph: the `ID` scalar type and the `@id` directive.
 
 * The `ID` scalar type is used when you don't need to set an identifier outside of Dgraph.
 * The `@id` directive is used for external identifiers, such as email addresses.
 
-### The ID type
+### The `ID` type
 
 In Dgraph, every node has a unique 64-bit identifier that you can expose in GraphQL using the `ID` type. `ID`s are auto-generated, immutable and never reused. Each type can have at most one `ID` field.
 
@@ -32,7 +32,7 @@ For input and output, `ID`s are treated as strings.
 
 You can also update and delete posts by `ID`.
 
-### The @id directive
+### The `@id` directive
 
 For some types, you'll need a unique identifier set from outside Dgraph.  A common example is a username.
 
