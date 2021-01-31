@@ -13,7 +13,7 @@ There are two types of identifiers built into Dgraph: the `ID` scalar type and t
 
 ### The `ID` type
 
-In Dgraph, every node has a unique 64-bit identifier that you can expose in GraphQL using the `ID` type. `ID`s are auto-generated, immutable and never reused. Each type can have at most one `ID` field.
+In Dgraph, every node has a unique 64-bit identifier that you can expose in GraphQL using the `ID` type. An `ID` is auto-generated, immutable and never reused. Each type can have at most one `ID` field.
 
 The `ID` type works great when you need to use an identifier on nodes and don't need to set that identifier externally (for example, posts and comments).
 
@@ -26,7 +26,7 @@ type Post {
 }
 ```
 
-In a single-page app, you should the page for `http://.../posts/0x123` when a user clicks to view the post with `ID` 0x123.  Your app can then use a `getPost(id: "0x123") { ... }` GraphQL query to fetch the data used to generate the page.
+In a single-page app, you could generate the page for `http://.../posts/0x123` when a user clicks to view the post with `ID` 0x123. Your app can then use a `getPost(id: "0x123") { ... }` GraphQL query to fetch the data used to generate the page.
 
 For input and output, `ID`s are treated as strings.
 
@@ -36,7 +36,7 @@ You can also update and delete posts by `ID`.
 
 For some types, you'll need a unique identifier set from outside Dgraph.  A common example is a username.
 
-The `@id` directive tells Dgraph to keep values of that field unique and to use them as identifiers.
+The `@id` directive tells Dgraph to keep that field's values unique and use them as identifiers.
 
 For example, you might set the following type in a schema:
 
@@ -55,13 +55,13 @@ Fields with the `@id` directive must have the type `String!`.
 
 As with `ID` types, Dgraph generates queries and mutations so you can query, update and delete data in fields specified with the `@id` directive.
 
-In a single-page app, you should render the page for `http://.../user/foobar` when a user clicks to view the author bio page for user `foobar`. Your app can then use a `getUser(username: "foobar") { ... }` GraphQL query to fetch the data and generate the page.
+In a single-page app, you could render the page for `http://.../user/Erik` when a user clicks to view the author bio page for that user. Your app can then use a `getUser(username: "Erik") { ... }` GraphQL query to fetch the data and generate the page.
 
 ### Combining `ID` and `@id`
 
-You may use both the `ID` type and the `@id` directive on another field definition to have both a unique identifier and a generated identifier.
+You can use both the `ID` type and the `@id` directive on another field definition to have both a unique identifier and a generated identifier.
 
-For example, you might set the following type in a schema:
+For example, you might define the following type in a schema:
 
 ```graphql
 type User {
@@ -71,7 +71,7 @@ type User {
 }
 ```
 
-With this schema, Dgraph will require a unique username when creating a new user. This schema provides the benefits of both of the previous examples above. Your app can then use the `getUser(...) { ... }` query to provide either the Dgraph-generated `id` or the externally-generated `username`.
+With this schema, Dgraph requires a unique `username` when creating a new user. This schema provides the benefits of both of the previous examples above. Your app can then use the `getUser(...) { ... }` query to provide either the Dgraph-generated `id` or the externally-generated `username`.
 <!--
 ### More to come
 
