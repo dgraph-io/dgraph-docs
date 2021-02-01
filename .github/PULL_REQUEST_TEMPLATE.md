@@ -12,6 +12,7 @@ Description: Please include the following in your PR description:
 2. Link to any related PRs or discuss.dgraph.io posts.
 3. If this PR corresponds to a Jira issue, include "Fixes DGRAPH-###" or "Per Dgraph-###" in the PR description.
 3. If this is a breaking change, please put "[Breaking]" in the title. In the description, please put a note with exactly who these changes are breaking for.
+4. If you are creating a PR in `master` and you know it needs to be cherry-picked to a release branch, please mention that in your PR description (for example: "cherry-pick to v20.07"). Cherry-pick PRs should reference the original PR.
 
 Note: Create and edit docs in the `master` branch when you can, so that we only cherry-pick out of `master`, not into `master`.
 -->
