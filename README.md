@@ -21,7 +21,7 @@ As a contributor to Dgraph documentation, we ask that you do the following:
 
 ### Technical writing style
 
-Dgraph Labs uses a style guide for our documentation so that we can make it as easy to understand as possible. The [Dgraph Style Guide](https://discuss.dgraph.io/t/dgraph-developer-documentation-style-guide/10955) is a concise style reference for our documentation, but it isn't comprehensive. For anything not found in our style guide, use Google's [Developer Docs Style Guide](https://developers.google.com/style/highlights). The next section has a few quick tips from that style guide.
+Dgraph Labs uses a style guide for our documentation so that we can make it as easy to understand as possible. The [Dgraph Style Guide](https://discuss.dgraph.io/t/dgraph-developer-documentation-style-guide/10955) is a concise style reference for our documentation, but it isn't comprehensive. For anything not found in our style guide, use Google's [Developer Docs Style Guide](https://developers.google.com/style/highlights).
 
 #### Style tips for machine-translatable docs!
 
