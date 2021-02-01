@@ -4,8 +4,8 @@ Title: Please use the following format for your PR title:  topic(area): details
 - The "topic" should be one of the following: Docs, Nav or Chore
 - The "area" is the feature (i.e., "GraphQL"), area of the docs (i.e., "Deployment"), or "Other" (for typo fixes and other bug-fix PRs). 
 Sample Titles:
-  Docs (GraphQL): Document the @deprecated annotation
-  Chore (Other): cherry-pick updates from master to release/v20.11
+  Docs(GraphQL): Document the @deprecated annotation
+  Chore(Other): cherry-pick updates from master to release/v20.11
 
 Description: Please include the following in your PR description:
 1. A brief, clear description of the change.
