@@ -1,12 +1,13 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
+description = "Dgraph supports command-line completion, a common feature provided by shells like bash or zsh that helps you to type commands in a fast and easy way."
 title = "Shell Completion"
 weight = 1
 [menu.main]
     parent = "howto"
 +++
 
-Command-line completion is a common feature provided by shells like `bash` or `zsh` that helps users type commands in a fast and easy way.
+Command-line completion is a common feature provided by shells like `bash` or `zsh` that lets you type commands in a fast and easy way.
 This functionality automatically fills in partially typed commands when the user press the <kbd>tab</kbd> key.
 
 ## Completion script
