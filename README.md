@@ -6,7 +6,8 @@ please see https://dgraph.io/docs/.
 ## Contribution guidelines
 
 As a contributor to Dgraph documentation, we ask that you do the following:
-- **Label your PR for easy management**: Your PR title should be in the following format: **Topic (area): details**. The **topic** is either "Docs", "Nav" (aka, navigation), or "Chore" (for build fixes, cherry-picks, etc). The **area** is the feature (i.e. "GraphQL"), area of the docs (i.e., "Deployment"), or "Other" (for typo fixes and other bugfix PRs). So, example PR names include: *Docs(GraphQL): Document the @deprecated annotation* or *Chore(Other): cherry-pick updates from `master` to `release/v20.11`*
+- **Label your PR for easy management**: Your PR title should be in the following format: **Topic (area): details**. The **topic** is either "Docs", "Nav" (aka, navigation), or "Chore" (for build fixes, cherry-picks, etc). The **area** is the feature (i.e. "GraphQL"), area of the docs (i.e., "Deployment"), or "Other" (for typo fixes and other bugfix PRs). So, example PR names include:
+ *Docs(GraphQL): Document the @deprecated annotation* or *Chore(Other): cherry-pick updates from master to release/v20.11*
 - **Develop in the `master` branch first**: Make any changes applicable to the current (recently-released) version of Dgraph in the `master` branch first, and then cherry-pick those changes to the correct release branch (for example, `release/v20.11`).
 
  **Exception**: Changes that *only* apply to older Dgraph versions (for example `release/v20.07`), can occur directly in a release branch, but will not be cherry-picked forward.
@@ -30,7 +31,7 @@ Making our documentation easy to understand includes optimizing it for client-si
 - Write in present-tense, active voice when you can.
 - Prefer simple sentences to complex and complex-compound sentences.
 
-**Note:** Please don't let these style conventions prevent you from creating a  PR to share your contribution to Dgraph Docs! PR reviewers can help with these issues.
+**Note:** Please don't let these style conventions stop you from creating a PR to share your contribution to Dgraph Docs! PR reviewers can help with style guide issues.
 
 ### Staging doc updates locally
 
@@ -54,7 +55,7 @@ DGRAPH_ENDPOINT="http://localhost:8080/query?latency=true" ./scripts/local.sh
 
 Now you can make changes to the docs and see them being updated instantly, thanks to Hugo.
 
-**Note**: While running locally, the version selector does not work because you need to build the documentation and serve it behind a reverse proxy to have multiple versions.
+**Note**: While running locally, the version selector does not work because you need to build the documentation and serve it behind a reverse proxy to have multiple versions. Also, formatting of lists is less fussy when running locally; so please precede lists with a blank line in your PR.
 
 ### Running docs locally with Docker
 
