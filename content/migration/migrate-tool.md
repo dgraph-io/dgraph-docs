@@ -73,6 +73,21 @@ Next, export the SQL database into a schema and RDF file, e.g. the `schema.txt` 
 dgraph migrate --config config.properties --output_schema schema.txt --output_data sql.rdf
 ```
 
+You should get an output such as:
+
+```txt
+Dumping table money
+Dumping table posts
+Dumping table users
+Dumping table votes
+Dumping table comments
+Dumping table constraints votes
+Dumping table constraints comments
+Dumping table constraints money
+Dumping table constraints posts
+Dumping table constraints users
+```
+
 {{% notice "note" %}}
 If you are connecting to a remote DB (something hosted on AWS, GCP, etc...), you need to pass the following flags
 ```
