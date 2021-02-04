@@ -6,11 +6,13 @@ weight = 4
     parent = "enterprise-features"
 +++
 
-`lsbackup` looks at a location where backups are stored and prints information about them.
+The `lsbackup` command-line tool prints information about the stored backups in a user-defined location.
 
-Here we have only two flags that is the --location flag that indicates a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
+## Parameters
 
-The other flag is the --verbose flag that if enabled will print additional information about the backup.
+The `lsbackup` command has only two flags:
+- `--location`: indicates a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
+- `--verbose`: if enabled will print additional information about the selected backup.
 
 ```txt
 Flags:
@@ -18,82 +20,31 @@ Flags:
   -l, --location string   Sets the source location URI (required).
       --verbose           Outputs additional info in backup list.
 ```
-How to run the command:
 
-The lsbackup command is easy to run as follows:
+For example, you can execute the `lsbackup` command as follows:
+
 ```sh
 dgraph lsbackup -l <source-location-URI>
 ```
-Below are the Source URI format and parts
+
+## Source URI
 
 Source URI formats:
 
-```txt
-[scheme]://[host]/[path]?[args]
-[scheme]:///[path]?[args]
-/[path]?[args] (only for local or NFS)
-```
+- `[scheme]://[host]/[path]?[args]`
+- `[scheme]:///[path]?[args]`
+- `/[path]?[args]` (only for local or NFS)
 
 Source URI parts:
 
-- `scheme` - service handler, one of: `s3`, `minio`, `file`
-- `host` - remote address. ex: `dgraph.s3.amazonaws.com`
-- `path` - directory, bucket or container at target. ex: `/dgraph/backups/`
-- `args` - specific arguments that are ok to appear in logs.
+- `scheme`: service handler, one of: `s3`, `minio`, `file`
+- `host`: remote address; e.g.: `dgraph.s3.amazonaws.com`
+- `path`: directory, bucket or container at target; e.g.: `/dgraph/backups/`
+- `args`: specific arguments that are ok to appear in logs
 
-Examples:
+## Output
 
-### S3
-
-checking information about backups stored in an AWS S3 bucket
-
-```sh
-dgraph lsbackup -l s3:///s3.us-west-2.amazonaws.com/dgraph_backup
-```
-
-You might need to set up access and secret key env variable in the shell (or session) you are going to run lsbackup command. This can be done this was:
-```
-AWS_SECRET_ACCESS_KEY=<paste-your-secret-access-key>
-AWS_ACCESS_ID=<paste-your-key-id>
-```
-
-### MinIO
-
-checking information about backups stored in a Minio bucket:
-
-```sh
-dgraph lsbackup -l minio://localhost:9000/dgraph_backup
-```
-
-In case Minio server is started without tls, one has to specify explicitly that secure=false as it set to true by default. Also one has to set the environment variable for the access key and secret key. 
-
-So in order to get the lsbackup running one has to do the following steps:
-
-set MINIO_ACCESS_KEY as an environment variable for the running shell this can be done with the following command export MINIO_ACCESS_KEY=minioadmin (minioadmin is the default access key, unless is changed by the user)
-
-set MINIO_SECRET_KEY as an environment variable for the running shell this can be done with the following command export MINIO_SECRET_KEY=minioadmin (minioadmin is the default secret key, unless is changed by the user)
-
-add the argument secure=false to the lsbackup command, that means the command will look like: dgraph lsbackup -l "minio://localhost:9000/<bucket-name>?secure=false" (not the double quotes (”) are required.
-
-Local: checking information about backups stored locally (on disk):
-
-```sh
-dgraph lsbackup -l ~/dgraph_backup
-```
-
-Output (what is printing this command):
-
-The output of this command is the following:
-
-```txt
-[Decoder]: Using assembly version of decoder
-Page Size: 4096
-Listing backups from: ~/backup
-Name	Since	Groups	Encrypted
-dgraph_backup/dgraph.20210121.125014.852/manifest.json	30005	map[1:[dgraph.graphql.schema_created_at dgraph.graphql.xid dgraph.drop.op dgraph.type dgraph.cors dgraph.graphql.schema_history score dgraph.graphql.p_query dgraph.graphql.schema dgraph.graphql.p_sha256hash series]]	false
-```
-
-I admit I don't like how we are printing the output as of now therefore I’ve sent this PR1 and PR2 that changes the output to the following one: (note PR2 will remove the first 2 lines, the ones reporting [Decoder]: Using … and Page Size: 4096 in order to provide better formatting experience for the user (e.g. using jq )
+The following snippet is an example output of `lsbackup`:
 
 ```json
 [
@@ -108,20 +59,7 @@ I admit I don't like how we are printing the output as of now therefore I’ve s
 ]
 ```
 
-
-We’ve also added/changed a few things:
-
-changed wording from Name → path
-
-Added DropOperations section 
-
-Added Type as well to the output that will tell if the backup is full or incremental one
-
-Added backup_id and backup_num
-
-`--verbose` flag: if enabled this will print additional information about Groups and DropOperations
-
-If `--verbose` flag is enabled an example of the output would look like this:
+If the `--verbose` flag was enabled, the output would look like this:
 
 ```json
 [
@@ -151,9 +89,7 @@ If `--verbose` flag is enabled an example of the output would look like this:
 ]
 ```
 
-It’s only merged master and it will be part of 21.03 in order to avoid breaking changes in 20.11. For 20.11, 20.07 and 20.03 the output will not change.
-
-In the table below I’m explaining what does each term/section means (when documenting them please follow the same order as they are printed in the above output command):
+### Return values
 
 - `path`: Name of the backup
 
@@ -171,3 +107,59 @@ In the table below I’m explaining what does each term/section means (when docu
 
 - `backup_id`: is a unique ID assigned to all the backups in the same series.
 
+
+## Examples
+
+### S3
+
+Checking information about backups stored in an AWS S3 bucket:
+
+```sh
+dgraph lsbackup -l s3:///s3.us-west-2.amazonaws.com/dgraph_backup
+```
+
+You might need to set up access and secret key environment variables in the shell (or session) you are going to run the `lsbackup` command. For example:
+```
+AWS_SECRET_ACCESS_KEY=<paste-your-secret-access-key>
+AWS_ACCESS_ID=<paste-your-key-id>
+```
+
+### MinIO
+
+Checking information about backups stored in a MinIO bucket:
+
+```sh
+dgraph lsbackup -l minio://localhost:9000/dgraph_backup
+```
+
+In case the MinIO server is started without `tls`, you must specify that `secure=false` as it set to `true` by default. You also need to set the environment variables for the access key and secret key. 
+
+In order to get the `lsbackup` running, you should following these steps:
+
+- Set `MINIO_ACCESS_KEY` as an environment variable for the running shell this can be done with the following command:
+  (`minioadmin` is the default access key, unless is changed by the user)
+
+  ```
+  export MINIO_ACCESS_KEY=minioadmin
+  ```
+
+- Set MINIO_SECRET_KEY as an environment variable for the running shell this can be done with the following command:
+  (`minioadmin` is the default secret key, unless is changed by the user)
+
+  ```
+  export MINIO_SECRET_KEY=minioadmin
+  ```
+
+- Add the argument `secure=false` to the `lsbackup command`, that means the command will look like: (the double quotes `"` are required)
+
+  ```sh
+  dgraph lsbackup -l "minio://localhost:9000/<bucket-name>?secure=false"
+  ```
+
+### Local
+
+Checking information about backups stored locally (on disk):
+
+```sh
+dgraph lsbackup -l ~/dgraph_backup
+```
