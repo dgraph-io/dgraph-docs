@@ -34,7 +34,7 @@ To define the connection method, you must set the `# Dgraph.Authorization` objec
 * `VerificationKey` is the string value of the key (newlines replaced with `\n`) wrapped in `""`
 * `JWKURL` is the URL for the JSON Web Key sets
 * `Audience` is used to verify the `aud` field of a JWT which might be set by certain providers. It indicates the intended audience for the JWT. When doing authentication with `JWKURL`, this field is mandatory as Identity Providers share JWKs among multiple tenants
-* `ClosedByDefault`, if set to `true`, requires auth for all requests even if the type does not specify the [`@auth`]({{< relref "directive.md" >}}) directive. If omitted, the default setting is `false`.
+* `ClosedByDefault`, if set to `true`, requires authorization for all requests even if the type does not specify the [`@auth`]({{< relref "directive.md" >}}) directive. If omitted, the default setting is `false`.
 
 To set up the authentication connection method:
 
