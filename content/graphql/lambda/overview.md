@@ -77,6 +77,29 @@ Available only for types and interfaces (`null` for queries and mutations)
 - `graphql`, a function to execute auto-generated GraphQL API calls from the lambda server. The user's auth header is passed back to the `graphql` function, so this can be used securely
 - `dql`, provides an API to execute DQL from the lambda server
 
+The `addGraphQLResolvers` can be represented with the following TypeScript types:
+
+```TypeScript
+type GraphQLResponse {
+  data?: Record<string, any>,
+  errors?: { message: string }[],
+}
+
+type GraphQLEventWithParent = {
+  parent: Record<string, any> | null,
+  args: Record<string, any>,
+  graphql: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>,
+  dql: {
+    query: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>
+    mutate: (s: string) => Promise<GraphQLResponse>
+  },
+}
+
+function addGraphQLResolvers(resolvers: {
+  [key: string]: (e: GraphQLEventWithParent) => any;
+}): void
+```
+
 {{% notice "tip" %}}
 `self.addGraphQLResolvers` is the default choice for registering resolvers when the result of the lambda for each parent is independent of other parents.
 {{% /notice %}}
@@ -119,6 +142,29 @@ This method takes an object as an argument, which maps a resolver name to the re
 - `args`,  the set of arguments for lambda queries and mutations (`null` for types and interfaces)
 - `graphql`, a function to execute auto-generated GraphQL API calls from the lambda server
 - `dql`, provides an API to execute DQL from the lambda server
+
+The `addMultiParentGraphQLResolvers` can be represented with the following TypeScript types:
+
+```TypeScript
+type GraphQLResponse {
+  data?: Record<string, any>,
+  errors?: { message: string }[]
+}
+
+type GraphQLEventWithParents = {
+  parents: (Record<string, any>)[] | null,
+  args: Record<string, any>,
+  graphql: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>,
+  dql: {
+    query: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>
+    mutate: (s: string) => Promise<GraphQLResponse>
+  },
+}
+
+function addMultiParentGraphQLResolvers(resolvers: {
+  [key: string]: (e: GraphQLEventWithParents) => any;
+}): void
+```
 
 {{% notice "note" %}}
 This method should not be used for lambda queries or lambda mutations.
