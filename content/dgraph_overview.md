@@ -27,7 +27,7 @@ the following real-world scenarios:
 You can run Dgraph database in a variety of ways:
 
 * Self-managed: You can use Dgraph on-premises, hosted on your own physical
-infrastructure. You can also run Dgraph in your AWS, GCP or Azure cloud
+infrastructure. You can also run Dgraph in your AWS, GCP, or Azure cloud
 infrastructure.
 * Fully-managed (hosted): You can use Dgraph as a fully-managed cloud service.
  Slash GraphQL gives you the power of Dgraph in a hosted service. Dgraph Cloud
@@ -96,5 +96,4 @@ Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers.
 |server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation](https://dgraph.io/docs/master/deploy/cluster-setup/) |
 |predicate|	A property of a data node in a graph database; also a discrete piece of information available to request in a graph database.	| |
 |Slash GraphQL|	A fully-managed GraphQL database service powered by Dgraph database.	|[Slash GraphQL documentation](https://dgraph.io/docs/slash-graphql/) |
-
 
