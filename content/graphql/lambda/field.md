@@ -47,7 +47,7 @@ Once the schema is ready, you can define your JavaScript mutation function and a
 To add the resolver you can use either the `addGraphQLResolvers` or `addMultiParentGraphQLResolvers` methods.
 
 {{% notice "note" %}}
-A Lambda Field resolver can use a combination of `parents`, `args`, `dql`, or `graphql` inside the function.
+A Lambda Field resolver can use a combination of `parents`, `parent`, `dql`, or `graphql` inside the function.
 {{% /notice %}}
 
 {{% notice "tip" %}}
