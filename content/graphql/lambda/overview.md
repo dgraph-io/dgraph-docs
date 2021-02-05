@@ -191,7 +191,7 @@ This function computes the rank of each author based on the reputation of the au
 */
 async function rank({parents}) {
     const idRepMap = {};
-    _.sortBy(parents, 'reputation').forEach((parent, i) => idRepMap[parent.id] = parents.length - i)
+    sortBy(parents, 'reputation').forEach((parent, i) => idRepMap[parent.id] = parents.length - i)
     return parents.map(p => idRepMap[p.id])
 }
 
