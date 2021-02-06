@@ -77,7 +77,7 @@ VMs, servers, firewalls, and HTTP endpoints to power your modern apps and websit
 
 To learn more about Slash GraphQL, see [Slash GraphQL Overview](https://dgraph.io/learn/courses/resources/overviews-and-glossary/overview/slash-overview/).
 
-Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers.
+Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers with dedicated instances, high availability, and the choice of running in your own cloud VPC.
 
 ## Glossary of Dgraph and GraphQL terms
 
