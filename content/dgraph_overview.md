@@ -8,7 +8,7 @@ description = "Dgraph is a horizontally scalable and distributed GraphQL databas
 +++
 
 Dgraph is a horizontally scalable and distributed GraphQL database with a graph
-backend.  Dgraph is built for the heavy transactional workloads required to 
+backend. Dgraph is built for the heavy transactional workloads required to 
 power modern apps and websites,  but it isn’t limited to only these types of
 applications. Whether you are looking to power the backend of your app, create 
 elastic search for your website, or build a new database purely for data
