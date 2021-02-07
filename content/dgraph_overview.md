@@ -44,8 +44,8 @@ and Dgraph Cloud (except for content about managing server clusters in the
 
 ### Get started with self-managed Dgraph
 
-To run Dgraph on your own server, see [instructions for single-node setup](/deploy/single-host-setup/)
-or [instructions for cluster setup](/deploy/multi-host-setup/).
+To run Dgraph on your own server, see [instructions for single-node setup]({{< relref "/deploy/single-host-setup" >}})
+or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
 
 {{% notice "tip" %}}
 Dgraph Labs recommends running Dgraph on Linux for production use.
@@ -65,7 +65,7 @@ database running in the background, so your data has the ability to grow and
 change with your app, without the need to add new tables. And when it comes time
 to deploy a new schema, you can do that in seconds, not hours.
 
-To learn more about Dgraph's GraphQL implementation, see [GraphQL Overview](/graphql/overview/).
+To learn more about Dgraph's GraphQL implementation, see [GraphQL Overview]({{< relref "/graphql/overview" >}}).
 
 ## Fully-Managed Dgraph
 
@@ -87,16 +87,16 @@ Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers wit
 
 | Term            |Definition	                                                   |Learn More                  |
 |-----------------|--------------------------------------------------------------|----------------------------|
-|Badger | A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph database.|[Badger documentation](https://dgraph.io/docs/badger/)|
+|Badger | A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph database.|[Badger documentation](https://dgraph.io/docs/badger)|
 |data node| A basic unit of data representing an entity in a graph database. Nodes are connected by *edges* and have predicates (or *fields*) that contain node data.||
-|Dgraph Alpha| A server node that serves data to clients of Dgraph database, and also provides administrator endpoints.|[Dgraph Alpha documentation](https://dgraph.io/docs/master/deploy/dgraph-alpha/)|
-|Dgraph database| A horizontally-scalable and distributed GraphQL database with a graph backend.	|[Dgraph documentation](https://dgraph.io/docs/master/)|
-|Dgraph Query Language (DQL)|	A query language that extends and modifies GraphQL to support deep queries for modern apps. Formerly known as *GraphQL+-*.	|[DQL documentation](https://dgraph.io/docs/master/dql/)|
-|Dgraph Zero| A server node that controls a Dgraph database cluster. |[Dgraph Zero documentation](https://dgraph.io/docs/master/deploy/dgraph-alpha/)|
+|Dgraph Alpha| A server node that serves data to clients of Dgraph database, and also provides administrator endpoints.|[Dgraph Alpha documentation]({{< relref "/deploy/dgraph-alpha" >}})|
+|Dgraph database| A horizontally-scalable and distributed GraphQL database with a graph backend.	||
+|Dgraph Query Language (DQL)|	A query language that extends and modifies GraphQL to support deep queries for modern apps. Formerly known as *GraphQL+-*.	|[DQL documentation]({{< relref "/dql" >}})|
+|Dgraph Zero| A server node that controls a Dgraph database cluster. |[Dgraph Zero documentation]({{< relref "/deploy/dgraph-zero" >}})|
 |edge|	A relationship between two data nodes in a graph database.	| |
 |field|	See *predicate*.	| |
-|GraphQL|	An open-source query language for APIs and a runtime for fulfilling those queries. |[Dgraph GraphQL documentation](https://dgraph.io/docs/master/graphql/overview/)|
+|GraphQL|	An open-source query language for APIs and a runtime for fulfilling those queries. |[Dgraph GraphQL documentation]({{< relref "/graphql/overview" >}})|
 |object|	See *data node*.	| |
-|server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation](https://dgraph.io/docs/master/deploy/cluster-setup/) |
+|server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation]({{< relref "/deploy/cluster-setup" >}}) |
 |predicate|	A property of a data node in a graph database; also a discrete piece of information available to request in a graph database.	| |
-|Slash GraphQL|	A fully-managed GraphQL database service powered by Dgraph database.	|[Slash GraphQL documentation](https://dgraph.io/docs/slash-graphql/) |
+|Slash GraphQL|	A fully-managed GraphQL database service powered by Dgraph database.	|[Slash GraphQL documentation]({{< relref "/slash-graphql" >}}) |
