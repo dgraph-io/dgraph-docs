@@ -8,8 +8,8 @@ description = "Dgraph is a horizontally scalable and distributed GraphQL databas
 +++
 
 Dgraph is a horizontally scalable and distributed GraphQL database with a graph
-backend.  Dgraph is built for the heavy transactional workloads required to 
-power modern apps and websites,  but it isn’t limited to only these types of
+backend. Dgraph is built for the heavy transactional workloads required to 
+power modern apps and websites, but it isn’t limited to only these types of
 applications. Whether you are looking to power the backend of your app, create 
 elastic search for your website, or build a new database purely for data
 analysis, Dgraph is up to the task. In fact, it is in production today in
@@ -31,7 +31,7 @@ the following real-world scenarios:
 You can run Dgraph database in a variety of ways:
 
 * Self-managed: You can use Dgraph on-premises, hosted on your own physical
-infrastructure. You can also run Dgraph in your AWS, GCP or Azure cloud
+infrastructure. You can also run Dgraph in your AWS, GCP, or Azure cloud
 infrastructure.
 * Fully-managed (hosted): You can use Dgraph as a fully-managed cloud service.
  Slash GraphQL gives you the power of Dgraph in a hosted service. Dgraph Cloud
@@ -53,7 +53,7 @@ Dgraph Labs recommends running Dgraph on Linux for production use.
 
 ### Get started with hosted Dgraph
 
-You can get started using Slash GraphQL today with a free trial [Try Slash GraphQL](https://slash.dgraph.io/).
+You can [get started using Slash GraphQL today](https://slash.dgraph.io) with a free trial.
 To use Dgraph Cloud, visit the [Dgraph Pricing Page](https://dgraph.io/pricing) to
 get an estimate or contact us.
 
@@ -74,14 +74,14 @@ building apps, not managing infrastructure. Slash is built from the ground up to
 support GraphQL, and uses a graph database structure down to its lowest layers.
 So it integrates seamlessly with your existing ecosystem of GraphQL tools.
 
-Slash gives you the power of Dgraph database in a hosted environment, giving you
+Slash GraphQL gives you the power of Dgraph database in a hosted environment, giving you
 the flexibility and performance of a horizontally-scalable and distributed
 GraphQL database with a graph backend, so you don’t need to configure and manage
 VMs, servers, firewalls, and HTTP endpoints to power your modern apps and websites.
 
 To learn more about Slash GraphQL, see [Slash GraphQL Overview](https://dgraph.io/learn/courses/resources/overviews-and-glossary/overview/slash-overview/).
 
-Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers.
+Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers with dedicated instances, high availability, and the choice of running in your own cloud VPC.
 
 ## Glossary of Dgraph and GraphQL terms
 
@@ -100,5 +100,3 @@ Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers.
 |server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation](https://dgraph.io/docs/master/deploy/cluster-setup/) |
 |predicate|	A property of a data node in a graph database; also a discrete piece of information available to request in a graph database.	| |
 |Slash GraphQL|	A fully-managed GraphQL database service powered by Dgraph database.	|[Slash GraphQL documentation](https://dgraph.io/docs/slash-graphql/) |
-
-
