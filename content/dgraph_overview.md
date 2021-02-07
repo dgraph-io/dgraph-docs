@@ -15,12 +15,16 @@ elastic search for your website, or build a new database purely for data
 analysis, Dgraph is up to the task. In fact, it is in production today in
 the following real-world scenarios:
 
-* HR management applications
-* Social media sites
-* Ecommerce stores
 * Content Management Systems
+* Customer 360
+* Data unification
+* Ecommerce stores
+* Entity resolution
+* HR management applications
+* Master data management
 * Product recommendation engines
-* Real-time chat applications 
+* Real-time chat applications
+* Social media sites 
 
 ## Dgraph database and Dgraph cloud services
 
