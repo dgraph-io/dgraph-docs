@@ -40,7 +40,7 @@ extends Slash GraphQL to meet the needs of enterprises.
 **Note**: The documentation provided on this site (dgraph.io/docs) is applicable to
 self-managed instances of Dgraph, and also largely applicable to Slash GraphQL 
 and Dgraph Cloud (except for content about managing server clusters in the
-[Deploy](/deploy) section).
+[Deploy]({{< relref "/deploy" >}}) section).
 
 ### Get started with self-managed Dgraph
 
