@@ -51,7 +51,7 @@ or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
 Dgraph Labs recommends running Dgraph on Linux for production use.
 {{% /notice %}}
 
-### Get started with hosted Dgraph
+### Get started with fully-managed Dgraph
 
 You can [get started using Slash GraphQL today](https://slash.dgraph.io) with a
 free trial. To use Dgraph Cloud, visit the
