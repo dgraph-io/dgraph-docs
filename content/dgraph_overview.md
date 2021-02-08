@@ -1,6 +1,6 @@
 +++
 title = "Dgraph Database Overview"
-description = "Dgraph is a horizontally scalable and distributed GraphQL database that you can run on-prem, in your cloud infrastructure, or fully-managed. Learn Dgraph and GraphQL terms from our glossary."
+description = "Introduction to Dgraph Database. Dgraph is a horizontally scalable and distributed GraphQL database that you can run on-premises, in your cloud infrastructure, or fully-managed (hosted). Learn Dgraph and GraphQL terms from our glossary."
 [menu.main]
     name = "Dgraph Overview"
     identifier = "overview"
