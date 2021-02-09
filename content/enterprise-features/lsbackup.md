@@ -47,67 +47,23 @@ Source URI parts:
 
 The following snippet is an example output of `lsbackup`:
 
-```json
-[
-	{
-		"path": "/home/user/Dgraph/20.11/backup/dgraph.20210121.125014.852/manifest.json",
-		"since": 30005,
-		"backup_id": "reverent_vaughan0",
-		"backup_num": 1,
-		"encrypted": false,
-		"type": "full"
-	},
-]
-```
-
-If the `--verbose` flag was enabled, the output would look like this:
-
-```json
-[
-    {
-        "path": "/home/user/Dgraph/20.11/bkp/dgraph.20210121.125014.852/manifest.json",
-        "since": 30005,
-        "backup_id": "reverent_vaughan0",
-        "backup_num": 1,
-        "encrypted": false,
-        "type": "full",
-        "groups": {
-            "1": [
-                "dgraph.graphql.schema_created_at",
-                "dgraph.graphql.xid",
-                "dgraph.drop.op",
-                "dgraph.type",
-                "dgraph.cors",
-                "dgraph.graphql.schema_history",
-                "score",
-                "dgraph.graphql.p_query",
-                "dgraph.graphql.schema",
-                "dgraph.graphql.p_sha256hash",
-                "series"
-            ]
-        }
-    },
-]
+```txt
+[Decoder]: Using assembly version of decoder
+Page Size: 4096
+Listing backups from: ~/bkp
+Name	Since	Groups	Encrypted
+dgraph_backup/dgraph.20210121.125014.852/manifest.json	30005	map[1:[dgraph.graphql.schema_created_at dgraph.graphql.xid dgraph.drop.op dgraph.type dgraph.cors dgraph.graphql.schema_history score dgraph.graphql.p_query dgraph.graphql.schema dgraph.graphql.p_sha256hash series]]	false
 ```
 
 ### Return values
 
-- `path`: Name of the backup
+- `Name`: Name of the backup
 
-- `since`:  is the timestamp at which this backup was taken. It's called Since because it will become the timestamp from which to backup in the next   incremental backup.
+- `Since`: is the timestamp at which this backup was taken. It's called `Since` because it will become the timestamp from which to backup in the next incremental backup.
 
-- `groups`: is the map of valid groups to predicates at the time the backup was created. This is printed only if `--verbose` flag is enabled
+- `Groups`: is the map of valid groups to predicates at the time the backup was created. This is printed only if `--verbose` flag is enabled
 
-- `encrypted`: Indicates whether this backup is encrypted or not
-
-- `type`: Indicates whether this backup is a full or incremental one
-
-- `drop_operation`: lists the various DROP operations that took place since the last backup.  These are used during restore to redo those operations before applying the backup. (This is printed only if `--verbose` flag is enabled)
-
-- `backup_num`: is a monotonically increasing number assigned to each backup in  a series. The full backup as BackupNum equal to one and each incremental  backup gets assigned the next available number. This can be used to verify the integrity of the data during a restore.
-
-- `backup_id`: is a unique ID assigned to all the backups in the same series.
-
+- `Encrypted`: Indicates whether this backup is encrypted or not
 
 ## Examples
 
