@@ -10,9 +10,7 @@ The `lsbackup` command-line tool prints information about the stored backups in 
 
 ## Parameters
 
-The `lsbackup` command has only two flags:
-- `--location`: indicates a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
-- `--verbose`: if enabled will print additional information about the selected backup.
+The `lsbackup` command has two flags:
 
 ```txt
 Flags:
@@ -21,13 +19,16 @@ Flags:
       --verbose           Outputs additional info in backup list.
 ```
 
+- `--location`: indicates a [source URI](#source-uri) with Dgraph backup objects. This URI supports all the schemes used for backup.
+- `--verbose`: if enabled will print additional information about the selected backup.
+
 For example, you can execute the `lsbackup` command as follows:
 
 ```sh
 dgraph lsbackup -l <source-location-URI>
 ```
 
-## Source URI
+### Source URI
 
 Source URI formats:
 
