@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Single Host Setup"
-weight = 4
+weight = 6
 [menu.main]
     parent = "deploy"
 +++
@@ -85,7 +85,7 @@ We will use [Docker Machine](https://docs.docker.com/machine/overview/). It is a
 * [Install Docker Machine](https://docs.docker.com/machine/install-machine/) on your machine.
 
 {{% notice "note" %}}These instructions are for running Dgraph Alpha without TLS config.
-Instructions for running with TLS refer [TLS instructions]({{< relref "deploy/tls-configuration.md" >}}).{{% /notice %}}
+Instructions for running with TLS refer [TLS instructions]({{< relref "deploy/security/tls-configuration.md" >}}).{{% /notice %}}
 
 Here we'll go through an example of deploying Dgraph Zero, Alpha and Ratel on an AWS instance.
 

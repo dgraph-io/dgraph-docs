@@ -1,9 +1,9 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "TLS Configuration"
-weight = 10
+weight = 2
 [menu.main]
-    parent = "deploy"
+    parent = "security"
 +++
 
 Connections between Dgraph database and its clients can be secured using TLS. In

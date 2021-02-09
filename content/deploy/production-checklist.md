@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Production Checklist"
-weight = 21
+weight = 11
 [menu.main]
     parent = "deploy"
 +++
@@ -68,7 +68,7 @@ Additional recommendations:
 
 ### Firewall Rules
 
-Dgraph instances communicate over several ports. Firewall rules should be configured appropriately for the ports documented in [Ports Usage]({{< relref "deploy/ports-usage.md" >}}).
+Dgraph instances communicate over several ports. Firewall rules should be configured appropriately for the ports documented in [Ports Usage]({{< relref "deploy/security/ports-usage.md" >}}).
 
 Internal ports must be accessible by all Zero and Alpha peers for proper cluster-internal communication. Database clients must be able to connect to Dgraph Alpha external ports either directly or through a load balancer.
 
@@ -96,7 +96,7 @@ A Dgraph instance is run as a single process from a single static binary. It doe
 
 A backup policy is a predefined, set schedule used to schedule backups of information from business applications. A backup policy helps to ensure data recoverability in the event of accidental data deletion, data corruption, or a system outage.
 
-For Dgraph, backups are created using the [backups enterprise feature]({{< relref "/enterprise-features/binary-backups" >}}). You can also create full backups of your data and schema using [data exports]({{< relref "/deploy/dgraph-administration/index.md#exporting-database" >}}) available as an open source feature.
+For Dgraph, backups are created using the [backups enterprise feature]({{< relref "/enterprise-features/binary-backups" >}}). You can also create full backups of your data and schema using [data exports]({{< relref "/deploy/admin/dgraph-administration/index.md#exporting-database" >}}) available as an open source feature.
 
 We **strongly** recommend that you have a backup policy in place before moving your application to the production phase, and we also suggest that you have a backup policy even for pre-production apps supported by Dgraph database instances running in development, staging, QA or pre-production clusters.
 

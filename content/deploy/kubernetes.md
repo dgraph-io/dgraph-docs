@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Using Kubernetes"
-weight = 6
+weight = 8
 [menu.main]
     parent = "deploy"
 +++
@@ -9,7 +9,7 @@ weight = 6
 The following section covers running Dgraph with Kubernetes. We have tested Dgraph with Kubernetes versions 1.14 to 1.16 on [GKE](https://cloud.google.com/kubernetes-engine) and versions 1.14 to 1.17 on [EKS](https://aws.amazon.com/eks/).
 
 {{% notice "note" %}}These instructions are for running Dgraph alpha service without TLS configuration.
-Instructions for running Dgraph alpha service with TLS refer [TLS instructions]({{< relref "deploy/tls-configuration.md" >}}).{{% /notice %}}
+Instructions for running Dgraph alpha service with TLS refer [TLS instructions]({{< relref "deploy/security/tls-configuration.md" >}}).{{% /notice %}}
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) which is used to deploy
   and manage applications on kubernetes.
@@ -640,8 +640,7 @@ remove the node from the cluster. With a Kubernetes StatefulSet, you'll need to
 remove the node in this order:
 
 1. On the Zero leader, call `/removeNode` to remove the Dgraph instance from
-   the cluster (see [More about Dgraph Zero]({{< relref
-   "/deploy/dgraph-zero" >}})). The removed instance will immediately stop
+   the cluster (see [More about Dgraph Zero]({{< relref "/deploy/dgraph-zero" >}})). The removed instance will immediately stop
    running. Any further attempts to join the cluster will fail for that instance
    since it has been removed.
 2. Remove the PersistentVolumeClaim associated with the pod to delete its data.

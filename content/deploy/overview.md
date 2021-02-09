@@ -1,6 +1,5 @@
 +++
-date = "2021-02-08"
-title = "Download"
+title = "Deployment and Management Overview"
 description = "Deploy and manage Dgraph database in your physical or cloud infrastructure."
 weight = 1
 [menu.main]
@@ -85,7 +84,7 @@ curl https://get.dgraph.io -sSf | VERSION={{< version >}}-beta1 bash
 ```
 
 {{% notice "note" %}}
-Be aware that using this script will overwrite the installed version and can lead to compatibility problems. For example, if you were using version v1.0.5 and forced the installation of {{< version >}}-Beta, the existing data won't be compatible with the new version. The data must be [exported]({{< relref "deploy/dgraph-administration.md#exporting-database" >}}) before running this script and reimported to the new cluster running the updated version.
+Be aware that using this script will overwrite the installed version and can lead to compatibility problems. For example, if you were using version v1.0.5 and forced the installation of {{< version >}}-Beta, the existing data won't be compatible with the new version. The data must be [exported]({{< relref "deploy/admin/dgraph-administration.md#exporting-database" >}}) before running this script and reimported to the new cluster running the updated version.
 {{% /notice %}}
 
 ## Manual download [optional]

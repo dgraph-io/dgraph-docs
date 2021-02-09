@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Multi Host Setup"
-weight = 5
+title = "Multi-Host Setup"
+weight = 7
 [menu.main]
     parent = "deploy"
 +++
@@ -11,7 +11,7 @@ weight = 5
 ### Cluster Setup Using Docker Swarm
 
 {{% notice "note" %}}These instructions are for running Dgraph Alpha without TLS config.
-Instructions for running with TLS refer [TLS instructions]({{< relref "deploy/tls-configuration.md" >}}).{{% /notice %}}
+Instructions for running with TLS refer [TLS instructions]({{< relref "deploy/security/tls-configuration.md" >}}).{{% /notice %}}
 
 Here we'll go through an example of deploying 3 Dgraph Alpha nodes and 1 Zero on three different AWS instances using Docker Swarm with a replication factor of 3.
 

@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Download"
-weight = 1
+weight = 2
 [menu.main]
     parent = "deploy"
 +++
@@ -60,7 +60,7 @@ curl https://get.dgraph.io -sSf | VERSION={{< version >}}-beta1 bash
 ```
 
 {{% notice "note" %}}
-Be aware that using this script will overwrite the installed version and can lead to compatibility problems. For example, if you were using version v1.0.5 and forced the installation of {{< version >}}-Beta, the existing data won't be compatible with the new version. The data must be [exported]({{< relref "deploy/dgraph-administration.md#exporting-database" >}}) before running this script and reimported to the new cluster running the updated version.
+Be aware that using this script will overwrite the installed version and can lead to compatibility problems. For example, if you were using version v1.0.5 and forced the installation of {{< version >}}-Beta, the existing data won't be compatible with the new version. The data must be [exported]({{< relref "deploy/admin/dgraph-administration.md#exporting-database" >}}) before running this script and reimported to the new cluster running the updated version.
 {{% /notice %}}
 
 ## Manual download [optional]

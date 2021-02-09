@@ -1,9 +1,9 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Dgraph Administration"
-weight = 19
+weight = 1
 [menu.main]
-    parent = "deploy"
+    parent = "admin"
 +++
 
 Each Dgraph Alpha exposes various administrative (admin) endpoints both over
