@@ -32,7 +32,7 @@ Reference: [Custom directive](/graphql/custom/directive)
 
 `@dgraph` directive tells us how to map fields within a type to existing predicates inside Dgraph.
 
-Reference: [GraphQL on Existing Dgraph](/graphql/dgraph/)
+Reference: [GraphQL on Existing Dgraph]({{< relref "graphql-dgraph.md" >}})
 
 ### @generate
 
