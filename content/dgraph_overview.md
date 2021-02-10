@@ -26,6 +26,12 @@ the following real-world scenarios:
 * Product recommendation engines
 * Real-time chat applications
 
+To learn more about how organizations are using Dgraph, see
+[Dgraph Case Studies](https://dgraph.io/case-studies). Or, learn more about
+specific scenarios by reading 
+[Dgraph's blog on entity resolution](https://dgraph.io/blog/post/introducing-entity-resolution/).
+
+
 ## Dgraph database and Dgraph cloud services
 
 You can run Dgraph database in a variety of ways:
@@ -37,10 +43,10 @@ infrastructure.
  Slash GraphQL gives you the power of Dgraph in a hosted service. Dgraph Cloud
 extends Slash GraphQL to meet the needs of enterprises. 
 
-**Note**: The documentation provided on this site (dgraph.io/docs) is applicable to
-self-managed instances of Dgraph, and also largely applicable to Slash GraphQL 
-and Dgraph Cloud (except for content about managing server clusters in the
-[Deploy]({{< relref "/deploy" >}}) section).
+**Note**: The documentation provided on this site (dgraph.io/docs) is applicable
+to self-managed instances of Dgraph, and also largely applicable to Slash
+GraphQL  and Dgraph Cloud (except for content about managing server clusters in
+the [Deploy and Manage]({{< relref "/deploy" >}}) section).
 
 ### Get started with self-managed Dgraph
 
@@ -65,7 +71,9 @@ database running in the background, so your data has the ability to grow and
 change with your app, without the need to add new tables. And when it comes time
 to deploy a new schema, you can do that in seconds, not hours.
 
-To learn more about Dgraph's GraphQL implementation, see [GraphQL Overview]({{< relref "/graphql/overview" >}}).
+To learn more about Dgraph's GraphQL implementation, 
+see [GraphQL Overview]({{< relref "/graphql/overview" >}}), or
+[Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
 
 ## Fully-Managed Dgraph
 
@@ -100,3 +108,4 @@ Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers wit
 |server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation]({{< relref "/deploy/cluster-setup" >}}) |
 |predicate|	A property of a data node in a graph database; also a discrete piece of information available to request in a graph database.	| |
 |Slash GraphQL|	A fully-managed GraphQL database service powered by Dgraph database.	|[Slash GraphQL documentation]({{< relref "/slash-graphql" >}}) |
+
