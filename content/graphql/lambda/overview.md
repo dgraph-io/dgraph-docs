@@ -62,6 +62,10 @@ A lambda resolver is a user-defined JavaScript function that performs custom act
 - `self.addGraphQLResolvers`
 - `self.addMultiParentGraphQLResolvers`
 
+{{% notice "tip" %}}
+Functions `self.addGraphQLResolvers` and `self.addMultiParentGraphQLResolvers` can be called multiple times in your resolver code.
+{{% /notice %}}
+
 ### addGraphQLResolvers
 
 The `self.addGraphQLResolvers` method takes an object as an argument, which maps a resolver name to the resolver function that implements it. The resolver functions registered using `self.addGraphQLResolvers` receive `{ parent, args, graphql, dql }` as argument:
@@ -72,6 +76,29 @@ Available only for types and interfaces (`null` for queries and mutations)
 - `args`,  the set of arguments for lambda queries and mutations
 - `graphql`, a function to execute auto-generated GraphQL API calls from the lambda server. The user's auth header is passed back to the `graphql` function, so this can be used securely
 - `dql`, provides an API to execute DQL from the lambda server
+
+The `addGraphQLResolvers` can be represented with the following TypeScript types:
+
+```TypeScript
+type GraphQLResponse {
+  data?: Record<string, any>,
+  errors?: { message: string }[],
+}
+
+type GraphQLEventWithParent = {
+  parent: Record<string, any> | null,
+  args: Record<string, any>,
+  graphql: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>,
+  dql: {
+    query: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>
+    mutate: (s: string) => Promise<GraphQLResponse>
+  },
+}
+
+function addGraphQLResolvers(resolvers: {
+  [key: string]: (e: GraphQLEventWithParent) => any;
+}): void
+```
 
 {{% notice "tip" %}}
 `self.addGraphQLResolvers` is the default choice for registering resolvers when the result of the lambda for each parent is independent of other parents.
@@ -116,6 +143,29 @@ This method takes an object as an argument, which maps a resolver name to the re
 - `graphql`, a function to execute auto-generated GraphQL API calls from the lambda server
 - `dql`, provides an API to execute DQL from the lambda server
 
+The `addMultiParentGraphQLResolvers` can be represented with the following TypeScript types:
+
+```TypeScript
+type GraphQLResponse {
+  data?: Record<string, any>,
+  errors?: { message: string }[]
+}
+
+type GraphQLEventWithParents = {
+  parents: (Record<string, any>)[] | null,
+  args: Record<string, any>,
+  graphql: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>,
+  dql: {
+    query: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>
+    mutate: (s: string) => Promise<GraphQLResponse>
+  },
+}
+
+function addMultiParentGraphQLResolvers(resolvers: {
+  [key: string]: (e: GraphQLEventWithParents) => any;
+}): void
+```
+
 {{% notice "note" %}}
 This method should not be used for lambda queries or lambda mutations.
 {{% /notice %}}
@@ -141,7 +191,7 @@ This function computes the rank of each author based on the reputation of the au
 */
 async function rank({parents}) {
     const idRepMap = {};
-    _.sortBy(parents, 'reputation').forEach((parent, i) => idRepMap[parent.id] = parents.length - i)
+    sortBy(parents, 'reputation').forEach((parent, i) => idRepMap[parent.id] = parents.length - i)
     return parents.map(p => idRepMap[p.id])
 }
 
@@ -151,7 +201,7 @@ self.addMultiParentGraphQLResolvers({
 ```
 
 {{% notice "note" %}}
-Webpack is required to use the sample `rank()` function.
+Scripts containing import packages (such as the example above) require compilation using Webpack.
 {{% /notice %}}
 
 Another resolver example using a `dql` call:
@@ -194,9 +244,9 @@ You should see a response such as
 
 ## Learn more
 
-Find out more about the  `@lambda` directive, or check out:
+Find out more about the  `@lambda` directive here:
 
-* [lambda fields](/graphql/lambda/field)
-* [lambda queries](/graphql/lambda/query)
-* [lambda mutations](/graphql/lambda/mutation)
-* [lambda server setup](/graphql/lambda/server)
+* [Lambda fields](/graphql/lambda/field)
+* [Lambda queries](/graphql/lambda/query)
+* [Lambda mutations](/graphql/lambda/mutation)
+* [Lambda server setup](/graphql/lambda/server)
