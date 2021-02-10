@@ -201,7 +201,7 @@ self.addMultiParentGraphQLResolvers({
 ```
 
 {{% notice "note" %}}
-Webpack is required to execute `sortBy()` in the sample `rank()` function.
+Scripts containing import packages (such as the example above) require compilation using Webpack.
 {{% /notice %}}
 
 Another resolver example using a `dql` call:
