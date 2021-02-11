@@ -36,6 +36,54 @@ $ dgraph live -C -f <path-to-gzipped-RDF-or-JSON-file>
 $ dgraph live -f <path-to-gzipped-RDf-or-JSON-file> -s <path-to-schema-file> -a <dgraph-alpha-address:grpc_port> -z <dgraph-zero-address:grpc_port>
 ```
 
+### Load from S3
+
+To live load from Amazon S3, you must have either [IAM](#iam-setup) or the following AWS credentials set
+via environment variables:
+
+ Environment Variable                        | Description
+ --------------------                        | -----------
+ `AWS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY`     | AWS access key with permissions to write to the destination bucket.
+ `AWS_SECRET_ACCESS_KEY` or `AWS_SECRET_KEY` | AWS access key with permissions to write to the destination bucket.
+ `AWS_SESSION_TOKEN`                         | AWS session token (if required).
+
+
+{{% notice "note" %}}
+If the system has access to the S3 bucket, you no longer need to explicitly include these environment variables.  
+{{% /notice %}}
+
+#### IAM setup
+
+In AWS, you can accomplish this by doing the following:
+1. Create an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) with an IAM Policy that grants access to the S3 bucket.
+2. Depending on whether you want to grant access to an EC2 instance, or to a pod running on [EKS](https://aws.amazon.com/eks/), you can do one of these options:
+   * [Instance Profile](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) can pass the IAM Role to an EC2 Instance
+   * [IAM Roles for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) to attach the IAM Role to a running EC2 Instance
+   * [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to associate the IAM Role to a [Kubernetes Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
+
+Once your setup is ready, you can execute the bulk load from S3:
+
+```sh
+dgraph live -f s3:///bucket-name/directory-with-rdf -s s3:///bucket-name/directory-with-rdf/schema.txt
+```
+
+### Load from MinIO
+
+To live load from MinIO, you must have the following MinIO credentials set via
+environment variables:
+
+ Environment Variable                        | Description
+ --------------------                        | -----------
+ `MINIO_ACCESS_KEY`                          | Minio access key with permissions to write to the destination bucket.
+ `MINIO_SECRET_KEY`                          | Minio secret key with permissions to write to the destination bucket.
+
+
+Once your setup is ready, you can execute the bulk load from MinIO:
+
+```sh
+dgraph live -f minio://minio-server:port/bucket-name/directory-with-rdf -s minio://minio-server:port/bucket-name/directory-with-rdf/schema.txt
+```
+
 ### Encrypted imports via Live Loader (Enterprise Feature)
 
 A new flag `--encryption_key_file` is added to the Live Loader. This option is required to decrypt the encrypted export data and schema files. Once the export files are decrypted, the Live Loader streams the data to a live Alpha instance.
