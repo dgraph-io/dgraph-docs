@@ -55,7 +55,7 @@ queryPost(filter: {
 
 The `and` and `or` filter accept a list of filters. Any non list filter will be coeorced into a list. This provides backwards compatibility while allowing for more complex filters.
 
-Example: Posts that have "GraphQL" in the title and not the tag "GraphQL", or have "Dgraph" in the title and not the tag "Dgraph"
+Example: Posts that have `GraphQL` in the title and not the tag `GraphQL`, or have `Dgraph` in the title and not the tag `Dgraph`
 
 ```graphql
 queryPost(filter: {
