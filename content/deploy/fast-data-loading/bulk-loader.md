@@ -15,20 +15,20 @@ datasets into Dgraph.
 Only one or more Dgraph Zeros should be running for bulk loading. Dgraph Alphas
 will be started later.
 
-{{% notice "warning" %}}
-Don't use bulk loader once the Dgraph cluster is up and running. Use it to import
-your existing data to a new cluster.
-{{% /notice %}}
-
 You can [read some technical details](https://blog.dgraph.io/post/bulkloader/)
 about the bulk loader on the blog.
+
+{{% notice "warning" %}}
+Don't use the Bulk loader once the Dgraph cluster is up and running. Use it to import
+your existing data to a new cluster.
+{{% /notice %}}
 
 {{% notice "tip" %}}
 It's crucial to tune the bulk loader's flags to get good performance. See the
 next section for details.
 {{% /notice %}}
 
-### Settings
+## Settings
 
 {{% notice "note" %}} Bulk Loader only accept [RDF N-Quad/Triple
 data](https://www.w3.org/TR/n-quads/) or JSON in plain or gzipped format. Data
@@ -49,6 +49,7 @@ predicates between the reduce shards.
 ```sh
 $ dgraph bulk -f goldendata.rdf.gz -s goldendata.schema --map_shards=4 --reduce_shards=2 --http localhost:8000 --zero=localhost:5080
 ```
+
 ```
 {
 	"DataFiles": "goldendata.rdf.gz",
@@ -104,7 +105,8 @@ load output from the example above:
 ```sh
 $ tree ./out
 ```
-```
+
+```txt
 ./out
 ├── 0
 │   └── p
@@ -143,43 +145,93 @@ $ dgraph bulk -f <file1.rdf, file2.rdf> ...
 
 ```
 
-### How to properly bulk load
+### Load from S3
+
+To bulk load from Amazon S3, you must have either [IAM](#iam-setup) or the following AWS credentials set
+via environment variables:
+
+ Environment Variable                        | Description
+ --------------------                        | -----------
+ `AWS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY`     | AWS access key with permissions to write to the destination bucket.
+ `AWS_SECRET_ACCESS_KEY` or `AWS_SECRET_KEY` | AWS access key with permissions to write to the destination bucket.
+
+#### IAM setup
+
+In AWS, you can accomplish this by doing the following:
+1. Create an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) with an IAM Policy that grants access to the S3 bucket.
+2. Depending on whether you want to grant access to an EC2 instance, or to a pod running on [EKS](https://aws.amazon.com/eks/), you can do one of these options:
+   * [Instance Profile](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) can pass the IAM Role to an EC2 Instance
+   * [IAM Roles for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) to attach the IAM Role to a running EC2 Instance
+   * [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to associate the IAM Role to a [Kubernetes Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
+
+Once your setup is ready, you can execute the bulk load from S3:
+
+```sh
+dgraph bulk -f s3:///bucket-name/directory-with-rdf -s s3:///bucket-name/directory-with-rdf/schema.txt
+```
+
+### Load from MinIO
+
+To bulk load from MinIO, you must have the following MinIO credentials set via
+environment variables:
+
+ Environment Variable                        | Description
+ --------------------                        | -----------
+ `MINIO_ACCESS_KEY`                          | Minio access key with permissions to write to the destination bucket.
+ `MINIO_SECRET_KEY`                          | Minio secret key with permissions to write to the destination bucket.
+
+
+Once your setup is ready, you can execute the bulk load from MinIO:
+
+```sh
+dgraph bulk -f minio://minio-server:port/bucket-name/directory-with-rdf -s minio://minio-server:port/bucket-name/directory-with-rdf/schema.txt
+```
+
+## How to properly bulk load
+
 Starting from Dgraph v20.03.7, v20.07.3 and v20.11.0 onwards, depending on your dataset size, you can follow one of the following ways to use bulk loader and initialize your new Cluster.
 
 *The following procedure is particularly relevant for Clusters that have `--replicas` flag greater than 1*
 
-#### For small dataset
+### For small datasets
+
 In case your dataset is small (a few GBs) it would be convenient to start by initializing just one Alpha node and then let the snapshot be streamed among the other Alpha replicas. You can follow these steps:
 1. Run bulk loader only on one server
 2. Once the `p` directory has been created by the bulk loader, then start **only** the first Alpha replica
 3. Wait for 1 minute to ensure that a snapshot has been taken by the first Alpha node replica. You can confirm that a snapshot has been taken by looking for the following message":
-```
+
+```txt
 I1227 13:12:24.202196   14691 draft.go:571] Creating snapshot at index: 30. ReadTs: 4.
 ```
 4. After confirming that the snapshot has been taken, you can start the other Alpha node replicas (number of Alpha nodes must be equal to the `--replicas` flag value set in the zero nodes). Now the Alpha node (the one started in point 2) will be printing similar messages:
-```
+
+```txt
 I1227 13:18:16.154674   16779 snapshot.go:246] Streaming done. Sent 1093470 entries. Waiting for ACK...
 I1227 13:18:17.126494   16779 snapshot.go:251] Received ACK with done: true
 I1227 13:18:17.126514   16779 snapshot.go:292] Stream snapshot: OK
 ```
 These messages indicate that all replica nodes are now using the same snapshot. Thus, all your data is correctly in sync across the cluster. Also, the other alpha nodes will be printing (in their logs) something similar to:
-```
+
+```txt
 I1227 13:18:17.126621    1720 draft.go:567] Skipping snapshot at 28, because found one at 28
 ```
 
-#### For bigger dataset
+### For bigger datasets
+
 When your dataset is pretty big (e.g. dataset size > 10GB) it will be faster that you just copy the generated `p` directory (by the bulk loader) among all the Alphas nodes. You can follow these steps:
+
 1. Run bulk loader only on one server
 2. Copy (or use `rsync`) the `p` directory to the other servers (the servers you will be using to start the other Alpha nodes)
 3. Now, start all Alpha nodes at the same time
 
 If the process went well **all** Alpha nodes will take a snapshot after 1 minute. You will be seeing something similar to this in the Alpha logs:
-```
+
+```txt
 I1227 13:27:53.959671   29781 draft.go:571] Creating snapshot at index: 34. ReadTs: 6.
 ```
 Note that `snapshot at index` value must be the same within the same Alpha group and `ReadTs` must be the same value within and among all the Alpha groups.
 
-### Encryption at rest with Bulk Loader (Enterprise Feature)
+## Encryption at rest with Bulk Loader (Enterprise Feature)
 
 Even before the Dgraph cluster starts, we can load data using Bulk Loader with the encryption feature turned on. Later we can point the generated `p` directory to a new Alpha server.
 
@@ -191,7 +243,7 @@ dgraph bulk --encryption_key_file ./enc_key_file -f data.json.gz -s data.schema 
 Alternatively, starting with v20.07.0, the `vault_*` options can be used to decrypt the encrypted export.
 
 
-### Encrypting imports via Bulk Loader (Enterprise Feature)
+## Encrypting imports via Bulk Loader (Enterprise Feature)
 
 The Bulk Loader’s `encryption_key_file` option was previously used to encrypt the output `p ` directory. This same option will also be used to decrypt the encrypted export data and schema files.
 
@@ -217,7 +269,7 @@ Input is not encrypted but the output is encrypted. (This is the migration use c
 
 Alternatively, starting with v20.07.0, the `vault_*` options can be used instead of the `--encryption_key_file` option above to achieve the same effect except that the keys are sitting in a Vault server.
 
-### Other Bulk Loader options
+## Other Bulk Loader options
 
 You can further configure Bulk Loader using the following options:
 
@@ -245,9 +297,9 @@ use [External IDs]({{< relref "mutations/external-ids.md" >}}).
 `--vault_*` flags specifies the Vault server address, role id, secret id and
 field that contains the encryption key that can be used to decrypt the encrypted export.
 
-### Tuning & monitoring
+## Tuning & monitoring
 
-#### Performance Tuning
+### Performance Tuning
 
 {{% notice "tip" %}}
 We highly recommend [disabling swap
