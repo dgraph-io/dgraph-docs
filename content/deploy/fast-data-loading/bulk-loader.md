@@ -154,12 +154,6 @@ via environment variables:
  --------------------                        | -----------
  `AWS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY`     | AWS access key with permissions to write to the destination bucket.
  `AWS_SECRET_ACCESS_KEY` or `AWS_SECRET_KEY` | AWS access key with permissions to write to the destination bucket.
- `AWS_SESSION_TOKEN`                         | AWS session token (if required).
-
-
-{{% notice "note" %}}
-If the system has access to the S3 bucket, you no longer need to explicitly include these environment variables.  
-{{% /notice %}}
 
 #### IAM setup
 
