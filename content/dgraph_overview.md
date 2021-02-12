@@ -15,13 +15,13 @@ elastic search for your website, or build a new database purely for data
 analysis, Dgraph is up to the task. In fact, it is in production today in
 the following real-world scenarios:
 
-* Social media sites
-* HR management applications
-* Content Management Systems
-* Customer 360
 * Data unification
+* Customer 360
+* Social media sites
+* Content Management Systems
 * Ecommerce stores
 * Entity resolution
+* HR management applications
 * Master data management
 * Product recommendation engines
 * Real-time chat applications
@@ -60,8 +60,9 @@ Dgraph Labs recommends running Dgraph on Linux for production use.
 ### Get started with fully-managed Dgraph
 
 You can [get started using Slash GraphQL today](https://slash.dgraph.io) with a
-free trial. To use Dgraph Cloud, visit the
-[Dgraph Pricing Page](https://dgraph.io/pricing) to get an estimate or contact us.
+free trial. To use Dgraph Cloud, visit our [Pricing Page](https://dgraph.io/pricing) or 
+[Pricing Calculator](https://slash.dgraph.io/pricing-calculator/) to get an
+estimate, and then [contact us](https://dgraph.io/connect).
 
 ## Dgraph and GraphQL
 
@@ -86,10 +87,16 @@ Slash GraphQL gives you the power of Dgraph database in a hosted environment, gi
 the flexibility and performance of a horizontally-scalable and distributed
 GraphQL database with a graph backend, so you don’t need to configure and manage
 VMs, servers, firewalls, and HTTP endpoints to power your modern apps and websites.
+Slash GraphQL runs on a shared cluster so we can offer it at a low price.
 
 To learn more about Slash GraphQL, see [Slash GraphQL Overview](https://dgraph.io/learn/courses/resources/overviews-and-glossary/overview/slash-overview/).
 
-Dgraph Cloud extends Slash GraphQL to meet the needs of enterprise customers with dedicated instances, high availability, and the choice of running in your own cloud VPC.
+Dgraph Cloud extends the capabilities of Slash GraphQL to meet the heavy workloads
+and other needs of enterprise customers. With Dgraph Cloud, you get dedicated
+clusters, high availability, and the choice of running in your own virtual
+private cloud (VPC). You can also run Dgraph Cloud in a bring your own
+Kubernetes (BYOK) environment.
+
 
 ## Glossary of Dgraph and GraphQL terms
 
