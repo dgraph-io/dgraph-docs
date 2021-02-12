@@ -34,7 +34,21 @@ next section for details.
 data](https://www.w3.org/TR/n-quads/) or JSON in plain or gzipped format. Data
 in other formats must be converted.{{% /notice %}}
 
-**Reduce shards**: Before running the bulk load, you need to decide how many
+```sh
+$ dgraph bulk --help # To see the available flags.
+
+# Read RDFs or JSON from the passed file.
+$ dgraph bulk -f <path-to-gzipped-RDF-or-JSON-file> ...
+
+# Read multiple RDFs or JSON from the passed path.
+$ dgraph bulk -f <./path-to-gzipped-RDF-or-JSON-files> ...
+
+# Read multiple files strictly by name.
+$ dgraph bulk -f <file1.rdf, file2.rdf> ...
+
+```
+
+- **Reduce shards**: Before running the bulk load, you need to decide how many
 Alpha groups will be running when the cluster starts. The number of Alpha groups
 will be the same number of reduce shards you set with the `--reduce_shards`
 flag. For example, if your cluster will run 3 Alpha with 3 replicas per group,
@@ -42,9 +56,11 @@ then there is 1 group and `--reduce_shards` should be set to 1. If your cluster
 will run 6 Alphas with 3 replicas per group, then there are 2 groups and
 `--reduce_shards` should be set to 2.
 
-**Map shards**: The `--map_shards` option must be set to at least what's set for
+- **Map shards**: The `--map_shards` option must be set to at least what's set for
 `--reduce_shards`. A higher number helps the bulk loader evenly distribute
 predicates between the reduce shards.
+
+For example:
 
 ```sh
 $ dgraph bulk -f goldendata.rdf.gz -s goldendata.schema --map_shards=4 --reduce_shards=2 --http localhost:8000 --zero=localhost:5080
@@ -122,28 +138,21 @@ $ tree ./out
 4 directories, 6 files
 ```
 
-Because `--reduce_shards` was set to 2, there are two sets of p directories: one
-in `./out/0` directory and another in the `./out/1` directory.
+Because `--reduce_shards` was set to `2`, there are two sets of `p` directories: 
+- one in the `./out/0` directory 
+- another in the `./out/1` directory.
 
-Once the output is created, they can be copied to all the servers that will run
-Dgraph Alphas. Each Dgraph Alpha must have its own copy of the group's p
-directory output. Each replica of the first group should have its own copy of
-`./out/0/p`, each replica of the second group should have its own copy of
-`./out/1/p`, and so on.
+{{% notice "note" %}}
+Each Dgraph Alpha must have a copy of the group's `p` directory output. 
+{{% /notice %}}
 
-```sh
-$ dgraph bulk --help # To see the available flags.
+![Bulk Loader diagram](/images/deploy/bulk-loader.png)
 
-# Read RDFs or JSON from the passed file.
-$ dgraph bulk -f <path-to-gzipped-RDF-or-JSON-file> ...
+Once the output is created, the files must be copied to all the servers that will run
+Dgraph Alphas:
 
-# Read multiple RDFs or JSON from the passed path.
-$ dgraph bulk -f <./path-to-gzipped-RDF-or-JSON-files> ...
-
-# Read multiple files strictly by name.
-$ dgraph bulk -f <file1.rdf, file2.rdf> ...
-
-```
+- Each replica of the first group (`Alpha1`, `Alpha2`, `Alpha3`) should have a copy of `./out/0/p`
+- Each replica of the second group (`Alpha4`, `Alpha5`, `Alpha6`) should have a copy of `./out/1/p`, and so on.
 
 ### Load from S3
 
