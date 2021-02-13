@@ -43,10 +43,12 @@ hosted service running on a shared cluster. [Dgraph Cloud](https://dgraph.io/clo
 extends Slash GraphQL to meet the needs of enterprises, and provides dedicated
 clusters. To learn more, see [Fully-Managed Dgraph](#fully-managed-dgraph).
 
-**Note**: The documentation provided on [this Dgraph Docs site](dgraph.io/docs)
+{{% notice "note" %}}
+The documentation provided on [this Dgraph Docs site](https://dgraph.io/docs)
 is applicable to self-managed instances of Dgraph, and also largely applicable
-to Slash GraphQL and Dgraph Cloud (except for content about managing server 
-clusters in the [Deploy and Manage]({{< relref "/deploy" >}}) section).
+to Slash GraphQL and Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/deploy" >}}) section). To learn more about Slash GraphQL and Dgraph Cloud, see
+[Dgraph cloud services docs](https://dgraph.io/docs/slash-graphql).
+{{% /notice %}}
 
 ### Get started with self-managed Dgraph
 
@@ -54,7 +56,8 @@ To run Dgraph on your own server, see [instructions for single-node setup]({{< r
 or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
 
 {{% notice "tip" %}}
-Dgraph Labs recommends running Dgraph on Linux for production use.
+Dgraph Labs recommends running Dgraph on Linux for production use. Dgraph is 
+optimized to perform best on Linux.
 {{% /notice %}}
 
 ### Get started with fully-managed Dgraph
