@@ -60,6 +60,24 @@ const clientStub = new dgraph.DgraphClientStub(
 const dgraphClient = new dgraph.DgraphClient(clientStub);
 ```
 
+#### Connecting to Slash
+
+Alternatively to the above, Slash users can create `DgraphClientStub` by using the specialized method for Slash.
+
+````js
+const dgraph = require("dgraph-js");
+const grpc = require("grpc");
+
+const clientStub = new dgraph.clientStubFromSlashGraphQLEndpoint(
+  "https://frozen-mango.cloud.dgraph.io/graphql",
+  "Your Slash Client API Key Here"
+)
+const dgraphClient = new dgraph.DgraphClient(clientStub);
+````
+
+Replace the GraphQL endpoint with the one obtained from your Slash admin Overview page,
+and create an Client API Key from your Slash admin Settings page.
+
 To facilitate debugging, [debug mode](#debug-mode) can be enabled for a client.
 
 ### Altering the Database
