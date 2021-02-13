@@ -19,7 +19,7 @@ aliases = ["/contribute"]
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-keyword-research" aria-hidden="true"></i></div>
-    <a href="{{< relref "dgraph_overview.md">}}">
+    <a href="{{< relref "dgraph-overview.md">}}">
       <h2>Overview</h2>
       <p>
       Dgraph basics, including deployment options and a glossary of terms
