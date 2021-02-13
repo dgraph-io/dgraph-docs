@@ -171,11 +171,13 @@ Each Alpha leader for a group writes output as a gzipped file to the export
 directory specified via the `--export` flag (defaults to a directory called `"export"`). If any of the groups fail, the
 entire export process is considered failed and an error is returned.
 
+### Exporting to a file path
+
 Starting in Dgraph v20.11.0 you can provide an absolute path to the directory where you want to export data in the GraphQL mutation request, as follows:
 
 ```graphql
 mutation {
-  export(input: {format: "rdf",destination: "<absolute-path-to-your-export-dir>"}) {
+  export(input: { format: "rdf", destination: "<absolute-path-to-your-export-dir>" }) {
     response {
       message
       code
@@ -189,7 +191,7 @@ The data is exported in RDF format by default. A different output format may be 
 
 ```graphql
 mutation {
-  export(input: {format: "json"}) {
+  export(input: { format: "json" }) {
     response {
       message
       code
@@ -200,13 +202,195 @@ mutation {
 
 Currently, "rdf" and "json" are the only formats supported.
 
-### Encrypting Exports
+### Exporting to an object store
+
+{{% notice "note" %}}
+This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
+{{% /notice %}}
+
+#### Exporting to S3
+
+```graphql
+mutation {
+  export(input: { 
+    destination: "s3://s3.<region>.amazonaws.com/<bucketname>"
+    accessKey: "<aws_access_key_id>"
+    secretKey: "<aws_secret_access_key>"
+  }) {
+    response {
+      message
+      code
+    }
+  }
+}
+```
+
+#### Exporting to Minio
+
+```graphql
+mutation {
+  export(input: { 
+    destination: "minio://<address>:9000/<bucketname>"
+    accessKey: "<minio_access_key>"
+    secretKey: "<minio_secret_key>"
+  }) {
+    response {
+      message
+      code
+    }
+  }
+}
+```
+
+#### Exporting to a Minio Gateway
+
+MinIO can be used as a gateway to other object stores, such as Azure Blob Storage and Google Cloud Storage.
+
+##### Azure Blob Storage
+
+You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs.
+
+For MinIO configuration, you will need to [retrieve storage accounts keys](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage). The [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) will use `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` to correspond to Azure Storage Account `AccountName` and `AccountKey`.
+
+Once you have the `AccountName` and `AccountKey`, you can access Azure Blob Storage locally using one of these methods:
+
+*  Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with the MinIO Binary
+   ```bash
+   export MINIO_ACCESS_KEY="<AccountName>"
+   export MINIO_SECRET_KEY="<AccountKey>"
+   minio gateway azure
+   ```
+*  Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with Docker
+   ```bash
+   docker run --publish 9000:9000 --name gateway \
+     --env "MINIO_ACCESS_KEY=<AccountName>" \
+     --env "MINIO_SECRET_KEY=<AccountKey>" \
+     minio/minio gateway azure
+   ```
+ * Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with the MinIO Helm chart for Kubernetes:
+   ```bash
+   helm repo add minio https://helm.min.io/
+   helm install my-gateway minio/minio \
+     --set accessKey="<AccountName>",secretKey="<AccountKey>" \
+     --set azuregateway.enabled=true
+   ```
+
+##### Google Cloud Storage
+
+You can use [Google Cloud Storage](https://cloud.google.com/storage) through the [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html).  You will need to [create storage buckets](https://cloud.google.com/storage/docs/creating-buckets), create a Service Account key for GCS and get a credentials file.  See [Create a Service Account key](https://github.com/minio/minio/blob/master/docs/gateway/gcs.md#11-create-a-service-account-ey-for-gcs-and-get-the-credentials-file) for further information.
+
+Once you have a `credentials.json`, you can access GCS locally using one of these methods:
+
+*  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with the MinIO Binary
+   ```bash
+   export GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials.json"
+   export MINIO_ACCESS_KEY="<minio_access_key>"
+   export MINIO_SECRET_KEY="<minio_secret_key>"
+   minio gateway gcs "<project_id>"
+   ```
+*  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with Docker
+   ```bash
+   docker run --publish 9000:9000 --name gateway \
+     --volume /path/to/credentials.json:/credentials.json \
+     --env "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" \
+     --env "MINIO_ACCESS_KEY=minioaccountname" \
+     --env "MINIO_SECRET_KEY=minioaccountkey" \
+     minio/minio gateway gcs <project-id>
+   ```
+*  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with the MinIO Helm chart for Kubernetes:
+   ```bash
+   ## create MinIO Helm config
+   cat <<-EOF > myvalues.yaml
+   accessKey: <minio_access_key>
+   secretKey: <minio_secret_key>
+   
+   gcsgateway:
+     enabled: true
+     projectId: <project_id>
+     gcsKeyJson: |
+     $(cat /path/to/credentials.json)
+   EOF
+
+   ## deploy MinIO GCS Gateway
+   helm repo add minio https://helm.min.io/
+   helm install my-gateway minio/minio \
+     --values myvalues.yaml
+   ```
+
+#### Disabling HTTPS for exports to S3 and Minio
+
+By default, Dgraph assumes the destination bucket is using HTTPS. If that is not the case, the export will fail. To export to a bucket using HTTP (insecure), set the query parameter `secure=false` with the destination endpoint in the destination field:
+
+```graphql
+mutation {
+  export(input: { 
+    destination: "minio://<address>:9000/<bucketname>?secure=false"
+    accessKey: "<minio_access_key>"
+    secretKey: "<minio_secret_key>"
+  }) {
+    response {
+      message
+      code
+    }
+  }
+}
+```
+
+#### Using anonymous credentials
+
+If exporting to S3 or MinIO where credentials are not required, you can set `anonymous` to true.
+
+```graphql
+mutation {
+  export(input: { 
+    destination: "s3://s3.<region>.amazonaws.com/<bucketname>"
+    accessKey: "<aws_access_key_id>"
+    secretKey: "<aws_secret_access_key>"
+    anonymous: true
+  }) {
+    response {
+      message
+      code
+    }
+  }
+}
+```
+
+### Encrypting exports
 
 Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `encryption-key-file`.
 
 {{% notice "note" %}}
 The `encryption-key-file` was used for `encryption-at-rest` and will now also be used for encrypted backups and exports.
 {{% /notice %}}
+
+### Using curl to trigger an export
+
+This is an example in how you can use `curl` to tigger an export.
+
+```bash
+## create an export script
+cat <<-EOF > export.graphql
+mutation {
+  export(input: { 
+    destination: "s3://s3.<region>.amazonaws.com/<bucketname>"
+    accessKey: "<aws_access_key_id>"
+    secretKey: "<aws_secret_access_key>"
+  }) {
+    response {
+      message
+      code
+    }
+  }
+}
+EOF
+
+## trigger an export with curl
+curl http://localhost:8080/admin --silent --request POST \
+  --header "Content-Type: application/graphql" \
+  --upload-file export.graphql
+```
+
 
 ## Shutting Down Database
 
