@@ -56,8 +56,7 @@ To run Dgraph on your own server, see [instructions for single-node setup]({{< r
 or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
 
 {{% notice "tip" %}}
-Dgraph Labs recommends running Dgraph on Linux for production use. Dgraph is 
-optimized to perform best on Linux.
+Dgraph Labs recommends running Dgraph on Linux for production use.
 {{% /notice %}}
 
 ### Get started with fully-managed Dgraph
