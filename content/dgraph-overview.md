@@ -76,7 +76,7 @@ to deploy a new schema, you can do that in seconds, not hours.
 
 To learn more about Dgraph's GraphQL implementation, 
 see [GraphQL Overview]({{< relref "/graphql/overview" >}}). If you are a SQL
-user who is interested in learning about Dgraph and GraphQL, see:
+user, see:
 [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
 
 ## Fully-Managed Dgraph
@@ -98,8 +98,8 @@ To learn more about Slash GraphQL, see [Slash GraphQL Overview](https://dgraph.i
 [Dgraph Cloud](https://dgraph.io/cloud) extends the capabilities of Slash
 GraphQL to meet the heavy workloads and other needs of enterprise customers.
 With Dgraph Cloud, you get dedicated cluster instances, high availability, and
-the choice of running in your own virtual private cloud (VPC). You can also run
-Dgraph Cloud in a bring your own Kubernetes (BYOK) environment.
+the option to run Dgraph in your own virtual private cloud (VPC) or bring your
+own Kubernetes (BYOK) environment.
 
 
 ## Glossary of Dgraph and GraphQL terms
