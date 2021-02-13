@@ -75,8 +75,8 @@ change with your app, without the need to add new tables. And when it comes time
 to deploy a new schema, you can do that in seconds, not hours.
 
 To learn more about Dgraph's GraphQL implementation, 
-see [GraphQL Overview]({{< relref "/graphql/overview" >}}) You can also check 
-out a tutorial for SQL users who are interested in learning about GraphQL:
+see [GraphQL Overview]({{< relref "/graphql/overview" >}}). If you are a SQL
+user who is interested in learning about Dgraph and GraphQL, see:
 [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
 
 ## Fully-Managed Dgraph
