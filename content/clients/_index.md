@@ -52,7 +52,7 @@ weight = 7
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-javascript" aria-hidden="true"></i></div>
-    <a href="{{< relref "javascript.md">}}">
+    <a href="{{< relref "javascript/_index.md">}}">
       <h2>JavaScript</h2>
       <p>
         Dgraph JavaScript client
