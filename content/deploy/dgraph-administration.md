@@ -144,7 +144,7 @@ An export of all nodes is started by locally executing the following GraphQL mut
 
 ```graphql
 mutation {
-  export(input: {format: "rdf"}) {
+  export(input: {}) {
     response {
       message
       code
@@ -167,17 +167,30 @@ cluster. Dgraph does not copy all files to the Alpha that initiated the export.
 The user must also ensure that there is sufficient space on disk to store the
 export.
 
-Each Alpha leader for a group writes output as a gzipped file to the export
+### Configuring Dgraph Alpha server
+
+Each Dgraph Alpha leader for a group writes output as a gzipped file to the export
 directory specified via the `--export` flag (defaults to a directory called `"export"`). If any of the groups fail, the
 entire export process is considered failed and an error is returned.
 
-### Exporting to a file path
+As an example of configuring `export`, you can run this:
 
-Starting in Dgraph v20.11.0 you can provide an absolute path to the directory where you want to export data in the GraphQL mutation request, as follows:
+```bash
+docker run --detach --rm --name dgraph-standalone \
+  --publish 8080:8080 \
+  --publish 8000:8000 \
+  --volume ~/exports:/dgraph/myexports \
+  --env "DGRAPH_ALPHA_EXPORT=/dgraph/myexports" \
+  dgraph/standalone:{{< version >}}
+```
+
+### Export data format
+
+The data is exported in RDF format by default.  You can explicitly set the output format with the `format` field. For example:
 
 ```graphql
 mutation {
-  export(input: { format: "rdf", destination: "<absolute-path-to-your-export-dir>" }) {
+  export(input: { format: "rdf" }) {
     response {
       message
       code
@@ -186,8 +199,8 @@ mutation {
 }
 ```
 
-The data is exported in RDF format by default. A different output format may be specified with the
-`format` field. For example:
+
+A different output format may be specified with the `format` field. For example:
 
 ```graphql
 mutation {
@@ -200,22 +213,21 @@ mutation {
 }
 ```
 
-Currently, "rdf" and "json" are the only formats supported.
+Currently, `rdf` and `json` are the only formats supported.
 
-### Exporting to an object store
+### Exporting to NFS or a file path
 
 {{% notice "note" %}}
 This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
 {{% /notice %}}
 
-#### Exporting to S3
+You can override the default folder path by adding `destination` input field to the directory where you want to export data in the GraphQL mutation request as follows:
 
 ```graphql
 mutation {
-  export(input: { 
-    destination: "s3://s3.<region>.amazonaws.com/<bucketname>"
-    accessKey: "<aws_access_key_id>"
-    secretKey: "<aws_secret_access_key>"
+  export(input: {
+    format: "rdf"
+    destination: "<absolute-path-to-your-export-dir>"
   }) {
     response {
       message
@@ -225,14 +237,44 @@ mutation {
 }
 ```
 
-#### Exporting to Minio
+### Exporting to an object store
+
+{{% notice "note" %}}
+This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
+{{% /notice %}}
+
+You can export to an S3 or MinIO object store by specifying a URL in the `destination` input field.
+
+#### Exporting to S3
 
 ```graphql
 mutation {
-  export(input: { 
-    destination: "minio://<address>:9000/<bucketname>"
-    accessKey: "<minio_access_key>"
-    secretKey: "<minio_secret_key>"
+  export(input: {
+    destination: "s3://s3.<region>.amazonaws.com/<bucket-name>"
+    accessKey: "<aws-access-key-id>"
+    secretKey: "<aws-secret-access-key>"
+  }) {
+    response {
+      message
+      code
+    }
+  }
+}
+```
+
+{{% notice "note" %}}
+Dgraph URL used for s3 is different than AWS CLI tools with the `aws s3` command, which uses a shortened format: `s3://<bucket-name>`.
+{{% /notice %}}
+
+
+#### Exporting to MinIO
+
+```graphql
+mutation {
+  export(input: {
+    destination: "minio://<address>:9000/<bucket-name>"
+    accessKey: "<minio-access-key>"
+    secretKey: "<minio-secret-key>"
   }) {
     response {
       message
@@ -244,11 +286,11 @@ mutation {
 
 #### Exporting to a Minio Gateway
 
-MinIO can be used as a gateway to other object stores, such as Azure Blob Storage and Google Cloud Storage.
+MinIO can be used as a gateway to other object stores, such as [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage).  You can use the above MinIO GraphQL mutation with MinIO configured as a gateway.
 
 ##### Azure Blob Storage
 
-You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs.
+You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a Blob [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs.  The blob container name synonymous to bucket name when specifying the destination.  
 
 For MinIO configuration, you will need to [retrieve storage accounts keys](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage). The [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) will use `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` to correspond to Azure Storage Account `AccountName` and `AccountKey`.
 
@@ -262,10 +304,11 @@ Once you have the `AccountName` and `AccountKey`, you can access Azure Blob Stor
    ```
 *  Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with Docker
    ```bash
-   docker run --publish 9000:9000 --name gateway \
-     --env "MINIO_ACCESS_KEY=<AccountName>" \
-     --env "MINIO_SECRET_KEY=<AccountKey>" \
-     minio/minio gateway azure
+   docker run --detach --rm --name gateway \
+    --publish 9000:9000 \
+    --env MINIO_ACCESS_KEY="<AccountName>" \
+    --env MINIO_SECRET_KEY="<AccountKey>" \
+    minio/minio gateway azure
    ```
  * Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with the MinIO Helm chart for Kubernetes:
    ```bash
@@ -277,38 +320,39 @@ Once you have the `AccountName` and `AccountKey`, you can access Azure Blob Stor
 
 ##### Google Cloud Storage
 
-You can use [Google Cloud Storage](https://cloud.google.com/storage) through the [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html).  You will need to [create storage buckets](https://cloud.google.com/storage/docs/creating-buckets), create a Service Account key for GCS and get a credentials file.  See [Create a Service Account key](https://github.com/minio/minio/blob/master/docs/gateway/gcs.md#11-create-a-service-account-ey-for-gcs-and-get-the-credentials-file) for further information.
+You can use [Google Cloud Storage](https://cloud.google.com/storage) through the [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html).  You will need to create [storage buckets](https://cloud.google.com/storage/docs/creating-buckets), create a Service Account key for GCS and get a credentials file.  See [Create a Service Account key](https://github.com/minio/minio/blob/master/docs/gateway/gcs.md#11-create-a-service-account-ey-for-gcs-and-get-the-credentials-file) for further information.
 
 Once you have a `credentials.json`, you can access GCS locally using one of these methods:
 
 *  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with the MinIO Binary
    ```bash
    export GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials.json"
-   export MINIO_ACCESS_KEY="<minio_access_key>"
-   export MINIO_SECRET_KEY="<minio_secret_key>"
-   minio gateway gcs "<project_id>"
+   export MINIO_ACCESS_KEY="<minio-access-key>"
+   export MINIO_SECRET_KEY="<minio-secret-key>"
+   minio gateway gcs "<project-id>"
    ```
 *  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with Docker
    ```bash
-   docker run --publish 9000:9000 --name gateway \
-     --volume /path/to/credentials.json:/credentials.json \
-     --env "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" \
-     --env "MINIO_ACCESS_KEY=minioaccountname" \
-     --env "MINIO_SECRET_KEY=minioaccountkey" \
-     minio/minio gateway gcs <project-id>
+   docker run --detach --rm --name gateway \
+     --publish 9000:9000  \
+     --volume "</path/to/credentials.json>":/credentials.json \
+     --env GOOGLE_APPLICATION_CREDENTIALS=/credentials.json \
+     --env MINIO_ACCESS_KEY="<minio-access-key>" \
+     --env MINIO_SECRET_KEY="<minio-secret-key>" \
+     minio/minio gateway gcs "<project-id>"
    ```
 *  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with the MinIO Helm chart for Kubernetes:
    ```bash
    ## create MinIO Helm config
    cat <<-EOF > myvalues.yaml
-   accessKey: <minio_access_key>
-   secretKey: <minio_secret_key>
-   
+   accessKey: <minio-access-key>
+   secretKey: <minio-secret-key>
+
    gcsgateway:
      enabled: true
-     projectId: <project_id>
+     projectId: <project-id>
      gcsKeyJson: |
-     $(cat /path/to/credentials.json)
+     $(cat "</path/to/credentials.json>")
    EOF
 
    ## deploy MinIO GCS Gateway
@@ -323,10 +367,10 @@ By default, Dgraph assumes the destination bucket is using HTTPS. If that is not
 
 ```graphql
 mutation {
-  export(input: { 
-    destination: "minio://<address>:9000/<bucketname>?secure=false"
-    accessKey: "<minio_access_key>"
-    secretKey: "<minio_secret_key>"
+  export(input: {
+    destination: "minio://<address>:9000/<bucket-name>?secure=false"
+    accessKey: "<minio-access-key>"
+    secretKey: "<minio-secret-key>"
   }) {
     response {
       message
@@ -342,10 +386,8 @@ If exporting to S3 or MinIO where credentials are not required, you can set `ano
 
 ```graphql
 mutation {
-  export(input: { 
-    destination: "s3://s3.<region>.amazonaws.com/<bucketname>"
-    accessKey: "<aws_access_key_id>"
-    secretKey: "<aws_secret_access_key>"
+  export(input: {
+    destination: "s3://s3.<region>.amazonaws.com/<bucket-name>"
     anonymous: true
   }) {
     response {
@@ -368,28 +410,29 @@ The `encryption-key-file` was used for `encryption-at-rest` and will now also be
 
 This is an example in how you can use `curl` to tigger an export.
 
-```bash
-## create an export script
-cat <<-EOF > export.graphql
-mutation {
-  export(input: { 
-    destination: "s3://s3.<region>.amazonaws.com/<bucketname>"
-    accessKey: "<aws_access_key_id>"
-    secretKey: "<aws_secret_access_key>"
-  }) {
-    response {
-      message
-      code
-    }
-  }
-}
-EOF
-
-## trigger an export with curl
-curl http://localhost:8080/admin --silent --request POST \
-  --header "Content-Type: application/graphql" \
-  --upload-file export.graphql
-```
+  1. Create GraphQL file for the desired mutation:
+     ```bash
+     cat <<-EOF > export.graphql
+     mutation {
+       export(input: {
+         destination: "s3://s3.<region>.amazonaws.com/<bucket-name>"
+         accessKey: "<aws-access-key-id>"
+         secretKey: "<aws-secret-access-key>"
+       }) {
+         response {
+           message
+           code
+         }
+       }
+     }
+     EOF
+     ```
+  2. Trigger an export with curl
+     ```bash
+     curl http://localhost:8080/admin --silent --request POST \
+       --header "Content-Type: application/graphql" \
+       --upload-file export.graphql
+     ```
 
 
 ## Shutting Down Database
