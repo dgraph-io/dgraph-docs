@@ -284,7 +284,7 @@ mutation {
 }
 ```
 
-#### Exporting to a Minio Gateway
+#### Exporting to a MinIO Gateway
 
 MinIO can be used as a gateway to other object stores, such as [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage).  You can use the above MinIO GraphQL mutation with MinIO configured as a gateway.
 
@@ -352,7 +352,7 @@ Once you have a `credentials.json`, you can access GCS locally using one of thes
      enabled: true
      projectId: <project-id>
      gcsKeyJson: |
-     $(cat "</path/to/credentials.json>")
+       $(cat "</path/to/credentials.json>")
    EOF
 
    ## deploy MinIO GCS Gateway
