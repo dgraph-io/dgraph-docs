@@ -62,7 +62,7 @@ const dgraphClient = new dgraph.DgraphClient(clientStub);
 
 #### Connecting to Slash
 
-Alternatively to the above, Slash users can create `DgraphClientStub` by using the specialized method for Slash.
+Alternatively to the above, Slash users can create a `DgraphClientStub` by using the specialized method for Slash.
 
 ````js
 const dgraph = require("dgraph-js");
