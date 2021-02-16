@@ -138,21 +138,21 @@ $ tree ./out
 4 directories, 6 files
 ```
 
-Because `--reduce_shards` was set to `2`, there are two sets of `p` directories: 
-- one in the `./out/0` directory 
-- another in the `./out/1` directory.
-
-{{% notice "note" %}}
-Each Dgraph Alpha must have a copy of the group's `p` directory output. 
-{{% /notice %}}
-
-![Bulk Loader diagram](/images/deploy/bulk-loader.png)
+Because `--reduce_shards` was set to `2`, two sets of `p` directories are generated: 
+1. the `./out/0` folder 
+2. the `./out/1` folder
 
 Once the output is created, the files must be copied to all the servers that will run
 Dgraph Alphas:
 
 - Each replica of the first group (`Alpha1`, `Alpha2`, `Alpha3`) should have a copy of `./out/0/p`
 - Each replica of the second group (`Alpha4`, `Alpha5`, `Alpha6`) should have a copy of `./out/1/p`, and so on.
+
+{{% notice "note" %}}
+Each Dgraph Alpha must have a copy of the group's `p` directory output. 
+{{% /notice %}}
+
+![Bulk Loader diagram](/images/deploy/bulk-loader.png)
 
 ### Load from S3
 
