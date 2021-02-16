@@ -310,7 +310,7 @@ Once you have the `AccountName` and `AccountKey`, you can access Azure Blob Stor
     --env MINIO_SECRET_KEY="<AccountKey>" \
     minio/minio gateway azure
    ```
- * Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with the MinIO Helm chart for Kubernetes:
+ * Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with the [MinIO Helm chart](https://github.com/minio/charts) for Kubernetes:
    ```bash
    helm repo add minio https://helm.min.io/
    helm install my-gateway minio/minio \
@@ -341,7 +341,7 @@ Once you have a `credentials.json`, you can access GCS locally using one of thes
      --env MINIO_SECRET_KEY="<minio-secret-key>" \
      minio/minio gateway gcs "<project-id>"
    ```
-*  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with the MinIO Helm chart for Kubernetes:
+*  Using [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) with the [MinIO Helm chart](https://github.com/minio/charts) for Kubernetes:
    ```bash
    ## create MinIO Helm config
    cat <<-EOF > myvalues.yaml
@@ -352,7 +352,7 @@ Once you have a `credentials.json`, you can access GCS locally using one of thes
      enabled: true
      projectId: <project-id>
      gcsKeyJson: |
-       $(cat "</path/to/credentials.json>")
+   $(IFS='\n'; while read -r LINE; do printf '    %s\n' "$LINE"; done < "</path/to/credentials.json>")
    EOF
 
    ## deploy MinIO GCS Gateway
