@@ -139,8 +139,8 @@ $ tree ./out
 ```
 
 Because `--reduce_shards` was set to `2`, two sets of `p` directories are generated: 
-1. the `./out/0` folder 
-2. the `./out/1` folder
+- the `./out/0` folder 
+- the `./out/1` folder
 
 Once the output is created, the files must be copied to all the servers that will run
 Dgraph Alphas:
