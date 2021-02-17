@@ -109,7 +109,7 @@ dgraph alpha --mutations strict
 Clients can use alter operations to apply schema updates and drop particular or all predicates from the database.
 By default, all clients are allowed to perform alter operations.
 You can configure Dgraph to only allow alter operations when the client provides a specific token.
-This "Simple ACL" token can be used to prevent clients from making unintended or accidental schema updates or predicate drops.
+You can use this "Simple ACL" token to prevent clients from making unintended or accidental schema updates or predicate drops.
 
 You can specify the auth token with the `--auth_token` option for each Dgraph Alpha in the cluster.
 Clients must include the same auth token to make alter requests.
@@ -167,13 +167,13 @@ cluster. Dgraph does not copy all files to the Alpha that initiated the export.
 The user must also ensure that there is sufficient space on disk to store the
 export.
 
-### Configuring Dgraph Alpha server
+### Configuring Dgraph Alpha server nodes
 
 Each Dgraph Alpha leader for a group writes output as a gzipped file to the export
 directory specified via the `--export` flag (defaults to a directory called `"export"`). If any of the groups fail, the
 entire export process is considered failed and an error is returned.
 
-As an example of configuring `export`, you can run this:
+For example, you could run the following commands to configure data exports:
 
 ```bash
 docker run --detach --rm --name dgraph-standalone \
@@ -186,7 +186,7 @@ docker run --detach --rm --name dgraph-standalone \
 
 ### Export data format
 
-The data is exported in RDF format by default.  You can explicitly set the output format with the `format` field. For example:
+By default, Dgraph exports data in RDF format. You can explicitly set the output format with the `format` field. For example:
 
 ```graphql
 mutation {
@@ -200,7 +200,7 @@ mutation {
 ```
 
 
-A different output format may be specified with the `format` field. For example:
+You can specify a different output format using the `format` field. For example:
 
 ```graphql
 mutation {
@@ -221,7 +221,7 @@ Currently, `rdf` and `json` are the only formats supported.
 This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
 {{% /notice %}}
 
-You can override the default folder path by adding `destination` input field to the directory where you want to export data in the GraphQL mutation request as follows:
+You can override the default folder path by adding the `destination` input field to the directory where you want to export data in the GraphQL mutation request, as follows:
 
 ```graphql
 mutation {
@@ -286,11 +286,11 @@ mutation {
 
 #### Exporting to a MinIO Gateway
 
-MinIO can be used as a gateway to other object stores, such as [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage).  You can use the above MinIO GraphQL mutation with MinIO configured as a gateway.
+You can use MinIO as a gateway to other object stores, such as [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage).  You can use the above MinIO GraphQL mutation with MinIO configured as a gateway.
 
 ##### Azure Blob Storage
 
-You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a Blob [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs.  The blob container name synonymous to bucket name when specifying the destination.  
+You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a Blob [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs. The name of the blob container should be the same as the name of the storage bucket you use when specifying the destination.
 
 For MinIO configuration, you will need to [retrieve storage accounts keys](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage). The [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) will use `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` to correspond to Azure Storage Account `AccountName` and `AccountKey`.
 
