@@ -57,7 +57,7 @@ The HTTP page `/debug/pprof/` is available at the HTTP port of a Dgraph Zero or 
 
 ## Profiling Information with `debuginfo`
 
-Instead of sending a request to the server for each CPU, Memory, goroutine profile, and you can use the `debuginfo` command to collect all the profiles along with several metric you need in one go.
+Instead of sending a request to the server for each CPU, Memory, and goroutine profile, you can use the `debuginfo` command to collect all the profiles along with several metrics you need in one go.
 
 You can run the command like this:
 
@@ -104,7 +104,7 @@ I0217 03:13:04.452051   12495 run.go:122] Debuginfo archive successful: dgraph-d
 
 When the command finishes, `debuginfo` returns the tarball's file name. If no destination has been specified, the file will be created in the same directory from where you ran the `debuginfo` command. 
 
-The followings are the information that have been collected by the `debuginfo` command:
+The following files contain the metrics collected by the `debuginfo` command:
 
 ```
 dgraph-debuginfo639541060
