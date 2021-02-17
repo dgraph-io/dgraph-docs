@@ -57,45 +57,78 @@ The HTTP page `/debug/pprof/` is available at the HTTP port of a Dgraph Zero or 
 
 ## Profiling Information with `debuginfo`
 
-Instead of sending a request to the server for each CPU, Memory, and goroutine profile, you can use the `debuginfo` command to collect all the profiles you need in one go.
+Instead of sending a request to the server for each CPU, Memory, goroutine profile, and you can use the `debuginfo` command to collect all the profiles along with several metric you need in one go.
 
 You can run the command like this:
 
 ```sh
-dgraph debuginfo -a <alpha_address:port> -z <zero_address:port> -d <path_to_dir_to_store_profiles> 
+dgraph debuginfo -a <alpha_address:port> -z <zero_address:port> -d <path_to_dir_to_store_profiles> -s 30
 ```
 
 Your output should look like:
 
 ```log
-[Decoder]: Using assembly version of decoder
-Page Size: 4096
-I0120 14:57:43.722166   15018 run.go:85] using directory /tmp/dgraph-debuginfo121781350 for debug info dump.
-I0120 14:57:43.722272   15018 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/goroutine?duration=30
-I0120 14:57:43.722281   15018 pprof.go:74] please wait... (30s)
-I0120 14:57:43.724208   15018 pprof.go:62] saving goroutine profile in /tmp/dgraph-debuginfo121781350/alpha_goroutine.gz
-I0120 14:57:43.724217   15018 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/heap?duration=30
-I0120 14:57:43.724222   15018 pprof.go:74] please wait... (30s)
-I0120 14:57:43.726212   15018 pprof.go:62] saving heap profile in /tmp/dgraph-debuginfo121781350/alpha_heap.gz
-I0120 14:57:43.726220   15018 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/threadcreate?duration=30
-I0120 14:57:43.726225   15018 pprof.go:74] please wait... (30s)
-I0120 14:57:43.727054   15018 pprof.go:62] saving threadcreate profile in /tmp/dgraph-debuginfo121781350/alpha_threadcreate.gz
-I0120 14:57:43.727064   15018 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/block?duration=30
-I0120 14:57:43.727071   15018 pprof.go:74] please wait... (30s)
-I0120 14:57:43.727958   15018 pprof.go:62] saving block profile in /tmp/dgraph-debuginfo121781350/alpha_block.gz
-I0120 14:57:43.727967   15018 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/mutex?duration=30
-I0120 14:57:43.727971   15018 pprof.go:74] please wait... (30s)
-I0120 14:57:43.728622   15018 pprof.go:62] saving mutex profile in /tmp/dgraph-debuginfo121781350/alpha_mutex.gz
-I0120 14:57:43.728630   15018 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/profile?duration=30
-I0120 14:57:43.728635   15018 pprof.go:74] please wait... (30s)
-I0120 14:58:13.788794   15018 pprof.go:62] saving profile profile in /tmp/dgraph-debuginfo121781350/alpha_profile.gz
-I0120 14:58:13.788827   15018 pprof.go:72] fetching profile over HTTP from http://localhost:8080/debug/pprof/trace?duration=30
-I0120 14:58:13.788841   15018 pprof.go:74] please wait... (30s)
-I0120 14:58:14.792110   15018 pprof.go:62] saving trace profile in /tmp/dgraph-debuginfo121781350/alpha_trace.gz
-I0120 14:58:14.799585   15018 run.go:115] Debuginfo archive successful: dgraph-debuginfo121781350.tar.gz
+I0217 03:12:33.417381   12495 run.go:90] using directory /tmp/dgraph-debuginfo695159006 for debug info dump.
+I0217 03:12:33.418542   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/debug/pprof/goroutine?duration=30
+I0217 03:12:33.418560   12495 debugging.go:104] please wait... (30s)
+I0217 03:12:33.420840   12495 debugging.go:68] saving goroutine profile in /tmp/dgraph-debuginfo695159006/alpha_goroutine.gz
+I0217 03:12:33.420855   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/debug/pprof/heap?duration=30
+I0217 03:12:33.420860   12495 debugging.go:104] please wait... (30s)
+I0217 03:12:33.422055   12495 debugging.go:68] saving heap profile in /tmp/dgraph-debuginfo695159006/alpha_heap.gz
+I0217 03:12:33.422065   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/debug/pprof/threadcreate?duration=30
+I0217 03:12:33.422072   12495 debugging.go:104] please wait... (30s)
+I0217 03:12:33.422863   12495 debugging.go:68] saving threadcreate profile in /tmp/dgraph-debuginfo695159006/alpha_threadcreate.gz
+I0217 03:12:33.422873   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/debug/pprof/block?duration=30
+I0217 03:12:33.422878   12495 debugging.go:104] please wait... (30s)
+I0217 03:12:33.437829   12495 debugging.go:68] saving block profile in /tmp/dgraph-debuginfo695159006/alpha_block.gz
+I0217 03:12:33.437843   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/debug/pprof/mutex?duration=30
+I0217 03:12:33.437848   12495 debugging.go:104] please wait... (30s)
+I0217 03:12:33.438736   12495 debugging.go:68] saving mutex profile in /tmp/dgraph-debuginfo695159006/alpha_mutex.gz
+I0217 03:12:33.438750   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/debug/pprof/profile?duration=30
+I0217 03:12:33.438757   12495 debugging.go:104] please wait... (30s)
+I0217 03:13:03.443671   12495 debugging.go:68] saving profile profile in /tmp/dgraph-debuginfo695159006/alpha_profile.gz
+I0217 03:13:03.443724   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/debug/pprof/trace?duration=30
+I0217 03:13:03.443750   12495 debugging.go:104] please wait... (30s)
+I0217 03:13:04.445754   12495 debugging.go:68] saving trace profile in /tmp/dgraph-debuginfo695159006/alpha_trace.gz
+I0217 03:13:04.445776   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/jemalloc
+I0217 03:13:04.445784   12495 debugging.go:104] please wait... (30s)
+I0217 03:13:04.446058   12495 debugging.go:92] saving jemalloc metric in /tmp/dgraph-debuginfo695159006/alpha_jemalloc.gz
+I0217 03:13:04.446073   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/state
+I0217 03:13:04.446086   12495 debugging.go:104] please wait... (30s)
+I0217 03:13:04.447259   12495 debugging.go:92] saving state metric in /tmp/dgraph-debuginfo695159006/alpha_state.gz
+I0217 03:13:04.447270   12495 debugging.go:102] fetching information over HTTP from http://localhost:8080/health
+I0217 03:13:04.447277   12495 debugging.go:104] please wait... (30s)
+I0217 03:13:04.447788   12495 debugging.go:92] saving health metric in /tmp/dgraph-debuginfo695159006/alpha_health.gz
+I0217 03:13:04.452051   12495 run.go:122] Debuginfo archive successful: dgraph-debuginfo695159006.tar.gz
 ```
 
-When the command finishes, `debuginfo` returns the tarball's file name. In this example, it was saved in `/tmp/dgraph-debuginfo121781350/alpha_trace.gz`.
+When the command finishes, `debuginfo` returns the tarball's file name. If no destination has been specified, the file will be created in the same directory from where you ran the `debuginfo` command. 
+
+The followings are the information that have been collected by the `debuginfo` command:
+
+```
+dgraph-debuginfo639541060
+├── alpha_block.gz
+├── alpha_goroutine.gz
+├── alpha_health.gz
+├── alpha_heap.gz
+├── alpha_jemalloc.gz
+├── alpha_mutex.gz
+├── alpha_profile.gz
+├── alpha_state.gz
+├── alpha_threadcreate.gz
+├── alpha_trace.gz
+├── zero_block.gz
+├── zero_goroutine.gz
+├── zero_health.gz
+├── zero_heap.gz
+├── zero_jemalloc.gz
+├── zero_mutex.gz
+├── zero_profile.gz
+├── zero_state.gz
+├── zero_threadcreate.gz
+└── zero_trace.gz
+```
 
 ### Command parameters
 
@@ -104,9 +137,23 @@ When the command finishes, `debuginfo` returns the tarball's file name. In this 
   -x, --archive            Whether to archive the generated report (default true)
   -d, --directory string   Directory to write the debug info into.
   -h, --help               help for debuginfo
+  -m, --metrics strings    List of metrics profiles to dump in the report. (default [jemalloc,state,health])
   -p, --profiles strings   List of pprof profiles to dump in the report. (default [goroutine,heap,threadcreate,block,mutex,profile,trace])
   -s, --seconds uint32     Duration for time-based profile collection. (default 15)
   -z, --zero string        Address of running dgraph zero.
+```
+
+#### The metrics flag (`-m`)
+
+By default, `debuginfo` collects:
+- `/jemalloc`
+- `/state`
+- `/health` 
+
+If needed, you can collect some of them (not necessarily all). For example, this command will collect only `jemalloc` and `health` profiles:
+
+```sh
+dgraph debuginfo -m jemalloc,health
 ```
 
 #### The profile flag (`-p`)
