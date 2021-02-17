@@ -17,11 +17,14 @@ building apps and websites, rather than managing infrastructure, see the
 [Dgraph cloud services docs](https://dgraph.io/docs/slash-graphql/), or 
 [Try Slash GraphQL](https://slash.dgraph.io/).
 
-Dgraph runs on two types of server nodes, even when you are doing a proof-of-concept
-deployment using a single-host setup:
+A Dgraph cluster consists of the following:
 
-* Dgraph Alpha database server: The Dgraph Alpha server nodes in your deployment host and serve data. These nodes also host an `/admin` HTTP and GRPC endpoint that can
+* **Dgraph Alpha database server nodes**: The Dgraph Alpha server nodes in your deployment host and serve data. These nodes also host an `/admin` HTTP and GRPC endpoint that can
 be used for data and node administration tasks such as backup, export, draining,
 and shutdown.
-* Dgraph Zero management server: The Dgraph Zero nodes in your deployment control
+* **Dgraph Zero management server nodes**: The Dgraph Zero nodes in your deployment control
 the nodes in your Dgraph cluster. Dgraph Zero automatically moves data between different Dgraph Alpha instances based on the volume of data served by each Alpha instance.
+
+You need at least one node of each type to run Dgraph. You need three nodes of
+each type to run Dgraph in a high-availability (HA) cluster configuration. To
+learn more about 2-node and 6-node deployment options, see the [Production Checklist]({{< relref "deploy/production-checklist.md" >}}).
