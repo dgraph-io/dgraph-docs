@@ -173,7 +173,7 @@ Each Dgraph Alpha leader for a group writes output as a gzipped file to the expo
 directory specified via the `--export` flag (defaults to a directory called `"export"`). If any of the groups fail, the
 entire export process is considered failed and an error is returned.
 
-For example, you could run the following commands to configure data exports:
+As an example of configuring `export`, you can run this:
 
 ```bash
 docker run --detach --rm --name dgraph-standalone \
@@ -183,6 +183,10 @@ docker run --detach --rm --name dgraph-standalone \
   --env "DGRAPH_ALPHA_EXPORT=/dgraph/myexports" \
   dgraph/standalone:{{< version >}}
 ```
+
+{{% notice "tip" %}}
+The `export` configuration can be configured as an environment variable `DGRAPH_ALPHA_EXPORT`, command line flag `--export`, or in a configuration file with the `export` key.  See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+{{% /notice %}}
 
 ### Export data format
 
@@ -263,7 +267,7 @@ mutation {
 ```
 
 {{% notice "note" %}}
-Dgraph URL used for S3 is different than AWS CLI tools with the `aws s3` command, which uses a shortened format: `s3://<bucket-name>`.
+The Dgraph URL used for S3 is different than the AWS CLI tools with the `aws s3` command, which uses a shortened format: `s3://<bucket-name>`.
 {{% /notice %}}
 
 
@@ -290,7 +294,7 @@ You can use MinIO as a gateway to other object stores, such as [Azure Blob Stora
 
 ##### Azure Blob Storage
 
-You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a Blob [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs. The name of the blob container should be the same as the name of the storage bucket you use when specifying the destination.
+You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a Blob [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs. The name of the blob container is what you use for `<bucket-name>` when specifying the `destination` in the GraphQL mutation.
 
 For MinIO configuration, you will need to [retrieve storage accounts keys](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage). The [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) will use `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` to correspond to Azure Storage Account `AccountName` and `AccountKey`.
 
@@ -400,10 +404,10 @@ mutation {
 
 ### Encrypting exports
 
-Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `encryption-key-file`.
+Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `encryption_key_file`.
 
 {{% notice "note" %}}
-The `encryption-key-file` was used for `encryption-at-rest` and will now also be used for encrypted backups and exports.
+The `encryption_key_file` was used for [Encryption at Rest]({{< relref "enterprise-features/encryption-at-rest" >}}) and will now also be used for encrypted exports.
 {{% /notice %}}
 
 ### Using `curl` to trigger an export
