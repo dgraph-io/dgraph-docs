@@ -263,7 +263,7 @@ mutation {
 ```
 
 {{% notice "note" %}}
-Dgraph URL used for s3 is different than AWS CLI tools with the `aws s3` command, which uses a shortened format: `s3://<bucket-name>`.
+Dgraph URL used for S3 is different than AWS CLI tools with the `aws s3` command, which uses a shortened format: `s3://<bucket-name>`.
 {{% /notice %}}
 
 
