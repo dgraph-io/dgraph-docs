@@ -408,7 +408,7 @@ The `encryption-key-file` was used for `encryption-at-rest` and will now also be
 
 ### Using `curl` to trigger an export
 
-This is an example in how you can use `curl` to tigger an export.
+This is an example of how you can use `curl` to trigger an export.
 
   1. Create GraphQL file for the desired mutation:
      ```bash
