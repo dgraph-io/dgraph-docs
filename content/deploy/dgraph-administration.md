@@ -406,7 +406,7 @@ Export is available wherever an Alpha is running. To encrypt an export, the Alph
 The `encryption-key-file` was used for `encryption-at-rest` and will now also be used for encrypted backups and exports.
 {{% /notice %}}
 
-### Using curl to trigger an export
+### Using `curl` to trigger an export
 
 This is an example in how you can use `curl` to tigger an export.
 
@@ -427,7 +427,7 @@ This is an example in how you can use `curl` to tigger an export.
      }
      EOF
      ```
-  2. Trigger an export with curl
+  2. Trigger an export with `curl`
      ```bash
      curl http://localhost:8080/admin --silent --request POST \
        --header "Content-Type: application/graphql" \
