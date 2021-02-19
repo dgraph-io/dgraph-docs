@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Single Host Setup"
-weight = 4
+weight = 6
 [menu.main]
     parent = "deploy"
 +++

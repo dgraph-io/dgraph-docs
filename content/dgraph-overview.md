@@ -46,7 +46,7 @@ clusters. To learn more, see [Fully-Managed Dgraph](#fully-managed-dgraph).
 {{% notice "note" %}}
 The documentation provided on [this Dgraph Docs site](https://dgraph.io/docs)
 is applicable to self-managed instances of Dgraph, and also largely applicable
-to Slash GraphQL and Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/deploy" >}}) section). To learn more about Slash GraphQL and Dgraph Cloud, see
+to Slash GraphQL and Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/deploy/overview" >}}) section). To learn more about Slash GraphQL and Dgraph Cloud, see
 [Dgraph cloud services docs](https://dgraph.io/docs/slash-graphql).
 {{% /notice %}}
 
