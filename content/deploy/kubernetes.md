@@ -9,7 +9,7 @@ weight = 8
 The following section covers running Dgraph with Kubernetes. We have tested Dgraph with Kubernetes versions 1.14 to 1.16 on [GKE](https://cloud.google.com/kubernetes-engine) and versions 1.14 to 1.17 on [EKS](https://aws.amazon.com/eks/).
 
 {{% notice "note" %}}These instructions are for running Dgraph alpha service without TLS configuration.
-Instructions for running Dgraph alpha service with TLS refer [TLS instructions]({{< relref "deploy/security/tls-configuration.md" >}}).{{% /notice %}}
+Instructions for running Dgraph alpha service with TLS refer [TLS instructions]({{< relref "deploy/tls-configuration.md" >}}).{{% /notice %}}
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) which is used to deploy
   and manage applications on kubernetes.
