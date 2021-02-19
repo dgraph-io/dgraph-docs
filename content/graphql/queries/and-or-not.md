@@ -49,6 +49,19 @@ Example: Posts that have "GraphQL" in the title, or have the tag "GraphQL" and m
 ```graphql
 queryPost(filter: {
     title: { allofterms: "GraphQL"},
-    or: { title: { allofterms: "Dgraph" }, tags: { eg: "GraphQL" } }
+    or: { title: { allofterms: "Dgraph" }, tags: { eq: "GraphQL" } }
+  } ) { ... }
+```
+
+The `and` and `or` filter both accept a list of filters. Per the GraphQL specification, non-list filters are coerced into a list. This provides backwards compatibility while allowing for more complex filters.
+
+Example: Query for posts that have `GraphQL` in the title but that lack the `GraphQL` tag, or that have `Dgraph` in the title but lack the `Dgraph` tag.
+
+```graphql
+queryPost(filter: {
+    or: [
+      and: [{ title: { allofterms: "GraphQL" } }, { not: { tags: { eq: "GraphQL" } } }]
+      and: [{ title: { allofterms: "Dgraph" } }, { not: { tags: { eq: "Dgraph" } } }]
+    ]
   } ) { ... }
 ```
