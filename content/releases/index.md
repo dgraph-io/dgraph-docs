@@ -26,8 +26,8 @@ To learn about the latest releases and other important announcements, watch the
  v20.11.x              | [v20.11.0][]    | Yes        | December 2020      | December 2021
  v20.07.x              | [v20.07.3][]    | Yes        | July 2020          | July 2021
  v20.03.x              | [v20.03.7][]    | Yes        | March 2020         | March 2021
- v1.2.x                | [v1.2.8][]      | Yes        | January 2020       | January 2021
- v1.1.x                | [v1.1.1][]      | Yes        | January 2020       | January 2021
+ v1.2.x                | [v1.2.8][]      | No         | January 2020       | January 2021
+ v1.1.x                | [v1.1.1][]      | No         | January 2020       | January 2021
  v1.0.x                | [v1.0.18][]     | No         | December 2017      | March 2020
 
 

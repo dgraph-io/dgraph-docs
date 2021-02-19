@@ -6,10 +6,7 @@ weight = 5
     parent = "deploy"
 +++
 
-On its HTTP port, a Dgraph Alpha exposes a number of admin endpoints.
-{{% notice "warning" %}}
-These HTTP endpoints are deprecated and will be removed in the next release. Please use the GraphQL endpoint at /admin.
-{{% /notice %}}
+Dgraph Alpha provides several HTTP endpoints for administrators, as follows:
 
 * `/health?all` returns information about the health of all the servers in the cluster.
 * `/admin/shutdown` initiates a proper [shutdown]({{< relref "deploy/dgraph-administration.md#shutting-down-database" >}}) of the Alpha.

@@ -37,19 +37,33 @@ Making our documentation easy to understand includes optimizing it for client-si
 
 We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to locally stage doc updates before or after creating a PR.
 
-1. Download and install the latest patch of hugo version v0.69.x from [here](https://github.com/gohugoio/hugo/releases/).
-
+1. Download and install the latest patch of hugo version v0.74.x from [here](https://github.com/gohugoio/hugo/releases/).
+   ```bash
+   pushd ~/Downloads
+   VERSION=v0.74
+   TAG=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases | jq '.[].tag_name' -r | grep $VERSION | head -1)
+   OS=$(uname -s)
+   if [[ ${OS,,} == "darwin" ]]; then
+     PKG=hugo_${TAG##v}_macOS-64bit.tar.gz
+     curl -sLO https://github.com/gohugoio/hugo/releases/download/${TAG}/${PKG}
+     tar xvzf $PKG hugo
+     sudo mv hugo /usr/local/bin/
+   else
+     PKG=hugo_${TAG##v}_Linux-64bit.deb
+     curl -sLO https://github.com/gohugoio/hugo/releases/download/${TAG}/${PKG}
+     sudo apt install $PKG
+   fi
+   popd
+   ```
 2. Run the command below to get the theme.
-
-```
-pushd themes && git clone https://github.com/dgraph-io/hugo-docs && popd
-```
-
+   ```bash
+   pushd themes && git clone https://github.com/dgraph-io/hugo-docs && popd
+   ```
 3. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the documentation site running on your local machine.
 
 (Optional) To run queries _within_ the documentation using a different Dgraph instance, set the `DGRAPH_ENDPOINT` environment variable before starting the local web server:
 
-```
+```bash
 DGRAPH_ENDPOINT="http://localhost:8080/query?latency=true" ./scripts/local.sh
 ```
 
@@ -69,7 +83,7 @@ sh scripts/docker.sh
 
 ### Branch
 
-Depending on what branch you are on, some code examples will dynamically change. 
+Depending on what branch you are on, some code examples will dynamically change.
 For example, `go-grpc` code examples will have different import path depending
 on the branch name.
 
@@ -97,4 +111,3 @@ Pass custom Go-GRPC example to the runnable by passing a `customExampleGoGRPC` t
 ```
 
 **Note:** Runnable doesn't support passing a multiline string as an argument to a shortcode. Therefore, you have to create the whole custom example in a single line string by replacing newlines with `\n`.
-
