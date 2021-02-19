@@ -53,9 +53,9 @@ queryPost(filter: {
   } ) { ... }
 ```
 
-The `and` and `or` filter accept a list of filters. Any non list filter will be coeorced into a list. This provides backwards compatibility while allowing for more complex filters.
+The `and` and `or` filter both accept a list of filters. Per the GraphQL specification, non-list filters are coerced into a list. This provides backwards compatibility while allowing for more complex filters.
 
-Example: Posts that have `GraphQL` in the title and not the tag `GraphQL`, or have `Dgraph` in the title and not the tag `Dgraph`
+Example: Query for posts that have `GraphQL` in the title but that lack the `GraphQL` tag, or that have `Dgraph` in the title but lack the `Dgraph` tag.
 
 ```graphql
 queryPost(filter: {
