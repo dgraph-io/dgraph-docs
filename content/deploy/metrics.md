@@ -1,9 +1,9 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Metrics"
-weight = 15
+weight = 5
 [menu.main]
-    parent = "deploy"
+    parent = "admin"
 +++
 
 

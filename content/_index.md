@@ -46,8 +46,8 @@ aliases = ["/contribute"]
   </div>
   <div class="item">
     <div class="icon"><i class="fa fa-wrench" aria-hidden="true"></i></div>
-    <a href="{{< relref "deploy/_index.md">}}">
-      <h2>Deploy</h2>
+    <a href="{{< relref "deploy/overview.md">}}">
+      <h2>Deploy and Manage</h2>
       <p>
         Running a Dgraph cluster in production
       </p>
