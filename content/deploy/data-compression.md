@@ -1,9 +1,9 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Data compression on Disk"
-weight = 17
+weight = 7
 [menu.main]
-    parent = "deploy"
+    parent = "admin"
 +++
 
 Dgraph Alpha lets you configure the compression of data on disk using the
