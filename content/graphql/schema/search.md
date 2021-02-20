@@ -79,13 +79,31 @@ queryAuthor(filter: { name: { eq: "Diggy" } } ) {
 }
 ```
 
+Dgraph can build search types with the ability to search between a range. For example with the above Post type with datePublished field, a query can find publish dates within a range
+
+```graphql
+query {
+    queryPost(filter: { datePublished: { between: { min: "2020-06-15", max: "2020-06-16" }}}) {
+        ...
+    }
+}
+```
+
+Dgraph can also build GraphQL search ability to find match a value from a list. For example with the above Author type with the name field, a query can return the Authors that match a list
+
+```graphql
+queryAuthor(filter: { name: { in: ["Diggy", "Jarvis"] } } ) {
+    ...
+}
+```
+
 There's different search possible for each type as explained below.
 
 ### Int, Float and DateTime
 
 | argument | constructed filter |
 |----------|----------------------|
-| none | `lt`, `le`, `eq`, `ge` and `gt` |
+| none | `lt`, `le`, `eq`, `in`, `between`, `ge`, and `gt` |
 
 Search for fields of types `Int`, `Float` and `DateTime` is enabled by adding `@search` to the field with no arguments.  For example, if a schema contains:
 
@@ -107,7 +125,7 @@ type Query {
 }
 ```
 
-`PostFilter` will contain less than `lt`, less than or equal to `le`, equal `eq`, greater than or equal to `ge` and greater than `gt` search on `numLikes`.  Allowing for example:
+`PostFilter` will contain less than `lt`, less than or equal to `le`, equal `eq`, in list `in`, between range `between`, greater than or equal to `ge`, and greater than `gt` search on `numLikes`.  Allowing for example:
 
 ```graphql
 query {
@@ -151,7 +169,7 @@ queryAuthor(filter: { name: { eq: "Diggy" } } ) {
 
 | argument | constructed filters |
 |----------|----------------------|
-| `year`, `month`, `day`, or `hour` | `lt`, `le`, `eq`, `ge` and `gt` |
+| `year`, `month`, `day`, or `hour` | `lt`, `le`, `eq`, `in`, `between`, `ge`, and `gt` |
 
 As well as `@search` with no arguments, `DateTime` also allows specifying how the search index should be built: by year, month, day or hour.  `@search` defaults to year, but once you understand your data and query patterns, you might want to changes that like `@search(by: [day])`.
 
@@ -179,8 +197,8 @@ Strings allow a wider variety of search options than other types.  For strings, 
 
 | argument | constructed searches |
 |----------|----------------------|
-| `hash` | `eq` |
-| `exact` | `lt`, `le`, `eq`, `ge` and `gt` (lexicographically) |
+| `hash` | `eq` and `in` |
+| `exact` | `lt`, `le`, `eq`, `in`, `between`, `ge`, and `gt` (lexicographically) |
 | `regexp` | `regexp` (regular expressions) |
 | `term` | `allofterms` and `anyofterms` |
 | `fulltext` | `alloftext` and `anyoftext` |
@@ -262,12 +280,12 @@ type Author {
 
 | argument | constructed searches |
 |----------|----------------------|
-| none | `eq` |
-| `hash` | `eq` |
-| `exact` | `lt`, `le`, `eq`, `ge` and `gt` (lexicographically) |
+| none | `eq` and `in` |
+| `hash` | `eq` and `in` |
+| `exact` | `lt`, `le`, `eq`, `in`, `between`, `ge`, and `gt` (lexicographically) |
 | `regexp` | `regexp` (regular expressions) |
 
-Enums are serialized in Dgraph as strings.  `@search` with no arguments is the same as `@search(by: [hash])` and provides only `eq` search.  Also available for enums are `exact` and `regexp`.  For hash and exact search on enums, the literal enum value, without quotes `"..."`, is used, for regexp, strings are required. For example:
+Enums are serialized in Dgraph as strings.  `@search` with no arguments is the same as `@search(by: [hash])` and provides `eq` and `in` searches.  Also available for enums are `exact` and `regexp`.  For hash and exact search on enums, the literal enum value, without quotes `"..."`, is used, for regexp, strings are required. For example:
 
 ```graphql
 enum Tag {
