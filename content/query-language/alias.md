@@ -6,6 +6,43 @@ weight = 4
     parent = "query-language"
 +++
 
+Tab example
+
+{{% tabs "json" %}}
+```json
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+```
+{{% /tabs %}}
+{{% tabs "rdf" %}}
+```rdf
+<0x01> <name> "Adelaide"@en .
+<0x01> <name> "Аделаида"@ru .
+<0x01> <name> "Adélaïde"@fr .
+<0x01> <dgraph.type> "Person" .
+```
+{{% /tabs %}}
+
 Syntax Examples:
 
 * `aliasName : predicate`
