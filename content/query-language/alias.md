@@ -6,7 +6,7 @@ weight = 4
     parent = "query-language"
 +++
 
-Tab example
+## Tab example
 
 {{% tabs "json" %}}
 ```json
