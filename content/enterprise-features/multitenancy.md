@@ -68,43 +68,63 @@ he can only read/write on namespace `0x00`, but he can create new namespaces and
 
 ## Create a Namespace
 
-A namespace can only be created by a member of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph-guardians`) group.
-A namespace can be created by calling `/alter` with payload `{"create_namespace": "<name>"}`,
+Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph-guardians`) group can create a namespace.
+A namespace can be created by calling `/admin` with the `addNamespace` mutation,
 and will return the assigned number for the new namespace.
 
-For example, to create a namespace `foo`:
+For example, to create a new namespace:
 
-```sh
-$ curl -X POST localhost:8080/alter -d '{"create_namespace": "foo"}'
+```graphql
+mutation {
+ addNamespace
+  {
+    namespaceId
+    message
+  }
+}
 ```
 
 ## Delete a Namespace
 
-A namespace can only be deleted by a member of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph-guardians`) group.
-A namespace can be dropped by calling `/alter` with payload `{"drop_namespace": "<name>"}`.  
+Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph-guardians`) group can delete a namespace.
+A namespace can be dropped by calling `/admin` with the `deleteNamespace()` mutation.
 
-For example, to drop the namespace `foo`:
+For example, to drop the namespace `0x123`:
 
-```sh
-$ curl -X POST localhost:8080/alter -d '{"drop_namespace": "foo"}'
+```graphql
+mutation {
+  deleteNamespace(input: {namespaceId: 0x123})
+  {
+    namespaceId
+    message
+  }
+}
 ```
 
 {{% notice "note" %}}
-Members of `namespace-guardians` cannot delete a namespace, they can only perform queries and mutations.
+Members of `namespace-guardians` can't delete namespaces, they can only perform queries and mutations.
 {{% /notice %}}
 
 ## Backups
 
 Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
+Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 {{% notice "tip" %}}
 [Live loader]({{< relref "live-loader.md" >}}) supports loading data into specific namespaces.
 {{% /notice %}}
 
+
 ## Exports
 
 Exports can be generated cluster-wide or at namespace level.
 The export function creates a new folder for each namespace, and each folder contains the exported `.rdf` and schema file.
+
+If a _Guardian of the Galaxy_ exports the whole cluster, a single folder containing the export data of all the namespaces in a single `.rdf` file and a single schema will be generated.
+
+{{% notice "note" %}}
+Guardians of a Namespace can trigger an Export for their namespace.
+{{% /notice %}}
 
 A namespace-specific export will contain the namespace value in the generated `.rdf` file: 
 
@@ -113,26 +133,30 @@ A namespace-specific export will contain the namespace value in the generated `.
 0x01 "name" "ibrahim" .          -> this goes to namespace 0x00
 ```
 
-For example, to export the namespace `foo` to a folder `foo` in the export directory (by default this directory is `export`):
+For example, to export the namespace `0x1234` to a folder in the export directory (by default this directory is `export`):
 
 ```graphql
 mutation {
-  export(input: {format: "json", namespace:"foo"}) {
+  export(input: {format: "rdf", namespace: 0x1234}) {
     response {
       message
-      code
     }
   }
 }
 ```
 
-To export all the namespaces:
+To export all the namespaces: (this is only valid for _Guardians of the Galaxy_)
 
 ```graphql
 mutation {
-    export(input: {format: "json", namespace:"*"})
+  export(input: {format: "rdf"}) {
+    response {
+      message
+    }
+  }
 }
 ```
-{{% notice "tip" %}}
-The `namespace` parameter can be a regex which allows exporting multiple namespaces.
+
+{{% notice "note" %}}
+For _Guardians of the Galaxy_, if you don't define a namespace it will export data for every namespace.
 {{% /notice %}}
