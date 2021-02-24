@@ -130,6 +130,7 @@ Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 Exports can be generated cluster-wide or at namespace level.
 The export function creates a new folder for each namespace, and each folder contains the exported `.rdf` and schema file.
+These exported sets of `.rdf` files and schemas include the multi-tenancy namespace information.
 
 If a _Guardian of the Galaxy_ exports the whole cluster, a single folder containing the export data of all the namespaces in a single `.rdf` file and a single schema will be generated.
 
