@@ -137,8 +137,8 @@ Guardians of a Namespace can trigger an Export for their namespace.
 A namespace-specific export will contain the namespace value in the generated `.rdf` file: 
 
 ```rdf
-0x01 "name" "ibrahim" 0x12 .     -> this goes to namespace 0x12
-0x01 "name" "ibrahim" .          -> this goes to namespace 0x00
+<0x01> "name" "ibrahim" <0x12> .     -> this belongs to namespace 0x12
+<0x01> "name" "ibrahim" <0x0> .       -> this belongs to namespace 0x00
 ```
 
 For example, to export the namespace `0x1234` to a folder in the export directory (by default this directory is `export`):
