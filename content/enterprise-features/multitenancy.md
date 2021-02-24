@@ -116,6 +116,22 @@ mutation {
 Members of `namespace-guardians` can't delete namespaces, they can only perform queries and mutations.
 {{% /notice %}}
 
+## Reset passwords
+
+Only members of the _Guardians of the Galaxy_ can reset passwords across namespaces.
+A password can be reset by calling `/admin` with the `resetPassword` mutation.
+
+For example, to reset the password for user `groot` from the namespace `100`:
+
+```graphql
+mutation {
+  resetPassword(input: {userId: "groot", password:"newpassword", namespace: 100}) {
+    userId
+    message
+  }
+}
+```
+
 ## Backups
 
 Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
