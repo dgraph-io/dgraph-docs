@@ -72,6 +72,10 @@ Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph
 A namespace can be created by calling `/admin` with the `addNamespace` mutation,
 and will return the assigned number for the new namespace.
 
+{{% notice "note" %}}
+To create a namespace, the _Guardian_ must send the JWT access token in the `X-Dgraph-AccessToken` header.
+{{% /notice %}}
+
 For example, to create a new namespace:
 
 ```graphql
@@ -88,6 +92,10 @@ mutation {
 
 Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph-guardians`) group can delete a namespace.
 A namespace can be dropped by calling `/admin` with the `deleteNamespace()` mutation.
+
+{{% notice "note" %}}
+To delete a namespace, the _Guardian_ must send the JWT access token in the `X-Dgraph-AccessToken` header.
+{{% /notice %}}
 
 For example, to drop the namespace `0x123`:
 
