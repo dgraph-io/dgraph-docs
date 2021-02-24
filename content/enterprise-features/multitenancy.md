@@ -27,10 +27,13 @@ users of other namespaces.
 
 ## Namespace
 
-A multi-tenancy Namespace acts as a logical silo. Each namespace has a group guardian (with root access to that namespace),
-and a unique `uint64` identifier. The data stored in one namespace will not be accessible by another namespace.
-Each user is part of a single namespace, and cross-namespace queries are not allowed.
-A user can be part of multiple namespaces, but the user has to be created separately for each namespace.
+A multi-tenancy Namespace acts as a logical silo, so data stored in one namespace is not accessible from another namespace.
+Each namespace has a group guardian (with root access to that namespace), and a unique `uint64` identifier. 
+Users are members of a single namespace, and cross-namespace queries are not allowed.
+
+{{% notice "note" %}}
+If a user wants to access multiple namespaces, the user needs to be created separately for each namespace.
+{{% /notice %}}
 
 The default namespace (`0x00`) is called a `galaxy`. A [Guardian of the Galaxy](#guardians-of-the-galaxy) has
 special access to create or delete namespaces and change passwords of
@@ -49,7 +52,7 @@ Multi-tenancy defines certain ACL roles for the shared cluster:
   - They can login into a namespace
   - They can query in their namespace
   - They can mutate in their namespace
-  - They cannot query or mutate across namespaces
+  - They can't query or mutate across namespaces
 
 ### Guardians of the Galaxy
 
