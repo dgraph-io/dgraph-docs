@@ -44,11 +44,11 @@ Multi-tenancy defines certain ACL roles for the shared cluster:
 - Guardians of the Namespace
   - They can add users to groups inside the namespace
   - They can remove users from groups inside the namespace
+  - They can export their namespace
 - Normal users
   - They can login into a namespace
   - They can query in their namespace
   - They can mutate in their namespace
-  - They can export their namespace
   - They cannot query or mutate across namespaces
 
 ### Guardians of the Galaxy
@@ -68,7 +68,7 @@ he can only read/write on namespace `0x00`, but he can create new namespaces and
 
 ## Create a Namespace
 
-Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph-guardians`) group can create a namespace.
+Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can create a namespace.
 A namespace can be created by calling `/admin` with the `addNamespace` mutation,
 and will return the assigned number for the new namespace.
 
@@ -90,8 +90,8 @@ mutation {
 
 ## Delete a Namespace
 
-Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) (`dgraph-guardians`) group can delete a namespace.
-A namespace can be dropped by calling `/admin` with the `deleteNamespace()` mutation.
+Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can delete a namespace.
+A namespace can be dropped by calling `/admin` with the `deleteNamespace` mutation.
 
 {{% notice "note" %}}
 To delete a namespace, the _Guardian_ must send the JWT access token in the `X-Dgraph-AccessToken` header.
@@ -138,7 +138,7 @@ A namespace-specific export will contain the namespace value in the generated `.
 
 ```rdf
 <0x01> "name" "ibrahim" <0x12> .     -> this belongs to namespace 0x12
-<0x01> "name" "ibrahim" <0x0> .       -> this belongs to namespace 0x00
+<0x01> "name" "ibrahim" <0x0> .      -> this belongs to namespace 0x00
 ```
 
 For example, to export the namespace `0x1234` to a folder in the export directory (by default this directory is `export`):
