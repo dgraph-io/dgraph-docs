@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Multi Host Setup"
-weight = 5
+title = "Multi-Host Setup"
+weight = 7
 [menu.main]
     parent = "deploy"
 +++

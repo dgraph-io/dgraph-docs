@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Cluster Checklist"
-weight = 11
+weight = 10
 [menu.main]
     parent = "deploy"
 +++

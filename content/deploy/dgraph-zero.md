@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "More about Dgraph Zero"
-weight = 8
+weight = 4
 [menu.main]
     parent = "deploy"
 +++

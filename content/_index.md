@@ -15,6 +15,7 @@ aliases = ["/contribute"]
     <p>
       Designed from the ground up to be run in production, Dgraph is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
     </p>
+    <p>New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser.</p>
     <img class="hero-deco" src="/images/hero-deco.png" />
   </div>
   <div class="item">
@@ -46,8 +47,8 @@ aliases = ["/contribute"]
   </div>
   <div class="item">
     <div class="icon"><i class="fa fa-wrench" aria-hidden="true"></i></div>
-    <a href="{{< relref "deploy/_index.md">}}">
-      <h2>Deploy</h2>
+    <a href="{{< relref "deploy/overview.md">}}">
+      <h2>Deploy and Manage</h2>
       <p>
         Running a Dgraph cluster in production
       </p>
