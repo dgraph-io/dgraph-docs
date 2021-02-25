@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Log Format"
+title = "Logging"
 weight = 2
 [menu.main]
     parent = "admin"
@@ -102,3 +102,9 @@ mutation {
   }
 }
 ```
+
+## Audit logging (enterprise feature)
+
+With a Dgraph enterprise license, you can enable audit logging so that all
+requests are tracked and available for use in security audits. To learn more, see
+[Audit Logging]({{< relref "enterprise-features/audit-logs.md" >}}).
