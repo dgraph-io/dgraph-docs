@@ -6,7 +6,7 @@ weight = 3
     parent = "enterprise-features"
 +++
 
-A Learner node is an enterprise-only feature that allows a user to spin-up a read replica instance across the world without paying a latency cost. 
+A Learner node is an enterprise-only feature that allows a user to spin-up a read-only replica instance across the world without paying a latency cost. 
 When enabled, a Dgraph cluster using learner nodes can serve best-effort queries faster.
 
 The `learner` nodes can still send `write` operations. The node would forward them over to the leader and do the writing just like a typical Alpha node. It would just be slower depending the latency between the Alpha node and the main cluster.
