@@ -42,7 +42,7 @@ Regular queries use the strict consistency model, and any write operation to the
 Best-effort queries apply the eventual consistency model. A write to the cluster will be seen eventually to the node.
 In regular conditions, the eventual consistency is usually achieved quickly.
 
-A best-effort query to a `learner` node returns any data (or timestamp) that is already available in the Alpha node.
+A best-effort query to a `learner` node returns any data that is already available in that learner node.
 The response is still a valid snapshot, but at a timestamp which is not the latest one.
 
 You can still send typical `read` queries (strict consistency) to a `learner` node.
