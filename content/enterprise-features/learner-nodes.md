@@ -60,7 +60,7 @@ Consider this scenario:
 - you want to achieve low latency for clients in a remote geographical region, distant from your Dgraph cluster.
 
 You can solve it by using a `learner` node to run best-effort queries.
-This read replica instance could be across distant geographies, and use best-effort queries to get instant responses.
+This read replica instance could be across distant geographies and you can use best-effort queries to get instant responses.
 
 Since a `learner` node supports read and write operations, users in the remote location can do everything with this replica node,
 as if they were working the full cluster.
