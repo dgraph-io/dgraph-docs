@@ -37,7 +37,7 @@ Since it's an Enterprise feature, a `learner` node won't be able to connect to a
 
 ## Best-effort Queries
 
-Regular queries use the strict consistency model, and any write operation to the cluster anywhere, would be read immediately.
+Regular queries use the strict consistency model, and any write operation to the cluster anywhere would be read immediately.
 
 Best-effort queries apply the eventual consistency model. A write to the cluster will be seen eventually to the node.
 In regular conditions, the eventual consistency is usually achieved quickly.
