@@ -9,7 +9,7 @@ weight = 3
 A Learner node is an enterprise-only feature that allows a user to spin-up a read-only replica instance across the world without paying a latency cost. 
 When enabled, a Dgraph cluster using learner nodes can serve best-effort queries faster.
 
-The `learner` nodes can still send `write` operations. The node would forward them over to the leader and do the writing just like a typical Alpha node. It would just be slower depending the latency between the Alpha node and the main cluster.
+The `learner` nodes can still accept `write` operations. The node would forward them over to the leader and do the writing just like a typical Alpha node. It would just be slower depending on the latency between the Alpha node and the learner node.
 
 {{% notice "note" %}}
 A `learner` node instance can forward `/admin` operations and perform both `read`/`write` operations,
