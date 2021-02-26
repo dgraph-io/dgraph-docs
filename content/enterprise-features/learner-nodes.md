@@ -9,7 +9,7 @@ weight = 3
 A Learner node is an enterprise-only feature that allows a user to spin-up a read-only replica instance across the world without paying a latency cost. 
 When enabled, a Dgraph cluster using learner nodes can serve best-effort queries faster.
 
-The `learner` nodes can still accept `write` operations. The node would forward them over to the leader and do the writing just like a typical Alpha node. It would just be slower depending on the latency between the Alpha node and the learner node.
+A `learner` node can still accept `write` operations. The node shall forward them over to the group leader and do the writing just like a typical Alpha node. It would just be slower depending on the latency between the Alpha node and the learner node.
 
 {{% notice "note" %}}
 A `learner` node instance can forward `/admin` operations and perform both `read`/`write` operations,
@@ -43,7 +43,7 @@ Best-effort queries apply the eventual consistency model. A write to the cluster
 In regular conditions, the eventual consistency is usually achieved quickly.
 
 A best-effort query to a `learner` node returns any data that is already available in that learner node.
-The response is still a valid snapshot of data, but at a timestamp which is not the latest one.
+The response is still a valid data snapshot, but at a timestamp which is not the latest one.
 
 You can still send typical `read` queries (strict consistency) to a `learner` node.
 They would just incur an extra latency cost due to having to reach out the Zero leader.
@@ -60,22 +60,10 @@ Consider this scenario:
 - you want to achieve low latency for clients in a remote geographical region, distant from your Dgraph cluster.
 
 You can solve it by using a `learner` node to run best-effort queries.
-This read replica instance could be across distant geographies and you can use best-effort queries to get instant responses.
+This read-only replica instance can be across distant geographies and you can use best-effort queries to get instant responses.
 
-Since a `learner` node supports read and write operations, users in the remote location can do everything with this replica node,
+Since a `learner` node supports read and write operations, users in the remote location can do everything with this learner node,
 as if they were working the full cluster.
-
-
-### Datacenter to Datacenter
-
-Another use case example is using a `learner` node for Data-Center to Data-Center replication.
-
-Let's take for example this DC scenario:
-- A Dgraph cluster in the US-west.
-- A `learner` read replica for each group in the US-east.
-
-In case the US-west Datacenter goes down, you could quickly bring up a new cluster in the US-east using the `learner` node data available.
-
 
 ### Zero downtime upgrades
 
