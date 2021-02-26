@@ -43,7 +43,7 @@ Best-effort queries apply the eventual consistency model. A write to the cluster
 In regular conditions, the eventual consistency is usually achieved quickly.
 
 A best-effort query to a `learner` node returns any data that is already available in that learner node.
-The response is still a valid snapshot, but at a timestamp which is not the latest one.
+The response is still a valid snapshot of data, but at a timestamp which is not the latest one.
 
 You can still send typical `read` queries (strict consistency) to a `learner` node.
 They would just incur an extra latency cost due to having to reach out the Zero leader.
