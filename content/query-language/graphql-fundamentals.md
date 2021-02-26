@@ -29,6 +29,49 @@ A query is composed of nested blocks, starting with a query root.  The root find
 
 {{% notice "note" %}}See more about Queries in [Queries design concept]({{< relref "design-concepts/concepts.md#queries" >}}) {{% /notice %}}
 
+### Code errors
+
+When running a DQL query you might get an error message from the `/query` endpoint. Here we will be focusing on the `"code"` error returned in the error message. 
+
+The `"code"` error message is returned with the query response:
+
+```json
+{
+  "errors": [
+    {
+      "message": "while lexing {\nq(func: has(\"test)){\nuid\n}\n} at line 2 column 12: Unexpected end of input.",
+      "extensions": {
+        "code": "ErrorInvalidRequest"
+      }
+    }
+  ],
+  "data": null
+}
+```
+In this case, we have commited a syntax error and the `"code"` of the error is reporting `"ErrorInvalidRequest"`.
+
+We have basically two types of code errors: `"ErrorInvalidRequest"` and `"Error"`. Below you can find use case when your would get such type of error codes.
+
+#### ErrorInvalidRequest
+
+This is the most common code error that you would get from the `/query` endpoint. This error can be either a bad request (400) or an internal server error (500). 
+
+You can get this error basically when:
+- If the query paramater is not being parsed corretelly. The query parameter could be: `debug`, `timeout`, `startTs`, `be` (best effort), `ro` (read-only). If the value of these query parameters is incorrect you would get this code error. This is basically a bad request (400)
+- If value of contenct type in the header is not parsed correctly. The only allowed content types in the header are: `application/json`, `application/graphql+-` or `application/dql`. Anything else will be worgly parsed and end up in a bad request (400)
+- Query timeout (deadline exeeded). This is a internal server error (500)
+- Any error in query processing like:
+    - syntax error - bad request (400)
+    - health failng (server not healthy) - interal server error (500)
+    - alpha not able to reach zero because of network issue -  interal server error (500)
+    - acl error (user not found or user does not have privileges) - bad request (400)
+    - if you set `be=true` and `ro=false` - bad request (400)
+    - any error related to json formation the response - interal server error (500)
+
+#### Error
+
+This is a rare code to get and it's always an internal server error (500). This can happen when JSON Marsharling is faliling (it's retun when it try to Mashal a Go struct to JSON) - this is an internal server error (500)
+
 ## Returning Values
 
 Each query has a name, specified at the query root, and the same name identifies the results.
