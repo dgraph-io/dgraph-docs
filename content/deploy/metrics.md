@@ -1,15 +1,16 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Metrics"
+description = "Dgraph database helps administrators by providing metrics on Dgraph instance activity, disk activity, server node health, memory and Raft leadership."
 weight = 5
 [menu.main]
     parent = "admin"
 +++
 
 
-Dgraph database provides metrics on disk activity, memory usage, Dgraph instance
-activity and server node health; along with built-in metrics provided by Go.
-Dgraph metrics follow the
+Dgraph database provides metrics on Dgraph instance activity, disk activity,
+server node health, memory and Raft leadership. It also provides built-in
+metrics provided by Go. Dgraph metrics follow the
 [metric and label conventions for the Prometheus](https://prometheus.io/docs/practices/naming/)
 monitoring and alerting toolkit.
 
