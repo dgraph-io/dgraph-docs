@@ -132,15 +132,60 @@ mutation {
 }
 ```
 
+## Drop operations
+
+
+The `drop all` and `drop data` operations can only be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
+They're executed at cluster level and delete data across namespaces.
+All other `drop` operations run at namespace level and are namespace specific.
+
+{{% notice "note" %}}
+`drop all` and `drop data` operations are executed at cluster level and will delete across namespaces.
+{{% /notice %}}
+
 ## Backups
 
 Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
 Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 {{% notice "tip" %}}
-[Live loader]({{< relref "live-loader.md" >}}) supports loading data into specific namespaces.
+[Live loader](#live-loader) supports loading data into specific namespaces.
 {{% /notice %}}
 
+### Bulk Loader
+
+[Bulk loader]({{< relref "bulk-loader.md" >}}) can be used to load the data in bulk.
+By default, Bulk loader preserves the namespace in the data and schema files.
+If the namespace information is missing it loads it into default namespace.
+
+Using `--force-namespace` flag one can load all the data into specified namespace.
+The namespace information from the data and schema file will be ignored.
+
+For example, to force the bulk data loading into namespace `123`:
+
+```sh
+dgraph bulk -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --force-namespace 123
+```
+
+### Live Loader
+
+Since multi-tenancy works with ACL enabled, when using the [Live loader]({{< relref "live-loader.md" >}}),
+you must provide the login credentials using the `--creds` flag.
+By default, Live loader loads the data into the user's namespace.
+
+[Guardians of the Galaxy](#guardians-of-the-galaxy) can load the data into multiple namespaces. Using `--force-namespace`, a _Guardian_ can load the data into the namespace specified in the data and schema files.
+
+For example:
+
+```sh
+dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace -1
+```
+
+A _Guardian of the Galaxy_ can also load data into a specific namespace. For example, to force the data loading into namespace `123`:
+
+```sh
+dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace 123
+```
 
 ## Exports
 
