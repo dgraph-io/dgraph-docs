@@ -491,7 +491,7 @@ Backup is an online tool, meaning it is available when Alpha server is running. 
 ### Online restore
 
 To restore from a backup to a live cluster, execute a mutation on the `/admin`
-endpoint with the following format.
+endpoint with the following format:
 
 ```graphql
 mutation{
@@ -501,14 +501,13 @@ mutation{
   }){
     message
     code
-    restoreId
   }
 }
 ```
 
-Online restores only require you to send this request. The UID and timestamp
+Online restores only require you to send this request. The `UID` and timestamp
 leases are updated accordingly. The latest backup to be restored should contain
-the same number of groups in its manifest.json file as the cluster to which it
+the same number of groups in its `manifest.json` file as the cluster to which it
 is being restored.
 
 {{% notice "note" %}}
@@ -604,19 +603,7 @@ input RestoreInput {
 ```
 
 Restore requests will return immediately without waiting for the operation to
-finish. The `restoreId` value included in the response can be used to query for
-the state of the restore operation via the `restoreStatus` endpoint. The request
-should be sent to the same alpha to which the original restore request was sent.
-Below is an example of how to perform the query.
-
-```
-query status() {
-	restoreStatus(restoreId: 8) {
-		status
-		errors
-	}
-}
-```
+finish.
 
 ### Offline restore using `dgraph restore`
 
@@ -678,22 +665,22 @@ option of the `dgraph alpha` command to specify a different path from the defaul
 
 
 ### Restore from Amazon S3
+
 ```sh
 $ dgraph restore -p /var/db/dgraph -l s3://s3.us-west-2.amazonaws.com/<bucketname>
 ```
 
+### Restore from MinIO
 
-### Restore from Minio
 ```sh
 $ dgraph restore -p /var/db/dgraph -l minio://127.0.0.1:9000/<bucketname>
 ```
 
-
 ### Restore from Local Directory or NFS
+
 ```sh
 $ dgraph restore -p /var/db/dgraph -l /var/backups/dgraph
 ```
-
 
 ### Restore and Update Timestamp
 
