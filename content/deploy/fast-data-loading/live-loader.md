@@ -109,7 +109,7 @@ Alternatively, starting with v20.07.0, the `vault_*` options can be used to decr
 If the live Alpha instance has encryption turned on, the `p` directory will be encrypted. Otherwise, the `p` directory is unencrypted.
 {{% /notice %}}
 
-For example, to Live load an encrypted RDF/JSON file and schema:
+For example, to load an encrypted RDF/JSON file and schema via Live Loader:
 
 ```sh
 dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption_keyfile <path-to-keyfile-to-decrypt-files>
