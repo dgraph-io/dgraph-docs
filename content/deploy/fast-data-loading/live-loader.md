@@ -100,7 +100,7 @@ A _Guardian of the Galaxy_ can also load data into a specific namespace. For exa
 dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace 123
 ```
 
-### Encrypted imports via Live Loader (Enterprise Feature)
+### Encrypted imports (Enterprise Feature)
 
 A new flag `--encryption_key_file` is added to the Live Loader. This option is required to decrypt the encrypted export data and schema files. Once the export files are decrypted, the Live Loader streams the data to a live Alpha instance.
 Alternatively, starting with v20.07.0, the `vault_*` options can be used to decrypt the encrypted export and schema files.
@@ -109,13 +109,13 @@ Alternatively, starting with v20.07.0, the `vault_*` options can be used to decr
 If the live Alpha instance has encryption turned on, the `p` directory will be encrypted. Otherwise, the `p` directory is unencrypted.
 {{% /notice %}}
 
-### Encrypted RDF/JSON file and schema via Live Loader
+For example, to Live load an encrypted RDF/JSON file and schema:
 
 ```sh
 dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption_keyfile <path-to-keyfile-to-decrypt-files>
 ```
 
-## Batch Upserts in Live Loader
+## Batch Upserts
 
 With batch upserts in Live Loader, you can insert big data-sets (multiple files) into an existing cluster that might contain nodes that already exist in the graph.
 Live Loader generates an `upsertPredicate` query for each of the ids found in the request, while
