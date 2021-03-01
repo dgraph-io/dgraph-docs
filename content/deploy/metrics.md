@@ -86,5 +86,15 @@ holding from the operating system and how much is actively in use.
  `dgraph_memory_inuse_bytes`      | Total memory usage in bytes (sum of heap usage and stack usage).
  `dgraph_memory_proc_bytes`       | Total memory usage in bytes of the Dgraph process. On Linux/macOS, this metric is equivalent to resident set size. On Windows, this metric is equivalent to [Go's runtime.ReadMemStats](https://golang.org/pkg/runtime/#ReadMemStats).
 
+## Raft leadership metrics
 
+Raft leadership metrics let you track changes in Raft leadership for Dgraph
+Alpha and Dgraph Zero nodes (or *node instances*) in your cluster. These metrics
+include a group label along with the node name, so that you can determine which
+metrics apply to which Raft groups. 
 
+Metric                             | Description
+-------                            | -----------
+`dgraph_raft_has_leader`           | Value is 1 when the node has a leader; otherwise 0.
+`dgraph_raft_is_leader`            | Value is 1 when the node is the leader if its group; otherwise 0.
+`dgraph_raft_leader_changes_total` | Incremented each time the leadership of the node's group changes.
