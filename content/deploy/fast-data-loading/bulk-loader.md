@@ -240,7 +240,23 @@ I1227 13:27:53.959671   29781 draft.go:571] Creating snapshot at index: 34. Read
 ```
 Note that `snapshot at index` value must be the same within the same Alpha group and `ReadTs` must be the same value within and among all the Alpha groups.
 
-## Encryption at rest with Bulk Loader (Enterprise Feature)
+## Enterprise Features
+
+### Multi-tenancy (Enterprise Feature)
+
+By default, Bulk loader preserves the namespace in the data and schema files.
+If there's no namespace information available, it loads the data into the default namespace.
+
+Using the `--force-namespace` flag, you can load all the data into a specific namespace.
+In that case, the namespace information from the data and schema files will be ignored.
+
+For example, to force the bulk data loading into namespace `123`:
+
+```sh
+dgraph bulk -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --force-namespace 123
+```
+
+### Encryption at rest (Enterprise Feature)
 
 Even before the Dgraph cluster starts, we can load data using Bulk Loader with the encryption feature turned on. Later we can point the generated `p` directory to a new Alpha server.
 
@@ -252,7 +268,7 @@ dgraph bulk --encryption_key_file ./enc_key_file -f data.json.gz -s data.schema 
 Alternatively, starting with v20.07.0, the `vault_*` options can be used to decrypt the encrypted export.
 
 
-## Encrypting imports via Bulk Loader (Enterprise Feature)
+### Encrypting imports (Enterprise Feature)
 
 The Bulk Loader’s `encryption_key_file` option was previously used to encrypt the output `p ` directory. This same option will also be used to decrypt the encrypted export data and schema files.
 

@@ -134,7 +134,6 @@ mutation {
 
 ## Drop operations
 
-
 The `drop all` and `drop data` operations can only be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
 They're executed at cluster level and delete data across namespaces.
 All other `drop` operations run at namespace level and are namespace specific.
@@ -156,10 +155,10 @@ Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 [Bulk loader]({{< relref "bulk-loader.md" >}}) can be used to load the data in bulk.
 By default, Bulk loader preserves the namespace in the data and schema files.
-If the namespace information is missing it loads it into default namespace.
+If there's no namespace information available, it loads the data into the default namespace.
 
-Using `--force-namespace` flag one can load all the data into specified namespace.
-The namespace information from the data and schema file will be ignored.
+Using the `--force-namespace` flag, you can load all the data into a specific namespace.
+In that case, the namespace information from the data and schema files will be ignored.
 
 For example, to force the bulk data loading into namespace `123`:
 

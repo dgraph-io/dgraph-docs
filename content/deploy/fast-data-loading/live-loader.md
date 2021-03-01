@@ -36,7 +36,7 @@ $ dgraph live -C -f <path-to-gzipped-RDF-or-JSON-file>
 $ dgraph live -f <path-to-gzipped-RDf-or-JSON-file> -s <path-to-schema-file> -a <dgraph-alpha-address:grpc_port> -z <dgraph-zero-address:grpc_port>
 ```
 
-### Load from S3
+## Load from S3
 
 To live load from Amazon S3, you must have either [IAM](#iam-setup) or the following AWS credentials set
 via environment variables:
@@ -46,7 +46,7 @@ via environment variables:
  `AWS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY`     | AWS access key with permissions to write to the destination bucket.
  `AWS_SECRET_ACCESS_KEY` or `AWS_SECRET_KEY` | AWS access key with permissions to write to the destination bucket.
 
-#### IAM setup
+### IAM setup
 
 In AWS, you can accomplish this by doing the following:
 1. Create an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) with an IAM Policy that grants access to the S3 bucket.
@@ -61,7 +61,7 @@ Once your setup is ready, you can execute the bulk load from S3:
 dgraph live -f s3:///bucket-name/directory-with-rdf -s s3:///bucket-name/directory-with-rdf/schema.txt
 ```
 
-### Load from MinIO
+## Load from MinIO
 
 To live load from MinIO, you must have the following MinIO credentials set via
 environment variables:
@@ -78,6 +78,28 @@ Once your setup is ready, you can execute the bulk load from MinIO:
 dgraph live -f minio://minio-server:port/bucket-name/directory-with-rdf -s minio://minio-server:port/bucket-name/directory-with-rdf/schema.txt
 ```
 
+## Enterprise Features
+
+### Multi-tenancy (Enterprise Feature)
+
+Since [multi-tenancy]({{< relref "multitenancy.md" >}}) requires ACL,
+when using the Live loader you must provide the login credentials using the `--creds` flag.
+By default, Live loader loads the data into the user's namespace.
+
+_Guardians of the Galaxy_ can load the data into multiple namespaces. Using `--force-namespace`, a _Guardian_ can load the data into the namespace specified in the data and schema files.
+
+For example:
+
+```sh
+dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace -1
+```
+
+A _Guardian of the Galaxy_ can also load data into a specific namespace. For example, to force the data loading into namespace `123`:
+
+```sh
+dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace 123
+```
+
 ### Encrypted imports via Live Loader (Enterprise Feature)
 
 A new flag `--encryption_key_file` is added to the Live Loader. This option is required to decrypt the encrypted export data and schema files. Once the export files are decrypted, the Live Loader streams the data to a live Alpha instance.
@@ -87,13 +109,13 @@ Alternatively, starting with v20.07.0, the `vault_*` options can be used to decr
 If the live Alpha instance has encryption turned on, the `p` directory will be encrypted. Otherwise, the `p` directory is unencrypted.
 {{% /notice %}}
 
-#### Encrypted RDF/JSON file and schema via Live Loader
+### Encrypted RDF/JSON file and schema via Live Loader
 
 ```sh
 dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption_keyfile <path-to-keyfile-to-decrypt-files>
 ```
 
-### Batch Upserts in Live Loader
+## Batch Upserts in Live Loader
 
 With batch upserts in Live Loader, you can insert big data-sets (multiple files) into an existing cluster that might contain nodes that already exist in the graph.
 Live Loader generates an `upsertPredicate` query for each of the ids found in the request, while
@@ -110,7 +132,7 @@ For example:
 dgraph live -f <path-to-gzipped-RDf-or-JSON-file> -s <path-to-schema-file> -U <xid>
 ```
 
-### Other Live Loader options
+## Other Live Loader options
 
 `--new_uids` (default: `false`): Assign new UIDs instead of using the existing
 UIDs in data files. This is useful to avoid overriding the data in a DB already
@@ -152,7 +174,7 @@ The `--ludicrous_mode` option should only be used if Dgraph is also running in [
 `--vault_*` flags specifies the Vault server address, role id, secret id and
 field that contains the encryption key that can be used to decrypt the encrypted export.
 
-### `upsertPredicate` Example
+## `upsertPredicate` Example
 
 You might find that discrete pieces of information regarding entities are arriving through independent data feeds. 
 The feeds might involve adding basic information (first and last name), income, and address in separate files. 
@@ -170,7 +192,7 @@ Start by adding the following schema:
 <xid>: string @index(hash) .
 ```
 
-#### The Upsert predicate
+### The Upsert predicate
 
 You can upload the files individually using the live loader (`dgraph live`) with the `-U` or `--upsertPredicate` option. 
 Each file has records with external keys for customers (e.g., `my.org/customer/1`) and addresses (e.g., `my.org/customer/1/address/1`). 
