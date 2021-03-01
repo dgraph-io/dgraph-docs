@@ -8,16 +8,19 @@ weight = 2
 +++
 
 As a database administrator, you count on being able to audit access to your
-database. With a Dgraph enterprise license, you can enable audit logging so that
-all requests are tracked and available for use in security audits. When audit logging
-is enabled, the following information is recorded about the queries and mutations (requests)
-sent to your database:
+database. With a Dgraph 
+[enterprise license]({{< relref "enterprise-features/license.md" >}}), you can
+enable audit logging so that all requests are tracked and available for use in
+security audits. When audit logging is enabled, the following information is
+recorded about the queries and mutations (requests) sent to your database:
 
 * Endpoint
 * Logged-in User Name
 * Server host address
 * Client Host address
 * Request Body (truncated at 4KB)
+* Timestamp
+* Namespace
 * Query Parameters (if provided)
 * Response status
 
@@ -41,18 +44,24 @@ The following are not logged:
 ## Audit log files
 
 All audit logs are in JSON format. Dgraph has a "rolling-file" policy for audit
-logs, where the current log file is used until it reaches 100MB, and then
-is replaced by another current audit log file. Older audit log files are
-retained for a maximum of 10 days.
+logs, where the current log file is used until it reaches a configurable size
+(default: 100MB), and then is replaced by another current audit log file. Older
+audit log files are retained for a configurable number of days (default: 10 days).
 
 ## Enable audit logging
 
 You can enable audit logging on a Dgraph Alpha or Dgraph Zero node by using the
-`--audit` flag to specify a directory where audit logs should be stored. When
+`--audit` flag to specify semicolon-separated options for audit logging. When
 you enable audit logging, a few options are available for you to configure:
 
 * `compress=true` tells Dgraph to use compression on older audit log files
-* `encrypt_file=/encryption/key/path` tells Dgraph to encrypt older log files with the specified key
+* `days=20` tells Dgraph to retain older audit logs for 20 days, rather than the
+default of 10 days
+* `dir=/path/to/audit/logs` tells Dgraph which path to use for storing audit logs
+* `encrypt_file=/encryption/key/path` tells Dgraph to encrypt older log files
+ with the specified key
+* `size=200` tells Dgraph to store audit logs in 200 MB files,  rather than the
+default of 100 MB files
 
 You can see how to use these options in the example commands below.
 
@@ -67,6 +76,13 @@ directory to store audit logs on a Dgraph Alpha node:
 
 ```bash
 dgraph alpha --audit dir=audit-log-dir
+```
+
+You could extend this command a bit to specify larger log files (200 MB, instead
+of 100 MB) and retain them for longer (15 days instead of 10 days):
+
+```bash
+dgraph alpha --audit dir=audit-log-dir;size=200;days=15
 ```
 
 ### Enable audit logging with compression
