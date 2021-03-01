@@ -18,7 +18,7 @@ monitoring and alerting toolkit.
 Activity metrics let you track the mutations, queries, and proposals of a Dgraph
 instance.
 
- Metrics                                            | Description
+ Metric                                            | Description
  -------                                            | -----------
  `go_goroutines`                                    | Total number of Goroutines currently running in Dgraph.
  `dgraph_active_mutations_total`                    | Total number of mutations currently running.
@@ -33,7 +33,7 @@ Disk metrics let you track the disk activity of the Dgraph process. Dgraph does
 not interact directly with the filesystem. Instead it relies on
 [Badger](https://github.com/dgraph-io/badger) to read from and write to disk.
 
- Metrics                          	 | Description
+ Metric                          	 | Description
  -------                          	 | -----------
  `badger_v3_disk_reads_total`        | Total count of disk reads in Badger.
  `badger_v3_disk_writes_total`       | Total count of disk writes in Badger.
@@ -48,7 +48,7 @@ not interact directly with the filesystem. Instead it relies on
 Go's built-in metrics may also be useful to measure memory usage and garbage
 collection time.
 
-Metrics                        | Description
+Metric                        | Description
 -------                        | -----------
 `go_memstats_gc_cpu_fraction`  | The fraction of this program's available CPU time used by the GC since the program started.
 `go_memstats_heap_idle_bytes`  | Number of heap bytes waiting to be used.
@@ -56,13 +56,19 @@ Metrics                        | Description
 
 ## Health Metrics
 
-Health metrics let you check the health of a Dgraph Alpha server node.
+Health metrics let you check the health of a server node.
 
- Metrics                          | Description
+{{% notice "note" %}}
+Health metrics are only available for Dgraph Alpha server nodes.
+{{% /notice %}}
+
+ Metric                          | Description
  -------                          | -----------
- `dgraph_alpha_health_status`     | **Only applicable to Dgraph Alpha**. Value is 1 when the Alpha node is ready to accept requests; otherwise 0.
- `dgraph_max_assigned_ts`         | **Only applicable to Dgraph Alpha**. This shows the latest max assigned timestamp. All Alpha nodes within the same Alpha group should show the same timestamp if they are in sync.
- `dgraph_txn_aborts_total`        | **Only applicable to Dgraph Alpha**. Shows the total number of transaction aborts that have occurred on the Alpha node.
+ `dgraph_alpha_health_status`     | Value is 1 when the Alpha node is ready to accept requests; otherwise 0.
+ `dgraph_max_assigned_ts`         | This shows the latest max assigned timestamp. All Alpha nodes within the same Alpha group should show the same timestamp if they are in sync.
+ `dgraph_txn_aborts_total`        | Shows the total number of server-initiated transaction aborts that have occurred on the Alpha node.
+ `dgraph_txn_commits_total`       | Shows the total number of successful commits that have occurred on the Alpha node.
+ `dgraph_txn_discards_total`      | Shows the total number of client-initiated transaction discards that have occurred on the Alpha node. This is incremented when the client calls for a transaction discard, such as using the Dgraph Go client's `txn.Discard` function.
 
 ## Memory metrics
 
@@ -74,7 +80,7 @@ the operating system.
 By looking at all three metrics you can see how much memory a Dgraph process is
 holding from the operating system and how much is actively in use.
 
- Metrics                          | Description
+ Metric                          | Description
  -------                          | -----------
  `dgraph_memory_idle_bytes`       | Estimated amount of memory that is being held idle that could be reclaimed by the OS.
  `dgraph_memory_inuse_bytes`      | Total memory usage in bytes (sum of heap usage and stack usage).
