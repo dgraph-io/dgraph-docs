@@ -41,7 +41,7 @@ Here is an excellent blog explaining in detail on [how to set up GraphQL Subscri
 
 You can use the `@withSubscription` directive on GraphQL types to generate subscriptions on queries for that type.
 This directive also supports DQL in custom queries.
-You can specify the `@withSubscription` directive on individual DQL queries in type `Query` and those queries will be added to the type's subscription.
+You can specify the `@withSubscription` directive on individual DQL queries in `type Query` and those queries will be added to `type subscription`.
 
 For example, see the custom DQL query `queryUserTweetCounts` below:
 
@@ -58,7 +58,7 @@ type Query {
 }
 ```
 
-Since the `queryUserTweetCounts` query has a `@withSubscription` directive, it will be added to the type's subscription,
+Since the `queryUserTweetCounts` query has a `@withSubscription` directive, it will be added to the `subscription` type,
 allowing users to subscribe to this query.
 
 ## Authorization with Subscriptions
