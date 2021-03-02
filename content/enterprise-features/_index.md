@@ -58,7 +58,6 @@ weight = 9
       </p>
     </a>
   </div>
-    </div>
     <div class="item">
     <div class="icon"><i class="lni lni-files" aria-hidden="true"></i></div>
     <a  href="{{< relref "learner-nodes.md">}}">
