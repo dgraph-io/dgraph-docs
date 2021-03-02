@@ -40,6 +40,16 @@ weight = 9
       </p>
     </a>
   </div>
+  <div class="item">
+    <div class="icon"><i class="lni lni-keyword-research" aria-hidden="true"></i></div>
+    <a  href="{{< relref "audit-logs.md">}}">
+      <h2>Audit Logging</h2>
+      <p>
+        All requests are tracked and available for use in security audits. 
+      </p>
+    </a>
+  </div>
+  
 
 </div>
 
