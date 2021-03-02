@@ -27,7 +27,7 @@ type Todo @withSubscription {
 }
 ```
 
-## Example
+### Example
 
 Once the schema is added, you can fire a subscription query, and we receive updates when the subscription query result is updated.
 
@@ -42,10 +42,8 @@ Here is an excellent blog explaining in detail on [how to set up GraphQL Subscri
 Authorization adds more power to GraphQL subscriptions. You can use all the features of authorization that are there for queries.
 Additionally, you can specify when the subscription automatically terminates (the "timeout" of the subscription) in the JWT. 
 
-## Example 
-
 ### Schema
-Consider following Schema, it has both `@withSubscription` and `@auth` directive defined on type Todo. Auth rule enforces that only todo's of owner `$USER` is visible which will be given in the JWT.
+Consider following Schema, it has both `@withSubscription` and `@auth` directive defined on type `Todo`. Auth rule enforces that only todo's of owner `$USER` is visible which will be given in the JWT.
 
 ```graphql
 type Todo @withSubscription @auth(
@@ -68,10 +66,11 @@ type Todo @withSubscription @auth(
 
 Subscription needs the JWT in which `$USER`, expiry, and other variables are declared. 
 The JWT is passed from GraphQL client as key-value pair, where the key is Header given in schema and the value is the JWT.
-For example in our case, the key is Authorization and the value is the JWT. 
+For example in our case, the key is `Authorization` and the value is the JWT. 
 
-Most of the GraphQL clients have a separate header section to pass Header-JWT key-value pair while from apollo client it is passed
-in connectionParams as follows.
+Most of the GraphQL clients have a separate header section to pass Header-JWT key-value pair while from Apollo client it is passed
+in `connectionParams` as follows.
+
 ```javascript
 const wsLink = new WebSocketLink({
   uri: `wss://${ENDPOINT}`,
@@ -85,7 +84,7 @@ const wsLink = new WebSocketLink({
 The below example shows the working of Subscription with Auth rules for the schema given above.
 
 First, we generate the JWT as shown in the below image with expiry and `$USER` which is the owner of TODO.
-You can generate the JWT from [jwt.io](https://jwt.io/)
+You can generate the JWT from [jwt.io](https://jwt.io/).
 We need to send the JWT to the server along with the request as discussed above.
 
 ![Subscription-Generating-JWT](/images/graphql/Generating-JWT.png "Subscription with Auth Example")
