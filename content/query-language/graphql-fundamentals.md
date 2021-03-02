@@ -75,8 +75,8 @@ For example, you can get this error:
   - If the value of these query parameters is incorrect you would get this error code. This is basically a bad request (`400`)
 - If the header's `Content-Type` value is not parsed correctly. The only allowed content types in the header are: 
   - `application/json`
-  - `application/graphql+-` (deprecated)
   - `application/dql`
+  - `application/graphql+-` (deprecated)
   - Anything else will be wrongly parsed and end up in a bad request (`400`)
 - Query timeout (deadline exceeded). This is an internal server error (`500`)
 - Any error in query processing like:
@@ -280,4 +280,3 @@ Query Example: Some of Bollywood director and actor Farhan Akhtar's movies have 
   }
 }
 {{< /runnable >}}
-
