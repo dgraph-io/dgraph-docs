@@ -37,6 +37,30 @@ Once the schema is added, you can fire a subscription query, and we receive upda
 
 Here is an excellent blog explaining in detail on [how to set up GraphQL Subscriptions using Apollo client](https://dgraph.io/blog/post/how-does-graphql-subscription/).
 
+## Subscriptions to custom DQL
+
+You can use the `@withSubscription` directive on GraphQL types to generate subscriptions on queries for that type.
+This directive also supports DQL in custom queries.
+You can specify the `@withSubscription` directive on individual DQL queries in type `Query` and those queries will be added to the type's subscription.
+
+For example, see the custom DQL query `queryUserTweetCounts` below:
+
+```graphql
+type Query {
+  queryUserTweetCounts: [UserTweetCount]  @withSubscription @custom(dql: """
+	query {
+		queryUserTweetCounts(func: type(User)) {
+			screen_name: User.screen_name
+			tweetCount: count(User.tweets)
+		}
+	}
+	""")
+}
+```
+
+Since the `queryUserTweetCounts` query has a `@withSubscription` directive, it will be added to the type's subscription,
+allowing users to subscribe to this query.
+
 ## Authorization with Subscriptions
 
 Authorization adds more power to GraphQL subscriptions. You can use all the features of authorization that are there for queries.
