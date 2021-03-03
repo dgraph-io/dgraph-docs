@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Metrics"
-description = "Dgraph database helps administrators by providing metrics on Dgraph instance activity, disk activity, server node health, memory and Raft leadership."
+description = "Dgraph database helps administrators by providing metrics on Dgraph instance activity, disk activity, server node health, memory, and Raft leadership."
 weight = 5
 [menu.main]
     parent = "admin"
@@ -9,7 +9,7 @@ weight = 5
 
 
 Dgraph database provides metrics on Dgraph instance activity, disk activity,
-server node health, memory and Raft leadership. It also provides built-in
+server node health, memory, and Raft leadership. It also provides built-in
 metrics provided by Go. Dgraph metrics follow the
 [metric and label conventions for the Prometheus](https://prometheus.io/docs/practices/naming/)
 monitoring and alerting toolkit.
@@ -90,12 +90,12 @@ holding from the operating system and how much is actively in use.
 ## Raft leadership metrics
 
 Raft leadership metrics let you track changes in Raft leadership for Dgraph
-Alpha and Dgraph Zero nodes (or *node instances*) in your cluster. These metrics
+Alpha and Dgraph Zero nodes in your cluster. These metrics
 include a group label along with the node name, so that you can determine which
 metrics apply to which Raft groups. 
 
 Metric                             | Description
 -------                            | -----------
 `dgraph_raft_has_leader`           | Value is 1 when the node has a leader; otherwise 0.
-`dgraph_raft_is_leader`            | Value is 1 when the node is the leader if its group; otherwise 0.
-`dgraph_raft_leader_changes_total` | Incremented each time the leadership of the node's group changes.
+`dgraph_raft_is_leader`            | Value is 1 when the node is the leader of its group; otherwise 0.
+`dgraph_raft_leader_changes_total` | The total number of leader changes seen by this node
