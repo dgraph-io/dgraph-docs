@@ -88,7 +88,11 @@ By default, Live loader loads the data into the user's namespace.
 
 _Guardians of the Galaxy_ can load the data into multiple namespaces. Using `--force-namespace`, a _Guardian_ can load the data into the namespace specified in the data and schema files.
 
-For example:
+{{% notice "note" %}}
+The Live loader requires that the `namespace` from the data and schema files exist before loading the data.
+{{% /notice %}}
+
+For example, to preserve the namespace while loading data:
 
 ```sh
 dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace -1
