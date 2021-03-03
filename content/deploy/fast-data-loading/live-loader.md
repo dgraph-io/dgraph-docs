@@ -86,7 +86,8 @@ Since [multi-tenancy]({{< relref "multitenancy.md" >}}) requires ACL,
 when using the Live loader you must provide the login credentials using the `--creds` flag.
 By default, Live loader loads the data into the user's namespace.
 
-_Guardians of the Galaxy_ can load the data into multiple namespaces. Using `--force-namespace`, a _Guardian_ can load the data into the namespace specified in the data and schema files.
+[Guardians of the Galaxy]({{< relref "multitenancy.md#guardians-of-the-galaxy" >}}) can load the data into multiple namespaces.
+Using `--force-namespace`, a _Guardian_ can load the data into the namespace specified in the data and schema files.
 
 {{% notice "note" %}}
 The Live loader requires that the `namespace` from the data and schema files exist before loading the data.

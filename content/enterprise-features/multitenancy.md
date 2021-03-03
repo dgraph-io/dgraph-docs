@@ -157,38 +157,20 @@ Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 By default, Bulk loader preserves the namespace in the data and schema files.
 If there's no namespace information available, it loads the data into the default namespace.
 
-Using the `--force-namespace` flag, you can load all the data into a specific namespace.
-In that case, the namespace information from the data and schema files will be ignored.
-
-For example, to force the bulk data loading into namespace `123`:
-
-```sh
-dgraph bulk -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --force-namespace 123
-```
+Please refer to the [Bulk loader documentation]({{< relref "bulk-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
 
 ### Live Loader
 
 Since multi-tenancy works with ACL enabled, when using the [Live loader]({{< relref "live-loader.md" >}}),
 you must provide the login credentials using the `--creds` flag.
 By default, Live loader loads the data into the user's namespace.
+[Guardians of the Galaxy](#guardians-of-the-galaxy) can load the data into multiple namespaces.
 
-[Guardians of the Galaxy](#guardians-of-the-galaxy) can load the data into multiple namespaces. Using `--force-namespace`, a _Guardian_ can load the data into the namespace specified in the data and schema files.
+Please refer to the [Live loader documentation]({{< relref "live-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
 
 {{% notice "note" %}}
 The Live loader requires that the `namespace` from the data and schema files exist before loading the data.
 {{% /notice %}}
-
-For example, to preserve the namespace while loading data:
-
-```sh
-dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace -1
-```
-
-A _Guardian of the Galaxy_ can also load data into a specific namespace. For example, to force the data loading into namespace `123`:
-
-```sh
-dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace 123
-```
 
 ## Exports
 
