@@ -132,15 +132,45 @@ mutation {
 }
 ```
 
+## Drop operations
+
+The `drop all` and `drop data` operations can only be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
+They're executed at cluster level and delete data across namespaces.
+All other `drop` operations run at namespace level and are namespace specific.
+
+{{% notice "note" %}}
+`drop all` and `drop data` operations are executed at cluster level and will delete across namespaces.
+{{% /notice %}}
+
 ## Backups
 
 Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
 Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 {{% notice "tip" %}}
-[Live loader]({{< relref "live-loader.md" >}}) supports loading data into specific namespaces.
+[Live loader](#live-loader) supports loading data into specific namespaces.
 {{% /notice %}}
 
+### Bulk Loader
+
+[Bulk loader]({{< relref "bulk-loader.md" >}}) can be used to load the data in bulk.
+By default, Bulk loader preserves the namespace in the data and schema files.
+If there's no namespace information available, it loads the data into the default namespace.
+
+Please refer to the [Bulk loader documentation]({{< relref "bulk-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
+
+### Live Loader
+
+Since multi-tenancy works with ACL enabled, when using the [Live loader]({{< relref "live-loader.md" >}}),
+you must provide the login credentials using the `--creds` flag.
+By default, Live loader loads the data into the user's namespace.
+[Guardians of the Galaxy](#guardians-of-the-galaxy) can load the data into multiple namespaces.
+
+Please refer to the [Live loader documentation]({{< relref "live-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
+
+{{% notice "note" %}}
+The Live loader requires that the `namespace` from the data and schema files exist before loading the data.
+{{% /notice %}}
 
 ## Exports
 
