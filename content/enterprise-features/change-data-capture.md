@@ -10,28 +10,83 @@ With a Dgraph [enterprise license]({{< relref "enterprise-features/license.md" >
 you can use change data capture (CDC) to track data changes over time, including
 mutations and drops (deletes) in your database. Dgraph's CDC implementation lets
 you use Kafka or a local file as a *sink* to store the CDC updates streamed by
-Dgraph Alpha leader nodes. 
+Dgraph Alpha leader nodes. CDC updates are in JSON format.
 
-When CDC is enabled, Dgraph streams all mutations except those that update
-password fields, along with any drop events. Live Loader events are tracked by
-CDC, but Bulk Loader events aren't.
+When CDC is enabled Dgraph streams updates from all `set` and `delete` mutations
+except those that affect password fields, along with any drop events. Live Loader
+events are recorded by CDC, but Bulk Loader events aren't. If the Kafka sink
+goes offline, events are collected on the Alpha leader node until the sink is
+available again.
 
-### Enable CDC
+## Data format
 
-To enable CDC, start Dgraph Alpha with the `--cdc` command, as in the following
-command example:
+CDC records for fields updated by a mutation look like the following:
+
+```json
+{ "key": "0", "value": {"meta":{"commit_ts":5},"type":"mutation","event":{"operation":"set","uid":2,"attr":"counter.val","value":1,"value_type":"int"}}}
+```
+
+A set mutation event updating `counter.val` to 10 would look like the following:
+
+```json
+{"meta":{"commit_ts":29},"type":"mutation","event":{"operation":"set","uid":3,"attr":"counter.val","value":10,"value_type":"int"}}
+```
+
+Similarly, a delete mutation event that removes all values for the `Author.name`
+field for a specified node would look like the following:
+
+```json
+{"meta":{"commit_ts":44},"type":"mutation","event":{"operation":"del","uid":7,"attr":"Author.name","value":"_STAR_ALL","value_type":"default"}}
+```
+
+CDC records for drops look like the following example record for "drop all":
+
+```json
+{"meta":{"commit_ts":13},"type":"drop","event":{"operation":"all"}}
+```
+
+
+### Enable CDC with Kafka sink
+
+To enable CDC and sink results to Kafka, start Dgraph Alpha with the `--cdc`
+command and the sub-options shown below, as follows:
 
 ```bash
 dgraph alpha --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"
 ```
 
+### Enable CDC with file sink
+
+To enable CDC and sink results to a local unencrypted file, start Dgraph Alpha
+with the `--cdc` command and the sub-option shown below, as follows:
+
+```bash
+dgraph alpha --cdc "file=local-file-path"
+```
+
 ## CDC command reference
 
 The `--cdc` option includes several sub-options that you can use to configure
-CDC when running the `dgraph alpha` command
+CDC when running the `dgraph alpha` command:
 
+| Sub-option       | Example `dgraph alpha` command option     | Notes                                                                |
+|------------------|-------------------------------------------|----------------------------------------------------------------------|
+|  `ca-cert`       | `--cdc "ca-cert=/cert-dir/ca.crt"`        | Path and filename of the CA root certificate used for TLS encryption |
+|  `client-cert`   | `--cdc "client-cert=/c-certs/client.crt"` | Path and filename of the client certificate used for TLS encryption  |
+|  `client-key`    | `--cdc "client-cert=/c-certs/client.key"` | Path and filename of the client certificate private key              |
+|  `file`          | `--cdc "file=/sink-dir/cdc-file"`         | Path and filename of a local file sink (alternative to Kafka sink)   |
+|  `kafka`         | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | Hostname(s) of the Kafka hosts. Requires authentication using the `sasl-user` and `sasl-password` sub-options. |
+|  `sasl-user`     | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
+|  `sasl-password` | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL password for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
 
+## Known limitations
 
+Currently, CDC has the following known limitations:
+
+* CDC is not currently supported when Dgraph is in Ludicrous mode. 
+* Schema updates are not currently recorded by CDC. 
+
+<!--
 # DRAFTY: FROM PR:
 
 Flag: cdc and various sub-options for change data capture are.
@@ -59,6 +114,8 @@ Sample events for file-based sink looks like this:
 ```json
 { "key": "0", "value": {"meta":{"commit_ts":5},"type":"mutation","event":{"operation":"set","uid":2,"attr":"counter.val","value":1,"value_type":"int"}}}
 ```
+
+
 
 # DRAFTY: FROM DISCUSS:
 
@@ -131,3 +188,21 @@ Limitations
     Schema updates will not available over CDC at this moment. We are working on fixing this. We will update the timelines for that later.
 
 Important: This is an enterprise feature.
+
+# DRAFTY: FROM SLACK:
+
+Anand:
+Need some inputs on CDC (I am doing a comparison with Neptune).
+Do we support any other channel apart from Kafka? Can CDC be retrieved by a REST API?
+Is the stream created synchronously with Transactions? If yes, what kind of perf degradation happens (slight , lots )?
+Can we switch CDC off and on?
+What happens if Kafka is down? Do we store CDC that can be retrieved later? If yes, do we purge this?
+cc: @Aman Bansal
+
+Aman Bansal
+Let me answer one by one
+We support only kafka and file based sink. File based are meant for testing and auditing purposes. CDC cannot be retrieved via rest apis
+No streams are independent of txns
+No you cannot switch on or off. Cdc are contolled via flags hence restarts are required
+If kafka is down, cdc will be halted, raft logs will grow, once kafka comes up online, client will try to send all the pending events. Therefore we retry till the client comes up online. No perf degrade as such for shorter periods. But raft will grow and can have delays in applying proposal if kept like that for long.
+-->
