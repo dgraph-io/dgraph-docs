@@ -39,9 +39,14 @@ Here is an excellent blog explaining in detail on [how to set up GraphQL Subscri
 
 ## Subscriptions to custom DQL
 
-You can use the `@withSubscription` directive on GraphQL types to generate subscriptions on queries for that type.
-This directive also supports DQL in custom queries.
-You can specify the `@withSubscription` directive on individual DQL queries in `type Query` and those queries will be added to `type subscription`.
+You can use the `@withSubscription` directive on GraphQL types to generate subscription queries for that type.
+You can also apply this directive on custom DQL queries by specifying `@withSubscription` on individual DQL queries in `type Query`,
+and those queries will be added to `type subscription`.
+
+{{% notice "note" %}}
+Currently, Dgraph only supports subscriptions on custom DQL queries.
+For example, custom HTTP queries can't be subscribed.
+{{% /notice %}}
 
 For example, see the custom DQL query `queryUserTweetCounts` below:
 
