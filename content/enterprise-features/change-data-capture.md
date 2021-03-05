@@ -29,8 +29,12 @@ shown below, as follows:
 dgraph alpha --cdc "kafka=kafka-hostname:port; sasl-user=tstark; sasl-password=m3Ta11ic"
 ```
 
-If you use Kafka without SASL authentication, you can simply specify the
-hostname and port used by Kafka, for example `--cdc "localhost:9092"`.
+If you use Kafka on the localhost without SASL authentication, you can just 
+specify the hostname and port used by Kafka, as follows:
+
+```bash
+dgraph alpha `--cdc "localhost:9092"`
+```
 
 ## Enable CDC with file sink
 
