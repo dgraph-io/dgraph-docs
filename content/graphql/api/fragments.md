@@ -1,10 +1,10 @@
 +++
-title = "GraphQL Fragements"
+title = "GraphQL Fragments"
 description = "A GraphQL fragment is a reusable unit of logic that can be shared between multiple queries and mutations."
 weight = 4
 [menu.main]
     parent = "api"
-    name = "GraphQL Fragements"
+    name = "GraphQL Fragments"
 +++
 
 A GraphQL fragment is a reusable unit of logic that can be shared between multiple queries and mutations.
