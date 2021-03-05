@@ -16,7 +16,7 @@ When CDC is enabled, Dgraph streams updates in JSON format for all `set` and
 `delete` mutations except those that affect password fields; along with any drop 
 events. Live Loader events are recorded by CDC, but Bulk Loader events aren't.
 CDC events are based on changes to Raft logs. So, if the sink is not reachable
-by the Alpha nodes, then Raft logs will grow as events are collected on the Alpha
+by the Alpha nodes, then Raft logs expand as events are collected on the Alpha
 leader node until the sink is available again. 
 
 ## Enable CDC with Kafka sink
@@ -48,9 +48,9 @@ CDC when running the `dgraph alpha` command:
 |  `client-cert`   | `--cdc "client-cert=/c-certs/client.crt"` | Path and filename of the client certificate used for TLS encryption  |
 |  `client-key`    | `--cdc "client-cert=/c-certs/client.key"` | Path and filename of the client certificate private key              |
 |  `file`          | `--cdc "file=/sink-dir/cdc-file"`         | Path and filename of a local file sink (alternative to Kafka sink)   |
-|  `kafka`         | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | Hostname(s) of the Kafka hosts. Requires authentication using the `sasl-user` and `sasl-password` sub-options. |
-|  `sasl-user`     | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
-|  `sasl-password` | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL password for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
+|  `kafka`         | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | Hostname(s) of the Kafka hosts. Requires authentication using the `sasl-user` and `sasl-password` sub-options. |
+|  `sasl-user`     | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
+|  `sasl-password` | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL password for Kafka. Requires the `kafka` and `sasl-username` sub-options. |
 
 ## CDC Data format
 
@@ -77,7 +77,7 @@ field for a specified node would look like the following:
 
 ### Drop event examples
 
-CDC events for drops look like the following example event for "drop all":
+CDC drop events look like the following example event for "drop all":
 
 ```json
 {"meta":{"commit_ts":13},"type":"drop","event":{"operation":"all"}}
@@ -89,10 +89,10 @@ specified `data`, or `all` data) is tracked by the CDC event.
 
 ## Known limitations
 
-Currently, CDC has the following known limitations:
+CDC has the following known limitations:
 
 * CDC is not currently supported when Dgraph is in Ludicrous mode
-* Schema updates do not cause a CDC event
+* CDC does not currently track schema updates
 * You can only configure or enable CDC when starting Alpha nodes using the
  `dgraph alpha` command
 * If a node crashes or the leadership of a Raft group changes, CDC might have
