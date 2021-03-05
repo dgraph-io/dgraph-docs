@@ -65,6 +65,29 @@ func newClient() *dgo.Dgraph {
 
 ```
 
+#### Multi-tenancy
+
+In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, Dgraph provides a new method `LoginIntoNamespace()`,
+which will allow the users to login to a specific namespace.
+
+In order to create a dgo client, and make the client login into namespace `123`:
+
+```go
+conn, err := grpc.Dial("127.0.0.1:9080", grpc.WithInsecure())
+if err != nil {
+	glog.Error("While trying to dial gRPC, got error", err)
+}
+dc := dgo.NewDgraphClient(api.NewDgraphClient(conn))
+ctx := context.Background()
+// Login to namespace 123
+if err := dc.LoginIntoNamespace(ctx, "groot", "password", 123); err != nil {
+	glog.Error("Failed to login: ",err)
+}
+```
+
+In the example above, the client logs into namespace `123` using username `groot` and password `password`.
+This client will be able to access all the data which is accessible to the `groot` user in the namespace `123`.
+
 ## Alter the database
 
 To set the schema, set it on a `api.Operation` object, and pass it down to
