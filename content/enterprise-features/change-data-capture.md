@@ -13,11 +13,44 @@ Kafka or a local file as a *sink* to store CDC updates streamed by Dgraph Alpha
 leader nodes. 
 
 When CDC is enabled, Dgraph streams updates in JSON format for all `set` and
-`delete` mutations except those that affect password fields, along with any drop 
+`delete` mutations except those that affect password fields; along with any drop 
 events. Live Loader events are recorded by CDC, but Bulk Loader events aren't.
-CDC events are based on changes to Raft logs. So. if the sink is not reachable
+CDC events are based on changes to Raft logs. So, if the sink is not reachable
 by the Alpha nodes, then Raft logs will grow as events are collected on the Alpha
 leader node until the sink is available again. 
+
+## Enable CDC with Kafka sink
+
+To enable CDC and sink results to Kafka, start Dgraph Alpha with the `--cdc`
+command and the sub-options shown below, as follows:
+
+```bash
+dgraph alpha --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"
+```
+
+## Enable CDC with file sink
+
+To enable CDC and sink results to a local unencrypted file, start Dgraph Alpha
+with the `--cdc` command and the sub-option shown below, as follows:
+
+```bash
+dgraph alpha --cdc "file=local-file-path"
+```
+
+## CDC command reference
+
+The `--cdc` option includes several sub-options that you can use to configure
+CDC when running the `dgraph alpha` command:
+
+| Sub-option       | Example `dgraph alpha` command option     | Notes                                                                |
+|------------------|-------------------------------------------|----------------------------------------------------------------------|
+|  `ca-cert`       | `--cdc "ca-cert=/cert-dir/ca.crt"`        | Path and filename of the CA root certificate used for TLS encryption |
+|  `client-cert`   | `--cdc "client-cert=/c-certs/client.crt"` | Path and filename of the client certificate used for TLS encryption  |
+|  `client-key`    | `--cdc "client-cert=/c-certs/client.key"` | Path and filename of the client certificate private key              |
+|  `file`          | `--cdc "file=/sink-dir/cdc-file"`         | Path and filename of a local file sink (alternative to Kafka sink)   |
+|  `kafka`         | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | Hostname(s) of the Kafka hosts. Requires authentication using the `sasl-user` and `sasl-password` sub-options. |
+|  `sasl-user`     | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
+|  `sasl-password` | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL password for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
 
 ## CDC Data format
 
@@ -53,38 +86,6 @@ CDC events for drops look like the following example event for "drop all":
 The `operation` field specifies which drop operation (`attribute`, `type`,
 specified `data`, or `all` data) is tracked by the CDC event.
 
-### Enable CDC with Kafka sink
-
-To enable CDC and sink results to Kafka, start Dgraph Alpha with the `--cdc`
-command and the sub-options shown below, as follows:
-
-```bash
-dgraph alpha --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"
-```
-
-### Enable CDC with file sink
-
-To enable CDC and sink results to a local unencrypted file, start Dgraph Alpha
-with the `--cdc` command and the sub-option shown below, as follows:
-
-```bash
-dgraph alpha --cdc "file=local-file-path"
-```
-
-## CDC command reference
-
-The `--cdc` option includes several sub-options that you can use to configure
-CDC when running the `dgraph alpha` command:
-
-| Sub-option       | Example `dgraph alpha` command option     | Notes                                                                |
-|------------------|-------------------------------------------|----------------------------------------------------------------------|
-|  `ca-cert`       | `--cdc "ca-cert=/cert-dir/ca.crt"`        | Path and filename of the CA root certificate used for TLS encryption |
-|  `client-cert`   | `--cdc "client-cert=/c-certs/client.crt"` | Path and filename of the client certificate used for TLS encryption  |
-|  `client-key`    | `--cdc "client-cert=/c-certs/client.key"` | Path and filename of the client certificate private key              |
-|  `file`          | `--cdc "file=/sink-dir/cdc-file"`         | Path and filename of a local file sink (alternative to Kafka sink)   |
-|  `kafka`         | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | Hostname(s) of the Kafka hosts. Requires authentication using the `sasl-user` and `sasl-password` sub-options. |
-|  `sasl-user`     | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
-|  `sasl-password` | --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic" | SASL password for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
 
 ## Known limitations
 
