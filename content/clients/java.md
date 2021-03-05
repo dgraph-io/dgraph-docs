@@ -62,6 +62,15 @@ DgraphStub stub3 = DgraphGrpc.newStub(channel3);
 DgraphClient dgraphClient = new DgraphClient(stub1, stub2, stub3);
 ```
 
+#### Multi-tenancy
+
+If [multi-tenancy]({{< relref "multitenancy.md" >}}) is enabled, by default the login method on client will login into the namespace `0`.
+In order to login into some other namespace, do this:
+
+```java
+dgraphClient.loginIntoNamespace(USER_ID, USER_PASSWORD, NAMESPACE);
+```
+
 ### Creating a Client for Slash GraphQL Endpoint
 
 If you want to connect to Dgraph running on your [Slash GraphQL](https://slash.dgraph.io) instance, then all you need is the URL of your Slash GraphQL endpoint and the API key. You can get a client using them as follows :
