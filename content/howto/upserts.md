@@ -46,11 +46,13 @@ in the `Assigned` object returned from the mutation.
    modify the account (using additional mutations) or perform queries on it in
 whichever way you wish.
 
-## Upsert Block
+## Upserts in DQL and GraphQL
 
-You can also use the `Upsert Block` to achieve the upsert procedure in a single
+You can also use the `Upsert Block` in DQL to achieve the upsert procedure in a single
  mutation. The request will contain both the query and the mutation as explained
 [here]({{< relref "mutations/upsert-block.md" >}}).
+
+In GraphQL, you can use the `upsert` input variable in an `add` mutation, as explained [here]({{< relref "graphql/mutations/upsert.md">}}).
 
 ## Conflicts
 
