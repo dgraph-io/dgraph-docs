@@ -1,9 +1,9 @@
 +++
-title = "GraphQL Fragements"
+title = "GraphQL Fragments"
 weight = 4
 [menu.main]
     parent = "api"
-    name = "GraphQL Fragements"
+    name = "GraphQL Fragments"
 +++
 
 Documentation on GraphQL fragments is coming soon.
