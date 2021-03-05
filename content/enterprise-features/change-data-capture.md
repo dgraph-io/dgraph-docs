@@ -21,12 +21,16 @@ leader node until the sink is available again.
 
 ## Enable CDC with Kafka sink
 
-To enable CDC and sink results to Kafka, start Dgraph Alpha with the `--cdc`
-command and the sub-options shown below, as follows:
+Kafka records CDC events under the `dgraph-cdc` topic. To enable CDC and sink
+events to Kafka, start Dgraph Alpha with the `--cdc` command and the sub-options
+shown below, as follows:
 
 ```bash
-dgraph alpha --cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"
+dgraph alpha --cdc "kafka=kafka-hostname:port; sasl-user=tstark; sasl-password=m3Ta11ic"
 ```
+
+If you use Kafka without SASL authentication, you can simply specify the
+hostname and port used by Kafka, for example `--cdc "localhost:9092"`.
 
 ## Enable CDC with file sink
 
@@ -48,7 +52,7 @@ CDC when running the `dgraph alpha` command:
 |  `client-cert`   | `--cdc "client-cert=/c-certs/client.crt"` | Path and filename of the client certificate used for TLS encryption  |
 |  `client-key`    | `--cdc "client-cert=/c-certs/client.key"` | Path and filename of the client certificate private key              |
 |  `file`          | `--cdc "file=/sink-dir/cdc-file"`         | Path and filename of a local file sink (alternative to Kafka sink)   |
-|  `kafka`         | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | Hostname(s) of the Kafka hosts. Requires authentication using the `sasl-user` and `sasl-password` sub-options. |
+|  `kafka`         | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | Hostname(s) of the Kafka hosts. May require authentication using the `sasl-user` and `sasl-password` sub-options. |
 |  `sasl-user`     | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
 |  `sasl-password` | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL password for Kafka. Requires the `kafka` and `sasl-username` sub-options. |
 
