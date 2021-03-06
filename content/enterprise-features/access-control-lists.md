@@ -61,19 +61,50 @@ make sure they are all using the same secret key file created in Step 2.
    dgraph alpha --acl_secret_file=PATH_TO_SECRET
    ```
 
-Here is an example that starts one zero server and one alpha server with the ACL feature turned on:
+### Example
+
+Here is an example that starts a Dgraph Zero server and a Dgraph Alpha server with the ACL feature turned on.  You can run these commands in a seperate terminal tab:
 
 ```bash
-dgraph zero --my=localhost:5080 --replicas 1 --idx 1 --bindall --expose_trace --profile_mode block --block_rate 10 --logtostderr -v=2
-dgraph alpha --my=localhost:7080 --zero=localhost:5080 --logtostderr -v=3 --acl_secret_file ./hmac-secret
+dgraph zero --my=localhost:5080 --replicas 1 --idx 1
+dgraph alpha --my=localhost:7080 --zero=localhost:5080 \
+  --acl_secret_file ./hmac_secret_file \
+  --whitelist "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
-If you are using docker-compose, a sample cluster can be set up by:
+### Example of using Docker Compose 
 
-1. `cd $GOPATH/src/github.com/dgraph-io/dgraph/compose/`
-2. `make`
-3. `./compose -e --acl_secret <path to your hmac secret file>`, after which a `docker-compose.yml` file will be generated.
-4. `docker-compose up` to start the cluster using the `docker-compose.yml` generated above.
+If you are using [Docker Compose](https://docs.docker.com/compose/), a sample cluster can be set up using this `docker-compose.yaml` configuration:
+
+```yaml
+version: '3.5'
+services:
+  alpha1:
+    command: dgraph alpha --my=alpha1:7080 --zero=zero1:5080
+    container_name: alpha1
+    environment:
+      DGRAPH_ALPHA_ACL_SECRET_FILE: /dgraph/acl/hmac_secret_file
+      DGRAPH_ALPHA_WHITELIST: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+    image: dgraph/dgraph:v20.11.2
+    ports:
+      - 8080:8080
+    volumes:
+      - ./hmac_secret_file:/dgraph/acl/hmac_secret_file
+  zero1:
+    command: dgraph zero --my=zero1:5080 --replicas 1 --idx 1
+    container_name: zero1
+    image: dgraph/dgraph:v20.11.2
+```
+
+You can run this with:
+
+```bash
+## Create ACL secret key file with 32 ASCII characters
+echo '1234567890123456789012345678901' > hmac_secret_file
+## Start Docker Compose
+docker-compose up 
+```
+
 
 ## Set up ACL Rules
 
@@ -97,13 +128,57 @@ A typical workflow includes the following tasks:
 All these mutations require passing an `X-Dgraph-AccessToken` header, value for which can be obtained after logging in.
 {{% /notice %}}
 
+#### Getting a token
+
+Here's how you can log in:
+
+```graphql
+mutation {
+  login(userId: "groot", password: "password") {
+    response {
+      accessJWT
+      refreshJWT
+    }
+  }
+}
+```
+
+#### Using curl
+
+If you are using `curl` from the command line, you can use the following with the mutation above saved to `login.graphql`:
+
+```bash
+## Login and save results
+JSON_RESULT=$(curl http://localhost:8080/admin --silent --request POST \
+  --header "Content-Type: application/graphql" \
+  --upload-file login.graphql
+)
+## Extract the token using GNU grep
+TOKEN=$(grep -oP '(?<=accessJWT":")[^"]*' <<< $JSON_RESULT)
+
+## Extract the token using the jq tool
+TOKEN=$(jq -r '.data.login.response.accessJWT' <<< $JSON_RESULT)
+
+## Run a GraphQL query using the token
+curl http://localhost:8080/admin --silent --request POST \
+  --header "Content-Type: application/graphql" \
+  --header "X-Dgraph-AccessToken: $TOKEN" \
+  --upload-file some_other_query.graphql
+```
+
+
 ### Reset the root password
 
 The example below uses the dgraph endpoint `localhost:8080/admin`as a demo, make sure to choose the correct IP and port for your environment:
 
 ```graphql
 mutation {
-  updateUser(input: {filter: {name: {eq: "groot"}}, set: {password: "newpassword"}}) {
+  updateUser(
+    input: {
+      filter: { name: { eq: "groot" } }
+      set: { password: "newpassword" }
+    }
+  ) {
     user {
       name
     }
@@ -182,12 +257,17 @@ To assign the user `alice` to both the group `dev` and the group `sre`, the muta
 
 ```graphql
 mutation {
-  updateUser(input: {filter: {name: {eq: "alice"}}, set: {groups: [{name: "dev"}, {name: "sre"}]}}) {
+  updateUser(
+    input: {
+      filter: { name: { eq: "alice" } }
+      set: { groups: [{ name: "dev" }, { name: "sre" }] }
+    }
+  ) {
     user {
       name
       groups {
         name
-    }
+      }
     }
   }
 }
@@ -198,23 +278,20 @@ mutation {
 To remove `alice` from the `dev` group, the mutation should be
 
 ```graphql
-mutation updateUser(input: {
-		filter: {
-			name: {
-				eq: "alice"
-			}
-		},
-		remove: {
-			groups: [{ name: "dev" }]
-		}
-	}) {
-		user {
-			name
-			groups {
-				name
-			}
-		}
-	}
+mutation {
+  updateUser(
+    input: {
+      filter: { name: { eq: "alice" } }
+      remove: { groups: [{ name: "dev" }] }
+    }
+  ) {
+    user {
+      name
+      groups {
+        name
+      }
+    }
+  }
 }
 ```
 
@@ -224,7 +301,12 @@ Here we assign a permission rule for the `friend` predicate to the group:
 
 ```graphql
 mutation {
-  updateGroup(input: {filter: {name: {eq: "dev"}}, set: {rules: [{predicate: "friend", permission: 7}]}}) {
+  updateGroup(
+    input: {
+      filter: { name: { eq: "dev" } }
+      set: { rules: [{ predicate: "friend", permission: 7 }] }
+    }
+  ) {
     group {
       name
       rules {
@@ -234,13 +316,19 @@ mutation {
     }
   }
 }
+
 ```
 
 In case you have [reverse edges]({{< relref "query-language/schema.md#reverse-edges" >}}), they have to be given the permission to the group as well
 
 ```graphql
 mutation {
-  updateGroup(input: {filter: {name: {eq: "dev"}}, set: {rules: [{predicate: "~friend", permission: 7}]}}) {
+  updateGroup(
+    input: {
+      filter: { name: { eq: "dev" } }
+      set: { rules: [{ predicate: "~friend", permission: 7 }] }
+    }
+  ) {
     group {
       name
       rules {
@@ -270,7 +358,12 @@ a predicate, the default behavior is to block all (`READ`, `WRITE` and `MODIFY`)
 
 ```graphql
 mutation {
-  updateGroup(input: {filter: {name: {eq: "dev"}}, set: {rules: [{predicate: "name", permission: 7}]}}) {
+  updateGroup(
+    input: {
+      filter: { name: { eq: "dev" } }
+      set: { rules: [{ predicate: "name", permission: 7 }] }
+    }
+  ) {
     group {
       name
       rules {
@@ -280,6 +373,7 @@ mutation {
     }
   }
 }
+
 ```
 
 ### Remove a rule from a Group
@@ -287,24 +381,22 @@ mutation {
 To remove a rule from the group `dev`, the mutation should be:
 
 ```graphql
-mutation updateGroup(input: {
-		filter: {
-			name: {
-				eq: "dev"
-			}
-		},
-		remove: {
-			rules: [{predicate: "name", permission: 7}]
-		}
-	}) {
-		group {
-			name
-			rules {
-				predicate
-				permission
-			}
-		}
-	}
+mutation {
+  updateGroup(
+    input: {
+      filter: { name: { eq: "dev" } }
+      remove: { rules: [ "friend", "~friend" ] }
+    }
+  ) {
+    group {
+      name
+      rules {
+        predicate
+        permission
+      }
+    }
+  }
+}
 ```
 
 ### Delete a User
@@ -312,10 +404,12 @@ mutation updateGroup(input: {
 To delete the user `alice`, you should execute
 
 ```graphql
-mutation deleteUser(filter: {name: {eq: "alice"}}) {
-		msg
-		numUids
-	}
+mutation {
+  deleteUser(filter: { name: { eq: "alice" } }) {
+    msg
+    numUids
+  }
+}
 ```
 
 ### Delete a Group
@@ -323,10 +417,12 @@ mutation deleteUser(filter: {name: {eq: "alice"}}) {
 To delete the group `sre`, the mutation should be
 
 ```graphql
-mutation deleteGroup(filter: {name: {eq: "sre"}}) {
-		msg
-		numUids
-	}
+mutation {
+  deleteGroup(filter: { name: { eq: "sre" } }) {
+    msg
+    numUids
+  }
+}
 ```
 
 ## Retrieve Users and Groups information
@@ -349,7 +445,7 @@ Let's query for the user `alice`:
 
 ```graphql
 query {
-  queryUser(filter: {name: {eq: "alice"}}) {
+  queryUser(filter: { name: { eq: "alice" } }) {
     name
     groups {
       name
@@ -415,7 +511,7 @@ Let's query for the `dev` group:
 
 ```graphql
 query {
-  queryGroup(filter: {name: {eq: "dev"}}) {
+  queryGroup(filter: { name: { eq: "dev" } }) {
     name
     users {
       name
@@ -463,7 +559,7 @@ group's ACL rules, e.g.
 To check the `dev` group information:
 
 ```graphql
-{
+query {
   getGroup(name: "dev") {
     name
     users {
@@ -476,7 +572,7 @@ To check the `dev` group information:
   }
 }
 ```
-
+ 
 The output should include the users in the group as well as the permissions, the
 group's ACL rules, e.g.
 
@@ -512,12 +608,17 @@ of `guardians` group, and its password is `simple_alice`.
 
 ```graphql
 mutation {
-  updateUser(input: {filter: {name: {eq: "alice"}}, set: {groups: [{name: "guardians"}]}}) {
+  updateUser(
+    input: {
+      filter: { name: { eq: "alice" } }
+      set: { groups: [{ name: "guardians" }] }
+    }
+  ) {
     user {
       name
       groups {
         name
-    }
+      }
     }
   }
 }
@@ -567,7 +668,7 @@ You can run authenticated requests by passing the accessJWT to a request via the
 
 ```graphql
 mutation {
-  addUser(input: [{name: "alice", password: "newpassword"}]) {
+  addUser(input: [{ name: "alice", password: "newpassword" }]) {
     user {
       name
     }
@@ -579,7 +680,11 @@ The refresh token can be used in the `/admin` POST GraphQL mutation to receive n
 
 ```graphql
 mutation {
-  login(userId: "groot", password: "newpassword", refreshToken: "<refreshJWT>") {
+  login(
+    userId: "groot"
+    password: "newpassword"
+    refreshToken: "<refreshJWT>"
+  ) {
     response {
       accessJWT
       refreshJWT
