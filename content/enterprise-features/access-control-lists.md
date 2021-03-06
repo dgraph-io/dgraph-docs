@@ -75,7 +75,7 @@ services:
   zero1:
     command: dgraph zero --my=zero1:5080 --replicas 1 --idx 1
     container_name: zero1
-    image: dgraph/dgraph:v20.11.2
+    image: dgraph/dgraph:{{< version >}}
 ```
 
 You can run this with:
