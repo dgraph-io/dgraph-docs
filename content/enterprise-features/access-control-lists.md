@@ -31,7 +31,7 @@ To use the Access Control List (ACL) features, you need to run Dgraph in Enterpr
 
 Dgraph enterprise features are enabled by default in a new cluster for 30 days. After the trial period of thirty days, the cluster must obtain a license from Dgraph to continue using the enterprise features released in the proprietary code.
 
-If you have a [License](https://dgraph.io/docs/enterprise-features/license/), you can supply the license key to the Zero server with:
+If you have a [License](https://dgraph.io/docs/enterprise-features/license/), you can supply the license key to the Dgraph Zero leader node with:
 
 ```bash
 dgraph zero --enterprise_license=PATH_TO_LICENSE_KEY
@@ -49,12 +49,12 @@ a contract with Dgraph Labs Inc. You can contact us by sending an email to
 forum](https://discuss.dgraph.io) to get an enterprise license.
 
 2. Create a plain text file, and store a randomly generated secret key in it. The secret
-key is used by Alpha servers to sign JSON Web Tokens (JWT). As you’ve probably guessed,
+key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT). As you’ve probably guessed,
 it’s critical to keep the secret key as a secret. Another requirement for the secret key
 is that it must have at least 256-bits, i.e. 32 ASCII characters, as we are using
 HMAC-SHA256 as the signing algorithm.
 
-3. Start all the alpha servers in your cluster with the option `--acl_secret_file`, and
+3. Start all the Dgraph Alpha nodes in your cluster with the option `--acl_secret_file`, and
 make sure they are all using the same secret key file created in Step 2.
 
    ```bash
@@ -63,7 +63,7 @@ make sure they are all using the same secret key file created in Step 2.
 
 ### Example
 
-Here is an example that starts a Dgraph Zero server and a Dgraph Alpha server with the ACL feature turned on.  You can run these commands in a seperate terminal tab:
+Here is an example that starts a Dgraph Zero node and a Dgraph Alpha node with the ACL feature turned on.  You can run these commands in a seperate terminal tab:
 
 ```bash
 dgraph zero --my=localhost:5080 --replicas 1 --idx 1
