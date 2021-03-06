@@ -1,22 +1,30 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
 title = "Troubleshooting"
 weight = 20
 [menu.main]
     parent = "deploy"
 +++
 
-Here are some problems that you may encounter and some solutions to try.
+This page provides tips on how to troubleshoot issues with running Dgraph.
 
-### Running OOM (out of memory)
+### Running out of memory (OOM)
 
-During bulk loading of data, Dgraph can consume more memory than usual, due to high volume of writes. That's generally when you see the OOM crashes.
+During bulk loading of data, Dgraph can consume more memory than usual due to a
+high volume of writes. This can cause OOM crashes.
 
-The recommended minimum RAM to run on desktops and laptops is 16GB.
+You can take the following steps to help avoid OOM crashes:
 
-On EC2/GCE instances, the recommended minimum is 8GB.
+* **Increase the amount of memory available**: If you run Dgraph with insufficient
+memory, that can result in OOM crashes. The recommended minimum RAM to run Dgraph
+on desktops and laptops is 16GB. On EC2 and GCE instances, the recommended minimum
+is 8GB.
+* **Reduce the number of Go routines**: You can troubleshoot OOM issues by reducing
+the number of Go routines (`goroutines`) used by Dgraph from the default value
+of eight. For example, you can reduce the `goroutines` that Dgraph uses to four
+by calling the `dgraph alpha` command with the following option: 
 
-You could also decrease memory usage of Dgraph by setting `--badger.vlog=disk`.
+  `--badger "goroutines=4"`
+
 
 ### Too many open files
 
