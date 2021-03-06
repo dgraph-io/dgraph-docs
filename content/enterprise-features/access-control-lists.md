@@ -34,7 +34,7 @@ make sure they are all using the same secret key file created in Step 2.
    ```
 
 {{% notice "tip" %}}
-In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph with a configuration file, e.g. `config.toml`, `config.properties`, `config.hcl`, etc. You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph with a configuration file, e.g. `config.properties`, `config.yaml`, `config.json`, `config.toml`, `config.hcl`.  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Example of using Dgraph CLI
