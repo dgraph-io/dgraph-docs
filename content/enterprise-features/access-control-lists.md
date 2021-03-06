@@ -114,6 +114,126 @@ helm repo add "dgraph" https://charts.dgraph.io
 helm install "my-release" --values ./dgraph_values.yaml dgraph/dgraph
 ```
 
+## Accessing Secured Dgraph
+
+Before managing users and groups and configuring ACL rules, you will need to login in order to get a token that is needed to access Dgraph.  You will use this token with the `X-Dgraph-AccessToken` header field.
+
+### Logging In
+
+To login, send a POST request to `/admin` with the GraphQL mutation. For example, to log in as the root user groot:
+
+```graphql
+mutation {
+  login(userId: "groot", password: "password") {
+    response {
+      accessJWT
+      refreshJWT
+    }
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "accessJWT": "<accessJWT>",
+    "refreshJWT": "<refreshJWT>"
+  }
+}
+```
+
+#### Access Token
+
+The response includes the access and refresh JWTs which are used for the authentication itself and refreshing the authentication token, respectively. Save the JWTs from the response for later HTTP requests.
+
+You can run authenticated requests by passing the accessJWT to a request via the `X-Dgraph-AccessToken` header. Add the header `X-Dgraph-AccessToken` with the `accessJWT` value which you got in the login response in the GraphQL tool which you're using to make the request. 
+
+For example, if you were using GraphQL Playground, you would add this in the headers section:
+
+```json
+{ "X-Dgraph-AccessToken" : "<accessJWT>" }
+```
+
+And in the main code section, you can add a mutation, such as:
+
+```graphql
+mutation {
+  addUser(input: [{ name: "alice", password: "whiterabbit" }]) {
+    user {
+      name
+    }
+  }
+}
+```
+
+#### Refresh Token
+
+The refresh token can be used in the `/admin` POST GraphQL mutation to receive new access and refresh JWTs, which is useful to renew the authenticated session once the ACL access TTL expires (controlled by Dgraph Alpha's flag `--acl_access_ttl` which is set to 6h0m0s by default).
+
+```graphql
+mutation {
+  login(
+    userId: "groot"
+    password: "password"
+    refreshToken: "<refreshJWT>"
+  ) {
+    response {
+      accessJWT
+      refreshJWT
+    }
+  }
+}
+```
+
+
+### Login using a client
+
+Now that the ACL settings are in place, to access the data protected by ACL rules, we need to
+first log in through a user. This is tyically done via the client's `.login(USER_ID, USER_PASSWORD)` method.
+
+Here are some code samples using a client:
+
+* **Go** ([dgo client](https://github.com/dgraph-io/dgo)): example `acl_over_tls_test.go` ([here](https://github.com/dgraph-io/dgraph/blob/master/tlstest/acl/acl_over_tls_test.go))
+* **Java** ([dgraph4j](https://github.com/dgraph-io/dgraph4j)): example `AclTest.java` ([here](https://github.com/dgraph-io/dgraph4j/blob/master/src/test/java/io/dgraph/AclTest.java))
+
+
+### Login uing curl
+
+If you are using `curl` from the command line, you can use the following with the above [login mutation](#logging-in) saved to `login.graphql`:
+
+```bash
+## Login and save results
+JSON_RESULT=$(curl http://localhost:8080/admin --silent --request POST \
+  --header "Content-Type: application/graphql" \
+  --upload-file login.graphql
+)
+## example of extracting the token using GNU grep
+TOKEN=$(grep -oP '(?<=accessJWT":")[^"]*' <<< $JSON_RESULT)
+
+## example of extracting the token using the jq tool
+TOKEN=$(jq -r '.data.login.response.accessJWT' <<< $JSON_RESULT)
+
+## Run a GraphQL query using the token
+curl http://localhost:8080/admin --silent --request POST \
+  --header "Content-Type: application/graphql" \
+  --header "X-Dgraph-AccessToken: $TOKEN" \
+  --upload-file some_other_query.graphql
+```
+
+## User and Group Administration
+
+TBA 
+
+## ACL Rules Administration
+
+TBA
+
+## Querying Users, Groups, Rules
+
+TBA
+
 ## Set up ACL Rules
 
 Now that your cluster is running with the ACL feature turned on, you can set up the ACL rules. This can be done using the web UI Ratel or by using a GraphQL tool which fires the mutations. Execute the following mutations using a GraphQL tool like Insomnia, GraphQL Playground or GraphiQL.
@@ -135,45 +255,6 @@ A typical workflow includes the following tasks:
 {{% notice "note" %}}
 All these mutations require passing an `X-Dgraph-AccessToken` header, value for which can be obtained after logging in.
 {{% /notice %}}
-
-#### Getting a token
-
-Here's how you can log in:
-
-```graphql
-mutation {
-  login(userId: "groot", password: "password") {
-    response {
-      accessJWT
-      refreshJWT
-    }
-  }
-}
-```
-
-#### Using curl
-
-If you are using `curl` from the command line, you can use the following with the mutation above saved to `login.graphql`:
-
-```bash
-## Login and save results
-JSON_RESULT=$(curl http://localhost:8080/admin --silent --request POST \
-  --header "Content-Type: application/graphql" \
-  --upload-file login.graphql
-)
-## Extract the token using GNU grep
-TOKEN=$(grep -oP '(?<=accessJWT":")[^"]*' <<< $JSON_RESULT)
-
-## Extract the token using the jq tool
-TOKEN=$(jq -r '.data.login.response.accessJWT' <<< $JSON_RESULT)
-
-## Run a GraphQL query using the token
-curl http://localhost:8080/admin --silent --request POST \
-  --header "Content-Type: application/graphql" \
-  --header "X-Dgraph-AccessToken: $TOKEN" \
-  --upload-file some_other_query.graphql
-```
-
 
 ### Reset the root password
 
@@ -627,75 +708,6 @@ mutation {
       groups {
         name
       }
-    }
-  }
-}
-```
-
-## Access Data using a Client
-
-Now that the ACL settings are in place, to access the data protected by ACL rules, we need to
-first log in through a user. This is tyically done via the client's `.login(USER_ID, USER_PASSWORD)` method.
-
-A sample code using the [dgo client](https://github.com/dgraph-io/dgo) can be found
-[here](https://github.com/dgraph-io/dgraph/blob/master/tlstest/acl/acl_over_tls_test.go). An example using
-[dgraph4j](https://github.com/dgraph-io/dgraph4j) can be found [here](https://github.com/dgraph-io/dgraph4j/blob/master/src/test/java/io/dgraph/AclTest.java).
-
-## Access Data using the GraphQL API
-
-Dgraph's HTTP API also supports authenticated operations to access ACL-protected
-data.
-
-To login, send a POST request to `/admin` with the GraphQL mutation. For example, to log in as the root user groot:
-
-```graphql
-mutation {
-  login(userId: "groot", password: "password") {
-    response {
-      accessJWT
-      refreshJWT
-    }
-  }
-}
-```
-
-Response:
-
-```json
-{
-  "data": {
-    "accessJWT": "<accessJWT>",
-    "refreshJWT": "<refreshJWT>"
-  }
-}
-```
-
-The response includes the access and refresh JWTs which are used for the authentication itself and refreshing the authentication token, respectively. Save the JWTs from the response for later HTTP requests.
-
-You can run authenticated requests by passing the accessJWT to a request via the `X-Dgraph-AccessToken` header. Add the header `X-Dgraph-AccessToken` with the `accessJWT` value which you got in the login response in the GraphQL tool which you're using to make the request. For example:
-
-```graphql
-mutation {
-  addUser(input: [{ name: "alice", password: "newpassword" }]) {
-    user {
-      name
-    }
-  }
-}
-```
-
-The refresh token can be used in the `/admin` POST GraphQL mutation to receive new access and refresh JWTs, which is useful to renew the authenticated session once the ACL access TTL expires (controlled by Dgraph Alpha's flag `--acl_access_ttl` which is set to 6h0m0s by default).
-
-```graphql
-mutation {
-  login(
-    userId: "groot"
-    password: "newpassword"
-    refreshToken: "<refreshJWT>"
-  ) {
-    response {
-      accessJWT
-      refreshJWT
     }
   }
 }
