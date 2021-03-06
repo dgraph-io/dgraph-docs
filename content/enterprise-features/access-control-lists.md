@@ -8,60 +8,36 @@ weight = 2
 
 {{% notice "note" %}}
 This feature was introduced in [v1.1.0](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.0).
-The Dgraph ACL tool is deprecated and would be removed in the next release. ACL changes can be made by using the `/admin` GraphQL endpoint on any Alpha node.
+The `dgrapch acl` command is deprecated and will be removed in a future release. ACL changes can be made by using the `/admin` GraphQL endpoint on any Alpha node.
 {{% /notice %}}
 
 Access Control List (ACL) provides access protection to your data stored in
-Dgraph. When the ACL feature is turned on, a client, e.g. [dgo](https://github.com/dgraph-io/dgo) or [dgraph4j](https://github.com/dgraph-io/dgraph4j), must
+Dgraph. When the ACL feature is enabled, a client, e.g. [dgo](https://github.com/dgraph-io/dgo) or [dgraph4j](https://github.com/dgraph-io/dgraph4j), must
 authenticate with a username and password before executing any transactions, and
 is only allowed to access the data permitted by the ACL rules.
 
-This document has two parts: first we will talk about the admin operations
-needed for setting up ACL; then we will explain how to use a client to access
-the data protected by ACL rules.
-
-## Turn on ACLs
-
-{{% notice "tip" %}}
-
-To use the Access Control List (ACL) features, you need to run Dgraph in Enterprise mode.
-{{% /notice %}}
-
-### Running in Enterprise mode
-
-Dgraph enterprise features are enabled by default in a new cluster for 30 days. After the trial period of thirty days, the cluster must obtain a license from Dgraph to continue using the enterprise features released in the proprietary code.
-
-If you have a [License](https://dgraph.io/docs/enterprise-features/license/), you can supply the license key to the Dgraph Zero leader node with:
-
-```bash
-dgraph zero --enterprise_license=PATH_TO_LICENSE_KEY
-```
-
-Once this is done, ACL will be turned on by default and you'll be able to run the ACL examples presented in this article.
-
-### Enabling ACL
+## Enable enterprise ACL feature
 
 The ACL feature can be turned on by following these steps:
 
-1. Since ACL is an enterprise feature, make sure your use case is covered under
-a contract with Dgraph Labs Inc. You can contact us by sending an email to
-[contact@dgraph.io](mailto:contact@dgraph.io) or post your request at [our discuss
-forum](https://discuss.dgraph.io) to get an enterprise license.
-
-2. Create a plain text file, and store a randomly generated secret key in it. The secret
+1. Create a plain text file, and store a randomly generated secret key in it. The secret
 key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT). As you’ve probably guessed,
 it’s critical to keep the secret key as a secret. Another requirement for the secret key
 is that it must have at least 256-bits, i.e. 32 ASCII characters, as we are using
 HMAC-SHA256 as the signing algorithm.
 
-3. Start all the Dgraph Alpha nodes in your cluster with the option `--acl_secret_file`, and
+2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl_secret_file`, and
 make sure they are all using the same secret key file created in Step 2.
 
    ```bash
-   dgraph alpha --acl_secret_file=PATH_TO_SECRET
+   dgraph alpha --acl_secret_file="/path/to/secret" --whitelist "<permitted-ip-addresses>"
    ```
 
-### Example
+{{% notice "tip" %}}
+In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph with a configuration file, e.g. `config.toml`, or use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+{{% /notice %}}
+
+### Example of using Dgraph CLI
 
 Here is an example that starts a Dgraph Zero node and a Dgraph Alpha node with the ACL feature turned on.  You can run these commands in a seperate terminal tab:
 
@@ -100,11 +76,43 @@ You can run this with:
 
 ```bash
 ## Create ACL secret key file with 32 ASCII characters
-echo '1234567890123456789012345678901' > hmac_secret_file
+echo '12345678901234567890123456789012' > hmac_secret_file
 ## Start Docker Compose
 docker-compose up 
 ```
 
+### Example of using Kubernetes Helm Chart
+
+If you deploy Dgraph on Kubernetes, you can configure the ACL feature using the [Dgraph Helm Chart](https://artifacthub.io/packages/helm/dgraph/dgraph).
+
+The first step is to encode the secret with base64:
+
+```bash
+## print secret without newline character
+printf '12345678901234567890123456789012' | base64
+```
+
+The next step is that we need to create a Helm chart config values file, e.g. `dgraph_values.yaml`.  We want to copy the results of encoded secret as paste this into the `hmac_secret_file` like the example below:
+
+```yaml
+## dgraph_values.yaml
+alpha:
+  acl:
+    enabled: true
+    file:
+      hmac_secret_file: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=
+  configFile:
+    config.toml: |
+      acl_secret_file = '/dgraph/acl/hmac_secret_file'
+      whitelist = '10.0.0.0/8,172.0.0.0/8,192.168.0.0/16'
+```
+
+Now with the Helm chart config values created, we can deploy Dgraph:
+
+```bash
+helm repo add "dgraph" https://charts.dgraph.io
+helm install "my-release" --values ./dgraph_values.yaml dgraph/dgraph
+```
 
 ## Set up ACL Rules
 
