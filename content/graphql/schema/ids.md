@@ -46,14 +46,42 @@ type User {
 
 Dgraph will then require a unique username when creating a new user --- it'll generate the input type for `addUser` with `username: String!` so you can't make an add mutation without setting a username, and when processing the mutation, Dgraph will ensure that the username isn't already set for another node of the `User` type.
 
-Identities created with `@id` are reusable - if you delete an existing user, you can reuse the username.
+Identities created with `@id` are reusable - if you delete an existing user, you can reuse the username. But like `ID` types, fields declared with `@id` are also immutable.
 
 Fields with the `@id` directive must have the type `String!`.
 
-As with `ID` types, Dgraph will generate queries and mutations so you'll also be able to query, update and delete by id.
+As with `ID` types, Dgraph generates queries and mutations so you can query, update and delete data in nodes, using the fields with the `@id` directive as references.
+
+It's possible to use the `@id` directive on more than one field in a type. For example, you can define a type like the following:
+
+```graphql
+type Book {
+    name: String! @id
+    isbn: String! @id
+    genre: String!
+    ...
+}
+```
+
+ You can then perform queries with filters containing multiple `@id` fields; the fields you specify will execute in the manner of an `and` operation. For example, for the above schema, you can send a `getBook` query like the following:
+
+```graphql
+query {
+  getBook(name: "The Metamorphosis", isbn: "9871165072") {
+    name
+    genre
+    ...
+  }
+}
+```
+
+This will yield a positive response if both the `name` **and** `isbn` match any data in the database.
+
+{{% notice "note" %}}
+If there are multiple fields with `@id`’s  in a type then all of them will be nullable. If a type has a single field defined with either `@id` or `ID` then that will be non-nullable. 
+{{% /notice %}}
+
 
 ### More to come
 
-We are currently considering allowing types other than `String` with `@id`, see [here](https://discuss.dgraph.io/t/id-with-type-int/10402)
-
-We are currently considering expanding uniqueness to include composite ids and multiple unique fields (e.g. [this](https://discuss.dgraph.io/t/support-multiple-unique-fields-in-dgraph-graphql/8512) issue).
+We are currently considering allowing types other than `String` with `@id`; see [here](https://discuss.dgraph.io/t/id-with-type-int/10402) for more information.
