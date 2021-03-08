@@ -61,7 +61,7 @@ DgraphStub stub3 = DgraphGrpc.newStub(channel3);
 
 DgraphClient dgraphClient = new DgraphClient(stub1, stub2, stub3);
 ```
-#### Login using ACL
+### Login using ACL
 
 If [ACL]({{< relref "access-control-lists.md" >}}) is enabled then you can log-in to the default namespace (`0`) with the following method:
 
@@ -69,7 +69,7 @@ If [ACL]({{< relref "access-control-lists.md" >}}) is enabled then you can log-i
 dgraphClient.login(USER_ID, USER_PASSWORD);
 ```
 
-#### Multi-tenancy
+### Multi-tenancy
 
 If [multi-tenancy]({{< relref "multitenancy.md" >}}) is enabled, by default the login method on client will login into the namespace `0`.
 In order to login into some other namespace, use the `loginIntoNamespace` method on the client:
@@ -135,12 +135,6 @@ Checking the version, before doing anything else can be used as a test to find o
 is able to communicate with the Dgraph server. This will also help reduce the latency of the first
 query/mutation which results from some dynamic library loading and linking that happens in JVM
 (see [this issue](https://github.com/dgraph-io/dgraph4j/issues/108) for more details).
-
-### Login Using ACL
-
-```java
-dgraphClient.login(USER_ID, USER_PASSWORD);
-```
 
 ### Altering the Database
 
