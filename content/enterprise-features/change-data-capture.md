@@ -1,7 +1,7 @@
 +++
 title = "Change Data Capture"
 description = "With a Dgraph enterprise license, you can use Dgraph's change data capture (CDC) capabilities to track data changes over time."
-weight = 2
+weight = 5
 [menu.main]
     parent = "enterprise-features"
 +++
