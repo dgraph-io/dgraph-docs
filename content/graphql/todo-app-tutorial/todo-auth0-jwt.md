@@ -36,8 +36,14 @@ Now let's go to `Settings` of our Auth0 application and then go down to view the
 
 Now let's run a command to get the public key from it, which we will add to our schema. Just change the `file_name` and run the command.
 
-```
+```shell
 openssl x509 -pubkey -noout -in file_name.pem
+```
+
+To format the key for the schema and replace the newlines with `\n`, you can use Node like so:
+
+```shell
+node -e "console.log(JSON.stringify(\`$(openssl x509 -pubkey -noout -in file_name.pem)\`).slice(1,-1))"
 ```
 
 Copy the public key and now let's add it to our schema. For doing that we will add something like this, to the bottom of our schema file - 
