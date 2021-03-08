@@ -21,10 +21,7 @@ is only allowed to access the data permitted by the ACL rules.
 The ACL feature can be turned on by following these steps:
 
 1. Create a plain text file, and store a randomly generated secret key in it. The secret
-key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT). As you’ve probably guessed,
-it’s critical to keep the secret key as a secret. Another requirement for the secret key
-is that it must have at least 256-bits, i.e. 32 ASCII characters, as we are using
-HMAC-SHA256 as the signing algorithm.
+key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  Keep this secret key secret to avoid data security issues.  The secret key must have at least 256-bits (32 ASCII characters) to support the HMAC-SHA256 signing algorithm.
 
 2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl_secret_file`, and
 make sure they are all using the same secret key file created in Step 2.
@@ -34,7 +31,7 @@ make sure they are all using the same secret key file created in Step 2.
    ```
 
 {{% notice "tip" %}}
-In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph with a configuration file, e.g. `config.properties`, `config.yaml`, `config.json`, `config.toml`, `config.hcl`.  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph using a configuration file (`config.properties`, `config.yaml`, `config.json`, `config.toml` or `config.hcl`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Example using Dgraph CLI
@@ -56,7 +53,7 @@ dgraph alpha --my=localhost:7080 --zero=localhost:5080 \
 
 ### Example using Docker Compose
 
-If you are using [Docker Compose](https://docs.docker.com/compose/), a sample cluster can be set up using this `docker-compose.yaml` configuration:
+If you are using [Docker Compose](https://docs.docker.com/compose/), you can set up a sample Dgraph cluster using this `docker-compose.yaml` configuration:
 
 ```yaml
 version: '3.5'
@@ -127,7 +124,7 @@ Before managing users and groups and configuring ACL rules, you will need to log
 
 ### Logging In
 
-To login, send a POST request to `/admin` with the GraphQL mutation. For example, to log in as the root user groot:
+To login, send a POST request to `/admin` with the GraphQL mutation. For example, to log in as the root user `groot`:
 
 ```graphql
 mutation {
@@ -197,8 +194,7 @@ mutation {
 
 ### Login using a client
 
-Now that the ACL settings are in place, to access the data protected by ACL rules, we need to
-first log in through a user. This is typically done via the client's `.login(USER_ID, USER_PASSWORD)` method.
+With ACL configured, you need to log in as a user to access data protected by ACL rules. You can do this using the client's `.login(USER_ID, USER_PASSWORD)` method.
 
 Here are some code samples using a client:
 
@@ -231,7 +227,7 @@ curl http://localhost:8080/admin --silent --request POST \
 ```
 
 {{% notice "tip" %}}
-As parsing JSON results on the command line can be challenging, embedded in this snippet are some alternatives to extract the desired data using popular tools, such as [the silver searcher](https://github.com/ggreer/the_silver_searcher) or the json query tool [jq](https://stedolan.github.io/jq).
+Parsing JSON results on the command line can be challenging, so you will find some alternatives to extract the desired data using popular tools, such as [the silver searcher](https://github.com/ggreer/the_silver_searcher) or the json query tool [jq](https://stedolan.github.io/jq), embedded in this snippet.
 {{% /notice %}}
 
 ## User and group administration
@@ -360,7 +356,7 @@ mutation {
 
 ## ACL rules configuration
 
-You can set up ACL rules using Dgraph Ratel UI or by using a GraphQL tool, such as [Insomnia](https://insomnia.rest/), [GraphQL Playground](https://github.com/prisma/graphql-playground), [GraphiQL](https://github.com/skevy/graphiql-app), etc. The permissions can be set on a predicate for the group using using pattern similar to the UNIX file permission convention:
+You can set up ACL rules using the Dgraph Ratel UI or by using a GraphQL tool, such as [Insomnia](https://insomnia.rest/), [GraphQL Playground](https://github.com/prisma/graphql-playground), [GraphiQL](https://github.com/skevy/graphiql-app), etc. You can set the permissions on a predicate for the group using a pattern similar to the UNIX file permission conventions shown below:
 
 | Permission                  | Value | Binary |
 |-----------------------------|-------|--------|
@@ -448,7 +444,7 @@ mutation {
 
 ## Querying users and groups
 
-You can set up ACL rules using Dgraph Ratel UI or by using a GraphQL tool, such as [Insomnia](https://insomnia.rest/), [GraphQL Playground](https://github.com/prisma/graphql-playground), [GraphiQL](https://github.com/skevy/graphiql-app), etc. The permissions can be set on a predicate for the group using using pattern similar to the UNIX file permission convention:
+You can set up ACL rules using the Dgraph Ratel UI or by using a GraphQL tool, such as [Insomnia](https://insomnia.rest/), [GraphQL Playground](https://github.com/prisma/graphql-playground), [GraphiQL](https://github.com/skevy/graphiql-app), etc. The permissions can be set on a predicate for the group using using pattern similar to the UNIX file permission convention:
 
 You can query and get information for users and groups.  These sections show output that will show the user `alice` and the `dev` group along with rules for `friend` and `~friend` predicates.
 
