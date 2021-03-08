@@ -1,4 +1,4 @@
-password+++
++++
 date = "2017-03-20T22:25:17+11:00"
 title = "Access Control Lists"
 weight = 2
@@ -8,7 +8,7 @@ weight = 2
 
 {{% notice "note" %}}
 This feature was introduced in [v1.1.0](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.0).
-The `dgrapch acl` command is deprecated and will be removed in a future release. ACL changes can be made by using the `/admin` GraphQL endpoint on any Alpha node.
+The `dgraph acl` command is deprecated and will be removed in a future release. ACL changes can be made by using the `/admin` GraphQL endpoint on any Alpha node.
 {{% /notice %}}
 
 Access Control List (ACL) provides access protection to your data stored in
@@ -37,7 +37,7 @@ make sure they are all using the same secret key file created in Step 2.
 In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph with a configuration file, e.g. `config.properties`, `config.yaml`, `config.json`, `config.toml`, `config.hcl`.  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
-### Example of using Dgraph CLI
+### Example using Dgraph CLI
 
 Here is an example that starts a Dgraph Zero node and a Dgraph Alpha node with the ACL feature turned on.  You can run these commands in a separate terminal tab:
 
@@ -54,7 +54,7 @@ dgraph alpha --my=localhost:7080 --zero=localhost:5080 \
   --whitelist "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
-### Example of using Docker Compose
+### Example using Docker Compose
 
 If you are using [Docker Compose](https://docs.docker.com/compose/), a sample cluster can be set up using this `docker-compose.yaml` configuration:
 
@@ -88,7 +88,7 @@ echo '12345678901234567890123456789012' > hmac_secret_file
 docker-compose up
 ```
 
-### Example of using Kubernetes Helm Chart
+### Example using Kubernetes Helm Chart
 
 If you deploy Dgraph on [Kubernetes](https://kubernetes.io/), you can configure the ACL feature using the [Dgraph Helm Chart](https://artifacthub.io/packages/helm/dgraph/dgraph).
 
@@ -237,8 +237,6 @@ As parsing JSON results on the command line can be challenging, embedded in this
 ## User and group administration
 
 The default configuration comes with a user `groot`, with a password of `password`.  The `groot` user is part of administrative group called `guardians` that have access to everything.  You can add more users to the `guardians` group as needed.
-
-The examples below will use the Dgraph endpoint `localhost:8080/admin` as a demo; make sure to choose the correct IP and port for your environment.
 
 ### Reset the root password
 
@@ -450,6 +448,10 @@ mutation {
 
 ## Querying users and groups
 
+You can set up ACL rules using Dgraph Ratel UI or by using a GraphQL tool, such as [Insomnia](https://insomnia.rest/), [GraphQL Playground](https://github.com/prisma/graphql-playground), [GraphiQL](https://github.com/skevy/graphiql-app), etc. The permissions can be set on a predicate for the group using using pattern similar to the UNIX file permission convention:
+
+You can query and get information for users and groups.  These sections show output that will show the user `alice` and the `dev` group along with rules for `friend` and `~friend` predicates.
+
 ### Query for users
 
 Let's query for the user `alice`:
@@ -556,7 +558,7 @@ group's ACL rules, e.g.
           },
           {
             "permission": 7,
-            "predicate": "name"
+            "predicate": "~friend"
           }
         ]
       }
@@ -604,7 +606,7 @@ group's ACL rules, e.g.
         },
         {
           "permission": 7,
-          "predicate": "name"
+          "predicate": "~friend"
         }
       ]
     }
