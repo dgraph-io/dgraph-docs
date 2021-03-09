@@ -85,66 +85,39 @@ For example:
         read_only: true
 ```
 
-Here's a complete Docker example, including:
-
-- Zero 
-- Alpha
-- Lambda
+Here's a complete Docker example that uses the base dgraph image and adds support to lambda server
 
 ```yml
-version: "3.5"
 services:
-  zero:
-    image: dgraph/dgraph:latest
-    container_name: zero1
-    working_dir: /data/zero1
+  dgraph:
+    image: dgraph/standalone
+    environment: 
+      DGRAPH_ALPHA_GRAPHQL_LAMBDA_URL: "http://dgraph_lambda:8686/graphql-worker"
     ports:
-      - 5180:5180
-      - 6180:6180
-    labels:
-      cluster: test
-      service: zero1
+      - "8080:8080"
+      - "9080:9080"
+      - "8000:8000"
     volumes:
-      - type: bind
-        source: $GOPATH/bin
-        target: /gobin
-        read_only: true
-    command: /gobin/dgraph zero -o 100 --logtostderr -v=2 --bindall --expose_trace --profile_mode block --block_rate 10 --my=zero1:5180
+      - "dgraph:/dgraph"
+    networks:
+      - "dgraph"
 
-  alpha:
-    image: dgraph/dgraph:latest
-    container_name: alpha1
-    working_dir: /data/alpha1
-    volumes:
-      - type: bind
-        source: $GOPATH/bin
-        target: /gobin
-        read_only: true
-    ports:
-      - 8180:8180
-      - 9180:9180
-    labels:
-      cluster: test
-      service: alpha1
-    command: /gobin/dgraph alpha --zero=zero1:5180 -o 100 --expose_trace --trace 1.0
-      --profile_mode block --block_rate 10 --logtostderr -v=2
-      --whitelist 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 --my=alpha1:7180
-      --graphql_lambda_url=http://lambda:8686/graphql-worker
-
-  lambda:
+  dgraph_lambda:
     image: dgraph/dgraph-lambda:latest
-    container_name: lambda
-    labels:
-      cluster: test
     ports:
       - 8686:8686
-    depends_on:
-      - alpha
     environment:
-      DGRAPH_URL: http://alpha:8180
+      DGRAPH_URL: http://dgraph:8080
+    networks:
+      - "dgraph"
     volumes:
       - type: bind
-        source: ./script.js
+        source: ./gql/script.js
         target: /app/script/script.js
         read_only: true
+
+volumes:
+  dgraph:
+networks:
+  dgraph:
 ```
