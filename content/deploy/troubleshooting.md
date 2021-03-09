@@ -29,10 +29,22 @@ by calling the `dgraph alpha` command with the following option:
   `--badger "goroutines=4"`
 
 
-### Too many open files
+### "Too many open files" errors
 
-If you see an log error messages saying `too many open files`, you should increase the per-process file descriptors limit.
+If Dgraph logs "too many open files" errors, you should increase the per-process
+open file descriptor limit to permit more open files. During normal operations,
+Dgraph must be able to open many files. Your operating system may have an open 
+file descriptor limit with a low default value that isn't adequate for a database
+like Dgraph. If so, you might need to increase this limit.
 
-During normal operations, Dgraph must be able to open many files. Your operating system may set by default a open file descriptor limit lower than what's needed for a database such as Dgraph.
+On Linux and Mac, you can get file descriptor limit settings with the `ulimit`
+command, as follows:
 
-On Linux and Mac, you can check the file descriptor limit with `ulimit -n -H` for the hard limit and `ulimit -n -S` for the soft limit. The soft limit should be set high enough for Dgraph to run properly. A soft limit of 65535 is a good lower bound for a production setup. You can adjust the limit as needed.
+* Get hard limit: `ulimit -n -H`
+* Get soft limit: `ulimit -n -S`
+
+
+A soft limit of 65535 open files is the recommended minimum to use Dgraph in
+production, but you can try increasing this soft limit if you continue to see 
+this error. To learn more, see the `ulimit` documentation for your operating
+system.
