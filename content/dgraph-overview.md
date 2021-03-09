@@ -61,9 +61,9 @@ Dgraph Labs recommends running Dgraph on Linux for production use.
 
 ### Get started with fully-managed Dgraph
 
-You can [get started using Slash GraphQL today](https://slash.dgraph.io) with a
+You can [get started using Slash GraphQL today](https://cloud.dgraph.io) with a
 free trial. To use Dgraph Cloud, visit our [Pricing Page](https://dgraph.io/pricing) or 
-[Pricing Calculator](https://slash.dgraph.io/pricing-calculator/) to get an
+[Pricing Calculator](https://cloud.dgraph.io/pricing-calculator/) to get an
 estimate, or [contact us](https://dgraph.io/connect).
 
 ## Dgraph and GraphQL
