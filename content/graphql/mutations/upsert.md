@@ -7,9 +7,9 @@ weight = 2
     name = "Upsert"
 +++
 
-Upsert mutations allow you to perform `add` or `update` operations based on whether a particular ID exists in the database. The IDs must be external IDs, defined using the `@id` directive in the schema.
+Upsert mutations allow you to perform `add` or `update` operations based on whether a particular `ID` exists in the database. The IDs must be external IDs, defined using the `@id` directive in the schema.
 
-We use the following schema to demonstrate how upserts work in GraphQL:
+For example, to demonstrate how upserts work in GraphQL, take the following schema:
 
 **Schema**
 ```graphql
@@ -29,7 +29,7 @@ type Post {
 }
 ```
 
-Dgraph automatically generates input and return types in the schema for the add mutation, as shown below:
+Dgraph automatically generates input and return types in the schema for the `add` mutation, as shown below:
 
 ```graphql
 addPost(input: [AddPostInput!]!): AddPostPayload
@@ -43,9 +43,9 @@ input AddPostInput {
 }
 ```
 
-Suppose we want to update the `text` field of a post with the ID `mm2`. But we also want to create a new post with that ID in case it doesn't already exist. To do this, we use the `addPost` mutation, but with an additional input variable `upsert`.  
+Suppose you want to update the `text` field of a post with the ID `mm2`. But you also want to create a new post with that ID in case it doesn't already exist. To do this, you use the `addPost` mutation, but with an additional input variable `upsert`.  
 
-This is a Boolean variable. Setting it to `true` will change the default behavior of an `add` operation to an upsert operation.
+This is a `Boolean` variable. Setting it to `true` will change the default behavior of an `add` operation to an upsert operation.
 
 It will perform an `update` mutation and carry out the changes you specify in your request if the particular ID exists. Otherwise, it will fall back to a default `add` operation and create a new `Post` with that ID and the details you provide.
 
@@ -104,9 +104,9 @@ If a post with the ID `mm2` exists, it will update the post with the new details
 ```
 
 {{% notice "note" %}}
-* The default value of `uspert` will be false, for backward compatibility.
+* The default value of `uspert` will be `false`, for backward compatibility.
 * Upsert operations are only relevant for types containing an `@id` field. Performing an `add` mutation with `upsert` set to `true` for a type that doesn't have any `@id` field will have no effect.
-* The current behavior of Add and Update mutations is such that they do not update deep level nodes. So Add mutations with `upsert` set to `true` will only update values at the root level. 
+* The current behavior of `Add` and `Update` mutations is such that they do not update deep level nodes. So Add mutations with `upsert` set to `true` will only update values at the root level. 
 {{% /notice %}}
 
 ## Examples
