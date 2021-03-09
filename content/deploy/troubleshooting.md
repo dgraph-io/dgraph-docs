@@ -1,27 +1,50 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
 title = "Troubleshooting"
 weight = 20
 [menu.main]
     parent = "deploy"
 +++
 
-Here are some problems that you may encounter and some solutions to try.
+This page provides tips on how to troubleshoot issues with running Dgraph.
 
-### Running OOM (out of memory)
+### Running out of memory (OOM)
 
-During bulk loading of data, Dgraph can consume more memory than usual, due to high volume of writes. That's generally when you see the OOM crashes.
+When you [bulk load]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}})
+or [backup]({{< relref "/enterprise-features/binary-backups.md" >}}) your data,
+Dgraph can consume more memory than usual due to a high volume of writes. This
+can cause OOM crashes.
 
-The recommended minimum RAM to run on desktops and laptops is 16GB.
+You can take the following steps to help avoid OOM crashes:
 
-On EC2/GCE instances, the recommended minimum is 8GB.
+* **Increase the amount of memory available**: If you run Dgraph with insufficient
+memory, that can result in OOM crashes. The recommended minimum RAM to run Dgraph
+on desktops and laptops (single-host deployment) is 16GB. For servers in a 
+cluster deployment, the recommended minimum is 8GB per server. This applies to
+EC2 and GCE instances, as well as on-premises servers.
+* **Reduce the number of Go routines**: You can troubleshoot OOM issues by reducing
+the number of Go routines (`goroutines`) used by Dgraph from the default value
+of eight. For example, you can reduce the `goroutines` that Dgraph uses to four
+by calling the `dgraph alpha` command with the following option: 
 
-You could also decrease memory usage of Dgraph by setting `--badger.vlog=disk`.
+  `--badger "goroutines=4"`
 
-### Too many open files
 
-If you see an log error messages saying `too many open files`, you should increase the per-process file descriptors limit.
+### "Too many open files" errors
 
-During normal operations, Dgraph must be able to open many files. Your operating system may set by default a open file descriptor limit lower than what's needed for a database such as Dgraph.
+If Dgraph logs "too many open files" errors, you should increase the per-process
+open file descriptor limit to permit more open files. During normal operations,
+Dgraph must be able to open many files. Your operating system may have an open 
+file descriptor limit with a low default value that isn't adequate for a database
+like Dgraph. If so, you might need to increase this limit.
 
-On Linux and Mac, you can check the file descriptor limit with `ulimit -n -H` for the hard limit and `ulimit -n -S` for the soft limit. The soft limit should be set high enough for Dgraph to run properly. A soft limit of 65535 is a good lower bound for a production setup. You can adjust the limit as needed.
+On Linux and Mac, you can get file descriptor limit settings with the `ulimit`
+command, as follows:
+
+* Get hard limit: `ulimit -n -H`
+* Get soft limit: `ulimit -n -S`
+
+
+A soft limit of 65535 open files is the recommended minimum to use Dgraph in
+production, but you can try increasing this soft limit if you continue to see 
+this error. To learn more, see the `ulimit` documentation for your operating
+system.
