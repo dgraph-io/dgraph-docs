@@ -12,12 +12,14 @@ mutations and drops in your database. Dgraph's CDC implementation lets you use
 Kafka or a local file as a *sink* to store CDC updates streamed by Dgraph Alpha
 leader nodes. 
 
-When CDC is enabled, Dgraph streams updates in JSON format for all `set` and
-`delete` mutations except those that affect password fields; along with any drop 
-events. Live Loader events are recorded by CDC, but Bulk Loader events aren't.
+When CDC is enabled, Dgraph streams events for all `set` and `delete` mutations,
+except those that affect password fields; along with any drop  events. Live
+Loader events are recorded by CDC, but Bulk Loader events aren't.
+
 CDC events are based on changes to Raft logs. So, if the sink is not reachable
-by the Alpha nodes, then Raft logs expand as events are collected on the Alpha
-leader node until the sink is available again. 
+by the Alpha leader node, then Raft logs expand as events are collected on
+that node until the sink is available again. You should enable CDC on all Dgraph
+Alpha nodes to avoid interruptions in the stream of CDC events.
 
 ## Enable CDC with Kafka sink
 
@@ -60,13 +62,18 @@ CDC when running the `dgraph alpha` command:
 |  `sasl-user`     | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
 |  `sasl-password` | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL password for Kafka. Requires the `kafka` and `sasl-username` sub-options. |
 
-## CDC Data format
+## CDC data format
 
-Most CDC events look like the following example:
+
+CDC events are in JSON format. Most CDC events look like the following example:
 
 ```json
 { "key": "0", "value": {"meta":{"commit_ts":5},"type":"mutation","event":{"operation":"set","uid":2,"attr":"counter.val","value":1,"value_type":"int"}}}
 ```
+
+The `Meta.Commit_Ts` value (shown above as `"meta":{"commit_ts":5}`) will increase
+with each CDC event, so you can use this value to find duplicate events if those 
+occur due to Raft leadership changes in your Dgraph Alpha group.
 
 ### Mutation event examples
 
@@ -94,14 +101,22 @@ CDC drop events look like the following example event for "drop all":
 The `operation` field specifies which drop operation (`attribute`, `type`,
 specified `data`, or `all` data) is tracked by the CDC event.
 
+## CDC and multi-tenancy
+
+When you enable CDC in a [multi-tenant environment]({{< relref "multitenancy.md" >}}),
+CDC events streamed to Kafka are distributed by the Kafka client. It distributes
+events between the available Kafka partitions based on their multi-tenancy
+namespace.
 
 ## Known limitations
 
 CDC has the following known limitations:
 
+* CDC events do not track old values that are updated or removed by mutation or
+  drop operations; only new values are tracked
 * CDC is not currently supported when Dgraph is in Ludicrous mode
 * CDC does not currently track schema updates
 * You can only configure or enable CDC when starting Alpha nodes using the
  `dgraph alpha` command
 * If a node crashes or the leadership of a Raft group changes, CDC might have
-  duplicate events, but no data loss.
+  duplicate events, but no data loss
