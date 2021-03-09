@@ -38,9 +38,9 @@ In addition to command line flags `--acl_secret_file` and `--whitelist`, you can
 
 Alternatively, you can use a Vault server for ACL secret keys. To use Vault, there are some pre-requisites:
 1. Vault Server URL of the form `http://fqdn[ip]:port`. This will be used for the `addr` option.
-2. Vault Server must be configued with an AppRole auth. A `secret-id` and `role-id` must be generated and copied over to local files. This will be needed for the options `secret-id-file` and `role-id-file`.
-3. Vault Server must instantiate a KV store containing a K/V for Dgraph. The `enc-field` option must be the KV-v1 or KV-v2 format. The vaule of this key is the encryption key that Dgraph will use. This key must be 16,24 or 32 bytes as explained above.
-4. Vault Server must contain a K/V for the ACL key. The `acl-field` option must be the KV-v1 or KV-v2 format. The vaule of this key is the ACL secret key that Dgraph will use. This key must be 16,24 or 32 bytes as explained above.
+2. Vault Server must be configured with an AppRole auth. A `secret-id` and `role-id` must be generated and copied over to local files. These will be required for the `secret-id-file` and `role-id-file` options.
+3. Vault Server must contain a K/V for the encryption key. This key will be needed for the `enc-field` option, to set the encryption key that Dgraph will use. This key must be 16, 32 or 64 bytes.
+4. Vault Server must contain a K/V for the ACL key. This key will be needed for the `acl-field` option, to set the ACL secret key that Dgraph will use. This key must have at least 256-bits (32 ASCII characters).
 
 {{% notice "tip" %}}
 For `enc-field` and `acl-field`, the key format can be defined using `enc-format` and `acl-format`.
