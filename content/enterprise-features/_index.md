@@ -40,6 +40,34 @@ weight = 9
       </p>
     </a>
   </div>
+  <div class="item">
+    <div class="icon"><i class="lni lni-keyword-research" aria-hidden="true"></i></div>
+    <a  href="{{< relref "audit-logs.md">}}">
+      <h2>Audit Logging</h2>
+      <p>
+        All requests are tracked and available for use in security audits. 
+      </p>
+    </a>
+  </div>
+    <div class="item">
+    <div class="icon"><i class="lni lni-network" aria-hidden="true"></i></div>
+    <a  href="{{< relref "multitenancy.md">}}">
+      <h2>Multi-Tenancy</h2>
+      <p>
+        Multiple tenants co-exist in the same Dgraph cluster. 
+      </p>
+    </a>
+  </div>
+    <div class="item">
+    <div class="icon"><i class="lni lni-files" aria-hidden="true"></i></div>
+    <a  href="{{< relref "learner-nodes.md">}}">
+      <h2>Learner Nodes</h2>
+      <p>
+        Spin-up a read-only replica instance across the world. 
+      </p>
+    </a>
+  </div>
+  
 
 </div>
 

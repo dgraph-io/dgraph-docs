@@ -1,13 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Logging"
-description = "Dgraph provides request logging, and also provides audit logging capabilities with a Dgraph Enterprise license."
+description = "Dgraph logs requests for queries and mutations, and also provides audit logging capabilities with a Dgraph Enterprise license."
 weight = 2
 [menu.main]
     parent = "admin"
 +++
 
-Dgraph provides request (query and mutation) logging, and also provides audit logging capabilities with a Dgraph Enterprise license.
+Dgraph logs requests for queries and mutations, and also provides audit logging
+capabilities with a Dgraph [enterprise license]({{< relref "enterprise-features/license.md" >}}).
 
 Dgraph's log format comes from the glog library and is [formatted](https://github.com/golang/glog/blob/23def4e6c14b4da8ac2ed8007337bc5eb5007998/glog.go#L523-L533) as follows:
 
@@ -15,27 +16,29 @@ Dgraph's log format comes from the glog library and is [formatted](https://githu
 Lmmdd hh:mm:ss.uuuuuu threadid file:line] msg...
 ```
 
-Where the fields are defined as follows:
+The fields shown above are defined as follows:
 
-```
-	L                A single character, representing the log level (eg 'I' for INFO)
-	mm               The month (zero padded; ie May is '05')
-	dd               The day (zero padded)
-	hh:mm:ss.uuuuuu  Time in hours, minutes and fractional seconds
-	threadid         The space-padded thread ID as returned by GetTID()
-	file             The file name
-	line             The line number
-	msg              The user-supplied message
-```
 
-## Log Verbosity
 
-To increase log verbosity, you have set the flag `-v=3` (or `-v=2`) which will enable verbose logging for everything. You can set this flag on both Zero and Alpha nodes.
+| Field | Definition |
+|-------|------------|
+|	`L`   | A single character, representing the log level (eg 'I' for INFO) |
+|	`mm`    | Month (zero padded; ie May is '05') |
+|	`dd`    | Day (zero padded) |
+|	`hh:mm:ss.uuuuuu` | Time in hours, minutes and fractional seconds |
+|	`threadid` | Space-padded thread ID as returned by GetTID() |
+|	`file` | Filename |
+|	`line` | Line number |
+|	`msg`  | User-supplied message | 
+
+## Log verbosity
+
+To increase log verbosity, set the flag `-v=3` (or `-v=2`) which will enable verbose logging for everything. You can set this flag on both Zero and Alpha nodes.
 {{% notice "note" %}}
-This requires a restart of the node itself.
+Changing log verbosity requires a restart of the node.
 {{% /notice %}}
 
-## Request logging Logging
+## Request logging
 
 Request logging, sometimes called *query logging*, lets you log queries and mutations.
 You can dynamically turn request logging on or off. To toggle request logging on, send the following GraphQL mutation to the `/admin` endpoint of an Alpha node (e.g. `localhost:8080/admin`):
