@@ -53,9 +53,35 @@ Identities created with `@id` are reusable. If you delete an existing user, you 
 
 Fields with the `@id` directive must have the type `String!`.
 
-As with `ID` types, Dgraph generates queries and mutations so you can query, update and delete data in fields specified with the `@id` directive.
+As with `ID` types, Dgraph generates queries and mutations so you can query, update and delete data in nodes, using the fields with the `@id` directive as references.
+
+It's possible to use the `@id` directive on more than one field in a type. For example, you can define a type like the following:
+
+```graphql
+type Book {
+    name: String! @id
+    isbn: String! @id
+    genre: String!
+    ...
+}
+```
+
+ You can then perform queries with filters containing multiple `@id` fields; the fields you specify will execute in the manner of an `and` operation. For example, for the above schema, you can send a `getBook` query like the following:
+
+```graphql
+query {
+  getBook(name: "The Metamorphosis", isbn: "9871165072") {
+    name
+    genre
+    ...
+  }
+}
+```
+
+This will yield a positive response if both the `name` **and** `isbn` match any data in the database.
 
 In a single-page app, you could render the page for `http://.../user/Erik` when a user clicks to view the author bio page for that user. Your app can then use a `getUser(username: "Erik") { ... }` GraphQL query to fetch the data and generate the page.
+
 
 ### Combining `ID` and `@id`
 
@@ -72,6 +98,10 @@ type User {
 ```
 
 With this schema, Dgraph requires a unique `username` when creating a new user. This schema provides the benefits of both of the previous examples above. Your app can then use the `getUser(...) { ... }` query to provide either the Dgraph-generated `id` or the externally-generated `username`.
+
+{{% notice "note" %}}
+If there are multiple fields with `@id`’s  in a type, then all of them will be nullable. If a type has a single field defined with either `@id` or `ID`, then that will be non-nullable. 
+{{% /notice %}}
 <!--
 ### More to come
 
