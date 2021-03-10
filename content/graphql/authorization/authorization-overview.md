@@ -86,6 +86,17 @@ for RSA Signature with SHA-256 asymmetric cryptography (the JWT is signed with t
 
 Both cases expect the JWT to be in a header `X-My-App-Auth` and expect the JWT to contain custom claims object `"https://my.app.io/jwt/claims": { ... }` with the claims used in authorization rules.
 
+The value of the `X-My-App-Auth` header is expected to be in one of these two forms:
+1. Just the JWT token. For example:
+    ```txt
+    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJodHRwczovL215LmFwcC5pby9qd3QvY2xhaW1zIjp7fX0.Pjlxpf-3FhH61EtHBRo2g1amQPRi0pNwoLUooGbxIho
+    ```
+
+2. A Bearer token, e.g., a JWT prepended with `Bearer ` prefix (including space). For example:
+    ```txt
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJodHRwczovL215LmFwcC5pby9qd3QvY2xhaW1zIjp7fX0.Pjlxpf-3FhH61EtHBRo2g1amQPRi0pNwoLUooGbxIho
+    ```
+
 {{% notice "note" %}}
 Authorization is in beta and some aspects may change - for example, it's possible that the method to specify the `header`, `key`, etc. will move into the /admin `updateGQLSchema` mutation that sets the schema. Some features are also in active improvement and development.
 {{% /notice %}}

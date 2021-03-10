@@ -34,6 +34,29 @@ make sure they are all using the same secret key file created in Step 2.
 In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph using a configuration file (`config.properties`, `config.yaml`, `config.json`, `config.toml` or `config.hcl`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
+### Using Vault for ACL secrets
+
+Alternatively, you can use a Vault server for ACL secret keys. To use Vault, there are some pre-requisites:
+1. Vault Server URL of the form `http://fqdn[ip]:port`. This will be used for the `addr` option.
+2. Vault Server must be configured with an AppRole auth. A `secret-id` and `role-id` must be generated and copied over to local files. These will be required for the `secret-id-file` and `role-id-file` options.
+3. Vault Server must contain a K/V for the ACL key. This key will be needed for the `acl-field` option, to set the ACL secret key that Dgraph will use. This key must have at least 256-bits (32 ASCII characters).
+
+{{% notice "tip" %}}
+The key format for the `acl-field` option can be defined using `acl-format`.
+Supported values are `raw` and `base64`.
+{{% /notice %}}
+
+Here is an example of using Dgraph with a Vault server that holds the secret key:
+
+```bash
+dgraph alpha --vault "addr=http://localhost:8200;path=secret/data/dgraph;role-id-file=path/to/role-file;secret-id-file=/path/to/secret-file;acl-field=my_acl;acl-format=base64;"
+```
+
+If multiple Alpha nodes are part of the cluster, you will need to pass the `--vault` option to
+each of the Alphas.
+If the Alpha server restarts, the `--vault` option must be set along with the key in order to
+restart successfully.
+
 ### Example using Dgraph CLI
 
 Here is an example that starts a Dgraph Zero node and a Dgraph Alpha node with the ACL feature turned on.  You can run these commands in a separate terminal tab:
