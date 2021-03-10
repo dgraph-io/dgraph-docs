@@ -47,7 +47,7 @@ release 21.03.
 |---------:|:---------|---------:|:---------|:----:|
 | | | **`--badger`** | | | |
 | `badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`|
-| | | (new) `goroutines` | int |`alpha`, `bulk`, `backup`|
+| | | (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`|
 | `badger.cache_mb` | string | `cache-mb` | string |`bulk`|
 | `badger.cache_percentage` | string | `cache-percentage` | string |`bulk`|
 | | | **`--acl`** | | |
