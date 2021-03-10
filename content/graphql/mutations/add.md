@@ -78,6 +78,10 @@ Variables:
 }
 ```
 
+{{% notice "note" %}}
+You can convert an `add` mutation to an `upsert` mutation by setting the value of the input variable `upsert` to `true`. For more information, see [Upsert Mutations](/graphql/mutations/upsert).
+{{% /notice %}}
+
 ## Examples
 
 You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/master/graphql/resolve/add_mutation_test.yaml) for more examples.
