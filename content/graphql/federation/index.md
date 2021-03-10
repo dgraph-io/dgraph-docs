@@ -1,5 +1,6 @@
 +++
 title = "Apollo Federation"
+description = "Dgraph now supports Apollo federation so that you can create a gateway GraphQL service that includes the Dgraph GraphQL API and other GraphQL services."
 weight = 14
 [menu.main]
   name = "Apollo Federation"
@@ -7,17 +8,18 @@ weight = 14
   parent = "graphql"
 +++
 
-Starting from release version 21.03 support has been added for Apollo federation. Hence making it possible to use Dgraph GraphQL API with other GraphQL services through a single gateway.
+Dgraph supports Apollo federation starting in release version 21.03. This lets you create a gateway GraphQL service that includes the Dgraph GraphQL API and other GraphQL services.
 
 ## Support for Apollo federation directives
 
-The current implementation supports 3 directives, namely `@key`, `@extends`, and `@external`.
+The current implementation supports the following three directives: `@key`, `@extends`, and `@external`.
 
 ### `@key` directive
-This directive takes one field argument inside it which is called `@key` field. There are few limitations on how to use `@key` directives.
+This directive takes one field argument inside it: the `@key` field. There are few limitations on how to use `@key` directives:
 
-User can define `@key` directive only once for a type, Support for multiple key types is not provided yet.
-Since the `@key` field acts as a foreign key to resolve entities from the service where it is extended, the field provided as an argument inside `@key` directive should be of `ID` type or having `@id` directive on it. 
+- Users can define the @key directive only once for a type
+- Support for multiple key types is not currently available.
+- Since the @key field acts as a foreign key to resolve entities from the service where it is extended, the field provided as an argument inside the @key directive should be of ID type or have the @id directive on it.
 
 For example -
 
