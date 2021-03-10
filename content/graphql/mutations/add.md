@@ -31,7 +31,7 @@ type Post {
 Dgraph automatically generates input and return types in the schema for the add mutation, 
 as shown below:
 ```graphql
-addPost(input: [AddPostInput!]!, upsert: Boolean): AddPostPayload
+addPost(input: [AddPostInput!]!): AddPostPayload
 
 input AddPostInput {
 	title: String!
