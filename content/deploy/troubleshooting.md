@@ -1,6 +1,6 @@
 +++
 title = "Troubleshooting"
-weight = 20
+weight = 21
 [menu.main]
     parent = "deploy"
 +++
