@@ -10,12 +10,9 @@ weight = 3
 For a single server setup, recommended for new users, please see [Get Started]({{< relref "get-started/index.md" >}}) page.
 {{% /notice %}}
 
-The full set of dgraph's configuration options (along with brief descriptions)
-can be viewed by invoking `dgraph` with the `--help` flag. For example, to see
-the options available for `dgraph alpha`, run `dgraph alpha --help`.
+The list of the available subcommands can be viewed by invoking `dgraph --help`.  The full set of configuration options for the subcommand can be viewed by invoking `dgraph <subcommand> --help`, such as `dgraph zero --help`.
 
-The options can be configured in multiple ways (from highest precedence to
-lowest precedence):
+The options can be configured in multiple ways (from highest precedence to lowest precedence):
 
 - Using command line flags (as described in the help output).
 - Using environment variables.
@@ -30,22 +27,22 @@ could be set using environment vars or flags.
 
 ## Command line flags
 
-Dgraph will have global flags that apply to all commands and commands specific to a subcommand. Below is an example of using command line flags with `dgraph alpha`.
+Dgraph will have *global flags* that apply to all subcommands and flags specific to a subcommand. Below is an example of using command line flags with `dgraph alpha`.
 
 ```bash
 dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
-  --badger.compression zstd:1 \
-  --block_rate 10 \
-  --jaeger.collector=http://jaeger:14268 \
-  --tls_cacert /dgraph/tls/node.crt \
-  --tls_cert /dgraph/tls/client.dgraphuser.crt \
-  --tls_client_auth REQUIREANDVERIFY \
+  --badger.compression "zstd:1" \
+  --block_rate "10" \
+  --jaeger.collector "http://jaeger:14268" \
+  --tls_cacert "/dgraph/tls/node.crt" \
+  --tls_cert "/dgraph/tls/client.dgraphuser.crt" \
+  --tls_client_auth "REQUIREANDVERIFY" \
   --tls_internal_port_enabled \
-  --tls_key /dgraph/tls/client.dgraphuser.key \
-  --tls_node_cert /dgraph/tls/node.crt \
-  --tls_node_key /dgraph/tls/node.key \
+  --tls_key "/dgraph/tls/client.dgraphuser.key" \
+  --tls_node_cert "/dgraph/tls/node.crt" \
+  --tls_node_key "/dgraph/tls/node.key" \
   --tls_use_system_ca \
-  --whitelist 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+  --whitelist "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
 ## Environment variables
@@ -63,28 +60,25 @@ For command line flags with the dot `.` notation, you can use underscore `_` in 
 Below is an example of environment variables for `dgraph alpha`:
 
 ```bash
-DGRAPH_ALPHA_BADGER_COMPRESSION=zstd:1
-DGRAPH_ALPHA_BLOCK_RATE=10
-DGRAPH_ALPHA_CLIENT_AUTH=VERIFYIFGIVEN
-DGRAPH_ALPHA_JAEGER_COLLECTOR=http://jaeger:14268
-DGRAPH_ALPHA_TLS_CACERT=/dgraph/tls/ca.crt
-DGRAPH_ALPHA_TLS_CERT=/dgraph/tls/client.dgraphuser.crt
-DGRAPH_ALPHA_TLS_INTERNAL_PORT_ENABLED=true
-DGRAPH_ALPHA_TLS_KEY=/dgraph/tls/client.dgraphuser.key
-DGRAPH_ALPHA_TLS_NODE_CERT=/dgraph/tls/node.crt
-DGRAPH_ALPHA_TLS_NODE_KEY=/dgraph/tls/node.key
-DGRAPH_ALPHA_TLS_USE_SYSTEM_CA=true
-DGRAPH_ALPHA_WHITELIST=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+DGRAPH_ALPHA_BADGER_COMPRESSION="zstd:1"
+DGRAPH_ALPHA_BLOCK_RATE="10"
+DGRAPH_ALPHA_CLIENT_AUTH="VERIFYIFGIVEN"
+DGRAPH_ALPHA_JAEGER_COLLECTOR="http://jaeger:14268"
+DGRAPH_ALPHA_TLS_CACERT="/dgraph/tls/ca.crt"
+DGRAPH_ALPHA_TLS_CERT="/dgraph/tls/client.dgraphuser.crt"
+DGRAPH_ALPHA_TLS_INTERNAL_PORT_ENABLED="true"
+DGRAPH_ALPHA_TLS_KEY="/dgraph/tls/client.dgraphuser.key"
+DGRAPH_ALPHA_TLS_NODE_CERT="/dgraph/tls/node.crt"
+DGRAPH_ALPHA_TLS_NODE_KEY="/dgraph/tls/node.key"
+DGRAPH_ALPHA_TLS_USE_SYSTEM_CA="true"
+DGRAPH_ALPHA_WHITELIST="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
 ## Configuration file
 
-A configuration file can be specified using the `--config` flag, or an
-environment variable, e.g. `dgraph alpha --config my_config.json` or
-`DGRAPH_ALPHA_CONFIG=my_config.json dgraph alpha`.
+A configuration file can be specified using the `--config` flag, or an environment variable, e.g. `dgraph alpha --config my_config.json` or `DGRAPH_ALPHA_CONFIG=my_config.json dgraph alpha`.
 
-The config file structure is just simple key/value pairs (mirroring the flag
-names).
+The config file structure is just simple key/value pairs (mirroring the flag names).
 
 Configuration file formats supported are [JSON](https://www.json.org/json-en.html), [TOML](https://toml.io/en/), [YAML](https://yaml.org/), [HCL](https://github.com/hashicorp/hcl), and [Java
 properties](https://en.wikipedia.org/wiki/.properties) (detected via file extension). The file extensions are `.json`, `.toml`,
@@ -169,7 +163,7 @@ whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
 Example HCL config file (`config.hcl`):
 
 {{% notice "note" %}}
-Though that HCL supports hierarchical key to hash, this currently does not work.
+Though that HCL language itself supports hierarchical key to hash, this currently does not work.  Instead you will have to use the full flag name with the dot `.` included.
 {{% /notice %}}
 
 ```hcl
