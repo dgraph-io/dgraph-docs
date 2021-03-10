@@ -41,6 +41,17 @@ client_stub = pydgraph.DgraphClientStub('localhost:9080')
 client = pydgraph.DgraphClient(client_stub)
 ```
 
+### Creating a Client for Slash GraphQL Endpoint
+
+If you want to connect to Dgraph running on your [Slash GraphQL](https://slash.dgraph.io) instance, then all you need is the URL of your Slash GraphQL endpoint and the API key. You can get a client using them as follows:
+
+```python
+import pydgraph
+
+client_stub = pydgraph.DgraphClientStub.from_slash_endpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
+client = pydgraph.DgraphClient(client_stub)
+```
+
 ### Altering the Database
 
 To set the schema, create an `Operation` object, set the schema and pass it to

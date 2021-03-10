@@ -25,8 +25,8 @@ More details on the supported versions can be found at [this link](https://githu
 
 ## Create the client
 
-To create a client, dial a connection to Dgraph's external gRPC port (typically
-9080). The following code snippet shows just one connection. You can connect to multiple Dgraph Alphas to distribute the workload evenly.
+To create a client, dial a connection to Dgraph's external gRPC port (typically `9080`).
+The following code snippet shows just one connection. You can connect to multiple Dgraph Alphas to distribute the workload evenly.
 
 ```go
 func newClient() *dgo.Dgraph {
@@ -63,6 +63,20 @@ func newClient() *dgo.Dgraph {
 	)
 }
 
+```
+
+### Creating a Client for Slash GraphQL Endpoint
+
+If you want to connect to Dgraph running on your [Slash GraphQL](https://slash.dgraph.io) instance, then all you need is the URL of your Slash GraphQL endpoint and the API key. You can get a client using them as follows:
+
+```go
+// This example uses dgo
+conn, err := dgo.DialSlashEndpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
+if err != nil {
+  log.Fatal(err)
+}
+defer conn.Close()
+dgraphClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
 ```
 
 ## Alter the database

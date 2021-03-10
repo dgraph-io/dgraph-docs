@@ -62,6 +62,20 @@ const dgraphClient = new dgraph.DgraphClient(clientStub);
 
 To facilitate debugging, [debug mode](#debug-mode) can be enabled for a client.
 
+### Creating a Client for Slash GraphQL Endpoint
+
+If you want to connect to Dgraph running on your [Slash GraphQL](https://slash.dgraph.io) instance, then all you need is the URL of your Slash GraphQL endpoint and the API key. You can get a client using them as follows:
+
+```js
+const dgraph = require("dgraph-js");
+
+const clientStub = dgraph.clientStubFromSlashGraphQLEndpoint(
+  "https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql",
+  "<api-key>"
+);
+const dgraphClient = new dgraph.DgraphClient(clientStub);
+```
+
 ### Altering the Database
 
 To set the schema, create an `Operation` object, set the schema and pass it to
