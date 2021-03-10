@@ -39,18 +39,17 @@ In addition to command line flags `--acl_secret_file` and `--whitelist`, you can
 Alternatively, you can use a Vault server for ACL secret keys. To use Vault, there are some pre-requisites:
 1. Vault Server URL of the form `http://fqdn[ip]:port`. This will be used for the `addr` option.
 2. Vault Server must be configured with an AppRole auth. A `secret-id` and `role-id` must be generated and copied over to local files. These will be required for the `secret-id-file` and `role-id-file` options.
-3. Vault Server must contain a K/V for the encryption key. This key will be needed for the `enc-field` option, to set the encryption key that Dgraph will use. This key must be 16, 32 or 64 bytes.
-4. Vault Server must contain a K/V for the ACL key. This key will be needed for the `acl-field` option, to set the ACL secret key that Dgraph will use. This key must have at least 256-bits (32 ASCII characters).
+3. Vault Server must contain a K/V for the ACL key. This key will be needed for the `acl-field` option, to set the ACL secret key that Dgraph will use. This key must have at least 256-bits (32 ASCII characters).
 
 {{% notice "tip" %}}
-For `enc-field` and `acl-field`, the key format can be defined using `enc-format` and `acl-format`.
+The key format for the `acl-field` option can be defined using `acl-format`.
 Supported values are `raw` and `base64`.
 {{% /notice %}}
 
 Here is an example of using Dgraph with a Vault server that holds the secret key:
 
 ```bash
-dgraph alpha --vault "addr=http://localhost:8200;path=secret/data/dgraph;role-id-file=path/to/role-file;secret-id-file=/path/to/secret-file;acl-field=my_acl;enc-field=my_enc;acl-format=base64;enc-format=base64;"
+dgraph alpha --vault "addr=http://localhost:8200;path=secret/data/dgraph;role-id-file=path/to/role-file;secret-id-file=/path/to/secret-file;acl-field=my_acl;acl-format=base64;"
 ```
 
 If multiple Alpha nodes are part of the cluster, you will need to pass the `--vault` option to
