@@ -86,7 +86,7 @@ if err := dc.LoginIntoNamespace(ctx, "groot", "password", 123); err != nil {
 ```
 
 In the example above, the client logs into namespace `123` using username `groot` and password `password`.
-This client will be able to access all the data which is accessible to the `groot` user in the namespace `123`.
+Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
 
 ## Alter the database
 
