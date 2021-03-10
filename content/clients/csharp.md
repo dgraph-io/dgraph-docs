@@ -30,6 +30,13 @@ Make a new client by passing in one or more GRPC channels pointing to alphas.
 var client = new DgraphClient(new Channel("127.0.0.1:9080", ChannelCredentials.Insecure));
 ```
 
+### Creating a Client for Slash GraphQL Endpoint
+
+If you want to connect to Dgraph running on your [Slash GraphQL](https://slash.dgraph.io) instance, then all you need is the URL of your Slash GraphQL endpoint and the API key. You can get a client using them as follows:
+
+```c#
+var client = new DgraphClient(SlashChannel.Create("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "api-key-here"));
+```
 
 ### Altering the Database
 
