@@ -64,7 +64,7 @@ DGRAPH_ALPHA_SECURITY="whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 
 A configuration file can be specified using the `--config` flag, or an environment variable, such as `dgraph alpha --config my_config.json` or `DGRAPH_ALPHA_CONFIG=my_config.json dgraph alpha`.
 
-Dgraph supports configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/)).  In these formats, the superflag will be used as a key that points to a hash.  The hash itself consists of key:value pairs corresponds to the superflag list of key=value pairs.
+Dgraph supports configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/)).  In these formats, the superflag will be used as a key that points to a hash.  The hash itself consists of `key: value` pairs corresponds to the superflag list of `option=value` pairs.
 
 {{% notice "note" %}}
 The formats [`.toml`](https://toml.io/en/), [`.hcl`](https://github.com/hashicorp/hcl), and [`.properties`](https://en.wikipedia.org/wiki/.properties) are not supported in release `v21.03.0`.
@@ -96,7 +96,7 @@ Example JSON config file (`config.json`) using kebab-case:
 }
 ```
 
-Example JSON config file (`config.json`) using snake-case:
+Example JSON config file (`config.json`) using snake_case:
 
 ```json
 {
@@ -118,8 +118,6 @@ Example JSON config file (`config.json`) using snake-case:
 
 
 ### YAML config file
-
-For YAML
 
 Example YAML config file (`config.yml`) using kebab-case:
 
