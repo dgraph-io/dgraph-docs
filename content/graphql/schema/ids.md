@@ -55,7 +55,7 @@ Identities created with `@id` are reusable. If you delete an existing user, you 
 
 Fields with the `@id` directive must have the type `String!`.
 
-As with `ID` types, Dgraph generates queries and mutations so you can query, update and delete data in nodes, using the fields with the `@id` directive as references.
+As with `ID` types, Dgraph generates queries and mutations so you can query, update, and delete data in nodes, using the fields with the `@id` directive as references.
 
 It's possible to use the `@id` directive on more than one field in a type. For example, you can define a type like the following:
 
@@ -68,7 +68,7 @@ type Book {
 }
 ```
 
-You can then use multiple `@id` fields in arguments to `get` queries, and while searching, these fields will be combined with the `AND` connective, resulting in a Boolean `AND` operation. For example, for the above schema, you can send a `getBook` query like the following:
+You can then use multiple `@id` fields in arguments to `get` queries, and while searching, these fields will be combined with the `AND` operator, resulting in a Boolean `AND` operation. For example, for the above schema, you can send a `getBook` query like the following:
 
 ```graphql
 query {
@@ -100,7 +100,7 @@ type User {
 With this schema, Dgraph requires a unique `username` when creating a new user. This schema provides the benefits of both of the previous examples above. Your app can then use the `getUser(...) { ... }` query to provide either the Dgraph-generated `id` or the externally-generated `username`.
 
 {{% notice "note" %}}
-If in a type, there are multiple `@id` fields, then in arguments to a `get` query these fields will be optional, and if in a type there's only one field defined with either `@id` or `ID`, then that will be a required field in the arguments of a `get` query. 
+If in a type there are multiple `@id` fields, then in a `get` query these arguments will be optional. If in a type there's only one field defined with either `@id` or `ID`, then that will be a required field in the `get` query's arguments.
 {{% /notice %}}
 <!--
 ### More to come
