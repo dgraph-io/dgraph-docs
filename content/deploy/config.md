@@ -53,11 +53,11 @@ could use `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
 Below is an example of environment variables for `dgraph alpha`:
 
 ```bash
-DGRAPH_ALPHA_BADGER=compression=zstd:1
-DGRAPH_ALPHA_BLOCK_RATE=10
-DGRAPH_ALPHA_TRACE=jaeger=http://jaeger:14268
-DGRAPH_ALPHA_TLS=ca-cert=/dgraph/tls/ca.crt;client-auth-type=REQUIREANDVERIFY;server-cert=/dgraph/tls/node.crt;server-key=/dgraph/tls/node.key;use-system-ca=true;internal-port=true;client-cert=/dgraph/tls/client.dgraphuser.crt;client-key=/dgraph/tls/client.dgraphuser.key
-DGRAPH_ALPHA_SECURITY=whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+DGRAPH_ALPHA_BADGER="compression=zstd:1"
+DGRAPH_ALPHA_BLOCK_RATE="10"
+DGRAPH_ALPHA_TRACE="jaeger=http://jaeger:14268"
+DGRAPH_ALPHA_TLS="ca-cert=/dgraph/tls/ca.crt;client-auth-type=REQUIREANDVERIFY;server-cert=/dgraph/tls/node.crt;server-key=/dgraph/tls/node.key;use-system-ca=true;internal-port=true;client-cert=/dgraph/tls/client.dgraphuser.crt;client-key=/dgraph/tls/client.dgraphuser.key"
+DGRAPH_ALPHA_SECURITY="whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
 ## Configuration file
@@ -80,25 +80,19 @@ Example JSON config file (`config.json`) using kebab-case:
 
 ```json
 {
-   "badger": {
-      "compression": "zstd:1"
-   },
-   "trace": {
-      "jaeger": "http://jaeger:14268"
-   },
-   "security": {
-      "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
-   },
-   "tls": {
-      "ca-cert": "/dgraph/tls/ca.crt",
-      "client-auth-type": "REQUIREANDVERIFY",
-      "server-cert": "/dgraph/tls/node.crt",
-      "server-key": "/dgraph/tls/node.key",
-      "use-system-ca": true,
-      "internal-port": true,
-      "client-cert": "/dgraph/tls/client.dgraphuser.crt",
-      "client-key": "/dgraph/tls/client.dgraphuser.key"
-   }
+  "badger": { "compression": "zstd:1" },
+  "trace": { "jaeger": "http://jaeger:14268" },
+  "security": { "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" },
+  "tls": {
+    "ca-cert": "/dgraph/tls/ca.crt",
+    "client-auth-type": "REQUIREANDVERIFY",
+    "server-cert": "/dgraph/tls/node.crt",
+    "server-key": "/dgraph/tls/node.key",
+    "use-system-ca": true,
+    "internal-port": true,
+    "client-cert": "/dgraph/tls/client.dgraphuser.crt",
+    "client-key": "/dgraph/tls/client.dgraphuser.key"
+  }
 }
 ```
 
@@ -106,25 +100,19 @@ Example JSON config file (`config.json`) using snake-case:
 
 ```json
 {
-   "badger": {
-      "compression": "zstd:1"
-   },
-   "trace": {
-      "jaeger": "http://jaeger:14268"
-   },
-   "security": {
-      "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
-   },
-   "tls": {
-      "ca_cert": "/dgraph/tls/ca.crt",
-      "client_auth_type": "REQUIREANDVERIFY",
-      "server_cert": "/dgraph/tls/node.crt",
-      "server_key": "/dgraph/tls/node.key",
-      "use_system_ca": true,
-      "internal_port": true,
-      "client_cert": "/dgraph/tls/client.dgraphuser.crt",
-      "client_key": "/dgraph/tls/client.dgraphuser.key"
-   }
+  "badger": { "compression": "zstd:1" },
+  "trace": { "jaeger": "http://jaeger:14268" },
+  "security": { "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" },
+  "tls": {
+    "ca_cert": "/dgraph/tls/ca.crt",
+    "client_auth_type": "REQUIREANDVERIFY",
+    "server_cert": "/dgraph/tls/node.crt",
+    "server_key": "/dgraph/tls/node.key",
+    "use_system_ca": true,
+    "internal_port": true,
+    "client_cert": "/dgraph/tls/client.dgraphuser.crt",
+    "client_key": "/dgraph/tls/client.dgraphuser.key"
+  }
 }
 ```
 
