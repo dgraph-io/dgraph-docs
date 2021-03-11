@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Learner Nodes"
-weight = 3
+weight = 7
 [menu.main]
     parent = "enterprise-features"
 +++
