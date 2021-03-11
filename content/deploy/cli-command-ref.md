@@ -7,35 +7,39 @@ weight = 20
 
 The Dgraph command-line interface (CLI) is used to deploy and manage Dgraph. You
 use it in self-managed deployment scenarios such as running Dgraph on on-premises
-servers hosted on your physical infrastructure, or running Dgraph on your AWS,
-GCP, or Azure cloud infrastructure. 
+servers hosted on your physical infrastructure, or running Dgraph in the cloud
+on your AWS, GCP, or Azure infrastructure. 
 
-The Dgraph CLI consists of a variety of commands (such as `alpha` or `upgrade`),
-some of which are grouped together (such as `acl add` and `acl info`). You specify
-settings for these commands using flags. Some flags have been deprecated and replaced
-in release 21.03.
+Dgraph has a root command used throughout the Dgraph CLI: `dgraph`. This root
+command is supported by multiple commands (such as `alpha` or `update`), some of
+which also contain commands. For example, the `acl` command requires you to
+specify one of the following commands: `add`, `del`, `info` or `mod`. You specify
+settings for commands using flags. 
 
-## Dgraph CLI flag updates in 21.03
+## Dgraph CLI flag updates in release 21.03
 
-In previous Dgraph releases, multiple related flags are used in a command,
-causing some commands to be very long. Starting in release 21.03, fewer flags are 
-used for the most complex commands (`alpha`, `backup`, `bulk`,`debug`, `live` and
+Some flags have been deprecated and replaced in release 21.03. In previous Dgraph
+releases, multiple related flags are used in a command, causing some commands to
+be very long. Starting in release 21.03, fewer flags are  used for the most
+complex commands (`alpha`, `backup`, `bulk`,`debug`, `live` and
 `zero`). Instead, many of these flags contain one or more options that let you 
 define multiple settings in a semicolon-delimited list that's encapsulated in 
 double-quotes. So, the general syntax for flags that contain options is as follows: 
 
-`--<flagname> "option-a=value; option-b=value"`
+```ssh
+--<flagname> "option-a=value; option-b=value"`
+```
 
 For example, the following command that is valid in release 20.11 is no longer
 valid starting in release 21.03:
 
-```bash
+```ssh
 dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
 ```
 
 Instead, you would express this command as follows starting in release 21.03:
 
-```bash
+```ssh
 dgraph alpha --ludicrous "enabled=true; concurrency=16;"
 ```
 
