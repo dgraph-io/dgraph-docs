@@ -66,12 +66,12 @@ Here is an example that starts a Dgraph Zero node and a Dgraph Alpha node with t
 echo '12345678901234567890123456789012' > hmac_secret_file
 
 ## Start Dgraph Zero in different terminal tab or window
-dgraph zero --my=localhost:5080 --replicas 1 --idx 1
+dgraph zero --my=localhost:5080 --replicas 1 --raft idx=1
 
 ## Start Dgraph Alpha in different terminal tab or window
 dgraph alpha --my=localhost:7080 --zero=localhost:5080 \
-  --acl_secret_file ./hmac_secret_file \
-  --whitelist "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+  --acl secret-file="./hmac_secret_file" \
+  --security whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
 ### Example using Docker Compose
