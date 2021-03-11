@@ -70,7 +70,7 @@ The formats [`.toml`](https://toml.io/en/), [`.hcl`](https://github.com/hashicor
 {{% /notice %}}
 
 {{% notice "tip" %}}
-When representing the superflag options in the hash, you can use either *kebab-case* or *snake_case* for names of the keys.
+When representing the compound flag options in the hash, you can use either *kebab-case* or *snake_case* for names of the keys.
 {{% /notice %}}
 
 ### JSON config file
