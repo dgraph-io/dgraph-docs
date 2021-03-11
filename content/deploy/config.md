@@ -44,11 +44,11 @@ dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
 
 ## Environment variables
 
-The environment variable names mirror the flag names as seen in the `--help`
-output. They are the concatenation of `DGRAPH`, the subcommand invoked
-(`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in
-uppercase). For example, instead of using `dgraph alpha --block_rate 10`, you
+The environment variable names mirror the flag names as seen in the `--help` output. They are the concatenation of `DGRAPH`, the subcommand invoked
+(`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in uppercase). For example, instead of using `dgraph alpha --block_rate 10`, you
 could use `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
+
+For an environment variable, the `--<flagname> option-a=value;option-b=value` can be represented as `<FLAGNAME>="option-a=value;option-b=value"`.
 
 Below is an example of environment variables for `dgraph alpha`:
 
@@ -71,12 +71,23 @@ The formats [`.toml`](https://toml.io/en/), [`.hcl`](https://github.com/hashicor
 {{% /notice %}}
 
 {{% notice "tip" %}}
-For the super flags you can use either kebab-case or snake_case for the key values.
+When representing the superflag options in the hash, you can use either *kebab-case* or *snake_case* for names of the keys.
 {{% /notice %}}
 
 ### JSON config file
 
-Example JSON config file (`config.json`) using kebab-case:
+For JSON, the `--<flagname> option-a=value;option-b=value` can be represented as:
+
+```json
+{
+  "<flagname>": {
+    "option-a": "value",
+    "opton-b": "value"
+  }
+}
+```
+
+Example JSON config file (`config.json`) using *kebab-case*:
 
 ```json
 {
@@ -96,7 +107,7 @@ Example JSON config file (`config.json`) using kebab-case:
 }
 ```
 
-Example JSON config file (`config.json`) using snake_case:
+Example JSON config file (`config.json`) using *snake_case*:
 
 ```json
 {
@@ -119,7 +130,14 @@ Example JSON config file (`config.json`) using snake_case:
 
 ### YAML config file
 
-Example YAML config file (`config.yml`) using kebab-case:
+For YAML, the `--<flagname> option-a=value;option-b=value` can be represented as:
+```yaml
+<flagname>:
+ option-a: value
+ opton-b: value
+```
+
+Example YAML config file (`config.yml`) using *kebab-case*:
 
 ```yaml
 badger:
@@ -139,7 +157,7 @@ tls:
   client-key: /dgraph/tls/client.dgraphuser.key
 ```
 
-Example YAML config file (`config.yml`) using snake_case:
+Example YAML config file (`config.yml`) using *snake_case*:
 
 ```yaml
 badger:
