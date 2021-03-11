@@ -29,9 +29,9 @@ could be set using environment vars or flags.
 
 Dgraph has *global flags* that apply to all subcommands and flags specific to a subcommand.
 
-Starting with release `v21.03.0` comes the introduction of superflags.  Flags of a similar category have been consolidated into a single superflag followed by string that is semicolon-delimited list of option value pairs.  So the general syntax for flags will be: `--<flagname> option-a=value;option-b=value`
+Some flags have been deprecated and replaced in release `v21.03`, and flags for several commands (`alpha`, `backup`, `bulk`,`debug`, `live`, and `zero`) now have compound flags. Compound flags contain one or more options that let you define multiple settings in a semicolon-delimited list. The general syntax for compound flags is as follows: `--<flagname> option-a=value-a; option-b=value-b`.
 
-Below is an example of using command line flags with `dgraph alpha`.
+The following example shows how to use compound flags when running the `dgraph alpha` command.
 
 ```bash
 dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
@@ -44,9 +44,7 @@ dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
 
 ## Environment variables
 
-The environment variable names mirror the flag names as seen in the `--help` output. They are the concatenation of `DGRAPH`, the subcommand invoked
-(`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in uppercase). For example, instead of using `dgraph alpha --block_rate 10`, you
-could use `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
+The environment variable names for Dgraph mirror the flag names shown in the Dgraph CLI `--help` output. These environment variable names are formed the concatenation of `DGRAPH`, the subcommand invoked (`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in uppercase). For example, instead running a command like `dgraph alpha --block_rate 10`, you could set the following environment variable: `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
 
 For an environment variable, the `--<flagname> option-a=value;option-b=value` can be represented as `<FLAGNAME>="option-a=value;option-b=value"`.
 
@@ -64,7 +62,8 @@ DGRAPH_ALPHA_SECURITY="whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 
 A configuration file can be specified using the `--config` flag, or an environment variable, such as `dgraph alpha --config my_config.json` or `DGRAPH_ALPHA_CONFIG=my_config.json dgraph alpha`.
 
-Dgraph supports configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/)).  In these formats, the superflag will be used as a key that points to a hash.  The hash itself consists of `key: value` pairs corresponds to the superflag list of `option=value` pairs.
+Dgraph supports configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/)).  In these files, the name of the compound flag is used as a key that points to a hash. The hash consists of `key: value` pairs that correspond to the compound flag's list of `option=value` pairs.
+
 
 {{% notice "note" %}}
 The formats [`.toml`](https://toml.io/en/), [`.hcl`](https://github.com/hashicorp/hcl), and [`.properties`](https://en.wikipedia.org/wiki/.properties) are not supported in release `v21.03.0`.
@@ -76,7 +75,7 @@ When representing the superflag options in the hash, you can use either *kebab-c
 
 ### JSON config file
 
-For JSON, the `--<flagname> option-a=value;option-b=value` can be represented as:
+In JSON, the `--<flagname> option-a=value;option-b=value` can be represented as:
 
 ```json
 {
@@ -87,7 +86,7 @@ For JSON, the `--<flagname> option-a=value;option-b=value` can be represented as
 }
 ```
 
-Example JSON config file (`config.json`) using *kebab-case*:
+The following example JSON config file (`config.json`) using *kebab-case*:
 
 ```json
 {
@@ -107,7 +106,7 @@ Example JSON config file (`config.json`) using *kebab-case*:
 }
 ```
 
-Example JSON config file (`config.json`) using *snake_case*:
+The following example JSON config file (`config.json`) using *snake_case*:
 
 ```json
 {
@@ -130,14 +129,14 @@ Example JSON config file (`config.json`) using *snake_case*:
 
 ### YAML config file
 
-For YAML, the `--<flagname> option-a=value;option-b=value` can be represented as:
+In YAML, the `--<flagname> option-a=value;option-b=value` can be represented as:
 ```yaml
 <flagname>:
  option-a: value
  opton-b: value
 ```
 
-Example YAML config file (`config.yml`) using *kebab-case*:
+The following example YAML config file (`config.yml`) using *kebab-case*:
 
 ```yaml
 badger:
@@ -157,7 +156,7 @@ tls:
   client-key: /dgraph/tls/client.dgraphuser.key
 ```
 
-Example YAML config file (`config.yml`) using *snake_case*:
+The following example YAML config file (`config.yml`) using *snake_case*:
 
 ```yaml
 badger:
