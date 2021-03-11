@@ -7,7 +7,7 @@ weight = 4
     identifier = "graphql-delete"
 +++
 
-Delete Mutations allows you to delete objects of a particular type.
+Delete Mutations allow you to delete objects of a particular type.
 
 We use the following schema to demonstrate some examples.
 
@@ -28,8 +28,8 @@ type Post {
 }
 ```
 
-Dgraph automatically generates input and return type in the schema for the delete mutation.
-Delete Mutations takes filter as an input to select specific objects and returns the state of the objects before deletion.
+Dgraph automatically generates input and return types in the schema for the `delete` mutation.
+Delete mutations take `filter` as an input to select specific objects and returns the state of the objects before deletion.
 ```graphql
 deleteAuthor(filter: AuthorFilter!): DeleteAuthorPayload
 
