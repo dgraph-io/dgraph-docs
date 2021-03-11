@@ -14,7 +14,6 @@ You can see the list of available subcommands with `dgraph --help`.  You can vie
 
 You can configure options in multiple ways, which are listed below from highest precedence to lowest precedence:
 
-
 - Using command line flags (as described in the help output).
 - Using environment variables.
 - Using a configuration file.
@@ -28,173 +27,151 @@ could be set using environment vars or flags.
 
 ## Command line flags
 
-Dgraph has *global flags* that apply to all subcommands and flags specific to a subcommand. Below is an example of using command line flags with `dgraph alpha`.
+Dgraph has *global flags* that apply to all subcommands and flags specific to a subcommand.
+
+Some flags have been deprecated and replaced in release `v21.03`, and flags for several commands (`alpha`, `backup`, `bulk`,`debug`, `live`, and `zero`) now have compound flags. Compound flags contain one or more options that let you define multiple settings in a semicolon-delimited list. The general syntax for compound flags is as follows: `--<flagname> option-a=value-a; option-b=value-b`.
+
+The following example shows how to use compound flags when running the `dgraph alpha` command.
 
 ```bash
 dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
-  --badger.compression "zstd:1" \
+  --badger "compression=zstd:1" \
   --block_rate "10" \
-  --jaeger.collector "http://jaeger:14268" \
-  --tls_cacert "/dgraph/tls/node.crt" \
-  --tls_cert "/dgraph/tls/client.dgraphuser.crt" \
-  --tls_client_auth "REQUIREANDVERIFY" \
-  --tls_internal_port_enabled \
-  --tls_key "/dgraph/tls/client.dgraphuser.key" \
-  --tls_node_cert "/dgraph/tls/node.crt" \
-  --tls_node_key "/dgraph/tls/node.key" \
-  --tls_use_system_ca \
-  --whitelist "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+  --trace "jaeger=http://jaeger:14268" \
+  --tls "ca-cert=/dgraph/tls/ca.crt;client-auth-type=REQUIREANDVERIFY;server-cert=/dgraph/tls/node.crt;server-key=/dgraph/tls/node.key;use-system-ca=true;internal-port=true;client-cert=/dgraph/tls/client.dgraphuser.crt;client-key=/dgraph/tls/client.dgraphuser.key"
+  --security "whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
 ## Environment variables
 
-The environment variable names mirror the flag names as seen in the `--help`
-output. They are the concatenation of `DGRAPH`, the subcommand invoked
-(`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in
-uppercase). For example, instead of using `dgraph alpha --block_rate 10`, you
-could use `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
+The environment variable names for Dgraph mirror the flag names shown in the Dgraph CLI `--help` output. These environment variable names are formed the concatenation of `DGRAPH`, the subcommand invoked (`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in uppercase). For example, instead running a command like `dgraph alpha --block_rate 10`, you could set the following environment variable: `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
 
-{{% notice "tip" %}}
-For command line flags with the dot `.` notation, you can use underscore `_` in the environment variable name.  Thus `dgraph zero --jaeger.collector` becomes `DGRAPH_ZERO_JAEGER_COLLECTOR`.
-{{% /notice %}}
+For an environment variable, the `--<flagname> option-a=value;option-b=value` can be represented as `<FLAGNAME>="option-a=value;option-b=value"`.
 
 Below is an example of environment variables for `dgraph alpha`:
 
 ```bash
-DGRAPH_ALPHA_BADGER_COMPRESSION="zstd:1"
+DGRAPH_ALPHA_BADGER="compression=zstd:1"
 DGRAPH_ALPHA_BLOCK_RATE="10"
-DGRAPH_ALPHA_CLIENT_AUTH="VERIFYIFGIVEN"
-DGRAPH_ALPHA_JAEGER_COLLECTOR="http://jaeger:14268"
-DGRAPH_ALPHA_TLS_CACERT="/dgraph/tls/ca.crt"
-DGRAPH_ALPHA_TLS_CERT="/dgraph/tls/client.dgraphuser.crt"
-DGRAPH_ALPHA_TLS_INTERNAL_PORT_ENABLED="true"
-DGRAPH_ALPHA_TLS_KEY="/dgraph/tls/client.dgraphuser.key"
-DGRAPH_ALPHA_TLS_NODE_CERT="/dgraph/tls/node.crt"
-DGRAPH_ALPHA_TLS_NODE_KEY="/dgraph/tls/node.key"
-DGRAPH_ALPHA_TLS_USE_SYSTEM_CA="true"
-DGRAPH_ALPHA_WHITELIST="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+DGRAPH_ALPHA_TRACE="jaeger=http://jaeger:14268"
+DGRAPH_ALPHA_TLS="ca-cert=/dgraph/tls/ca.crt;client-auth-type=REQUIREANDVERIFY;server-cert=/dgraph/tls/node.crt;server-key=/dgraph/tls/node.key;use-system-ca=true;internal-port=true;client-cert=/dgraph/tls/client.dgraphuser.crt;client-key=/dgraph/tls/client.dgraphuser.key"
+DGRAPH_ALPHA_SECURITY="whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
 ## Configuration file
 
 A configuration file can be specified using the `--config` flag, or an environment variable, such as `dgraph alpha --config my_config.json` or `DGRAPH_ALPHA_CONFIG=my_config.json dgraph alpha`.
 
-The config consists of a set of key/value pairs, where the keys mirror the flag names.
+Dgraph supports configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/)).  In these files, the name of the compound flag is used as a key that points to a hash. The hash consists of `key: value` pairs that correspond to the compound flag's list of `option=value` pairs.
 
-Dgraph supports several configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.toml`](https://toml.io/en/), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/), [`.hcl`](https://github.com/hashicorp/hcl), and [`.properties`](https://en.wikipedia.org/wiki/.properties)).
+
+{{% notice "note" %}}
+The formats [`.toml`](https://toml.io/en/), [`.hcl`](https://github.com/hashicorp/hcl), and [`.properties`](https://en.wikipedia.org/wiki/.properties) are not supported in release `v21.03.0`.
+{{% /notice %}}
 
 {{% notice "tip" %}}
-For command-line flags with the dot (`.`) notation, you can use the full name as the key (such as `jaeger.collector`), or represent them hierarchically where the key (`jaeger`) points to a hash. For flags in snake case or using underscore (`_`) notation (such as `tls_cacert`), you cannot represent them hierarchically.  See language-specific examples below for further information.
+When representing the compound flag options in the hash, you can use either *kebab-case* or *snake_case* for names of the keys.
 {{% /notice %}}
 
 ### JSON config file
 
-Example JSON config file (`config.json`):
+In JSON, the `--<flagname> option-a=value;option-b=value` can be represented as:
 
 ```json
 {
-  "block_rate": 10,
-  "badger": {
-    "compression": "zstd:1",
-  },
-  "jaeger": {
-    "collector": "http://jaeger:14268",
-  },
-  "tls_cacert": "/dgraph/tls/node.crt",
-  "tls_cert": "/dgraph/tls/client.dgraphuser.crt",
-  "tls_client_auth": "REQUIREANDVERIFY",
-  "tls_internal_port_enabled": true,
-  "tls_key": "/dgraph/tls/client.dgraphuser.key",
-  "tls_node_cert": "/dgraph/tls/node.crt",
-  "tls_node_key": "/dgraph/tls/node.key",
-  "tls_use_system_ca": true,
-  "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+  "<flagname>": {
+    "option-a": "value",
+    "opton-b": "value"
+  }
 }
 ```
 
-### TOML config file
+The following example JSON config file (`config.json`) using *kebab-case*:
 
-
-Example TOML config file (`config.toml`):
-
-```toml
-block_rate = 10
-tls_cacert = '/dgraph/tls/node.crt'
-tls_cert = '/dgraph/tls/client.dgraphuser.crt'
-tls_client_auth = 'REQUIREANDVERIFY'
-tls_internal_port_enabled = true
-tls_key = '/dgraph/tls/client.dgraphuser.key'
-tls_node_cert = '/dgraph/tls/node.crt'
-tls_node_key = '/dgraph/tls/node.key'
-tls_use_system_ca = true
-whitelist = '10.0.0.0/8,172.0.0.0/8,192.168.0.0/16'
-
-[badger]
-compression = 'zstd:1'
-
-[jaeger]
-collector = 'http://jaeger:14268'
+```json
+{
+  "badger": { "compression": "zstd:1" },
+  "trace": { "jaeger": "http://jaeger:14268" },
+  "security": { "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" },
+  "tls": {
+    "ca-cert": "/dgraph/tls/ca.crt",
+    "client-auth-type": "REQUIREANDVERIFY",
+    "server-cert": "/dgraph/tls/node.crt",
+    "server-key": "/dgraph/tls/node.key",
+    "use-system-ca": true,
+    "internal-port": true,
+    "client-cert": "/dgraph/tls/client.dgraphuser.crt",
+    "client-key": "/dgraph/tls/client.dgraphuser.key"
+  }
+}
 ```
+
+The following example JSON config file (`config.json`) using *snake_case*:
+
+```json
+{
+  "badger": { "compression": "zstd:1" },
+  "trace": { "jaeger": "http://jaeger:14268" },
+  "security": { "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" },
+  "tls": {
+    "ca_cert": "/dgraph/tls/ca.crt",
+    "client_auth_type": "REQUIREANDVERIFY",
+    "server_cert": "/dgraph/tls/node.crt",
+    "server_key": "/dgraph/tls/node.key",
+    "use_system_ca": true,
+    "internal_port": true,
+    "client_cert": "/dgraph/tls/client.dgraphuser.crt",
+    "client_key": "/dgraph/tls/client.dgraphuser.key"
+  }
+}
+```
+
 
 ### YAML config file
 
-Example YAML config file (`config.yml`):
+In YAML, the `--<flagname> option-a=value;option-b=value` can be represented as:
+```yaml
+<flagname>:
+ option-a: value
+ opton-b: value
+```
+
+The following example YAML config file (`config.yml`) using *kebab-case*:
 
 ```yaml
 badger:
   compression: zstd:1
-block_rate: 10
-jaeger:
-  collector: http://jaeger:14268
-tls_cacert: /dgraph/tls/node.crt
-tls_cert: /dgraph/tls/client.dgraphuser.crt
-tls_client_auth: REQUIREANDVERIFY
-tls_internal_port_enabled: true
-tls_key: /dgraph/tls/client.dgraphuser.key
-tls_node_cert: /dgraph/tls/node.crt
-tls_node_key: /dgraph/tls/node.key
-tls_use_system_ca: true
-whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+trace:
+  jaeger: http://jaeger:14268
+security:
+  whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+tls:
+  ca-cert: /dgraph/tls/ca.crt
+  client-auth-type: REQUIREANDVERIFY
+  server-cert: /dgraph/tls/node.crt
+  server-key: /dgraph/tls/node.key
+  use-system-ca: true
+  internal-port: true
+  client-cert: /dgraph/tls/client.dgraphuser.crt
+  client-key: /dgraph/tls/client.dgraphuser.key
 ```
 
-### HCL config file
+The following example YAML config file (`config.yml`) using *snake_case*:
 
-Example HCL config file (`config.hcl`):
-
-{{% notice "note" %}}
-Though that HCL language itself supports hierarchical key to hash, this currently does not work.  Instead you will have to use the full flag name with the dot `.` included.
-{{% /notice %}}
-
-```hcl
-badger.compression        = "zstd:1"
-block_rate                = 10
-jaeger.collector          = "http://jaeger:14268"
-tls_cacert                = "/dgraph/tls/node.crt"
-tls_cert                  = "/dgraph/tls/client.dgraphuser.crt"
-tls_client_auth           = "REQUIREANDVERIFY"
-tls_internal_port_enabled = true
-tls_key                   = "/dgraph/tls/client.dgraphuser.key"
-tls_node_cert             = "/dgraph/tls/node.crt"
-tls_node_key              = "/dgraph/tls/node.key"
-tls_use_system_ca         = true
-whitelist                 = "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
-```
-
-### Java properties config file
-
-Example Java properties config file (`config.properties`):
-
-```properties
-badger.compression=zstd:1
-block_rate=10
-jaeger.collector=http://jaeger:14268
-tls_cacert=/dgraph/tls/node.crt
-tls_cert=/dgraph/tls/client.dgraphuser.crt
-tls_client_auth=REQUIREANDVERIFY
-tls_internal_port_enabled=true
-tls_key=/dgraph/tls/client.dgraphuser.key
-tls_node_cert=/dgraph/tls/node.crt
-tls_node_key=/dgraph/tls/node.key
-tls_use_system_ca=true
-whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+```yaml
+badger:
+  compression: zstd:1
+trace:
+  jaeger: http://jaeger:14268
+security:
+  whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+tls:
+  ca_cert: /dgraph/tls/ca.crt
+  client_auth_type: REQUIREANDVERIFY
+  server_cert: /dgraph/tls/node.crt
+  server_key: /dgraph/tls/node.key
+  use_system_ca: true
+  internal_port: true
+  client_cert: /dgraph/tls/client.dgraphuser.crt
+  client_key: /dgraph/tls/client.dgraphuser.key
 ```
