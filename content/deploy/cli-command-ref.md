@@ -10,19 +10,27 @@ use it in self-managed deployment scenarios; such as running Dgraph on on-premis
 servers hosted on your physical infrastructure, or running Dgraph in the cloud
 on your AWS, GCP, or Azure infrastructure. 
 
-Dgraph has a root command used throughout the Dgraph CLI: `dgraph`. This root
-command is supported by multiple commands (such as `alpha` or `update`), some of
-which also contain commands. For example, the `acl` command requires you to
-specify one of the following commands: `add`, `del`, `info` or `mod`. You specify
-settings for commands using flags. 
+Dgraph has a root command used throughout its CLI: `dgraph`. The `dgraph` command
+is supported by multiple subcommands (such as `alpha` or `update`), some of which
+are also supported by their own subcommands. For example, the `dgraph acl`
+command requires you to specify one of its subcommands: `add`, `del`, `info` or
+`mod`. As with other CLIs, you provide command options using flags like `--help`
+or `--telemetry`. 
+
+{{% notice "Tip" %}}
+The term *command* is used instead of *subcommand* throughout this document, 
+except when clarifying relationships in the CLI command hierarchy. The
+term *command* is also used for combinations of commands and their subcommands,
+such as `dgraph alpha debug`. 
+{{% /notice %}}
 
 ## Dgraph CLI flag updates in release 21.03
 
 Some flags are deprecated and replaced in release v21.03. In previous Dgraph
 releases, multiple related flags are used in a command, causing some commands to
-be very long. Starting in release v21.03, compound flags are  used for the most
-complex subcommands (`alpha`, `backup`, `bulk`,`debug`, `live` and
-`zero`). Compound flags contain one or more options that let you define multiple
+be very long. Starting in release v21.03, compound flags (or *superflags*) are
+used for the most complex commands: `alpha`, `backup`, `bulk`,`debug`, `live` and
+`zero`. Compound flags contain one or more options that let you define multiple
 settings in a semicolon-delimited list. The general syntax for compound flags
 is as follows: `--<flagname> option-a=value; option-b=value`
 
@@ -45,7 +53,7 @@ have been replaced by compound flags in release v21.03. Any flags not shown here
 are unchanged from release 21.03.
 
 <!-- TBD alphabetize by compound flag -->
-| Old Flag | Old Type | New Flag and Options | New Type | Applies To |
+| Old Flag | Old Type | New Flag and Options | New Type | Applies To | 
 |---------:|:---------|---------:|:---------|:----:|
 | | | **`--badger`** | | | |
 | `max_retries` | int | `max-retries` | int |`alpha`|
@@ -106,8 +114,11 @@ are unchanged from release 21.03.
 | `vault_field` | string | `field` | string |`alpha`, `bulk`, `backup`, `live`, `debug`|
 | `vault_format` | string | `format` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
 
+To learn more about each of these flags, see the `--help` output the subcommands of `dgraph`
+in the following section.
+
 <!--
-## Dgraph CLI commands
+## Dgraph CLI command help
 
 The Dgraph CLI includes the following commands (subcommands of `dgraph`). 
 CLI help for these commands is replicated inline below for your reference, or you
@@ -115,11 +126,24 @@ can find help by calling these commands with the `--help` flag.
 
 | Command    | Notes                    | Learn More |
 |------------|--------------------------|------------|
-|[`acl`](#name-command)| Notes | []() |
-|[`name`](#name-command)|  |
-|[`name`](#name-command)|  |
-|[`name`](#name-command)|  |
-|[`name`](#name-command)|  |
-|[`name`](#name-command)|  |
-|[`name`](#name-command)|  |
+|[`acl`](#name-command)| Dgraph Enterprise Edition access control list (ACL) tool | [Access Control Lists]({{< relref "enterprise-features/access-control-lists.md" >}}) |
+|[`alpha`](#name-command)|  |
+|[`audit`](#name-command)|  |
+|[`bulk`](#name-command)|  |
+|[`cert`](#name-command)|  |
+|[`completion`](#name-command)|  |
+|[`conv`](#name-command)|  |
+|[`debug`](#name-command)|  |
+|[`debuginfo`](#name-command)|  |
+|[`decrypt`](#name-command)|  |
+|[`dgraph`](#name-command)|  |
+|[`export_backup`](#name-command)|  |
+|[`increment`](#name-command)|  |
+|[`live`](#name-command)|  |
+|[`lsbackup`](#name-command)|  |
+|[`migrate`](#name-command)|  |
+|[`raftmigrate`](#name-command)|  |
+|[`restore`](#name-command)|  |
+|[`upgrade`](#name-command)|  |
+|[`zero`](#name-command)|  |
 -->
