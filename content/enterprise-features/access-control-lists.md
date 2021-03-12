@@ -23,15 +23,15 @@ The ACL feature can be turned on by following these steps:
 1. Create a plain text file, and store a randomly generated secret key in it. The secret
 key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  Keep this secret key secret to avoid data security issues.  The secret key must have at least 256-bits (32 ASCII characters) to support the HMAC-SHA256 signing algorithm.
 
-2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl_secret_file`, and
+2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl secret-file="/path/to/secret"`, and
 make sure they are all using the same secret key file created in Step 2.
 
    ```bash
-   dgraph alpha --acl_secret_file="/path/to/secret" --whitelist "<permitted-ip-addresses>"
+   dgraph alpha --acl secret-file="/path/to/secret" --security whitelist="<permitted-ip-addresses>"
    ```
 
 {{% notice "tip" %}}
-In addition to command line flags `--acl_secret_file` and `--whitelist`, you can also configure Dgraph using a configuration file (`config.properties`, `config.yaml`, `config.json`, `config.toml` or `config.hcl`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL_SECRET_FILE` and `DGRAPH_ALPHA_WHITELIST`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security whitelist="<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=/path/to/secret"` and `"DGRAPH_ALPHA_SECURITY: whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Using Vault for ACL secrets
@@ -66,12 +66,12 @@ Here is an example that starts a Dgraph Zero node and a Dgraph Alpha node with t
 echo '12345678901234567890123456789012' > hmac_secret_file
 
 ## Start Dgraph Zero in different terminal tab or window
-dgraph zero --my=localhost:5080 --replicas 1 --idx 1
+dgraph zero --my=localhost:5080 --replicas 1 --raft idx=1
 
 ## Start Dgraph Alpha in different terminal tab or window
 dgraph alpha --my=localhost:7080 --zero=localhost:5080 \
-  --acl_secret_file ./hmac_secret_file \
-  --whitelist "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+  --acl secret-file="./hmac_secret_file" \
+  --security whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
 ### Example using Docker Compose
@@ -85,15 +85,15 @@ services:
     command: dgraph alpha --my=alpha1:7080 --zero=zero1:5080
     container_name: alpha1
     environment:
-      DGRAPH_ALPHA_ACL_SECRET_FILE: /dgraph/acl/hmac_secret_file
-      DGRAPH_ALPHA_WHITELIST: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
+      DGRAPH_ALPHA_ACL: secret-file=/dgraph/acl/hmac_secret_file
+      DGRAPH_ALPHA_SECURITY: whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
     image: dgraph/dgraph:v20.11.2
     ports:
       - 8080:8080
     volumes:
       - ./hmac_secret_file:/dgraph/acl/hmac_secret_file
   zero1:
-    command: dgraph zero --my=zero1:5080 --replicas 1 --idx 1
+    command: dgraph zero --my=zero1:5080 --replicas 1 --raft idx=1
     container_name: zero1
     image: dgraph/dgraph:{{< version >}}
 ```
@@ -129,9 +129,11 @@ alpha:
     file:
       hmac_secret_file: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=
   configFile:
-    config.toml: |
-      acl_secret_file = '/dgraph/acl/hmac_secret_file'
-      whitelist = '10.0.0.0/8,172.0.0.0/8,192.168.0.0/16'
+    config.yaml: |
+      acl:
+        secret_file: /dgraph/acl/hmac_secret_file
+      security:
+        whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16‘
 ```
 
 Now with the Helm chart config values created, we can deploy Dgraph:
