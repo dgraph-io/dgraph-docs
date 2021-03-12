@@ -6,7 +6,7 @@ weight = 7
     parent = "todo-app-tutorial"
 +++
 
-Let's now deploy our fully functional app on Slash GraphQL [slash.dgraph.io](https://slash.dgraph.io).
+Let's now deploy our fully functional app on Slash GraphQL [cloud.dgraph.io](https://cloud.dgraph.io).
 
 ### Create a deployment
 
