@@ -31,7 +31,7 @@ make sure they are all using the same secret key file created in Step 2.
    ```
 
 {{% notice "tip" %}}
-In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security whitelist="<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=/path/to/secret"` and `"DGRAPH_ALPHA_SECURITY: whitelist=<permitted-ip-addresses>"` See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security whitelist="<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=/path/to/secret"` and `"DGRAPH_ALPHA_SECURITY: whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Using Vault for ACL secrets
