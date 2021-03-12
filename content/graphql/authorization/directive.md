@@ -99,9 +99,11 @@ type Author {
 
 interface Post @auth(
     query: { rule: """
-        query ($USER: String!) { 
-            queryPost(filter: { author : { id: { eq: $USER } } } ) { 
-                id 
+        query ($USER: ID!) { 
+            queryPost {
+              author(filter: { id: [$USER] }) {
+                id
+              }
             } 
         }"""
     }
