@@ -14,7 +14,7 @@ The client can unsubscribe by sending a message to the server. The server can al
 
 ![Subscription](/images/graphql/subscription_flow.png "Subscription in GraphQL")
 
-## How to Enable Subscriptions in GraphQL
+## How to enable subscriptions in GraphQL
 
 In GraphQL, it's straightforward to enable subscriptions on any type. You can add the `@withSubscription` directive to the schema as part of the type definition, as in the following example:
 
@@ -66,13 +66,13 @@ type Query {
 Because the `queryUserTweetCounts` query has a `@withSubscription` directive, it
 will be added to the `subscription` type, allowing users to subscribe to this query.
 
-## Authorization with Subscriptions
+## Authorization with subscriptions
 
 Authorization adds more power to GraphQL subscriptions. You can use all of the authorization features that are available when running queries.
 Additionally, you can specify when the subscription automatically terminates (the "timeout" of the subscription) in the JWT. 
 
 ### Schema
-Consider following Schema, it has both `@withSubscription` and `@auth` directive defined on type `Todo`. Auth rule enforces that only todo's of owner `$USER` is visible which will be given in the JWT.
+Consider following Schema that has both the `@withSubscription` and `@auth` directives defined on type `Todo`. The authorization rule enforces that only to-do tasks owned by `$USER` (defined in the JWT) are visible.
 
 ```graphql
 type Todo @withSubscription @auth(
@@ -93,12 +93,12 @@ type Todo @withSubscription @auth(
 
 ### JWT
 
-Subscription needs the JWT in which `$USER`, expiry, and other variables are declared. 
-The JWT is passed from GraphQL client as key-value pair, where the key is Header given in schema and the value is the JWT.
-For example in our case, the key is `Authorization` and the value is the JWT. 
+The subscription requires a JWT that declares the `$USER`, expiry, and other variables. 
+The JWT is passed from the GraphQL client as key-value pair, where the key is the `Header` given in the schema and the value is the JWT.
+In the example below, the key is `Authorization` and the value is the JWT. 
 
-Most of the GraphQL clients have a separate header section to pass Header-JWT key-value pair while from Apollo client it is passed
-in `connectionParams` as follows.
+Most GraphQL clients have a separate header section to pass Header-JWT key-value pairs. In the Apollo client, these are passed
+using `connectionParams`, as follows.
 
 ```javascript
 const wsLink = new WebSocketLink({
@@ -114,9 +114,9 @@ Dgraph uses gzip compression if the GraphQL client's `Sec-Websocket-Extensions`
 request header includes `permessage-deflate` (`Sec-WebSocket-Extensions: permessage-deflate`).
 {{% /notice %}}
 
-### Working
+### Example
 
-The following example shows the working of Subscription with authentication rules for the schema given above.
+The following example shows the operation of subscriptions with authentication rules for the schema given above.
 
 First, we generate the JWT as shown in the following image with expiry and `$USER` (the owner of a to-do task).
 You can generate the JWT from [jwt.io](https://jwt.io/). The client should send the JWT to the server along with the request, as discussed above.
@@ -128,7 +128,7 @@ Next, Dgraph runs the subscription and send updates. You can see that only the t
 ![Subscription+Auth-Action](/images/graphql/Auth-Action.gif "Subscription with Auth Example")
 
 
-After some time, the JWT expires and the subscription terminates as shown below.
+Eventually, the JWT expires and the subscription terminates, as shown below.
 
 ![Subscription+Timeout](/images/graphql/Subscription-Timeout.gif "Subscription with Auth Example")
 
