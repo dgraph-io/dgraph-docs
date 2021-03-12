@@ -48,6 +48,7 @@ are unchanged from release 21.03.
 | Old Flag | Old Type | New Flag and Options | New Type | Applies To |
 |---------:|:---------|---------:|:---------|:----:|
 | | | **`--badger`** | | | |
+| `max_retries` | int | `max-retries` | int |`alpha`|
 | `badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`|
 | | | (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`|
 | `badger.cache_mb` | string | `cache-mb` | string |`bulk`|
@@ -56,8 +57,6 @@ are unchanged from release 21.03.
 | `acl_secret_file` | string | `secret-file` | string |`alpha`|
 | `acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
 | `acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
-| | | **`--badger`** | | |
-| `max_retries` | int | `max-retries` | int |`alpha`|
 | | | **`--limit`** | | |
 | `mutations` | string | `mutations` | string |`alpha`|
 | | | **`--ludicrous`** | | |
@@ -85,7 +84,6 @@ are unchanged from release 21.03.
 | | | **`--telemetry`** | |
 | `telemetry` | bool | `reports` | bool |`alpha` and `zero`|
 | `enable_sentry` | bool | `sentry` | bool |`alpha` and `zero`|
-| `tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | | | **`--tls`** | |
 | `tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | `tls_use_system_ca` | bool | `use-system-ca` | bool |`alpha`, `zero`, `bulk`, `backup`, `live`|
