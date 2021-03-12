@@ -12,7 +12,7 @@ Dgraph supports Apollo federation starting in release version 21.03. This lets y
 
 ## Support for Apollo federation directives
 
-The current implementation supports the following three directives: `@key`, `@extends`, and `@external`.
+The current implementation supports the following five directives: `@key`, `@extends`, `@external`, `@provides`, and `@requires`.
 
 ### `@key` directive
 This directive takes one field argument inside it: the `@key` field. There are few limitations on how to use `@key` directives:
@@ -41,6 +41,40 @@ type User @key(fields: "id") @extends{
 
 ### `@external` directive
 This directive is used when the given field is not stored in this service. It can only be used on extended type definitions. As it is used above on the `id` field of `User` type.
+
+### `@provides` directive
+This directive is used on a field that tells the gateway to return a specific fieldSet from the base type while fetching the field. 
+
+For example -
+
+```graphql
+type Review @key(fields: "id") {
+  product: Product @provides(fields: "name price")
+}
+
+extend type Product @key(fields: "upc") {
+  upc: String @external
+  name: String @external
+  price: Int @external
+}
+```
+
+While fetching `Review.product` from the `review` service, and if the `name` or `price` is also queried, the gateway will fetch these from the `review` service itself, meaning that it also resolves these fields, even though both fields are `@external`.
+
+### `@requires` directive
+This directive is used on a field to annotate the fieldSet of the base type. It is used to develop a query plan where the required fields may not be needed by the client, but the service may need additional information from other services. 
+
+For example -
+
+```graphql
+extend type User @key(fields: "id") {
+  id: ID! @external
+  email: String @external
+  reviews: [Review] @requires(fields: "email")
+}
+```
+
+When the gateway fetches `user.reviews` from the `review` service, the gateway will get `user.email` from the `User` service and provide it as an argument to the `_entities` query.
 
 ## Generated queries and mutations
 
