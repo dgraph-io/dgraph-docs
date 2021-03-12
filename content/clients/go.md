@@ -65,7 +65,7 @@ func newClient() *dgo.Dgraph {
 
 ```
 
-#### Multi-tenancy
+### Multi-tenancy
 
 In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, Dgraph provides a new method `LoginIntoNamespace()`,
 which will allow the users to login to a specific namespace.
