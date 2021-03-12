@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Learner Nodes"
-weight = 3
+weight = 7
 [menu.main]
     parent = "enterprise-features"
 +++
@@ -45,11 +45,15 @@ In regular conditions, the eventual consistency is usually achieved quickly.
 A best-effort query to a `learner` node returns any data that is already available in that learner node.
 The response is still a valid data snapshot, but at a timestamp which is not the latest one.
 
+{{% notice "note" %}}
+Best-effort queries won't be forwarded to a Zero node to get the latest timestamp.
+{{% /notice %}}
+
 You can still send typical `read` queries (strict consistency) to a `learner` node.
 They would just incur an extra latency cost due to having to reach out the Zero leader.
 
 {{% notice "note" %}}
-Best-effort queries won't be forwarded to a Zero node to get the latest timestamp.
+If the learner node needs to serve normal queries, at least one Alpha leader must be available. 
 {{% /notice %}}
 
 ## Use-case examples

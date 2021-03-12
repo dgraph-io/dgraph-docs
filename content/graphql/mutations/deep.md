@@ -28,7 +28,7 @@ type Post {
 }
 ```
 
-### **Example**: Adding deep nested post with new author mutation using variables
+### **Example**: Adding deeply nested post with new author mutation using variables
 ```graphql
 mutation addAuthorWithPost($author: addAuthorInput!) {
   addAuthor(input: [$author]) {
