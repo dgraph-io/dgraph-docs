@@ -412,6 +412,10 @@ mutation {
 }
 ```
 
+{{% notice "tip" %}}
+While modifying the GraphQL schema, if you get errors like `errIndexingInProgress`, `another operation is already running` or `server is not ready`, then please wait for a bit and then retry the schema update.
+{{% /notice %}}
+
 ## Using `querySchemaHistory` to see schema history
 
 You can query the history of your schema using `querySchemaHistory` on the
