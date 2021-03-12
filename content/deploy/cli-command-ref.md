@@ -6,7 +6,7 @@ weight = 20
 +++
 
 The Dgraph command-line interface (CLI) is used to deploy and manage Dgraph. You
-use it in self-managed deployment scenarios such as running Dgraph on on-premises
+use it in self-managed deployment scenarios; such as running Dgraph on on-premises
 servers hosted on your physical infrastructure, or running Dgraph in the cloud
 on your AWS, GCP, or Azure infrastructure. 
 
@@ -18,17 +18,14 @@ settings for commands using flags.
 
 ## Dgraph CLI flag updates in release 21.03
 
-Some flags have been deprecated and replaced in release 21.03. In previous Dgraph
+Some flags are deprecated and replaced in release v21.03. In previous Dgraph
 releases, multiple related flags are used in a command, causing some commands to
-be very long. Starting in release 21.03, fewer flags are  used for the most
-complex commands (`alpha`, `backup`, `bulk`,`debug`, `live` and
-`zero`). Instead, many of these flags contain one or more options that let you 
-define multiple settings in a semicolon-delimited list that's encapsulated in 
-double-quotes. So, the general syntax for flags that contain options is as follows: 
+be very long. Starting in release v21.03, compound flags are  used for the most
+complex subcommands (`alpha`, `backup`, `bulk`,`debug`, `live` and
+`zero`). Compound flags contain one or more options that let you define multiple
+settings in a semicolon-delimited list. The general syntax for compound flags
+is as follows: `--<flagname> option-a=value; option-b=value`
 
-```ssh
---<flagname> "option-a=value; option-b=value"`
-```
 
 For example, the following command that is valid in release 20.11 is no longer
 valid starting in release 21.03:
@@ -40,13 +37,14 @@ dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
 Instead, you would express this command as follows starting in release 21.03:
 
 ```ssh
-dgraph alpha --ludicrous "enabled=true; concurrency=16;"
+dgraph alpha --ludicrous enabled=true; concurrency=16;
 ```
 
-The following table maps Dgraph CLI flags from release 20.11 and earlier to new
-flags used starting in release 21.03; any flags not shown here are unchanged from
-release 21.03.
+The following table maps Dgraph CLI flags from release 20.11 and earlier that
+have been replaced by compound flags in release v21.03. Any flags not shown here
+are unchanged from release 21.03.
 
+<!-- TBD alphabetize by compound flag -->
 | Old Flag | Old Type | New Flag and Options | New Type | Applies To |
 |---------:|:---------|---------:|:---------|:----:|
 | | | **`--badger`** | | | |
@@ -58,6 +56,10 @@ release 21.03.
 | `acl_secret_file` | string | `secret-file` | string |`alpha`|
 | `acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
 | `acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
+| | | **`--badger`** | | |
+| `max_retries` | int | `max-retries` | int |`alpha`|
+| | | **`--limit`** | | |
+| `mutations` | string | `mutations` | string |`alpha`|
 | | | **`--ludicrous`** | | |
 | `ludicrous_mode` | bool | `enabled` | bool |`alpha`|
 | `ludicrous_concurrency` | int | `concurrency` | int |`alpha`|
@@ -80,13 +82,17 @@ release 21.03.
 | `query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`|
 | `normalize_node_limit` | int | `normalize-node` | int |`alpha`|
 | `mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`|
+| | | **`--telemetry`** | |
+| `telemetry` | bool | `reports` | bool |`alpha` and `zero`|
+| `enable_sentry` | bool | `sentry` | bool |`alpha` and `zero`|
+| `tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | | | **`--tls`** | |
 | `tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | `tls_use_system_ca` | bool | `use-system-ca` | bool |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | `tls_server_name` | string | `server-name` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | `tls_client_auth` | string | `client-auth-type` | string |`alpha`, `zero`|
-| `tls_node_cert` | string | `server-cert` | string |`alpha`, `zero`|
-| `tls_node_key` | string | `server-key` | string |`alpha`, `zero`|
+| `tls_node_cert` | string | `server-cert` | string |`alpha` and `zero`|
+| `tls_node_key` | string | `server-key` | string |`alpha` and `zero`|
 | `tls_internal_port_enabled` | bool | `internal-port` | bool | `alpha`, `zero`, `bulk`, `backup`, `live`|
 | `tls_cert` | string | `client-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | `tls_key` | string | `client-key` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
@@ -101,3 +107,21 @@ release 21.03.
 | `vault_path` | string | `path` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
 | `vault_field` | string | `field` | string |`alpha`, `bulk`, `backup`, `live`, `debug`|
 | `vault_format` | string | `format` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
+
+<!--
+## Dgraph CLI commands
+
+The Dgraph CLI includes the following commands (subcommands of `dgraph`). 
+CLI help for these commands is replicated inline below for your reference, or you
+can find help by calling these commands with the `--help` flag.
+
+| Command    | Notes                    | Learn More |
+|------------|--------------------------|------------|
+|[`acl`](#name-command)| Notes | []() |
+|[`name`](#name-command)|  |
+|[`name`](#name-command)|  |
+|[`name`](#name-command)|  |
+|[`name`](#name-command)|  |
+|[`name`](#name-command)|  |
+|[`name`](#name-command)|  |
+-->
