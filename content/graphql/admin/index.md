@@ -374,6 +374,10 @@ There are two ways you can modify a GraphQL schema:
 - Using `/admin/schema`
 - Using the `updateGQLSchema` mutation on `/admin`
 
+{{% notice "tip" %}}
+While modifying the GraphQL schema, if you get errors like `errIndexingInProgress`, `another operation is already running` or `server is not ready`, please wait for a moment and then retry the schema update.
+{{% /notice %}}
+
 ### Using `/admin/schema`
 
 The `/admin/schema` endpoint provides a simplified method to add and update schemas.
