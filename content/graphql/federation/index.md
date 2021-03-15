@@ -142,8 +142,6 @@ type Astronaut @key(fields: "id") {
 
 When adding an object of type `Astronaut`, first it should be added into `AstronautService` service and then the `addAstronaut` mutation should be called with value of `id` provided as an argument which must be equal to the value in `AstronautService` service.
 
-Remember to add the `Extended Definitions` block from the generated schema of Dgraph GraphQL to the other GraphQL services schemas that are part of the gateway. This needs to be done otherwise the Apollo gateway will throw an error like `Custom directives must be implemented in every service.`
-
 Use the admin endpoint to query for the generated schema -
 
 ```graphql
