@@ -71,7 +71,13 @@ Reference: [Lambda directive](/graphql/lambda/overview)
 `@remote` directive is used to annotate types for which data is not stored in Dgraph. These types
 are typically used with custom queries and mutations.
 
-Reference: [Remote directive](/graphql/custom/directive)
+Reference: [Remote directive](/graphql/custom/directive/#remote-types)
+
+### @remoteResponse
+
+The `@remoteResponse` directive allows you to annotate the fields of a `@remote` type in order to map a custom query's JSON key response to a GraphQL field.
+
+Reference: [Remote directive](/graphql/custom/directive/#remote-response)
 
 ### @search
 
