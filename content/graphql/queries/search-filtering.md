@@ -222,8 +222,9 @@ queryStudent(filter: {name: between: {min: "ba", max: "hz"}}){
 
 You can filter query results to find objects with one or more specified values using the
 `in` keyword. This keyword can find matches for fields with the `@id` directive
-applied. This filter is also supported on `string` and `enum` types with a
+applied. This filter is supported on `string` and `enum` types with a
 [`Hash` or `Exact` index](/graphql/schema/search/#string-exact-and-hash-search).
+The `in` filter is also supported for all scalar data types such as `Int`, `Int64`, `Float`, and `DateTime`.
 
 For example, let's say that your schema defines a `State` type that has the
 `@id` directive applied to the `code` field:
