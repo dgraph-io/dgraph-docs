@@ -257,7 +257,7 @@ Just defining the connection is all it takes and then you can ask a single Graph
 In combination with the `@remote` directive, in a GraphQL schema you can also use the `@remoteResponse` directive.
 You can define the `@remoteResponse` directive on the fields of a `@remote` type in order to map the JSON key response of a custom query to a GraphQL field.
 
-For example, for the given GraphQL schema:
+For example, in the given GraphQL schema, we have defined a custom DQL query, whose JSON response contains the results of the `groupby` clause in the `@groupby` key. So, we are using the `@remoteResponse` directive to map the `groupby` field in `GroupUserMapQ` type to the `@groupby` key in the JSON response:
 
 ```graphql
 type User {
