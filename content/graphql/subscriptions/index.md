@@ -109,16 +109,17 @@ const wsLink = new WebSocketLink({
 ```
 
 {{% notice "note" %}}
-Starting in release v21.03, Dgraph supports gzip compression for subscriptions.
-Dgraph uses gzip compression if the GraphQL client's `Sec-Websocket-Extensions`
-request header includes `permessage-deflate` (`Sec-WebSocket-Extensions: permessage-deflate`).
+Starting in release v21.03, Dgraph supports compression for subscriptions.
+Dgraph uses `permessage-deflate` compression if the GraphQL client's
+`Sec-Websocket-Extensions` request header includes `permessage-deflate`, as follows:
+`Sec-WebSocket-Extensions: permessage-deflate`.
 {{% /notice %}}
 
 ### Example
 
 The following example shows the operation of subscriptions with authentication rules for the schema given above.
 
-First, we generate the JWT as shown in the following image with expiry and `$USER` (the owner of a to-do task).
+First, you can generate the JWT as shown in the following image with expiry and `$USER` (the owner of a to-do task).
 You can generate the JWT from [jwt.io](https://jwt.io/). The client should send the JWT to the server along with the request, as discussed above.
 
 ![Subscription-Generating-JWT](/images/graphql/Generating-JWT.png "Subscription with Auth Example")
