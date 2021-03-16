@@ -130,6 +130,28 @@ Types can also be used to filter results inside a query. For example:
 This query will return the nodes that have a parent predicate and only the
 `parent`'s of type `Person`.
 
+You can also query for `dgraph.type` to get the Entity type. For example:
+
+```graphql
+{
+   people(func: eq(dgraph.type, "Person")) {
+      name
+      dgraph.type
+   }
+}
+```
+
+or
+
+```graphql
+{
+   people(func: type(Person)) {
+      name
+      dgraph.type
+   }
+}
+```
+
 ## Deleting a type
 
 Type definitions can be deleted using the Alter endpoint. All that is needed is
