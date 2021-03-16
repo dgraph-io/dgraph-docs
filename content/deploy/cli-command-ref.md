@@ -17,7 +17,7 @@ command requires you to specify one of its subcommands: `add`, `del`, `info` or
 `mod`. As with other CLIs, you provide command options using flags like `--help`
 or `--telemetry`. 
 
-{{% notice "Tip" %}}
+{{% notice "tip" %}}
 The term *command* is used instead of *subcommand* throughout this document, 
 except when clarifying relationships in the CLI command hierarchy. The
 term *command* is also used for combinations of commands and their subcommands,
@@ -121,7 +121,7 @@ help for these commands is replicated inline below for your reference, or you
 can find help by calling these commands (or their subcommands) using the `--help`
 flag.
 
-{{% notice "Note" %}}
+{{% notice "note" %}}
 Although many of the commands listed below have subcommands, only `dgraph` and
 subcommands of `dgraph` are included in this listing. 
 {{% /notice %}}
