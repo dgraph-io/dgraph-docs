@@ -39,7 +39,7 @@ dgraph zero --enterprise_license ./licensekey.txt
 
 **Warning messages related to license expiry**
 
-Dgraph will print a warning message in the logs when your license is about to expire. An example of this message is shown below. You may want to note this pattern if you are planning on implementing any log monitoring solution and you can configure suitable alerts for yourself.
+Dgraph will print a warning message in the logs when your license is about to expire. If you are planning to implement any log monitoring solution, you may note this pattern and configure suitable alerts for yourself. You can find an example of this message below:
 
 ```sh
 Your enterprise license will expire in 6 days from now. To continue using enterprise features after 6 days from now, apply a valid license. To get a new license, contact us at https://dgraph.io/contact.
