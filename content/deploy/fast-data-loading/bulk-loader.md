@@ -298,10 +298,10 @@ Alternatively, starting with v20.07.0, the `vault_*` options can be used instead
 
 You can further configure Bulk Loader using the following options:
 
-`--badger.compression`: Configure the compression of data on disk. By default,
-the Snappy compression format is used, but you can also use Zstandard
-compression. Or, you can choose no compression to minimize CPU usage. To learn
-more, see [Data Compression on Disk](/deploy/data-compression).
+`--badger` superflag's `compression` option: Configure the compression of data
+on disk. By default, the Snappy compression format is used, but you can also use
+Zstandard compression. Or, you can choose no compression to minimize CPU usage. 
+To learnmore, see [Data Compression on Disk]({{< relref "/deploy/data-compression.md" >}}).
 
 `--new_uids`: (default: false): Assign new UIDs instead of using the existing
 UIDs in data files. This is useful to avoid overriding the data in a DB already
@@ -319,7 +319,7 @@ use [External IDs]({{< relref "mutations/external-ids.md" >}}).
 
 `--xidmap` (default: disabled. Need a path): Store xid to uid mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. It is recommended to use this flag if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific UID.
 
-`--vault_*` flags specifies the Vault server address, role id, secret id and
+The `--vault` superflag and its options specify the Vault server address, role id, secret id and
 field that contains the encryption key that can be used to decrypt the encrypted export.
 
 ## Tuning & monitoring
@@ -333,9 +333,9 @@ running Bulk Loader. It is better to fix the parameters to decrease memory
 usage, than to have swapping grind the loader down to a halt.
 {{% /notice %}}
 
-Flags can be used to control the behaviour and performance characteristics of
+Flags can be used to control the behavior and performance characteristics of
 the bulk loader. You can see the full list by running `dgraph bulk --help`. In
-particular, **the flags should be tuned so that the bulk loader doesn't use more
+particular, **you should tune the flags so that Bulk Loader doesn't use more
 memory than is available as RAM**. If it starts swapping, it will become
 incredibly slow.
 

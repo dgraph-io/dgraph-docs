@@ -10,14 +10,14 @@ Each Dgraph Alpha exposes various administrative (admin) endpoints both over
 HTTP and GraphQL, for example endpoints to export data and to perform a clean
 shutdown. All such admin endpoints are protected by three layers of authentication:
 
-1. IP White-listing (use `--whitelist` flag in alpha to whitelist IPs other than
+1. IP White-listing (use the `--security` superflag's `whitelist` option on Dgraph Alpha to whitelist IPs other than
    localhost).
-2. Poor-man's auth, if alpha is started with the `--auth_token` flag (means you
-   will need to pass the `auth_token` as `X-Dgraph-AuthToken` header while
-   making the HTTP request).
-3. Guardian-only access, if ACL is enabled (means you need to pass the ACL-JWT
+2. Poor-man's auth, if Dgraph Alpha is started with the `--security` superflag's `token` option,
+   then you should pass the token as an `X-Dgraph-AuthToken` header while
+   making the HTTP request.
+3. Guardian-only access, if ACL is enabled. In this case you should pass the ACL-JWT
    of a Guardian user using the `X-Dgraph-AccessToken` header while making the
-  HTTP request).
+   HTTP request.
 
 An admin endpoint is any HTTP endpoint which provides admin functionality.
 Admin endpoints usually start with the `/admin` path. The current list of admin
@@ -46,18 +46,18 @@ There are a few exceptions to the general rule described above:
 
 By default, admin operations can only be initiated from the machine on which the Dgraph Alpha runs.
 
-You can use the `--whitelist` option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
+You can use the `--security` superflag's option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
 
 **IP Address**
 
 ```sh
-dgraph alpha --whitelist 127.0.0.1 ...
+dgraph alpha --security whitelist=127.0.0.1 ...
 ```
 This would allow admin operations from hosts with IP 127.0.0.1 (i.e., localhost only).
 
 **IP Range**
 ```sh
-dgraph alpha --whitelist 172.17.0.0:172.20.0.0,192.168.1.1 ...
+dgraph alpha --security whitelist=172.17.0.0:172.20.0.0,192.168.1.1 ...
 ```
 
 This would allow admin operations from hosts with IP between `172.17.0.0` and `172.20.0.0` along with
@@ -66,7 +66,7 @@ the server which has IP address as `192.168.1.1`.
 **CIDR Range**
 
 ```sh
-dgraph alpha --whitelist 172.17.0.0/16,172.18.0.0/15,172.20.0.0/32,192.168.1.1/32 ...
+dgraph alpha --security whitelist=172.17.0.0/16,172.18.0.0/15,172.20.0.0/32,192.168.1.1/32 ...
 ```
 
 This would allow admin operations from hosts that matches the CIDR range `172.17.0.0/16`, `172.18.0.0/15`, `172.20.0.0/32`, or `192.168.1.1/32` (the same range as the IP Range example).
@@ -76,7 +76,7 @@ You can set whitelist IP to `0.0.0.0/0` to whitelist all IPs.
 **Hostname**
 
 ```sh
-dgraph alpha --whitelist admin-bastion,host.docker.internal ...
+dgraph alpha --security whitelist=admin-bastion,host.docker.internal ...
 ```
 
 This would allow admin operations from hosts with hostnames `admin-bastion` and `host.docker.internal`.
@@ -111,11 +111,11 @@ By default, all clients are allowed to perform alter operations.
 You can configure Dgraph to only allow alter operations when the client provides a specific token.
 You can use this "Simple ACL" token to prevent clients from making unintended or accidental schema updates or predicate drops.
 
-You can specify the auth token with the `--auth_token` option for each Dgraph Alpha in the cluster.
+You can specify the auth token with the `--security` superflag's `token` option for each Dgraph Alpha in the cluster.
 Clients must include the same auth token to make alter requests.
 
 ```sh
-$ dgraph alpha --auth_token=<authtokenstring>
+$ dgraph alpha --security token=<authtokenstring>
 ```
 
 ```sh
@@ -134,7 +134,7 @@ $ curl -H 'X-Dgraph-AuthToken: <authtokenstring>' localhost:8180/alter -d '{ "dr
 ```
 
 {{% notice "note" %}}
-To fully secure alter operations in the cluster, the auth token must be set for every Alpha.
+To fully secure alter operations in the cluster, the authentication token must be set for every Alpha node.
 {{% /notice %}}
 
 
@@ -153,8 +153,8 @@ mutation {
 }
 ```
 {{% notice "warning" %}}By default, this won't work if called from outside the server where the Dgraph Alpha is running.
-You can specify a list or range of whitelisted IP addresses from which export or other admin operations
-can be initiated using the `--whitelist` flag on `dgraph alpha`.
+You can specify a list or range of whitelisted IP addresses from which export, or other admin operations
+can be initiated using the `--security` superflag's `whitelist` option with the `dgraph alpha` command.
 {{% /notice %}}
 
 This triggers an export for all Alpha groups of the cluster. The data is exported from the following Dgraph instances:
@@ -288,7 +288,7 @@ mutation {
 }
 ```
 
-#### Exporting to a MinIO Gateway
+#### Exporting to a MinIO gateway
 
 You can use MinIO as a gateway to other object stores, such as [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage).  You can use the above MinIO GraphQL mutation with MinIO configured as a gateway.
 
@@ -365,7 +365,7 @@ Once you have a `credentials.json`, you can access GCS locally using one of thes
      --values myvalues.yaml
    ```
 
-#### Disabling HTTPS for exports to S3 and Minio
+#### Disable HTTPS for exports to S3 and Minio
 
 By default, Dgraph assumes the destination bucket is using HTTPS. If that is not the case, the export will fail. To export to a bucket using HTTP (insecure), set the query parameter `secure=false` with the destination endpoint in the destination field:
 
@@ -384,7 +384,7 @@ mutation {
 }
 ```
 
-#### Using anonymous credentials
+#### Use anonymous credentials
 
 If exporting to S3 or MinIO where credentials are not required, you can set `anonymous` to true.
 
@@ -402,7 +402,7 @@ mutation {
 }
 ```
 
-### Encrypting exports
+### Encrypt exports
 
 Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `encryption_key_file`.
 
@@ -439,12 +439,12 @@ This is an example of how you can use `curl` to trigger an export.
      ```
 
 
-## Shutting Down Database
+## Shutting down database
 
 A clean exit of a single Dgraph node is initiated by running the following GraphQL mutation on /admin endpoint.
 {{% notice "warning" %}}This won't work if called from outside the server where Dgraph is running.
 You can specify a list or range of whitelisted IP addresses from which shutdown or other admin operations
-can be initiated using the `--whitelist` flag on `dgraph alpha`.
+can be initiated using the `--security` superflag's `whitelist` option on `dgraph alpha`.
 {{% /notice %}}
 
 ```graphql
@@ -472,7 +472,7 @@ Alternatively, you could:
 * Delete (maybe do an export first) the `p` and `w` directories, then
 * Restart Dgraph.
 
-## Upgrading Database
+## Upgrading datatabase
 
 Doing periodic exports is always a good idea. This is particularly useful if you wish to upgrade Dgraph or reconfigure the sharding of a cluster. The following are the right steps to safely export and restart.
 
@@ -492,7 +492,8 @@ do a rolling restart of all your Alpha using the option `--mutations disallow` w
 At this point your application can still read from the old cluster and you can perform the steps 4. and 5. described above.
 When the new cluster (that uses the upgraded version of Dgraph) is up and running, you can point your application to it, and shutdown the old cluster.
 
-### Upgrading from v1.2.2 to v20.03.0 for Enterprise Customers
+### Upgrading from v1.2.2 to v20.03.0 for enterprise customers
+
 <!-- TODO: Redirect(s) -->
 1. Use [binary]({{< relref "enterprise-features/binary-backups.md">}}) backup to export data from old cluster
 2. Ensure it is successful

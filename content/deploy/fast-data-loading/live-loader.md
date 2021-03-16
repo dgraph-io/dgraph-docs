@@ -166,17 +166,17 @@ Alpha server.
 Using the `--xidmap` flag is recommended if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific `uid`.
 {{% /notice %}}
 
-`--ludicrous_mode` (default: `false`): This option allows the user to notify Live Loader that the Alpha server is running in ludicrous mode.
+The `--ludicrous` superflag's `enabled` option (default: `false`): This option allows the user to notify Live Loader that the Alpha server is running in ludicrous mode.
 Live Loader, by default, does smart batching of data to avoid transaction conflicts, which improves the performance in normal mode.
 Since there's no conflict detection in ludicrous mode, smart batching is disabled to speed up the data ingestion further.
 
 {{% notice "note" %}}
-The `--ludicrous_mode` option should only be used if Dgraph is also running in [ludicrous mode]({{< relref "ludicrous-mode.md" >}}).
+The `--ludicrous` superflag's `enabled` option should only be used if Dgraph is also running in [ludicrous mode]({{< relref "ludicrous-mode.md" >}}).
 {{% /notice %}}
 
 `-U, --upsertPredicate` (default: disabled): Runs Live Loader in `upsertPredicate` mode. The provided value will be used to store blank nodes as a `xid`.
 
-`--vault_*` flags specifies the Vault server address, role id, secret id and
+`--vault` superflag's options specify the Vault server address, role id, secret id and
 field that contains the encryption key that can be used to decrypt the encrypted export.
 
 ## `upsertPredicate` Example

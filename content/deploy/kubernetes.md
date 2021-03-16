@@ -653,8 +653,8 @@ of the cluster, be assigned a group and an unused index from Zero, and receive
 the latest snapshot from the Alpha leader of the group.
 
 When a Zero pod restarts, it must join the existing group with an unused index
-ID. The index ID is set with the `--idx` flag. This may require the StatefulSet
-configuration to be updated.
+ID. You set the index ID with the `--raft` superflag's `idx` option. This might
+require you to update the StatefulSet configuration.
 
 ## Kubernetes and Bulk Loader
 

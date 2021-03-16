@@ -23,26 +23,26 @@ The ACL feature can be turned on by following these steps:
 1. Create a plain text file, and store a randomly generated secret key in it. The secret
 key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  Keep this secret key secret to avoid data security issues.  The secret key must have at least 256-bits (32 ASCII characters) to support the HMAC-SHA256 signing algorithm.
 
-2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl secret-file="/path/to/secret"`, and
+2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl "secret-file=/path/to/secret"`, and
 make sure they are all using the same secret key file created in Step 2.
 
    ```bash
-   dgraph alpha --acl secret-file="/path/to/secret" --security whitelist="<permitted-ip-addresses>"
+   dgraph alpha --acl "secret-file=/path/to/secret" --security "whitelist=<permitted-ip-addresses>"
    ```
 
 {{% notice "tip" %}}
-In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security whitelist="<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=/path/to/secret"` and `"DGRAPH_ALPHA_SECURITY: whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security whitelist="<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=</path/to/secret>"` and `DGRAPH_ALPHA_SECURITY="whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "deploy/config.md" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Using Vault for ACL secrets
 
 Alternatively, you can use a Vault server for ACL secret keys. To use Vault, there are some pre-requisites:
 1. Vault Server URL of the form `http://fqdn[ip]:port`. This will be used for the `addr` option.
-2. Vault Server must be configured with an AppRole auth. A `secret-id` and `role-id` must be generated and copied over to local files. These will be required for the `secret-id-file` and `role-id-file` options.
-3. Vault Server must contain a K/V for the ACL key. This key will be needed for the `acl-field` option, to set the ACL secret key that Dgraph will use. This key must have at least 256-bits (32 ASCII characters).
+2. Vault Server must be configured with an AppRole auth. A `secret-id` and `role-id` must be generated and copied over to local files. These are required for the `--vault` superflag's `secret-id-file` and `role-id-file` options.
+3. Vault Server must contain a K/V for the ACL key. This key is needed to set the `--vault` superflag's `field` option to the ACL secret key that Dgraph will use. This key must have at least 256-bits (32 ASCII characters).
 
 {{% notice "tip" %}}
-The key format for the `acl-field` option can be defined using `acl-format`.
+You can set the key format for the `--vault` superflag's `field` option using the `format` option.
 Supported values are `raw` and `base64`.
 {{% /notice %}}
 
@@ -52,9 +52,9 @@ Here is an example of using Dgraph with a Vault server that holds the secret key
 dgraph alpha --vault "addr=http://localhost:8200;path=secret/data/dgraph;role-id-file=path/to/role-file;secret-id-file=/path/to/secret-file;acl-field=my_acl;acl-format=base64;"
 ```
 
-If multiple Alpha nodes are part of the cluster, you will need to pass the `--vault` option to
+If multiple Alpha nodes are part of the cluster, you will need to pass the `--vault` superflag to
 each of the Alphas.
-If the Alpha server restarts, the `--vault` option must be set along with the key in order to
+If the Alpha server restarts, the `--vault` superflag must be set along with the key in order to
 restart successfully.
 
 ### Example using Dgraph CLI

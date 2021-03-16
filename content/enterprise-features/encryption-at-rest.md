@@ -45,7 +45,7 @@ Alternatively, you can use the `--vault_*` options to enable encrption as explai
 Here is an example that starts one Zero server and one Alpha server with the encryption feature turned on:
 
 ```bash
-dgraph zero --my=localhost:5080 --replicas 1 --idx 1
+dgraph zero --my=localhost:5080 --replicas 1 --raft idx=1
 dgraph alpha --encryption_key_file ./enc_key_file --my=localhost:7080 --zero=localhost:5080
 ```
 
@@ -63,7 +63,7 @@ Alternatively, for encryption keys sitting on Vault server, here is an example. 
 
 Next, here is an example of using Dgraph with a Vault server that holds the encryption key.
 ```bash
-dgraph zero --my=localhost:5080 --replicas 1 --idx 1
+dgraph zero --my=localhost:5080 --replicas 1 --raft idx=1
 dgraph alpha --vault_addr https://localhost:8200 --vault_roleid_file ./roleid --vault_secretid_file ./secretid --vault_field enc_key_name --my=localhost:7080 --zero=localhost:5080
 ```
 

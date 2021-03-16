@@ -19,7 +19,7 @@ Because Dgraph with Ludicrous mode enabled is eventually consistent, it is a goo
 
 ## Enabling Ludicrous mode
 
-You can enable Ludicrous mode by setting the `--ludicrous_mode` config option on all Dgraph Zero and Dgraph Alpha nodes in a cluster.
+You can enable Ludicrous mode by setting the `--ludicrous` superflag's `enabled` option on all Dgraph Zero and Dgraph Alpha nodes in a cluster.
 
 
 ## What does Ludicrous mode do?
@@ -50,7 +50,7 @@ In ludicrous mode, we assign a `commit timestamp` equal to the `start timestamp`
 Ludicrous mode now runs mutations concurrently to increase the speed of data
 ingestion. This is enabled by default with `2000` total concurrent threads
 available, but you can adjust the number of concurrent threads available using
-the `--ludicrous_concurrency` configuration setting on the Alpha nodes in a
+the `--ludicrous` superflag's `concurrency` option on the Alpha nodes in a
 cluster.
 
 ## Can you use Ludicrous mode in a highly-available (HA) cluster?

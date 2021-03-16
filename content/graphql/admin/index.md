@@ -26,7 +26,9 @@ Once you've tried out Dgraph GraphQL, you'll need to move past the `dgraph/stand
 
 Dgraph is a distributed graph database.  It can scale to huge data and shard that data across a cluster of Dgraph instances.  GraphQL is built into Dgraph in its Alpha nodes. To learn how to manage and deploy a Dgraph cluster, check our [deployment guide](https://dgraph.io/docs/deploy/).
 
-GraphQL schema introspection is enabled by default, but can be disabled with the `--graphql_introspection=false` when starting the Dgraph alpha nodes.
+GraphQL schema introspection is enabled by default, but you can disable it by
+settign the `--graphql` superflag's `introspection` option to false (`--graphql introspection=false`) when
+starting the Dgraph Alpha nodes in your cluster.
 
 ## Dgraph's schema
 

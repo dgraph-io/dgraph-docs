@@ -25,7 +25,7 @@ dgraph alpha --my=IPADDR:7080 --zero=localhost:5080
 dgraph alpha --my=IPADDR:7081 --zero=localhost:5080 -o=1
 ```
 
-Notice the use of `-o` for the second Alpha to add offset to the default ports used. Zero automatically assigns an unique ID to each Alpha, which is persisted in the write ahead log (wal) directory, users can specify the index using `--idx` option. Dgraph Alphas use two directories to persist data and
+Notice the use of `-o` for the second Alpha to add offset to the default ports used. Zero automatically assigns an unique ID to each Alpha, which is persisted in the write ahead log (wal) directory, users can specify the index using the `--raft` superflag's `idx` option. Dgraph Alphas use two directories to persist data and
 wal logs, and these directories must be different for each Alpha if they are running on the same host. You can use `-p` and `-w` to change the location of the data and WAL directories. For all other flags, run
 
 `dgraph alpha --help`.

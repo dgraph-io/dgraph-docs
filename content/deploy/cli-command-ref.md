@@ -70,7 +70,7 @@ are unchanged from release v21.03.
 | `--graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
 | `--graphql_lambda_url` | string | `lambda-url` | string |`alpha`|
 | | | **`--limit`** | | | Limit-setting flags for Dgraph Alpha  |
-| `--mutations` | string | `mutations` | string |`alpha`|
+| `--mutations` | string | `mutations-nquad` | string |`alpha`|
 | `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`|
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`|
 | `--mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`|
