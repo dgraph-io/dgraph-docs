@@ -37,7 +37,7 @@ useful when the process needs to be automated.
 dgraph zero --enterprise_license ./licensekey.txt
 ```
 
-# Warning messages related to license expiry
+*** Warning messages related to license expiry
 
 Dgraph will print a warning message in the logs when your license is about to expire. An example of this message is shown below. You may want to note this pattern if you are planning on implementing any log monitoring solution and you can configure suitable alerts for yourself.
 
