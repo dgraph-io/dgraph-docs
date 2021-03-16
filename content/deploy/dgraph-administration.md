@@ -76,7 +76,7 @@ You can set whitelist IP to `0.0.0.0/0` to whitelist all IPs.
 **Hostname**
 
 ```sh
-dgraph alpha --security whitelist=admin-bastion,host.docker.internal ...
+dgraph alpha --security "whitelist=admin-bastion,host.docker.internal ..."
 ```
 
 This would allow admin operations from hosts with hostnames `admin-bastion` and `host.docker.internal`.
@@ -153,8 +153,7 @@ mutation {
 }
 ```
 {{% notice "warning" %}}By default, this won't work if called from outside the server where the Dgraph Alpha is running.
-You can specify a list or range of whitelisted IP addresses from which export, or other admin operations
-can be initiated using the `--security` superflag's `whitelist` option with the `dgraph alpha` command.
+You can specify a list or range of whitelisted IP addresses to initiate admin operations like export. You can do so using the `--security` superflag's `whitelist` option with the `dgraph alpha` command.
 {{% /notice %}}
 
 This triggers an export for all Alpha groups of the cluster. The data is exported from the following Dgraph instances:

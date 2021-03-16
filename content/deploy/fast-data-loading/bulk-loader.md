@@ -301,7 +301,7 @@ You can further configure Bulk Loader using the following options:
 `--badger` superflag's `compression` option: Configure the compression of data
 on disk. By default, the Snappy compression format is used, but you can also use
 Zstandard compression. Or, you can choose no compression to minimize CPU usage. 
-To learnmore, see [Data Compression on Disk]({{< relref "/deploy/data-compression.md" >}}).
+To learn more, see [Data Compression on Disk]({{< relref "/deploy/data-compression.md" >}}).
 
 `--new_uids`: (default: false): Assign new UIDs instead of using the existing
 UIDs in data files. This is useful to avoid overriding the data in a DB already
@@ -319,8 +319,8 @@ use [External IDs]({{< relref "mutations/external-ids.md" >}}).
 
 `--xidmap` (default: disabled. Need a path): Store xid to uid mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. It is recommended to use this flag if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific UID.
 
-The `--vault` superflag and its options specify the Vault server address, role id, secret id and
-field that contains the encryption key that can be used to decrypt the encrypted export.
+The `--vault` superflag and its options specify the Vault server address, role id, secret id, and
+field that contains the encryption key required to decrypt the encrypted export.
 
 ## Tuning & monitoring
 
