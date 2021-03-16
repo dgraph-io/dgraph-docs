@@ -46,7 +46,7 @@ There are a few exceptions to the general rule described above:
 
 By default, admin operations can only be initiated from the machine on which the Dgraph Alpha runs.
 
-You can use the `--security` superflag's option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
+You can use the `--security` superflag's `whitelist` option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
 
 **IP Address**
 
