@@ -51,42 +51,41 @@ The following table maps Dgraph CLI flags from release v20.11 and earlier that
 have been replaced by superflags in release v21.03. Any flags not shown here
 are unchanged from release v21.03.
 
-<!-- TBD alphabetize by compound flag -->
 | Old flag | Old type | New flag and options | New type | Applies to | Note <!-- or example --> |
 |---------:|:---------|---------:|:---------|:----:|:----:|
+| | | **`--acl`** | | | [Access Control List]({{< relref "enterprise-features/access-control-lists.md" >}}) flags |
+| `--acl_secret_file` | string | `secret-file` | string |`alpha`|
+| `--acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
+| `--acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
 | | | **`--badger`** | | |  [Badger](https://dgraph.io/docs/badger) flags |
 | `--max_retries` | int | `max-retries` | int |`alpha`|
 | `--badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`|
 | `--badger.cache_mb` | string | `cache-mb` | string |`bulk`|
 | `--badger.cache_percentage` | string | `cache-percentage` | string |`bulk`|
 ||| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`|
-| | | **`--acl`** | | | [Access Control List]({{< relref "enterprise-features/access-control-lists.md" >}}) flags |
-| `--acl_secret_file` | string | `secret-file` | string |`alpha`|
-| `--acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
-| `--acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
-| | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "deploy/ludicrous-mode.md" >}}) flags  |
-| `--ludicrous_mode` | bool | `enabled` | bool |`alpha`|
-| `--ludicrous_concurrency` | int | `concurrency` | int |`alpha`|
 | | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) flags  |
 | `--graphql_introspection` | bool | `introspection` | bool |`alpha`|
 | `--graphql_debug` | bool | `debug` | bool |`alpha`|
 | `--graphql_extensions` | bool | `extensions` | bool |`alpha`|
 | `--graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
 | `--graphql_lambda_url` | string | `lambda-url` | string |`alpha`|
-| | | **`--raft`** | | | [Raft]({{< relref "design-concepts/raft.md" >}}) flags  |
-| `--pending_proposals` | int | `pending-proposals` | int |`alpha`|
-| `--idx` | int | `idx` | int |`alpha`, `zero`|
-| `--group` | int | `group` | int |`alpha`|
-| `--learner` | bool | `learner` | bool | `alpha`, `zero`| <!-- TBD remove -->
-| `--snapshot-after` | int | `snapshot-after` | bool |`alpha`|
-| | | **`--security`** | | | Security flags |
-| `--auth_token` | string | `token` | string |`alpha`|
-| `--whitelist` | string | `whitelist` | string |`alpha`|
 | | | **`--limit`** | | | Limit-setting flags for Dgraph Alpha  |
 | `--mutations` | string | `mutations` | string |`alpha`|
 | `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`|
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`|
 | `--mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`|
+| | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "deploy/ludicrous-mode.md" >}}) flags  |
+| `--ludicrous_mode` | bool | `enabled` | bool |`alpha`|
+| `--ludicrous_concurrency` | int | `concurrency` | int |`alpha`|
+| | | **`--raft`** | | | [Raft]({{< relref "design-concepts/raft.md" >}}) flags  |
+| `--pending_proposals` | int | `pending-proposals` | int |`alpha`|
+| `--idx` | int | `idx` | int |`alpha`, `zero`|
+| `--group` | int | `group` | int |`alpha`|
+|  |  | (new)`learner` | bool | `alpha`, `zero`|
+| `--snapshot-after` | int | `snapshot-after` | bool |`alpha`|
+| | | **`--security`** | | | Security flags |
+| `--auth_token` | string | `token` | string |`alpha`|
+| `--whitelist` | string | `whitelist` | string |`alpha`|
 | | | **`--telemetry`** | | | Telemetry flags  |
 | `--telemetry` | bool | `reports` | bool |`alpha` and `zero`|
 | `--enable_sentry` | bool | `sentry` | bool |`alpha` and `zero`|
@@ -144,21 +143,21 @@ The commands in these groups are shown in the following table:
 | Dgraph core      | [`zero`](#dgraph-zero) | Dgraph Zero management node commands |
 | Data loading     | [`bulk`](#dgraph-bulk) | Dgraph [Bulk Loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}}) commands     |
 | Data loading     | [`live`](#dgraph-live) | Dgraph [Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) commands     |
-| Data loading     | [`restore`](#dgraph-restore) | Command used to restore backups created using Dgraph enterprise     |
-| Dgraph security  | [`acl`](#dgraph-acl) | Dgraph enterprise access control list ([ACL]({{< relref "enterprise-features/access-control-lists.md" >}})) commands |
-| Dgraph security  | [`audit`](#name-command) |      |
-| Dgraph security  | [`cert`](#name-command) |      |
-| Dgraph debug     | [`debug`](#name-command)    |      |
-| Dgraph debug     | [`debuginfo`](#name-command)    |      |
-| Dgraph tools     | [`completion`](#name-command)    |      |
-| Dgraph tools     | [`conv`](#name-command)    |      |
-| Dgraph tools     | [`decrypt`](#name-command)    |      |
-| Dgraph tools     | [`export_backup`](#name-command)    |      |
-| Dgraph tools     | [`increment`](#name-command)    |      |
-| Dgraph tools     | [`lsbackup`](#name-command)    |      |
-| Dgraph tools     | [`migrate`](#name-command)    |      |
-| Dgraph tools     | [`raftmigrate`](#name-command)    |      |
-| Dgraph tools     | [`upgrade`](#name-command)    |      |
+| Data loading     | [`restore`](#dgraph-restore) | Command used to restore backups created using Dgraph Enterprise Edition     |
+| Dgraph security  | [`acl`](#dgraph-acl) | Dgraph access control list ([ACL]({{< relref "enterprise-features/access-control-lists.md" >}})) commands |
+| Dgraph security  | [`audit`](#dgraph-audit) | Decrypt audit files     |
+| Dgraph security  | [`cert`](#dgraph-cert) | Configure TLS and manage TLS certificates     |
+| Dgraph debug     | [`debug`](#dgraph-debug)    | Used to debug issues with Dgraph     |
+| Dgraph debug     | [`debuginfo`](#dgraph-debuginfo)    | Generates information about the current node for use in debugging issues with Dgraph clusters   |
+| Dgraph tools     | [`completion`](#dgraph-completion)    | Generates shell completion scripts for `bash` and `zsh`     |
+| Dgraph tools     | [`conv`](#dgraph-conv)    | Converts geographic files into RDF so that they can be consumed by Dgraph    |
+| Dgraph tools     | [`decrypt`](#dgraph-decrypt)    | Decrypts an export file created by an encrypted Dgraph cluster     |
+| Dgraph tools     | [`export_backup`](#dgraph-export_backup)    | Converts a binary backup created using Dgraph Enterprise Edition into an exported folder.      |
+| Dgraph tools     | [`increment`](#dgraph-increment)    | Increments a counter transactionally to confirm that a Dgraph Alpha node can handle query and mutation requests |
+| Dgraph tools     | [`lsbackup`](#dgraph-lsbackup)    | Lists information on backups in a given location   |
+| Dgraph tools     | [`migrate`](#dgraph-migrate)    | Migrates data from a MySQL database to Dgraph |
+| Dgraph tools     | [`raftmigrate`](#dgraph-raftmigrate)    | Dgraph Raft migration tool     |
+| Dgraph tools     | [`upgrade`](#dgraph-upgrade)    | Upgrades Dgraph to a newer version     |
 
 ### `dgraph` root command
 
@@ -419,8 +418,9 @@ Use "dgraph zero [command] --help" for more information about a command.
 
 #### `dgraph bulk`
 
-This command is used to TBD. The following replicates the help listing shown when you run
-`dgraph bulk --help`:
+This command is used to bulk load data with the Dgraph
+[Bulk Loader]({{< relref "deploy/fast-data-loading/bulk-loader.md"  >}}) tool.
+The following replicates the help listing shown when you run `dgraph bulk --help`:
 
 ```
 Run Dgraph Bulk Loader 
@@ -484,8 +484,9 @@ Use "dgraph bulk [command] --help" for more information about a command.
 
 #### `dgraph live`
 
-This command is used to TBD. The following replicates the help listing shown when you run
-`dgraph live --help`:
+This command is used to load live data with the Dgraph
+[Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) tool. The
+following replicates the help listing shown when you run `dgraph live --help`:
 
 ```
 Run Dgraph Live Loader 
@@ -715,7 +716,8 @@ Use "dgraph cert [command] --help" for more information about a command.
 
 ### Dgraph debug commands
 
-TBD
+Dgraph debug commands provide support for debugging issues with Dgraph deployments.
+To learn more, see [Using the Debug Tool]({{< relref "howto/using-increment-tool.md" >}}).
 
 #### `dgraph debug`
 
@@ -782,7 +784,8 @@ Use "dgraph debuginfo [command] --help" for more information about a command.
 
 ### Dgraph tools commands
 
-TBD
+Dgraph tools provide a variety of tools to make it easier for you to deploy and
+manage Dgraph.
 
 #### `dgraph completion`
 
@@ -806,7 +809,8 @@ Use "dgraph completion [command] --help" for more information about a command.
 
 #### `dgraph conv`
 
-This command runs the Dgraph geographic file converter. The following replicates
+This command runs the Dgraph geographic file converter, which onverts geographic
+files into RDF so that they can be consumed by Dgraph. The following replicates
 the help listing shown when you run `dgraph conv --help`:
 
 ```
@@ -853,9 +857,9 @@ Use "dgraph decrypt [command] --help" for more information about a command.
 
 #### `dgraph export_backup`
 
-This command is used to convert a [binary backup](TBD) created using Dgraph Enterprise
-Edition into an exported folder. The following replicates key information from
-the help listing shown when you run `dgraph export_backup --help`:
+This command is used to convert a [binary backup]({{< relref "enterprise-features/binary-backups.md" >}})
+created using Dgraph Enterprise Edition into an exported folder. The following
+replicates key information from the help listing shown when you run `dgraph export_backup --help`:
 
 ```
 Usage:
@@ -885,7 +889,7 @@ Use "dgraph export_backup [command] --help" for more information about a command
 
 This command increments a counter transactionally, so that you can confirm that
 an Alpha node is able to handle both query and mutation requests. To learn more,
-see [Using the Increment Tool](TBD). 
+see [Using the Increment Tool]({{< relref "howto/using-increment-tool.md" >}}). 
 The following replicates the help listing shown when you run `dgraph increment --help`:
 
 ```
