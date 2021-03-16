@@ -30,18 +30,18 @@ Some flags are deprecated and replaced in release v21.03. In previous Dgraph
 releases, multiple related flags often are used in a command, causing some 
 commands to be very long. Starting in release v21.03, Dgraph uses *superflags* 
 for the most complex commands: `alpha`, `backup`, `bulk`,`debug`, `live` and
-`zero`. Superflags are compound flags: they contain one or more options that let
+`zero`. A superflag is a compound flag; it includes one or more options that let
 you define multiple settings in a semicolon-delimited list. The general syntax
-for superflags is as follows: `--<flagname> option-a=value; option-b=value`
+for a superflag is as follows: `--<flagname> option-a=value; option-b=value`
 
-For example, the following command that is valid in release 20.11 is no longer
-valid starting in release 21.03:
+For example, the following command that is valid in release v20.11 is no longer
+valid starting in release v21.03:
 
 ```ssh
 dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
 ```
 
-Instead, you can express this command as follows starting in release 21.03:
+Instead, you can express this command as follows starting in release v21.03:
 
 ```ssh
 dgraph alpha --ludicrous enabled=true; concurrency=16;
@@ -809,7 +809,7 @@ Use "dgraph completion [command] --help" for more information about a command.
 
 #### `dgraph conv`
 
-This command runs the Dgraph geographic file converter, which onverts geographic
+This command runs the Dgraph geographic file converter, which converts geographic
 files into RDF so that they can be consumed by Dgraph. The following replicates
 the help listing shown when you run `dgraph conv --help`:
 
