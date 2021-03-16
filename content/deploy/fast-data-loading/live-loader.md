@@ -176,8 +176,8 @@ The `--ludicrous` superflag's `enabled` option should only be used if Dgraph is 
 
 `-U, --upsertPredicate` (default: disabled): Runs Live Loader in `upsertPredicate` mode. The provided value will be used to store blank nodes as a `xid`.
 
-`--vault` superflag's options specify the Vault server address, role id, secret id and
-field that contains the encryption key that can be used to decrypt the encrypted export.
+`--vault` superflag's options specify the Vault server address, role id, secret id, and
+field that contains the encryption key required to decrypt the encrypted export.
 
 ## `upsertPredicate` Example
 

@@ -46,18 +46,18 @@ There are a few exceptions to the general rule described above:
 
 By default, admin operations can only be initiated from the machine on which the Dgraph Alpha runs.
 
-You can use the `--security` superflag's option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
+You can use the `--security` superflag's `whitelist` option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
 
 **IP Address**
 
 ```sh
-dgraph alpha --security whitelist=127.0.0.1 ...
+dgraph alpha --security "whitelist=127.0.0.1 ..."
 ```
 This would allow admin operations from hosts with IP 127.0.0.1 (i.e., localhost only).
 
 **IP Range**
 ```sh
-dgraph alpha --security whitelist=172.17.0.0:172.20.0.0,192.168.1.1 ...
+dgraph alpha --security "whitelist=172.17.0.0:172.20.0.0,192.168.1.1 ..."
 ```
 
 This would allow admin operations from hosts with IP between `172.17.0.0` and `172.20.0.0` along with
@@ -76,7 +76,7 @@ You can set whitelist IP to `0.0.0.0/0` to whitelist all IPs.
 **Hostname**
 
 ```sh
-dgraph alpha --security whitelist=admin-bastion,host.docker.internal ...
+dgraph alpha --security "whitelist=admin-bastion,host.docker.internal ..."
 ```
 
 This would allow admin operations from hosts with hostnames `admin-bastion` and `host.docker.internal`.
@@ -153,8 +153,7 @@ mutation {
 }
 ```
 {{% notice "warning" %}}By default, this won't work if called from outside the server where the Dgraph Alpha is running.
-You can specify a list or range of whitelisted IP addresses from which export, or other admin operations
-can be initiated using the `--security` superflag's `whitelist` option with the `dgraph alpha` command.
+You can specify a list or range of whitelisted IP addresses to initiate admin operations like export. You can do so using the `--security` superflag's `whitelist` option with the `dgraph alpha` command.
 {{% /notice %}}
 
 This triggers an export for all Alpha groups of the cluster. The data is exported from the following Dgraph instances:
