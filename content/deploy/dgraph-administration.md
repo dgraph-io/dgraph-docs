@@ -51,13 +51,13 @@ You can use the `--security` superflag's `whitelist` option to specify a comma-s
 **IP Address**
 
 ```sh
-dgraph alpha --security whitelist=127.0.0.1 ...
+dgraph alpha --security "whitelist=127.0.0.1 ..."
 ```
 This would allow admin operations from hosts with IP 127.0.0.1 (i.e., localhost only).
 
 **IP Range**
 ```sh
-dgraph alpha --security whitelist=172.17.0.0:172.20.0.0,192.168.1.1 ...
+dgraph alpha --security "whitelist=172.17.0.0:172.20.0.0,192.168.1.1 ..."
 ```
 
 This would allow admin operations from hosts with IP between `172.17.0.0` and `172.20.0.0` along with
