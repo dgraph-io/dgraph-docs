@@ -130,7 +130,7 @@ Types can also be used to filter results inside a query. For example:
 This query will return the nodes that have a parent predicate and only the
 `parent`'s of type `Person`.
 
-You can also query for `dgraph.type` to get the data's type. For example:
+You can also query for `dgraph.type` to get the Entity type. For example:
 
 ```graphql
 {
