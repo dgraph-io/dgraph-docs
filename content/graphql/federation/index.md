@@ -8,7 +8,7 @@ weight = 14
   parent = "graphql"
 +++
 
-Dgraph supports Apollo federation starting in release version 21.03. This lets you create a gateway GraphQL service that includes the Dgraph GraphQL API and other GraphQL services.
+Dgraph supports [Apollo federation](https://www.apollographql.com/docs/federation/) starting in release version 21.03. This lets you create a gateway GraphQL service that includes the Dgraph GraphQL API and other GraphQL services.
 
 ## Support for Apollo federation directives
 
@@ -18,7 +18,7 @@ The current implementation supports the following five directives: `@key`, `@ext
 This directive takes one field argument inside it: the `@key` field. There are few limitations on how to use `@key` directives:
 
 - Users can define the @key directive only once for a type
-- Support for multiple key types is not currently available.
+- Support for multiple key fields is not currently available.
 - Since the @key field acts as a foreign key to resolve entities from the service where it is extended, the field provided as an argument inside the @key directive should be of ID type or have the @id directive on it.
 
 For example -
@@ -31,13 +31,15 @@ type User @key(fields: "id") {
 ```
 
 ### `@extends` directive
-This directive is provided to give support for extended definitions. Suppose the above defined `User` type is defined in some service. Users can extend it to our GraphQL service by using this directive.
+This directive is provided to give support for extended definitions. Suppose the above defined `User` type is defined in some other service. Users can extend it in Dgraph's GraphQL service by using this directive. 
+
 ```graphql
 type User @key(fields: "id") @extends{
-   id: ID! @external
+  id: String! @id @external
   products: [Product]
 }
 ```
+The same is also achievable with the `extend` keyword, i.e., user has the choice to choose between `extend type User ...` or `type User @extends ...`.
 
 ### `@external` directive
 This directive is used when the given field is not stored in this service. It can only be used on extended type definitions. As it is used above on the `id` field of `User` type.
@@ -75,6 +77,32 @@ extend type User @key(fields: "id") {
 ```
 
 When the gateway fetches `user.reviews` from the `review` service, the gateway will get `user.email` from the `User` service and provide it as an argument to the `_entities` query.
+
+Using `@requires` alone on a field doesn't make much sense. In cases, where you feel the need to use `@requires`, you would want some custom logic on that field too. You can achieve that using `@lambda` or `@custom(http: {...})` directives.
+
+Here's an example -
+
+1. Schema:
+```graphql
+extend type User @key(fields: "id") {
+  id: ID! @external
+  email: String @external
+  reviews: [Review] @requires(fields: "email") @lambda
+}
+```
+2. Lambda Script:
+```js
+// returns a list of reviews for a user
+async function userReviews({parent, graphql}) {
+  let reviews = [];
+  // find the reviews for a user using the email and return them.
+  // Even though the email has been declared `@external`, it will be available as `parent.email` as it is mentioned in `@requires`.
+  return reviews
+}
+self.addGraphQLResolvers({
+  "User.reviews": userReviews
+})
+```
 
 ## Generated queries and mutations
 
@@ -141,23 +169,3 @@ type Astronaut @key(fields: "id") {
 ```
 
 When adding an object of type `Astronaut`, first it should be added into `AstronautService` service and then the `addAstronaut` mutation should be called with value of `id` provided as an argument which must be equal to the value in `AstronautService` service.
-
-Use the admin endpoint to query for the generated schema -
-
-```graphql
-{
-  getGQLSchema {
-    generatedSchema
-  }
-}
-```
-
-{{% notice "note" %}}
-Currently we only support federated queries, not federated mutations. We might support it in the future.
-{{% /notice %}}
-
-## Gateway supported directives
-
-Due to the bug in the federation library (see [here](https://github.com/apollographql/federation/issues/346)), some directives are removed from the schema `SDL` which is returned to the gateway in response to the `_service` query. Those directives are `@custom`, `@generate`, and `@auth`.
-
-You can still use these directives in your GraphQL schema and they will work as desired but the gateway will unaware of this.
