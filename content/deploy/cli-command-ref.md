@@ -55,62 +55,62 @@ are unchanged from release v21.03.
 | Old flag | Old type | New flag and options | New type | Applies to | Note <!-- or example --> |
 |---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--badger`** | | |  [Badger](https://dgraph.io/docs/badger) flags |
-| `max_retries` | int | `max-retries` | int |`alpha`|
-| `badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`|
-| `badger.cache_mb` | string | `cache-mb` | string |`bulk`|
-| `badger.cache_percentage` | string | `cache-percentage` | string |`bulk`|
-| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`|
+| `--max_retries` | int | `max-retries` | int |`alpha`|
+| `--badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`|
+| `--badger.cache_mb` | string | `cache-mb` | string |`bulk`|
+| `--badger.cache_percentage` | string | `cache-percentage` | string |`bulk`|
+||| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`|
 | | | **`--acl`** | | | [Access Control List]({{< relref "enterprise-features/access-control-lists.md" >}}) flags |
-| `acl_secret_file` | string | `secret-file` | string |`alpha`|
-| `acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
-| `acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
+| `--acl_secret_file` | string | `secret-file` | string |`alpha`|
+| `--acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
+| `--acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
 | | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "deploy/ludicrous-mode.md" >}}) flags  |
-| `ludicrous_mode` | bool | `enabled` | bool |`alpha`|
-| `ludicrous_concurrency` | int | `concurrency` | int |`alpha`|
+| `--ludicrous_mode` | bool | `enabled` | bool |`alpha`|
+| `--ludicrous_concurrency` | int | `concurrency` | int |`alpha`|
 | | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) flags  |
-| `graphql_introspection` | bool | `introspection` | bool |`alpha`|
-| `graphql_debug` | bool | `debug` | bool |`alpha`|
-| `graphql_extensions` | bool | `extensions` | bool |`alpha`|
-| `graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
-| `graphql_lambda_url` | string | `lambda-url` | string |`alpha`|
+| `--graphql_introspection` | bool | `introspection` | bool |`alpha`|
+| `--graphql_debug` | bool | `debug` | bool |`alpha`|
+| `--graphql_extensions` | bool | `extensions` | bool |`alpha`|
+| `--graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`|
+| `--graphql_lambda_url` | string | `lambda-url` | string |`alpha`|
 | | | **`--raft`** | | | [Raft]({{< relref "design-concepts/raft.md" >}}) flags  |
-| `pending_proposals` | int | `pending-proposals` | int |`alpha`|
-| `idx` | int | `idx` | int |`alpha`, `zero`|
-| `group` | int | `group` | int |`alpha`|
-| `learner` | bool | `learner` | bool | `alpha`, `zero`|
-| `snapshot-after` | int | `snapshot-after` | bool |`alpha`|
+| `--pending_proposals` | int | `pending-proposals` | int |`alpha`|
+| `--idx` | int | `idx` | int |`alpha`, `zero`|
+| `--group` | int | `group` | int |`alpha`|
+| `--learner` | bool | `learner` | bool | `alpha`, `zero`| <!-- TBD remove -->
+| `--snapshot-after` | int | `snapshot-after` | bool |`alpha`|
 | | | **`--security`** | | | Security flags |
-| `auth_token` | string | `token` | string |`alpha`|
-| `whitelist` | string | `whitelist` | string |`alpha`|
+| `--auth_token` | string | `token` | string |`alpha`|
+| `--whitelist` | string | `whitelist` | string |`alpha`|
 | | | **`--limit`** | | | Limit-setting flags for Dgraph Alpha  |
-| `mutations` | string | `mutations` | string |`alpha`|
-| `query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`|
-| `normalize_node_limit` | int | `normalize-node` | int |`alpha`|
-| `mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`|
+| `--mutations` | string | `mutations` | string |`alpha`|
+| `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`|
+| `--normalize_node_limit` | int | `normalize-node` | int |`alpha`|
+| `--mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`|
 | | | **`--telemetry`** | | | Telemetry flags  |
-| `telemetry` | bool | `reports` | bool |`alpha` and `zero`|
-| `enable_sentry` | bool | `sentry` | bool |`alpha` and `zero`|
+| `--telemetry` | bool | `reports` | bool |`alpha` and `zero`|
+| `--enable_sentry` | bool | `sentry` | bool |`alpha` and `zero`|
 | | | **`--tls`** | | | [TLS]({{< relref "deploy/tls-configuration.md" >}}) flags  |
-| `tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
-| `tls_use_system_ca` | bool | `use-system-ca` | bool |`alpha`, `zero`, `bulk`, `backup`, `live`|
-| `tls_server_name` | string | `server-name` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
-| `tls_client_auth` | string | `client-auth-type` | string |`alpha`, `zero`|
-| `tls_node_cert` | string | `server-cert` | string |`alpha` and `zero`|
-| `tls_node_key` | string | `server-key` | string |`alpha` and `zero`|
-| `tls_internal_port_enabled` | bool | `internal-port` | bool | `alpha`, `zero`, `bulk`, `backup`, `live`|
-| `tls_cert` | string | `client-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
-| `tls_key` | string | `client-key` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
+| `--tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
+| `--tls_use_system_ca` | bool | `use-system-ca` | bool |`alpha`, `zero`, `bulk`, `backup`, `live`|
+| `--tls_server_name` | string | `server-name` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
+| `--tls_client_auth` | string | `client-auth-type` | string |`alpha`, `zero`|
+| `--tls_node_cert` | string | `server-cert` | string |`alpha` and `zero`|
+| `--tls_node_key` | string | `server-key` | string |`alpha` and `zero`|
+| `--tls_internal_port_enabled` | bool | `internal-port` | bool | `alpha`, `zero`, `bulk`, `backup`, `live`|
+| `--tls_cert` | string | `client-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
+| `--tls_key` | string | `client-key` | string |`alpha`, `zero`, `bulk`, `backup`, `live`|
 | | | **`--trace`** | | | [Tracing]({{< relref "deploy/tracing.md" >}}) flags  |
-| `trace` | float64 | `ratio` | float64 |`alpha`, `zero`|
-| `jaeger.collector` | string | `jaeger` | string | `alpha`, `zero`|
-| `datadog.collector` | string | `datadog` | string | `alpha`, `zero`|
+| `--trace` | float64 | `ratio` | float64 |`alpha`, `zero`|
+| `--jaeger.collector` | string | `jaeger` | string | `alpha`, `zero`|
+| `--datadog.collector` | string | `datadog` | string | `alpha`, `zero`|
 | | | **`--vault`** | | | Vault flags  |
-| `vault_addr` | string | `addr` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
-| `vault_roleid_file` | string | `role-id-file` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
-| `vault_secretid_file` | string | `secret-id-file` | string |`alpha`, `bulk`, `backup`, `live`, `debug`|
-| `vault_path` | string | `path` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
-| `vault_field` | string | `field` | string |`alpha`, `bulk`, `backup`, `live`, `debug`|
-| `vault_format` | string | `format` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
+| `--vault_addr` | string | `addr` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
+| `--vault_roleid_file` | string | `role-id-file` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
+| `--vault_secretid_file` | string | `secret-id-file` | string |`alpha`, `bulk`, `backup`, `live`, `debug`|
+| `--vault_path` | string | `path` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
+| `--vault_field` | string | `field` | string |`alpha`, `bulk`, `backup`, `live`, `debug`|
+| `--vault_format` | string | `format` | string | `alpha`, `bulk`, `backup`, `live`, `debug`|
 
 To learn more about each of these flags, see the `--help` output of the Dgraph
 CLI commands listed in the following section.
