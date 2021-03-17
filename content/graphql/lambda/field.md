@@ -22,6 +22,7 @@ type Author {
   reputation: Float @search
   bio: String @lambda
   rank: Int @lambda
+  isMe: Boolean @lambda
 }
 ```
 
@@ -49,6 +50,14 @@ Once the schema is ready, you can define your JavaScript mutation function and
 add it as a resolver in your JS source code. To add the resolver you can use
 either the `addGraphQLResolvers` or `addMultiParentGraphQLResolvers` methods.
 
+{{% notice "note" %}} A Lambda Field resolver can use a combination of
+`parents`, `parent`, `dql`, or `graphql` inside the function. {{% /notice %}}
+
+{{% notice "tip" %}} This example uses `parent` for the resolver function. You
+can find additional resolver examples using `dql` in the [Lambda queries
+article]({{< relref "query.md" >}}), and using `graphql` in the [Lambda
+mutations article]({{< relref "mutation.md" >}}). {{% /notice %}}
+
 For example, to define JavaScript lambda functions for...
 
 - `Author`,
@@ -75,7 +84,7 @@ self.addGraphQLResolvers({
 });
 ```
 
-Another example, adding a resolver for `rank` using a `graphql` call:
+An example, adding a resolver for `rank` using a `graphql` call:
 
 ```javascript
 async function rank({ parents }) {
@@ -94,6 +103,28 @@ self.addMultiParentGraphQLResolvers({
 });
 ```
 
+An example of using the client provided JWT to return true if the custom claim
+for `USER` from the JWT matches the Author's id.
+
+```javascript
+async function isMe({ parent, authHeader }) {
+  if (!authHeader) return false;
+  if (!authHeader.value) return false;
+  const headerValue = authHeader.value;
+  if (headerValue === "") return false;
+  const base64Url = headerValue.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const allClaims = JSON.parse(atob(base64));
+  if (!allClaims["https://my.app.io/jwt/claims"]) return false;
+  const customClaims = allClaims["https://my.app.io/jwt/claims"];
+  return customClaims.USER === parent.id;
+}
+
+self.addGraphQlResolvers({
+  "Author.isMe": isMe,
+});
+```
+
 ### Example
 
 If you execute this lambda query
@@ -104,6 +135,7 @@ query {
     name
     bio
     rank
+    isMe
   }
 }
 ```
@@ -116,7 +148,8 @@ You should see a response such as
     {
       "name": "Ann Author",
       "bio": "My name is Ann Author and I was born on 2000-01-01T00:00:00Z.",
-      "rank": 3
+      "rank": 3,
+      "isMe": false
     }
   ]
 }

@@ -96,24 +96,32 @@ functions registered using `self.addGraphQLResolvers` receive
   lambda server. The user's auth header is passed back to the `graphql`
   function, so this can be used securely
 - `dql`, provides an API to execute DQL from the lambda server
+- `authHeader`, provides the JWT key and value of the auth header passed from
+  the client
 
 The `addGraphQLResolvers` can be represented with the following TypeScript
 types:
 
 ```TypeScript
 type GraphQLResponse {
-  data?: Record<string, any>,
-  errors?: { message: string }[],
+  data?: Record<string, any>
+  errors?: { message: string }[]
+}
+
+type AuthHeader {
+  key: string
+  value: string
 }
 
 type GraphQLEventWithParent = {
-  parent: Record<string, any> | null,
-  args: Record<string, any>,
-  graphql: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>,
+  parent: Record<string, any> | null
+  args: Record<string, any>
+  graphql: (query: string, vars?: Record<string, any>, authHeader?: AuthHeader) => Promise<GraphQLResponse>
   dql: {
-    query: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>
-    mutate: (s: string) => Promise<GraphQLResponse>
-  },
+    query: (dql: string, vars?: Record<string, any>) => Promise<GraphQLResponse>
+    mutate: (dql: string) => Promise<GraphQLResponse>
+  }
+  authHeader: AuthHeader
 }
 
 function addGraphQLResolvers(resolvers: {
@@ -176,6 +184,8 @@ this method receive `{ parents, args, graphql, dql }` as argument:
 - `graphql`, a function to execute auto-generated GraphQL API calls from the
   lambda server
 - `dql`, provides an API to execute DQL from the lambda server
+- `authHeader`, provides the JWT key and value of the auth header passed from
+  the client
 
 The `addMultiParentGraphQLResolvers` can be represented with the following
 TypeScript types:
@@ -186,14 +196,20 @@ type GraphQLResponse {
   errors?: { message: string }[]
 }
 
+type AuthHeader {
+  key: string
+  value: string
+}
+
 type GraphQLEventWithParents = {
-  parents: (Record<string, any>)[] | null,
-  args: Record<string, any>,
-  graphql: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>,
+  parents: (Record<string, any>)[] | null
+  args: Record<string, any>
+  graphql: (query: string, vars?: Record<string, any>, authHeader?: AuthHeader) => Promise<GraphQLResponse>
   dql: {
-    query: (s: string, vars: Record<string, any> | undefined) => Promise<GraphQLResponse>
+    query: (s: string, vars?: Record<string, any>) => Promise<GraphQLResponse>
     mutate: (s: string) => Promise<GraphQLResponse>
-  },
+  }
+  authHeader: AuthHeader
 }
 
 function addMultiParentGraphQLResolvers(resolvers: {
@@ -242,7 +258,7 @@ self.addMultiParentGraphQLResolvers({
 {{% notice "note" %}} Scripts containing import packages (such as the example
 above) require compilation using Webpack. {{% /notice %}}
 
-Another resolver example using a `dql` call:
+A resolver example using a `dql` call:
 
 ```javascript
 async function reallyComplexDql({ parents, dql }) {
@@ -255,6 +271,37 @@ async function reallyComplexDql({ parents, dql }) {
 
 self.addMultiParentGraphQLResolvers({
   "MyType.reallyComplexProperty": reallyComplexDql,
+});
+```
+
+A resolver example using a `graphql` call and manually overriding the authHeader
+provided by the client:
+
+```javascript
+async function secretGraphQL({ parents, graphql }) {
+  const ids = parents.map((p) => p.id);
+  const secretResults = await graphql(
+    `query myQueryName ($ids: [ID!]) { queryMyType(filter: { id: $ids }) { id controlledEdge { myField } } }`,
+    { ids },
+    {
+      key: 'X-My-App-Auth'
+      value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL215LmFwcC5pby9qd3QvY2xhaW1zIjp7IlVTRVIiOiJmb28ifSwiZXhwIjoxODAwMDAwMDAwLCJzdWIiOiJ0ZXN0IiwibmFtZSI6IkpvaG4gRG9lIDIiLCJpYXQiOjE1MTYyMzkwMjJ9.wI3857KzwjtZAtOjng6MnzKVhFSqS1vt1SjxUMZF4jc'
+    }
+  );
+  return parents.map((parent) => {
+    const secretRes = secretResults.data.find(res => res.id === parent.id)
+    parent.secretProperty = null
+    if (secretRes) {
+      if (secretRes.controlledEdge) {
+        parent.secretProperty = secretRes.controlledEdge.myField
+      }
+    }
+    return parent
+  });
+}
+
+self.addMultiParentGraphQLResolvers({
+  "MyType.secretProperty": secretGraphQL,
 });
 ```
 
