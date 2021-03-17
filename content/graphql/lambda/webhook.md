@@ -8,9 +8,9 @@ weight = 5
 
 ### Schema
 
-To set up a lambda webhook, first you need to define it in your GraphQL schema by using the `@lambdaOnMutate` directive along with the mutation events (add/update/delete) you want to listen on.
+To set up a lambda webhook, you need to define it in your GraphQL schema by using the `@lambdaOnMutate` directive along with the mutation events (`add`/`update`/`delete`) you want to listen on.
 
-For example, to define a lambda webhook for all mutation events (add/update/delete) on any `Author` object:
+For example, to define a lambda webhook for all mutation events (`add`/`update`/`delete`) on any `Author` object:
 
 ```graphql
 type Author @lambdaOnMutate(add: true, update: true, delete: true) {
@@ -30,7 +30,9 @@ To add the resolvers you should use the `addWebHookResolvers`method.
 A Lambda Webhook resolver can use a combination of `event`, `dql`, `graphql` or `authHeader` inside the function.
 {{% /notice %}}
 
-You have access to the `event` object within the resolver. The definition of `event` is something as follows:
+#### Event object
+
+You also have access to the `event` object within the resolver. The definition of `event` is as follows:
 
 ```
 "event": {
@@ -51,7 +53,9 @@ You have access to the `event` object within the resolver. The definition of `ev
     }
 ```
 
-For example, to define the JavaScript lambda functions for each mutation event for which `@lambdaOnMutate` is enabled and add those as resolvers:
+#### Resolver examples
+
+For example, to define JavaScript lambda functions for each mutation event for which `@lambdaOnMutate` is enabled and add those as resolvers:
 
 ```javascript
 async function addAuthorWebhook({event, dql, graphql, authHeader}) {
@@ -81,7 +85,7 @@ self.addWebHookResolvers({
 
 ### Example
 
-Finally, if you execute a `addAuthor` mutation the resolver `addAuthorWebhook` mapped to `add` operation will get triggered :
+Finally, if you execute an `addAuthor` mutation, the `add` operation mapped to the `addAuthorWebhook` resolver will be triggered:
 
 ```graphql
 mutation {
