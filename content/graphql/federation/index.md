@@ -17,9 +17,9 @@ The current implementation supports the following five directives: `@key`, `@ext
 ### `@key` directive
 This directive takes one field argument inside it: the `@key` field. There are few limitations on how to use `@key` directives:
 
-- Users can define the @key directive only once for a type
+- Users can define the `@key` directive only once for a type
 - Support for multiple key fields is not currently available.
-- Since the @key field acts as a foreign key to resolve entities from the service where it is extended, the field provided as an argument inside the @key directive should be of ID type or have the @id directive on it.
+- Since the `@key` field acts as a foreign key to resolve entities from the service where it is extended, the field provided as an argument inside the `@key` directive should be of `ID` type or have the `@id` directive on it.
 
 For example -
 
@@ -31,7 +31,7 @@ type User @key(fields: "id") {
 ```
 
 ### `@extends` directive
-This directive is provided to give support for extended definitions. Suppose the above defined `User` type is defined in some other service. Users can extend it in Dgraph's GraphQL service by using this directive. 
+This directive provides support for extended definitions. For example, if the above-defined `User` type is defined in some other service, you can extend it in Dgraph's GraphQL service by using the `@extends` directive, as follows:
 
 ```graphql
 type User @key(fields: "id") @extends{
@@ -39,13 +39,13 @@ type User @key(fields: "id") @extends{
   products: [Product]
 }
 ```
-The same is also achievable with the `extend` keyword, i.e., user has the choice to choose between `extend type User ...` or `type User @extends ...`.
+You can also achieve this with the `extend` keyword; so you have a choice between two types of syntax to extend a type into your Dgraph GraphQL service: `extend type User ...` or `type User @extends ...`.
 
 ### `@external` directive
-This directive is used when the given field is not stored in this service. It can only be used on extended type definitions. As it is used above on the `id` field of `User` type.
+You use this directive when the given field is not stored in this service. It can only be used on extended type definitions. For example, it is used in the example shown above on the `id` field of the `User` type.
 
 ### `@provides` directive
-This directive is used on a field that tells the gateway to return a specific fieldSet from the base type while fetching the field. 
+You use this directive on a field that tells the gateway to return a specific fieldset from the base type while fetching the field.
 
 For example -
 
@@ -61,10 +61,10 @@ extend type Product @key(fields: "upc") {
 }
 ```
 
-While fetching `Review.product` from the `review` service, and if the `name` or `price` is also queried, the gateway will fetch these from the `review` service itself, meaning that it also resolves these fields, even though both fields are `@external`.
+While fetching `Review.product` from the `review` service, and if the `name` or `price` is also queried, the gateway will fetch these from the `review` service itself. So, the `review` service also resolves these fields, even though both fields are `@external`.
 
 ### `@requires` directive
-This directive is used on a field to annotate the fieldSet of the base type. It is used to develop a query plan where the required fields may not be needed by the client, but the service may need additional information from other services. 
+You use this directive on a field to annotate the fieldset of the base type. You can use it to develop a query plan where the required fields may not be needed by the client, but the service may need additional information from other services.
 
 For example -
 
@@ -78,7 +78,7 @@ extend type User @key(fields: "id") {
 
 When the gateway fetches `user.reviews` from the `review` service, the gateway will get `user.email` from the `User` service and provide it as an argument to the `_entities` query.
 
-Using `@requires` alone on a field doesn't make much sense. In cases, where you feel the need to use `@requires`, you would want some custom logic on that field too. You can achieve that using `@lambda` or `@custom(http: {...})` directives.
+Using `@requires` alone on a field doesn't make much sense. In cases where you need to use `@requires`, you should also add some custom logic on that field. You can add such logic using the `@lambda` or `@custom(http: {...})` directives.
 
 Here's an example -
 
@@ -144,11 +144,11 @@ type Mutation {
 }
 ```
 
-The queries for `Astronaut` are not exposed to the gateway since it will be resolved through the `_entities` resolver. Although these queries will be available on the Dgraph GraphQL API endpoint.
+The queries for `Astronaut` are not exposed to the gateway because they are resolved through the `_entities` resolver. However, these queries are available on the Dgraph GraphQL API endpoint.
 
 ## Mutation for `extended` types
 If you want to add an object of `Astronaut` type which is extended in this service.
-The mutation `addAstronaut` takes `AddAstronautInput` which is generated as -
+The mutation `addAstronaut` takes `AddAstronautInput`, which is generated as follows:
 
 ```graphql
 input AddAstronautInput {
@@ -157,9 +157,9 @@ input AddAstronautInput {
 }
 ```
 
-Even though the `id` field is of `ID` type which should be ideally generated internally by Dgraph. In this case, it should be provided as input since currently federated mutations aren't supported. The user should provide the value of `id` same as the value present in the GraphQL service where the type  `Astronaut` is defined.
+The `id` field is of `ID` type, which is usually generated internally by Dgraph. But, In this case, it's provided as an input. The user should provide the same `id` value that is present in the GraphQL service where the type  `Astronaut` is defined.
 
-For example, let's take that the type `Astronaut` is defined in some other service `AstronautService` as -
+For example, let's assume that the type `Astronaut` is defined in some other service, `AstronautService`, as follows:
 
 ```graphql
 type Astronaut @key(fields: "id") {
@@ -168,4 +168,4 @@ type Astronaut @key(fields: "id") {
 }
 ```
 
-When adding an object of type `Astronaut`, first it should be added into `AstronautService` service and then the `addAstronaut` mutation should be called with value of `id` provided as an argument which must be equal to the value in `AstronautService` service.
+When adding an object of type `Astronaut`, you should first add it to the `AstronautService` service. Then, you can call the `addAstronaut` mutation with the value of `id` provided as an argument that must be equal to the value in `AstronautService` service.
