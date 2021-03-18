@@ -57,13 +57,13 @@ Release v21.03 includes the following superflags:
 For example, the following command that is valid in release v20.11 is no longer
 valid starting in release v21.03:
 
-```ssh
+```sh
 dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
 ```
 
 Instead, you can express this command as follows starting in release v21.03:
 
-```ssh
+```sh
 dgraph alpha --ludicrous enabled=true; concurrency=16;
 ```
 
@@ -498,8 +498,8 @@ Use "dgraph bulk [command] --help" for more information about a command.
 #### `dgraph live`
 
 This command is used to load live data with the Dgraph
-[Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) tool. The
-following replicates the help listing shown when you run `dgraph live --help`:
+[Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) tool.
+The following replicates the help listing shown when you run `dgraph live --help`:
 
 ```shell
 Run Dgraph Live Loader 

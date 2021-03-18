@@ -21,7 +21,7 @@ used in lists. Lists behave like an unordered set in Dgraph. For example:
 not be stored and order might not be preserved. All scalars may be nullable or
 non-nullable.
 
-{{% notice "note" %}}The `Int64` type introduced in release 20.11 represents
+{{% notice "note" %}}The `Int64` type introduced in release v20.11 represents
 a signed integer ranging between `-(2^63)` and `(2^63 -1)`. Signed `Int64` values
 in this range will be parsed correctly by Dgraph as long as the client can
 serialize the number correctly in JSON. For example, a JavaScript client might
