@@ -5,6 +5,7 @@ weight = 20
     parent = "deploy"
 +++
 
+
 You can use the Dgraph command-line interface (CLI) to deploy and manage Dgraph.
 You use it in self-managed deployment scenarios; such as running Dgraph on
 on-premises servers hosted on your physical infrastructure, or running Dgraph in
@@ -32,6 +33,7 @@ commands to be very long. Starting in release v21.03, Dgraph uses *superflags*
 for some flags used by the most complex commands: `alpha`, `backup`, `bulk`,
 `debug`, `live` and `zero`. Superflags are compound flags: they contain one or
 more options that let you define multiple settings in a semicolon-delimited list.
+
 The general syntax for superflags is as follows: `--<super-flag-name> option-a=value; option-b=value`
 
 {{% notice "note" %}}
@@ -64,12 +66,14 @@ dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
 Instead, you can express this command as follows starting in release v21.03:
 
 ```sh
+
 dgraph alpha --ludicrous enabled=true; concurrency=16;
 ```
 
 The following table maps Dgraph CLI flags from release v20.11 and earlier that
 have been replaced by superflags (and their options) in release v21.03. Any flags
 not shown here are unchanged in release v21.03. 
+
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
@@ -497,8 +501,7 @@ Use "dgraph bulk [command] --help" for more information about a command.
 
 #### `dgraph live`
 
-This command is used to load live data with the Dgraph
-[Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) tool.
+This command is used to load live data with the Dgraph [Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) tool.
 The following replicates the help listing shown when you run `dgraph live --help`:
 
 ```shell

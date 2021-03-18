@@ -102,3 +102,9 @@ Reference: [Skip directive](/graphql/queries/skip-include)
 `@withSubscription` directive when applied on a type, generates subsciption queries for it.
 
 Reference: [Subscriptions](/graphql/subscriptions)
+
+### @lambdaOnMutate
+
+The `@lambdaOnMutate` directive allows you to listen to mutation events(`add`/`update`/`delete`). Depending on the defined events and the occurrence of a mutation event, `@lambdaOnMutate` triggers the appropriate lambda function implemented on a given lambda server.
+
+Reference: [LambdaOnMutate directive](/graphql/lambda/webhook)

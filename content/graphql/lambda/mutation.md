@@ -59,6 +59,22 @@ self.addGraphQLResolvers({
 })
 ```
 
+Alternatively, you can use `dql.mutate` to achieve the same results:
+
+```javascript
+async function newAuthor({args, dql, graphql}) {
+    // lets give every new author a reputation of 3 by default
+    const res = await dql.mutate(`{
+        set {
+            _:newAuth <Author.name> "${args.name}" .
+            _:newAuth <Author.reputation> "3.0" .
+            _:newAuth <dgraph.type> "Author" .
+        }
+    }`);
+    return res.data.uids.newAuth
+}
+```
+
 ### Example
 
 Finally, if you execute this lambda mutation a new author `Ken Addams` with `reputation=3.0` should be added to the database:
