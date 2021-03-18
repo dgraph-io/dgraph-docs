@@ -38,7 +38,7 @@ You can import `@slash-graph/lambda-types` to get types for `addGraphQLResolver`
 
 ## Dgraph Alpha
 
-To set up Dgraph Alpha, you need to define the `--graphql` superflag's `lambda_url` option, which is used to set the URL of the lambda server. All the `@lambda` fields will be resolved through the lambda functions implemented on the given lambda server.
+To set up Dgraph Alpha, you need to define the `--graphql` superflag's `lambda-url` option, which is used to set the URL of the lambda server. All the `@lambda` fields will be resolved through the lambda functions implemented on the given lambda server.
 
 For example:
 
