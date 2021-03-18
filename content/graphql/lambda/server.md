@@ -1,7 +1,7 @@
 +++
 title = "Lambda Server"
 description = "Setup a Dgraph database with a lambda server. Dgraph Lambda is a serverless platform for running JavaScript on Dgraph and Slash GraphQL."
-weight = 5
+weight = 6
 [menu.main]
     parent = "lambda"
 +++
