@@ -643,8 +643,10 @@ The `--encryption_key_file` flag is required if you took the backup in an
 encrypted cluster and should point to the location of the same key used to
 run the cluster.
 
-The `--vault_*` flags specifies the Vault server address, role id, secret id and
-field that contains the encryption key that was used to encrypt the backup.
+The `--vault` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) has
+options used to specify the Vault server address (`addr`), role id 
+(`role-id-file`), secret id (`secret-id-file`) and the encryption key that was
+used to encrypt the backup (`field`).
 
 The restore feature will create a cluster with as many groups as the original
 cluster had at the time of the last backup. For each group, `dgraph restore`

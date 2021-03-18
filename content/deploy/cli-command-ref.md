@@ -5,10 +5,10 @@ weight = 20
     parent = "deploy"
 +++
 
-The Dgraph command-line interface (CLI) is used to deploy and manage Dgraph. You
-use it in self-managed deployment scenarios; such as running Dgraph on on-premises
-servers hosted on your physical infrastructure, or running Dgraph in the cloud
-on your AWS, GCP, or Azure infrastructure. 
+You can use the Dgraph command-line interface (CLI) to deploy and manage Dgraph.
+You use it in self-managed deployment scenarios; such as running Dgraph on
+on-premises servers hosted on your physical infrastructure, or running Dgraph in
+the cloud on your AWS, GCP, or Azure infrastructure. 
 
 Dgraph has a root command used throughout its CLI: `dgraph`. The `dgraph` command
 is supported by multiple subcommands (such as `alpha` or `update`), some of which
@@ -32,7 +32,14 @@ commands to be very long. Starting in release v21.03, Dgraph uses *superflags*
 for some flags used by the most complex commands: `alpha`, `backup`, `bulk`,
 `debug`, `live` and `zero`. Superflags are compound flags: they contain one or
 more options that let you define multiple settings in a semicolon-delimited list.
-The general syntax for superflags is as follows: `--<flagname> option-a=value; option-b=value`
+The general syntax for superflags is as follows: `--<super-flag-name> option-a=value; option-b=value`
+
+{{% notice "note" %}}
+You should encapsulate the options for a superflag in double-quotes (`"`) if any
+of those option values include spaces. You can also encapsulate options in
+double-quotes to improve readability. So, you can also use the following
+syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`
+{{% /notice %}}
 
 Release v21.03 includes the following superflags:
 * `--acl`
@@ -47,14 +54,14 @@ Release v21.03 includes the following superflags:
 * `--trace`
 * `--vault`
 
-For example, the following command that is valid in release 20.11 is no longer
-valid starting in release 21.03:
+For example, the following command that is valid in release v20.11 is no longer
+valid starting in release v21.03:
 
 ```ssh
 dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
 ```
 
-Instead, you can express this command as follows starting in release 21.03:
+Instead, you can express this command as follows starting in release v21.03:
 
 ```ssh
 dgraph alpha --ludicrous enabled=true; concurrency=16;
@@ -62,7 +69,7 @@ dgraph alpha --ludicrous enabled=true; concurrency=16;
 
 The following table maps Dgraph CLI flags from release v20.11 and earlier that
 have been replaced by superflags (and their options) in release v21.03. Any flags
-not shown here are unchanged from release v21.03. 
+not shown here are unchanged in release v21.03. 
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|

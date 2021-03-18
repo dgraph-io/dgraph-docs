@@ -43,13 +43,13 @@ Alternatively, you can use a Vault server for ACL secret keys. To use Vault, the
 
 {{% notice "tip" %}}
 You can set the key format for the `--vault` superflag's `field` option using the `format` option.
-Supported values are `raw` and `base64`.
+The `field` option supports the `raw` and `base64` values.
 {{% /notice %}}
 
 Here is an example of using Dgraph with a Vault server that holds the secret key:
 
 ```bash
-dgraph alpha --vault "addr=http://localhost:8200;path=secret/data/dgraph;role-id-file=path/to/role-file;secret-id-file=/path/to/secret-file;acl-field=my_acl;acl-format=base64;"
+dgraph alpha --vault addr=http://localhost:8200;path=secret/data/dgraph;role-id-file=path/to/role-file;secret-id-file=/path/to/secret-file;acl-field=my_acl;acl-format=base64;
 ```
 
 If multiple Alpha nodes are part of the cluster, you will need to pass the `--vault` superflag to

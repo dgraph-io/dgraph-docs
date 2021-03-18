@@ -56,7 +56,7 @@ curl localhost:8686/graphql-worker -H "Content-Type: application/json" -d '{"res
 If you're using Docker, you need to add the `--graphql` superflag's `lambda-url` option to your Alpha configuration. For example:
 
 ```yml
-    command: /gobin/dgraph alpha --zero=zero1:5180 -o 100 --expose_trace --trace 1.0
+    command: /gobin/dgraph alpha --zero=zero1:5180 -o 100 --expose_trace --trace ratio=1.0
       --profile_mode block --block_rate 10 --logtostderr -v=2
       --security whitelist=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 --my=alpha1:7180
       --graphql lambda-url=http://lambda:8686/graphql-worker
