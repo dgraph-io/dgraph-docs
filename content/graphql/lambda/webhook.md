@@ -32,7 +32,7 @@ A Lambda Webhook resolver can use a combination of `event`, `dql`, `graphql` or 
 
 #### Event object
 
-You also have access to the `event` object within the resolver. The definition of `event` is as follows:
+You also have access to the `event` object within the resolver. Depending on the value of `operation` field, only one of the fields (`add`/`update`/`delete`) will be part of the `event` object. The definition of `event` is as follows:
 
 ```
 "event": {
