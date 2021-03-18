@@ -41,9 +41,11 @@ For example, while changing a normal field to an `@id` field, it's the user's re
 
 ## Examples
 
-Changing a list field to scalar:
+### List to scalar
 
-1.Post this schema
+Take for example changing a list field to scalar.
+
+1.Post this schema:
 
 ```graphql
 type todo {
@@ -58,7 +60,7 @@ type owner {
 }
 ```
 
-2. Add some data
+2. Add some data:
 
 ```graphql
 mutation {
@@ -77,7 +79,7 @@ mutation {
 }
 ```
 
-3. Change schema as below, i.e. change `todo` field to scalar
+3. Change the schema. E.g., change the `todo` field to scalar:
 
 ```graphql
 type todo {
@@ -92,13 +94,13 @@ type owner {
  }
 ```
 
-4.  it will give below error 
+4. The change will bring the following error: 
 
 ```txt
 resolving updateGQLSchema failed because succeeded in saving GraphQL schema but failed to alter Dgraph schema - GraphQL layer may exhibit unexpected behaviour, reapplying the old GraphQL schema may prevent any issues: Schema change not allowed from [uid] => uid without deleting pred: owner.todo (Locations: [{Line: 3, Column: 4}])
 ```
 
-5. Run below query 
+5. Next, run the following query:
 
 ```graphql
 query {
@@ -132,11 +134,14 @@ it will return this error:
     },
  ```
  
- So, the user needs to post the original schema to make this work.
- 
- Example: Convert `String!` field to `@id` 
+You need to post the original schema to make this query work.
 
-    Post this schema
+### `String!` to `@id`
+
+Take for example changing a `String!` field to `@id`.
+
+1. Post this schema:
+
 ```graphql
 type todo {
   id : ID!
@@ -144,7 +149,8 @@ type todo {
 }
 ```
 
-2. Add this multiple times
+2. Add this entry multiple times:
+
 ```graphql
 mutation {
   addtodo(input: { task: " bugs" }) {
@@ -155,7 +161,8 @@ mutation {
 }
 ```
 
-3. change the schema to add `@id` field as below
+3. Change the schema to add the `@id` field:
+
 ```graphql
 type todo {
   id : ID!
@@ -163,7 +170,8 @@ type todo {
   }
 ```
   
-  4. Run this mutation 
+4. Run the mutation:
+
 ```graphql
 mutation {
   addtodo(input: { task: " bugs" }) {
@@ -174,7 +182,7 @@ mutation {
 }
 ```
 
-It will give below error 
+It will give the following error:
 
 ```json
 {
@@ -192,7 +200,7 @@ It will give below error
 }
 ```
 
-and if we go get query bytask we will get below error 
+If you try to execute the `bytask` query you will get this error:
 
 ```json
 {
