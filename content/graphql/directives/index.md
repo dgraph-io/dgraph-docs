@@ -105,6 +105,6 @@ Reference: [Subscriptions](/graphql/subscriptions)
 
 ### @lambdaOnMutate
 
-The `@lambdaOnMutate` directive allows you to listen on mutation events(`add`/`update`/`delete`). The `@lambdaOnMutate` depending on the mutation events defined and on occurence of a mutation event, triggers the appropriate lambda function implemented on a given lambda server.
+The `@lambdaOnMutate` directive allows you to listen to mutation events(`add`/`update`/`delete`). Depending on the defined events and the occurrence of a mutation event, `@lambdaOnMutate` triggers the appropriate lambda function implemented on a given lambda server.
 
 Reference: [LambdaOnMutate directive](/graphql/lambda/webhook)
