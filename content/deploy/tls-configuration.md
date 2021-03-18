@@ -151,17 +151,19 @@ Important points:
 
 ## TLS options
 
-The following TLS configuration options are available for Dgraph Alpha and Dgraph
-Zero nodes:
+Starting in release v21.03, pre-existing TLS configuration options have been
+replaced by the `--tls` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) 
+and its options. The following `--tls` configuration options are available for
+Dgraph Alpha and Dgraph Zero nodes:
 
-* `--tls_cacert <path>` - Path and filename of the CA root certificate (for
+* `ca-cert <path>` - Path and filename of the Dgraph Root CA (for
    example, `ca.crt`)
-* `--tls_node_cert <path>` - Path and filename of the node certificate (for
+* `server-cert <path>` - Path and filename of the node certificate (for
    example, `node.crt`)
-* `--tls_node_key <path>` - Path and filename of the node certificate private
+* `server-key <path>` - Path and filename of the node certificate private
    key (for example, `node.key`)
-* `--tls_use_system_ca` - Include System CA with Dgraph Root CA.
-* `--tls_client_auth string` - TLS client authentication used to validate client
+* `use-system-ca` - Include System CA with Dgraph Root CA.
+* `client-auth-type <string>` - TLS client authentication used to validate client
   connections from external ports. To learn more, see
   [Client Authentication Options](#client-authentication-options).
 
@@ -172,13 +174,13 @@ these files do not need to have specific filenames or exist in the same
 directory, as in previous Dgraph versions that used the `--tls_dir` flag.
 {{% /notice %}}
 
-Dgraph Live Loader can be configured with the following options:
+You can configure Dgraph Live Loader with the following `--tls` options:
 
-* `--tls_cacert string` - Dgraph Root CA, such as `./tls/ca.crt`
-* `--tls_use_system_ca` - Include System CA with Dgraph Root CA.
-* `--tls_cert` - User cert file provided by the client to Alpha
-* `--tls_key` - User private key file provided by the client to Alpha
-* `--tls_server_name string` - Server name, used for validating the server's TLS host name.
+* `ca-cert <path>` - Dgraph root CA, such as `./tls/ca.crt`
+* `use-system-ca` - Include System CA with Dgraph Root CA.
+* `client-cert` - User cert file provided by the client to Alpha
+* `client-key` - User private key file provided by the client to Alpha
+* `server-name <string>` - Server name, used for validating the server's TLS host name.
 
 
 ### Using TLS with only external ports encrypted
@@ -194,7 +196,7 @@ Dgraph Alpha:
 # Note that you must specify in node.crt the host name or IP addresses that clients use connect:
 $ dgraph cert -n localhost,104.25.165.23,104.25.165.25,104.25.165.27
 # Set up Dgraph Alpha nodes using the following default command (after generating certificates and private keys)
-$ dgraph alpha --tls_cacert /dgraph-tls/ca.crt --tls_node_cert /dgraph-tls/node.crt --tls_node_key /dgraph-tls/node.key
+$ dgraph alpha --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key
 ```
 
 Dgraph Zero:
@@ -203,14 +205,14 @@ Dgraph Zero:
 # First, copy the root CA, node certificates and private keys used to set up Dgraph Alpha (above) to the Dgraph Zero node.
 # Optionally, you can generate and use a separate Zero node certificate, where you specify the host name or IP addresses used by Live Loader and Bulk Loader to connect to Dgraph Zero.
 # Next, set up Dgraph Zero nodes using the following default command:
-$ dgraph zero --tls_cacert /dgraph-tls/ca.crt --tls_node_cert /dgraph-tls/node.crt --tls_node_key /dgraph-tls/node.key
+$ dgraph zero --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key
 ```
 
 You can then run Dgraph Live Loader on a Dgraph Alpha node using the following command:
 
 ```sh
 # Now, connect to server using TLS
-$ dgraph live --tls_cacert ./dgraph-tls/ca.crt --tls_server_name "localhost" -s 21million.schema -f 21million.rdf.gz
+$ dgraph live --tls ca-cert=./dgraph-tls/ca.crt; server-name "localhost" -s 21million.schema -f 21million.rdf.gz
 ```
 
 ### Using TLS with internal and external ports encrypted
@@ -231,8 +233,8 @@ Dgraph Alpha:
 $ dgraph cert -n localhost,104.25.165.23,104.25.165.25,104.25.165.27
 # Set up Dgraph Alpha nodes using the following default command (after generating certificates and private keys)
 $ dgraph alpha
-      --tls_cacert /dgraph-tls/ca.crt --tls_node_cert /dgraph-tls/node.crt --tls_node_key /dgraph-tls/node.key
-      --tls_internal_port_enabled=true --tls_cert /dgraph-tls/client.alpha1.crt --tls_key /dgraph-tls/client.alpha1.key
+      --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key;
+internal-port=true; client-cert=/dgraph-tls/client.alpha1.crt; client-key=/dgraph-tls/client.alpha1.key
 ```
 
 Dgraph Zero:
@@ -241,20 +243,18 @@ Dgraph Zero:
 # First, copy the certificates and private keys used to set up Dgraph Alpha (above) to the Dgraph Zero node.
 # Next, set up Dgraph Zero nodes using the following default command:
 $ dgraph zero
-      --tls_cacert /dgraph-tls/ca.crt --tls_node_cert /dgraph-tls/node.crt --tls_node_key /dgraph-tls/node.key
-      --tls_internal_port_enabled=true --tls_cert /dgraph-tls/client.zero1.crt --tls_key /dgraph-tls/client.zero1.key
+      --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key; internal-port=true; client-cert=/dgraph-tls/client.zero1.crt; client-key=/dgraph-tls/client.zero1.key
 ```
 
 You can then run Dgraph Live Loader using the following:
 
 ```sh
 # Now, connect to server using mTLS (mutual TLS)
-$ dgraph live \
-   --tls_cacert ./tls/ca.crt \
-   --tls_cert ./tls/client.dgraphuser.crt \
-   --tls_key ./tls/client.dgraphuser.key \
-   --tls_server_name "localhost" \
-   --tls-internal-port-enabled=true
+$ dgraph live --tls ca-cert=./tls/ca.crt; \
+   client-cert=./tls/client.dgraphuser.crt; \
+   client-key ./tls/client.dgraphuser.key; \
+   server-name="localhost"; \
+   internal-port=true \
    -s 21million.schema \
    -f 21million.rdf.gz
 ```
@@ -273,13 +273,13 @@ policy of the client certificate.
 | `REQUIREANDVERIFY` | required        | Client certificate is always VERIFIED (most secure) |
 
 `REQUIREANDVERIFY` is the most secure but also the most difficult to configure
-for clients. When using this value, the value of `--tls_server_name` is matched
+for clients. When using this value, the value of `server-name` is matched
 against the certificate SANs values and the connection host.
 
-{{% notice "note" %}}If mTLS is enabled using `--tls_internal_port_enabled=true`,
+{{% notice "note" %}}If mTLS is enabled using `internal-port=true`,
 internal ports (by default, 5080 and 7080) use the `REQUIREANDVERIFY` setting.
 Unless otherwise configured, external ports (by default, 9080, 8080 and 6080)
-use the `VERIFYIFGIVEN` setting. Changing the `--tls_client_auth` option to
+use the `VERIFYIFGIVEN` setting. Changing the `client-auth-type` option to
 another setting only affects client authentication on external ports.{{% /notice %}}
 
 ## Using Ratel UI with Client authentication
@@ -294,7 +294,9 @@ If you haven't already created the CA certificate and the node certificate for a
 $ dgraph cert -n localhost
 ```
 
-If `--tls_client_auth` option in dgraph alpha is set to `REQUEST` or `VERIFYIFGIVEN` (default), then client certificate is not mandatory. The steps after generating CA/node certificate are as follows:
+If Dgraph Alpha's `client-auth-type` option is set to `REQUEST` or `VERIFYIFGIVEN`
+(default), then client certificate is not mandatory. The steps after generating
+CA/node certificate are as follows:
 
 ### Step 1. Install Dgraph Root CA into System CA
 ##### Linux (Debian/Ubuntu)
@@ -329,7 +331,7 @@ $ certutil -addstore -f "ROOT" /path/to/ca.crt
 
 * Change the Dgraph Alpha server address to `https://` instead of `http://`, for example `https://localhost:8080`.
 
-For `REQUIREANY` and `REQUIREANDVERIFY` as `--tls_client_auth` option, you need to follow the steps above and you
+For `REQUIREANY` and `REQUIREANDVERIFY` as `client-auth-type` option, you need to follow the steps above and you
 also need to install client certificate on your browser:
 
 1. Generate a client certificate: `dgraph cert -c laptopuser`.
@@ -345,10 +347,11 @@ also need to install client certificate on your browser:
 3. Import the client certificate to your browser. It can be done in chrome as follows:
    * Goto Settings -> Privacy and Security -> Security -> Manage Certificates -> Your Certificates
    * Click on Import and import the `laptopuser.p12`. For mac OS, this process returns back to KeyChain, and under the area "My Certificates" select `laptopuser.p12`.
-
+<!-- Cut because we have cut macOS support 
 {{% notice "note" %}}
-Under macOS you can alternatively import the `.p12` file via command line by `security import ./laptopuser.p12 -P secretPassword`.
+Under macOS you can alternatively import the `.p12` file using the command line by `security import ./laptopuser.p12 -P secretPassword`.
 {{% /notice %}}
+-->
 {{% notice "note" %}}
 Mutual TLS may not work in Firefox because Firefox is unable to send privately-signed client certificates, this issue is filed [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1662607).
 {{% /notice %}}
@@ -393,10 +396,10 @@ Assuming you are running Dgraph on your local machine, opening
 `https://localhost:8080/` in the browser should produce a message `Dgraph browser is available for running separately using the dgraph-ratel binary`.
 
 In case you are getting a connection error, try not passing the
-`--tls_client_auth` flag when starting an alpha. If you are still getting an
+`client-auth-type` flag when starting an alpha. If you are still getting an
 error, check that your hostname is correct and the port is open; then make sure
 that "Dgraph Root CA" certificate is installed and trusted correctly.
 
-After that, if things work without `--tls_client_auth` but stop working when
-`REQUIREANY` and `REQUIREANDVERIFY` is set make sure the `.p12` file is
+After that, if things work without passing `client-auth-type` but stop working when
+`REQUIREANY` and `REQUIREANDVERIFY` are set, make sure the `.p12` file is
 installed correctly.
