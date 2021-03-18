@@ -61,7 +61,7 @@ self.addGraphQLResolvers({
 
 Alternatively, you can use `dql.mutate` to achieve the same results:
 
-```graphql
+```javascript
 async function newAuthor({args, dql, graphql}) {
     // lets give every new author a reputation of 3 by default
     const res = await dql.mutate(`{
