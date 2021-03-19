@@ -18,7 +18,7 @@ zero. So, the port `5080` and the IP address must be visible to all the Dgraph a
 
 For all other various flags, run `dgraph zero --help`.
 
-### Run Dgraph alpha
+### Run Dgraph Alpha
 
 ```sh
 dgraph alpha --my=IPADDR:7080 --zero=localhost:5080
