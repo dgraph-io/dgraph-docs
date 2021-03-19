@@ -43,7 +43,7 @@ Alternatively, you can use a Vault server for ACL secret keys. To use Vault, the
 
 {{% notice "tip" %}}
 You can set the key format for the `--vault` superflag's `field` option using the `format` option.
-The `format` option supports the `raw` and `base64` values.
+You can set the `format` option to either `raw` or `base64`.
 {{% /notice %}}
 
 Here is an example of using Dgraph with a Vault server that holds the secret key:

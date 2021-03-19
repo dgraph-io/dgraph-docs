@@ -106,7 +106,7 @@ We suggest that your policy include frequent full and incremental backups. Accor
 
 ### Terminology
 
-An **N-node cluster** is a Dgraph cluster that contains N number of Dgraph instances. For example, a 6-node cluster means six Dgraph instances. The **replication setting** specifies the number of Dgraph Alpha replicas are assigned per group. The replication setting is a configuration flag (`--replicas`) on Dgraph Zero. A **Dgraph Alpha group** is a set of Dgraph Alphas that store replications of the data among each other. Every Dgraph Alpha group is assigned a set of distinct predicates to store and serve.
+An **N-node cluster** is a Dgraph cluster that contains N number of Dgraph instances. For example, a 6-node cluster means six Dgraph instances. The **replication setting** specifies the number of Dgraph Alpha replicas that are assigned per group. The replication setting is a configuration flag (`--replicas`) on Dgraph Zero. A **Dgraph Alpha group** is a set of Dgraph Alphas that store replications of the data among each other. Every Dgraph Alpha group is assigned a set of distinct predicates to store and serve.
 
 Examples of different cluster settings:
 * No sharding

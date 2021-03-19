@@ -1,5 +1,5 @@
 +++
-title = "Dgraph CLI Command Reference"
+title = "Dgraph CLI Reference"
 weight = 20
 [menu.main]
     parent = "deploy"
@@ -33,6 +33,8 @@ commands to be very long. Starting in release v21.03, Dgraph uses *superflags*
 for some flags used by the most complex commands: `alpha`, `backup`, `bulk`,
 `debug`, `live` and `zero`. Superflags are compound flags: they contain one or
 more options that let you define multiple settings in a semicolon-delimited list.
+Semicolons are required between superflag options, but a semicolon after the last
+superflag option is optional.
 
 The general syntax for superflags is as follows: `--<super-flag-name> option-a=value; option-b=value`
 
@@ -40,7 +42,7 @@ The general syntax for superflags is as follows: `--<super-flag-name> option-a=v
 You should encapsulate the options for a superflag in double-quotes (`"`) if any
 of those option values include spaces. You can also encapsulate options in
 double-quotes to improve readability. So, you can also use the following
-syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`
+syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`.
 {{% /notice %}}
 
 Release v21.03 includes the following superflags:
