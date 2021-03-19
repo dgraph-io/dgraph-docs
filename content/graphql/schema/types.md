@@ -303,6 +303,10 @@ And the results of the GraphQL query will look like the following:
 A password for an entity is set with setting the schema for the node type with `@secret` directive. Passwords cannot be queried directly, only checked for a match using the `checkTypePassword` function where `Type` is the node type.
 The passwords are encrypted using [bcrypt](https://en.wikipedia.org/wiki/Bcrypt).
 
+{{% notice "note" %}}
+For security reasons, Dgraph enforces a minimum password length of 6 characters on `@secret` fields.
+{{% /notice %}}
+
 For example, to set a password, first set schema:
 
 1. Cut-and-paste the following schema into a file called `schema.graphql`
