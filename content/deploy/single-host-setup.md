@@ -63,7 +63,7 @@ mkdir ~/zero # Or any other directory where data should be stored.
 docker run -it -p 5080:5080 --network dgraph_default -p 6080:6080 -v ~/zero:/dgraph dgraph/dgraph:{{< version >}} dgraph zero --my=HOSTIPADDR:5080
 ```
 
-### Run Dgraph alpha
+### Run Dgraph Alpha
 ```sh
 mkdir ~/server1 # Or any other directory where data should be stored.
 
