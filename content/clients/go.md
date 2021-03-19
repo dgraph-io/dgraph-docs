@@ -65,6 +65,29 @@ func newClient() *dgo.Dgraph {
 
 ```
 
+### Multi-tenancy
+
+In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, Dgraph provides a new method `LoginIntoNamespace()`,
+which will allow the users to login to a specific namespace.
+
+In order to create a dgo client, and make the client login into namespace `123`:
+
+```go
+conn, err := grpc.Dial("127.0.0.1:9080", grpc.WithInsecure())
+if err != nil {
+	glog.Error("While trying to dial gRPC, got error", err)
+}
+dc := dgo.NewDgraphClient(api.NewDgraphClient(conn))
+ctx := context.Background()
+// Login to namespace 123
+if err := dc.LoginIntoNamespace(ctx, "groot", "password", 123); err != nil {
+	glog.Error("Failed to login: ",err)
+}
+```
+
+In the example above, the client logs into namespace `123` using username `groot` and password `password`.
+Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
+
 ### Creating a Client for Slash GraphQL Endpoint
 
 If you want to connect to Dgraph running on your [Slash GraphQL](https://slash.dgraph.io) instance, then all you need is the URL of your Slash GraphQL endpoint and the API key. You can get a client using them as follows:
