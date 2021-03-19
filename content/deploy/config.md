@@ -48,7 +48,7 @@ dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
 
 The environment variable names for Dgraph mirror the flag names shown in the Dgraph CLI `--help` output. These environment variable names are formed the concatenation of `DGRAPH`, the subcommand invoked (`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in uppercase). For example, instead running a command like `dgraph alpha --block_rate 10`, you could set the following environment variable: `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
 
-So, the environment variable syntax for a a superflag (`--<superflag-name> option-a=value; option-b=value`) is `<SUPERFLAG-NAME>="option-a=value;option-b=value"`.
+So, the environment variable syntax for a superflag (`--<superflag-name> option-a=value; option-b=value`) is `<SUPERFLAG-NAME>="option-a=value;option-b=value"`.
 
 The following is an example of environment variables for `dgraph alpha`:
 
