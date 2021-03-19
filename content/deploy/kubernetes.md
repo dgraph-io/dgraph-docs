@@ -451,7 +451,7 @@ The UI is accessible at port 9090. Open http://localhost:9090 in your browser to
 
 #### Registering Alerts and Installing Alert Manager
 
-To register alerts from Dgraph cluster with your Prometheus deployment follow the steps below:
+To register alerts from Dgraph cluster with your Prometheus deployment, follow the steps below:
 
 * Create a Kubernetes secret containing alertmanager configuration. Edit the configuration file present [here](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/alertmanager-config.yaml)
 with the required receiver configuration including the slack webhook credential and create the secret.
