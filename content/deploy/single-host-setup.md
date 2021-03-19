@@ -55,7 +55,7 @@ We'll refer to the host IP address via `HOSTIPADDR`.
 docker network create dgraph_default
 ```
 
-### Run Dgraph zero
+### Run Dgraph Zero
 
 ```sh
 mkdir ~/zero # Or any other directory where data should be stored.
