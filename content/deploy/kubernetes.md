@@ -221,17 +221,17 @@ To install the chart with the release name `my-release`:
 helm install my-release dgraph/dgraph
 ```
 
-The above command will install a recent version of the dgraph docker image. You can set the version an explicit version, such as:
+The above command will install a recent version of the Dgraph docker image. You can set the version an explicit version, such as:
 
 ```sh
 helm install my-release dgraph/dgraph --set image.tag="{{< version >}}"
 ```
 
-{{% notice "warning" %}}When configuring dgraph image tag, be careful not to use `latest` or `master` in a production environment. These tags may have the dgraph version change, causing a mixed version dgraph cluster that can lead to an outage and potential data loss.{{% /notice %}}
+{{% notice "warning" %}}When configuring the Dgraph image tag, be careful not to use `latest` or `master` in a production environment. These tags may have the Dgraph version change, causing a mixed-version Dgraph cluster that can lead to an outage and potential data loss.{{% /notice %}}
 
 #### Dgraph Configuration Files
 
-You can supply a dgraph config files (see [Config]({{< relref "deploy/config.md" >}})) for alpha and zero with Helm chart configuration values:
+You can supply a Dgraph config files (see [Config]({{< relref "deploy/config.md" >}})) for alpha and zero with Helm chart configuration values:
 
 ```yaml
 # my-config-values.yaml
@@ -260,10 +260,10 @@ helm install my-release dgraph/dgraph --values my-config-values.yaml
 
 #### Exposing Alpha and Ratel Services
 
-By default zero and alpha services are exposed only within the kubernetes cluster as
-kubernetes service type `ClusterIP`.
+By default zero and alpha services are exposed only within the Kubernetes cluster as
+Kubernetes service type `ClusterIP`.
 
-In order to expose the alpha service and ratel service publicly you can use kubernetes service type `LoadBalancer` or an Ingress resource.
+In order to expose the alpha service and Ratel service publicly you can use Kubernetes service type `LoadBalancer` or an Ingress resource.
 
 ##### LoadBalancer (Public Internet)
 
@@ -277,7 +277,7 @@ You can expose alpha service to the Internet as follows:
 helm install my-release dgraph/dgraph --set alpha.service.type="LoadBalancer"
 ```
 
-Similarly, you can expose alpha and ratel service to the Internet as follows:
+Similarly, you can expose alpha and Ratel service to the Internet as follows:
 
 ```sh
 helm install my-release dgraph/dgraph --set alpha.service.type="LoadBalancer" --set ratel.service.type="LoadBalancer"
@@ -310,7 +310,7 @@ ratel:
       service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 ```
 
-And then expose alpha and ratel services privately:
+And then expose alpha and Ratel services privately:
 
 ```sh
 helm install my-release dgraph/dgraph --values my-config-values.yaml
@@ -318,9 +318,9 @@ helm install my-release dgraph/dgraph --values my-config-values.yaml
 
 ##### Ingress Resource
 
-You can expose alpha and ratel using an [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource that can route traffic to service resources.  Before using this option you may need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) first, as is the case with [AKS](https://docs.microsoft.com/azure/aks/) and [EKS](https://aws.amazon.com/eks/), while in the case of [GKE](https://cloud.google.com/kubernetes-engine), this comes bundled with a default ingress controller.  When routing traffic based on the `hostname`, you may want to integrate an addon like [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) so that DNS records can be registered automatically when deploying dgraph.
+You can expose alpha and Ratel using an [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource that can route traffic to service resources.  Before using this option you may need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) first, as is the case with [AKS](https://docs.microsoft.com/azure/aks/) and [EKS](https://aws.amazon.com/eks/), while in the case of [GKE](https://cloud.google.com/kubernetes-engine), this comes bundled with a default ingress controller.  When routing traffic based on the `hostname`, you may want to integrate an addon like [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) so that DNS records can be registered automatically when deploying Dgraph.
 
-As an examples, you can configure a single ingress resource that uses [ingress-nginx](https://github.com/kubernetes/ingress-nginx) for alpha and ratel services, by creating Helm chart configuration values like this below:
+As an examples, you can configure a single ingress resource that uses [ingress-nginx](https://github.com/kubernetes/ingress-nginx) for alpha and Ratel services, by creating Helm chart configuration values like this below:
 
 ```yaml
 # my-config-values.yaml
@@ -333,7 +333,7 @@ global:
     alpha_hostname: "alpha.<my-domain-name>"
 ```
 
-And then expose alpha and ratel services through an ingress:
+And then expose alpha and Ratel services through an ingress:
 
 ```sh
 helm install my-release dgraph/dgraph --values my-config-values.yaml
@@ -399,7 +399,7 @@ The latest configuration settings can be found:
 
 ## Monitoring in Kubernetes
 
-Dgraph exposes prometheus metrics to monitor the state of various components involved in the cluster, this includes dgraph alpha and zero.
+Dgraph exposes Prometheus metrics to monitor the state of various components involved in the cluster, this includes Dgraph alpha and zero.
 
 Below are instructions to setup Prometheus monitoring for your cluster.  This solution has the following parts:
 
@@ -410,7 +410,7 @@ Below are instructions to setup Prometheus monitoring for your cluster.  This so
 
 ### Installation through Manifests
 
-Follow the below mentioned steps to setup prometheus monitoring for your cluster.
+Follow the below mentioned steps to setup Prometheus monitoring for your cluster.
 
 #### Install Prometheus operator
 
@@ -428,7 +428,7 @@ prometheus-operator   1         1         1            1           3m
 
 #### Install Prometheus
 
-* Apply prometheus manifest present [here](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/prometheus.yaml).
+* Apply Prometheus manifest present [here](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/prometheus.yaml).
 
 ```sh
 $ kubectl apply --filename prometheus.yaml
@@ -441,7 +441,7 @@ servicemonitor.monitoring.coreos.com/zero-dgraph-io created
 prometheus.monitoring.coreos.com/dgraph-io created
 ```
 
-To view prometheus UI locally run:
+To view Prometheus UI locally run:
 
 ```sh
 kubectl port-forward prometheus-dgraph-io-0 9090:9090
@@ -451,9 +451,9 @@ The UI is accessible at port 9090. Open http://localhost:9090 in your browser to
 
 #### Registering Alerts and Installing Alert Manager
 
-To register alerts from dgraph cluster with your prometheus deployment follow the steps below:
+To register alerts from Dgraph cluster with your Prometheus deployment follow the steps below:
 
-* Create a kubernetes secret containing alertmanager configuration. Edit the configuration file present [here](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/alertmanager-config.yaml)
+* Create a Kubernetes secret containing alertmanager configuration. Edit the configuration file present [here](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/alertmanager-config.yaml)
 with the required receiver configuration including the slack webhook credential and create the secret.
 
 You can find more information about alertmanager configuration [here](https://prometheus.io/docs/alerting/configuration/).
@@ -468,7 +468,7 @@ alertmanager-alertmanager-dgraph-io             Opaque               1      87m
 ```
 
 * Apply the [alertmanager](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/alertmanager.yaml) along with [alert-rules](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/alert-rules.yaml) manifest
-to use the default configured alert configuration. You can also add custom rules based on the metrics exposed by dgraph cluster similar to [alert-rules](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/alert-rules.yaml)
+to use the default configured alert configuration. You can also add custom rules based on the metrics exposed by Dgraph cluster similar to [alert-rules](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/monitoring/prometheus/alert-rules.yaml)
 manifest.
 
 ```sh

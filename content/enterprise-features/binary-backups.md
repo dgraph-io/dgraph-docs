@@ -645,7 +645,7 @@ run the cluster.
 
 The `--vault` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) has
 options used to specify the Vault server address (`addr`), role id 
-(`role-id-file`), secret id (`secret-id-file`) and the encryption key that was
+(`role-id-file`), secret id (`secret-id-file`), and the encryption key that was
 used to encrypt the backup (`field`).
 
 The restore feature will create a cluster with as many groups as the original

@@ -87,7 +87,7 @@ replicas, three must be online to avoid an impact to reads or writes.
 
 ### Dgraph Zero
 
-Run three Dgraph Zero instances, assigning a unique integer ID to each usidng the
+Run three Dgraph Zero instances, assigning a unique integer ID to each using the
 `--raft` superflag's `idx` option, and passing the address of any healthy Dgraph
 Zero instance using the `--peer` flag.
 

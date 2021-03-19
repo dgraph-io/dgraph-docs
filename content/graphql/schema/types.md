@@ -301,7 +301,7 @@ And the results of the GraphQL query will look like the following:
 ### Password type
 
 A password for an entity is set with setting the schema for the node type with `@secret` directive. Passwords cannot be queried directly, only checked for a match using the `checkTypePassword` function where `Type` is the node type.
-The passwords are encrypted using [bcrypt](https://en.wikipedia.org/wiki/Bcrypt).
+The passwords are encrypted using [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt).
 
 For example, to set a password, first set schema:
 

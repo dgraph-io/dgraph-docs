@@ -126,7 +126,7 @@ With batch upserts in Live Loader, you can insert big data-sets (multiple files)
 Live Loader generates an `upsertPredicate` query for each of the ids found in the request, while
 adding the corresponding `xid` to that `uid`. The added mutation is only useful if the `uid` doesn't exists.
 
-The `-U, --upsertPredicate` flag runs the Live Loader in upsertPredicate mode. The provided predicate needs to be indexed, and the Loader will use it to store blank nodes as a `xid`.
+The `-U, --upsertPredicate` flag runs the Live Loader in "upsert predicate" mode. The provided predicate needs to be indexed, and the Loader will use it to store blank nodes as a `xid`.
 
 {{% notice "note" %}}
 When the `upsertPredicate` already exists in the data, the existing node with this `xid` is modified and no new node is added.
@@ -168,10 +168,10 @@ Using the `--xidmap` flag is recommended if you have full control over your iden
 
 The `--ludicrous` superflag's `enabled` option (default: `false`): This option allows the user to notify Live Loader that the Alpha server is running in ludicrous mode.
 Live Loader, by default, does smart batching of data to avoid transaction conflicts, which improves the performance in normal mode.
-Since there's no conflict detection in ludicrous mode, smart batching is disabled to speed up the data ingestion further.
+Since there's no conflict detection in Ludicrous mode, smart batching is disabled to speed up data ingestion.
 
 {{% notice "note" %}}
-The `--ludicrous` superflag's `enabled` option should only be used if Dgraph is also running in [ludicrous mode]({{< relref "ludicrous-mode.md" >}}).
+You should only use the `--ludicrous` superflag's `enabled` option if Dgraph is also running in [ludicrous mode]({{< relref "ludicrous-mode.md" >}}).
 {{% /notice %}}
 
 `-U, --upsertPredicate` (default: disabled): Runs Live Loader in `upsertPredicate` mode. The provided value will be used to store blank nodes as a `xid`.

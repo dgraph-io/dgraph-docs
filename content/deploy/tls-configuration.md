@@ -253,7 +253,7 @@ You can then run Dgraph Live Loader using the following:
 $ dgraph live --tls ca-cert=./tls/ca.crt; \
    client-cert=./tls/client.dgraphuser.crt; \
    client-key ./tls/client.dgraphuser.key; \
-   server-name="localhost"; \
+   server-name=localhost; \
    internal-port=true \
    -s 21million.schema \
    -f 21million.rdf.gz
@@ -319,7 +319,7 @@ $ certutil -addstore -f "ROOT" /path/to/ca.crt
 
 ##### Firefox
 
-* Goto Preferences -> Prvacy & Security -> View Certificates -> Authorities
+* Goto Preferences -> Privacy & Security -> View Certificates -> Authorities
 * Click on Import and import the `ca.crt`
 
 ##### Chrome
@@ -327,7 +327,7 @@ $ certutil -addstore -f "ROOT" /path/to/ca.crt
 * Goto Settings -> Privacy and Security -> Security -> Manage Certificates -> Authorities
 * Click on Import and import the `ca.crt`
 
-### Step 3. Point ratel to the `https://` endpoint of alpha server.
+### Step 3. Point Ratel to the `https://` endpoint of alpha server.
 
 * Change the Dgraph Alpha server address to `https://` instead of `http://`, for example `https://localhost:8080`.
 

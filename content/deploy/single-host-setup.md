@@ -8,7 +8,7 @@ weight = 6
 
 ## Run directly on the host
 
-### Run dgraph zero
+### Run Dgraph zero
 
 ```sh
 dgraph zero --my=IPADDR:5080
@@ -18,19 +18,22 @@ zero. So, the port `5080` and the IP address must be visible to all the Dgraph a
 
 For all other various flags, run `dgraph zero --help`.
 
-### Run dgraph alpha
+### Run Dgraph alpha
 
 ```sh
 dgraph alpha --my=IPADDR:7080 --zero=localhost:5080
 dgraph alpha --my=IPADDR:7081 --zero=localhost:5080 -o=1
 ```
 
-Notice the use of `-o` for the second Alpha to add offset to the default ports used. Zero automatically assigns an unique ID to each Alpha, which is persisted in the write ahead log (wal) directory, users can specify the index using the `--raft` superflag's `idx` option. Dgraph Alphas use two directories to persist data and
-wal logs, and these directories must be different for each Alpha if they are running on the same host. You can use `-p` and `-w` to change the location of the data and WAL directories. For all other flags, run
+Notice the use of `-o` for the second Alpha to add offset to the default ports used. Dgraph Zero automatically assigns a unique ID to each Alpha, which persists in the [Write Ahead Logs]({{< relref "design-concepts/concepts#write-ahead-logs" >}}) (**wal**) directory; users can specify the index using the `--raft` superflag's `idx` option. 
+Dgraph Alpha nodes use two directories to persist data and WAL logs, and these
+directories must be different for each Alpha if they are running on the same
+host. You can use `-p` and `-w` to change the location of the data and WAL directories.
+To learn more about other flags, run the following command:
 
 `dgraph alpha --help`.
 
-### Run dgraph UI
+### Run Dgraph's Ratel UI
 
 ```sh
 dgraph-ratel
@@ -52,7 +55,7 @@ We'll refer to the host IP address via `HOSTIPADDR`.
 docker network create dgraph_default
 ```
 
-### Run dgraph zero
+### Run Dgraph zero
 
 ```sh
 mkdir ~/zero # Or any other directory where data should be stored.
@@ -60,7 +63,7 @@ mkdir ~/zero # Or any other directory where data should be stored.
 docker run -it -p 5080:5080 --network dgraph_default -p 6080:6080 -v ~/zero:/dgraph dgraph/dgraph:{{< version >}} dgraph zero --my=HOSTIPADDR:5080
 ```
 
-### Run dgraph alpha
+### Run Dgraph alpha
 ```sh
 mkdir ~/server1 # Or any other directory where data should be stored.
 
@@ -73,7 +76,7 @@ docker run -it -p 7081:7081 --network dgraph_default -p 8081:8081 -p 9081:9081 -
 ```
 Notice the use of -o for server2 to override the default ports for server2.
 
-### Run dgraph UI
+### Run Dgraph UI
 ```sh
 docker run -it -p 8000:8000 --network dgraph_default dgraph/dgraph:{{< version >}} dgraph-ratel
 ```
