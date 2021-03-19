@@ -169,10 +169,10 @@ export.
 ### Configure Dgraph Alpha server nodes
 
 Each Dgraph Alpha leader for a group writes output as a gzipped file to the export
-directory specified via the `--export` flag (defaults to an `/export` directory). If any of the groups fail, the
+directory specified via the `--export` flag (defaults to an **export** directory). If any of the groups fail, the
 entire export process is considered failed and an error is returned.
 
-As an example of configuring `export`, you can run this:
+As an example of configuring data export, you can run this:
 
 ```bash
 docker run --detach --rm --name dgraph-standalone \
@@ -184,7 +184,7 @@ docker run --detach --rm --name dgraph-standalone \
 ```
 
 {{% notice "tip" %}}
-The `export` configuration can be configured as an environment variable `DGRAPH_ALPHA_EXPORT`, command line flag `--export`, or in a configuration file with the `export` key.  See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+The export configuration can be configured as an environment variable `DGRAPH_ALPHA_EXPORT`, command line flag `--export`, or in a configuration file with the `export` key.  See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Export data format

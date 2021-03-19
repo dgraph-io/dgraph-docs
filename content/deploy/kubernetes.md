@@ -8,8 +8,8 @@ weight = 8
 
 The following section covers running Dgraph with Kubernetes. We have tested Dgraph with Kubernetes versions 1.14 to 1.16 on [GKE](https://cloud.google.com/kubernetes-engine) and versions 1.14 to 1.17 on [EKS](https://aws.amazon.com/eks/).
 
-{{% notice "note" %}}These instructions are for running Dgraph alpha service without TLS configuration.
-Instructions for running Dgraph alpha service with TLS refer [TLS instructions]({{< relref "deploy/tls-configuration.md" >}}).{{% /notice %}}
+{{% notice "note" %}}These instructions are for running the Dgraph Alpha service without TLS configuration.
+To learn how to run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "deploy/tls-configuration.md" >}}).{{% /notice %}}
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) which is used to deploy
   and manage applications on kubernetes.
@@ -99,7 +99,7 @@ kubectl delete persistentvolumeclaims --selector app=dgraph
 ## HA Cluster Setup Using Kubernetes
 
 This setup allows you to run 3 Dgraph Alphas and 3 Dgraph Zeros. We start Zero with `--replicas
-3` flag, so all data would be replicated on 3 Alphas and form 1 alpha group.
+3` flag, so all data would be replicated on 3 Alphas and form 1 Alpha group.
 
 {{% notice "note" %}} Ideally you should have at least three worker nodes as part of your Kubernetes
 cluster so that each Dgraph Alpha runs on a separate worker node.{{% /notice %}}
@@ -231,7 +231,7 @@ helm install my-release dgraph/dgraph --set image.tag="{{< version >}}"
 
 #### Dgraph Configuration Files
 
-You can supply a Dgraph config files (see [Config]({{< relref "deploy/config.md" >}})) for alpha and zero with Helm chart configuration values:
+You can supply Dgraph config files (see [Config]({{< relref "deploy/config.md" >}})) for Alpha and Zero with Helm chart configuration values:
 
 ```yaml
 # my-config-values.yaml
@@ -252,7 +252,7 @@ zero:
       wal: /dgraph/data/zw
 ```
 
-And then install with alpha and zero configuration using this:
+And then install with Alpha and Zero configuration using this:
 
 ```sh
 helm install my-release dgraph/dgraph --values my-config-values.yaml
@@ -260,10 +260,10 @@ helm install my-release dgraph/dgraph --values my-config-values.yaml
 
 #### Exposing Alpha and Ratel Services
 
-By default zero and alpha services are exposed only within the Kubernetes cluster as
+By default Zero and Alpha services are exposed only within the Kubernetes cluster as
 Kubernetes service type `ClusterIP`.
 
-In order to expose the alpha service and Ratel service publicly you can use Kubernetes service type `LoadBalancer` or an Ingress resource.
+In order to expose the Alpha service and Ratel service publicly you can use Kubernetes service type `LoadBalancer` or an Ingress resource.
 
 ##### LoadBalancer (Public Internet)
 
@@ -271,13 +271,13 @@ To use an external load balancer, set the service type to `LoadBalancer`.
 
 {{% notice "note" %}}For security purposes we recommend limiting access to any public endpoints, such as using a white list.{{% /notice %}}
 
-You can expose alpha service to the Internet as follows:
+You can expose Alpha service to the Internet as follows:
 
 ```sh
 helm install my-release dgraph/dgraph --set alpha.service.type="LoadBalancer"
 ```
 
-Similarly, you can expose alpha and Ratel service to the Internet as follows:
+Similarly, you can expose Alpha and Ratel service to the Internet as follows:
 
 ```sh
 helm install my-release dgraph/dgraph --set alpha.service.type="LoadBalancer" --set ratel.service.type="LoadBalancer"
@@ -310,7 +310,7 @@ ratel:
       service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 ```
 
-And then expose alpha and Ratel services privately:
+And then expose Alpha and Ratel services privately:
 
 ```sh
 helm install my-release dgraph/dgraph --values my-config-values.yaml
@@ -318,9 +318,9 @@ helm install my-release dgraph/dgraph --values my-config-values.yaml
 
 ##### Ingress Resource
 
-You can expose alpha and Ratel using an [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource that can route traffic to service resources.  Before using this option you may need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) first, as is the case with [AKS](https://docs.microsoft.com/azure/aks/) and [EKS](https://aws.amazon.com/eks/), while in the case of [GKE](https://cloud.google.com/kubernetes-engine), this comes bundled with a default ingress controller.  When routing traffic based on the `hostname`, you may want to integrate an addon like [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) so that DNS records can be registered automatically when deploying Dgraph.
+You can expose Alpha and Ratel using an [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource that can route traffic to service resources.  Before using this option you may need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) first, as is the case with [AKS](https://docs.microsoft.com/azure/aks/) and [EKS](https://aws.amazon.com/eks/), while in the case of [GKE](https://cloud.google.com/kubernetes-engine), this comes bundled with a default ingress controller.  When routing traffic based on the `hostname`, you may want to integrate an addon like [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) so that DNS records can be registered automatically when deploying Dgraph.
 
-As an examples, you can configure a single ingress resource that uses [ingress-nginx](https://github.com/kubernetes/ingress-nginx) for alpha and Ratel services, by creating Helm chart configuration values like this below:
+As an examples, you can configure a single ingress resource that uses [ingress-nginx](https://github.com/kubernetes/ingress-nginx) for Alpha and Ratel services, by creating Helm chart configuration values like this below:
 
 ```yaml
 # my-config-values.yaml
@@ -333,7 +333,7 @@ global:
     alpha_hostname: "alpha.<my-domain-name>"
 ```
 
-And then expose alpha and Ratel services through an ingress:
+And then expose Alpha and Ratel services through an ingress:
 
 ```sh
 helm install my-release dgraph/dgraph --values my-config-values.yaml
@@ -399,9 +399,9 @@ The latest configuration settings can be found:
 
 ## Monitoring in Kubernetes
 
-Dgraph exposes Prometheus metrics to monitor the state of various components involved in the cluster, this includes Dgraph alpha and zero.
+Dgraph exposes Prometheus metrics to monitor the state of various components involved in the cluster, including Dgraph Alpha and Zero nodes.
 
-Below are instructions to setup Prometheus monitoring for your cluster.  This solution has the following parts:
+Below are instructions to setup Prometheus monitoring for your cluster. This solution has the following parts:
 
 * [prometheus-operator](https://coreos.com/blog/the-prometheus-operator.html) - a Kubernetes operator to install and configure Prometheus and Alert Manager.
 * [Prometheus](https://prometheus.io/) - the service that will scrape Dgraph for metrics
