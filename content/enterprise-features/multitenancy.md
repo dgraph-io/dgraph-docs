@@ -369,11 +369,11 @@ A namespace can be dropped by calling `/admin` with the `deleteNamespace` mutati
 To delete a namespace, the _Guardian_ must send the JWT access token in the `X-Dgraph-AccessToken` header.
 {{% /notice %}}
 
-For example, to drop the namespace `0x123`:
+For example, to drop the namespace `123`:
 
 ```graphql
 mutation {
-  deleteNamespace(input: {namespaceId: 0x123})
+  deleteNamespace(input: {namespaceId: 123})
   {
     namespaceId
     message
