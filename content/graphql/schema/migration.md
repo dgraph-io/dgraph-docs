@@ -1,6 +1,6 @@
 +++
 title = "Schema Migration"
-description = "These documents describe all the things that you can put in your input GraphQL schema, and what gets generated from that."
+description = "This document describes all the things that you need to take care while doing an schema update or migration."
 weight = 1
 [menu.main]
     parent = "schema"
@@ -18,11 +18,12 @@ If you see an error message starting with:
 resolving updateGQLSchema failed because succeeded in saving GraphQL schema but failed to alter Dgraph schema - GraphQL layer may exhibit unexpected behaviour, reapplying the old GraphQL schema may prevent any issues
 ```
 
-It means that you have changed a schema in GraphQL which is not allowed in Dgraph.
-This will result in different schemas in Dgraph and GraphQL.
+It means that you have made a schema change in GraphQL, which is not allowed in Dgraph.
+Thus, the GraphQL schema is changed, but the Dgraph schema remains as it is. This will result in different schemas in Dgraph and GraphQL.
+
 Such error can be caused by various reasons, for example changing a list type to scalar, or changing a scalar field to `uid`.
 
-If you query mutations on such schemas, you can get the following errors, depending the operation that you performed on the schema update: 
+If you do queries or mutations on such schemas, you can get the following errors, depending the operation that you performed on the schema update: 
 
  - `ErrExpectedScalar`: An object type was returned, but GraphQL was expecting a scalar. This indicates an internal error -  probably a mismatch between the GraphQL and Dgraph/remote schemas. The value was resolved as null (which may trigger GraphQL error propagation)   and as much other data as possible returned.
 
@@ -132,6 +133,7 @@ it will return this error:
         "todo"
       ]
     },
+]
  ```
  
 You need to post the original schema to make this query work.
