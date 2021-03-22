@@ -57,8 +57,8 @@ you enable audit logging, a few options are available for you to configure:
 * `compress=true` tells Dgraph to use compression on older audit log files
 * `days=20` tells Dgraph to retain older audit logs for 20 days, rather than the
 default of 10 days
-* `dir=/path/to/audit/logs` tells Dgraph which path to use for storing audit logs
-* `encrypt_file=/encryption/key/path` tells Dgraph to encrypt older log files
+* `output=/path/to/audit/logs` tells Dgraph which path to use for storing audit logs
+* `encrypt-file=/encryption/key/path` tells Dgraph to encrypt older log files
  with the specified key
 * `size=200` tells Dgraph to store audit logs in 200 MB files,  rather than the
 default of 100 MB files
@@ -75,14 +75,14 @@ In the simplest scenario, you can enable audit logging by simply specifying the
 directory to store audit logs on a Dgraph Alpha node:
 
 ```bash
-dgraph alpha --audit dir=audit-log-dir
+dgraph alpha --audit output=audit-log-dir
 ```
 
 You could extend this command a bit to specify larger log files (200 MB, instead
 of 100 MB) and retain them for longer (15 days instead of 10 days):
 
 ```bash
-dgraph alpha --audit dir=audit-log-dir;size=200;days=15
+dgraph alpha --audit output=audit-log-dir;size=200;days=15
 ```
 
 ### Enable audit logging with compression
@@ -91,7 +91,7 @@ In many cases you will want to compress older audit logs to save storage space.
 You can do this with a command like the following:
 
 ```bash
-dgraph alpha --audit dir=audit-log-dir;compress=true
+dgraph alpha --audit output=audit-log-dir;compress=true
 ```
 
 ### Enable audit logging with encryption
@@ -101,7 +101,7 @@ might exist in logged requests. You can do this, along with compression, with a
 command like the following:
 
 ```bash
-dgraph alpha --audit dir=audit-log-dir;compress=true;encrypt_file=/path/to/encrypt/key/file
+dgraph alpha --audit output=audit-log-dir;compress=true;encrypt-file=/path/to/encrypt/key/file
 ```
 
 ### Decrypt audit logs
