@@ -21,7 +21,7 @@ used in lists. Lists behave like an unordered set in Dgraph. For example:
 not be stored and order might not be preserved. All scalars may be nullable or
 non-nullable.
 
-{{% notice "note" %}}The `Int64` type introduced in release 20.11 represents
+{{% notice "note" %}}The `Int64` type introduced in release v20.11 represents
 a signed integer ranging between `-(2^63)` and `(2^63 -1)`. Signed `Int64` values
 in this range will be parsed correctly by Dgraph as long as the client can
 serialize the number correctly in JSON. For example, a JavaScript client might
@@ -301,7 +301,11 @@ And the results of the GraphQL query will look like the following:
 ### Password type
 
 A password for an entity is set with setting the schema for the node type with `@secret` directive. Passwords cannot be queried directly, only checked for a match using the `checkTypePassword` function where `Type` is the node type.
-The passwords are encrypted using [bcrypt](https://en.wikipedia.org/wiki/Bcrypt).
+The passwords are encrypted using [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt).
+
+{{% notice "note" %}}
+For security reasons, Dgraph enforces a minimum password length of 6 characters on `@secret` fields.
+{{% /notice %}}
 
 For example, to set a password, first set schema:
 

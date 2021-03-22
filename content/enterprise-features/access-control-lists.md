@@ -26,12 +26,13 @@ key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  Keep this secr
 2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl secret-file="/path/to/secret"`, and
 make sure they are all using the same secret key file created in Step 1.  Alternatively, you can [store the secret in Hashicorp Vault](#storing-acl-secret-in-hashicorp-vault).
 
+
    ```bash
-   dgraph alpha --acl secret-file="/path/to/secret" --security whitelist="<permitted-ip-addresses>"
+   dgraph alpha --acl "secret-file=/path/to/secret" --security "whitelist=<permitted-ip-addresses>"
    ```
 
 {{% notice "tip" %}}
-In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security whitelist="<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=/path/to/secret"` and `"DGRAPH_ALPHA_SECURITY: whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security "whitelist=<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=</path/to/secret>"` and `DGRAPH_ALPHA_SECURITY="whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "deploy/config.md" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Example using Dgraph CLI
@@ -255,7 +256,7 @@ Response:
 
 The response includes the access and refresh JWTs which are used for the authentication itself and refreshing the authentication token, respectively. Save the JWTs from the response for later HTTP requests.
 
-You can run authenticated requests by passing the accessJWT to a request via the `X-Dgraph-AccessToken` header. Add the header `X-Dgraph-AccessToken` with the `accessJWT` value which you got in the login response in the GraphQL tool which you're using to make the request.
+You can run authenticated requests by passing the access JWT to a request via the `X-Dgraph-AccessToken` header. Add the header `X-Dgraph-AccessToken` with the `accessJWT` value which you got in the login response in the GraphQL tool which you're using to make the request.
 
 For example, if you were using the GraphQL Playground, you would add this in the headers section:
 

@@ -38,12 +38,12 @@ You can import `@slash-graph/lambda-types` to get types for `addGraphQLResolver`
 
 ## Dgraph Alpha
 
-To set up Dgraph Alpha, you need to define the `--graphql_lambda_url` flag, which is used to set the URL of the lambda server. All the `@lambda` fields will be resolved through the lambda functions implemented on the given lambda server.
+To set up Dgraph Alpha, you need to define the `--graphql` superflag's `lambda-url` option, which is used to set the URL of the lambda server. All the `@lambda` fields will be resolved through the lambda functions implemented on the given lambda server.
 
 For example:
 
 ```bash
-dgraph alpha --graphql_lambda_url=http://localhost:8686/graphql-worker
+dgraph alpha --graphql lambda-url=http://localhost:8686/graphql-worker
 ```
 
 Then test it out with the following `curl` command:
@@ -53,13 +53,13 @@ curl localhost:8686/graphql-worker -H "Content-Type: application/json" -d '{"res
 
 ### Docker settings
 
-If you're using Docker, you need to add the `--graphql_lambda_url` to your Alpha configuration. For example:
+If you're using Docker, you need to add the `--graphql` superflag's `lambda-url` option to your Alpha configuration. For example:
 
 ```yml
-    command: /gobin/dgraph alpha --zero=zero1:5180 -o 100 --expose_trace --trace 1.0
+    command: /gobin/dgraph alpha --zero=zero1:5180 -o 100 --expose_trace --trace ratio=1.0
       --profile_mode block --block_rate 10 --logtostderr -v=2
-      --whitelist 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 --my=alpha1:7180
-      --graphql_lambda_url=http://lambda:8686/graphql-worker
+      --security whitelist=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 --my=alpha1:7180
+      --graphql lambda-url=http://lambda:8686/graphql-worker
 ```
 
 Next, you need to add the Dgraph Lambda server configuration, and map the JavaScript file that contains the code for lambda functions to the `/app/script/script.js` file. Remember to set the `DGRAPH_URL` environment variable to your Alpha server.
@@ -126,10 +126,10 @@ services:
     labels:
       cluster: test
       service: alpha1
-    command: /gobin/dgraph alpha --zero=zero1:5180 -o 100 --expose_trace --trace 1.0
+    command: /gobin/dgraph alpha --zero=zero1:5180 -o 100 --expose_trace --trace ratio=1.0
       --profile_mode block --block_rate 10 --logtostderr -v=2
-      --whitelist 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 --my=alpha1:7180
-      --graphql_lambda_url=http://lambda:8686/graphql-worker
+      --security whitelist=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 --my=alpha1:7180
+      --graphql lambda-url=http://lambda:8686/graphql-worker
 
   lambda:
     image: dgraph/dgraph-lambda:latest
