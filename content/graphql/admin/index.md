@@ -26,7 +26,9 @@ Once you've tried out Dgraph GraphQL, you'll need to move past the `dgraph/stand
 
 Dgraph is a distributed graph database.  It can scale to huge data and shard that data across a cluster of Dgraph instances.  GraphQL is built into Dgraph in its Alpha nodes. To learn how to manage and deploy a Dgraph cluster, check our [deployment guide](https://dgraph.io/docs/deploy/).
 
-GraphQL schema introspection is enabled by default, but can be disabled with the `--graphql_introspection=false` when starting the Dgraph alpha nodes.
+GraphQL schema introspection is enabled by default, but you can disable it by
+setting the `--graphql` superflag's `introspection` option to false (`--graphql introspection=false`) when
+starting the Dgraph Alpha nodes in your cluster.
 
 ## Dgraph's schema
 
@@ -503,6 +505,6 @@ type Person {
 would have the following effects:
 
 * The `/graphql` endpoint would refresh to serve the schema built from this type.
-* Thus, field `dob` would no longer be accessible, and there'd be no search available on `name`.
+* Thus, field `dob` would no longer be accessible, and there would be no search available on `name`.
 * The search index on `name` in Dgraph would be removed.
 * The predicate `dob` in Dgraph would be left untouched (the predicate remains and no data is deleted).

@@ -106,7 +106,7 @@ We suggest that your policy include frequent full and incremental backups. Accor
 
 ### Terminology
 
-An **N-node cluster** is a Dgraph cluster that contains N number of Dgraph instances. For example, a 6-node cluster means six Dgraph instances. The **replication setting** specifies the number of Dgraph Alpha replicas are assigned per group. The replication setting is a configuration flag (`--replicas`) on Dgraph Zero. A **Dgraph Alpha group** is a set of Dgraph Alphas that store replications of the data amongst each other. Every Dgraph Alpha group is assigned a set of distinct predicates to store and serve.
+An **N-node cluster** is a Dgraph cluster that contains N number of Dgraph instances. For example, a 6-node cluster means six Dgraph instances. The **replication setting** specifies the number of Dgraph Alpha replicas that are assigned per group. The replication setting is a configuration flag (`--replicas`) on Dgraph Zero. A **Dgraph Alpha group** is a set of Dgraph Alphas that store replications of the data among each other. Every Dgraph Alpha group is assigned a set of distinct predicates to store and serve.
 
 Examples of different cluster settings:
 * No sharding
@@ -127,7 +127,7 @@ Configuration can be set either as command-line flags, environment variables, or
 
 Dgraph Zero:
 * The `--my` flag should be set to the address:port (the internal-gRPC port) that will be accessible to the Dgraph Alpha (default: `localhost:5080`).
-* The `--idx` flag should be set to a unique Raft ID within the Dgraph Zero group (default: `1`).
+* The `--raft` superflag's `idx` option should be set to a unique Raft ID within the Dgraph Zero group (default: `1`).
 * The `--wal` flag should be set to the directory path to store write-ahead-log entries on disk (default: `zw`).
 * The `--bindall` flag should be set to true for machine-to-machine communication (default: `true`).
 * Recommended: For better issue diagnostics, set the log level verbosity to 2 with the option `--v=2`.
@@ -144,7 +144,7 @@ Dgraph Alpha:
 
 We provide sample configs for both [Docker Compose](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/docker/docker-compose-ha.yml) and [Kubernetes](https://github.com/dgraph-io/dgraph/tree/master/contrib/config/kubernetes/dgraph-ha) for a 6-node cluster with 3 Alpha replicas per group. You can also run Dgraph directly on your host machines.
 
-A Dgraph cluster can be configured in a high-availability setup with Dgraph Zero and Dgraph Alpha each set up with peers. These peers are part of Raft consensus groups, which elect a single leader amongst themselves. The non-leader peers are called followers. In the event that the peers cannot communicate with the leader (e.g., a network partition or a machine shuts down), the group automatically elects a new leader to continue.
+A Dgraph cluster can be configured in a high-availability setup with Dgraph Zero and Dgraph Alpha each set up with peers. These peers are part of Raft consensus groups, which elect a single leader among themselves. The non-leader peers are called followers. In the event that the peers cannot communicate with the leader (e.g., a network partition or a machine shuts down), the group automatically elects a new leader to continue.
 
 Configuration can be set either as command-line flags, environment variables, or in a config file (see [Config]({{< relref "deploy/config.md" >}})).
 
@@ -163,26 +163,26 @@ We will configure the cluster with 3 Alpha replicas per group. The cluster group
 
 #### Set up Dgraph Zero group
 
-In the Dgraph Zero group you must set unique Raft IDs (`--idx`) per Dgraph Zero. Dgraph will not auto-assign Raft IDs to Dgraph Zero instances.
+In the Dgraph Zero group you must set unique Raft IDs (`--raft` superflag's `idx` option) per Dgraph Zero. Dgraph will not auto-assign Raft IDs to Dgraph Zero instances.
 
 The first Dgraph Zero that starts will initiate the database cluster. Any following Dgraph Zero instances must connect to the cluster via the `--peer` flag to join. If the `--peer` flag is omitted from the peers, then the Dgraph Zero will create its own independent Dgraph cluster.
 
-**First Dgraph Zero** example: `dgraph zero --replicas=3 --idx=1 --my=zero1:5080`
+**First Dgraph Zero** example: `dgraph zero --replicas=3 --raft idx=1 --my=zero1:5080`
 
-The `--my` flag must be set to the address:port of this instance that peers will connect to. The `--idx` flag sets its Raft ID to `1`.
+The `--my` flag must be set to the address:port of this instance that peers will connect to. The `--raft` superflag's `idx` option sets its Raft ID to `1`.
 
-**Second Dgraph Zero** example: `dgraph zero --replicas=3 --idx=2 --my=zero2:5080 --peer=zero1:5080`
+**Second Dgraph Zero** example: `dgraph zero --replicas=3 --raft idx=2 --my=zero2:5080 --peer=zero1:5080`
 
-The `--my` flag must be set to the address:port of this instance that peers will connect to. The `--idx` flag sets its Raft ID to 2, and the `--peer` flag specifies a request to connect to the Dgraph cluster of zero1 instead of initializing a new one.
+The `--my` flag must be set to the address:port of this instance that peers will connect to. The `--raft` superflag's `idx` option sets its Raft ID to 2, and the `--peer` flag specifies a request to connect to the Dgraph cluster of zero1 instead of initializing a new one.
 
-**Third Dgraph Zero** example: `dgraph zero --replicas=3 --idx=3 --my=zero3:5080 --peer=zero1:5080`:
+**Third Dgraph Zero** example: `dgraph zero --replicas=3 --raft idx=3 --my=zero3:5080 --peer=zero1:5080`:
 
-The `--my` flag must be set to the address:port of this instance that peers will connect to. The `--idx` flag sets its Raft ID to 3, and the `--peer` flag specifies a request to connect to the Dgraph cluster of zero1 instead of initializing a new one.
+The `--my` flag must be set to the address:port of this instance that peers will connect to. The `--raft` superflag's `idx` option sets its Raft ID to 3, and the `--peer` flag specifies a request to connect to the Dgraph cluster of zero1 instead of initializing a new one.
 
 Dgraph Zero configuration options:
 
 * The `--my` flag should be set to the address:port (the internal-gRPC port) that will be accessible to Dgraph Alpha (default: `localhost:5080`).
-* The `--idx` flag should be set to a unique Raft ID within the Dgraph Zero group (default: `1`).
+* The `--raft` superflag's `idx` option should be set to a unique Raft ID within the Dgraph Zero group (default: `1`).
 * The `--wal` flag should be set to the directory path to store write-ahead-log entries on disk (default: `zw`).
 * The `--bindall` flag should be set to true for machine-to-machine communication (default: `true`).
 * Recommended: For more informative log info, set the log level verbosity to 2 with the option `--v=2`.

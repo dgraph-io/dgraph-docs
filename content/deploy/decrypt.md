@@ -42,12 +42,16 @@ The following decryption options (or *flags*) are available for the `decrypt` co
 |`-f`, `--file`               | Path and filename for the encrypted RDF or schema **.gz** file       |
 |`-h`, `--help`               | Help for the `decrypt` command                                       |
 |`-o`, `--out`                | Path and filename for the decrypted .gz file that `decrypt` creates  |
-|`--vault_addr`               | Vault server address, in **http://&lt;*ip-address*&gt;:&lt;*port*&gt;** format (default: `http://localhost:8200` ) |
-|`--vault_field`              | Name of the Vault server's key/value store field that holds the Base64 encryption key (default `enc_key`) |
-|`--vault_format`             | Vault server field format; can be `raw` or `base64` (default: `base64`) |
-|`--vault_path`               | Vault server key/value store path (default: `secret/data/dgraph`)       |
-|`--vault_roleid_file`        | File containing the Vault `role-id` used for AppRole authentication     |
-|`--vault_secretid_file`      |  File containing the Vault `secret-id` used for AppRole authentication  |
+|`--vault addr`               | Vault server address, in **http://&lt;*ip-address*&gt;:&lt;*port*&gt;** format (default: `http://localhost:8200` ) |
+|`--vault field`              | Name of the Vault server's key/value store field that holds the Base64 encryption key (default `enc_key`) |
+|`--vault format`             | Vault server field format; can be `raw` or `base64` (default: `base64`) |
+|`--vault path`               | Vault server key/value store path (default: `secret/data/dgraph`)       |
+|`--vault role-id-file`        | File containing the Vault `role-id` used for AppRole authentication     |
+|`--vault secret-id-file`      |  File containing the Vault `secret-id` used for AppRole authentication  |
+
+To learn more about the `--vault` superflag and its options that have replaced
+the `--vault_*` options in release v20.11 and earlier, see
+[Dgraph CLI Command Reference]({{< relref "deploy/cli-command-ref.md" >}}).
 
 ## Data decryption examples 
 
