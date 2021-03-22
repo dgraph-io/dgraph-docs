@@ -247,7 +247,7 @@ In case you are using a `p` directory coming a different Dgraph cluster (e.g. yo
 After starting your Zero nodes, you need to increase the timestamp of Zero by sending the following curl request to the Zero leader node:
 
 ```
-curl "zero_address:port/assign?what=timestamps&num=X" //with X = high number e.g. 100000 or higher
+curl "zero_address:port/assign?what=timestamps&num=X" #with X = high number e.g. 100000 or higher
 ```
 and this will print the following message:
 
@@ -257,7 +257,7 @@ and this will print the following message:
 Now you need to double-check if this timestamp has been increased correctly and this can be checked by sending a curl request to the zero `/state` endpoint:
 
 ```
-curl zerp-address:port/state | jq
+curl zero-address:port/state | jq
 ```
 At the very end of the response you will be looking at `"maxTxnTs"` this should be at least equal or higher than the timestamp you assigned in the previous curl request
 
