@@ -67,6 +67,15 @@ weight = 9
       </p>
     </a>
   </div>
+    <div class="item">
+    <div class="icon"><i class="lni lni-cog" aria-hidden="true"></i></div>
+    <a  href="{{< relref "change-data-capture.md">}}">
+      <h2>Change Data Capture</h2>
+      <p>
+        Track data changes over time. 
+      </p>
+    </a>
+  </div>  
   
 
 </div>
