@@ -240,6 +240,46 @@ I1227 13:27:53.959671   29781 draft.go:571] Creating snapshot at index: 34. Read
 ```
 Note that `snapshot at index` value must be the same within the same Alpha group and `ReadTs` must be the same value within and among all the Alpha groups.
 
+### Using "p" directories coming from different Dgraph clusters
+
+In case you are using a `p` directory coming a different Dgraph cluster (e.g. you are copying the `p` directory from your current Dgraph cluster and you want to spin up another Dgraph cluster using the same `p`) you will need to do an additional step before starting your Alpha nodes. 
+
+After starting your Zero nodes, you need to increase the timestamp of Zero by sending the following curl request to the Zero leader node:
+
+```
+curl "zero_address:port/assign?what=timestamps&num=X" //with X = high number e.g. 100000 or higher
+```
+and this will print the following message:
+
+```
+{"startId":"1","endId":"10000000","readOnly":"0"}
+```
+Now you need to double-check if this timestamp has been increased correctly and this can be checked by sending a curl request to the zero `/state` endpoint:
+
+```
+curl zerp-address:port/state | jq
+```
+At the very end of the response you will be looking at `"maxTxnTs"` this should be at least equal or higher than the timestamp you assigned in the previous curl request
+
+```json
+  "maxLeaseId": "0",
+  "maxTxnTs": "10010000",
+  "maxRaftId": "0",
+  "removed": [],
+  "cid": "47285b0d-6223-421e-aab5-e6910620a8ed",
+  "license": {
+    "user": "",
+    "maxNodes": "18446744073709551615",
+    "expiryTs": "1619041648",
+    "enabled": true
+  }
+```
+Only at this point you can start all your Alpha nodes and check that the Snapshot created has a `ReadTs` equal or higher that the `"maxTxnTs"`.
+
+```
+I0322 14:52:40.858626 2885131 draft.go:606] Creating snapshot at Index: 180, ReadTs: 10000011
+```
+
 ## Enterprise Features
 
 ### Multi-tenancy (Enterprise Feature)
