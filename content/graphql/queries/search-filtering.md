@@ -254,13 +254,14 @@ field using the `has` keyword. The `has` keyword can only check whether a field
 returns a non-null value, not for specific field values.
 
 For example, your schema might define a `Student` type that has basic
-information about each student; such as their ID number, age, and name:
+information about each student; such as their ID number, age, name, and email address:
 
 ```graphql
 type Student {
    tid: ID!
    age: Int!
    name: String
+   email: String
 }
 ```
 
@@ -273,3 +274,15 @@ queryStudent(filter: { has : name } ){
    name
 }
 ```
+You can also specify a list of fields, like the following:
+
+```graphql
+queryStudent(filter: { has : [name, email] } ){
+   tid
+   age
+   name
+   email
+}
+```
+
+This would return `Student` objects where both `name` and `email` fields are non-null.
