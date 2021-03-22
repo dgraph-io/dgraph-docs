@@ -36,33 +36,42 @@ Vault's
 
 The following decryption options (or *flags*) are available for the `decrypt` command:
 
-| Option                      | Notes                                                                |
-|-----------------------------|----------------------------------------------------------------------|
-|`encryption_key_file`        | Encryption key filename                                              |
-|`-f`, `--file`               | Path and filename for the encrypted RDF or schema **.gz** file       |
-|`-h`, `--help`               | Help for the `decrypt` command                                       |
-|`-o`, `--out`                | Path and filename for the decrypted .gz file that `decrypt` creates  |
-|`--vault_addr`               | Vault server address, in **http://&lt;*ip-address*&gt;:&lt;*port*&gt;** format (default: `http://localhost:8200` ) |
-|`--vault_field`              | Name of the Vault server's key/value store field that holds the Base64 encryption key (default `enc_key`) |
-|`--vault_format`             | Vault server field format; can be `raw` or `base64` (default: `base64`) |
-|`--vault_path`               | Vault server key/value store path (default: `secret/data/dgraph`)       |
-|`--vault_roleid_file`        | File containing the Vault `role-id` used for AppRole authentication     |
-|`--vault_secretid_file`      |  File containing the Vault `secret-id` used for AppRole authentication  |
+| Flag or Superflag       | Superflag Option | Notes                                                                                         |
+|-------------------------|------------------|-----------------------------------------------------------------------------------------------|
+| `--encryption_key_file` |                  | Encryption key filename                                                                       |
+| `-f`, `--file`          |                  | Path to file for the encrypted RDF or schema .gz file                                         |
+| `-h`, `--help`          |                  | Help for the decrypt command                                                                  |
+| `-o`, `--out`           |                  | Path to file for the decrypted .gz file that decrypt creates                                  |
+| `--vault`               | `addr`           | Vault server address, in http://<ip-address>:<port> format (default: `http://localhost:8200` )  |
+|                         | `enc-field`      | Name of the Vault server's key/value store field that holds the Base64 encryption key         |
+|                         | `enc-format`     | Vault server field format; can be raw or base64 (default: base64)                             |
+|                         | `path`           | Vault server key/value store path (default: secret/data/dgraph)                               |
+|                         | `role-id-file`   | File containing the Vault role-id used for AppRole authentication                             |
+|                         | `secret-id-file` | File containing the Vault secret-id used for AppRole authentication                           |
 
-## Data decryption examples 
+
+## Data decryption examples
 
 For example, you could use the following command with an encrypted RDF file
 (**encrypted.rdf.gz**) and an encryption key file (**enc_key_file**), to
 create a decrypted RDF file:
 
-```
-dgraph decrypt -f encrypted.rdf.gz --encryption_key_file enc-key-file -o decrypted_rdf.gz
+```bash
+# Encryption Key from the file path
+dgraph decrypt --file "encrypted.rdf.gz" --out "decrypted_rdf.gz" --encryption_key_file "enc-key-file"
+
+# Encryption Key from HashiCorp Vault
+dgraph decrypt --file "encrypted.rdf.gz" --out "decrypted_rdf.gz" \
+  --vault addr="http://localhost:8200";enc-field="enc_key";enc-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
 ```
 
 You can use similar syntax to create a decrypted schema file:
 
-```
-dgraph decrypt -f encrypted.schema.gz --encryption_key_file enc-key-file -o decrypted_schema.gz
-```
+```bash
+# Encryption Key from the file path
+dgraph decrypt --file "encrypted.schema.gz" --out "decrypted_schema.gz" --encryption_key_file "enc-key-file"
 
-
+# Encryption Key from HashiCorp Vault
+dgraph decrypt --file "encrypted.schema.gz" --out "decrypted_schema.gz" \
+  --vault addr="http://localhost:8200";enc-field="enc_key";enc-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
+```
