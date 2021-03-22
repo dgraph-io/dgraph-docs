@@ -29,23 +29,23 @@ users of other namespaces.
 
 - How access controls and policies are handled among different tenants?
 
-    Dgraph uses [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL) to manage controls and policies.
-    Previously, Dgraph had ACL across a single instance. With multi-tenancy, Dgraph's ACL controlling scope is by tenant.
-    Each tenant must be set up using ACL, and only users associated with this ACL will have access to that tenant.
+    In previous versions of Dgraph, the [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL) feature
+    offered a unified control solution across the entire database.
+    With the new multi-tenancy feature, the ACL policies are now scoped down to individual tenants in the database.
 
 {{% notice "note" %}}
 Only super-admins ([Guardians of the galaxy](#guardians-of-the-galaxy)) have access across tenants.
 The super admin is used only for database admininstration operations, such as exporting data of all tenants. 
 {{% /notice %}}
 
-- What is the granularity of the access controls? Is it per graph? Per tenant only?
+- What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
 
     The access controls are applied per tenant at a predicate level.
     For example, the user `John Smith` belonging to the group `Data Approvers` may only have read-only access to predicates,
-    while user `Jane Doe`, who belongs to the group `Data Managers`, can be given access to modify predicates.
+    while user `Jane Doe`, who belongs to the group `Data Editors`, can be given access to modify predicates.
     All of these ACL constraints have to be configured for each tenant. 
 
-- Are tenants a physical separation or a logical one? Does the data needs to be writen twice (e.g., for 2 tenants), or only once?
+- Are tenants a physical separation or a logical one?
 
     Tenants are a logical separation. In this example, data needs to be written twice for 2 different tenants.
     Each client must authenticate within a tenant, and can only modify data within the tenant as allowed by the configured ACLs.
