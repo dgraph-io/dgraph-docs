@@ -242,24 +242,24 @@ Note that `snapshot at index` value must be the same within the same Alpha group
 
 ### Using "p" directories coming from different Dgraph clusters
 
-In case you are using a `p` directory coming a different Dgraph cluster (e.g. you are copying the `p` directory from your current Dgraph cluster and you want to spin up another Dgraph cluster using the same `p`) you will need to do an additional step before starting your Alpha nodes. 
+In case you are using a `p` directory coming from a different Dgraph cluster (e.g. you are copying the `p` directory from your current Dgraph cluster and you want to spin up another Dgraph cluster using the same `p`) you will need to do an additional step before starting your Alpha nodes. 
 
-After starting your Zero nodes, you need to increase the timestamp of Zero by sending the following curl request to the Zero leader node:
+After starting your Zero nodes, you need to increase the Zero's timestamp by sending the following `curl` request to the Zero leader node:
 
 ```
 curl "zero_address:port/assign?what=timestamps&num=X" #with X = high number e.g. 100000 or higher
 ```
-and this will print the following message:
+This will print the following message:
 
 ```
 {"startId":"1","endId":"10000000","readOnly":"0"}
 ```
-Now you need to double-check if this timestamp has been increased correctly and this can be checked by sending a curl request to the zero `/state` endpoint:
+Now you need to double-check if this timestamp has been increased correctly. This can be checked by sending a `curl` request to the zero `/state` endpoint:
 
 ```
 curl zero-address:port/state | jq
 ```
-At the very end of the response you will be looking at `"maxTxnTs"` this should be at least equal or higher than the timestamp you assigned in the previous curl request
+At the very end of the response, you will be looking at `"maxTxnTs"` this should be at least equal or higher than the timestamp you assigned in the previous `curl` request
 
 ```json
   "maxLeaseId": "0",
