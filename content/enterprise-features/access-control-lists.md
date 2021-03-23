@@ -123,7 +123,7 @@ helm install "my-release" --values ./dgraph_values.yaml dgraph/dgraph
 
 ## Storing ACL secret in Hashicorp Vault
 
-The ACL secret can be saved on [Hashicorp Vault](https://www.vaultproject.io/) server instead saving the secret on the local file system.
+You can save the ACL secret on [Hashicorp Vault](https://www.vaultproject.io/) server instead of saving the secret on the local file system.
 
 ### Configuring a Hashicorp Vault Server
 
