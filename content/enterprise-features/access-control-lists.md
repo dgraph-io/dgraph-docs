@@ -143,7 +143,7 @@ To use Hashicorp Vault, these prerequisites must for the Vault Server.
      }
    }
    ```   
-4. A role with an attached policy that grants access to the secret.  For example, this policy would grant access to `secret/data/dgraph/alpha`:
+4. On the Vault server, create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
    ```hcl
    path "secret/data/dgraph/*" {
      capabilities = [ "read", "update" ]
