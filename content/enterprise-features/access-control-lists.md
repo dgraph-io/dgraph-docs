@@ -130,7 +130,7 @@ You can save the ACL secret on [Hashicorp Vault](https://www.vaultproject.io/) s
 Do the following to set up [Hashicorp Vault](https://www.vaultproject.io/) server for use with Dgraph:
 
 To use Hashicorp Vault, these prerequisites must for the Vault Server.
-1. Accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
+1. Ensure that the Vault server is accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
 2. Enable [AppRole Auth method](https://www.vaultproject.io/docs/auth/approle) and enable [KV Secrets Engine](https://www.vaultproject.io/docs/secrets/kv).
 3. Save the 256-bits (32 ASCII characters) long ACL secret in a KV Secret path.  For example, you can upload this below to KV Secrets V2 path of `secret/data/dgraph/alpha`:
    ```json
