@@ -404,7 +404,7 @@ name: string .
 friend: [uid] .
 ```
 
-Since you have to do a modification to the schema itself, you need an export.
+Because you have to do a modification to the schema itself, you need an export.
 You can use the `export_backup` tool to convert your binary backup into an export folder.
 
 ### Binary Backups and Exports folders
