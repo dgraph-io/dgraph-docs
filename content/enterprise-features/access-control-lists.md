@@ -127,7 +127,7 @@ The ACL secret can be saved on [Hashicorp Vault](https://www.vaultproject.io/) s
 
 ### Configuring a Hashicorp Vault Server
 
-These prerequisites are required when setting up [Hashicorp Vault](https://www.vaultproject.io/) server for use with Dgraph:
+Do the following to set up [Hashicorp Vault](https://www.vaultproject.io/) server for use with Dgraph:
 
 To use Hashicorp Vault, these prerequisites must for the Vault Server.
 1. Accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
