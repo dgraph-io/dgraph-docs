@@ -220,7 +220,7 @@ alpha:
         whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16‘
 ```
 
-The [Hashicorp Vault](https://www.vaultproject.io/) service will need to be installed and available.  This can be installed using the [Hashicorp Vault Helm Chart](https://www.vaultproject.io/docs/platform/k8s/helm) and can be configured to [auto unseal](https://learn.hashicorp.com/collections/vault/auto-unseal) so that the service is immediately available after deployment.
+To set up this chart, the [Hashicorp Vault](https://www.vaultproject.io/) service must be installed and available. You can use the [Hashicorp Vault Helm Chart](https://www.vaultproject.io/docs/platform/k8s/helm) and configure it to [auto unseal](https://learn.hashicorp.com/collections/vault/auto-unseal) so that the service is immediately available after deployment.
 
 ## Accessing secured Dgraph
 
