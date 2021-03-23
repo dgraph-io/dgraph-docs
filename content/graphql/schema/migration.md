@@ -1,224 +1,202 @@
 +++
 title = "Schema Migration"
-description = "This document describes all the things that you need to take care while doing an schema update or migration."
+description = "This document describes all the things that you need to take care while doing a schema update or migration."
 weight = 1
 [menu.main]
     parent = "schema"
     identifier = "schema-migration"
 +++
 
-There are many scenarios where Dgraph and GraphQL schemas can differ, which can result in unexpected behavior. 
-This article will help you identify these scenarios and prevent unwanted behavior, and also recover from these situations.
+In every app's development lifecycle, there comes a point, when the underlying schema doesn't 
+fit the requirements and has to be changed for good. That requires migration, for both schema 
+and the underlying data.
+This article will guide you about what all migration scenarios you can encounter with Dgraph, and 
+how to avoid any pitfalls around them.
 
-## Error messages
+Specifically, following are the most common scenarios that can occur:
+* Renaming a type
+* Renaming a field
+* Changing the type of a field
+* Adding @id to an existing field
 
-If you see an error message starting with:
+We will go through each of them one-by-one in this page.
 
-```txt
-resolving updateGQLSchema failed because succeeded in saving GraphQL schema but failed to alter Dgraph schema - GraphQL layer may exhibit unexpected behaviour, reapplying the old GraphQL schema may prevent any issues
-```
+Before we begin, it is worth mentioning that as long as you can avoid migration, avoid it. 
+Because there can be scenarios where you might need to update downstream clients, which can be hard.
+So, its always best to try out things first, once you are confident enough, then only push them to 
+production.
 
-It means that you have made a schema change in GraphQL, which is not allowed in Dgraph.
-Thus, the GraphQL schema is changed, but the Dgraph schema remains as it is. This will result in different schemas in Dgraph and GraphQL.
+### Renaming a type
 
-Such error can be caused by various reasons, for example changing a list type to scalar, or changing a scalar field to `uid`.
-
-If you do queries or mutations on such schemas, you can get the following errors, depending the operation that you performed on the schema update: 
-
- - `ErrExpectedScalar`: An object type was returned, but GraphQL was expecting a scalar. This indicates an internal error -  probably a mismatch between the GraphQL and Dgraph/remote schemas. The value was resolved as null (which may trigger GraphQL error propagation)   and as much other data as possible returned.
-
- - `ErrExpectedSingleItem`: A list was returned, but GraphQL was expecting just one item.  This indicates an internal error -  probably a mismatch between the GraphQL and Dgraph/remote schemas.  The value was resolved as null (which may trigger GraphQL error propagation)  and as much other data as possible returned.
-
- - `ErrExpectedList`: An item was returned, but GraphQL was expecting a list of items. This indicates an internal error - probably a mismatch between the GraphQL and Dgraph/remote schemas. The value was resolved as null (which may trigger GraphQL error propagation)  and as much other data as possible returned.
- 
-## Exceptions
-
-There are some cases where you won't get an error when you update the schema, but you can get an error later for an invalid operation.
-
-For example, if you have a `String!` field and add some data, when you change this field to the `@id` type you may have a problem while querying data. E.g., when using `getQuery` you will get multiple nodes with a given id, and get query will give an error.
-
-If you need to perform such schema migrations, you should be sure that it won't cause any unexpected behavior.
-For example, while changing a normal field to an `@id` field, it's the user's responsibility to make sure that the database doesn't have duplicate values for such fields.
-
-## Examples
-
-### List to scalar
-
-Take for example changing a list field to scalar.
-
-1.Post this schema:
-
+Let's say you had the following schema:
 ```graphql
-type todo {
-  id: ID!    
-  task: String   
-  owner: owner
-}  
-
-type owner {
-  name:String! @id 
-  todo:[todo] @hasInverse(field:"owner")
+type User {
+    id: ID!
+    name: String
 }
 ```
+and you had your application working fine with it. Now, you feel that the name `AppUser` would be
+more sensible than the name `User` because `User` seems a bit generic to you. Then you are in a 
+situation where you need migration.
 
-2. Add some data:
+This can be handled in a couple of ways:
+1. Migrate all the data for type `User` to use the new name `AppUser`. OR,
+2. Just use the [`@dgraph(type: ...)`](/graphql/dgraph) directive to maintain backward compatibility 
+   with the existing data.
 
+Depending on your use-case, you might find option 1 or 2 better for you. For example, if you 
+have accumulated very less data for the `User` type till now, then you might want to go with 
+option-1. But, if you have an active application with a very large dataset then updating the 
+node of each user may not be a thing you might want to commit to, as that can require some 
+maintenance downtime. So, option-2 could be a better choice in such conditions.
+
+Option-2 makes your new schema compatible with your existing data. Here's an example:
 ```graphql
-mutation {
-  addtodo(
-    input: [
-      { task: "graphql bugs fix", owner: { name: "alice" } }
-      { task: "dgraph bugs fix", owner: { name: "bob" } }
-    ]
-  ) {
-    todo {
-      taskowner {
-        name
-      }
-    }
-  }
+type AppUser @dgraph(type: "User") {
+    id: ID!
+    name: String
 }
 ```
+So, no downtime required. Migration is done by just updating your schema. Fast, easy, safe and 
+perfect!
 
-3. Change the schema. E.g., change the `todo` field to scalar:
+Note that, irrespective of what option you choose for migration on Dgraph side, you will still 
+need to migrate your GraphQL clients to use the new name in queries/mutations. For example, the 
+query `getUser` would now be renamed to `getAppUser`. So, your downstream clients need to update 
+that bit in the code.
 
+### Renaming a field
+
+Same story as renaming a type, but a different place this time.
+
+Let's say you had the following working schema:
 ```graphql
-type todo {
-  id : ID!
-  task:String
-  owner:owner
+type User {
+    id: ID!
+    name: String
+    phone: String
 }
-
-type owner {
-   name:String! @id
-   todo:todo @hasInverse(field:"owner")
- }
 ```
+and now you figured that it would be better to call `phone` as `tel`. You need migration.
 
-4. The change will bring the following error: 
-
-```txt
-resolving updateGQLSchema failed because succeeded in saving GraphQL schema but failed to alter Dgraph schema - GraphQL layer may exhibit unexpected behaviour, reapplying the old GraphQL schema may prevent any issues: Schema change not allowed from [uid] => uid without deleting pred: owner.todo (Locations: [{Line: 3, Column: 4}])
+You have the same two choices as above:
+1. Migrate all the data for the field `phone` to use the new name `tel`. OR,
+2. Just use the [`@dgraph(pred: ...)`](/graphql/dgraph) directive to maintain backward compatibility
+   with the existing data.
+   
+Here's an example if you want to go with option-2:
+```graphql
+type User {
+    id: ID!
+    name: String
+    tel: String @dgraph(pred: "User.phone")
+}
 ```
+Simple, right?
 
-5. Next, run the following query:
-
+Again, note that, irrespective of what option you choose for migration on Dgraph side, you will 
+still need to migrate your GraphQL clients to use the new name in queries/mutations. For example,
+the following query:
 ```graphql
 query {
-  queryowner {
-    name
-    todo {
-      id
-      task
+    getUser(id: "0x05") {
+        name
+        phone
     }
-  }
 }
 ```
-
-it will return this error:
-
-```json
-"errors": [
-    {
-      "message": "A list was returned, but GraphQL was expecting just one item. This indicates an internal error - probably a mismatch between the GraphQL and Dgraph/remote schemas. The value was resolved as null (which may trigger GraphQL error propagation) and as much other data as possible returned.",
-      "locations": [
-        {
-          "line": 5,
-          "column": 4
-        }
-      ],
-      "path": [
-        "queryowner",
-        0,
-        "todo"
-      ]
-    },
-]
- ```
- 
-You need to post the original schema to make this query work.
-
-### `String!` to `@id`
-
-Take for example changing a `String!` field to `@id`.
-
-1. Post this schema:
-
+would now have to be changed to:
 ```graphql
-type todo {
-  id : ID!
-  task:String
+query {
+    getUser(id: "0x05") {
+        name
+        tel
+    }
 }
 ```
+So, your downstream clients need to update that bit in the code.
 
-2. Add this entry multiple times:
+### Changing the type of a field
 
+There can be multiple scenarios in this category:
+* List -> Single item
+* String -> Int
+* Any other combination you can imagine
+
+It is strictly advisable that you figure out a solid schema before going in production, so that 
+you don't have to deal with such cases later. Nevertheless, if you ended up in such a situation, you
+have to migrate your data to fit the new schema. There is no easy way around here.
+
+An example scenario is, if you initially had this schema:
 ```graphql
-mutation {
-  addtodo(input: { task: " bugs" }) {
-    todo {
-      task
-    }
-  }
+type Todo {
+    id: ID!
+    task: String
+    owner: Owner
+}  
+
+type Owner {
+    name: String! @id
+    todo: [Todo] @hasInverse(field:"owner")
 }
 ```
-
-3. Change the schema to add the `@id` field:
-
+and later you decided that you want an owner to have only one todo at a time. So, you want to 
+make your schema look like this:
 ```graphql
-type todo {
-  id : ID!
-  task:String! @id
-  }
-```
-  
-4. Run the mutation:
+type Todo {
+    id: ID!
+    task: String
+    owner: Owner
+}  
 
+type Owner {
+    name: String! @id
+    todo: Todo @hasInverse(field:"owner")
+}
+```
+If you try updating your schema, you may end up getting an error like this:
+```txt
+resolving updateGQLSchema failed because succeeded in saving GraphQL schema but failed to alter Dgraph schema - GraphQL layer may exhibit unexpected behaviour, reapplying the old GraphQL schema may prevent any issues: Schema change not allowed from [uid] => uid without deleting pred: owner.todo
+```
+
+That is a red flag. As the error message says, you should revert to the old schema to make your 
+clients work correctly. In such cases, you should have migrated your data to fit the new schema
+_before_ applying the new schema. The steps for such a data migration varies from case to case, 
+and so can't all be listed down here, but you need to migrate your data first, is all you need 
+to keep in mind while making such changes.
+
+### Adding @id to an existing field
+
+Let's say you had the following schema:
 ```graphql
-mutation {
-  addtodo(input: { task: " bugs" }) {
-    todo {
-      task
-    }
-  }
+type User {
+    id: ID!
+    username: String
+}
+```
+and now you think that username must be unique for every user. So, you change the schema to this:
+```graphql
+type User {
+    id: ID!
+    username: String! @id
 }
 ```
 
-It will give the following error:
-
-```json
-{
-  "errors": [
-    {
-      "message": "mutation addtodo failed because Found multiple nodes with ID: 0x9c44",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
-        }
-      ]
+Now, here's the catch. With the old schema, it was possible that there could have existed 
+multiple users with the username `Alice`. If that was true, then the queries would break in such 
+cases. Like, if you run this query after the schema change:
+```graphql
+query {
+    getUser(username: "Alice") {
+        id
     }
-  ]
 }
 ```
-
-If you try to execute the `bytask` query you will get this error:
-
-```json
-{
-  "errors": [
-    {
-      "message": "A list was returned, but GraphQL was expecting just one item. This indicates an internal error - probably a mismatch between the GraphQL and Dgraph/remote schemas. The value was resolved as null (which may trigger GraphQL error propagation) and as much other data as possible returned.",
-      "locations": [
-        {
-          "line": 2,
-          "column": 1
-        }
-      ],
-      "path": [
-        "gettodo"
-      ]
-    }
-  ]
-}
+Then it might error out saying:
+```txt
+A list was returned, but GraphQL was expecting just one item. This indicates an internal error - probably a mismatch between the GraphQL and Dgraph/remote schemas. The value was resolved as null (which may trigger GraphQL error propagation) and as much other data as possible returned.
 ```
+
+So, while making such a schema change, you need to make sure that the underlying data really 
+honours the uniqueness constraint on the username field. If not, you need to do a data migration 
+to honour such constraints.
