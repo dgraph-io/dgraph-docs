@@ -202,7 +202,7 @@ In this example, you will also need to configure a [Hashicorp Vault](https://www
 
 If you deploy Dgraph on [Kubernetes](https://kubernetes.io/), you can configure the ACL feature using the [Dgraph Helm Chart](https://artifacthub.io/packages/helm/dgraph/dgraph).
 
-The next step is that we need to create a [Helm](https://helm.sh/) chart config values file, e.g. `dgraph_values.yaml`.
+The next step is that we need to create a [Helm](https://helm.sh/) chart config values file, such as `dgraph_values.yaml`.
 
 ```yaml
 ## dgraph_values.yaml
