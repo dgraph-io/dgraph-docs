@@ -24,7 +24,7 @@ The ACL feature can be turned on by following these steps:
 key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  Keep this secret key secret to avoid data security issues.  The secret key must have at least 256-bits (32 ASCII characters) to support the HMAC-SHA256 signing algorithm.
 
 2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl secret-file="/path/to/secret"`, and
-make sure they are all using the same secret key file created in Step 1.  Alternatively, you can [store the secret in Hashicorp Vault](#storing-acl-secret-in-hashicorp-vault).
+make sure that they are all using the same secret key file created in Step 1.  Alternatively, you can [store the secret in Hashicorp Vault](#storing-acl-secret-in-hashicorp-vault).
 
 
    ```bash
