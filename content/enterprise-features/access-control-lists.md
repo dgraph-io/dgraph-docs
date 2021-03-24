@@ -147,7 +147,7 @@ Do the following to set up [Hashicorp Vault](https://www.vaultproject.io/) serve
      capabilities = [ "read", "update" ]
    }
    ```
-5. On the Hashicorp Vault server, generate the `role_id` and corresponding `secret_id` whose policy can access the KV Secrete path, and copy them over to local files that will be used by Dgraph Alpha nodes like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`.
+5. On the Hashicorp Vault server, generate the `role_id` and corresponding `secret_id` whose policy can access the KV Secret path, and copy them over to local files that will be used by Dgraph Alpha nodes like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`.
 
 {{% notice "note" %}}
 The key format for the `acl-field` option can be defined using `acl-format` with the values `base64` (default) or `raw`.
