@@ -60,7 +60,7 @@ restart successfully.
 
 The encryption key secret can be saved in [Hashicorp Vault](https://www.vaultproject.io/) K/V Secret instead of as file on Dgraph Alpha.
 
-To use [Hashicorp Vault](https://www.vaultproject.io/), these prerequisites must be met for the Vault Server.
+To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prerequisites for the Vault Server.
 
 1. Accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
 2. Enable [AppRole Auth method](https://www.vaultproject.io/docs/auth/approle) and enable [KV Secrets Engine](https://www.vaultproject.io/docs/secrets/kv).
