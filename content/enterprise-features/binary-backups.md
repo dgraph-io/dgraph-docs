@@ -620,7 +620,7 @@ The `--zero` (`-z`) flag specifies a Dgraph Zero server address to update the st
 
 The `--backup_id` optional flag specifies the ID of the backup series to restore. A backup series consists of a full backup and all the incremental backups built on top of it. Each time a new full backup is created, a new backup series with a different ID is started. The backup series ID is stored in each `manifest.json` file stored in every backup folder.
 
-The `--encryption_key_file` flag is required if you took the backup in an encrypted cluster and should point to the location of the same key used to run the cluster.
+You use the `--encryption_key_file` flag in cases where you took the backup in an encrypted cluster. The string for this flag must point to the location of the same key file used to run the cluster.
 
 You use the `--vault` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) to specify the [Hashicorp Vault](https://www.vaultproject.io/) server address (`addr`), role id (`role-id-file`), secret id (`secret-id-file`) and the field that contains the encryption key (`enc-field`) that was used to encrypt the backup.
 
