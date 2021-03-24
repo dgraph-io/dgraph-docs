@@ -618,7 +618,7 @@ You can use the `--postings` (`-p`) flag to set the directory where restored pos
 
 The `--zero` (`-z`) flag specifies a Dgraph Zero server address to update the start timestamp and UID lease using the restored version. If no Dgraph Zero server address is passed, the command will complain unless you set the value of the `--force_zero` flag to false. If do not pass a zero value to this command, the timestamp and UID lease must be manually updated through Dgraph Zero server's HTTP 'assign' endpoint using the values printed near the end of the command's output.
 
-The `--backup_id` optional flag specifies the ID of the backup series to restore. A backup series consists of a full backup and all the incremental backups built on top of it. Each time a new full backup is created, a new backup series with a different ID is started. The backup series ID is stored in each `manifest.json` file stored in every backup folder.
+You use the `--backup_id` optional flag to specify the ID of the backup series to restore. A backup series consists of a full backup and all of the incremental backups built on top of it. Each time a new full backup is created, a new backup series with a different ID is started. The backup series ID is stored in each `manifest.json` file stored in each backup folder.
 
 You use the `--encryption_key_file` flag in cases where you took the backup in an encrypted cluster. The string for this flag must point to the location of the same key file used to run the cluster.
 
