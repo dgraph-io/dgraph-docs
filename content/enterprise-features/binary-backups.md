@@ -614,7 +614,7 @@ The `dgraph restore` command restores the postings directory from a previously c
 
 You can use the `--location` (`-l`) flag to specify a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
 
-The `--postings` (`-p`) flag sets the directory to which the restored posting directories will be saved. This directory will contain a posting directory for each group in the restored backup.
+You can use the `--postings` (`-p`) flag to set the directory where restored posting directories are saved. This directory contains a posting directory for each group in the restored backup.
 
 The `--zero` (`-z`) flag specifies a Dgraph Zero server address to update the start timestamp and UID lease using the restored version. If no Dgraph Zero server address is passed, the command will complain unless you set the value of the `--force_zero` flag to false. If do not pass a zero value to this command, the timestamp and UID lease must be manually updated through Dgraph Zero server's HTTP 'assign' endpoint using the values printed near the end of the command's output.
 
