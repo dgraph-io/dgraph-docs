@@ -616,7 +616,7 @@ You can use the `--location` (`-l`) flag to specify a source URI with Dgraph bac
 
 You can use the `--postings` (`-p`) flag to set the directory where restored posting directories are saved. This directory contains a posting directory for each group in the restored backup.
 
-The `--zero` (`-z`) flag specifies a Dgraph Zero server address to update the start timestamp and UID lease using the restored version. If no Dgraph Zero server address is passed, the command will complain unless you set the value of the `--force_zero` flag to false. If do not pass a zero value to this command, the timestamp and UID lease must be manually updated through Dgraph Zero server's HTTP 'assign' endpoint using the values printed near the end of the command's output.
+You can use the `--zero` (`-z`) flag to specify a Dgraph Zero server address to update the start timestamp and UID lease using the restored version. If no Dgraph Zero server address is passed, the command will complain unless you set the value of the `--force_zero` flag to false. If do not pass a zero value to this command, you need to manually update the timestamp and UID lease using the Dgraph Zero server's HTTP 'assign' endpoint. The updated values should be those that are printed near the end of the command's output.
 
 You use the `--backup_id` optional flag to specify the ID of the backup series to restore. A backup series consists of a full backup and all of the incremental backups built on top of it. Each time a new full backup is created, a new backup series with a different ID is started. The backup series ID is stored in each `manifest.json` file stored in each backup folder.
 
