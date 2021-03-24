@@ -48,6 +48,39 @@ logs, where the current log file is used until it reaches a configurable size
 (default: 100MB), and then is replaced by another current audit log file. Older
 audit log files are retained for a configurable number of days (default: 10 days).
 
+
+For example, by sending this query:
+
+```graphql
+{
+  q(func: has(actor.film)){
+    count(uid)
+  }
+}
+```
+
+You'll get the following JSON audit log entry:
+
+```json
+{
+   "ts":"2021-03-22T15:03:19.165Z",
+   "endpoint":"/query",
+   "level":"AUDIT",
+   "user":"",
+   "namespace":0,
+   "server":"localhost:7080",
+   "client":"[::1]:60118",
+   "req_type":"Http",
+   "req_body":"{\"query\":\"{\\n  q(func: has(actor.film)){\\n    count(uid)\\n  }\\n}\",\"variables\":{}}",
+   "query_param":{
+      "timeout":[
+         "20s"
+      ]
+   },
+   "status":"OK"
+}
+```
+
 ## Enable audit logging
 
 You can enable audit logging on a Dgraph Alpha or Dgraph Zero node by using the
