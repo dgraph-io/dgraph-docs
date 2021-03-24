@@ -35,7 +35,7 @@ A Lambda Mutation resolver can use a combination of `parents`, `args`, `dql`, or
 {{% /notice %}}
 
 {{% notice "tip" %}}
-This example uses `graphql` for the resolver function. You can find additional resolver examples using `dql` in the [Lambda queries article]({{< relref "query.md" >}}), and using `parent` in the [Lambda fields article]({{< relref "mutation.md" >}}).
+This example uses `graphql` for the resolver function. You can find additional resolver examples using `dql` in the [Lambda queries article]({{< relref "query.md" >}}), and using `parent` in the [Lambda fields article]({{< relref "field.md" >}}).
 {{% /notice %}}
 
 For example, to define the JavaScript `newAuthor()` lambda function and add it as resolver:
