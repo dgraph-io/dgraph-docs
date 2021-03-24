@@ -612,7 +612,7 @@ The restore utility is now a standalone tool. A new flag, `--encryption_key_file
 
 The `dgraph restore` command restores the postings directory from a previously created backup to a directory in the local filesystem. Restore is intended to restore a backup to a new Dgraph cluster not a currently live one. During a restore, a new Dgraph Zero server may be running to fully restore the backup state.
 
-The `--location` (`-l`) flag specifies a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
+You can use the `--location` (`-l`) flag to specify a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
 
 The `--postings` (`-p`) flag sets the directory to which the restored posting directories will be saved. This directory will contain a posting directory for each group in the restored backup.
 
