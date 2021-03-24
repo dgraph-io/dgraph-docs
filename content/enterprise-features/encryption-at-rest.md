@@ -81,7 +81,7 @@ To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prere
      capabilities = [ "read", "update" ]
    }
    ```
-5. The `role-id` and corresponding `secret-id` must must be generated and copied over to local files.
+5. On the Vault server, generate the `role-id` and corresponding `secret-id`; and then save these ids on the Dgraph Alpha server. To learn more about this step, see [HashiCorp Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
 
 Here is an example of using Dgraph with a Vault server that holds the encryption key:
 ```bash
