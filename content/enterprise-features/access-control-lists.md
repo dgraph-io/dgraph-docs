@@ -131,7 +131,7 @@ Do the following to set up on the [Hashicorp Vault](https://www.vaultproject.io/
 
 1. Ensure that the Vault server is accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
 2. Enable [AppRole Auth method](https://www.vaultproject.io/docs/auth/approle) and enable [KV Secrets Engine](https://www.vaultproject.io/docs/secrets/kv).
-3. Save the 256-bits (32 ASCII characters) long ACL secret in a KV Secret pat (K/V Version 1 or K/V Version 1).  For example, you can upload this below to KV Secrets Engine Version 2 path of `secret/data/dgraph/alpha`:
+3. Save the 256-bits (32 ASCII characters) long ACL secret in a KV Secret path ([K/V Version 1](https://www.vaultproject.io/docs/secrets/kv/kv-v1) or [K/V Version 2](https://www.vaultproject.io/docs/secrets/kv/kv-v2)).  For example, you can upload this below to KV Secrets Engine Version 2 path of `secret/data/dgraph/alpha`:
    ```json
    {
      "options": {
@@ -142,7 +142,7 @@ Do the following to set up on the [Hashicorp Vault](https://www.vaultproject.io/
      }
    }
    ```   
-4.Create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
+4. Create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
    ```hcl
    path "secret/data/dgraph/*" {
      capabilities = [ "read", "update" ]
@@ -150,7 +150,9 @@ Do the following to set up on the [Hashicorp Vault](https://www.vaultproject.io/
    ```
 5. Using the `role_id` generated from the previous step, create a corresponding `secret_id`, and copy the `role_id` and `secret_id` over to local files, like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`, that will be used by Dgraph Alpha nodes.
 
+{{% notice "tip" %}}
 To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
+{{% /notice %}}
 
 {{% notice "note" %}}
 The key format for the `acl-field` option can be defined using `acl-format` with the values `base64` (default) or `raw`.
@@ -158,12 +160,17 @@ The key format for the `acl-field` option can be defined using `acl-format` with
 
 ### Example using Dgraph CLI with Hashicorp Vault configuration
 
-Here is an example of using Dgraph Alpha with a Vault server that holds the secret key:
+Here is an example of using Dgraph with a Vault server that holds the secret key:
 
 ```bash
+## Start Dgraph Zero in different terminal tab or window
+dgraph zero --my=localhost:5080 --replicas 1 --raft "idx=1"
+
+## Start Dgraph Alpha in different terminal tab or window
 dgraph alpha \
   --security whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" \
   --vault addr="http://localhost:8200";acl-field="hmac_secret_file";acl-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
+
 ```
 
 ### Example using Docker Compose with Hashicorp Vault configuration
