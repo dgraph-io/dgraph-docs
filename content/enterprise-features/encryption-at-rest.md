@@ -62,9 +62,9 @@ You can save the encryption key secret in [Hashicorp Vault](https://www.vaultpro
 
 To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prerequisites for the Vault Server.
 
-1. Accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
+1. Ensure that the Vault server is accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
 2. Enable [AppRole Auth method](https://www.vaultproject.io/docs/auth/approle) and enable [KV Secrets Engine](https://www.vaultproject.io/docs/secrets/kv).
-3. Save the value of the key (16, 24, or 32 bytes long) that Dgraph Alpha will use in a KV Secret path (KV V1 or KV V2).  For example, you can upload this below to KV Secrets V2 path of `secret/data/dgraph/alpha`:
+3. Save the value of the key (16, 24, or 32 bytes long) that Dgraph Alpha will use in a KV Secret path (K/V Version 1 or K/V Version 1).  For example, you can upload this below to KV Secrets Engine Version 2 path of `secret/data/dgraph/alpha`:
    ```json
    {
      "options": {
@@ -75,22 +75,31 @@ To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prere
      }
    }
    ```   
-4. A role with an attached policy that grants access to the secret.  For example, this policy would grant access to `secret/data/dgraph/alpha`:
+4. Create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
    ```hcl
    path "secret/data/dgraph/*" {
      capabilities = [ "read", "update" ]
    }
    ```
-5. On the Vault server, generate the `role-id` and corresponding `secret-id`; and then save these ids on the Dgraph Alpha server. To learn more about this step, see [HashiCorp Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
+5. Using the `role_id` generated from the previous step, create a corresponding `secret_id`, and copy the `role_id` and `secret_id` over to local files, like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`, that will be used by Dgraph Alpha nodes.
 
-Here is an example of using Dgraph with a Vault server that holds the encryption key:
+To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
+
+{{% notice "note" %}}
+The key format for the `acl-field` option can be defined using `acl-format` with the values `base64` (default) or `raw`.
+{{% /notice %}}
+
+### Example using Dgraph CLI with Hashicorp Vault configuration
+
+The following example shows how to use Dgraph with a Vault server that holds the encryption key:
+
 ```bash
 dgraph zero --my=localhost:5080 --replicas 1 --raft "idx=1"
 dgraph alpha --my="localhost:7080" --zero="localhost:5080" \
   --vault addr="http://localhost:8200";enc-field="enc_key";enc-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
 ```
 
-If multiple Dgraph Alpha nodes are part of the cluster, you will need to pass the `--encryption_key_file` flag or the `--vault` superflag with appropriate superflag options to each of the Dgraph Alpha nodes.
+If multiple Dgraph Alpha nodes are part of the cluster, you must pass the `--encryption_key_file` flag or the `--vault` superflag with appropriate superflag options to each of the Dgraph Alpha nodes.
 
 Once an Dgraph Alpha has encryption enabled, the encryption key must be provided in order to start a Dgraph Alpha node. If a Dgraph Alpha node restarts, the `--encryption_key_file` flag or the `--vault` superflag must be set along with the key in order to restart successfully.
 

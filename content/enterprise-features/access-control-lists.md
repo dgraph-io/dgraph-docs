@@ -127,10 +127,11 @@ You can save the ACL secret on [Hashicorp Vault](https://www.vaultproject.io/) s
 
 ### Configuring a Hashicorp Vault Server
 
-Do the following to set up [Hashicorp Vault](https://www.vaultproject.io/) server for use with Dgraph:
+Do the following to set up on the [Hashicorp Vault](https://www.vaultproject.io/) server for use with Dgraph:
+
 1. Ensure that the Vault server is accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
 2. Enable [AppRole Auth method](https://www.vaultproject.io/docs/auth/approle) and enable [KV Secrets Engine](https://www.vaultproject.io/docs/secrets/kv).
-3. Save the 256-bits (32 ASCII characters) long ACL secret in a KV Secret path.  For example, you can upload this below to KV Secrets V2 path of `secret/data/dgraph/alpha`:
+3. Save the 256-bits (32 ASCII characters) long ACL secret in a KV Secret pat (K/V Version 1 or K/V Version 1).  For example, you can upload this below to KV Secrets Engine Version 2 path of `secret/data/dgraph/alpha`:
    ```json
    {
      "options": {
@@ -141,13 +142,15 @@ Do the following to set up [Hashicorp Vault](https://www.vaultproject.io/) serve
      }
    }
    ```   
-4. On the Vault server, create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
+4.Create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
    ```hcl
    path "secret/data/dgraph/*" {
      capabilities = [ "read", "update" ]
    }
    ```
-5. On the Hashicorp Vault server, generate the `role_id` and corresponding `secret_id` whose policy can access the KV Secret path, and copy them over to local files that will be used by Dgraph Alpha nodes like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`.
+5. Using the `role_id` generated from the previous step, create a corresponding `secret_id`, and copy the `role_id` and `secret_id` over to local files, like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`, that will be used by Dgraph Alpha nodes.
+
+To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
 
 {{% notice "note" %}}
 The key format for the `acl-field` option can be defined using `acl-format` with the values `base64` (default) or `raw`.
