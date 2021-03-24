@@ -32,9 +32,13 @@ To define the connection method, you must set the `# Dgraph.Authorization` objec
 * `Namespace` is the key inside the JWT that contains the claims relevant to Dgraph auth
 * `Algo` is the JWT verification algorithm which can be either `HS256` or `RS256`
 * `VerificationKey` is the string value of the key (newlines replaced with `\n`) wrapped in `""`
-* `JWKURL` is the URL for the JSON Web Key sets
+* `JWKURL`/`JWKURLs` is the URL for the JSON Web Key sets. If you want to pass multiple URLs, use `JWKURLs` as an array of multiple JWK URLs for the JSON Web Key sets
 * `Audience` is used to verify the `aud` field of a JWT which might be set by certain providers. It indicates the intended audience for the JWT. When doing authentication with `JWKURL`, this field is mandatory as Identity Providers share JWKs among multiple tenants
 * `ClosedByDefault`, if set to `true`, requires authorization for all requests even if the type does not specify the [`@auth`]({{< relref "directive.md" >}}) directive. If omitted, the default setting is `false`.
+
+{{% notice "tip" %}}
+If you want to pass multiple URLs, use `JWKURLs` as an array of multiple JWK URLs for the JSON Web Key sets.
+{{% /notice %}}
 
 To set up the authentication connection method:
 
@@ -68,6 +72,18 @@ Valid `Dgraph.Authorization` examples look like:
 
 ```
 # Dgraph.Authorization {"VerificationKey":"verificationkey","Header":"X-My-App-Auth","Namespace":"https://my.app.io/jwt/claims","Algo":"HS256","Audience":["aud1","aud5"]}
+```
+
+With a single JWK URL:
+
+```
+# Dgraph.Authorization {"VerificationKey":"","Header":"X-My-App-Auth", "jwkurl":"https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com", "Namespace":"https://xyz.io/jwt/claims","Algo":"","Audience":["fir-project1-259e7", "HhaXkQVRBn5e0K3DmMp2zbjI8i1wcv2e"]}
+```
+
+With multiple JWK URLs:
+
+```
+# Dgraph.Authorization {"VerificationKey":"","Header":"X-My-App-Auth","jwkurls":["https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com","https://dev-hr2kugfp.us.auth0.com/.well-known/jwks.json"], "Namespace":"https://xyz.io/jwt/claims","Algo":"","Audience":["fir-project1-259e7", "HhaXkQVRBn5e0K3DmMp2zbjI8i1wcv2e"]}
 ```
 
 Without an `Audience` field:
