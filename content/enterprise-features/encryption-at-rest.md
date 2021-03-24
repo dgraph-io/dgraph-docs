@@ -58,7 +58,7 @@ restart successfully.
 
 ### Storing encryption key secret in Hashicorp Vault
 
-The encryption key secret can be saved in [Hashicorp Vault](https://www.vaultproject.io/) K/V Secret instead of as file on Dgraph Alpha.
+You can save the encryption key secret in [Hashicorp Vault](https://www.vaultproject.io/) K/V Secret instead of as file on Dgraph Alpha.
 
 To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prerequisites for the Vault Server.
 
