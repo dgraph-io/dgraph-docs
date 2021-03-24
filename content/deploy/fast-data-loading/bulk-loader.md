@@ -259,7 +259,7 @@ Now you need to double-check if this timestamp has been increased correctly. Thi
 ```
 curl zero-address:port/state | jq
 ```
-At the very end of the response, you will be looking at `"maxTxnTs"` this should be at least equal or higher than the timestamp you assigned in the previous `curl` request
+At the end of the response, you will be looking at `"maxTxnTs"`. This should be at least equal or higher than the timestamp you assigned in the previous `curl` request
 
 ```json
   "maxLeaseId": "0",
