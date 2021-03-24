@@ -624,7 +624,7 @@ The `--encryption_key_file` flag is required if you took the backup in an encryp
 
 The `--vault` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) specifies the [Hashicorp Vault](https://www.vaultproject.io/) server address (`addr`), role id (`role-id-file`), secret id (`secret-id-file`) and field that contains the encryption key (`enc-field`) that was used to encrypt the backup.
 
-The restore feature will create a cluster with as many groups as the original cluster had at the time of the last backup. For each group, `dgraph restore` creates a posting directory `p<N>` corresponding to the backup group ID. For example, a backup for Dgraph Alpha group 2 would have the name `.../r32-g2.backup` and would be loaded to posting directory `p2`.
+The restore feature creates a cluster with as many groups as the original cluster had at the time of the last backup. For each group, `dgraph restore` creates a posting directory (`p<N>`) that corresponds to the backup group ID. For example, a backup for Dgraph Alpha group 2 would have the name `.../r32-g2.backup` and would be loaded to posting directory `p2`.
 
 After running the restore command, the directories inside the `postings` directory need to be manually copied over to the machines/containers running the Dgraph Alpha servers before running the `dgraph alpha` command. For example, in a database cluster with two Dgraph Alpha groups and one replica each, `p1` needs to be moved to the location of the first Dgraph Alpha node and `p2` needs to be moved to the location of the second Dgraph Alpha node.
 
