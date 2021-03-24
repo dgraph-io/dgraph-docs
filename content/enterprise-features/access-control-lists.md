@@ -23,8 +23,9 @@ The ACL feature can be turned on by following these steps:
 1. Create a plain text file, and store a randomly generated secret key in it. The secret
 key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  Keep this secret key secret to avoid data security issues.  The secret key must have at least 256-bits (32 ASCII characters) to support the HMAC-SHA256 signing algorithm.
 
-2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl_secret_file`, and
-make sure they are all using the same secret key file created in Step 2.
+2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl secret-file="/path/to/secret"`, and
+make sure that they are all using the same secret key file created in Step 1.  Alternatively, you can [store the secret in Hashicorp Vault](#storing-acl-secret-in-hashicorp-vault).
+
 
    ```bash
    dgraph alpha --acl_secret_file="/path/to/secret" --whitelist "<permitted-ip-addresses>"
@@ -62,9 +63,9 @@ services:
     command: dgraph alpha --my=alpha1:7080 --zero=zero1:5080
     container_name: alpha1
     environment:
-      DGRAPH_ALPHA_ACL_SECRET_FILE: /dgraph/acl/hmac_secret_file
-      DGRAPH_ALPHA_WHITELIST: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
-    image: dgraph/dgraph:v20.11.2
+      DGRAPH_ALPHA_ACL: secret-file="/dgraph/acl/hmac_secret_file"
+      DGRAPH_ALPHA_SECURITY: whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+    image: dgraph/dgraph:{{< version >}}
     ports:
       - 8080:8080
     volumes:
@@ -117,6 +118,115 @@ Now with the Helm chart config values created, we can deploy Dgraph:
 helm repo add "dgraph" https://charts.dgraph.io
 helm install "my-release" --values ./dgraph_values.yaml dgraph/dgraph
 ```
+
+## Storing ACL secret in Hashicorp Vault
+
+You can save the ACL secret on [Hashicorp Vault](https://www.vaultproject.io/) server instead of saving the secret on the local file system.
+
+### Configuring a Hashicorp Vault Server
+
+Do the following to set up on the [Hashicorp Vault](https://www.vaultproject.io/) server for use with Dgraph:
+
+1. Ensure that the Vault server is accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
+2. Enable [AppRole Auth method](https://www.vaultproject.io/docs/auth/approle) and enable [KV Secrets Engine](https://www.vaultproject.io/docs/secrets/kv).
+3. Save the 256-bits (32 ASCII characters) long ACL secret in a KV Secret path ([K/V Version 1](https://www.vaultproject.io/docs/secrets/kv/kv-v1) or [K/V Version 2](https://www.vaultproject.io/docs/secrets/kv/kv-v2)).  For example, you can upload this below to KV Secrets Engine Version 2 path of `secret/data/dgraph/alpha`:
+   ```json
+   {
+     "options": {
+       "cas": 0
+     },
+     "data": {
+       "hmac_secret_file": "12345678901234567890123456789012"
+     }
+   }
+   ```   
+4. Create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
+   ```hcl
+   path "secret/data/dgraph/*" {
+     capabilities = [ "read", "update" ]
+   }
+   ```
+5. Using the `role_id` generated from the previous step, create a corresponding `secret_id`, and copy the `role_id` and `secret_id` over to local files, like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`, that will be used by Dgraph Alpha nodes.
+
+{{% notice "tip" %}}
+To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
+{{% /notice %}}
+
+{{% notice "note" %}}
+The key format for the `acl-field` option can be defined using `acl-format` with the values `base64` (default) or `raw`.
+{{% /notice %}}
+
+### Example using Dgraph CLI with Hashicorp Vault configuration
+
+Here is an example of using Dgraph with a Vault server that holds the secret key:
+
+```bash
+## Start Dgraph Zero in different terminal tab or window
+dgraph zero --my=localhost:5080 --replicas 1 --raft "idx=1"
+
+## Start Dgraph Alpha in different terminal tab or window
+dgraph alpha \
+  --security whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" \
+  --vault addr="http://localhost:8200";acl-field="hmac_secret_file";acl-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
+
+```
+
+### Example using Docker Compose with Hashicorp Vault configuration
+
+If you are using [Docker Compose](https://docs.docker.com/compose/), you can set up a sample Dgraph cluster using this `docker-compose.yaml` configuration:
+
+```yaml
+version: '3.5'
+services:
+  alpha1:
+    command: dgraph alpha --my=alpha1:7080 --zero=zero1:5080
+    container_name: alpha1
+    environment:
+      DGRAPH_ALPHA_VAULT: addr="http://vault:8200";acl-ield="hmac_secret_file";acl-format="raw";path="secret/data/dgraph/alpha";role-id-file="/dgraph/vault/role_id";secret-id-file="/dgraph/vault/secret_id"
+      DGRAPH_ALPHA_SECURITY: whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+    image: dgraph/dgraph:{{< version >}}
+    ports:
+      - 8080:8080
+    volumes:
+      - ./role_id:/dgraph/vault/role_id
+      - ./secret_id:/dgraph/vault/secret_id
+  zero1:
+    command: dgraph zero --my=zero1:5080 --replicas 1 --raft idx=1
+    container_name: zero1
+    image: dgraph/dgraph:{{< version >}}
+```
+
+In this example, you will also need to configure a [Hashicorp Vault](https://www.vaultproject.io/) service named `vault` in the above `docker-compose.yaml`, and then run through this sequence:
+
+1. Launch `vault` service: `docker-compose up --detach vault`
+2. Unseal and Configure `vault` with the required prerequisites (see [Configuring a Hashicorp Vault Server](#configuring-a-hashicorp-vault-server)).
+3. Save role-id and secret-id as `./role_id` and `secret_id`
+4. Launch Dgraph Zero and Alpha: `docker-compose up --detach`
+
+
+### Example using Kubernetes Helm Chart with Hashicorp Vault configuration
+
+If you deploy Dgraph on [Kubernetes](https://kubernetes.io/), you can configure the ACL feature using the [Dgraph Helm Chart](https://artifacthub.io/packages/helm/dgraph/dgraph).
+
+The next step is that we need to create a [Helm](https://helm.sh/) chart config values file, such as `dgraph_values.yaml`.
+
+```yaml
+## dgraph_values.yaml
+alpha:
+  configFile:
+    config.yaml: |
+      vault:
+        addr: http://vault-headless.default.svc.cluster.local:9200
+        acl_field: hmac_secret_file
+        acl_format: raw
+        path: secret/data/dgraph/alpha
+        role_id_file: /dgraph/vault/role_id
+        secret_id_file: /dgraph/vault/secret_id
+      security:
+        whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16‘
+```
+
+To set up this chart, the [Hashicorp Vault](https://www.vaultproject.io/) service must be installed and available. You can use the [Hashicorp Vault Helm Chart](https://www.vaultproject.io/docs/platform/k8s/helm) and configure it to [auto unseal](https://learn.hashicorp.com/collections/vault/auto-unseal) so that the service is immediately available after deployment.
 
 ## Accessing secured Dgraph
 

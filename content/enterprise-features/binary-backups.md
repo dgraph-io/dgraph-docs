@@ -175,7 +175,7 @@ Once you have a `credentials.json`, you can access GCS locally using one of thes
    export MINIO_SECRET_KEY=miniosecretkey
    minio gateway gcs <project-id>
    ```
- 
+
 #### Test Using MinIO Browser
 
 MinIO Gateway comes with an embedded web-based object browser.  After using one of the aforementioned methods to run the MinIO Gateway, you can test that MinIO Gateway is running, open a web browser, navigate to http://127.0.0.1:9000, and ensure that the object browser is displayed and can access the remote object storage.
@@ -404,7 +404,7 @@ name: string .
 friend: [uid] .
 ```
 
-Since you have to do a modification to the schema itself, you need an export. 
+Because you have to do a modification to the schema itself, you need an export.
 You can use the `export_backup` tool to convert your binary backup into an export folder.
 
 ### Binary Backups and Exports folders
@@ -447,7 +447,7 @@ dgraph.20210104.224757.709
 Then run the following command:
 
 ```sh
-dgraph export_backup -l <location-of-your-binary-backup> -d <destination-of-the-export-dir>
+dgraph export_backup --location "<location-of-your-binary-backup>" --destination "<destination-of-the-export-dir>"
 ```
 
 Once completed you will find your export folder (in this case `dgraph.r9.u0108.1621`).
@@ -462,8 +462,10 @@ dgraph.r9.u0108.1621
 
 ## Encrypted Backups
 
-Encrypted backups are a Enterprise feature that are available from v20.03.1 and v1.2.3 and allow you to encrypt your backups and restore them. This documentation describes how to implement encryption into your binary backups.
-Starting with v20.07.0, we also added support for Encrypted Backups using encryption keys sitting on Vault.
+Encrypted backups are an Enterprise feature that are available from `v20.03.1` and `v1.2.3` and allow you to encrypt your backups and restore them. This
+documentation describes how to implement encryption into your binary backups.
+
+Starting with` v20.07.0`, we also added support for Encrypted Backups using encryption keys sitting on [Hashicorp Vault](https://www.vaultproject.io/).
 
 
 ### New flag “Encrypted” in manifest.json
@@ -482,13 +484,13 @@ During **backup**: the 16 bytes IV is prepended to the Cipher-text data after en
 
 ### Backup
 
-Backup is an online tool, meaning it is available when Alpha server is running. For encrypted backups, the Alpha server must be configured with the “encryption_key_file”. Starting with v20.07.0, the Alpha server can alternatively be configured to interface with Vault server to obtain keys.
+Backup is an online tool, meaning it is available when Dgraph Alpha server is running. For encrypted backups, the Dgraph Alpha server must be configured with the “encryption_key_file”. Starting with v20.07.0, the Dgraph Alpha server can alternatively be configured to interface with a [Hashicorp Vault](https://www.vaultproject.io/) server to obtain keys.
 
 {{% notice "note" %}}
-`encryption_key_file` or `vault_*` options was used for encryption-at-rest and will now also be used for encrypted backups.
+`encryption_key_file` flag or `vault` superflag was used for encryption-at-rest and will now also be used for encrypted backups.
 {{% /notice %}}
 
-### Online restore
+## Online restore
 
 To restore from a backup to a live cluster, execute a mutation on the `/admin`
 endpoint with the following format.
@@ -519,8 +521,7 @@ algorithm where the same key is used for both encryption and decryption, so the 
 cluster is needed for the restore process.
 {{% /notice %}}
 
-Restore can be performed from Amazon S3 / Minio or from a local directory. Below
-is the documentation for the fields inside `RestoreInput` that can be passed into
+Online restore can be performed from Amazon S3 / Minio or from a local directory. Below is the documentation for the fields inside `RestoreInput` that can be passed into
 the mutation.
 
 ```graphql
@@ -536,7 +537,7 @@ input RestoreInput {
 		If missing, it defaults to the latest series.
 		"""
 		backupId: String
-        
+
 		"""
 		Number of the backup within the backup series to be restored. Backups with a greater value
 		will be ignored. If the value is zero or is missing, the entire series will be restored.
@@ -618,80 +619,45 @@ query status() {
 }
 ```
 
-### Offline restore using `dgraph restore`
+## Offline restore
 
-{{% notice "note" %}}
-`dgraph restore` is being deprecated, please use GraphQL API for Restoring from Backup.
-{{% /notice %}}
+The restore utility is now a standalone tool. A new flag, `--encryption_key_file`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
 
-The restore utility is a standalone tool today. A new flag `--encryption_key_file` is added to the restore utility so it can decrypt the backup. This file must contain the same key that was used for encryption during backup.
-Alternatively, starting with v20.07.0, the `vault_*` options can be used to restore a backup.
+You can use the `dgraph restore` command to restore the postings directory from a previously-created backup to a directory in the local filesystem. This command restores a backup to a new Dgraph cluster, so it is not designed to restore a backup to a Dgraph cluster that is currently live. During a restore operation, a new Dgraph Zero server might run to fully restore the backup state.
 
-The `dgraph restore` command restores the postings directory from a previously
-created backup to a directory in the local filesystem. Restore is intended to
-restore a backup to a new Dgraph cluster not a currently live one. During a
-restore, a new Dgraph Zero server may be running to fully restore the backup state.
+You can use the `--location` (`-l`) flag to specify a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
 
-The `--location` (`-l`) flag specifies a source URI with Dgraph backup objects.
-This URI supports all the schemes used for backup.
+You can use the `--postings` (`-p`) flag to set the directory where restored posting directories are saved. This directory contains a posting directory for each group in the restored backup.
 
-The `--postings` (`-p`) flag sets the directory to which the restored posting
-directories will be saved. This directory will contain a posting directory for
-each group in the restored backup.
+You can use the `--zero` (`-z`) flag to specify a Dgraph Zero server address to update the start timestamp and UID lease using the restored version. If no Dgraph Zero server address is passed, the command will complain unless you set the value of the `--force_zero` flag to false. If do not pass a zero value to this command, you need to manually update the timestamp and UID lease using the Dgraph Zero server's HTTP 'assign' endpoint. The updated values should be those that are printed near the end of the command's output.
 
-The `--zero` (`-z`) flag specifies a Dgraph Zero server address to update the start
-timestamp and UID lease using the restored version. If no Zero server address is
-passed, the command will complain unless you set the value of the
-`--force_zero` flag to false. If do not pass a zero value to this command,
-the timestamp and UID lease must be manually updated through Zero server's HTTP
-'assign' endpoint using the values printed near the end of the command's output.
+You use the `--backup_id` optional flag to specify the ID of the backup series to restore. A backup series consists of a full backup and all of the incremental backups built on top of it. Each time a new full backup is created, a new backup series with a different ID is started. The backup series ID is stored in each `manifest.json` file stored in each backup folder.
 
-The `--backup_id` optional flag specifies the ID of the backup series to
-restore. A backup series consists of a full backup and all the incremental
-backups built on top of it. Each time a new full backup is created, a new backup
-series with a different ID is started. The backup series ID is stored in each
-`manifest.json` file stored in every backup folder.
+You use the `--encryption_key_file` flag in cases where you took the backup in an encrypted cluster. The string for this flag must point to the location of the same key file used to run the cluster.
 
-The `--encryption_key_file` flag is required if you took the backup in an
-encrypted cluster and should point to the location of the same key used to
-run the cluster.
+You use the `--vault` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) to specify the [Hashicorp Vault](https://www.vaultproject.io/) server address (`addr`), role id (`role-id-file`), secret id (`secret-id-file`) and the field that contains the encryption key (`enc-field`) that was used to encrypt the backup.
 
-The `--vault_*` flags specifies the Vault server address, role id, secret id and
-field that contains the encryption key that was used to encrypt the backup.
+The restore feature creates a cluster with as many groups as the original cluster had at the time of the last backup. For each group, `dgraph restore` creates a posting directory (`p<N>`) that corresponds to the backup group ID. For example, a backup for Dgraph Alpha group 2 would have the name `.../r32-g2.backup` and would be loaded to posting directory `p2`.
 
-The restore feature will create a cluster with as many groups as the original
-cluster had at the time of the last backup. For each group, `dgraph restore`
-creates a posting directory `p<N>` corresponding to the backup group ID. For
-example, a backup for Alpha Server group 2 would have the name `.../r32-g2.backup`
-and would be loaded to posting directory `p2`.
+After running the restore command, the directories inside the `postings` directory need to be manually copied over to the machines/containers running the Dgraph Alpha servers before running the `dgraph alpha` command. For example, in a database cluster with two Dgraph Alpha groups and one replica each, `p1` needs to be moved to the location of the first Dgraph Alpha node and `p2` needs to be moved to the location of the second Dgraph Alpha node.
 
-After running the restore command, the directories inside the `postings`
-directory need to be manually copied over to the machines/containers running the
-Alpha servers before running the `dgraph alpha` command. For example, in a database
-cluster with two Alpha groups and one replica each, `p1` needs to be moved to
-the location of the first Alpha server and `p2` needs to be moved to the location of
-the second Alpha server.
-
-By default, Dgraph will look for a posting directory with the name `p`, so make
-sure to rename the directories after moving them. You can also use the `-p`
-option of the `dgraph alpha` command to specify a different path from the default.
-
+By default, Dgraph will look for a posting directory with the name `p`, so make sure to rename the directories after moving them. You can also use the `-p` option of the `dgraph alpha` command to specify a different path from the default.
 
 ### Restore from Amazon S3
 ```sh
-$ dgraph restore -p /var/db/dgraph -l s3://s3.us-west-2.amazonaws.com/<bucketname>
+dgraph restore --postings "/var/db/dgraph" --location "s3://s3.<region>.amazonaws.com/<bucketname>"
 ```
 
 
 ### Restore from Minio
 ```sh
-$ dgraph restore -p /var/db/dgraph -l minio://127.0.0.1:9000/<bucketname>
+dgraph restore --postings "/var/db/dgraph" --location "minio://127.0.0.1:9000/<bucketname>"
 ```
 
 
 ### Restore from Local Directory or NFS
 ```sh
-$ dgraph restore -p /var/db/dgraph -l /var/backups/dgraph
+dgraph restore --postings "/var/db/dgraph" --location "/var/backups/dgraph"
 ```
 
 
@@ -699,5 +665,5 @@ $ dgraph restore -p /var/db/dgraph -l /var/backups/dgraph
 
 Specify the Zero server address and port for the new cluster with `--zero`/`-z` to update the timestamp.
 ```sh
-$ dgraph restore -p /var/db/dgraph -l /var/backups/dgraph -z localhost:5080
+dgraph restore --postings "/var/db/dgraph" --location "/var/backups/dgraph" --zero "localhost:5080"
 ```
