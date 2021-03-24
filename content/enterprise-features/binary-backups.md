@@ -610,7 +610,7 @@ finish.
 
 The restore utility is now a standalone tool. A new flag, `--encryption_key_file`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
 
-The `dgraph restore` command restores the postings directory from a previously created backup to a directory in the local filesystem. Restore is intended to restore a backup to a new Dgraph cluster not a currently live one. During a restore, a new Dgraph Zero server may be running to fully restore the backup state.
+You can use the `dgraph restore` command to restore the postings directory from a previously-created backup to a directory in the local filesystem. This command restores a backup to a new Dgraph cluster, so it is not designed to restore a backup to a Dgraph cluster that is currently live. During a restore operation, a new Dgraph Zero server might run to fully restore the backup state.
 
 You can use the `--location` (`-l`) flag to specify a source URI with Dgraph backup objects. This URI supports all the schemes used for backup.
 
