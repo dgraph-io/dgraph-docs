@@ -608,7 +608,7 @@ finish.
 
 ## Offline restore
 
-The restore utility is a standalone tool today. A new flag `--encryption_key_file` is added to the restore utility so it can decrypt the backup. This file must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
+The restore utility is now a standalone tool. A new flag, `--encryption_key_file`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
 
 The `dgraph restore` command restores the postings directory from a previously created backup to a directory in the local filesystem. Restore is intended to restore a backup to a new Dgraph cluster not a currently live one. During a restore, a new Dgraph Zero server may be running to fully restore the backup state.
 
