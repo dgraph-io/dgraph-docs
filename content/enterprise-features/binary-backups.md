@@ -622,7 +622,7 @@ The `--backup_id` optional flag specifies the ID of the backup series to restore
 
 The `--encryption_key_file` flag is required if you took the backup in an encrypted cluster and should point to the location of the same key used to run the cluster.
 
-The `--vault` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) specifies the [Hashicorp Vault](https://www.vaultproject.io/) server address (`addr`), role id (`role-id-file`), secret id (`secret-id-file`) and field that contains the encryption key (`enc-field`) that was used to encrypt the backup.
+You use the `--vault` [superflag]({{< relref "deploy/cli-command-ref.md" >}}) to specify the [Hashicorp Vault](https://www.vaultproject.io/) server address (`addr`), role id (`role-id-file`), secret id (`secret-id-file`) and the field that contains the encryption key (`enc-field`) that was used to encrypt the backup.
 
 The restore feature creates a cluster with as many groups as the original cluster had at the time of the last backup. For each group, `dgraph restore` creates a posting directory (`p<N>`) that corresponds to the backup group ID. For example, a backup for Dgraph Alpha group 2 would have the name `.../r32-g2.backup` and would be loaded to posting directory `p2`.
 
