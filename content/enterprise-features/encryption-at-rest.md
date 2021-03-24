@@ -34,8 +34,8 @@ the corresponding block size for AES encryption ,i.e. AES-128, AES-192, and AES-
 You can use the following command to create the encryption key file (set _count_ to the
 desired key size):
 
-```
-dd if=/dev/random bs=1 count=32 of=enc_key_file
+```bash
+tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
 ```
 
 Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-command-ref.md" >}}) options to enable encryption, as explained below.
@@ -45,8 +45,8 @@ Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-co
 Here is an example that starts one Zero server and one Alpha server with the encryption feature turned on:
 
 ```bash
-dgraph zero --my=localhost:5080 --replicas 1 --raft idx=1
-dgraph alpha --encryption_key_file ./enc_key_file --my=localhost:7080 --zero=localhost:5080
+dgraph zero --my="localhost:5080" --replicas 1 --raft "idx=1"
+dgraph alpha --encryption_key_file "./enc_key_file" --my="localhost:7080" --zero="localhost:5080"
 ```
 
 If multiple Alpha nodes are part of the cluster, you will need to pass the `--encryption_key_file` option to
@@ -56,37 +56,102 @@ Once an Alpha has encryption enabled, the encryption key must be provided in ord
 If the Alpha server restarts, the `--encryption_key_file` option must be set along with the key in order to
 restart successfully.
 
-Alternatively, for encryption keys sitting on Vault server, here is an example. To use Vault, there are some pre-requisites.
-1. Vault Server URL of the form `http://fqdn[ip]:port`. You will use this for the `--vault` superflag's `addr` option.
-2. Vault Server must be configured with an AppRole auth. A `secret-id` and `role-id` must be generated and copied over to local files. You will need these values for the `--vault` superflag's `secret-id-file` and `role-id-file` options.
-3. Vault Server must instantiate a KV store containing a K/V for Dgraph. The `--vault` superflag's `field` option must be the value of the key that Dgraph will use (in KV-v1 or KV-v2 format). This key must be 16, 24 or 32 bytes, as explained above.
+### Storing encryption key secret in Hashicorp Vault
 
-Next, here is an example of using Dgraph with a Vault server that holds the encryption key.
+You can save the encryption key secret in [Hashicorp Vault](https://www.vaultproject.io/) K/V Secret instead of as file on Dgraph Alpha.
+
+To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prerequisites for the Vault Server.
+
+1. Ensure that the Vault server is accessible from Dgraph Alpha and configured using URL `http://fqdn[ip]:port`.
+2. Enable [AppRole Auth method](https://www.vaultproject.io/docs/auth/approle) and enable [KV Secrets Engine](https://www.vaultproject.io/docs/secrets/kv).
+3. Save the value of the key (16, 24, or 32 bytes long) that Dgraph Alpha will use in a KV Secret path ([K/V Version 1](https://www.vaultproject.io/docs/secrets/kv/kv-v1) or [K/V Version 2](https://www.vaultproject.io/docs/secrets/kv/kv-v2)).  For example, you can upload this below to KV Secrets Engine Version 2 path of `secret/data/dgraph/alpha`:
+   ```json
+   {
+     "options": {
+       "cas": 0
+     },
+     "data": {
+       "enc_key": "1234567890123456"
+     }
+   }
+   ```   
+4. Create or use a role with an attached policy that grants access to the secret.  For example, the following policy would grant access to `secret/data/dgraph/alpha`:
+   ```hcl
+   path "secret/data/dgraph/*" {
+     capabilities = [ "read", "update" ]
+   }
+   ```
+5. Using the `role_id` generated from the previous step, create a corresponding `secret_id`, and copy the `role_id` and `secret_id` over to local files, like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`, that will be used by Dgraph Alpha nodes.
+
+{{% notice "tip" %}}
+To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
+{{% /notice %}}
+
+{{% notice "note" %}}
+The key format for the `enc-field` option can be defined using `enc-format` with the values `base64` (default) or `raw`.
+{{% /notice %}}
+
+### Example using Dgraph CLI with Hashicorp Vault configuration
+
+The following example shows how to use Dgraph with a Vault server that holds the encryption key:
+
 ```bash
-dgraph zero --my=localhost:5080 --replicas 1 --raft idx=1
-dgraph alpha --vault "addr=https://localhost:8200; role-id-file=./roleid; secret-id-file=./secretid; field=enc_key_name" --my=localhost:7080 --zero=localhost:5080
+## Start Dgraph Zero in different terminal tab or window
+dgraph zero --my=localhost:5080 --replicas 1 --raft "idx=1"
+
+## Start Dgraph Alpha in different terminal tab or window
+dgraph alpha --my="localhost:7080" --zero="localhost:5080" \
+  --vault addr="http://localhost:8200";enc-field="enc_key";enc-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
+
 ```
 
-If multiple Alpha nodes are part of the cluster, you will need to pass the
-`--encryption_key_file` option or the `--vault` superflag's options to each of
-the Alpha nodes.
+If multiple Dgraph Alpha nodes are part of the cluster, you must pass the `--encryption_key_file` flag or the `--vault` superflag with appropriate superflag options to each of the Dgraph Alpha nodes.
+
+Once an Dgraph Alpha has encryption enabled, the encryption key must be provided in order to start a Dgraph Alpha node. If a Dgraph Alpha node restarts, the `--encryption_key_file` flag or the `--vault` superflag must be set along with the key in order to restart successfully.
+
 
 After an Alpha node has encryption enabled, you must provide the encryption key to start the Alpha server.
 If the Alpha server restarts, the `--encryption_key_file` or the `--vault` superflag's options must be set along with the key to
-restart successfully.
+
 
 ## Turn off Encryption
 
-If you wish to turn off encryption from an existing Dgraph cluster, then you can export your data and import it using [live loader]({{< relref "live-loader.md" >}}) into a new Dgraph instance without encryption enabled. You will have to use the `--encryption_key_file` flag while importing.
+You can use [live loader]({{< relref "live-loader.md" >}}) or [bulk loader]({{< relref "bulk-loader.md" >}}) to decrypt the data while importing.
+
+### Using live loader
+
+You can import your encrypted data using [live loader]({{< relref "live-loader.md" >}}) into a new Dgraph Alpha node without encryption enabled.
+
+```bash
+# Encryption Key from the file path
+dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>"  \
+  --alpha "<dgraph-alpha-address:grpc_port>" --zero "<dgraph-zero-address:grpc_port>" \
+  --encryption_key_file "<path-to-enc_key_file>"
+
+# Encryption Key from HashiCorp Vault
+dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>"  \
+  --alpha "<dgraph-alpha-address:grpc_port>" --zero "<dgraph-zero-address:grpc_port>" \
+  --vault addr="http://localhost:8200";enc-field="enc_key";enc-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
 
 ```
-dgraph live -f <path-to-gzipped-RDF-or-JSON-file> -s <path-to-schema> --encryption_key_file <path-to-enc_key_file> -a <dgraph-alpha-address:grpc_port> -z <dgraph-zero-address:grpc_port>
-```
+
+### Using bulk loader
+
 You can also use [bulk loader]({{< relref "bulk-loader.md" >}}), to turn off encryption. This will generate a new unencrypted `p` that will be used by the Alpha process. In this, case you need to pass `--encryption_key_file`, `--encrypted` and `--encrypted_out` flags.
 
 ```bash
-dgraph bulk -f <path-to-gzipped-RDF-or-JSON-file> -s <path-to-schema> --encryption_key_file <path-to-enc_key_file> --encrypted=true --encrypted_out=false -z <dgraph-zero-address:grpc_port>
+# Encryption Key from the file path
+dgraph bulk --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>" --zero "<dgraph-zero-address:grpc_port>" \
+  --encrypted="true" --encrypted_out="false" \
+  --encryption_key_file "<path-to-enc_key_file>"
+
+# Encryption Key from HashiCorp Vault
+dgraph bulk --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>" --zero "<dgraph-zero-address:grpc_port>" \
+  --encrypted="true" --encrypted_out="false" \
+  --vault addr="http://localhost:8200";enc-field="enc_key";enc-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
+
 ```
+
 In this case, we are also passing the flag `--encrypted=true` as the exported data has been taken from an encrypted Dgraph cluster and we are also specifying the flag `--encrypted_out=false` to specify that we want the `p` directory (_that will be generated by the bulk loader process_) to be unencrypted.
 
 ## Change Encryption Key
