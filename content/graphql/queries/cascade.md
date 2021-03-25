@@ -27,6 +27,12 @@ level, it will automatically be applied at the `posts` level too.
 }
 ```
 
+{{% notice "note" %}}
+Dgraph doesn't support pagination when using `@cascade`.
+The `@cascade` directive is a post-processing step, so it may exclude nodes that were part of the paginated result.
+This issue has been fixed in v21.03.
+{{% /notice %}}
+
 ### Nested `@cascade`
 
 `@cascade` can also be used at nested levels, so the query below would return all authors
