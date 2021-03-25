@@ -27,6 +27,21 @@ level, it will automatically be applied at the `posts` level too.
 }
 ```
 
+### Pagination
+
+Starting from v21.03, the `@cascade` directive supports pagination of query results.
+
+For example, to get to get the next 5 results after skipping the first 2 with all the fields non-null:
+
+```graphql
+query {
+  queryTask(first: 5, offset: 2) @cascade {
+    name
+    completed
+  }
+}
+```
+
 ### Nested `@cascade`
 
 `@cascade` can also be used at nested levels, so the query below would return all authors
