@@ -195,7 +195,7 @@ First Alpha example: `dgraph alpha --my=alpha1:7080 --zero=zero1:5080`
 
 Second Alpha example: `dgraph alpha --my=alpha2:7080 --zero=zero1:5080`
 
-First Alpha example: `dgraph alpha --my=alpha3:7080 --zero=zero1:5080`
+Third Alpha example: `dgraph alpha --my=alpha3:7080 --zero=zero1:5080`
 
 Dgraph Alpha configuration options:
 
@@ -210,8 +210,9 @@ Dgraph Alpha configuration options:
 
 These services are not required for a Dgraph cluster to function but are recommended for better insight when operating a Dgraph cluster.
 
-- [Metrics and monitoring][] with Prometheus and Grafana.
+- [Metrics] and [monitoring][] with Prometheus and Grafana.
 - [Distributed tracing][] with Jaeger.
 
-[Metrics and monitoring]: {{< relref "deploy/monitoring.md" >}}
+[Metrics]: {{< relref "deploy/metrics.md" >}}
+[Monitoring]: {{< relref "deploy/monitoring.md" >}}
 [Distributed tracing]: {{< relref "deploy/tracing.md" >}}
