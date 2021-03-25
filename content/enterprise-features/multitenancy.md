@@ -25,6 +25,12 @@ The default namespace is called a `galaxy`. [Guardians of the Galaxy](#guardians
 special access to create or delete namespaces and change passwords of
 users of other namespaces.
 
+{{% notice "note" %}}
+Dgraph provides a timeout limit per query that's configurable using the `--limit` superflag's `query-limit` option.
+There's no time limit for queries by default, but you can override it when running Dgraph Alpha.
+For multi-tenant environments a suggested `query-limit` value is 500ms. 
+{{% /notice %}}
+
 ## FAQ
 
 - How access controls and policies are handled among different tenants?
