@@ -27,8 +27,6 @@ level, it will automatically be applied at the `posts` level too.
 }
 ```
 
-### Pagination
-
 Starting from v21.03, the `@cascade` directive supports pagination of query results.
 
 For example, to get to get the next 5 results after skipping the first 2 with all the fields non-null:
@@ -41,6 +39,12 @@ query {
   }
 }
 ```
+
+{{% notice "note" %}}
+Dgraph doesn't support pagination when using `@cascade`.
+The `@cascade` directive is a post-processing step, so it may exclude nodes that were part of the paginated result.
+This issue has been fixed in v21.03.
+{{% /notice %}}
 
 ### Nested `@cascade`
 
