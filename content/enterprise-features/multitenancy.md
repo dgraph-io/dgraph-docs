@@ -28,7 +28,7 @@ users of other namespaces.
 {{% notice "note" %}}
 Dgraph provides a timeout limit per query that's configurable using the `--limit` superflag's `query-limit` option.
 There's no time limit for queries by default, but you can override it when running Dgraph Alpha.
-For multi-tenant environments the recommended `query-limit` value is 500ms. 
+For multi-tenant environments a suggested `query-limit` value is 500ms. 
 {{% /notice %}}
 
 ## FAQ
