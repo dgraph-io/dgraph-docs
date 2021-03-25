@@ -31,11 +31,11 @@ level, it will automatically be applied at the `posts` level too.
 
 Starting from v21.03, the `@cascade` directive supports pagination of query results.
 
-For example, to get the first 5 results only:
+For example, to get to get the next 5 results after skipping the first 2 with all the fields non-null:
 
 ```graphql
 query {
-  queryTask(first: 5) @cascade {
+  queryTask(first: 5, offset: 2) @cascade {
     name
     completed
   }
