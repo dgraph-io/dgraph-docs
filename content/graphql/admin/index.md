@@ -3,7 +3,7 @@ title = "Administrative API"
 description = "This documentation presents the Admin API and explains how to run a Dgraph database with GraphQL."
 weight = 12
 [menu.main]
-  name = "Admin"
+  name = "Administrative API"
   identifier = "graphql-admin"
   parent = "graphql"
 +++

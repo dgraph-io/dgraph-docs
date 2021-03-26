@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Math on value variables"
+title = "Math on Value Variables"
 weight = 12
 [menu.main]
     parent = "query-language"

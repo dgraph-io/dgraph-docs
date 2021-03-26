@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Batch mutations"
+title = "Batch Mutations"
 weight = 6
 [menu.main]
     parent = "mutations"

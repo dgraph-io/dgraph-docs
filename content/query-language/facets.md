@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Facets : Edge attributes"
+title = "Facets and Edge attributes"
 weight = 22
 [menu.main]
     parent = "query-language"

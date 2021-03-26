@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Load balancing queries with NGINX"
+title = "Load Balancing Queries with NGINX"
 weight = 8
 [menu.main]
     parent = "howto"

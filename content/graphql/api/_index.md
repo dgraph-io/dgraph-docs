@@ -1,5 +1,5 @@
 +++
-title = "The API"
+title = "API"
 [menu.main]
   identifier = "api"
   parent = "graphql"

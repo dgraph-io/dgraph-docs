@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Minimizing network calls explained"
+title = "How Dgraph Minimizes Network Calls"
 weight = 4
 [menu.main]
     parent = "design-concepts"

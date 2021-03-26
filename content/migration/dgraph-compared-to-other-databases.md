@@ -1,5 +1,5 @@
 +++
-title = "Dgraph compared to other databases"
+title = "Dgraph Compared to Other Databases"
 weight = 13
 [menu.main]
   identifier = "dgraph-compared-to-other-databases"
