@@ -7,7 +7,7 @@ weight = 8
 
 The `@deprecated` directive allows you to tag the schema definition of a field or enum value as deprecated with an optional reason.
 
-By using the `@deprecated` directive, Dgraph will pass this information through to the generated API, so users can deprecate their fields.
+When you use the `@deprecated` directive, GraphQL users can deprecate their use of the deprecated field or `enum` value.
 Most GraphQL tools and clients will pick up this notification and give you a warning if you try to use a deprecated field.
 
 ### Example
