@@ -10,7 +10,7 @@ There might be times when you'll want to set up a load balancer to accomplish go
 
 ## Setting up NGINX load balancer using Docker Compose
 
-### Dowload ZIP
+### Download ZIP
 
 Download the contents of this gist's ZIP file and extract it to a directory called `graph-nginx`, as follows:
 
@@ -36,7 +36,7 @@ You can start your Dgraph cluster directly on the host machine (for example, wit
 
 ### Install NGINX using the following `apt-get` command:
 
-After you have set up your Dgraph cluster, install the latest stable nginx. On Debian and Ubuntu systems use the following command:
+After you have set up your Dgraph cluster, install the latest stable NGINX. On Debian and Ubuntu systems use the following command:
 ```sh
 apt-get install nginx
 ```
@@ -131,7 +131,7 @@ nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.7:
 nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.2:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.012 msec 1579057922.188 request_time 0.011
 nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.5:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.016 msec 1579057922.202 request_time 0.013
 ```
-These logs show that traffic os being load balanced to the following upstream addresses defined in alpha_grpc in nginx.conf:
+These logs show that traffic is being load balanced to the following upstream addresses defined in alpha_grpc in nginx.conf:
 
 - `nginx to: 172.20.0.7`
 - `nginx to: 172.20.0.2`

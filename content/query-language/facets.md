@@ -7,7 +7,7 @@ weight = 22
 +++
 
 Dgraph supports facets --- **key value pairs on edges** --- as an extension to RDF triples. That is, facets add properties to edges, rather than to nodes.
-For example, a `friend` edge between two nodes may have a boolean property of `close` friendship.
+For example, a `friend` edge between two nodes may have a Boolean property of `close` friendship.
 Facets can also be used as `weights` for edges.
 
 Though you may find yourself leaning towards facets many times, they should not be misused.  It wouldn't be correct modeling to give the `friend` edge a facet `date_of_birth`. That should be an edge for the friend.  However, a facet like `start_of_friendship` might be appropriate.  Facets are however not first class citizen in Dgraph like predicates.

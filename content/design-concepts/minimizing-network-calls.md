@@ -51,5 +51,5 @@ by X. `result set 3`
 
 In 4-5 RPCs, we have figured out all the posts liked by friends of friends, written by popular author X.
 
-This design allows vast scalability, and yet consistent production level latencies,
+This design allows vast scalability, and yet consistent production level latency,
 to support running complicated queries requiring deep joins.

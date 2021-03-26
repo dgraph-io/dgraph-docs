@@ -21,7 +21,7 @@ The supported operators are as follows:
 | `since`                         | `dateTime`                                 | Returns the number of seconds in float from the time specified |
 | `pow(a, b)`                     | `int`, `float`                                     | Returns `a to the power b`                                     |
 | `logbase(a,b)`                  | `int`, `float`                                     | Returns `log(a)` to the base `b`                               |
-| `cond(a, b, c)`                 | first operand must be a boolean                | selects `b` if `a` is true else `c`                            |
+| `cond(a, b, c)`                 | first operand must be a Boolean                | selects `b` if `a` is true else `c`                            |
 
 
 Query Example:  Form a score for each of Steven Spielberg's movies as the sum of number of actors, number of genres and number of countries.  List the top five such movies in order of decreasing score.
