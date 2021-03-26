@@ -30,7 +30,7 @@ Reference: [Custom directive](/graphql/custom/directive)
 
 ### @deprecated
 
-The `@deprecated` directive allows you to mark the schema definition of a field or enum value as deprecated with an optional reason.
+The `@deprecated` directive lets you mark the schema definition of a field or `enum` value as deprecated, and also lets you provide an optional reason for the deprecation.
 
 Reference: [Deprecation]({{< relref "graphql/schema/deprecated.md" >}})
 
