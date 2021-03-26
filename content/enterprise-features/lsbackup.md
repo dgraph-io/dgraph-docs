@@ -50,7 +50,7 @@ The following snippet is an example output of `lsbackup`:
 ```json
 [
 	{
-		"path": "/home/user/Dgraph/20.11/backup/dgraph.20210121.125014.852/manifest.json",
+		"path": "/home/user/Dgraph/20.11/backup/manifest.json",
 		"since": 30005,
 		"backup_id": "reverent_vaughan0",
 		"backup_num": 1,
@@ -65,7 +65,7 @@ If the `--verbose` flag was enabled, the output would look like this:
 ```json
 [
     {
-        "path": "/home/user/Dgraph/20.11/bkp/dgraph.20210121.125014.852/manifest.json",
+        "path": "/home/user/Dgraph/20.11/backup/manifest.json",
         "since": 30005,
         "backup_id": "reverent_vaughan0",
         "backup_num": 1,
