@@ -28,6 +28,12 @@ Reference: [Cascade](/graphql/queries/cascade)
 
 Reference: [Custom directive](/graphql/custom/directive)
 
+### @deprecated
+
+The `@deprecated` directive lets you mark the schema definition of a field or `enum` value as deprecated, and also lets you provide an optional reason for the deprecation.
+
+Reference: [Deprecation]({{< relref "graphql/schema/deprecated.md" >}})
+
 ### @dgraph
 
 `@dgraph` directive tells us how to map fields within a type to existing predicates inside Dgraph.
