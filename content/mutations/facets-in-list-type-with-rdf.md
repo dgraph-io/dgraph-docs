@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Facets in List-type with RDF"
+title = "Facet Lists in RDF"
 weight = 8
 [menu.main]
     parent = "mutations"

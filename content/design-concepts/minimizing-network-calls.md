@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Minimizing network calls explained"
+title = "How Dgraph Minimizes Network Calls"
 weight = 4
 [menu.main]
     parent = "design-concepts"
@@ -51,5 +51,5 @@ by X. `result set 3`
 
 In 4-5 RPCs, we have figured out all the posts liked by friends of friends, written by popular author X.
 
-This design allows vast scalability, and yet consistent production level latencies,
+This design allows vast scalability, and yet consistent production level latency,
 to support running complicated queries requiring deep joins.
