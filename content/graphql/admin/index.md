@@ -290,7 +290,6 @@ Here are the important types, queries, and mutations from the `admin` schema.
 		health: [NodeState]
 		state: MembershipState
 		config: Config
-		querySchemaHistory(first: Int, offset: Int): [SchemaHistory]
 	}
 
 	type Mutation {
