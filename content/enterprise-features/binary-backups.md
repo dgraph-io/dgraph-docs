@@ -251,8 +251,8 @@ mutation {
 ## Listing Backups
 
 The GraphQL admin interface includes the `listBackups` endpoint that lists the
-backups in the given location along with the information included in their
-`manifests.json` files. An example of a request to list the backups in the
+backups in the given location along with the information included in the
+`manifest.json` file. An example of a request to list the backups in the
 `/data/backup` location is included below:
 
 ```
@@ -304,8 +304,7 @@ input ListBackupsInput {
 }
 ```
 
-The output is of the `Manifest` type, which contains the fields below. The
-fields correspond to the fields inside the `manifest.json` files.
+The output is of `[Manifest]` type. The fields inside the `Manifest` type corresponds to the fields in the `manifest.json` file.
 
 ```
 type Manifest {
@@ -411,15 +410,18 @@ You can use the `export_backup` tool to convert your binary backup into an expor
 
 A Binary Backup directory has the following structure:
 
-```
-dgraph.20210104.224757.709
-├── manifest.json
-└── r9-g1.backup
+```sh
+backup
+├── dgraph.20210102.204757.509
+│   └── r9-g1.backup
+├── dgraph.20210104.224757.707
+│   └── r9-g1.backup
+└── manifest.json
 ```
 
 An Export directory has the following structure:
 
-```
+```sh
 dgraph.r9.u0108.1621
 ├── g01.gql_schema.gz
 ├── g01.rdf.gz
@@ -438,10 +440,11 @@ Instead, just take a binary backup and convert it to an export only when needed.
 
 Ensure that you have created a binary backup. The directory tree of a binary backup usually looks like this:
 
-```
-dgraph.20210104.224757.709
-├── manifest.json
-└── r9-g1.backup
+```sh
+backup
+├── dgraph.20210104.224757.709
+│   └── r9-g1.backup
+└── manifest.json
 ```
 
 Then run the following command:
@@ -453,7 +456,7 @@ dgraph export_backup --location "<location-of-your-binary-backup>" --destination
 Once completed you will find your export folder (in this case `dgraph.r9.u0108.1621`).
 The tree of the directory should look like this:
 
-```
+```sh
 dgraph.r9.u0108.1621
 ├── g01.gql_schema.gz
 ├── g01.rdf.gz
@@ -468,9 +471,9 @@ documentation describes how to implement encryption into your binary backups.
 Starting with` v20.07.0`, we also added support for Encrypted Backups using encryption keys sitting on [Hashicorp Vault](https://www.vaultproject.io/).
 
 
-### New flag “Encrypted” in manifest.json
+### New `Encrypted` flag in manifest.json
 
-A new flag “Encrypted” is added to the `manifest.json`. This flag indicates if the corresponding binary backup is encrypted or not. To be backward compatible, if this flag is absent, it is presumed that the corresponding backup is not encrypted.
+A new `Encrypted` flag is added to the `manifest.json`. This flag indicates if the corresponding binary backup is encrypted or not. To be backward compatible, if this flag is absent, it is presumed that the corresponding backup is not encrypted.
 
 For a series of full and incremental backups, per the current design, we don't allow the mixing of encrypted and unencrypted backups. As a result, all full and incremental backups in a series must either be encrypted fully or not at all. This flag helps with checking this restriction.
 
