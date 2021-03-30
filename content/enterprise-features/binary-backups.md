@@ -304,8 +304,7 @@ input ListBackupsInput {
 }
 ```
 
-The output is of the `Manifest` type, which contains the fields below. The
-fields correspond to the fields inside the `manifest.json` file.
+The output is of `[Manifest]` type. The fields inside the `Manifest` type corresponds to the fields in the `manifest.json` file.
 
 ```
 type Manifest {
