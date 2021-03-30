@@ -38,15 +38,6 @@ Dgraph's GraphQL runs in Dgraph and presents a GraphQL schema where the queries 
 this means that if you have a Dgraph instance and change its GraphQL schema, the schema of the underlying Dgraph will also be changed!
 {{% /notice %}}
 
-### Adding CORS
-
-You can add CORS Origins by specifying `# Dgraph.Allow-Origin` at the end of the GraphQL schema using a schema update. For example:
-
-```graphql
-# Dgraph.Allow-Origin "https://example.com" 
-# Dgraph.Allow-Origin "https://www.exmaple.com"
-```
-
 ## Endpoints
 
 When you start Dgraph with GraphQL, two GraphQL endpoints are served.
@@ -381,7 +372,7 @@ There are two ways you can modify a GraphQL schema:
 - Using the `updateGQLSchema` mutation on `/admin`
 
 {{% notice "tip" %}}
-While modifying the GraphQL schema, if you get errors like `errIndexingInProgress`, `another operation is already running` or `server is not ready`, please wait for a moment and then retry the schema update.
+While modifying the GraphQL schema, if you get errors like `errIndexingInProgress`, `another operation is already running` or `server is not ready`, please wait a moment and then retry the schema update.
 {{% /notice %}}
 
 ### Using `/admin/schema`
@@ -420,6 +411,15 @@ mutation {
     }
   }
 }
+```
+
+### Adding CORS
+
+You can add CORS Origins by specifying `# Dgraph.Allow-Origin` at the end of the GraphQL schema using a schema update. For example:
+
+```graphql
+# Dgraph.Allow-Origin "https://example.com" 
+# Dgraph.Allow-Origin "https://www.exmaple.com"
 ```
 
 ## Initial schema
