@@ -63,7 +63,7 @@ $ dgraph cert ls
 ```
 
 The default location where the _cert_ command stores certificates (and keys) is
-`tls` under the Dgraph working directory. The default dir path can be overridden
+`tls` under the Dgraph working directory. The default directory path can be overridden
 using the `--dir` option. For example:
 
 ```sh
@@ -311,12 +311,12 @@ $ sudo update-ca-certificates`
 
 ##### Firefox
 
-* Goto Preferences -> Privacy & Security -> View Certificates -> Authorities
+* Choose Preferences -> Privacy & Security -> View Certificates -> Authorities
 * Click on Import and import the `ca.crt`
 
 ##### Chrome
 
-* Goto Settings -> Privacy and Security -> Security -> Manage Certificates -> Authorities
+* Choose Settings -> Privacy and Security -> Security -> Manage Certificates -> Authorities
 * Click on Import and import the `ca.crt`
 
 ### Step 3. Point Ratel to the `https://` endpoint of alpha server.
@@ -336,9 +336,9 @@ also need to install client certificate on your browser:
    ```
    Use any password you like for export, it is used to encrypt the p12 file.
 
-3. Import the client certificate to your browser. It can be done in chrome as follows:
-   * Goto Settings -> Privacy and Security -> Security -> Manage Certificates -> Your Certificates
-   * Click on Import and import the `laptopuser.p12`. For mac OS, this process returns back to KeyChain, and under the area "My Certificates" select `laptopuser.p12`.
+3. Import the client certificate to your browser. It can be done in Chrome as follows:
+   * Choose Settings -> Privacy and Security -> Security -> Manage Certificates -> Your Certificates
+   * Click on Import and import the `laptopuser.p12`.
 
 {{% notice "note" %}}
 Mutual TLS may not work in Firefox because Firefox is unable to send privately-signed client certificates, this issue is filed [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1662607).
