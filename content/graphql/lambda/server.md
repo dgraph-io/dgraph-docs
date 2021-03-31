@@ -64,26 +64,6 @@ If you're using Docker, you need to add the `--graphql_lambda_url` to your Alpha
 
 Next, you need to add the Dgraph Lambda server configuration, and map the JavaScript file that contains the code for lambda functions to the `/app/script/script.js` file. Remember to set the `DGRAPH_URL` environment variable to your Alpha server.
 
-For example:
-
-```yml
-  lambda:
-    image: dgraph/dgraph-lambda:latest
-    container_name: lambda
-    labels:
-      cluster: test
-    ports:
-      - 8686:8686
-    depends_on:
-      - alpha
-    environment:
-      DGRAPH_URL: http://alpha:8180
-    volumes:
-      - type: bind
-        source: ./script.js
-        target: /app/script/script.js
-        read_only: true
-```
 
 Here's a complete Docker example that uses the base dgraph image and adds support to lambda server
 
@@ -99,25 +79,16 @@ services:
       - "8000:8000"
     volumes:
       - "dgraph:/dgraph"
-    networks:
-      - "dgraph"
 
   dgraph_lambda:
     image: dgraph/dgraph-lambda:latest
     ports:
-      - 8686:8686
+      - "8686:8686"
     environment:
       DGRAPH_URL: http://dgraph:8080
-    networks:
-      - "dgraph"
     volumes:
-      - type: bind
-        source: ./gql/script.js
-        target: /app/script/script.js
-        read_only: true
+      - ./gql/script.js:/app/script/script.js:ro
 
 volumes:
-  dgraph:
-networks:
   dgraph:
 ```
