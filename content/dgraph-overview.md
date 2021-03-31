@@ -63,7 +63,7 @@ Docker image to try out Dgraph on Windows or macOS.
 
 #### To run Dgraph using the standalone Docker image
 
-1. Download docker: https://www.docker.com/
+1. Download [Docker](https://www.docker.com/)
 2. Create a folder to store Dgraph data outside of the container, as follows: `mkdir -p ~/dgraph`
 3. Get the Docker standalone image, as follows: `docker pull dgraph/standalone`
 4. Run the Dgraph Docker standalone image, as follows:
@@ -135,4 +135,3 @@ own Kubernetes (BYOK) environment.
 |server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation]({{< relref "/deploy/cluster-setup" >}}) |
 |predicate|	A property of a data node in a graph database; also a discrete piece of information available to request in a graph database.	| |
 |Slash GraphQL|	A fully-managed GraphQL database service powered by Dgraph database.	|[Slash GraphQL documentation]({{< relref "/slash-graphql" >}}) |
-
