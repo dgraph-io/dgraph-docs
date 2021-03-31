@@ -491,10 +491,10 @@ do a rolling restart of all your Alpha using the option `--mutations disallow` w
 At this point your application can still read from the old cluster and you can perform the steps 4. and 5. described above.
 When the new cluster (that uses the upgraded version of Dgraph) is up and running, you can point your application to it, and shutdown the old cluster.
 
-### Upgrade from v1.2.2 to v20.03.0 for enterprise customers
+### Upgrade from v1.2.2 to v20.03.0 for Enterprise customers
 
 <!-- TODO: Redirect(s) -->
-1. Use [binary]({{< relref "enterprise-features/binary-backups.md">}}) backup to export data from old cluster
+1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from old cluster
 2. Ensure it is successful
 3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Upgrade `dgraph` binary to `v20.03.0`
@@ -506,8 +506,9 @@ When the new cluster (that uses the upgraded version of Dgraph) is up and runnin
 dgraph upgrade --acl -a localhost:9080 -u groot -p password
 ```
 
-### Upgrade from v20.03.0 to v20.07.0 for Enterprise Customers
-1. Use [binary]({{< relref "enterprise-features/binary-backups.md">}}) backup to export data from old cluster
+### Upgrade from v20.03.0 to v20.07.0 for Enterprise customers
+
+1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from old cluster
 2. Ensure it is successful
 3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Upgrade `dgraph` binary to `v20.07.0`
@@ -532,6 +533,30 @@ are affected. Then, you can drop the old types and predicates from DB.
 
 {{% notice "note" %}}
 If you are upgrading from v1.0, please make sure you follow the schema migration steps described in [this section]({{< relref "/migration/migrate-dgraph-1-1.md" >}}).
+{{% /notice %}}
+
+### Upgrade from v20.11.0 to v21.03.0 for Enterprise customers
+
+1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from the old cluster
+2. Ensure it is successful
+3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
+4. Upgrade `dgraph` binary to `v21.03.0`
+5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using the upgraded `dgraph` binary
+6. Start a new Dgraph cluster using the restored data directories
+7. Upgrade the CORS and persisted queries using the following command:
+    ```sh
+    dgraph upgrade  --from v20.11.0 --to v21.03.0 --user groot --password password --alpha-http http://localhost:8080 --acl --deleteOld
+    ```
+    This is required because previously CORS information was stored in `dgraph.cors` predicate which has
+    now been moved to be a part of the GraphQL schema. Also, the format of persisted queries has changed.
+    Some of the internal deprecated predicates will be removed by this change.
+
+    You can use `--dry-run` option in `dgraph upgrade` command to see a dry run of what the upgrade
+    command will do.
+
+{{% notice "note" %}}
+The above steps are valid for migration from a cluster in `v20.11` to a single-tenant cluster in `v21.03`, 
+as backup and restore are cluster-wide operations and a single namespace cannot be restored. 
 {{% /notice %}}
 
 ## Post Installation
