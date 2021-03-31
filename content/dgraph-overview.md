@@ -58,19 +58,21 @@ or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
 {{% notice "Note" %}}
 Dgraph is designed to run on Linux. As of release v21.03, Dgraph no longer
 supports installation on Windows or macOS. We recommend using the standalone
-Docker image to try out Dgraph on macOS.
+Docker image to try out Dgraph on Windows or macOS.
 {{% /notice %}}
 
 #### To run Dgraph using the standalone Docker image
 
 1. Download docker: https://www.docker.com/
-2. Run the Dgraph Docker standalone image, as follows:
+2. Create a folder to store Dgraph data outside of the container (`mkdir -p ~/dgraph`)
+3. Run the Dgraph Docker standalone image, as follows:
 
-``` 
-  docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 \
-    -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph \
-    dgraph/standalone:v20.11.0
+```sh
+  docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph dgraph/standalone:v21.03
 ```  
+
+After following these steps, Dgraph Alpha now runs and listens for HTTP requests
+on port 8080, and Ratel listens on port 8000.
 
 ### Get started with fully-managed Dgraph
 

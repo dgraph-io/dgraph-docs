@@ -306,14 +306,6 @@ $ cp /path/to/ca.crt /usr/local/share/ca-certificates/ca.crt
 # Update the CA store
 $ sudo update-ca-certificates`
 ```
-##### Mac OS X
-```sh
-$ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/ca.crt
-```
-##### Windows
-```sh
-$ certutil -addstore -f "ROOT" /path/to/ca.crt
-```
 
 ### Step 2. Install Dgraph Root CA into Web Browsers Trusted CA List
 
@@ -347,11 +339,7 @@ also need to install client certificate on your browser:
 3. Import the client certificate to your browser. It can be done in chrome as follows:
    * Goto Settings -> Privacy and Security -> Security -> Manage Certificates -> Your Certificates
    * Click on Import and import the `laptopuser.p12`. For mac OS, this process returns back to KeyChain, and under the area "My Certificates" select `laptopuser.p12`.
-<!-- Cut because we have cut macOS support 
-{{% notice "note" %}}
-Under macOS you can alternatively import the `.p12` file using the command line by `security import ./laptopuser.p12 -P secretPassword`.
-{{% /notice %}}
--->
+
 {{% notice "note" %}}
 Mutual TLS may not work in Firefox because Firefox is unable to send privately-signed client certificates, this issue is filed [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1662607).
 {{% /notice %}}
