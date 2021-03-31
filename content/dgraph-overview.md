@@ -37,11 +37,11 @@ You can run Dgraph database in a variety of ways:
 * Self-managed: You can use [Dgraph](https://dgraph.io/dgraph) on-premises, hosted on your own physical
 infrastructure. You can also run Dgraph in your AWS, GCP, or Azure cloud
 infrastructure.
-* Fully-managed (hosted): You can use Dgraph as a fully-managed cloud service.
-[Slash GraphQL](https://dgraph.io/graphql) gives you the power of Dgraph in a
-hosted service running on a shared cluster. [Dgraph Cloud](https://dgraph.io/cloud)
-extends Slash GraphQL to meet the needs of enterprises, and provides dedicated
-clusters. To learn more, see [Fully-Managed Dgraph](#fully-managed-dgraph).
+* Fully-managed (hosted): Dgraph Cloud provides Dgraph as a fully-managed cloud
+service. Dgraph Cloud [Shared Instances](https://dgraph.io/graphql)
+give you the power of Dgraph in a low-cost hosted service running on a shared cluster.
+Dgraph Cloud [Dedicated Instances](https://dgraph.io/cloud) provide an enterprise-grade
+service that runs on dedicated cluster instances. To learn more, see [Fully-Managed Dgraph](#fully-managed-dgraph).
 
 {{% notice "note" %}}
 The documentation provided on [this Dgraph Docs site](https://dgraph.io/docs)
@@ -55,9 +55,22 @@ to Slash GraphQL and Dgraph Cloud (except for content in the [Deploy and Manage]
 To run Dgraph on your own server, see [instructions for single-node setup]({{< relref "/deploy/single-host-setup" >}})
 or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
 
-{{% notice "tip" %}}
-Dgraph Labs recommends running Dgraph on Linux for production use.
+{{% notice "Note" %}}
+Dgraph is designed to run on Linux. As of release v21.03, Dgraph no longer
+supports installation on Windows or macOS. We recommend using the standalone
+Docker image to try out Dgraph on macOS.
 {{% /notice %}}
+
+#### To run Dgraph using the standalone Docker image
+
+1. Download docker: https://www.docker.com/
+2. Run the Dgraph Docker standalone image, as follows:
+
+``` 
+  docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 \
+    -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph \
+    dgraph/standalone:v20.11.0
+```  
 
 ### Get started with fully-managed Dgraph
 
