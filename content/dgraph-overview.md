@@ -64,11 +64,12 @@ Docker image to try out Dgraph on Windows or macOS.
 #### To run Dgraph using the standalone Docker image
 
 1. Download docker: https://www.docker.com/
-2. Create a folder to store Dgraph data outside of the container (`mkdir -p ~/dgraph`)
-3. Run the Dgraph Docker standalone image, as follows:
+2. Create a folder to store Dgraph data outside of the container, as follows: `mkdir -p ~/dgraph`
+3. Get the Docker standalone image, as follows: `docker pull dgraph/standalone`
+4. Run the Dgraph Docker standalone image, as follows:
 
 ```sh
-  docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph dgraph/standalone:v21.03
+  docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph dgraph/standalone:v21.03.0
 ```  
 
 After following these steps, Dgraph Alpha now runs and listens for HTTP requests
