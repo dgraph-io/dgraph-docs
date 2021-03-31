@@ -1,6 +1,6 @@
 +++
 title = "Lambda Server"
-description = "Setup a Dgraph database with a lambda server. Dgraph Lambda is a serverless platform for running JavaScript on Dgraph and Slash GraphQL."
+description = "Setup a Dgraph database with a lambda server. Dgraph Lambda is a serverless platform for running JavaScript on Dgraph and Dgraph Cloud."
 weight = 6
 [menu.main]
     parent = "lambda"
@@ -10,7 +10,7 @@ In this article you'll learn how to setup a Dgraph database with a lambda server
 
 ## Dgraph Lambda
 
-[Dgraph Lambda](https://github.com/dgraph-io/dgraph-lambda) is a serverless platform for running JavaScript on Dgraph and [Slash GraphQL](https://dgraph.io/slash-graphql).
+[Dgraph Lambda](https://github.com/dgraph-io/dgraph-lambda) is a serverless platform for running JavaScript on Dgraph and [Dgraph Cloud](https://dgraph.io/slash-graphql).
 
 You can [download the latest version](https://github.com/dgraph-io/dgraph-lambda/releases/latest) or review the implementation in our [open-source repository](https://github.com/dgraph-io/dgraph-lambda).
 

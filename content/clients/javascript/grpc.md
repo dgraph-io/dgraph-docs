@@ -77,9 +77,9 @@ await dgraphClientStub.loginIntoNamespace("groot", "password", 123); // where 12
 In the example above, the client logs into namespace `123` using username `groot` and password `password`.
 Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
 
-### Creating a Client for Slash GraphQL Endpoint
+### Creating a Client for Dgraph Cloud Endpoint
 
-If you want to connect to Dgraph running on your [Slash GraphQL](https://slash.dgraph.io) instance, then all you need is the URL of your Slash GraphQL endpoint and the API key. You can get a client using them as follows:
+If you want to connect to Dgraph running on your [Dgraph Cloud](https://slash.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
 
 ```js
 const dgraph = require("dgraph-js");
