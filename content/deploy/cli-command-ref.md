@@ -513,7 +513,7 @@ Usage:
 
 Flags:
  -a, --alpha string                 Comma-separated list of Dgraph alpha gRPC server addresses (default "127.0.0.1:9080")
- -t, --auth_token string            The auth token passed to the server for Alter operation of the schema file. If used with --slash_grpc_endpoint, then this should be set to the API token issuedby Dgraph Cloud
+ -t, --auth_token string            The auth token passed to the server for Alter operation of the schema file. If used with --slash_grpc_endpoint, then this should be set to the API token issued by Dgraph Cloud
  -b, --batch int                    Number of N-Quads to send as part of a mutation. (default 1000)
  -m, --bufferSize string            Buffer for each thread (default "100")
  -c, --conc int                     Number of concurrent requests to make to Dgraph (default 10)
