@@ -85,7 +85,7 @@ holding from the operating system and how much is actively in use.
  -------                          | -----------
  `dgraph_memory_idle_bytes`       | Estimated amount of memory that is being held idle that could be reclaimed by the OS.
  `dgraph_memory_inuse_bytes`      | Total memory usage in bytes (sum of heap usage and stack usage).
- `dgraph_memory_proc_bytes`       | Total memory usage in bytes of the Dgraph process. On Linux/macOS, this metric is equivalent to resident set size. On Windows, this metric is equivalent to [Go's runtime.ReadMemStats](https://golang.org/pkg/runtime/#ReadMemStats).
+ `dgraph_memory_proc_bytes`       | Total memory usage in bytes of the Dgraph process. This metric is equivalent to resident set size on Linux.
 
 ## Raft leadership metrics
 

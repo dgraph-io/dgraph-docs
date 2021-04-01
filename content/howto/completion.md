@@ -77,10 +77,6 @@ Now open the `.bashrc` file with any text editor (you might need `sudo` to apply
 nano ~/.bashrc
 ```
 
-{{% notice "note" %}}
-macOS users using `bash` as the default shell need to configure `~/.bash_profile`.
-{{% /notice %}}
-
 Once opened, add the path to `dgraph-completion.sh` using the following syntax and save:
 
 ```sh

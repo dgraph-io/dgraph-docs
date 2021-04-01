@@ -35,8 +35,9 @@ Do not run multiple Dgraph Zeros or Dgraph Alpha processes on a single machine. 
 
 ### Operating System
 
-The recommended operating system is Linux for production workloads. Dgraph provides release binaries in Linux, macOS, and Windows. For test environments, you can choose to run Dgraph on any operating system. This deployment guide assumes you are setting up Dgraph on Linux systems (see [Operating System Tuning]({{< relref
-   "#operating-system-tuning" >}})).
+Dgraph is designed to run on Linux. As of release v21.03, Dgraph no longer
+supports installation on Windows or macOS. To run Dgraph on Windows
+and macOS, use the [standalone Docker image]({{<relref "dgraph-overview#to-run-dgraph-using-the-standalone-docker-image">}}).
 
 ### CPU and Memory
 
