@@ -543,9 +543,13 @@ If you are upgrading from v1.0, please make sure you follow the schema migration
 4. Upgrade `dgraph` binary to `v21.03.0`
 5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using the upgraded `dgraph` binary
 6. Start a new Dgraph cluster using the restored data directories
-7. Upgrade the CORS and persisted queries using the following command:
+7. Upgrade the CORS and persisted queries. To upgrade an ACL cluster use:
     ```sh
-    dgraph upgrade  --from v20.11.0 --to v21.03.0 --user groot --password password --alpha-http http://localhost:8080 --acl --deleteOld
+    dgraph upgrade --from v20.11.0 --to v21.03.0 --user groot --password password --alpha http://localhost:9080 --alpha-http http://localhost:8080 --deleteOld
+    ```
+    To upgrade a non-ACL cluster use:
+    ```sh
+    dgraph upgrade --from v20.11.0 --to v21.03.0 --alpha http://localhost:9080 --alpha-http http://localhost:8080 --deleteOld
     ```
     This is required because previously CORS information was stored in `dgraph.cors` predicate which has
     now been moved to be a part of the GraphQL schema. Also, the format of persisted queries has changed.
@@ -556,7 +560,7 @@ If you are upgrading from v1.0, please make sure you follow the schema migration
 
 {{% notice "note" %}}
 The above steps are valid for migration from a cluster in `v20.11` to a single-tenant cluster in `v21.03`, 
-as backup and restore are cluster-wide operations and a single namespace cannot be restored. 
+as backup and restore are cluster-wide operations and a single namespace cannot be restored in a multi-tenant cluster.
 {{% /notice %}}
 
 ## Post Installation
