@@ -89,7 +89,7 @@ Some Dgraph configurations require extra access tokens.
 dgraphClient.setAlphaAuthToken("My secret token value");
 ```
 
-2. [Dgraph Cloud](https://dgraph.io/slash-graphql) requires API key for HTTP access:
+2. [Dgraph Cloud](https://cloud.dgraph.io/) requires API key for HTTP access:
 
 ```js
 dgraphClient.setSlashApiKey("Copy the Api Key from Dgraph Cloud admin page");
