@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "License"
-weight = 4
+weight = 8
 [menu.main]
     parent = "enterprise-features"
 +++
@@ -35,6 +35,20 @@ useful when the process needs to be automated.
 
 ```sh
 dgraph zero --enterprise_license ./licensekey.txt
+```
+
+**Warning messages related to license expiry**
+
+Dgraph will print a warning message in the logs when your license is about to expire. If you are planning to implement any log monitoring solution, you may note this pattern and configure suitable alerts for yourself. You can find an example of this message below:
+
+```sh
+Your enterprise license will expire in 6 days from now. To continue using enterprise features after 6 days from now, apply a valid license. To get a new license, contact us at https://dgraph.io/contact.
+```
+
+Once your license has expired, you will see the following warning message in the logs.
+
+```sh
+Your enterprise license has expired and enterprise features are disabled. To continue using enterprise features, apply a valid license. To receive a new license, contact us at https://dgraph.io/contact.
 ```
 
 [dcl]: https://github.com/dgraph-io/dgraph/blob/master/licenses/DCL.txt

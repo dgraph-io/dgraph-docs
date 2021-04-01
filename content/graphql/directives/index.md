@@ -28,6 +28,12 @@ Reference: [Cascade](/graphql/queries/cascade)
 
 Reference: [Custom directive](/graphql/custom/directive)
 
+### @deprecated
+
+The `@deprecated` directive lets you mark the schema definition of a field or `enum` value as deprecated, and also lets you provide an optional reason for the deprecation.
+
+Reference: [Deprecation]({{< relref "graphql/schema/deprecated.md" >}})
+
 ### @dgraph
 
 `@dgraph` directive tells us how to map fields within a type to existing predicates inside Dgraph.
@@ -71,7 +77,13 @@ Reference: [Lambda directive](/graphql/lambda/overview)
 `@remote` directive is used to annotate types for which data is not stored in Dgraph. These types
 are typically used with custom queries and mutations.
 
-Reference: [Remote directive](/graphql/custom/directive)
+Reference: [Remote directive](/graphql/custom/directive/#remote-types)
+
+### @remoteResponse
+
+The `@remoteResponse` directive allows you to annotate the fields of a `@remote` type in order to map a custom query's JSON key response to a GraphQL field.
+
+Reference: [Remote directive](/graphql/custom/directive/#remote-response)
 
 ### @search
 
@@ -96,3 +108,9 @@ Reference: [Skip directive](/graphql/queries/skip-include)
 `@withSubscription` directive when applied on a type, generates subsciption queries for it.
 
 Reference: [Subscriptions](/graphql/subscriptions)
+
+### @lambdaOnMutate
+
+The `@lambdaOnMutate` directive allows you to listen to mutation events(`add`/`update`/`delete`). Depending on the defined events and the occurrence of a mutation event, `@lambdaOnMutate` triggers the appropriate lambda function implemented on a given lambda server.
+
+Reference: [LambdaOnMutate directive](/graphql/lambda/webhook)

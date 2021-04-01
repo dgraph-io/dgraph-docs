@@ -49,13 +49,39 @@ type User {
 
 Dgraph requires a unique username when creating a new user. It generates the input type for `addUser` with `username: String!`, so you can't make an add mutation without setting a username; and when processing the mutation, Dgraph will ensure that the username isn't already set for another node of the `User` type.
 
+In a single-page app, you could render the page for `http://.../user/Erik` when a user clicks to view the author bio page for that user. Your app can then use a `getUser(username: "Erik") { ... }` GraphQL query to fetch the data and generate the page.
+
 Identities created with `@id` are reusable. If you delete an existing user, you can reuse the username.
 
 Fields with the `@id` directive must have the type `String!`.
 
-As with `ID` types, Dgraph generates queries and mutations so you can query, update and delete data in fields specified with the `@id` directive.
+As with `ID` types, Dgraph generates queries and mutations so you can query, update, and delete data in nodes, using the fields with the `@id` directive as references.
 
-In a single-page app, you could render the page for `http://.../user/Erik` when a user clicks to view the author bio page for that user. Your app can then use a `getUser(username: "Erik") { ... }` GraphQL query to fetch the data and generate the page.
+It's possible to use the `@id` directive on more than one field in a type. For example, you can define a type like the following:
+
+```graphql
+type Book {
+    name: String! @id
+    isbn: String! @id
+    genre: String!
+    ...
+}
+```
+
+You can then use multiple `@id` fields in arguments to `get` queries, and while searching, these fields will be combined with the `AND` operator, resulting in a Boolean `AND` operation. For example, for the above schema, you can send a `getBook` query like the following:
+
+```graphql
+query {
+  getBook(name: "The Metamorphosis", isbn: "9871165072") {
+    name
+    genre
+    ...
+  }
+}
+```
+
+This will yield a positive response if both the `name` **and** `isbn` match any data in the database.
+
 
 ### Combining `ID` and `@id`
 
@@ -72,6 +98,10 @@ type User {
 ```
 
 With this schema, Dgraph requires a unique `username` when creating a new user. This schema provides the benefits of both of the previous examples above. Your app can then use the `getUser(...) { ... }` query to provide either the Dgraph-generated `id` or the externally-generated `username`.
+
+{{% notice "note" %}}
+If in a type there are multiple `@id` fields, then in a `get` query these arguments will be optional. If in a type there's only one field defined with either `@id` or `ID`, then that will be a required field in the `get` query's arguments.
+{{% /notice %}}
 <!--
 ### More to come
 

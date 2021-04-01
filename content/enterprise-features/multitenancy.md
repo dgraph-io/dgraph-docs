@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Multi-Tenancy"
-weight = 3
+weight = 9
 [menu.main]
     parent = "enterprise-features"
 +++
@@ -24,6 +24,42 @@ Each namespace has a group guardian, which has root access to that namespace.
 The default namespace is called a `galaxy`. [Guardians of the Galaxy](#guardians-of-the-galaxy) get
 special access to create or delete namespaces and change passwords of
 users of other namespaces.
+
+{{% notice "note" %}}
+Dgraph provides a timeout limit per query that's configurable using the `--limit` superflag's `query-limit` option.
+There's no time limit for queries by default, but you can override it when running Dgraph Alpha.
+For multi-tenant environments a suggested `query-limit` value is 500ms. 
+{{% /notice %}}
+
+## FAQ
+
+- How access controls and policies are handled among different tenants?
+
+    In previous versions of Dgraph, the [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL) feature
+    offered a unified control solution across the entire database.
+    With the new multi-tenancy feature, the ACL policies are now scoped down to individual tenants in the database.
+
+{{% notice "note" %}}
+Only super-admins ([Guardians of the galaxy](#guardians-of-the-galaxy)) have access across tenants.
+The super admin is used only for database admininstration operations, such as exporting data of all tenants. 
+{{% /notice %}}
+
+- What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
+
+    The access controls are applied per tenant at a predicate level.
+    For example, the user `John Smith` belonging to the group `Data Approvers` may only have read-only access to predicates,
+    while user `Jane Doe`, who belongs to the group `Data Editors`, can be given access to modify predicates.
+    All of these ACL constraints have to be configured for each tenant. 
+
+- Are tenants a physical separation or a logical one?
+
+    Tenants are a logical separation. In this example, data needs to be written twice for 2 different tenants.
+    Each client must authenticate within a tenant, and can only modify data within the tenant as allowed by the configured ACLs.
+
+- Can data be copied from one tenant to the other?
+
+    Yes, but not by breaking any ACL or tenancy constraints.
+    This can be done by exporting data from one tenant and importing data to another.
 
 ## Namespace
 
@@ -91,6 +127,275 @@ mutation {
 }
 ```
 
+## List Namespaces
+
+Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can list active namespaces.
+You can check available namespaces using the `/state` endpoint.
+
+For example, if you have a multi-tenant cluster with multiple namespaces, as a _Guardian of the Galaxy_ you can query `state` from GraphQL:
+
+```graphql
+query{
+  state {
+    groups {
+      tablets{
+        predicate
+      }
+    }
+  }
+}
+```
+
+In the response, each predicate will have a namespace prefix.
+In this way administrators can identify which namespaces are available and active.
+E.g., for predicate `2-dgraph.type`, `2` is the namespace.
+
+```json
+{
+  "data": {
+    "state": {
+      "groups": [
+        {
+          "tablets": [
+            {
+              "predicate": "1-dgraph.password"
+            },
+            {
+              "predicate": "2-dgraph.user.group"
+            },
+            {
+              "predicate": "2-dgraph.xid"
+            },
+            {
+              "predicate": "4-dgraph.rule.predicate"
+            },
+            {
+              "predicate": "3-dgraph.password"
+            },
+            {
+              "predicate": "3-dgraph.user.group"
+            },
+            {
+              "predicate": "5-dgraph.type"
+            },
+            {
+              "predicate": "3-dgraph.acl.rule"
+            },
+            {
+              "predicate": "6-dgraph.graphql.xid"
+            },
+            {
+              "predicate": "5-dgraph.graphql.xid"
+            },
+            {
+              "predicate": "2-dgraph.password"
+            },
+            {
+              "predicate": "0-dgraph.password"
+            },
+            {
+              "predicate": "5-dgraph.rule.predicate"
+            },
+            {
+              "predicate": "6-dgraph.type"
+            },
+            {
+              "predicate": "4-dgraph.xid"
+            },
+            {
+              "predicate": "0-dgraph.rule.permission"
+            },
+            {
+              "predicate": "5-dgraph.xid"
+            },
+            {
+              "predicate": "1-dgraph.graphql.xid"
+            },
+            {
+              "predicate": "0-dgraph.drop.op"
+            },
+            {
+              "predicate": "4-dgraph.drop.op"
+            },
+            {
+              "predicate": "3-dgraph.graphql.xid"
+            },
+            {
+              "predicate": "5-dgraph.acl.rule"
+            },
+            {
+              "predicate": "6-dgraph.rule.permission"
+            },
+            {
+              "predicate": "2-dgraph.drop.op"
+            },
+            {
+              "predicate": "5-dgraph.user.group"
+            },
+            {
+              "predicate": "5-dgraph.drop.op"
+            },
+            {
+              "predicate": "1-dgraph.user.group"
+            },
+            {
+              "predicate": "1-dgraph.xid"
+            },
+            {
+              "predicate": "5-dgraph.graphql.p_query"
+            },
+            {
+              "predicate": "6-dgraph.rule.predicate"
+            },
+            {
+              "predicate": "4-dgraph.graphql.schema"
+            },
+            {
+              "predicate": "4-dgraph.rule.permission"
+            },
+            {
+              "predicate": "2-dgraph.graphql.p_query"
+            },
+            {
+              "predicate": "2-dgraph.graphql.xid"
+            },
+            {
+              "predicate": "5-dgraph.rule.permission"
+            },
+            {
+              "predicate": "0-dgraph.user.group"
+            },
+            {
+              "predicate": "0-dgraph.xid"
+            },
+            {
+              "predicate": "6-dgraph.drop.op"
+            },
+            {
+              "predicate": "0-dgraph.graphql.schema"
+            },
+            {
+              "predicate": "0-dgraph.acl.rule"
+            },
+            {
+              "predicate": "3-dgraph.type"
+            },
+            {
+              "predicate": "3-dgraph.rule.permission"
+            },
+            {
+              "predicate": "1-dgraph.drop.op"
+            },
+            {
+              "predicate": "6-dgraph.graphql.p_query"
+            },
+            {
+              "predicate": "3-dgraph.rule.predicate"
+            },
+            {
+              "predicate": "1-dgraph.graphql.p_query"
+            },
+            {
+              "predicate": "1-dgraph.rule.predicate"
+            },
+            {
+              "predicate": "1-dgraph.graphql.schema"
+            },
+            {
+              "predicate": "6-dgraph.user.group"
+            },
+            {
+              "predicate": "5-dgraph.graphql.schema"
+            },
+            {
+              "predicate": "1-dgraph.rule.permission"
+            },
+            {
+              "predicate": "2-dgraph.acl.rule"
+            },
+            {
+              "predicate": "1-dgraph.acl.rule"
+            },
+            {
+              "predicate": "4-dgraph.user.group"
+            },
+            {
+              "predicate": "3-dgraph.graphql.schema"
+            },
+            {
+              "predicate": "3-dgraph.drop.op"
+            },
+            {
+              "predicate": "4-dgraph.password"
+            },
+            {
+              "predicate": "6-dgraph.graphql.schema"
+            },
+            {
+              "predicate": "5-dgraph.password"
+            },
+            {
+              "predicate": "3-dgraph.xid"
+            },
+            {
+              "predicate": "4-dgraph.graphql.p_query"
+            },
+            {
+              "predicate": "0-dgraph.graphql.p_query"
+            },
+            {
+              "predicate": "2-dgraph.rule.predicate"
+            },
+            {
+              "predicate": "0-dgraph.rule.predicate"
+            },
+            {
+              "predicate": "6-dgraph.acl.rule"
+            },
+            {
+              "predicate": "4-dgraph.graphql.xid"
+            },
+            {
+              "predicate": "2-dgraph.rule.permission"
+            },
+            {
+              "predicate": "0-dgraph.graphql.xid"
+            },
+            {
+              "predicate": "1-dgraph.type"
+            },
+            {
+              "predicate": "3-dgraph.graphql.p_query"
+            },
+            {
+              "predicate": "2-dgraph.graphql.schema"
+            },
+            {
+              "predicate": "6-dgraph.password"
+            },
+            {
+              "predicate": "4-dgraph.type"
+            },
+            {
+              "predicate": "6-dgraph.xid"
+            },
+            {
+              "predicate": "0-dgraph.type"
+            },
+            {
+              "predicate": "4-dgraph.acl.rule"
+            },
+            {
+              "predicate": "2-dgraph.type"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
 ## Delete a Namespace
 
 Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can delete a namespace.
@@ -100,11 +405,11 @@ A namespace can be dropped by calling `/admin` with the `deleteNamespace` mutati
 To delete a namespace, the _Guardian_ must send the JWT access token in the `X-Dgraph-AccessToken` header.
 {{% /notice %}}
 
-For example, to drop the namespace `0x123`:
+For example, to drop the namespace `123`:
 
 ```graphql
 mutation {
-  deleteNamespace(input: {namespaceId: 0x123})
+  deleteNamespace(input: {namespaceId: 123})
   {
     namespaceId
     message

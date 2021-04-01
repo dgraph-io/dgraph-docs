@@ -3,7 +3,7 @@ title = "Administrative API"
 description = "This documentation presents the Admin API and explains how to run a Dgraph database with GraphQL."
 weight = 12
 [menu.main]
-  name = "Admin"
+  name = "Administrative API"
   identifier = "graphql-admin"
   parent = "graphql"
 +++
@@ -26,7 +26,9 @@ Once you've tried out Dgraph GraphQL, you'll need to move past the `dgraph/stand
 
 Dgraph is a distributed graph database.  It can scale to huge data and shard that data across a cluster of Dgraph instances.  GraphQL is built into Dgraph in its Alpha nodes. To learn how to manage and deploy a Dgraph cluster, check our [deployment guide](https://dgraph.io/docs/deploy/).
 
-GraphQL schema introspection is enabled by default, but can be disabled with the `--graphql_introspection=false` when starting the Dgraph alpha nodes.
+GraphQL schema introspection is enabled by default, but you can disable it by
+setting the `--graphql` superflag's `introspection` option to false (`--graphql introspection=false`) when
+starting the Dgraph Alpha nodes in your cluster.
 
 ## Dgraph's schema
 
@@ -279,8 +281,6 @@ Here are the important types, queries, and mutations from the `admin` schema.
 		health: [NodeState]
 		state: MembershipState
 		config: Config
-		getAllowedCORSOrigins: Cors
-		querySchemaHistory(first: Int, offset: Int): [SchemaHistory]
 	}
 
 	type Mutation {
@@ -313,8 +313,6 @@ Here are the important types, queries, and mutations from the `admin` schema.
 		"""
 		config(input: ConfigInput!): ConfigPayload
 
-		replaceAllowedCORSOrigins(origins: [String]): Cors
-
 	}
 ```
 
@@ -324,7 +322,6 @@ You'll notice that the `/admin` schema is very much the same as the schemas gene
 * The `state`  query returns the current state of the cluster and group membership information. For more information about `state` see [here](https://dgraph.io/docs/deploy/dgraph-zero/#more-about-state-endpoint).
 * The `config` query returns the configuration options of the cluster set at the time of starting it.
 * The `getGQLSchema` query gets the current GraphQL schema served at `/graphql`, or returns null if there's no such schema.
-* The `getAllowedCORSOrigins` query returns your CORS policy.
 * The `updateGQLSchema` mutation allows you to change the schema currently served at `/graphql`.
 
 ## Enterprise features
@@ -374,6 +371,10 @@ There are two ways you can modify a GraphQL schema:
 - Using `/admin/schema`
 - Using the `updateGQLSchema` mutation on `/admin`
 
+{{% notice "tip" %}}
+While modifying the GraphQL schema, if you get errors like `errIndexingInProgress`, `another operation is already running` or `server is not ready`, please wait a moment and then retry the schema update.
+{{% /notice %}}
+
 ### Using `/admin/schema`
 
 The `/admin/schema` endpoint provides a simplified method to add and update schemas.
@@ -412,41 +413,14 @@ mutation {
 }
 ```
 
-## Using `querySchemaHistory` to see schema history
+### Adding CORS
 
-You can query the history of your schema using `querySchemaHistory` on the
-`/admin` endpoint. This allows you to debug any issues that arise as you iterate
-your schema. You can specify how many entries to return, and an offset to skip
-the first few entries in the query result.
-
-Because a query using `querySchemaHistory` returns the complete schema
-for each version, you can use the JSON returned by such a query to manually roll
-back to an earlier schema version. To roll back, copy the desired
-schema version from query results, and then send it to `updateGQLSchema`.
-
-For example, to see the first 10 entries in your schema history, run the
-following query on the `/admin` endpoint:
+You can add CORS Origins by specifying `# Dgraph.Allow-Origin` at the end of the GraphQL schema using a schema update. For example:
 
 ```graphql
-query {
-          querySchemaHistory ( first : 10 ){
-              schema
-              created_at
-           }
-}
+# Dgraph.Allow-Origin "https://example.com" 
+# Dgraph.Allow-Origin "https://www.exmaple.com"
 ```
-You could also skip the first entry when querying your schema history by setting
-an offset, as in the following example:
-
-```graphql
-query {
-          querySchemaHistory ( first : 10, offset : 1 ){
-              schema
-              created_at
-           }
-}
-```
-
 
 ## Initial schema
 
@@ -499,6 +473,6 @@ type Person {
 would have the following effects:
 
 * The `/graphql` endpoint would refresh to serve the schema built from this type.
-* Thus, field `dob` would no longer be accessible, and there'd be no search available on `name`.
+* Thus, field `dob` would no longer be accessible, and there would be no search available on `name`.
 * The search index on `name` in Dgraph would be removed.
 * The predicate `dob` in Dgraph would be left untouched (the predicate remains and no data is deleted).

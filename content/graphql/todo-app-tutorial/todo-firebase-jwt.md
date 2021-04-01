@@ -77,7 +77,7 @@ After creating that, copy the config from there.
 
 ![Firebase Config](/images/graphql/tutorial/todo/firebase-config.png)
 
-Setup your Firebase configuration and `Dgraph GraphQL/ Slash GraphQL` endpoint in the [config.json](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/config.json). It looks like this:
+Setup your Firebase configuration and `Dgraph Cloud` endpoint in the [config.json](https://github.com/dgraph-io/graphql-sample-apps/blob/master/todo-react-firebase/src/config.json). It looks like this:
 
 ```json
 {
@@ -133,7 +133,7 @@ type User {
 # Dgraph.Authorization {"JWKUrl":"https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com", "Namespace": "https://dgraph.io/jwt/claims", "Audience": ["your-project-id"], "Header": "X-Auth-Token"}
 ```
 
-Resubmit the updated schema to Dgraph or Slash GraphQL.
+Resubmit the updated schema to Dgraph or Dgraph Cloud.
 
 ### React App
 

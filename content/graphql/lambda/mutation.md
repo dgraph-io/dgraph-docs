@@ -35,7 +35,7 @@ A Lambda Mutation resolver can use a combination of `parents`, `args`, `dql`, or
 {{% /notice %}}
 
 {{% notice "tip" %}}
-This example uses `graphql` for the resolver function. You can find additional resolver examples using `dql` in the [Lambda queries article]({{< relref "query.md" >}}), and using `parent` in the [Lambda fields article]({{< relref "mutation.md" >}}).
+This example uses `graphql` for the resolver function. You can find additional resolver examples using `dql` in the [Lambda queries article]({{< relref "query.md" >}}), and using `parent` in the [Lambda fields article]({{< relref "field.md" >}}).
 {{% /notice %}}
 
 For example, to define the JavaScript `newAuthor()` lambda function and add it as resolver:
@@ -57,6 +57,22 @@ async function newAuthor({args, graphql}) {
 self.addGraphQLResolvers({
     "Mutation.newAuthor": newAuthor
 })
+```
+
+Alternatively, you can use `dql.mutate` to achieve the same results:
+
+```javascript
+async function newAuthor({args, dql, graphql}) {
+    // lets give every new author a reputation of 3 by default
+    const res = await dql.mutate(`{
+        set {
+            _:newAuth <Author.name> "${args.name}" .
+            _:newAuth <Author.reputation> "3.0" .
+            _:newAuth <dgraph.type> "Author" .
+        }
+    }`);
+    return res.data.uids.newAuth
+}
 ```
 
 ### Example

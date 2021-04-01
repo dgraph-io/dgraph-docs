@@ -13,7 +13,7 @@ Dgraph serves [spec-compliant
 GraphQL](https://graphql.github.io/graphql-spec/June2018/) over HTTP to two endpoints: `/graphql` and `/admin`. 
 
 
-In Slash GraphQL `/graphql` and `/admin` are served from the domain of your backend, which will be something like `https://YOUR-SUBDOMAIN.REGION.aws.cloud.dgraph.io`. If you are running a self-hosted Dgraph instance that will be at the alpha port and url (which defaults to `http://localhost:8080` if you aren't changing any settings).
+In Dgraph Cloud `/graphql` and `/admin` are served from the domain of your backend, which will be something like `https://YOUR-SUBDOMAIN.REGION.aws.cloud.dgraph.io`. If you are running a self-hosted Dgraph instance that will be at the alpha port and url (which defaults to `http://localhost:8080` if you aren't changing any settings).
 
 In each case, both GET and POST requests are served.
 

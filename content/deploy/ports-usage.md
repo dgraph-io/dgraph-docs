@@ -88,8 +88,8 @@ replicas, three must be online to avoid an impact to reads or writes.
 ### Dgraph Zero
 
 Run three Dgraph Zero instances, assigning a unique integer ID to each using the
-`--idx` flag, and passing the address of any healthy Zero instance using the
-`--peer` flag.
+`--raft` superflag's `idx` option, and passing the address of any healthy Dgraph
+Zero instance using the `--peer` flag.
 
 To run three replicas for the Alpha nodes, set `--replicas=3`. Each time a new
 Alpha node is added, the Zero node will check the existing groups and assign
@@ -97,7 +97,7 @@ them as appropriate.
 
 ### Dgraph Alpha
 You can run as many Dgraph Alpha nodes as you want. You can manually set the
-`--idx` flag, or you can leave that flag empty, and the Zero node will
+`--raft` superflag's `idx` option, or you can leave that flag empty, and the Zero node will
 auto-assign an id to the Alpha node. This id persists in the write-ahead log, so
 be careful not to delete it.
 

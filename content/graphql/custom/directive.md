@@ -252,6 +252,44 @@ type User {
 
 Just defining the connection is all it takes and then you can ask a single GraphQL query that performs a local query and joins with (potentially many) remote data sources.
 
+### RemoteResponse directive
+
+In combination with the `@remote` directive, in a GraphQL schema you can also use the `@remoteResponse` directive.
+You can define the `@remoteResponse` directive on the fields of a `@remote` type in order to map the JSON key response of a custom query to a GraphQL field.
+
+For example, in the given GraphQL schema there's a defined custom DQL query, whose JSON response contains the results of the `groupby` clause in the `@groupby` key. By using the `@remoteResponse` directive you'll map the `groupby` field in `GroupUserMapQ` type to the `@groupby` key in the JSON response:
+
+```graphql
+type User {
+	screen_name: String! @id
+	followers: Int @search
+	tweets: [Tweets] @hasInverse(field: user)
+}
+type UserTweetCount @remote {
+	screen_name: String
+	tweetCount: Int
+}
+type UserMap @remote {
+	followers: Int
+	count: Int
+}
+type GroupUserMapQ @remote {
+	groupby: [UserMap] @remoteResponse(name: "@groupby")
+}
+```
+
+it's possible to define the following `@custom` DQL query:
+
+```graphql
+queryUserKeyMap: [GroupUserMapQ] @custom(dql: """
+{
+	queryUserKeyMap(func: type(User)) @groupby(followers: User.followers) {
+		count(uid)
+	}
+}
+""")
+```
+
 ## How Dgraph processes custom results
 
 Given types like

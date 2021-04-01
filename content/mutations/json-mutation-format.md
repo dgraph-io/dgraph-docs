@@ -8,8 +8,8 @@ weight = 10
 
 Mutations can also be specified using JSON objects. This can allow mutations to
 be expressed in a more natural way. It also eliminates the need for apps to
-have custom serialisation code, since most languages already have a JSON
-marshalling library.
+have custom serialization code, since most languages already have a JSON
+marshaling library.
 
 When Dgraph receives a mutation as a JSON object, it first converts it into an 
 internal edge format that is then processed into Dgraph.
@@ -20,7 +20,7 @@ internal edge format that is then processed into Dgraph.
 Each JSON object represents a single node in the graph.
 
 {{% notice "note" %}}
-JSON mutations are available via gRPC clients such as the Go client, JS client, and Java client, and are available to HTTP clients with [dgraph-js-http](https://github.com/dgraph-io/dgraph-js-http) and cURL. See more about cURL [here]({{< relref "#using-json-operations-via-curl" >}})
+JSON mutations are available via gRPC clients such as the Go client, JavaScript client, and Java client, and are available to HTTP clients with [dgraph-js-http](https://github.com/dgraph-io/dgraph-js-http) and cURL. See more about cURL [here]({{< relref "#using-json-operations-via-curl" >}})
 {{% /notice %}}
 
 ## Setting literal values
@@ -58,7 +58,7 @@ to the key `blank-0`. You could specify your own key like
 }
 ```
 
-In this case, the assigned uids map would have a key called `diggy` with the value being the uid
+In this case, the assigned UIDs map would have a key called `diggy` with the value being the uid
 assigned to it.
 
 ### Forbidden values
@@ -164,8 +164,8 @@ _:blank-0 <friend> _:blank-1 .
 _:blank-1 <name> "Betty" .
 ```
 
-The result of the mutation would contain the uids assigned to `blank-0` and `blank-1` nodes. If you
-wanted to return these uids under a different key, you could specify the `uid` field as a blank
+The result of the mutation would contain the UIDs assigned to `blank-0` and `blank-1` nodes. If you
+wanted to return these UIDs under a different key, you could specify the `uid` field as a blank
 node.
 
 ```JSON
@@ -293,8 +293,8 @@ _:blank-1 <dgraph.type> "Person" .
 
 Facets do not contain type information but Dgraph will try to guess a type from
 the input. If the value of a facet can be parsed to a number, it will be
-converted to either a float or an int. If it can be parsed as a boolean, it will
-be stored as a boolean. If the value is a string, it will be stored as a
+converted to either a float or an int. If it can be parsed as a Boolean, it will
+be stored as a Boolean. If the value is a string, it will be stored as a
 datetime if the string matches one of the time formats that Dgraph recognizes
 (YYYY, MM-YYYY, DD-MM-YYYY, RFC339, etc.) and as a double-quoted string
 otherwise. If you do not want to risk the chance of your facet data being
@@ -496,7 +496,7 @@ with a `name`:
 
 This syntax can be used in the most current version of Ratel, in the [dgraph-js-http](https://github.com/dgraph-io/dgraph-js-http) client or even via cURL.
 
-You can also [download the Ratel UI for Linux, macOS, or Windows](https://discuss.dgraph.io/t/ratel-installer-for-linux-macos-and-windows-preview-version-ratel-update-from-v1-0-6/2884/).
+You can also [download the Ratel UI](https://discuss.dgraph.io/t/ratel-installer-for-linux-macos-and-windows-preview-version-ratel-update-from-v1-0-6/2884/).
 
 Mutate:
 ```JSON

@@ -197,7 +197,9 @@ Here's an example of a query response with the extensions field:
 
 ### Turn off extensions
 
-Extensions are returned in every response. These are completely optional. If you'd like to turn off extensions, you can set the config option `--graphql_extensions=false` in Dgraph Alpha.
+Extensions are returned in every response. These are completely optional. If you'd like to turn off extensions, you can set the
+`--graphql` superflag's `extensions` option to false (`--graphql extensions=false`)
+when running Dgraph Alpha.
 
 ## Compression
 

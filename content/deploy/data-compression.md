@@ -6,14 +6,14 @@ weight = 7
     parent = "admin"
 +++
 
-Dgraph Alpha lets you configure the compression of data on disk using the
-`--badger.compression` option. You can choose between the
+Dgraph Alpha lets you configure the compression of data on disk using the `--badger`
+superflag's `compression` option. You can choose between the
 [Snappy](https://github.com/golang/snappy) and
 [Zstandard](https://github.com/facebook/zstd) compression algorithms, or choose
 not to compress data on disk.
 
-{{% notice "note" %}}This option replaces the  `--badger.compression_level`
-option used in earlier Dgraph versions. {{% /notice %}}
+{{% notice "note" %}}This option replaces the  `--badger.compression_level` and
+`--badger.compression` options used in earlier Dgraph versions. {{% /notice %}}
 
 The following disk compression settings are available:
 
@@ -27,7 +27,7 @@ For example, you could choose to use Zstandard compression with the highest
 compression level using the following command:
 
 ```sh
-dgraph alpha --badger.compression=zstd:3
+dgraph alpha --badger compression=zstd:3
 ```
 
 This compression setting (Zstandard, level 3) is more CPU-intensive than other
@@ -36,7 +36,7 @@ compression setting, use the following command:
 
 
 ```sh
-dgraph alpha --badger.compression=snappy
+dgraph alpha --badger compression=snappy
 ```
 
 Using this compression setting (Snappy) provides a good compromise between the

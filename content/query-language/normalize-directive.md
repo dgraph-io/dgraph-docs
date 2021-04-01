@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Normalize directive"
+title = "@normalize Directive"
 weight = 17
 [menu.main]
     parent = "query-language"

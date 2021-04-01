@@ -91,6 +91,11 @@ query {
 }
 ```
 
+{{% notice "note" %}}
+The `get` API on interfaces containing fields with the `@id` directive is being deprecated and will be removed in v21.11.
+Users are advised to use the `query` API instead.
+{{% /notice %}}
+
 ### Query a list of objects
 
 You can query a list of objects using GraphQL. For example, the following query fetches the `title`, `text` and and `datePublished` for all posts:
@@ -222,8 +227,7 @@ queryStudent(filter: {name: between: {min: "ba", max: "hz"}}){
 
 You can filter query results to find objects with one or more specified values using the
 `in` keyword. This keyword can find matches for fields with the `@id` directive
-applied. This filter is also supported on `string` and `enum` types with a
-[`Hash` or `Exact` index](/graphql/schema/search/#string-exact-and-hash-search).
+applied. The `in` filter is supported for all data types such as `string`, `enum`, `Int`, `Int64`, `Float`, and `DateTime`.
 
 For example, let's say that your schema defines a `State` type that has the
 `@id` directive applied to the `code` field:
@@ -255,13 +259,14 @@ field using the `has` keyword. The `has` keyword can only check whether a field
 returns a non-null value, not for specific field values.
 
 For example, your schema might define a `Student` type that has basic
-information about each student; such as their ID number, age, and name:
+information about each student; such as their ID number, age, name, and email address:
 
 ```graphql
 type Student {
    tid: ID!
    age: Int!
    name: String
+   email: String
 }
 ```
 
@@ -274,3 +279,15 @@ queryStudent(filter: { has : name } ){
    name
 }
 ```
+You can also specify a list of fields, like the following:
+
+```graphql
+queryStudent(filter: { has : [name, email] } ){
+   tid
+   age
+   name
+   email
+}
+```
+
+This would return `Student` objects where both `name` and `email` fields are non-null.

@@ -27,7 +27,7 @@ Dgraph gives you GraphQL.  You're always working with GraphQL, not a translation
 * [Custom Logic](/graphql/custom/custom-overview) - Dgraph's auto generated GraphQL API is fantastic, but as your app gets more complicated, you'll need to add custom business logic to your API.
 * [Authorization](/graphql/authorization/authorization-overview) - Find out how Dgraph can add automated authorization to your GraphQL API.
 * [Local Administration](/graphql/admin) - Once you're up and running you might also need to know a few details about administering your Dgraph instance if you are running locally.  
-* [Slash GraphQL](/slash-graphql/admin/overview) - If you are using hosted Dgraph on Slash GraphQL, then head over here to learn about administering your backend.
+* [Dgraph Cloud](/slash-graphql/admin/overview) - If you are using hosted Dgraph on Dgraph Cloud, then head over here to learn about administering your backend.
 
 ## Contribute
 

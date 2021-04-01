@@ -10,14 +10,14 @@ Each Dgraph Alpha exposes various administrative (admin) endpoints both over
 HTTP and GraphQL, for example endpoints to export data and to perform a clean
 shutdown. All such admin endpoints are protected by three layers of authentication:
 
-1. IP White-listing (use `--whitelist` flag in alpha to whitelist IPs other than
+1. IP White-listing (use the `--security` superflag's `whitelist` option on Dgraph Alpha to whitelist IP addresses other than
    localhost).
-2. Poor-man's auth, if alpha is started with the `--auth_token` flag (means you
-   will need to pass the `auth_token` as `X-Dgraph-AuthToken` header while
-   making the HTTP request).
-3. Guardian-only access, if ACL is enabled (means you need to pass the ACL-JWT
+2. Poor-man's auth, if Dgraph Alpha is started with the `--security` superflag's `token` option,
+   then you should pass the token as an `X-Dgraph-AuthToken` header while
+   making the HTTP request.
+3. Guardian-only access, if ACL is enabled. In this case you should pass the ACL-JWT
    of a Guardian user using the `X-Dgraph-AccessToken` header while making the
-  HTTP request).
+   HTTP request.
 
 An admin endpoint is any HTTP endpoint which provides admin functionality.
 Admin endpoints usually start with the `/admin` path. The current list of admin
@@ -46,18 +46,18 @@ There are a few exceptions to the general rule described above:
 
 By default, admin operations can only be initiated from the machine on which the Dgraph Alpha runs.
 
-You can use the `--whitelist` option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
+You can use the `--security` superflag's `whitelist` option to specify a comma-separated whitelist of IP addresses, IP ranges, CIDR ranges, or hostnames for hosts from which admin operations can be initiated.
 
 **IP Address**
 
 ```sh
-dgraph alpha --whitelist 127.0.0.1 ...
+dgraph alpha --security whitelist=127.0.0.1 ...
 ```
 This would allow admin operations from hosts with IP 127.0.0.1 (i.e., localhost only).
 
 **IP Range**
 ```sh
-dgraph alpha --whitelist 172.17.0.0:172.20.0.0,192.168.1.1 ...
+dgraph alpha --security whitelist=172.17.0.0:172.20.0.0,192.168.1.1 ...
 ```
 
 This would allow admin operations from hosts with IP between `172.17.0.0` and `172.20.0.0` along with
@@ -66,22 +66,22 @@ the server which has IP address as `192.168.1.1`.
 **CIDR Range**
 
 ```sh
-dgraph alpha --whitelist 172.17.0.0/16,172.18.0.0/15,172.20.0.0/32,192.168.1.1/32 ...
+dgraph alpha --security whitelist=172.17.0.0/16,172.18.0.0/15,172.20.0.0/32,192.168.1.1/32 ...
 ```
 
 This would allow admin operations from hosts that matches the CIDR range `172.17.0.0/16`, `172.18.0.0/15`, `172.20.0.0/32`, or `192.168.1.1/32` (the same range as the IP Range example).
 
-You can set whitelist IP to `0.0.0.0/0` to whitelist all IPs.
+You can set whitelist IP to `0.0.0.0/0` to whitelist all IP addresses.
 
 **Hostname**
 
 ```sh
-dgraph alpha --whitelist admin-bastion,host.docker.internal ...
+dgraph alpha --security whitelist=admin-bastion,host.docker.internal ...
 ```
 
 This would allow admin operations from hosts with hostnames `admin-bastion` and `host.docker.internal`.
 
-## Restricting Mutation Operations
+## Restrict Mutation Operations
 
 By default, you can perform mutation operations for any predicate.
 If the predicate in mutation doesn't exist in the schema,
@@ -104,18 +104,18 @@ you need to perform an alter operation with that predicate and its schema type.
 dgraph alpha --mutations strict
 ```
 
-## Securing Alter Operations
+## Secure Alter Operations
 
 Clients can use alter operations to apply schema updates and drop particular or all predicates from the database.
 By default, all clients are allowed to perform alter operations.
 You can configure Dgraph to only allow alter operations when the client provides a specific token.
 You can use this "Simple ACL" token to prevent clients from making unintended or accidental schema updates or predicate drops.
 
-You can specify the auth token with the `--auth_token` option for each Dgraph Alpha in the cluster.
+You can specify the auth token with the `--security` superflag's `token` option for each Dgraph Alpha in the cluster.
 Clients must include the same auth token to make alter requests.
 
 ```sh
-$ dgraph alpha --auth_token=<authtokenstring>
+$ dgraph alpha --security token=<authtokenstring>
 ```
 
 ```sh
@@ -134,11 +134,11 @@ $ curl -H 'X-Dgraph-AuthToken: <authtokenstring>' localhost:8180/alter -d '{ "dr
 ```
 
 {{% notice "note" %}}
-To fully secure alter operations in the cluster, the auth token must be set for every Alpha.
+To fully secure alter operations in the cluster, the authentication token must be set for every Alpha node.
 {{% /notice %}}
 
 
-## Exporting Database
+## Export Database
 
 An export of all nodes is started by locally executing the following GraphQL mutation on the `/admin` endpoint of an Alpha node (e.g. `localhost:8080/admin`) using any compatible client like Insomnia, GraphQL Playground or GraphiQL.
 
@@ -153,8 +153,7 @@ mutation {
 }
 ```
 {{% notice "warning" %}}By default, this won't work if called from outside the server where the Dgraph Alpha is running.
-You can specify a list or range of whitelisted IP addresses from which export or other admin operations
-can be initiated using the `--whitelist` flag on `dgraph alpha`.
+You can specify a list or range of whitelisted IP addresses to initiate admin operations like export. You can do so using the `--security` superflag's `whitelist` option with the `dgraph alpha` command.
 {{% /notice %}}
 
 This triggers an export for all Alpha groups of the cluster. The data is exported from the following Dgraph instances:
@@ -167,13 +166,13 @@ cluster. Dgraph does not copy all files to the Alpha that initiated the export.
 The user must also ensure that there is sufficient space on disk to store the
 export.
 
-### Configuring Dgraph Alpha server nodes
+### Configure Dgraph Alpha server nodes
 
 Each Dgraph Alpha leader for a group writes output as a gzipped file to the export
-directory specified via the `--export` flag (defaults to a directory called `"export"`). If any of the groups fail, the
+directory specified via the `--export` flag (defaults to an **export** directory). If any of the groups fail, the
 entire export process is considered failed and an error is returned.
 
-As an example of configuring `export`, you can run this:
+As an example of configuring data export, you can run this:
 
 ```bash
 docker run --detach --rm --name dgraph-standalone \
@@ -185,7 +184,7 @@ docker run --detach --rm --name dgraph-standalone \
 ```
 
 {{% notice "tip" %}}
-The `export` configuration can be configured as an environment variable `DGRAPH_ALPHA_EXPORT`, command line flag `--export`, or in a configuration file with the `export` key.  See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
+The export configuration can be configured as an environment variable `DGRAPH_ALPHA_EXPORT`, command line flag `--export`, or in a configuration file with the `export` key.  See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Export data format
@@ -219,7 +218,7 @@ mutation {
 
 Currently, `rdf` and `json` are the only formats supported.
 
-### Exporting to NFS or a file path
+### Export to NFS or a file path
 
 {{% notice "note" %}}
 This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
@@ -241,7 +240,7 @@ mutation {
 }
 ```
 
-### Exporting to an object store
+### Export to an object store
 
 {{% notice "note" %}}
 This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
@@ -249,7 +248,7 @@ This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/re
 
 You can export to an S3 or MinIO object store by specifying a URL in the `destination` input field.
 
-#### Exporting to S3
+#### Export to S3
 
 ```graphql
 mutation {
@@ -271,7 +270,7 @@ The Dgraph URL used for S3 is different than the AWS CLI tools with the `aws s3`
 {{% /notice %}}
 
 
-#### Exporting to MinIO
+#### Export to MinIO
 
 ```graphql
 mutation {
@@ -288,7 +287,7 @@ mutation {
 }
 ```
 
-#### Exporting to a MinIO Gateway
+#### Export to a MinIO gateway
 
 You can use MinIO as a gateway to other object stores, such as [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage).  You can use the above MinIO GraphQL mutation with MinIO configured as a gateway.
 
@@ -365,7 +364,7 @@ Once you have a `credentials.json`, you can access GCS locally using one of thes
      --values myvalues.yaml
    ```
 
-#### Disabling HTTPS for exports to S3 and Minio
+#### Disable HTTPS for exports to S3 and Minio
 
 By default, Dgraph assumes the destination bucket is using HTTPS. If that is not the case, the export will fail. To export to a bucket using HTTP (insecure), set the query parameter `secure=false` with the destination endpoint in the destination field:
 
@@ -384,7 +383,7 @@ mutation {
 }
 ```
 
-#### Using anonymous credentials
+#### Use anonymous credentials
 
 If exporting to S3 or MinIO where credentials are not required, you can set `anonymous` to true.
 
@@ -402,7 +401,7 @@ mutation {
 }
 ```
 
-### Encrypting exports
+### Encrypt exports
 
 Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `encryption_key_file`.
 
@@ -410,7 +409,7 @@ Export is available wherever an Alpha is running. To encrypt an export, the Alph
 The `encryption_key_file` was used for [Encryption at Rest]({{< relref "enterprise-features/encryption-at-rest" >}}) and will now also be used for encrypted exports.
 {{% /notice %}}
 
-### Using `curl` to trigger an export
+### Use `curl` to trigger an export
 
 This is an example of how you can use `curl` to trigger an export.
 
@@ -439,12 +438,12 @@ This is an example of how you can use `curl` to trigger an export.
      ```
 
 
-## Shutting Down Database
+## Shut down database
 
 A clean exit of a single Dgraph node is initiated by running the following GraphQL mutation on /admin endpoint.
 {{% notice "warning" %}}This won't work if called from outside the server where Dgraph is running.
 You can specify a list or range of whitelisted IP addresses from which shutdown or other admin operations
-can be initiated using the `--whitelist` flag on `dgraph alpha`.
+can be initiated using the `--security` superflag's `whitelist` option on `dgraph alpha`.
 {{% /notice %}}
 
 ```graphql
@@ -460,7 +459,7 @@ mutation {
 
 This stops the Alpha on which the command is executed and not the entire cluster.
 
-## Deleting database
+## Delete database
 
 Individual triples, patterns of triples and predicates can be deleted as described in the [DQL docs]({{< relref "mutations/delete.md" >}}).
 
@@ -468,17 +467,17 @@ To drop all data, you could send a `DropAll` request via `/alter` endpoint.
 
 Alternatively, you could:
 
-* [Shutdown Dgraph]({{< relref "#shutting-down-database" >}}) and wait for all writes to complete,
+* [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete,
 * Delete (maybe do an export first) the `p` and `w` directories, then
 * Restart Dgraph.
 
-## Upgrading Database
+## Upgrade database
 
 Doing periodic exports is always a good idea. This is particularly useful if you wish to upgrade Dgraph or reconfigure the sharding of a cluster. The following are the right steps to safely export and restart.
 
-1. Start an [export]({{< relref "#exporting-database">}})
+1. Start an [export]({{< relref "#export-database">}})
 2. Ensure it is successful
-3. [Shutdown Dgraph]({{< relref "#shutting-down-database" >}}) and wait for all writes to complete
+3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Start a new Dgraph cluster using new data directories (this can be done by passing empty directories to the options `-p` and `-w` for Alphas and `-w` for Zeros)
 5. Reload the data via [bulk loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}})
 6. Verify the correctness of the new Dgraph cluster. If all looks good, you can delete the old directories (export serves as an insurance)
@@ -487,16 +486,17 @@ These steps are necessary because Dgraph's underlying data format could have cha
 
 Blue-green deployment is a common approach to minimize downtime during the upgrade process.
 This approach involves switching your application to read-only mode. To make sure that no mutations are executed during the maintenance window you can
-do a rolling restart of all your Alpha using the option `--mutations disallow` when you restart the Alphas. This will ensure the cluster is in read-only mode.
+do a rolling restart of all your Alpha using the option `--mutations disallow` when you restart the Alpha nodes. This will ensure the cluster is in read-only mode.
 
 At this point your application can still read from the old cluster and you can perform the steps 4. and 5. described above.
 When the new cluster (that uses the upgraded version of Dgraph) is up and running, you can point your application to it, and shutdown the old cluster.
 
-### Upgrading from v1.2.2 to v20.03.0 for Enterprise Customers
+### Upgrade from v1.2.2 to v20.03.0 for Enterprise customers
+
 <!-- TODO: Redirect(s) -->
-1. Use [binary]({{< relref "enterprise-features/binary-backups.md">}}) backup to export data from old cluster
+1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from old cluster
 2. Ensure it is successful
-3. [Shutdown Dgraph]({{< relref "#shutting-down-database" >}}) and wait for all writes to complete
+3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Upgrade `dgraph` binary to `v20.03.0`
 5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using upgraded `dgraph` binary
 6. Start a new Dgraph cluster using the restored data directories
@@ -506,10 +506,11 @@ When the new cluster (that uses the upgraded version of Dgraph) is up and runnin
 dgraph upgrade --acl -a localhost:9080 -u groot -p password
 ```
 
-### Upgrading from v20.03.0 to v20.07.0 for Enterprise Customers
-1. Use [binary]({{< relref "enterprise-features/binary-backups.md">}}) backup to export data from old cluster
+### Upgrade from v20.03.0 to v20.07.0 for Enterprise customers
+
+1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from old cluster
 2. Ensure it is successful
-3. [Shutdown Dgraph]({{< relref "#shutting-down-database" >}}) and wait for all writes to complete
+3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Upgrade `dgraph` binary to `v20.07.0`
 5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using upgraded `dgraph` binary
 6. Start a new Dgraph cluster using the restored data directories
@@ -519,7 +520,7 @@ dgraph upgrade --acl -a localhost:9080 -u groot -p password
     ```
     This is required because previously the type-names `User`, `Group` and `Rule` were used by ACL.
     They have now been renamed as `dgraph.type.User`, `dgraph.type.Group` and `dgraph.type.Rule`, to
-    keep them in dgraph's internal namespace. This upgrade just changes the type-names for the ACL
+    keep them in Dgraph's internal namespace. This upgrade just changes the type-names for the ACL
     nodes to the new type-names.
 
     You can use `--dry-run` option in `dgraph upgrade` command to see a dry run of what the upgrade
@@ -532,6 +533,34 @@ are affected. Then, you can drop the old types and predicates from DB.
 
 {{% notice "note" %}}
 If you are upgrading from v1.0, please make sure you follow the schema migration steps described in [this section]({{< relref "/migration/migrate-dgraph-1-1.md" >}}).
+{{% /notice %}}
+
+### Upgrade from v20.11.0 to v21.03.0 for Enterprise customers
+
+1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from the old cluster
+2. Ensure it is successful
+3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
+4. Upgrade `dgraph` binary to `v21.03.0`
+5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using the upgraded `dgraph` binary
+6. Start a new Dgraph cluster using the restored data directories
+7. Upgrade the CORS and persisted queries. To upgrade an ACL cluster use:
+    ```sh
+    dgraph upgrade --from v20.11.0 --to v21.03.0 --user groot --password password --alpha http://localhost:9080 --alpha-http http://localhost:8080 --deleteOld
+    ```
+    To upgrade a non-ACL cluster use:
+    ```sh
+    dgraph upgrade --from v20.11.0 --to v21.03.0 --alpha http://localhost:9080 --alpha-http http://localhost:8080 --deleteOld
+    ```
+    This is required because previously CORS information was stored in `dgraph.cors` predicate which has
+    now been moved to be a part of the GraphQL schema. Also, the format of persisted queries has changed.
+    Some of the internal deprecated predicates will be removed by this change.
+
+    You can use `--dry-run` option in `dgraph upgrade` command to see a dry run of what the upgrade
+    command will do.
+
+{{% notice "note" %}}
+The above steps are valid for migration from a cluster in `v20.11` to a single-tenant cluster in `v21.03`, 
+as backup and restore are cluster-wide operations and a single namespace cannot be restored in a multi-tenant cluster.
 {{% /notice %}}
 
 ## Post Installation

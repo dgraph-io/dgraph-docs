@@ -30,6 +30,32 @@ Make a new client by passing in one or more GRPC channels pointing to alphas.
 var client = new DgraphClient(new Channel("127.0.0.1:9080", ChannelCredentials.Insecure));
 ```
 
+### Multi-tenancy
+
+In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, Dgraph provides a new method `LoginRequest()`,
+which will allow the users to login to a specific namespace.
+
+In order to create a Dgraph client, and make the client login into namespace `123`:
+
+```c#
+var lr = new Api.LoginRequest() {
+  UserId = "userId",
+  Password = "password",
+  Namespace = 123
+}
+client.Login(lr)
+```
+
+In the example above, the client logs into namespace `123` using username `userId` and password `password`.
+Once logged in, the client can perform all the operations allowed to the `userId` user of namespace `123`.
+
+### Creating a Client for Dgraph Cloud Endpoint
+
+If you want to connect to Dgraph running on your [Dgraph Cloud](https://slash.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
+
+```c#
+var client = new DgraphClient(SlashChannel.Create("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "api-key-here"));
+```
 
 ### Altering the Database
 

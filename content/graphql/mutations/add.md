@@ -7,7 +7,7 @@ weight = 2
     name = "Add"
 +++
 
-Add mutations allows you to add new objects of a particular type.
+Add mutations allow you to add new objects of a particular type.
 
 We use the following schema to demonstrate some examples.
 
@@ -28,7 +28,7 @@ type Post {
 }
 ```
 
-Dgraph automatically generates input and return types in the schema for the add mutation, 
+Dgraph automatically generates input and return types in the schema for the `add` mutation, 
 as shown below:
 ```graphql
 addPost(input: [AddPostInput!]!): AddPostPayload
@@ -77,6 +77,10 @@ Variables:
   }
 }
 ```
+
+{{% notice "note" %}}
+You can convert an `add` mutation to an `upsert` mutation by setting the value of the input variable `upsert` to `true`. For more information, see [Upsert Mutations](/graphql/mutations/upsert).
+{{% /notice %}}
 
 ## Examples
 

@@ -15,7 +15,7 @@ This section focuses exclusively on deployment and management for these self-man
 scenarios. To learn about fully-managed options that let you focus on
 building apps and websites, rather than managing infrastructure, see the 
 [Dgraph cloud services docs](https://dgraph.io/docs/slash-graphql/), or 
-[Try Slash GraphQL](https://slash.dgraph.io/).
+[Try Dgraph Cloud](https://cloud.dgraph.io/).
 
 A Dgraph cluster consists of the following:
 

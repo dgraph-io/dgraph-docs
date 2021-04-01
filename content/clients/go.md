@@ -25,8 +25,8 @@ More details on the supported versions can be found at [this link](https://githu
 
 ## Create the client
 
-To create a client, dial a connection to Dgraph's external gRPC port (typically
-9080). The following code snippet shows just one connection. You can connect to multiple Dgraph Alphas to distribute the workload evenly.
+To create a client, dial a connection to Dgraph's external gRPC port (typically `9080`).
+The following code snippet shows just one connection. You can connect to multiple Dgraph Alphas to distribute the workload evenly.
 
 ```go
 func newClient() *dgo.Dgraph {
@@ -63,6 +63,43 @@ func newClient() *dgo.Dgraph {
 	)
 }
 
+```
+
+### Multi-tenancy
+
+In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, Dgraph provides a new method `LoginIntoNamespace()`,
+which will allow the users to login to a specific namespace.
+
+In order to create a dgo client, and make the client login into namespace `123`:
+
+```go
+conn, err := grpc.Dial("127.0.0.1:9080", grpc.WithInsecure())
+if err != nil {
+	glog.Error("While trying to dial gRPC, got error", err)
+}
+dc := dgo.NewDgraphClient(api.NewDgraphClient(conn))
+ctx := context.Background()
+// Login to namespace 123
+if err := dc.LoginIntoNamespace(ctx, "groot", "password", 123); err != nil {
+	glog.Error("Failed to login: ",err)
+}
+```
+
+In the example above, the client logs into namespace `123` using username `groot` and password `password`.
+Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
+
+### Creating a Client for Dgraph Cloud Endpoint
+
+If you want to connect to Dgraph running on your [Dgraph Cloud](https://slash.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
+
+```go
+// This example uses dgo
+conn, err := dgo.DialSlashEndpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
+if err != nil {
+  log.Fatal(err)
+}
+defer conn.Close()
+dgraphClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
 ```
 
 ## Alter the database

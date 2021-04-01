@@ -41,6 +41,34 @@ client_stub = pydgraph.DgraphClientStub('localhost:9080')
 client = pydgraph.DgraphClient(client_stub)
 ```
 
+### Multi-tenancy
+
+In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, PyDgraph provides a new method `login_in_namespace()`,
+which will allow the users to login to a specific namespace.
+
+In order to create a python client, and make the client login into namespace `123`:
+
+```python
+client_stub = pydgraph.DgraphClientStub('localhost:9080')
+client = pydgraph.DgraphClient(client_stub)
+// Login to namespace groot user of namespace 123
+client.login_in_namespace("groot", "password", "123")
+```
+
+In the example above, the client logs into namespace `123` using username `groot` and password `password`.
+Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
+
+### Creating a Client for Dgraph Cloud Endpoint
+
+If you want to connect to Dgraph running on your [Dgraph Cloud](https://slash.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
+
+```python
+import pydgraph
+
+client_stub = pydgraph.DgraphClientStub.from_slash_endpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
+client = pydgraph.DgraphClient(client_stub)
+```
+
 ### Altering the Database
 
 To set the schema, create an `Operation` object, set the schema and pass it to
