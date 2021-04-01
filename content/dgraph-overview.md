@@ -72,6 +72,11 @@ Docker image to try out Dgraph on Windows or macOS.
   docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph dgraph/standalone:v21.03.0
 ```  
 
+{{% notice "Tip" %}}
+To run the Docker standalone image for another version of Dgraph, change `v21.03.0`
+in the command shown above to the version number for a previous release, such as `v20.11.0`.
+{{% /notice %}}
+
 After following these steps, Dgraph Alpha now runs and listens for HTTP requests
 on port 8080, and Ratel listens on port 8000.
 
