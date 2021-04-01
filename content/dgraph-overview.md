@@ -39,6 +39,7 @@ infrastructure. You can also run Dgraph in your AWS, GCP, or Azure cloud
 infrastructure.
 * Fully-managed (hosted): Dgraph Cloud provides Dgraph as a fully-managed cloud
 service. Dgraph Cloud [Shared Instances](https://dgraph.io/graphql) (formerly called *Slash GraphQL*)
+
 give you the power of Dgraph in a low-cost hosted service running on a shared cluster.
 Dgraph Cloud [Dedicated Instances](https://dgraph.io/cloud) provide an enterprise-grade
 service that runs on dedicated cluster instances. To learn more, see [Fully-Managed Dgraph](#fully-managed-dgraph).
@@ -138,4 +139,3 @@ private cloud (VPC) or bring your own Kubernetes (BYOK) environment.
 |server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation]({{< relref "/deploy/cluster-setup" >}}) |
 |predicate|	A property of a data node in a graph database; also a discrete piece of information available to request in a graph database.	| |
 |Dgraph Cloud|	A fully-managed GraphQL database service powered by Dgraph database.	|[Dgraph Cloud documentation]({{< relref "/slash-graphql" >}}) |
-
