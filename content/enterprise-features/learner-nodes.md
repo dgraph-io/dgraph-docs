@@ -10,7 +10,7 @@ weight = 7
 A Learner node is an enterprise-only feature that allows a user to spin-up a read-only replica instance across the world without paying a latency cost. 
 When enabled, a Dgraph cluster using learner nodes can serve best-effort queries faster.
 
-A "learner node" can still accept write operations. The node forwards them over to the group leader and does the writing just like a typical Alpha node. It will just be slower, depending on the latency between the Alpha node and the learner node.
+A "learner node" can still accept write operations. The node forwards them over to the Alpha group leader and does the writing just like a typical Alpha node. It will just be slower, depending on the latency between the Alpha node and the learner node.
 
 {{% notice "note" %}}
 A learner node instance can forward `/admin` operations and perform both read and write operations,
@@ -27,8 +27,8 @@ with zero latency overhead. Because it's an Enterprise feature, a learner node
 won't be able to connect to a Dgraph Zero node until the Zero node has a valid
 license.
 
-To spin up a learner node, first make sure that you start both the Dgraph Zero
-leader and the Dgraph Alpha leader with the `--my` flag so that these nodes will
+To spin up a learner node, first make sure that you start all the nodes, including the Dgraph Zero
+leader and the Dgraph Alpha leader, with the `--my` flag so that these nodes will
 be accessible to the learner node. Then, start an Alpha instance as follows:
 
 ```sh
@@ -81,6 +81,7 @@ Because learner nodes support read and write operations, users in the remote
 location can do everything with this learner node, as if they were working with
 the full cluster.
 
+<!-- commented until tested (21.07)
 ### Zero-downtime upgrades
 
 Assume that you want to upgrade your cluster to the latest Dgraph version, with zero downtime even with breaking changes.
@@ -91,3 +92,4 @@ You can easily solve this with a learner node setup:
 3. Bring a new cluster around the learner node (the learner needs to restart for this).
 4. Redirect the traffic to the new cluster.
 5. Turn off the old cluster.
+-->
