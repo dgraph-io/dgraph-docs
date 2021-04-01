@@ -1,22 +1,22 @@
 +++
-title = "Deploying on Slash GraphQL"
-description = "In just two steps on Slash GraphQL (deployment & schema), you get a GraphQL API that you can easily use in any application."
+title = "Deploying on Dgraph Cloud"
+description = "In just two steps on Dgraph Cloud (deployment & schema), you get a GraphQL API that you can easily use in any application."
 weight = 7
 [menu.main]
     parent = "todo-app-tutorial"
 +++
 
-Let's now deploy our fully functional app on Slash GraphQL [cloud.dgraph.io](https://cloud.dgraph.io).
+Let's now deploy our fully functional app on Dgraph Cloud [cloud.dgraph.io](https://cloud.dgraph.io).
 
 ### Create a deployment
 
 After successfully logging into the site for the first time, your dashboard should look something like this.
 
-![Slash-GraphQL: Get Started](/images/graphql/tutorial/todo/slash-graphql-1.png)
+![Dgraph Cloud: Get Started](/images/graphql/tutorial/todo/slash-graphql-1.png)
 
 Let's go ahead and launch a new deployment.
 
-![Slash-GraphQL: Create deployment](/images/graphql/tutorial/todo/slash-graphql-2.png)
+![Dgraph Cloud: Create deployment](/images/graphql/tutorial/todo/slash-graphql-2.png)
 
 We named our deployment `todo-app-deployment` and set the optional subdomain as
 `todo-app`, using which the deployment will be accessible. We can choose any
@@ -24,7 +24,7 @@ subdomain here as long as it is available.
 
 Let's set it up in AWS, in the US region, and click on the *Launch* button.
 
-![Slash-GraphQL: Deployment created ](/images/graphql/tutorial/todo/slash-graphql-3.png)
+![Dgraph Cloud: Deployment created ](/images/graphql/tutorial/todo/slash-graphql-3.png)
 
 Now the backend is ready.
 
@@ -64,4 +64,4 @@ Let's update our frontend to use this URL instead of localhost. Open `src/config
 }
 ```
 
-That's it! Just in two steps on Slash GraphQL (deployment & schema), we got a GraphQL API that we can now easily use in any application!
+That's it! Just in two steps on Dgraph Cloud (deployment & schema), we got a GraphQL API that we can now easily use in any application!

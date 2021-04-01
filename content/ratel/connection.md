@@ -51,4 +51,4 @@ If you use a custom address for Zero instance, you should inform here.
 ### Extra Settings
 
 - Query timeout (seconds): This is a timeout for queries and mutations. If the operation takes too long, it will be dropped after `X` seconds in the cluster.
-- Slash API Key: Used to access Slash services.
+- Dgraph Cloud API Key: Used to access Dgraph Cloud services.

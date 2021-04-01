@@ -67,7 +67,7 @@ aliases = ["/contribute"]
   <div class="item">
     <div class="icon"><i class="lni lni-cloud" aria-hidden="true"></i></div>
     <a href="https://dgraph.io/docs/slash-graphql/">
-      <h2>Slash GraphQL</h2>
+      <h2>Dgraph Cloud</h2>
       <p>
         Run Dgraph in the Cloud. 
         Work with your data in a fully-managed cloud service.
