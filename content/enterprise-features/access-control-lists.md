@@ -111,7 +111,7 @@ alpha:
       acl:
         secret_file: /dgraph/acl/hmac_secret_file
       security:
-        whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16‘
+        whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
 ```
 
 Now with the Helm chart config values created, we can deploy Dgraph:
@@ -184,8 +184,8 @@ services:
     command: dgraph alpha --my=alpha1:7080 --zero=zero1:5080
     container_name: alpha1
     environment:
-      DGRAPH_ALPHA_VAULT: addr="http://vault:8200";acl-ield="hmac_secret_file";acl-format="raw";path="secret/data/dgraph/alpha";role-id-file="/dgraph/vault/role_id";secret-id-file="/dgraph/vault/secret_id"
-      DGRAPH_ALPHA_SECURITY: whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+      DGRAPH_ALPHA_VAULT: addr=http://vault:8200;acl-field=hmac_secret_file;acl-format=raw;path=secret/data/dgraph/alpha;role-id-file=/dgraph/vault/role_id;secret-id-file=/dgraph/vault/secret_id
+      DGRAPH_ALPHA_SECURITY: whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
     image: dgraph/dgraph:{{< version >}}
     ports:
       - 8080:8080
