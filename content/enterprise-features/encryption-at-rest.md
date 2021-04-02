@@ -38,7 +38,7 @@ desired key size):
 tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
 ```
 
-Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-command-ref.md" >}}) options to enable encryption, as explained below.
+Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-command-ref.md" >}}) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
 
 ## Turn on Encryption
 
@@ -107,12 +107,8 @@ dgraph alpha --my="localhost:7080" --zero="localhost:5080" \
 
 If multiple Dgraph Alpha nodes are part of the cluster, you must pass the `--encryption_key_file` flag or the `--vault` superflag with appropriate superflag options to each of the Dgraph Alpha nodes.
 
-Once an Dgraph Alpha has encryption enabled, the encryption key must be provided in order to start a Dgraph Alpha node. If a Dgraph Alpha node restarts, the `--encryption_key_file` flag or the `--vault` superflag must be set along with the key in order to restart successfully.
-
-
 After an Alpha node has encryption enabled, you must provide the encryption key to start the Alpha server.
-If the Alpha server restarts, the `--encryption_key_file` or the `--vault` superflag's options must be set along with the key to
-
+If the Alpha server restarts, the `--encryption_key_file` or the `--vault` superflag's options must be set along with the key to restart successfully.
 
 ## Turn off Encryption
 
