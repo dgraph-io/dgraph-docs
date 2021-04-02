@@ -67,7 +67,7 @@ services:
       DGRAPH_ALPHA_SECURITY: whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
     image: dgraph/dgraph:{{< version >}}
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - ./hmac_secret_file:/dgraph/acl/hmac_secret_file
   zero1:
@@ -188,7 +188,7 @@ services:
       DGRAPH_ALPHA_SECURITY: whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
     image: dgraph/dgraph:{{< version >}}
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - ./role_id:/dgraph/vault/role_id
       - ./secret_id:/dgraph/vault/secret_id
