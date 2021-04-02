@@ -63,8 +63,8 @@ services:
     command: dgraph alpha --my=alpha1:7080 --zero=zero1:5080
     container_name: alpha1
     environment:
-      DGRAPH_ALPHA_ACL: secret-file="/dgraph/acl/hmac_secret_file"
-      DGRAPH_ALPHA_SECURITY: whitelist="10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
+      DGRAPH_ALPHA_ACL: secret-file=/dgraph/acl/hmac_secret_file
+      DGRAPH_ALPHA_SECURITY: whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
     image: dgraph/dgraph:{{< version >}}
     ports:
       - 8080:8080
