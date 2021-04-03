@@ -54,12 +54,12 @@ The easiest way to get Dgraph up and running is using the `dgraph/standalone` do
 Follow the instructions [here](https://docs.docker.com/install) to install
 Docker if you don't have it already.
 
-_This standalone image is meant for quickstart purposes only.
-It is not recommended for production environments._
-
 ```sh
-docker run --rm -it -p 8080:8080 -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph dgraph/standalone:{{< version >}}
+docker run --rm -it -p "8080:8080" -p "9080:9080" -p "8000:8000" -v ~/dgraph:/dgraph "dgraph/standalone:{{< version >}}"
 ```
+{{% notice "note" %}}This standalone image is meant for quickstart purposes only.
+It is not recommended for production environments.
+{{% /notice %}}
 
 This would start a single container with **Dgraph Alpha**, **Dgraph Zero** and **Ratel** running in it.
 You would find the Dgraph data stored in a folder named *dgraph* of your *home directory*.
@@ -86,7 +86,9 @@ series and one of the ''Star Trek'' movies. Running the RDF mutation, either
 through the curl or Ratel UI's mutate tab will store the data in Dgraph.
 
 ```sh
-curl -H "Content-Type: application/rdf" "localhost:8080/mutate?commitNow=true" -XPOST -d $'
+curl "localhost:8080/mutate?commitNow=true" --silent --request POST \
+ --header  "Content-Type: application/rdf" \
+ --data $'
 {
   set {
    _:luke <name> "Luke Skywalker" .
@@ -144,9 +146,9 @@ curl -H "Content-Type: application/rdf" "localhost:8080/mutate?commitNow=true" -
 
 {{% notice "tip" %}}
 To run an RDF/JSON mutation using a file via curl, you can use the curl option
-`--data-binary @/path/to/mutation.rdf` instead of `-d $''`.
+`--data-binary @/path/to/mutation.rdf` instead of `--data $''`.
 The `--data-binary` option skips curl's default URL-encoding which includes removal of all newlines. thus
-By using the data binary option you enable the use of `#` comments in the text since with the `-d` option, anything after the first `#` in the text would appear on the same line and therefore be taken as one long comment.
+By using the data binary option you enable the use of `#` comments in the text since with the `--data` option, anything after the first `#` in the text would appear on the same line and therefore be taken as one long comment.
 {{% /notice %}}
 
 ### Step 3: Alter Schema
@@ -154,26 +156,27 @@ By using the data binary option you enable the use of `#` comments in the text s
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 
 ```sh
-curl "localhost:8080/alter" -XPOST -d $'
-  name: string @index(term) .
-  release_date: datetime @index(year) .
-  revenue: float .
-  running_time: int .
-  starring: uid .
-  director: uid .
+curl "localhost:8080/alter" --silent --request POST \
+  --data $'
+name: string @index(term) .
+release_date: datetime @index(year) .
+revenue: float .
+running_time: int .
+starring: [uid] .
+director: [uid] .
 
-  type Person {
-    name
-  }
+type Person {
+  name
+}
 
-  type Film {
-    name
-    release_date
-    revenue
-    running_time
-    starring
-    director
-  }
+type Film {
+  name
+  release_date
+  revenue
+  running_time
+  starring
+  director
+}
 ' | python -m json.tool | less
 ```
 
@@ -193,7 +196,9 @@ You can also run the DQL query from the Query tab in the Ratel UI.
 {{% /notice %}}
 
 ```sh
-curl -H "Content-Type: application/dql" "localhost:8080/query" -XPOST -d $'
+curl "localhost:8080/query" --silent --request POST \
+  --header "Content-Type: application/dql" \
+  --data $'
 {
  me(func: has(starring)) {
    name
@@ -213,9 +218,11 @@ Run this query to get "Star Wars" movies released after "1980".
 Try it in the user interface to see the result as a graph.
 
 ```sh
-curl -H "Content-Type: application/dql" "localhost:8080/query" -XPOST -d $'
+curl "localhost:8080/query" --silent --request POST \
+  --header "Content-Type: application/dql" \
+  --data $'
 {
-  me(func:allofterms(name, "Star Wars")) @filter(ge(release_date, "1980")) {
+  me(func: allofterms(name, "Star Wars"), orderasc: release_date) @filter(ge(release_date, "1980")) {
     name
     release_date
     revenue
@@ -223,7 +230,7 @@ curl -H "Content-Type: application/dql" "localhost:8080/query" -XPOST -d $'
     director {
      name
     }
-    starring {
+    starring (orderasc: name) {
      name
     }
   }
