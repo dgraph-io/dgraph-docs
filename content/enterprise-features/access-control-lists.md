@@ -64,9 +64,9 @@ services:
     environment:
       DGRAPH_ALPHA_ACL_SECRET_FILE: /dgraph/acl/hmac_secret_file
       DGRAPH_ALPHA_WHITELIST: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
-    image: dgraph/dgraph:v20.11.2
+    image: dgraph/dgraph:{{< version >}}
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - ./hmac_secret_file:/dgraph/acl/hmac_secret_file
   zero1:
