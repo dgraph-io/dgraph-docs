@@ -47,7 +47,7 @@ The following decryption options (or *flags*) are available for the `decrypt` co
 |                         | `secret-id-file` | File containing the [Vault](https://www.vaultproject.io/) `secret_id` used for AppRole authentication                           |
 
 To learn more about the `--vault` superflag and its options that have replaced the `--vault_*` options in release v20.11 and earlier, see
-[Dgraph CLI Command Reference]({{< relref "deploy/cli-command-ref.md" >}}).
+[Dgraph CLI Command Reference]({{< relref "deploy/cli-command-reference.md" >}}).
 
 ## Data decryption examples 
 

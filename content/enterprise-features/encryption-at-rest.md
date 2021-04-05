@@ -38,7 +38,7 @@ desired key size):
 tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
 ```
 
-Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-command-ref.md" >}}) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
+Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-command-reference.md" >}}) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
 
 ## Turn on Encryption
 
