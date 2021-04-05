@@ -99,6 +99,8 @@ not shown here are unchanged in release v21.03.
 | `--graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| The polling interval for GraphQL subscriptions | 
 | `--graphql_lambda_url` | string | `lambda-url` | string |`alpha`| The URL of a lambda server that implements custom GraphQL JavaScript resolvers |
 | | | **`--limit`** | | | Limit-setting superflag for Dgraph Alpha  |
+| `--abort_older_than` | string | `txn-abort-after` | string |`alpha`| Abort any pending transactions older than this duration |
+| `--disable_admin_http` | string | `disable-admin-http` | string |`zero`| Turn on/off the administrative endpoints |
 | `--mutations` | string | `mutations` | string |`alpha`| Mutation mode: `allow`, `disallow`, or `strict` |
 | `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`| Maximum number of edges that can be returned in a query |
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`| Maximum number of nodes that can be returned in a query that uses the normalize directive |
