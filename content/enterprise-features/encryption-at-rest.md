@@ -28,7 +28,7 @@ way to configure the encryption keys needed for encrypting the data at rest.
 ## Set up Encryption
 
 To enable encryption, we need to pass a file that stores the data encryption key with the option
-`--encryption_key_file`. The key size must be 16, 24, or 32 bytes long, and the key size determines
+`--encryption key-file=value`. The key size must be 16, 24, or 32 bytes long, and the key size determines
 the corresponding block size for AES encryption ,i.e. AES-128, AES-192, and AES-256, respectively.
 
 You can use the following command to create the encryption key file (set _count_ to the
@@ -46,14 +46,14 @@ Here is an example that starts one Zero server and one Alpha server with the enc
 
 ```bash
 dgraph zero --my="localhost:5080" --replicas 1 --raft "idx=1"
-dgraph alpha --encryption_key_file "./enc_key_file" --my="localhost:7080" --zero="localhost:5080"
+dgraph alpha --encryption key-file="./enc_key_file" --my="localhost:7080" --zero="localhost:5080"
 ```
 
-If multiple Alpha nodes are part of the cluster, you will need to pass the `--encryption_key_file` option to
+If multiple Alpha nodes are part of the cluster, you will need to pass the `--encryption key-file` option to
 each of the Alphas.
 
 Once an Alpha has encryption enabled, the encryption key must be provided in order to start the Alpha server.
-If the Alpha server restarts, the `--encryption_key_file` option must be set along with the key in order to
+If the Alpha server restarts, the `--encryption key-file` option must be set along with the key in order to
 restart successfully.
 
 ### Storing encryption key secret in Hashicorp Vault
@@ -105,10 +105,10 @@ dgraph alpha --my="localhost:7080" --zero="localhost:5080" \
 
 ```
 
-If multiple Dgraph Alpha nodes are part of the cluster, you must pass the `--encryption_key_file` flag or the `--vault` superflag with appropriate superflag options to each of the Dgraph Alpha nodes.
+If multiple Dgraph Alpha nodes are part of the cluster, you must pass the `--encryption key-file` flag or the `--vault` superflag with appropriate superflag options to each of the Dgraph Alpha nodes.
 
 After an Alpha node has encryption enabled, you must provide the encryption key to start the Alpha server.
-If the Alpha server restarts, the `--encryption_key_file` or the `--vault` superflag's options must be set along with the key to restart successfully.
+If the Alpha server restarts, the `--encryption key-file` or the `--vault` superflag's options must be set along with the key to restart successfully.
 
 ## Turn off Encryption
 
@@ -122,7 +122,7 @@ You can import your encrypted data using [live loader]({{< relref "live-loader.m
 # Encryption Key from the file path
 dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>"  \
   --alpha "<dgraph-alpha-address:grpc_port>" --zero "<dgraph-zero-address:grpc_port>" \
-  --encryption_key_file "<path-to-enc_key_file>"
+  --encryption key-file="<path-to-enc_key_file>"
 
 # Encryption Key from HashiCorp Vault
 dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>"  \
@@ -133,13 +133,13 @@ dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-sche
 
 ### Using bulk loader
 
-You can also use [bulk loader]({{< relref "bulk-loader.md" >}}), to turn off encryption. This will generate a new unencrypted `p` that will be used by the Alpha process. In this, case you need to pass `--encryption_key_file`, `--encrypted` and `--encrypted_out` flags.
+You can also use [bulk loader]({{< relref "bulk-loader.md" >}}), to turn off encryption. This will generate a new unencrypted `p` that will be used by the Alpha process. In this, case you need to pass `--encryption key-file`, `--encrypted` and `--encrypted_out` flags.
 
 ```bash
 # Encryption Key from the file path
 dgraph bulk --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>" --zero "<dgraph-zero-address:grpc_port>" \
   --encrypted="true" --encrypted_out="false" \
-  --encryption_key_file "<path-to-enc_key_file>"
+  --encryption key-file="<path-to-enc_key_file>"
 
 # Encryption Key from HashiCorp Vault
 dgraph bulk --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>" --zero "<dgraph-zero-address:grpc_port>" \
@@ -152,7 +152,7 @@ In this case, we are also passing the flag `--encrypted=true` as the exported da
 
 ## Change Encryption Key
 
-The master encryption key set by the `--encryption_key_file` option (or one used in Vault KV store) does not change automatically. The master
+The master encryption key set by the `--encryption key-file` option (or one used in Vault KV store) does not change automatically. The master
 encryption key encrypts underlying *data keys* which are changed on a regular basis automatically (more info
 about this is covered on the encryption-at-rest [blog][encblog] post).
 

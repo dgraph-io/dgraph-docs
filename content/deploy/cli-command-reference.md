@@ -48,6 +48,7 @@ syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`.
 Release v21.03 includes the following superflags:
 * `--acl`
 * `--badger`
+* `--encryption`
 * `--graphql`
 * `--limit`
 * `--ludicrous`
@@ -89,6 +90,8 @@ not shown here are unchanged in release v21.03.
 | `--badger.cache_mb` | string | `cache-mb` | string |`bulk`| Total size of cache (in MB) per shard in the reducer |
 | `--badger.cache_percentage` | string | `cache-percentage` | string |`bulk`| Cache percentages for block cache and index cache |
 ||| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
+| | | **`--encryption`** | | |  Encryption superflag |
+| `--encryption_key_file` | string | `key-file` | string |`alpha`, `bulk`, `live`, `restore`, `debug`, `decrypt`, `export_backup`, `raftmigrate` | The file that stores the symmetric key |
 | | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) superflag  |
 | `--graphql_introspection` | bool | `introspection` | bool |`alpha`| Enables GraphQL schema introspection |
 | `--graphql_debug` | bool | `debug` | bool |`alpha`| Enables debug mode in GraphQL |

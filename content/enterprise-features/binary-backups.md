@@ -487,10 +487,10 @@ During **backup**: the 16 bytes IV is prepended to the Cipher-text data after en
 
 ### Backup
 
-Backup is an online tool, meaning it is available when Dgraph Alpha server is running. For encrypted backups, the Dgraph Alpha server must be configured with the “encryption_key_file”. Starting with v20.07.0, the Dgraph Alpha server can alternatively be configured to interface with a [Hashicorp Vault](https://www.vaultproject.io/) server to obtain keys.
+Backup is an online tool, meaning it is available when Dgraph Alpha server is running. For encrypted backups, the Dgraph Alpha server must be configured with the `--encryption key-file=value`. Starting with v20.07.0, the Dgraph Alpha server can alternatively be configured to interface with a [Hashicorp Vault](https://www.vaultproject.io/) server to obtain keys.
 
 {{% notice "note" %}}
-`encryption_key_file` flag or `vault` superflag was used for encryption-at-rest and will now also be used for encrypted backups.
+`encryption key-file=value` flag or `vault` superflag was used for encryption-at-rest and will now also be used for encrypted backups.
 {{% /notice %}}
 
 ## Online restore
@@ -611,7 +611,7 @@ finish.
 
 ## Offline restore
 
-The restore utility is now a standalone tool. A new flag, `--encryption_key_file`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
+The restore utility is now a standalone tool. A new flag, `--encryption key-file=value`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
 
 You can use the `dgraph restore` command to restore the postings directory from a previously-created backup to a directory in the local filesystem. This command restores a backup to a new Dgraph cluster, so it is not designed to restore a backup to a Dgraph cluster that is currently live. During a restore operation, a new Dgraph Zero server might run to fully restore the backup state.
 
@@ -623,7 +623,7 @@ You can use the `--zero` (`-z`) flag to specify a Dgraph Zero server address to 
 
 You use the `--backup_id` optional flag to specify the ID of the backup series to restore. A backup series consists of a full backup and all of the incremental backups built on top of it. Each time a new full backup is created, a new backup series with a different ID is started. The backup series ID is stored in each `manifest.json` file stored in each backup folder.
 
-You use the `--encryption_key_file` flag in cases where you took the backup in an encrypted cluster. The string for this flag must point to the location of the same key file used to run the cluster.
+You use the `--encryption key-file=value` flag in cases where you took the backup in an encrypted cluster. The string for this flag must point to the location of the same key file used to run the cluster.
 
 You use the `--vault` [superflag]({{< relref "deploy/cli-command-reference.md" >}}) to specify the [Hashicorp Vault](https://www.vaultproject.io/) server address (`addr`), role id (`role-id-file`), secret id (`secret-id-file`) and the field that contains the encryption key (`enc-field`) that was used to encrypt the backup.
 
