@@ -96,7 +96,6 @@ A _Guardian of the Galaxy_ is a Super Admin of the default namespace (`0x00`).
 
 As a super-admin, a _Guardian of the Galaxy_ can: 
 - [Create](#create-a-namespace) and [delete](#delete-a-namespace) namespaces
-- Add new users and guardians to any namespace
 - Reset the passwords
 - Query and mutate the default namespace (`0x00`)
 - Trigger cluster-wide [backups](#backups) (no namespace-specific backup)
