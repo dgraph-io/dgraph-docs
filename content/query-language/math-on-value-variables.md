@@ -24,6 +24,10 @@ The supported operators are as follows:
 | `cond(a, b, c)`                 | first operand must be a Boolean                | selects `b` if `a` is true else `c`                            |
 
 
+{{% notice "note" %}}
+If an operand is passed to a math operation like `ln`, `logbase`, `sqrt`, `pow` which results in an illegal operation (resulting in `NaN`) Dgraph will return an error.
+{{% /notice %}}
+
 Query Example:  Form a score for each of Steven Spielberg's movies as the sum of number of actors, number of genres and number of countries.  List the top five such movies in order of decreasing score.
 
 {{< runnable >}}
