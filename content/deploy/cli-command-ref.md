@@ -89,8 +89,8 @@ not shown here are unchanged in release v21.03.
 | `--badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`| Specifies the compression level and algorithm |
 ||| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
 | | | **`--cache`** | | |  Cache superflag |
-| `--badger.cache_mb` | string | `size-mb` | string |`bulk`| Total size of cache (in MB) per shard in the reducer |
-| `--badger.cache_percentage` | string | `percentage` | string |`bulk`| Cache percentages for block cache and index cache |
+| `cache_mb` | string | `size-mb` | string |`alpha`| Total size of cache (in MB) per shard in the reducer |
+| `cache_percentage` | string | `percentage` | string |`alpha`| Cache percentages for block cache and index cache |
 | | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) superflag  |
 | `--graphql_introspection` | bool | `introspection` | bool |`alpha`| Enables GraphQL schema introspection |
 | `--graphql_debug` | bool | `debug` | bool |`alpha`| Enables debug mode in GraphQL |
