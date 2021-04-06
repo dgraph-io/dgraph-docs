@@ -403,10 +403,10 @@ mutation {
 
 ### Encrypt exports
 
-Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `encryption_key_file`.
+Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `--encryption key-file=value`.
 
 {{% notice "note" %}}
-The `encryption_key_file` was used for [Encryption at Rest]({{< relref "enterprise-features/encryption-at-rest" >}}) and will now also be used for encrypted exports.
+The `--encryption key-file` was used for [Encryption at Rest]({{< relref "enterprise-features/encryption-at-rest" >}}) and will now also be used for encrypted exports.
 {{% /notice %}}
 
 ### Use `curl` to trigger an export

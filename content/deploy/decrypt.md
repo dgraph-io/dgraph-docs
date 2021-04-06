@@ -35,7 +35,7 @@ The following decryption options (or *flags*) are available for the `decrypt` co
 
 | Flag or Superflag       | Superflag Option | Notes                                                                                         |
 |-------------------------|------------------|-----------------------------------------------------------------------------------------------|
-| `--encryption_key_file` |                  | Encryption key filename                                                                       |
+| `--encryption`          | `key-file`       | Encryption key filename                                                                       |
 | `-f`, `--file`          |                  | Path to file for the encrypted RDF or schema **.gz** file                                     |
 | `-h`, `--help`          |                  | Help for the decrypt command                                                                  |
 | `-o`, `--out`           |                  | Path to file for the decrypted **.gz** file that decrypt creates                                  |
@@ -47,7 +47,7 @@ The following decryption options (or *flags*) are available for the `decrypt` co
 |                         | `secret-id-file` | File containing the [Vault](https://www.vaultproject.io/) `secret_id` used for AppRole authentication                           |
 
 To learn more about the `--vault` superflag and its options that have replaced the `--vault_*` options in release v20.11 and earlier, see
-[Dgraph CLI Command Reference]({{< relref "deploy/cli-command-ref.md" >}}).
+[Dgraph CLI Command Reference]({{< relref "deploy/cli-command-reference.md" >}}).
 
 ## Data decryption examples 
 
@@ -57,7 +57,7 @@ create a decrypted RDF file:
 
 ```bash
 # Encryption Key from the file path
-dgraph decrypt --file "encrypted.rdf.gz" --out "decrypted_rdf.gz" --encryption_key_file "enc-key-file"
+dgraph decrypt --file "encrypted.rdf.gz" --out "decrypted_rdf.gz" --encryption key-file="enc-key-file"
 
 # Encryption Key from HashiCorp Vault
 dgraph decrypt --file "encrypted.rdf.gz" --out "decrypted_rdf.gz" \
@@ -68,7 +68,7 @@ You can use similar syntax to create a decrypted schema file:
 
 ```bash
 # Encryption Key from the file path
-dgraph decrypt --file "encrypted.schema.gz" --out "decrypted_schema.gz" --encryption_key_file "enc-key-file"
+dgraph decrypt --file "encrypted.schema.gz" --out "decrypted_schema.gz" --encryption key-file="enc-key-file"
 
 # Encryption Key from HashiCorp Vault
 dgraph decrypt --file "encrypted.schema.gz" --out "decrypted_schema.gz" \
