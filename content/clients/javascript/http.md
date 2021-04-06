@@ -58,12 +58,12 @@ To facilitate debugging, [debug mode](#debug-mode) can be enabled for a client.
 
 ### Create a Client for Dgraph Cloud Endpoint
 
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://slash.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
+If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
 
 ```js
 const dgraph = require("dgraph-js-http");
 
-//here we pass the slash endpoint
+//here we pass the cloud endpoint
 const clientStub = new dgraph.DgraphClientStub(
     "https://super-pail.us-west-2.aws.cloud.dgraph.io",
 );
