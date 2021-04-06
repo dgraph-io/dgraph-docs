@@ -48,6 +48,7 @@ syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`.
 Release v21.03 includes the following superflags:
 * `--acl`
 * `--badger`
+* `--cache`
 * `--encryption`
 * `--graphql`
 * `--limit`
@@ -87,9 +88,10 @@ not shown here are unchanged in release v21.03.
 | | | **`--badger`** | | |  [Badger](https://dgraph.io/docs/badger) superflag |
 | `--max_retries` | int | `max-retries` | int |`alpha`| Maximum number of retries |
 | `--badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`| Specifies the compression level and algorithm |
-| `--badger.cache_mb` | string | `cache-mb` | string |`bulk`| Total size of cache (in MB) per shard in the reducer |
-| `--badger.cache_percentage` | string | `cache-percentage` | string |`bulk`| Cache percentages for block cache and index cache |
 ||| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
+| | | **`--cache`** | | |  Cache superflag |
+| `cache_mb` | string | `size-mb` | string |`alpha`| Total size of cache (in MB) per shard in the reducer |
+| `cache_percentage` | string | `percentage` | string |`alpha`| Cache percentages for block cache and index cache |
 | | | **`--encryption`** | | |  Encryption superflag |
 | `--encryption_key_file` | string | `key-file` | string |`alpha`, `bulk`, `live`, `restore`, `debug`, `decrypt`, `export_backup` | The file that stores the symmetric key |
 | | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) superflag  |
@@ -286,12 +288,13 @@ Flags:
                                    			will be saved. When stdout is specified as output other fields will be ignored.
                                        size=100; The audit log max size in MB after which it will be rolled over.
                                     (default "compress=false; days=10; size=100; dir=; output=; encrypt-file=;")
-      --badger string              Badger options (Refer to badger documentation for all possible options)
+      --badger string              Badger options
                                        compression=snappy; [none, zstd:level, snappy] Specifies the compression algorithm and
                                    			compression level (if applicable) for the postings directory."none" would disable
                                    			compression, while "zstd:1" would set zstd compression at level 1.
-                                       numgoroutines=8; The number of goroutines to use in badger.Stream.
-                                    (default "compression=snappy; numgoroutines=8;")
+                                       goroutines=8; The number of goroutines to use in badger.Stream.
+                                       max-retries=-1; Commits to disk will give up after these number of retries to prevent locking the worker in a failed state. Use -1 to retry infinitely.
+                                    (default "compression=snappy; goroutines=8; max-retries=-1;")
       --cache string               Cache options
                                        percentage=0,65,35; Cache percentages summing up to 100 for various caches (FORMAT: PostingListCache,PstoreBlockCache,PstoreIndexCache)
                                        size-mb=1024; Total size of cache (in MB) to be used in Dgraph.
@@ -320,14 +323,13 @@ Flags:
   -h, --help                       help for alpha
       --limit string               Limit options
                                        disallow-drop=false; Set disallow-drop to true to block drop-all and drop-data operation. It still allows dropping attributes and types.
-                                       max-retries=-1; Commits to disk will give up after these number of retries to prevent locking the worker in a failed state. Use -1 to retry infinitely.
                                        mutations-nquad=1000000; The maximum number of nquads that can be inserted in a mutation request.
                                        mutations=allow; [allow, disallow, strict] The mutations mode to use.
                                        normalize-node=10000; The maximum number of nodes that can be returned in a query that uses the normalize directive.
                                        query-edge=1000000; The maximum number of edges that can be returned in a query. This applies to shortest path and recursive queries.
                                        query-timeout=0ms; Maximum time after which a query execution will fail. If set to 0, the timeout is infinite.
                                        txn-abort-after=5m; Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation.
-                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;  max-retries=-1;")
+                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;")
       --ludicrous string           Ludicrous options
                                        concurrency=2000; The number of concurrent threads to use in Ludicrous mode.
                                        enabled=false; Set enabled to true to run Dgraph in Ludicrous mode.
