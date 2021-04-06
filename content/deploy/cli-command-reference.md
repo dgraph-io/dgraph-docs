@@ -86,9 +86,8 @@ not shown here are unchanged in release v21.03.
 | `--acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| TTL for the access JWT |
 | `--acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| The TTL for the refresh JWT |
 | | | **`--badger`** | | |  [Badger](https://dgraph.io/docs/badger) superflag |
-| `--max_retries` | int | `max-retries` | int |`alpha`| Maximum number of retries |
 | `--badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`| Specifies the compression level and algorithm |
-||| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
+||| (new) [`numgoroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
 | | | **`--cache`** | | |  Cache superflag |
 | `cache_mb` | string | `size-mb` | string |`alpha`| Total size of cache (in MB) per shard in the reducer |
 | `cache_percentage` | string | `percentage` | string |`alpha`| Cache percentages for block cache and index cache |
@@ -103,6 +102,7 @@ not shown here are unchanged in release v21.03.
 | | | **`--limit`** | | | Limit-setting superflag for Dgraph Alpha  |
 | `--abort_older_than` | string | `txn-abort-after` | string |`alpha`| Abort any pending transactions older than this duration |
 | `--disable_admin_http` | string | `disable-admin-http` | string |`zero`| Turn on/off the administrative endpoints |
+| `--max_retries` | int | `max-retries` | int |`alpha`| Maximum number of retries |
 | `--mutations` | string | `mutations` | string |`alpha`| Mutation mode: `allow`, `disallow`, or `strict` |
 | `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`| Maximum number of edges that can be returned in a query |
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`| Maximum number of nodes that can be returned in a query that uses the normalize directive |
