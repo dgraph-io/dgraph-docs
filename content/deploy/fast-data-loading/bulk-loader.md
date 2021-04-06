@@ -263,36 +263,36 @@ Even before the Dgraph cluster starts, we can load data using Bulk Loader with t
 Here's an example to run Bulk Loader with a key used to write encrypted data:
 
 ```bash
-dgraph bulk --encryption_key_file ./enc_key_file -f data.json.gz -s data.schema --map_shards=1 --reduce_shards=1 --http localhost:8000 --zero=localhost:5080
+dgraph bulk --encryption key-file=./enc_key_file -f data.json.gz -s data.schema --map_shards=1 --reduce_shards=1 --http localhost:8000 --zero=localhost:5080
 ```
 Alternatively, starting with v20.07.0, the `vault_*` options can be used to decrypt the encrypted export.
 
 
 ### Encrypting imports (Enterprise Feature)
 
-The Bulk Loader’s `encryption_key_file` option was previously used to encrypt the output `p ` directory. This same option will also be used to decrypt the encrypted export data and schema files.
+The Bulk Loader’s `--encryption key-file=value` option was previously used to encrypt the output `p` directory. This same option will also be used to decrypt the encrypted export data and schema files.
 
 Another option, `--encrypted`, indicates whether the input `rdf`/`json` data and schema files are encrypted or not. With this switch, we support the use case of migrating data from unencrypted exports to encrypted import.
 
 So, with the above two options we have 4 cases:
 
-1. `--encrypted=true` and no `encryption_key_file`.
+1. `--encrypted=true` and no `encryption key-file=value`.
 
 Error: If the input is encrypted, a key file must be provided.
 
-2. `--encrypted=true` and `encryption_key_file=path-to-key`.
+2. `--encrypted=true` and `encryption key-file=path-to-key`.
 
 Input is encrypted and output `p` dir is encrypted as well.
 
-3. `--encrypted=false` and no `encryption_key_file`.
+3. `--encrypted=false` and no `encryption key-file=value`.
 
 Input is not encrypted and the output `p` dir is also not encrypted.   
 
-4. `--encrypted=false` and `encryption_key_file`=`path to key`.
+4. `--encrypted=false` and `encryption key-file=path-to-key`.
 
 Input is not encrypted but the output is encrypted. (This is the migration use case mentioned above).
 
-Alternatively, starting with v20.07.0, the `vault_*` options can be used instead of the `--encryption_key_file` option above to achieve the same effect except that the keys are sitting in a Vault server.
+Alternatively, starting with v20.07.0, the `vault_*` options can be used instead of the `--encryption key-file=value` option above to achieve the same effect except that the keys are sitting in a Vault server.
 
 ## Other Bulk Loader options
 

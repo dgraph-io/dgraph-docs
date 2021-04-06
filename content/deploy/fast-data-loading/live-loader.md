@@ -107,7 +107,7 @@ dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="u
 
 ### Encrypted imports (Enterprise Feature)
 
-A new flag `--encryption_key_file` is added to the Live Loader. This option is required to decrypt the encrypted export data and schema files. Once the export files are decrypted, the Live Loader streams the data to a live Alpha instance.
+A new flag `--encryption key-file=value` is added to the Live Loader. This option is required to decrypt the encrypted export data and schema files. Once the export files are decrypted, the Live Loader streams the data to a live Alpha instance.
 Alternatively, starting with v20.07.0, the `vault_*` options can be used to decrypt the encrypted export and schema files.
 
 {{% notice "note" %}}
@@ -117,7 +117,7 @@ If the live Alpha instance has encryption turned on, the `p` directory will be e
 For example, to load an encrypted RDF/JSON file and schema via Live Loader:
 
 ```sh
-dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption_keyfile <path-to-keyfile-to-decrypt-files>
+dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption key-file=<path-to-keyfile-to-decrypt-files>
 ```
 
 ## Batch Upserts
@@ -176,7 +176,7 @@ You should only use the `--ludicrous` superflag's `enabled` option if Dgraph is 
 
 `-U, --upsertPredicate` (default: disabled): Runs Live Loader in `upsertPredicate` mode. The provided value will be used to store blank nodes as a `xid`.
 
-`--vault` [superflag's]({{< relref "deploy/cli-command-ref" >}}) options specify the Vault server address, role id, secret id, and
+`--vault` [superflag's]({{< relref "deploy/cli-command-reference" >}}) options specify the Vault server address, role id, secret id, and
 field that contains the encryption key required to decrypt the encrypted export.
 
 ## `upsertPredicate` Example
