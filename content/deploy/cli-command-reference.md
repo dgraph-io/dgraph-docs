@@ -91,7 +91,7 @@ not shown here are unchanged in release v21.03.
 | `--badger.cache_percentage` | string | `cache-percentage` | string |`bulk`| Cache percentages for block cache and index cache |
 ||| (new) [`goroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
 | | | **`--encryption`** | | |  Encryption superflag |
-| `--encryption_key_file` | string | `key-file` | string |`alpha`, `bulk`, `live`, `restore`, `debug`, `decrypt`, `export_backup`, `raftmigrate` | The file that stores the symmetric key |
+| `--encryption_key_file` | string | `key-file` | string |`alpha`, `bulk`, `live`, `restore`, `debug`, `decrypt`, `export_backup` | The file that stores the symmetric key |
 | | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) superflag  |
 | `--graphql_introspection` | bool | `introspection` | bool |`alpha`| Enables GraphQL schema introspection |
 | `--graphql_debug` | bool | `debug` | bool |`alpha`| Enables debug mode in GraphQL |
@@ -267,111 +267,122 @@ your deployment. The following replicates the help listing for `dgraph alpha --h
 A Dgraph Alpha instance stores the data. Each Dgraph Alpha is responsible for
 storing and serving one data group. If multiple Alphas serve the same group,
 they form a Raft group and provide synchronous replication.
-
+ 
 Usage:
- dgraph alpha [flags] 
+  dgraph alpha [flags] 
 
 Flags:
-     --abort_older_than string      Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation. (default "5m")
-     --acl string                   [Enterprise Feature] ACL options
-                                        access-ttl=6h; The TTL for the access JWT.
-                                        refresh-ttl=30d; The TTL for the refresh JWT.
-                                        secret-file=; The file that stores the HMAC secret, which is used for signing the JWT and should have at least 32 ASCII characters. Required to enable ACLs.
-                                     (default "access-ttl=6h; refresh-ttl=30d; secret-file=;")
-     --audit string                 Audit options
-                                        compress=false; Enables the compression of old audit logs.
-                                        days=10; The number of days audit logs will be preserved.
-                                        encrypt-file=; The path to the key file to be used for audit log encryption.
-                                        output=; [stdout, /path/to/dir] This specifies where audit logs should be output to.
-                                         "stdout" is for standard output. You can also specify the directory where audit logs 
-                                         will be saved. When stdout is specified as output other fields will be ignored.
-                                        size=100; The audit log max size in MB after which it will be rolled over.
-                                    
-     --badger string                Badger options
-                                        compression=snappy; [none, zstd:level, snappy] Specifies the compression algorithm and
-                                         compression level (if applicable) for the postings directory."none" would disable 
-                                         compression, while "zstd:1" would set zstd compression at level 1.
-                                        goroutines=8; The number of goroutines to use in badger.Stream.
-                                     (default "compression=snappy; goroutines=8;")
-     --cache_mb int                 Total size of cache (in MB) to be used in Dgraph. (default 1024)
-     --cache_percentage string      Cache percentages summing up to 100 for various caches (FORMAT: PostingListCache,PstoreBlockCache,PstoreIndexCache,WAL). (default "0,65,35,0")
-     --cdc string                   Change Data Capture options
-                                        ca-cert=; The path to CA cert file for TLS encryption.
-                                        client-cert=; The path to client cert file for TLS encryption.
-                                        client-key=; The path to client key file for TLS encryption.
-                                        file=; The path where audit logs will be stored.
-                                        kafka=; A comma separated list of Kafka hosts.
-                                        sasl-password=; The SASL password for Kafka.
-                                        sasl-user=; The SASL username for Kafka.
-                                    
-     --custom_tokenizers string     Comma separated list of tokenizer plugins
-     --enable_sentry                Turn on/off sending crash events to Sentry. (default true)
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
-     --export string                Folder in which to store exports. (default "export")
-     --graphql string               GraphQL options
-                                        debug=false; Enables debug mode in GraphQL. This returns auth errors to clients, and we do not recommend turning it on for production.
-                                        extensions=true; Enables extensions in GraphQL response body.
-                                        introspection=true; Enables GraphQL schema introspection.
-                                        lambda-url=; The URL of a lambda server that implements custom GraphQL Javascript resolvers.
-                                        poll-interval=1s; The polling interval for GraphQL subscription.
-                                     (default "introspection=true; debug=false; extensions=true; poll-interval=1s; lambda-url=;")
- -h, --help                         help for alpha
-     --limit string                 Limit options
-                                        mutations-nquad=1000000; The maximum number of nquads that can be inserted in a mutation request.
-                                        normalize-node=10000; The maximum number of nodes that can be returned in a query that uses the normalize directive.
-                                        query-edge=1000000; The maximum number of edges that can be returned in a query. This applies to shortest path and recursive queries.
-                                     (default "query-edge=1000000; normalize-node=10000; mutations-nquad=1000000;")
-     --ludicrous string             Ludicrous options
-                                        concurrency=2000; The number of concurrent threads to use in Ludicrous mode.
-                                        enabled=false; Run Dgraph in Ludicrous mode.
-                                     (default "enabled=false; concurrency=2000;")
-     --max_retries int              Commits to disk will give up after these number of retries to prevent locking the worker in a failed state. Use -1 to retry infinitely. (default -1)
-     --mutations string             Set mutation mode to allow, disallow, or strict. (default "allow")
-     --my string                    addr:port of this server, so other Dgraph servers can talk to this.
- -o, --port_offset int              Value added to all listening port numbers. [Internal=7080, HTTP=8080, Grpc=9080]
- -p, --postings string              Directory to store posting lists. (default "p")
-     --raft string                  Raft options
-                                        group=; Provides an optional Raft Group ID that this Alpha would indicate to Zero to join.
-                                        idx=; Provides an optional Raft ID that this Alpha would use to join Raft groups.
-                                        learner=false; Make this Alpha a "learner" node. In learner mode, this Alpha will not participate in Raft elections. This can be used to achieve a read-only replica.
-                                        pending-proposals=256; Number of pending mutation proposals. Useful for rate limiting.
-                                        snapshot-after=10000; Create a new Raft snapshot after N number of Raft entries. The lower this number, the more frequent snapshot creation will be.
-                                     (default "learner=false; snapshot-after=10000; pending-proposals=256; idx=; group=;")
-     --security string              Security options
-                                        token=; If set, all Admin requests to Dgraph will need to have this token. The token can be passed as follows: for HTTP requests, in the X-Dgraph-AuthToken header. For Grpc, in auth-token key in the context.
-                                        whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames you wish to whitelist for performing admin actions (i.e., --security "whitelist=144.142.126.254,127.0.0.1:127.0.0.3,192.168.0.0/16,host.docker.internal").
-                                     (default "token=; whitelist=;")
-     --survive string               Choose between "process" or "filesystem".
-                                        If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
-                                        If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
-                                        Most users should be OK with choosing "process". (default "process")
-     --telemetry                    Send anonymous telemetry data to Dgraph devs. (default true)
-     --tls string                   TLS Server options
-                                        ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
-                                        client-auth-type=VERIFYIFGIVEN; The TLS client authentication method.
-                                        client-cert=; (Optional) The client Cert file which is needed to connect as a client with the other nodes in the cluster.
-                                        client-key=; (Optional) The private client Key file which is needed to connect as a client with the other nodes in the cluster.
-                                        internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
-                                        server-cert=; The server Cert file which is needed to initiate the server in the cluster.
-                                        server-key=; The server Key file which is needed to initiate the server in the cluster.
-                                        use-system-ca=true; Includes System CA into CA Certs.
-                                     (default "use-system-ca=true; client-auth-type=VERIFYIFGIVEN; internal-port=false;")
-     --tmp string                   Directory to store temporary buffers. (default "t")
-     --trace string                 Trace options
-                                        datadog=; URL of Datadog to send OpenCensus traces. As of now, the trace exporter does not support annotation logs and discards them.
-                                        jaeger=; URL of Jaeger to send OpenCensus traces.
-                                        ratio=0.01; The ratio of queries to trace.
-                                     (default "ratio=0.01; jaeger=; datadog=;")
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
- -w, --wal string                   Directory to store raft write-ahead logs. (default "w")
- -z, --zero string                  Comma separated list of Dgraph Zero addresses of the form IP_ADDRESS:PORT. (default "localhost:5080")
+      --acl string                 [Enterprise Feature] ACL options
+                                       access-ttl=6h; The TTL for the access JWT.
+                                       refresh-ttl=30d; The TTL for the refresh JWT.
+                                       secret-file=; The file that stores the HMAC secret, which is used for signing the JWT and should have at least 32 ASCII characters. Required to enable ACLs.
+                                    (default "access-ttl=6h; refresh-ttl=30d; secret-file=;")
+      --audit string               Audit options
+                                       compress=false; Enables the compression of old audit logs.
+                                       days=10; The number of days audit logs will be preserved.
+                                       encrypt-file=; The path to the key file to be used for audit log encryption.
+                                       output=; [stdout, /path/to/dir] This specifies where audit logs should be output to.
+                                   			"stdout" is for standard output. You can also specify the directory where audit logs
+                                   			will be saved. When stdout is specified as output other fields will be ignored.
+                                       size=100; The audit log max size in MB after which it will be rolled over.
+                                    (default "compress=false; days=10; size=100; dir=; output=; encrypt-file=;")
+      --badger string              Badger options (Refer to badger documentation for all possible options)
+                                       compression=snappy; [none, zstd:level, snappy] Specifies the compression algorithm and
+                                   			compression level (if applicable) for the postings directory."none" would disable
+                                   			compression, while "zstd:1" would set zstd compression at level 1.
+                                       numgoroutines=8; The number of goroutines to use in badger.Stream.
+                                    (default "compression=snappy; numgoroutines=8;")
+      --cache string               Cache options
+                                       percentage=0,65,35; Cache percentages summing up to 100 for various caches (FORMAT: PostingListCache,PstoreBlockCache,PstoreIndexCache)
+                                       size-mb=1024; Total size of cache (in MB) to be used in Dgraph.
+                                    (default "size-mb=1024; percentage=0,65,35;")
+      --cdc string                 Change Data Capture options
+                                       ca-cert=; The path to CA cert file for TLS encryption.
+                                       client-cert=; The path to client cert file for TLS encryption.
+                                       client-key=; The path to client key file for TLS encryption.
+                                       file=; The path where audit logs will be stored.
+                                       kafka=; A comma separated list of Kafka hosts.
+                                       sasl-password=; The SASL password for Kafka.
+                                       sasl-user=; The SASL username for Kafka.
+                                    (default "file=; kafka=; sasl_user=; sasl_password=; ca_cert=; client_cert=; client_key=;")
+      --custom_tokenizers string   Comma separated list of tokenizer plugins for custom indices.
+      --encryption string          [Enterprise Feature] Encryption At Rest options
+                                       key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
+                                    (default "key-file=;")
+      --export string              Folder in which to store exports. (default "export")
+      --graphql string             GraphQL options
+                                       debug=false; Enables debug mode in GraphQL. This returns auth errors to clients, and we do not recommend turning it on for production.
+                                       extensions=true; Enables extensions in GraphQL response body.
+                                       introspection=true; Enables GraphQL schema introspection.
+                                       lambda-url=; The URL of a lambda server that implements custom GraphQL Javascript resolvers.
+                                       poll-interval=1s; The polling interval for GraphQL subscription.
+                                    (default "introspection=true; debug=false; extensions=true; poll-interval=1s; lambda-url=;")
+  -h, --help                       help for alpha
+      --limit string               Limit options
+                                       disallow-drop=false; Set disallow-drop to true to block drop-all and drop-data operation. It still allows dropping attributes and types.
+                                       max-retries=-1; Commits to disk will give up after these number of retries to prevent locking the worker in a failed state. Use -1 to retry infinitely.
+                                       mutations-nquad=1000000; The maximum number of nquads that can be inserted in a mutation request.
+                                       mutations=allow; [allow, disallow, strict] The mutations mode to use.
+                                       normalize-node=10000; The maximum number of nodes that can be returned in a query that uses the normalize directive.
+                                       query-edge=1000000; The maximum number of edges that can be returned in a query. This applies to shortest path and recursive queries.
+                                       query-timeout=0ms; Maximum time after which a query execution will fail. If set to 0, the timeout is infinite.
+                                       txn-abort-after=5m; Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation.
+                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;  max-retries=-1;")
+      --ludicrous string           Ludicrous options
+                                       concurrency=2000; The number of concurrent threads to use in Ludicrous mode.
+                                       enabled=false; Set enabled to true to run Dgraph in Ludicrous mode.
+                                    (default "enabled=false; concurrency=2000;")
+      --my string                  addr:port of this server, so other Dgraph servers can talk to this.
+  -o, --port_offset int            Value added to all listening port numbers. [Internal=7080, HTTP=8080, Grpc=9080]
+  -p, --postings string            Directory to store posting lists. (default "p")
+      --raft string                Raft options
+                                       group=; Provides an optional Raft Group ID that this Alpha would indicate to Zero to join.
+                                       idx=; Provides an optional Raft ID that this Alpha would use to join Raft groups.
+                                       learner=false; Make this Alpha a "learner" node. In learner mode, this Alpha will not participate in Raft elections. This can be used to achieve a read-only replica.
+                                       pending-proposals=256; Number of pending mutation proposals. Useful for rate limiting.
+                                       snapshot-after-duration=30m; Frequency at which we should create a new raft snapshots. Set to 0 to disable duration based snapshot.
+                                       snapshot-after-entries=10000; Create a new Raft snapshot after N number of Raft entries. The lower this number, the more frequent snapshot creation will be. Snapshots are created only if both snapshot-after-duration and snapshot-after-entries threshold are crossed.
+                                    (default "learner=false; snapshot-after-entries=10000; snapshot-after-duration=30m; pending-proposals=256; idx=; group=;")
+      --security string            Security options
+                                       token=; If set, all Admin requests to Dgraph will need to have this token. The token can be passed as follows: for HTTP requests, in the X-Dgraph-AuthToken header. For Grpc, in auth-token key in the context.
+                                       whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames you wish to whitelist for performing admin actions (i.e., --security "whitelist=144.142.126.254,127.0.0.1:127.0.0.3,192.168.0.0/16,host.docker.internal").
+                                    (default "token=; whitelist=;")
+      --survive string             Choose between "process" or "filesystem".
+                                       If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                       If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
+                                       Most users should be OK with choosing "process". (default "process")
+      --telemetry string           Telemetry (diagnostic) options
+                                       reports=true; Send anonymous telemetry data to Dgraph devs.
+                                       sentry=true; Send crash events to Sentry.
+                                    (default "reports=true; sentry=true;")
+      --tls string                 TLS Server options
+                                       ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
+                                       client-auth-type=VERIFYIFGIVEN; The TLS client authentication method.
+                                       client-cert=; (Optional) The client Cert file which is needed to connect as a client with the other nodes in the cluster.
+                                       client-key=; (Optional) The private client Key file which is needed to connect as a client with the other nodes in the cluster.
+                                       internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
+                                       server-cert=; The server Cert file which is needed to initiate the server in the cluster.
+                                       server-key=; The server Key file which is needed to initiate the server in the cluster.
+                                       use-system-ca=true; Includes System CA into CA Certs.
+                                    (default "use-system-ca=true; client-auth-type=VERIFYIFGIVEN; internal-port=false;")
+      --tmp string                 Directory to store temporary buffers. (default "t")
+      --trace string               Trace options
+                                       datadog=; URL of Datadog to send OpenCensus traces. As of now, the trace exporter does not support annotation logs and discards them.
+                                       jaeger=; URL of Jaeger to send OpenCensus traces.
+                                       ratio=0.01; The ratio of queries to trace.
+                                    (default "ratio=0.01; jaeger=; datadog=;")
+      --vault string               Vault options
+                                       acl-field=; Vault field containing ACL key.
+                                       acl-format=base64; ACL key format, can be 'raw' or 'base64'.
+                                       addr=http://localhost:8200; Vault server address (format: http://ip:port).
+                                       enc-field=; Vault field containing encryption key.
+                                       enc-format=base64; Encryption key format, can be 'raw' or 'base64'.
+                                       path=secret/data/dgraph; Vault KV store path (e.g. 'secret/data/dgraph' for KV V2, 'kv/dgraph' for KV V1).
+                                       role-id-file=; Vault RoleID file, used for AppRole authentication.
+                                       secret-id-file=; Vault SecretID file, used for AppRole authentication.
+                                    (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
+  -w, --wal string                 Directory to store raft write-ahead logs. (default "w")
+  -z, --zero string                Comma separated list of Dgraph Zero addresses of the form IP_ADDRESS:PORT. (default "localhost:5080")
 
 Use "dgraph alpha [command] --help" for more information about a command.
 ```
@@ -383,57 +394,64 @@ your deployment. The following replicates the help listing shown when you run
 `dgraph zero --help`:
 
 ```shell
-
 A Dgraph Zero instance manages the Dgraph cluster.  Typically, a single Zero
 instance is sufficient for the cluster; however, one can run multiple Zero
 instances to achieve high-availability.
-
+ 
 Usage:
- dgraph zero [flags] 
+  dgraph zero [flags] 
 
 Flags:
-     --audit string                  Audit options
-                                         compress=; Enables the compression of old audit logs.
-                                         days=; The number of days audit logs will be preserved.
-                                         encrypt-file=; The path to the key file to be used for audit log encryption.
-                                         output=; [stdout, /path/to/dir] This specifies where audit logs should be output to.
-                                           "stdout" is for standard output. You can also specify the directory where audit logs 
-                                           will be saved. When stdout is specified as output other fields will be ignored.
-                                         size=; The audit log max size in MB after which it will be rolled over.
-     --cache_mb int                  Total size of cache (in MB) to be used in Dgraph. (default 1024)
-     --enable_sentry                 Turn on/off sending crash events to Sentry. (default true)
-     --enterprise_license string     Path to the enterprise license file.
- -h, --help                          help for zero
-     --my string                     addr:port of this server, so other Dgraph servers can talk to this.
-     --peer string                   Address of another dgraphzero server.
- -o, --port_offset int               Value added to all listening port numbers. [Grpc=5080, HTTP=6080]
-     --raft string                   Raft options
-                                         idx=1; Provides an optional Raft ID that this Alpha would use to join Raft groups.
-                                         learner=false; Make this Zero a "learner" node. In learner mode, this Zero will not participate in Raft elections. This can be used to achieve a read-only replica.
-                                      (default "idx=1; learner=false;")
-     --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
-     --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
-     --survive string                Choose between "process" or "filesystem".
-                                         If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
-                                         If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
-                                         Most users should be OK with choosing "process". (default "process")
-     --telemetry                     Send anonymous telemetry data to Dgraph devs. (default true)
-     --tls string                    TLS Server options
-                                         ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
-                                         client-auth-type=VERIFYIFGIVEN; The TLS client authentication method.
-                                         client-cert=; (Optional) The client Cert file which is needed to connect as a client with the other nodes in the cluster.
-                                         client-key=; (Optional) The private client Key file which is needed to connect as a client with the other nodes in the cluster.
-                                         internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
-                                         server-cert=; The server Cert file which is needed to initiate the server in the cluster.
-                                         server-key=; The server Key file which is needed to initiate the server in the cluster.
-                                         use-system-ca=true; Includes System CA into CA Certs.
-                                      (default "use-system-ca=true; client-auth-type=VERIFYIFGIVEN; internal-port=false;")
-     --trace string                  Trace options
-                                         datadog=; URL of Datadog to send OpenCensus traces. As of now, the trace exporter does not support annotation logs and discards them.
-                                         jaeger=; URL of Jaeger to send OpenCensus traces.
-                                         ratio=0.01; The ratio of queries to trace.
-                                      (default "ratio=0.01; jaeger=; datadog=;")
- -w, --wal string                    Directory storing WAL. (default "zw")
+      --audit string                  Audit options
+                                          compress=false; Enables the compression of old audit logs.
+                                          days=10; The number of days audit logs will be preserved.
+                                          encrypt-file=; The path to the key file to be used for audit log encryption.
+                                          output=; [stdout, /path/to/dir] This specifies where audit logs should be output to.
+                                      			"stdout" is for standard output. You can also specify the directory where audit logs 
+                                      			will be saved. When stdout is specified as output other fields will be ignored.
+                                          size=100; The audit log max size in MB after which it will be rolled over.
+                                       (default "compress=false; days=10; size=100; dir=; output=; encrypt-file=;")
+      --enterprise_license string     Path to the enterprise license file.
+  -h, --help                          help for zero
+      --limit string                  Limit options
+                                          disable-admin-http=false; Turn on/off the administrative endpoints exposed over Zero's HTTP port.
+                                          refill-interval=30s; The interval after which the tokens for UID lease are replenished.
+                                          uid-lease=0; The maximum number of UIDs that can be leased by namespace (except default namespace)
+                                      			in an interval specified by refill-interval. Set it to 0 to remove limiting.
+                                       (default "uid-lease=0; refill-interval=30s; disable-admin-http=false;")
+      --my string                     addr:port of this server, so other Dgraph servers can talk to this.
+      --peer string                   Address of another dgraphzero server.
+  -o, --port_offset int               Value added to all listening port numbers. [Grpc=5080, HTTP=6080]
+      --raft string                   Raft options
+                                          idx=1; Provides an optional Raft ID that this Alpha would use to join Raft groups.
+                                          learner=false; Make this Zero a "learner" node. In learner mode, this Zero will not participate in Raft elections. This can be used to achieve a read-only replica.
+                                       (default "idx=1; learner=false;")
+      --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
+      --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
+      --survive string                Choose between "process" or "filesystem".
+                                          If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                          If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
+                                          Most users should be OK with choosing "process". (default "process")
+      --telemetry string              Telemetry (diagnostic) options
+                                          reports=true; Send anonymous telemetry data to Dgraph devs.
+                                          sentry=true; Send crash events to Sentry.
+                                       (default "reports=true; sentry=true;")
+      --tls string                    TLS Server options
+                                          ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
+                                          client-auth-type=VERIFYIFGIVEN; The TLS client authentication method.
+                                          client-cert=; (Optional) The client Cert file which is needed to connect as a client with the other nodes in the cluster.
+                                          client-key=; (Optional) The private client Key file which is needed to connect as a client with the other nodes in the cluster.
+                                          internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
+                                          server-cert=; The server Cert file which is needed to initiate the server in the cluster.
+                                          server-key=; The server Key file which is needed to initiate the server in the cluster.
+                                          use-system-ca=true; Includes System CA into CA Certs.
+                                       (default "use-system-ca=true; client-auth-type=VERIFYIFGIVEN; internal-port=false;")
+      --trace string                  Trace options
+                                          datadog=; URL of Datadog to send OpenCensus traces. As of now, the trace exporter does not support annotation logs and discards them.
+                                          jaeger=; URL of Jaeger to send OpenCensus traces.
+                                          ratio=0.01; The ratio of queries to trace.
+                                       (default "ratio=0.01; jaeger=; datadog=;")
+  -w, --wal string                    Directory storing WAL. (default "zw")
 
 Use "dgraph zero [command] --help" for more information about a command.
 ```
@@ -447,61 +465,63 @@ This command is used to bulk load data with the Dgraph
 The following replicates the help listing shown when you run `dgraph bulk --help`:
 
 ```shell
-Run Dgraph Bulk Loader 
+ Run Dgraph Bulk Loader 
 Usage:
- dgraph bulk [flags] 
+  dgraph bulk [flags] 
 
 Flags:
-     --badger string                Badger options
-                                        cache-mb=64; Total size of cache (in MB) per shard in the reducer.
-                                        cache-percentage=70,30; Cache percentages summing up to 100 for various caches. (FORMAT: BlockCacheSize,IndexCacheSize)
-                                        compression=snappy; Specifies the compression algorithm and compression level (if applicable) for the postings directory. "none" would disable compression, while "zstd:1" would set zstd compression at level 1.
-                                        goroutines=8; The number of goroutines to use in badger.Stream.
-                                     (default "compression=snappy; goroutines=8; cache_mb=64; cache_percentage=70,30;")
-     --cleanup_tmp                  Clean up the tmp directory after the loader finishes. Setting this to false allows the bulk loader can be re-run while skipping the map phase. (default true)
-     --custom_tokenizers string     Comma separated list of tokenizer plugins
-     --encrypted                    Flag to indicate whether schema and data files are encrypted. Must be specified with --encryption_key_file or vault option(s).
-     --encrypted_out                Flag to indicate whether to encrypt the output. Must be specified with --encryption_key_file or vault option(s).
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
- -f, --files string                 Location of *.rdf(.gz) or *.json(.gz) file(s) to load.
-     --force-namespace uint         Namespace onto which to load the data. If not set, will preserve the namespace. (default 18446744073709551615)
-     --format string                Specify file format (rdf or json) instead of getting it from filename.
- -g, --graphql_schema string        Location of the GraphQL schema file.
- -h, --help                         help for bulk
-     --http string                  Address to serve http (pprof). (default "localhost:8080")
-     --ignore_errors                ignore line parsing errors in rdf files
-     --map_shards int               Number of map output shards. Must be greater than or equal to the number of reduce shards. Increasing allows more evenly sized reduce shards, at the expense of increased memory usage. (default 1)
-     --mapoutput_mb int             The estimated size of each map file output. Increasing this increases memory usage. (default 2048)
-     --new_uids                     Ignore UIDs in load files and assign new ones.
- -j, --num_go_routines int          Number of worker threads to use. MORE THREADS LEAD TO HIGHER RAM USAGE. (default 3)
-     --out string                   Location to write the final dgraph data directories. (default "./out")
-     --partition_mb int             Pick a partition key every N megabytes of data. (default 4)
-     --reduce_shards int            Number of reduce shards. This determines the number of dgraph instances in the final cluster. Increasing this potentially decreases the reduce stage runtime by using more parallelism, but increases memory usage. (default 1)
-     --reducers int                 Number of reducers to run concurrently. Increasing this can improve performance, and must be less than or equal to the number of reduce shards. (default 1)
-     --replace_out                  Replace out directory and its contents if it exists.
- -s, --schema string                Location of schema file.
-     --skip_map_phase               Skip the map phase (assumes that map output files already exist).
-     --store_xids                   Generate an xid edge for each node.
-     --tls string                   TLS Client options
-                                        ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
-                                        client-cert=; (Optional) The Cert file provided by the client to the server.
-                                        client-key=; (Optional) The private Key file provided by the clients to the server.
-                                        internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
-                                        server-name=; Used to verify the server hostname.
-                                        use-system-ca=true; Includes System CA into CA Certs.
-                                     (default "use-system-ca=true; internal-port=false;")
-     --tmp string                   Temp directory used to use for on-disk scratch space. Requires free space proportional to the size of the RDF file and the amount of indexing used. (default "tmp")
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
-     --version                      Prints the version of Dgraph Bulk Loader.
-     --xidmap string                Directory to store xid to uid mapping
- -z, --zero string                  gRPC address for Dgraph zero (default "localhost:5080")
+      --badger string              Badger options (Refer to badger documentation for all possible options)
+                                       compression=snappy; Specifies the compression algorithm and compression level (if applicable) for the postings directory. "none" would disable compression, while "zstd:1" would set zstd compression at level 1.
+                                       numgoroutines=8; The number of goroutines to use in badger.Stream.
+                                    (default "compression=snappy; numgoroutines=8;")
+      --cleanup_tmp                Clean up the tmp directory after the loader finishes. Setting this to false allows the bulk loader can be re-run while skipping the map phase. (default true)
+      --custom_tokenizers string   Comma separated list of tokenizer plugins
+      --encrypted                  Flag to indicate whether schema and data files are encrypted. Must be specified with --encryption or vault option(s).
+      --encrypted_out              Flag to indicate whether to encrypt the output. Must be specified with --encryption or vault option(s).
+      --encryption string          [Enterprise Feature] Encryption At Rest options
+                                       key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
+                                    (default "key-file=;")
+  -f, --files string               Location of *.rdf(.gz) or *.json(.gz) file(s) to load.
+      --force-namespace uint       Namespace onto which to load the data. If not set, will preserve the namespace. (default 18446744073709551615)
+      --format string              Specify file format (rdf or json) instead of getting it from filename.
+  -g, --graphql_schema string      Location of the GraphQL schema file.
+  -h, --help                       help for bulk
+      --http string                Address to serve http (pprof). (default "localhost:8080")
+      --ignore_errors              ignore line parsing errors in rdf files
+      --map_shards int             Number of map output shards. Must be greater than or equal to the number of reduce shards. Increasing allows more evenly sized reduce shards, at the expense of increased memory usage. (default 1)
+      --mapoutput_mb int           The estimated size of each map file output. Increasing this increases memory usage. (default 2048)
+      --new_uids                   Ignore UIDs in load files and assign new ones.
+  -j, --num_go_routines int        Number of worker threads to use. MORE THREADS LEAD TO HIGHER RAM USAGE. (default 1)
+      --out string                 Location to write the final dgraph data directories. (default "./out")
+      --partition_mb int           Pick a partition key every N megabytes of data. (default 4)
+      --reduce_shards int          Number of reduce shards. This determines the number of dgraph instances in the final cluster. Increasing this potentially decreases the reduce stage runtime by using more parallelism, but increases memory usage. (default 1)
+      --reducers int               Number of reducers to run concurrently. Increasing this can improve performance, and must be less than or equal to the number of reduce shards. (default 1)
+      --replace_out                Replace out directory and its contents if it exists.
+  -s, --schema string              Location of schema file.
+      --skip_map_phase             Skip the map phase (assumes that map output files already exist).
+      --store_xids                 Generate an xid edge for each node.
+      --tls string                 TLS Client options
+                                       ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
+                                       client-cert=; (Optional) The Cert file provided by the client to the server.
+                                       client-key=; (Optional) The private Key file provided by the clients to the server.
+                                       internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
+                                       server-name=; Used to verify the server hostname.
+                                       use-system-ca=true; Includes System CA into CA Certs.
+                                    (default "use-system-ca=true; internal-port=false;")
+      --tmp string                 Temp directory used to use for on-disk scratch space. Requires free space proportional to the size of the RDF file and the amount of indexing used. (default "tmp")
+      --vault string               Vault options
+                                       acl-field=; Vault field containing ACL key.
+                                       acl-format=base64; ACL key format, can be 'raw' or 'base64'.
+                                       addr=http://localhost:8200; Vault server address (format: http://ip:port).
+                                       enc-field=; Vault field containing encryption key.
+                                       enc-format=base64; Encryption key format, can be 'raw' or 'base64'.
+                                       path=secret/data/dgraph; Vault KV store path (e.g. 'secret/data/dgraph' for KV V2, 'kv/dgraph' for KV V1).
+                                       role-id-file=; Vault RoleID file, used for AppRole authentication.
+                                       secret-id-file=; Vault SecretID file, used for AppRole authentication.
+                                    (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
+      --version                    Prints the version of Dgraph Bulk Loader.
+      --xidmap string              Directory to store xid to uid mapping
+  -z, --zero string                gRPC address for Dgraph zero (default "localhost:5080")
 
 Use "dgraph bulk [command] --help" for more information about a command.
 ```
@@ -512,53 +532,57 @@ This command is used to load live data with the Dgraph [Live Loader]({{< relref 
 The following replicates the help listing shown when you run `dgraph live --help`:
 
 ```shell
-Run Dgraph Live Loader 
+ Run Dgraph Live Loader 
 Usage:
- dgraph live [flags] 
+  dgraph live [flags] 
 
 Flags:
- -a, --alpha string                 Comma-separated list of Dgraph alpha gRPC server addresses (default "127.0.0.1:9080")
- -t, --auth_token string            The auth token passed to the server for Alter operation of the schema file. If used with --slash_grpc_endpoint, then this should be set to the API token issued by Dgraph Cloud
- -b, --batch int                    Number of N-Quads to send as part of a mutation. (default 1000)
- -m, --bufferSize string            Buffer for each thread (default "100")
- -c, --conc int                     Number of concurrent requests to make to Dgraph (default 10)
-     --creds string                 Various login credentials if login is required.
-                                     user defines the username to login.
-                                     password defines the password of the user.
-                                     namespace defines the namespace to log into.
-                                     Sample flag could look like --creds user=username;password=mypass;namespace=2
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
- -f, --files string                 Location of *.rdf(.gz) or *.json(.gz) file(s) to load
-     --force-namespace int          Namespace onto which to load the data.This flag will be ignored when not logging into galaxy namespace.Only guardian of galaxy should use this for loading data into multiple namespaces.Setting it to negative value will preserve the namespace.
-     --format string                Specify file format (rdf or json) instead of getting it from filename
- -h, --help                         help for live
-     --http string                  Address to serve http (pprof). (default "localhost:6060")
-     --ludicrous                    Run live loader in ludicrous mode (Should only be done when alpha is under ludicrous mode)
-     --new_uids                     Ignore UIDs in load files and assign new ones.
- -s, --schema string                Location of schema file
-     --slash_grpc_endpoint string   Path to Dgraph Cloud GRPC endpoint. If --slash_grpc_endpoint is set, all other TLS options and connection options will beignored
-     --tls string                   TLS Client options
-                                        ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
-                                        client-cert=; (Optional) The Cert file provided by the client to the server.
-                                        client-key=; (Optional) The private Key file provided by the clients to the server.
-                                        internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
-                                        server-name=; Used to verify the server hostname.
-                                        use-system-ca=true; Includes System CA into CA Certs.
-                                     (default "use-system-ca=true; internal-port=false;")
-     --tmp string                   Directory to store temporary buffers. (default "t")
- -U, --upsertPredicate string       run in upsertPredicate mode. the value would be used to store blank nodes as an xid
- -C, --use_compression              Enable compression on connection to alpha server
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
-     --verbose                      Run the live loader in verbose mode
- -x, --xidmap string                Directory to store xid to uid mapping
- -z, --zero string                  Dgraph zero gRPC server address (default "127.0.0.1:5080")
+  -a, --alpha string                 Comma-separated list of Dgraph alpha gRPC server addresses (default "127.0.0.1:9080")
+  -t, --auth_token string            The auth token passed to the server for Alter operation of the schema file. If used with --slash_grpc_endpoint, then this should be set to the API token issuedby Slash GraphQL
+  -b, --batch int                    Number of N-Quads to send as part of a mutation. (default 1000)
+  -m, --bufferSize string            Buffer for each thread (default "100")
+  -c, --conc int                     Number of concurrent requests to make to Dgraph (default 10)
+      --creds string                 Various login credentials if login is required.
+                                     	user defines the username to login.
+                                     	password defines the password of the user.
+                                     	namespace defines the namespace to log into.
+                                     	Sample flag could look like --creds user=username;password=mypass;namespace=2
+      --encryption string            [Enterprise Feature] Encryption At Rest options
+                                         key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
+                                      (default "key-file=;")
+  -f, --files string                 Location of *.rdf(.gz) or *.json(.gz) file(s) to load
+      --force-namespace int          Namespace onto which to load the data.Only guardian of galaxy should use this for loading data into multiple namespaces or somespecific namespace. Setting it to negative value will preserve the namespace.
+      --format string                Specify file format (rdf or json) instead of getting it from filename
+  -h, --help                         help for live
+      --http string                  Address to serve http (pprof). (default "localhost:6060")
+      --ludicrous                    Run live loader in ludicrous mode (Should only be done when alpha is under ludicrous mode)
+      --new_uids                     Ignore UIDs in load files and assign new ones.
+  -s, --schema string                Location of schema file
+      --slash_grpc_endpoint string   Path to Slash GraphQL GRPC endpoint. If --slash_grpc_endpoint is set, all other TLS options and connection options will beignored
+      --tls string                   TLS Client options
+                                         ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
+                                         client-cert=; (Optional) The Cert file provided by the client to the server.
+                                         client-key=; (Optional) The private Key file provided by the clients to the server.
+                                         internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
+                                         server-name=; Used to verify the server hostname.
+                                         use-system-ca=true; Includes System CA into CA Certs.
+                                      (default "use-system-ca=true; internal-port=false;")
+      --tmp string                   Directory to store temporary buffers. (default "t")
+  -U, --upsertPredicate string       run in upsertPredicate mode. the value would be used to store blank nodes as an xid
+  -C, --use_compression              Enable compression on connection to alpha server
+      --vault string                 Vault options
+                                         acl-field=; Vault field containing ACL key.
+                                         acl-format=base64; ACL key format, can be 'raw' or 'base64'.
+                                         addr=http://localhost:8200; Vault server address (format: http://ip:port).
+                                         enc-field=; Vault field containing encryption key.
+                                         enc-format=base64; Encryption key format, can be 'raw' or 'base64'.
+                                         path=secret/data/dgraph; Vault KV store path (e.g. 'secret/data/dgraph' for KV V2, 'kv/dgraph' for KV V1).
+                                         role-id-file=; Vault RoleID file, used for AppRole authentication.
+                                         secret-id-file=; Vault SecretID file, used for AppRole authentication.
+                                      (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
+      --verbose                      Run the live loader in verbose mode
+  -x, --xidmap string                Directory to store xid to uid mapping
+  -z, --zero string                  Dgraph zero gRPC server address (default "127.0.0.1:5080")
 
 Use "dgraph live [command] --help" for more information about a command.
 ```
@@ -579,15 +603,15 @@ The --location flag indicates a source URI with Dgraph backup objects. This URI 
 the schemes used for backup.
 
 Source URI formats:
- [scheme]://[host]/[path]?[args]
- [scheme]:///[path]?[args]
- /[path]?[args] (only for local or NFS)
+  [scheme]://[host]/[path]?[args]
+  [scheme]:///[path]?[args]
+  /[path]?[args] (only for local or NFS)
 
 Source URI parts:
- scheme - service handler, one of: "s3", "minio", "file"
-   host - remote address. ex: "dgraph.s3.amazonaws.com"
-   path - directory, bucket or container at target. ex: "/dgraph/backups/"
-   args - specific arguments that are ok to appear in logs.
+  scheme - service handler, one of: "s3", "minio", "file"
+    host - remote address. ex: "dgraph.s3.amazonaws.com"
+    path - directory, bucket or container at target. ex: "/dgraph/backups/"
+    args - specific arguments that are ok to appear in logs.
 
 The --posting flag sets the posting list parent dir to store the loaded backup files.
 
@@ -610,38 +634,42 @@ $ dgraph restore -p /var/db/dgraph -l s3://s3.us-west-2.amazonaws.com/srfrog/dgr
 # Restore from dir and update Ts:
 $ dgraph restore -p . -l /var/backups/dgraph -z localhost:5080
 
-    
+		 
 Usage:
- dgraph restore [flags] 
+  dgraph restore [flags] 
 
 Flags:
-     --backup_id string             The ID of the backup series to restore. If empty, it will restore the latest series.
- -b, --badger string                Badger options
-                                        compression=snappy; Specifies the compression algorithm and compression level (if applicable) for the postings directory. "none" would disable compression, while "zstd:1" would set zstd compression at level 1.
-                                        goroutines=8; The number of goroutines to use in badger.Stream.
-                                     (default "compression=snappy; goroutines=8;")
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
-     --force_zero                   If false, no connection to a zero in the cluster will be required. Keep in mind this requires you to manually update the timestamp and max uid when you start the cluster. The correct values are printed near the end of this command's output. (default true)
- -h, --help                         help for restore
- -l, --location string              Sets the source location URI (required).
- -p, --postings string              Directory where posting lists are stored (required).
-     --tls string                   TLS Client options
-                                        ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
-                                        client-cert=; (Optional) The Cert file provided by the client to the server.
-                                        client-key=; (Optional) The private Key file provided by the clients to the server.
-                                        internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
-                                        server-name=; Used to verify the server hostname.
-                                        use-system-ca=true; Includes System CA into CA Certs.
-                                     (default "use-system-ca=true; internal-port=false;")
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
- -z, --zero string                  gRPC address for Dgraph zero. ex: localhost:5080
+      --backup_id string    The ID of the backup series to restore. If empty, it will restore the latest series.
+  -b, --badger string       Badger options
+                                compression=snappy; Specifies the compression algorithm and compression level (if applicable) for the postings directory. "none" would disable compression, while "zstd:1" would set zstd compression at level 1.
+                                goroutines=; The number of goroutines to use in badger.Stream.
+                             (default "compression=snappy; numgoroutines=8;")
+      --encryption string   [Enterprise Feature] Encryption At Rest options
+                                key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
+                             (default "key-file=;")
+      --force_zero          If false, no connection to a zero in the cluster will be required. Keep in mind this requires you to manually update the timestamp and max uid when you start the cluster. The correct values are printed near the end of this command's output. (default true)
+  -h, --help                help for restore
+  -l, --location string     Sets the source location URI (required).
+  -p, --postings string     Directory where posting lists are stored (required).
+      --tls string          TLS Client options
+                                ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
+                                client-cert=; (Optional) The Cert file provided by the client to the server.
+                                client-key=; (Optional) The private Key file provided by the clients to the server.
+                                internal-port=false; (Optional) Enable inter-node TLS encryption between cluster nodes.
+                                server-name=; Used to verify the server hostname.
+                                use-system-ca=true; Includes System CA into CA Certs.
+                             (default "use-system-ca=true; internal-port=false;")
+      --vault string        Vault options
+                                acl-field=; Vault field containing ACL key.
+                                acl-format=base64; ACL key format, can be 'raw' or 'base64'.
+                                addr=http://localhost:8200; Vault server address (format: http://ip:port).
+                                enc-field=; Vault field containing encryption key.
+                                enc-format=base64; Encryption key format, can be 'raw' or 'base64'.
+                                path=secret/data/dgraph; Vault KV store path (e.g. 'secret/data/dgraph' for KV V2, 'kv/dgraph' for KV V1).
+                                role-id-file=; Vault RoleID file, used for AppRole authentication.
+                                secret-id-file=; Vault SecretID file, used for AppRole authentication.
+                             (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
+  -z, --zero string         gRPC address for Dgraph zero. ex: localhost:5080
 
 Use "dgraph restore [command] --help" for more information about a command.
 ```
@@ -748,37 +776,41 @@ This command is used to debug issues with a Dgraph database instance. The
 following replicates the help listing shown when you run `dgraph debug --help`:
 
 ```shell
-Debug Dgraph instance 
+ Debug Dgraph instance 
 Usage:
- dgraph debug [flags] 
+  dgraph debug [flags] 
 
 Flags:
-     --at uint                      Set read timestamp for all txns. (default 18446744073709551615)
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
- -h, --help                         help for debug
-     --histogram                    Show a histogram of the key and value sizes.
- -y, --history                      Show all versions of a key.
-     --item                         Output item meta as well. Set to false for diffs. (default true)
-     --jepsen string                Disect Jepsen output. Can be linear/binary.
- -l, --lookup string                Hex of key to lookup.
-     --nokeys                       Ignore key_. Only consider amount when calculating total.
- -p, --postings string              Directory where posting lists are stored.
- -r, --pred string                  Only output specified predicate.
-     --prefix string                Uses a hex prefix.
- -o, --readonly                     Open in read only mode. (default true)
-     --rollup string                Hex of key to rollup.
- -s, --snap string                  Set snapshot term,index,readts to this. Value must be comma-separated list containing the value for these vars in that order.
- -t, --truncate uint                Remove data from Raft entries until but not including this index.
-     --vals                         Output values along with keys.
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
- -w, --wal string                   Directory where Raft write-ahead logs are stored.
+      --at uint             Set read timestamp for all txns. (default 18446744073709551615)
+      --encryption string   [Enterprise Feature] Encryption At Rest options
+                                key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
+                             (default "key-file=;")
+  -h, --help                help for debug
+      --histogram           Show a histogram of the key and value sizes.
+  -y, --history             Show all versions of a key.
+      --item                Output item meta as well. Set to false for diffs. (default true)
+      --jepsen string       Disect Jepsen output. Can be linear/binary.
+  -l, --lookup string       Hex of key to lookup.
+      --nokeys              Ignore key_. Only consider amount when calculating total.
+  -p, --postings string     Directory where posting lists are stored.
+  -r, --pred string         Only output specified predicate.
+      --prefix string       Uses a hex prefix.
+  -o, --readonly            Open in read only mode. (default true)
+      --rollup string       Hex of key to rollup.
+  -s, --snap string         Set snapshot term,index,readts to this. Value must be comma-separated list containing the value for these vars in that order.
+  -t, --truncate uint       Remove data from Raft entries until but not including this index.
+      --vals                Output values along with keys.
+      --vault string        Vault options
+                                acl-field=; Vault field containing ACL key.
+                                acl-format=base64; ACL key format, can be 'raw' or 'base64'.
+                                addr=http://localhost:8200; Vault server address (format: http://ip:port).
+                                enc-field=; Vault field containing encryption key.
+                                enc-format=base64; Encryption key format, can be 'raw' or 'base64'.
+                                path=secret/data/dgraph; Vault KV store path (e.g. 'secret/data/dgraph' for KV V2, 'kv/dgraph' for KV V1).
+                                role-id-file=; Vault RoleID file, used for AppRole authentication.
+                                secret-id-file=; Vault SecretID file, used for AppRole authentication.
+                             (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
+  -w, --wal string          Directory where Raft write-ahead logs are stored.
 
 Use "dgraph debug [command] --help" for more information about a command.
 ```
@@ -857,23 +889,27 @@ cluster. The following replicates the help listing shown when you run
 `dgraph decrypt --help`:
 
 ```shell
-A tool to decrypt an export file created by an encrypted Dgraph cluster 
+ A tool to decrypt an export file created by an encrypted Dgraph cluster 
 Usage:
- dgraph decrypt [flags] 
+  dgraph decrypt [flags] 
 
 Flags:
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
- -f, --file string                  Path to file to decrypt.
- -h, --help                         help for decrypt
- -o, --out string                   Path to the decrypted file.
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
+      --encryption string   [Enterprise Feature] Encryption At Rest options
+                                key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
+                             (default "key-file=;")
+  -f, --file string         Path to file to decrypt.
+  -h, --help                help for decrypt
+  -o, --out string          Path to the decrypted file.
+      --vault string        Vault options
+                                acl-field=; Vault field containing ACL key.
+                                acl-format=base64; ACL key format, can be 'raw' or 'base64'.
+                                addr=http://localhost:8200; Vault server address (format: http://ip:port).
+                                enc-field=; Vault field containing encryption key.
+                                enc-format=base64; Encryption key format, can be 'raw' or 'base64'.
+                                path=secret/data/dgraph; Vault KV store path (e.g. 'secret/data/dgraph' for KV V2, 'kv/dgraph' for KV V1).
+                                role-id-file=; Vault RoleID file, used for AppRole authentication.
+                                secret-id-file=; Vault SecretID file, used for AppRole authentication.
+                             (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
 
 Use "dgraph decrypt [command] --help" for more information about a command.
 ```
@@ -885,27 +921,34 @@ created using Dgraph Enterprise Edition into an exported folder. The following
 replicates key information from the help listing shown when you run `dgraph export_backup --help`:
 
 ```shell
+ Export data inside single full or incremental backup 
 Usage:
   dgraph export_backup [flags] 
 
 Flags:
-  -d, --destination string           The folder to which export the backups.
-      --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
-  -f, --format string                The format of the export output. Accepts a value of either rdf or json (default "rdf")
-  -h, --help                         help for export_backup
-  -l, --location string              Sets the location of the backup. Both file URIs and s3 are supported.
-                                     		This command will take care of all the full + incremental backups present in the location.
-      --vault string                 Vault options
-                                         addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                         field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                         format=base64; Vault field format: raw or base64.
-                                         path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                         role-id-file=; File containing Vault role-id used for approle auth.
-                                         secret-id-file=; File containing Vault secret-id used for approle auth.
-                                      (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
+  -d, --destination string   The folder to which export the backups.
+      --encryption string    [Enterprise Feature] Encryption At Rest options
+                                 key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
+                              (default "key-file=;")
+  -f, --format string        The format of the export output. Accepts a value of either rdf or json (default "rdf")
+  -h, --help                 help for export_backup
+  -l, --location string      Sets the location of the backup. Both file URIs and s3 are supported.
+                             		This command will take care of all the full + incremental backups present in the location.
+      --upgrade              If true, retrieve the CORS from DB and append at the end of GraphQL schema.
+                             		It also deletes the deprecated types and predicates.
+                             		Use this option when exporting a backup of 20.11 for loading onto 21.03.
+      --vault string         Vault options
+                                 acl-field=; Vault field containing ACL key.
+                                 acl-format=base64; ACL key format, can be 'raw' or 'base64'.
+                                 addr=http://localhost:8200; Vault server address (format: http://ip:port).
+                                 enc-field=; Vault field containing encryption key.
+                                 enc-format=base64; Encryption key format, can be 'raw' or 'base64'.
+                                 path=secret/data/dgraph; Vault KV store path (e.g. 'secret/data/dgraph' for KV V2, 'kv/dgraph' for KV V1).
+                                 role-id-file=; Vault RoleID file, used for AppRole authentication.
+                                 secret-id-file=; Vault SecretID file, used for AppRole authentication.
+                              (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
 
-
-Use "dgraph export_backup [command] --help" for more information about a command.
+Use "dgraph export_backup [command] --help" for more information about a command. 
 ```
 
 #### `dgraph increment`
