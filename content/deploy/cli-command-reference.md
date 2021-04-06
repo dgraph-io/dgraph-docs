@@ -115,7 +115,8 @@ not shown here are unchanged in release v21.03.
 | `--idx` | int | `idx` | int |`alpha`, `zero`| Provides an optional Raft ID that an Alpha node can use to join Raft groups |
 | `--group` | int | `group` | int |`alpha`| Provides an optional Raft group ID that an Alpha node can use to request group membership from a Zero node |
 |  |  | (new)`learner` | bool | `alpha`, `zero`| Make this Alpha a learner node (used for read-only replicas) |
-| `--snapshot-after` | int | `snapshot-after` | bool |`alpha`|  Create a new Raft snapshot after the specified number of Raft entries |
+| | | (new)`snapshot-after-duration` | int |`alpha`|  Frequency at which Raft snapshots are created |
+| `--snapshot-after` | int | `snapshot-after-entries` | int |`alpha`|  Create a new Raft snapshot after the specified number of Raft entries |
 | | | **`--security`** | | | Security superflag |
 | `--auth_token` | string | `token` | string |`alpha`| Authentication token |
 | `--whitelist` | string | `whitelist` | string |`alpha`| A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames for administration |
