@@ -78,6 +78,7 @@ The following table maps Dgraph CLI flags from release v20.11 and earlier that
 have been replaced by superflags (and their options) in release v21.03. Any flags
 not shown here are unchanged in release v21.03. 
 
+### ACL superflag
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
@@ -85,20 +86,55 @@ not shown here are unchanged in release v21.03.
 | `--acl_secret_file` | string | `secret-file` | string |`alpha`| File that stores the HMAC secret that is used for signing the JWT |
 | `--acl_access_ttl` | time.Duration | `access-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| TTL for the access JWT |
 | `--acl_refresh_ttl` | time.Duration | `refresh-ttl` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| The TTL for the refresh JWT |
+
+### Badger superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--badger`** | | |  [Badger](https://dgraph.io/docs/badger) superflag |
 | `--badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`| Specifies the compression level and algorithm |
 ||| (new) [`numgoroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
+
+{{% notice "tip" %}}
+The `--badger` superflag allows you to set many additional [Badger options](https://pkg.go.dev/github.com/dgraph-io/badger/v3#Options), including:
+`dir`, `valuedir`, `syncwrites`, `numversionstokeep`, `readonly`, `inmemory`, `metricsenabled`, `memtablesize`,
+`basetablesize`, `baselevelsize`, `levelsizemultiplier`, `tablesizemultiplier`, `maxlevels`, `vlogpercentile`,
+`valuethreshold`, `nummemtables`, `blocksize`, `bloomfalsepositive`, `blockcachesize`, `indexcachesize`, `numlevelzerotables`,
+`numlevelzerotablesstall`, `valuelogfilesize`, `valuelogmaxentries`, `numcompactors`, `compactl0onclose`, `lmaxcompaction`,
+`zstdcompressionlevel`, `verifyvaluechecksum`, `encryptionkeyrotationduration`, `bypasslockguard`, `checksumverificationmode`,
+`detectconflicts`, `namespaceoffset`.
+{{% /notice %}}
+
+### Cache superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--cache`** | | |  Cache superflag |
 | `cache_mb` | string | `size-mb` | string |`alpha`| Total size of cache (in MB) per shard in the reducer |
 | `cache_percentage` | string | `percentage` | string |`alpha`| Cache percentages for block cache and index cache |
+
+### Encryption superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--encryption`** | | |  Encryption superflag |
 | `--encryption_key_file` | string | `key-file` | string |`alpha`, `bulk`, `live`, `restore`, `debug`, `decrypt`, `export_backup` | The file that stores the symmetric key |
+
+### GraphQL superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) superflag  |
 | `--graphql_introspection` | bool | `introspection` | bool |`alpha`| Enables GraphQL schema introspection |
 | `--graphql_debug` | bool | `debug` | bool |`alpha`| Enables debug mode in GraphQL |
 | `--graphql_extensions` | bool | `extensions` | bool |`alpha`| Enables extensions in GraphQL response body |
 | `--graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| The polling interval for GraphQL subscriptions | 
 | `--graphql_lambda_url` | string | `lambda-url` | string |`alpha`| The URL of a lambda server that implements custom GraphQL JavaScript resolvers |
+
+### Limit superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--limit`** | | | Limit-setting superflag for Dgraph Alpha  |
 | `--abort_older_than` | string | `txn-abort-after` | string |`alpha`| Abort any pending transactions older than this duration |
 | `--disable_admin_http` | string | `disable-admin-http` | string |`zero`| Turn on/off the administrative endpoints |
@@ -107,21 +143,41 @@ not shown here are unchanged in release v21.03.
 | `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`| Maximum number of edges that can be returned in a query |
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`| Maximum number of nodes that can be returned in a query that uses the normalize directive |
 | `--mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`| Maximum number of nquads that can be inserted in a mutation request |
+
+### Ludicrous mode superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "deploy/ludicrous-mode.md" >}}) superflag  |
 | `--ludicrous_mode` | bool | `enabled` | bool |`alpha`| Enables Ludicrous mode |
 | `--ludicrous_concurrency` | int | `concurrency` | int |`alpha`| Number of concurrent threads to use in Ludicrous mode |
+
+### Raft superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--raft`** | | | [Raft]({{< relref "design-concepts/raft.md" >}}) superflag  |
 | `--pending_proposals` | int | `pending-proposals` | int |`alpha`|  Maximum number of pending mutation proposals; useful for rate limiting |
 | `--idx` | int | `idx` | int |`alpha`, `zero`| Provides an optional Raft ID that an Alpha node can use to join Raft groups |
 | `--group` | int | `group` | int |`alpha`| Provides an optional Raft group ID that an Alpha node can use to request group membership from a Zero node |
 |  |  | (new)`learner` | bool | `alpha`, `zero`| Make this Alpha a learner node (used for read-only replicas) |
 | `--snapshot-after` | int | `snapshot-after` | bool |`alpha`|  Create a new Raft snapshot after the specified number of Raft entries |
+
+### Security superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--security`** | | | Security superflag |
 | `--auth_token` | string | `token` | string |`alpha`| Authentication token |
 | `--whitelist` | string | `whitelist` | string |`alpha`| A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames for administration |
 | | | **`--telemetry`** | | | Telemetry superflag  |
 | `--telemetry` | bool | `reports` | bool |`alpha` and `zero`| Sends anonymous telemetry data to Dgraph |
 | `--enable_sentry` | bool | `sentry` | bool |`alpha` and `zero`| Enable sending crash events to Sentry |
+
+### TLS superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--tls`** | | | [TLS]({{< relref "deploy/tls-configuration.md" >}}) superflag  |
 | `--tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`| The CA cert file used to verify server certificates |
 | `--tls_use_system_ca` | bool | `use-system-ca` | bool |`alpha`, `zero`, `bulk`, `backup`, `live`| Include System CA with Dgraph Root CA |
@@ -132,10 +188,20 @@ not shown here are unchanged in release v21.03.
 | `--tls_internal_port_enabled` | bool | `internal-port` | bool | `alpha`, `zero`, `bulk`, `backup`, `live`| Makes internal ports (by default, 5080 and 7080) use the REQUIREANDVERIFY setting. |
 | `--tls_cert` | string | `client-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`| User cert file provided by the client to the Alpha node |
 | `--tls_key` | string | `client-key` | string |`alpha`, `zero`, `bulk`, `backup`, `live`| User private key file provided by the client to the Alpha node |
+
+### Trace superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--trace`** | | | [Tracing]({{< relref "deploy/tracing.md" >}}) superflag  |
 | `--trace` | float64 | `ratio` | float64 |`alpha`, `zero`| The ratio of queries to trace |
 | `--jaeger.collector` | string | `jaeger` | string | `alpha`, `zero`| URL of Jaeger to send OpenCensus traces |
 | `--datadog.collector` | string | `datadog` | string | `alpha`, `zero`| URL of Datadog to send OpenCensus traces
+
+### Vault superflag
+
+| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
+|---------:|:---------|---------:|:---------|:----:|:----:|
 | | | **`--vault`** | | | Vault superflag  |
 | `--vault_addr` | string | `addr` | string | `alpha`, `bulk`, `backup`, `live`, `debug`| Vault server address, formatted as of `http://ip-address:port` |
 | `--vault_roleid_file` | string | `role-id-file` | string | `alpha`, `bulk`, `backup`, `live`, `debug`| File containing Vault `role-id` used for AppRole authentication |
