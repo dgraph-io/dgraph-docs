@@ -26,7 +26,7 @@ instructions in the [README](https://github.com/dgraph-io/dgraph4j/tree/master/s
 ## Intro
 This library supports two styles of clients, the synchronous client `DgraphClient` and
 the async client `DgraphAsyncClient`.
-A `DgraphClient` or `DgraphAsyncClient` can be initialised by passing it
+A `DgraphClient` or `DgraphAsyncClient` can be initialized by passing it
 a list of `DgraphBlockingStub` clients. The `anyClient()` API can randomly pick a stub, which can
 then be used for GRPC operations. In the next section, we will explain how to create a
 synchronous client and use it to mutate or query dgraph. For the async client, more details can
@@ -185,7 +185,7 @@ number of query or mutate operations. However, if a transaction only has queries
 benefit from a read-only transaction, which can share the same read timestamp across multiple
 such read-only transactions and can result in lower latencies.
 
-For normal read-write transactions, it is a good practise to call `Transaction#discard()` in a
+For normal read-write transactions, it is a good practice to call `Transaction#discard()` in a
 `finally` block after running the transaction. Calling `Transaction#discard()` after
 `Transaction#commit()` is a no-op and you can call `discard()` multiple times with no additional
 side-effects.
@@ -231,7 +231,7 @@ class Person {
 }
 ```
 
-Next, we initialise a `Person` object, serialize it and use it in `Mutation` object.
+Next, we initialize a `Person` object, serialize it and use it in `Mutation` object.
 
 ```java
 // Create data

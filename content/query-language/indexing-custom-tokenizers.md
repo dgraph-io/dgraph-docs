@@ -98,7 +98,7 @@ dgraph ...other-args... --custom_tokenizers=plugin1.so,plugin2.so
 
 {{% notice "note" %}}
 Plugin validation is performed on startup. If a problem is detected, Dgraph
-will refuse to initialise.
+will refuse to initialize.
 {{% /notice %}}
 
 ## Adding the index to the schema
@@ -117,14 +117,14 @@ my_predicate: string @index(foo) .
 
 There are two functions that can use custom indexes:
 
- Mode | Behaviour
+ Mode | Behavior
 --------|-------
  `anyof` | Returns nodes that match on *any* of the tokens generated
  `allof` | Returns nodes that match on *all* of the tokens generated
 
 The functions can be used either at the query root or in filters.
 
-There behaviour here an analogous to `anyofterms`/`allofterms` and
+There behavior here an analogous to `anyofterms`/`allofterms` and
 `anyoftext`/`alloftext`.
 
 ## Examples

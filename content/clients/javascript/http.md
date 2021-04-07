@@ -36,7 +36,7 @@ for Node.js >= v6.
 
 ### Create a client
 
-A `DgraphClient` object can be initialised by passing it a list of
+A `DgraphClient` object can be initialized by passing it a list of
 `DgraphClientStub` clients as variadic arguments. Connecting to multiple Dgraph
 servers in the same cluster allows for better distribution of workload.
 
@@ -153,7 +153,7 @@ await dgraphClient.alter({ dropAll: true });
 To create a transaction, call `DgraphClient#newTxn()` method, which returns a
 new `Txn` object. This operation incurs no network overhead.
 
-It is good practise to call `Txn#discard()` in a `finally` block after running
+It is good practice to call `Txn#discard()` in a `finally` block after running
 the transaction. Calling `Txn#discard()` after `Txn#commit()` is a no-op
 and you can call `Txn#discard()` multiple times with no additional side-effects.
 
