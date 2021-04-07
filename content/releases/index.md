@@ -32,6 +32,7 @@ To learn about the latest releases and other important announcements, watch the
  v1.0.x                | [v1.0.18][]     | No         | December 2017      | March 2020
 
 
+[v21.03.0]: https://discuss.dgraph.io/t/release-notes-v21-03-0-resilient-rocket/13587
 [v20.11.0]: https://discuss.dgraph.io/t/release-notes-v20-11-0-tenacious-tchalla/11942
 [v20.07.3]: https://discuss.dgraph.io/t/dgraph-v20-07-3-release/12107
 [v20.03.7]: https://discuss.dgraph.io/t/dgraph-v20-03-7-release/12077
