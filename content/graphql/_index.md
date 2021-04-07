@@ -64,7 +64,7 @@ description = "Find everything you need to know about using GraphQL with Dgraph 
     <a href="{{< relref "custom/custom-overview.md">}}">
       <h2>Custom Resolvers</h2>
       <p>
-        Customize the behaviour of your schemas
+        Customize the behavior of your schemas
       </p>
     </a>
   </div>
