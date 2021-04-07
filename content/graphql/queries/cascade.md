@@ -61,7 +61,7 @@ but only those posts which have both `text` and `id`.
 
 ### Parameterized `@cascade`
 
-The `@cascade` directive can optionally take a list of fields as an argument. This changes the default behaviour, considering only the supplied fields as mandatory instead of all the fields for a type.
+The `@cascade` directive can optionally take a list of fields as an argument. This changes the default behavior, considering only the supplied fields as mandatory instead of all the fields for a type.
 Listed fields are automatically cascaded as a required argument to nested selection sets.
 
 In the example below, `name` is supplied in the `fields` argument. For an author to be in the query response, it must have a `name`, and if it has a `country` subfield, then that subfield must also have `name`.

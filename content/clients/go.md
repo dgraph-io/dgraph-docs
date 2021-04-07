@@ -298,7 +298,7 @@ returns an error in case the transaction could not be committed.
 This is an example from the [GoDoc](https://godoc.org/github.com/dgraph-io/dgo). It shows how to to create a `Node` with name `Alice`, while also creating her relationships with other nodes. 
 
 {{% notice "note" %}}
-`loc` predicate is of type `geo` and can be easily marshalled and unmarshalled into a Go struct. More such examples are present as part of the GoDoc.
+`loc` predicate is of type `geo` and can be easily marshaled and unmarshaled into a Go struct. More such examples are present as part of the GoDoc.
 {{% /notice %}}
 
 {{% notice "tip" %}}
