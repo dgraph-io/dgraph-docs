@@ -13,7 +13,7 @@ help our Zoologist friend, Mary, and her team in their mission to conserve birds
 using Dgraph's geolocation capabilities.
 
 You might have used Google to find the restaurants near you or to find the shopping
-centres within a mile of your current location. Applications like these make use of
+centers within a mile of your current location. Applications like these make use of
 your geolocation data.
 
 Geolocation has become an integral part of mobile applications, especially with the
@@ -93,7 +93,7 @@ For instance, the `location type` could just be a property or a predicate of the
 rather than being a node of its own.
 
 The queries you want to perform or the relationships you like to explore mostly influence
-the modelling decisions. The goal of the tutorial is not to arrive at the ideal graph model,
+the modeling decisions. The goal of the tutorial is not to arrive at the ideal graph model,
 but to use a simple dataset to demonstrate the geolocation capabilities of Dgraph.
 
 For the rest of the tutorial, let's call the node representing a `City` as a `city`

@@ -26,7 +26,7 @@ Dgraph is no exception.
 
 ## Upsert Procedure
 
-In Dgraph, upsert-style behaviour can be implemented by users on top of
+In Dgraph, upsert-style behavior can be implemented by users on top of
 transactions. The steps are as follows:
 
 1. Create a new transaction.
