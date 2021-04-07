@@ -95,8 +95,8 @@ not shown here are unchanged in release v21.03.
 | `--badger.compression` | string | `compression` | string | `alpha`, `bulk`, `backup`| Specifies the compression level and algorithm |
 ||| (new) [`numgoroutines`]({{< relref "troubleshooting.md" >}}) | int |`alpha`, `bulk`, `backup`| Number of Go routines used by Dgraph |
 
-{{% notice "tip" %}}
-The `--badger` superflag allows you to set many additional [Badger options](https://pkg.go.dev/github.com/dgraph-io/badger/v3#Options), including:
+{{% notice "note" %}}
+The `--badger` superflag allows you to set many advanced [Badger options](https://pkg.go.dev/github.com/dgraph-io/badger/v3#Options), including:
 `dir`, `valuedir`, `syncwrites`, `numversionstokeep`, `readonly`, `inmemory`, `metricsenabled`, `memtablesize`,
 `basetablesize`, `baselevelsize`, `levelsizemultiplier`, `tablesizemultiplier`, `maxlevels`, `vlogpercentile`,
 `valuethreshold`, `nummemtables`, `blocksize`, `bloomfalsepositive`, `blockcachesize`, `indexcachesize`, `numlevelzerotables`,
