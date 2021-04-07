@@ -77,7 +77,7 @@ Make sure you have docker-compose installed.
 
 Run:
 
-```
+```sh
 sh scripts/docker.sh
 ```
 
