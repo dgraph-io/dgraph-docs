@@ -166,7 +166,7 @@ type Owner {
 If you try updating your schema, you may end up getting an error like this:
 
 ```txt
-resolving updateGQLSchema failed because succeeded in saving GraphQL schema but failed to alter Dgraph schema - GraphQL layer may exhibit unexpected behaviour, reapplying the old GraphQL schema may prevent any issues: Schema change not allowed from [uid] => uid without deleting pred: owner.todo
+resolving updateGQLSchema failed because succeeded in saving GraphQL schema but failed to alter Dgraph schema - GraphQL layer may exhibit unexpected behavior, reapplying the old GraphQL schema may prevent any issues: Schema change not allowed from [uid] => uid without deleting pred: owner.todo
 ```
 
 That is a red flag. As the error message says, you should revert to the old schema to make your 
@@ -214,5 +214,5 @@ A list was returned, but GraphQL was expecting just one item. This indicates an 
 ```
 
 So, while making such a schema change, you need to make sure that the underlying data really 
-honours the uniqueness constraint on the username field. If not, you need to do a data migration 
-to honour such constraints.
+honors the uniqueness constraint on the username field. If not, you need to do a data migration 
+to honor such constraints.
