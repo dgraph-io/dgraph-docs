@@ -47,7 +47,7 @@ service that runs on dedicated cluster instances. To learn more, see [Fully-Mana
 The documentation provided on [this Dgraph Docs site](https://dgraph.io/docs)
 is applicable to self-managed instances of Dgraph, and also largely applicable
 to Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/deploy/overview" >}}) section). To learn more about Dgraph Cloud and Dgraph Cloud, see
-[Dgraph cloud services docs](https://dgraph.io/docs/slash-graphql).
+[Dgraph cloud services docs](https://dgraph.io/docs/cloud).
 {{% /notice %}}
 
 ### Get started with self-managed Dgraph
@@ -113,7 +113,7 @@ providing the flexibility and performance of a horizontally-scalable and distrib
 GraphQL database with a graph backend, so you don’t need to configure and manage
 VMs, servers, firewalls, and HTTP endpoints to power your modern apps and websites.
 Dgraph Cloud with shared instances runs on a shared cluster so we can offer it
-at a low price. To learn more about Dgraph Cloud, see [Dgraph Cloud Overview](https://dgraph.io/docs/slash-graphql/introduction).
+at a low price. To learn more about Dgraph Cloud, see [Dgraph Cloud Overview](https://dgraph.io/docs/cloud/introduction).
 
 Dgraph Cloud with [dedicated instances](https://dgraph.io/cloud) extends the
 capabilities of the lower-cost shared instances offering to meet the heavy workloads
@@ -125,7 +125,7 @@ private cloud (VPC) or bring your own Kubernetes (BYOK) environment.
 
 | Term            |Definition	                                                   |Learn More                  |
 |-----------------|--------------------------------------------------------------|----------------------------|
-|Dgraph Cloud|	A fully-managed GraphQL database service powered by Dgraph database.	|[Dgraph Cloud documentation]({{< relref "/slash-graphql" >}}) |
+|Dgraph Cloud|	A fully-managed GraphQL database service powered by Dgraph database.	|[Dgraph Cloud documentation](https://dgraph.io/docs/cloud) |
 |Badger | A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph database.|[Badger documentation](https://dgraph.io/docs/badger)|
 |data node| A basic unit of data representing an entity in a graph database. Nodes are connected by *edges* and have predicates (or *fields*) that contain node data.||
 |Dgraph Alpha| A server node that serves data to clients of Dgraph database, and also provides administrator endpoints.|[Dgraph Alpha documentation]({{< relref "/deploy/dgraph-alpha" >}})|

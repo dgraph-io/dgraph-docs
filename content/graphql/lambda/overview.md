@@ -10,20 +10,20 @@ weight = 1
 
 Lambda provides a way to write your custom logic in JavaScript, integrate it with your GraphQL schema, and execute it using the GraphQL API in a few easy steps:
 
-- Setup a Dgraph cluster with a working lambda server (not required for [Dgraph Cloud](https://dgraph.io/slash-graphql) users)
+- Setup a Dgraph cluster with a working lambda server (not required for [Dgraph Cloud](https://dgraph.io/cloud) users)
 - Declare lambda queries, mutations, and fields in your GraphQL schema as needed
 - Define lambda resolvers for them in a JavaScript file
 
 This also simplifies the job of developers, as they can build a complex backend that is rich with business logic, without setting up multiple different services. Also, you can build your backend in JavaScript, which means you can build both your frontend and backend using the same language.
 
-Dgraph doesn't execute your custom logic itself. It makes external HTTP requests to a user-defined lambda server. [Dgraph Cloud](https://dgraph.io/slash-graphql) will do all of this for you. 
+Dgraph doesn't execute your custom logic itself. It makes external HTTP requests to a user-defined lambda server. [Dgraph Cloud](https://dgraph.io/cloud) will do all of this for you. 
 
 {{% notice "tip" %}}
 If you want to deploy your own lambda server, you can find the implementation of Dgraph Lambda in our [open-source repository](https://github.com/dgraph-io/dgraph-lambda). Please refer to the documentation on [setting up a lambda server](/graphql/lambda/server) for more details.
 {{% /notice %}}
 
 {{% notice "note" %}}
-If you're using [Dgraph Cloud](https://dgraph.io/slash-graphql), the final compiled script file must be under 500Kb
+If you're using [Dgraph Cloud](https://dgraph.io/cloud), the final compiled script file must be under 500Kb
 {{% /notice %}}
 
 ## Declaring lambda in a GraphQL schema
