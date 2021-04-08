@@ -32,7 +32,7 @@ If you would like to add libraries to Dgraph Lambda, use `webpack --target=webwo
 
 ### Working with TypeScript
 
-You can import `@slash-graph/lambda-types` to get types for `addGraphQLResolver` and `addGraphQLMultiParentResolver`.
+You can import `@slash-graphql/lambda-types` to get types for `addGraphQLResolver` and `addGraphQLMultiParentResolver`.
 
 
 ## Dgraph Alpha
