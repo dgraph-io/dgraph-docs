@@ -74,6 +74,10 @@ const dgraphClient = new dgraph.DgraphClient(clientStub);
 dgraphClient.setSlashApiKey("<api-key>");
 ```
 
+{{% notice "note" %}}
+You need to remove the `/graphql` path when copying the endpoint URL from the Dgraph Cloud dashboard. 
+{{% /notice %}}
+
 ### Login into Dgraph
 
 If your Dgraph server has Access Control Lists enabled (Dgraph v1.1 or above),
