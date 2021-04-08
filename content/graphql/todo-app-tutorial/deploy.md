@@ -24,7 +24,7 @@ subdomain here as long as it is available.
 
 Let's set it up in AWS, in the US region, and click on the *Launch* button.
 
-![Dgraph Cloud: Deployment created ](/images/graphql/tutorial/todo/cloud-3.png)
+![Dgraph Cloud: Deployment created](/images/graphql/tutorial/todo/cloud-3.png)
 
 Now the backend is ready.
 
