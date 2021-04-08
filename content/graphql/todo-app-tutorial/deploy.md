@@ -60,7 +60,7 @@ Let's update our frontend to use this URL instead of localhost. Open `src/config
 ```json
 {
     ...
-    "graphqlUrl": "<Slash-GraphQL-API>"
+    "graphqlUrl": "<Dgraph-Cloud-GraphQL-API>"
 }
 ```
 
