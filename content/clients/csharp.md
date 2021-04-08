@@ -51,7 +51,7 @@ Once logged in, the client can perform all the operations allowed to the `userId
 
 ### Creating a Client for Dgraph Cloud Endpoint
 
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://slash.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
+If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
 
 ```c#
 var client = new DgraphClient(SlashChannel.Create("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "api-key-here"));

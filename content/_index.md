@@ -66,7 +66,7 @@ aliases = ["/contribute"]
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-cloud" aria-hidden="true"></i></div>
-    <a href="https://dgraph.io/docs/slash-graphql/">
+    <a href="https://dgraph.io/docs/cloud/">
       <h2>Dgraph Cloud</h2>
       <p>
         Run Dgraph in the Cloud. 

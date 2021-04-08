@@ -12,11 +12,11 @@ Let's now deploy our fully functional app on Dgraph Cloud [cloud.dgraph.io](http
 
 After successfully logging into the site for the first time, your dashboard should look something like this.
 
-![Dgraph Cloud: Get Started](/images/graphql/tutorial/todo/slash-graphql-1.png)
+![Dgraph Cloud: Get Started](/images/graphql/tutorial/todo/cloud-1.png)
 
 Let's go ahead and launch a new deployment.
 
-![Dgraph Cloud: Create deployment](/images/graphql/tutorial/todo/slash-graphql-2.png)
+![Dgraph Cloud: Create deployment](/images/graphql/tutorial/todo/cloud-2.png)
 
 We named our deployment `todo-app-deployment` and set the optional subdomain as
 `todo-app`, using which the deployment will be accessible. We can choose any
@@ -24,7 +24,7 @@ subdomain here as long as it is available.
 
 Let's set it up in AWS, in the US region, and click on the *Launch* button.
 
-![Dgraph Cloud: Deployment created ](/images/graphql/tutorial/todo/slash-graphql-3.png)
+![Dgraph Cloud: Deployment created](/images/graphql/tutorial/todo/cloud-3.png)
 
 Now the backend is ready.
 
@@ -60,7 +60,7 @@ Let's update our frontend to use this URL instead of localhost. Open `src/config
 ```json
 {
     ...
-    "graphqlUrl": "<Slash-GraphQL-API>"
+    "graphqlUrl": "<Dgraph-Cloud-GraphQL-API>"
 }
 ```
 
