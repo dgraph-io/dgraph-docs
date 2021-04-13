@@ -43,7 +43,7 @@ client = pydgraph.DgraphClient(client_stub)
 
 ### Multi-tenancy
 
-In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, PyDgraph provides a new method `login_in_namespace()`,
+In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, PyDgraph provides a new method `login_into_namespace()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a python client, and make the client login into namespace `123`:
@@ -52,7 +52,7 @@ In order to create a python client, and make the client login into namespace `12
 client_stub = pydgraph.DgraphClientStub('localhost:9080')
 client = pydgraph.DgraphClient(client_stub)
 // Login to namespace groot user of namespace 123
-client.login_in_namespace("groot", "password", "123")
+client.login_into_namespace("groot", "password", "123")
 ```
 
 In the example above, the client logs into namespace `123` using username `groot` and password `password`.
