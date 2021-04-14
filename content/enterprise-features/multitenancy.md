@@ -18,7 +18,7 @@ Multi-tenancy is an enterprise feature and needs [Access Control Lists]({{< relr
 
 Multi-tenancy is built upon [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL), 
 and enables multiple tenants to share a Dgraph cluster using unique namespaces.
-The tenants are logically separated, and their data lies in the same `p` directory.
+The tenants are logically separated, and their data lies in the same `p`.
 Each namespace has a group guardian, which has root access to that namespace.
 
 The default namespace is called a `galaxy`. [Guardians of the Galaxy](#guardians-of-the-galaxy) get
@@ -41,7 +41,7 @@ For multi-tenant environments a suggested `query-limit` value is 500ms.
 
 {{% notice "note" %}}
 Only super-admins ([Guardians of the galaxy](#guardians-of-the-galaxy)) have access across tenants.
-The super admin is used only for database admininstration operations, such as exporting data of all tenants. 
+The super admin is used only for database admininstration operations, such as exporting data of all tenants. Guardian of the galaxy cannot read across tenats.
 {{% /notice %}}
 
 - What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
@@ -81,8 +81,6 @@ Multi-tenancy defines certain ACL roles for the shared cluster:
 
 - [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins) 
 - Guardians of the Namespace
-  - They can add users to groups inside the namespace
-  - They can remove users from groups inside the namespace
   - They can export their namespace
 - Normal users
   - They can login into a namespace
@@ -102,7 +100,7 @@ As a super-admin, a _Guardian of the Galaxy_ can:
 - Trigger cluster-wide or namespace-specific [exports](#exports) (exports contain information about the namespace)
 
 For example, if the user `rocket` is part of the _Guardians of the Galaxy_ group (namespace `0x00`),
-he can only read/write on namespace `0x00`, but he can create new namespaces and add users to them.
+he can only read/write on namespace `0x00`.
 
 ## Create a Namespace
 
@@ -443,17 +441,13 @@ They're executed at cluster level and delete data across namespaces.
 All other `drop` operations run at namespace level and are namespace specific.
 
 {{% notice "note" %}}
-`drop all` and `drop data` operations are executed at cluster level and will delete across namespaces.
+`drop all` and `drop data` operations are executed at cluster level and will delete across namespaces. The `drop data` operation will delete all the data but will keep the schema only.
 {{% /notice %}}
 
 ## Backups
 
 Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
 Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
-
-{{% notice "tip" %}}
-[Live loader](#live-loader) supports loading data into specific namespaces.
-{{% /notice %}}
 
 ### Bulk Loader
 
@@ -476,13 +470,16 @@ Please refer to the [Live loader documentation]({{< relref "live-loader.md#multi
 The Live loader requires that the `namespace` from the data and schema files exist before loading the data.
 {{% /notice %}}
 
+{{% notice "tip" %}}
+[Live loader](#live-loader) supports loading data into specific namespaces.
+{{% /notice %}}
+
 ## Exports
 
 Exports can be generated cluster-wide or at namespace level.
-The export function creates a new folder for each namespace, and each folder contains the exported `.rdf` and schema file.
-These exported sets of `.rdf` files and schemas include the multi-tenancy namespace information.
+These exported sets of `.rdf` or `.json` files and schemas include the multi-tenancy namespace information.
 
-If a _Guardian of the Galaxy_ exports the whole cluster, a single folder containing the export data of all the namespaces in a single `.rdf` file and a single schema will be generated.
+If a _Guardian of the Galaxy_ exports the whole cluster, a single folder containing the export data of all the namespaces in a single `.rdf` or `.json` file and a single schema will be generated.
 
 {{% notice "note" %}}
 Guardians of a Namespace can trigger an Export for their namespace.
@@ -495,11 +492,22 @@ A namespace-specific export will contain the namespace value in the generated `.
 <0x01> "name" "ibrahim" <0x0> .      -> this belongs to namespace 0x00
 ```
 
-For example, to export the namespace `0x1234` to a folder in the export directory (by default this directory is `export`):
+For example, when the _Guardian of the Galaxy_ is used to export the namespace `0x1234` to a folder in the export directory (by default this directory is `export`):
 
 ```graphql
 mutation {
-  export(input: {format: "rdf", namespace: 0x1234}) {
+  export(input: {format: "rdf", namespace: 1234}) {
+    response {
+      message
+    }
+  }
+}
+```
+When using the _Guardian of the Namespace_, then no need to specify the namespace in the GraphQL mutation, as they can only export within their own namespace:
+
+```graphql
+mutation {
+  export(input: {format: "rdf") {
     response {
       message
     }
@@ -511,14 +519,10 @@ To export all the namespaces: (this is only valid for _Guardians of the Galaxy_)
 
 ```graphql
 mutation {
-  export(input: {format: "rdf"}) {
+  export(input: {format: "rdf", namespace: -1}) {
     response {
       message
     }
   }
 }
 ```
-
-{{% notice "note" %}}
-For _Guardians of the Galaxy_, if you don't define a namespace it will export data for every namespace.
-{{% /notice %}}
