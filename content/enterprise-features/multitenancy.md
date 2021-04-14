@@ -118,13 +118,17 @@ For example, to create a new namespace:
 
 ```graphql
 mutation {
- addNamespace
+ addNamespace(input: {password: "mypass"})
   {
     namespaceId
     message
   }
 }
 ```
+
+By sending the mutation above, a namespace is created. A _Guardian group_ is also automatically created for that namespace.
+A `groot` user with password `mypass` (default is `password`) is created in the guardian group.
+You can then use these credentials to login into the namespace and perform operations like [`addUser`]({{< relref "access-control-lists.md#create-a-regular-user" >}}).
 
 ## List Namespaces
 
