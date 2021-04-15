@@ -41,7 +41,7 @@ For multi-tenant environments a suggested `query-limit` value is 500ms.
 
 {{% notice "note" %}}
 Only super-admins ([Guardians of the galaxy](#guardians-of-the-galaxy)) have access across tenants.
-The super admin is used only for database admininstration operations, such as exporting data of all tenants. Guardian of the galaxy cannot read across tenats.
+The super admin is used only for database admininstration operations, such as exporting data of all tenants. Guardian of the galaxy cannot read across tenants.
 {{% /notice %}}
 
 - What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
