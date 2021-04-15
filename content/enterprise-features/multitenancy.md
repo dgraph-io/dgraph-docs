@@ -18,7 +18,7 @@ Multi-tenancy is an enterprise feature and needs [Access Control Lists]({{< relr
 
 Multi-tenancy is built upon [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL), 
 and enables multiple tenants to share a Dgraph cluster using unique namespaces.
-The tenants are logically separated, and their data lies in the same `p`.
+The tenants are logically separated, and their data lies in the same `p` directory.
 Each namespace has a group guardian, which has root access to that namespace.
 
 The default namespace is called a `galaxy`. [Guardians of the Galaxy](#guardians-of-the-galaxy) get
