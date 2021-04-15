@@ -81,7 +81,13 @@ Multi-tenancy defines certain ACL roles for the shared cluster:
 
 - [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins) 
 - Guardians of the Namespace
-  - They can export their namespace
+  - They can create/add users/groups inside their own namespace
+  - They can assign users to groups inside their own namespace
+  - They can assign predicates to groups inside their own namespace
+  - They can add users to groups inside the namespace
+  - They can export their namespace 
+  - They can query/mutate in their namespace
+  - They can't query or mutate across namespaces
 - Normal users
   - They can login into a namespace
   - They can query in their namespace
