@@ -35,7 +35,7 @@ If you use Kafka on the localhost without SASL authentication, you can just
 specify the hostname and port used by Kafka, as follows:
 
 ```bash
-dgraph alpha `--cdc "localhost:9092"`
+dgraph alpha --cdc "localhost:9092"
 ```
 
 ## Enable CDC with file sink
