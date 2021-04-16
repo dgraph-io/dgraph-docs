@@ -41,7 +41,7 @@ For multi-tenant environments a suggested `query-limit` value is 500ms.
 
 {{% notice "note" %}}
 Only super-admins ([Guardians of the galaxy](#guardians-of-the-galaxy)) have access across tenants.
-The super admin is used only for database admininstration operations, such as exporting data of all tenants. Guardian of the galaxy users cannot read across tenants.
+The super admin is used only for database administration operations, such as exporting data of all tenants. _Guardian_ of the _Galaxy_ group cannot read across tenants.
 {{% /notice %}}
 
 - What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
@@ -81,12 +81,12 @@ Multi-tenancy defines certain ACL roles for the shared cluster:
 
 - [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins) 
 - Guardians of the Namespace
-  - They can create/add users/groups inside their own namespace
+  - They can create users and groups inside their own namespace
   - They can assign users to groups inside their own namespace
   - They can assign predicates to groups inside their own namespace
   - They can add users to groups inside the namespace
   - They can export their namespace 
-  - They can query/mutate in their namespace
+  - They can query and mutate in their namespace
   - They can't query or mutate across namespaces
 - Normal users
   - They can login into a namespace
@@ -509,7 +509,7 @@ mutation {
   }
 }
 ```
-When using the _Guardian of the Namespace_, then no need to specify the namespace in the GraphQL mutation, as they can only export within their own namespace:
+When using the _Guardian of the Namespace_, there's no need to specify the namespace in the GraphQL mutation, as they can only export within their own namespace:
 
 ```graphql
 mutation {

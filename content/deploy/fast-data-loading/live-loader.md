@@ -93,7 +93,7 @@ Using `--force-namespace`, a _Guardian_ can load the data into the namespace spe
 The Live loader requires that the `namespace` from the data and schema files exist before loading the data.
 {{% /notice %}}
 
-For example, to preserve the namespace while loading data first you need to create the namespace/s and then run the live loader command:
+For example, to preserve the namespace while loading data first you need to create the namespace(s) and then run the live loader command:
 
 ```sh
 dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace -1
