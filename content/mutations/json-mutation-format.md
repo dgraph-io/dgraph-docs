@@ -284,9 +284,9 @@ used to show facets in query results. E.g.
 ```
 Produces the following RDFs:
 ```
-_:blank-0 <name> "Carol" (initial=C) .
+_:blank-0 <name> "Carol" (initial="C") .
 _:blank-0 <dgraph.type> "Person" .
-_:blank-0 <friend> _:blank-1 (close=yes) .
+_:blank-0 <friend> _:blank-1 (close="yes") .
 _:blank-1 <name> "Daryl" .
 _:blank-1 <dgraph.type> "Person" .
 ```
