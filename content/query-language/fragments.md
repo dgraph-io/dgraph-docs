@@ -7,7 +7,7 @@ weight = 25
 +++
 
 The `fragment` keyword lets you define new fragments that can be referenced
-in a query, per the [GraphQL specification](https://facebook.github.io/graphql/#sec-Language.Fragments).
+in a query, per the [Fragments section of the GraphQL specification](http://spec.graphql.org/June2018/#sec-Language.Fragments).
 Fragments allow for the reuse of common repeated selections of fields, reducing
 duplicated text in the DQL documents. Fragments can be nested inside fragments,
 but no cycles are allowed in such cases. For example:
