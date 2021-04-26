@@ -55,7 +55,7 @@ to Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/depl
 To run Dgraph on your own server, see [instructions for single-node setup]({{< relref "/deploy/single-host-setup" >}})
 or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
 
-{{% notice "Note" %}}
+{{% notice "note" %}}
 Dgraph is designed to run on Linux. As of release v21.03, Dgraph no longer
 supports installation on Windows or macOS. We recommend using the standalone
 Docker image to try out Dgraph on Windows or macOS.
@@ -72,7 +72,7 @@ Docker image to try out Dgraph on Windows or macOS.
   docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph dgraph/standalone:v21.03.0
 ```  
 
-{{% notice "Tip" %}}
+{{% notice "tip" %}}
 To run the Docker standalone image for another version of Dgraph, change `v21.03.0`
 in the command shown above to the version number for a previous release, such as `v20.11.0`.
 {{% /notice %}}
