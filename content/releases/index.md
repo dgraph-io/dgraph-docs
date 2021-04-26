@@ -40,26 +40,26 @@ To learn about the latest releases and other important announcements, watch the
 [v1.1.1]: https://discuss.dgraph.io/t/dgraph-v1-1-1-release/5664
 [v1.0.18]: https://discuss.dgraph.io/t/dgraph-v1-0-18-release/5663
 
-## Dgraph product lifecycle and deprecation policy
+## Dgraph support policy
 
-The following summarizes our approach to product support and API deprecation:
+The following summarizes our approach to product and service support:
  
-* **Releases**: Dgraph Labs supports Dgraph releases for 12 months following the
+* **Dgraph releases**: Dgraph Labs supports Dgraph releases for 12 months following the
  first release date, until the applicable *End of life* date (see above).
-* **Breaking API changes**: Occasionally, a new Dgraph release or Dgraph Cloud service
-update will include breaking API changes. When this happens, Dgraph Labs will notify
-Dgraph customers. This lets you plan for the impact of the breaking API change
-on your code, so you can make code changes before upgrading to the latest version.
+* **Breaking API changes**: Occasionally, a new Dgraph release or Dgraph Cloud
+service update will include breaking API changes. When this happens, Dgraph Labs
+will provide advance notice to Dgraph customers so they can update their code 
+to work with the breaking API change.
 * **Data format changes**: Occasionally, Dgraph Cloud service updates will include
 changes to the underlying data format. When this happens, Dgraph Labs will contact
 Dgraph Cloud customers to schedule a short upgrade window. During the upgrade,
 your Dgraph Cloud backend will switch to read-only.
 * **Dgraph Cloud rolling upgrades**: Dgraph Cloud service updates that don't
 include breaking API changes or data format changes are handled as rolling upgrades,
-with no impact on HA clusters and minimal impact on non-HA clusters (they will
-switch to read-only during the upgrade).
+with no impact on HA clusters and minimal impact on non-HA clusters (non-HA
+clusters switch to read-only during the upgrade).
 
-<!-- Original per @mrjn, for reference  
+<!-- Original API deprecation wording per Manish, for reviewer reference:  
 If there're API breaking changes, we'll give the user plenty of notice (months) and work with them to upgrade them to the new version — this might require code changes at their end, so we have to be more careful.
 
 If there're no API changes, but underlying data format changes, then we'd upgrade the user automatically based on the downtime slots the user chooses. Downtime for us means moving existing backend to "read-only" for 15-30 mins, and upgrading them.
