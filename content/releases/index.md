@@ -56,8 +56,7 @@ Dgraph Cloud customers to schedule a short upgrade window. During the upgrade,
 your Dgraph Cloud backend will switch to read-only.
 * **Dgraph Cloud rolling upgrades**: Dgraph Cloud service updates that don't
 include breaking API changes or data format changes are handled as rolling upgrades,
-with no impact on HA clusters and minimal impact on non-HA clusters (non-HA
-clusters switch to read-only during the upgrade).
+with no impact on HA clusters and a few minutes of downtime for non-HA clusters.
 
 <!-- Original API deprecation wording, for reviewer reference:  
 If there're API breaking changes, we'll give the user plenty of notice (months) and work with them to upgrade them to the new version — this might require code changes at their end, so we have to be more careful.
