@@ -86,9 +86,15 @@ docker run -it -p 7081:7081 --network dgraph_default -p 8081:8081 -p 9081:9081 -
 Notice the use of -o for server2 to override the default ports for server2.
 
 ### Run Dgraph's Ratel UI
+
 ```sh
 docker run -it -p 8000:8000 --network dgraph_default dgraph/dgraph:{{< version >}} dgraph-ratel
 ```
+
+{{% notice "note" %}} As an alternative to running Ratel using Docker, you can
+clone and build Ratel using the [instructions
+from the Ratel repository on GitHub](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md).
+{{% /notice %}}
 
 ## Run using Docker Compose (On single AWS instance)
 

@@ -3,7 +3,7 @@ date = "2020-31-08T19:35:35+11:00"
 title = "Connection"
 [menu.main]
     parent = "ratel"
-    weight = 1
+    weight = 2
 +++
 
 ## Recent Servers

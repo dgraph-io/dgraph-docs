@@ -3,7 +3,7 @@ date = "2020-31-08T19:35:35+11:00"
 title = "Backups"
 [menu.main]
     parent = "ratel"
-    weight = 5
+    weight = 6
 +++
 
 ## Backup
