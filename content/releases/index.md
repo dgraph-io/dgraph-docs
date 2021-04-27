@@ -52,7 +52,7 @@ will provide advance notice to Dgraph customers so they can update their code
 to work with the breaking API change.
 * **Data format changes**: Occasionally, Dgraph Cloud service updates will include
 changes to the underlying data format. When this happens, Dgraph Labs will contact
-Dgraph Cloud customers to schedule a short upgrade window. During the upgrade,
+Dgraph Cloud customers to schedule an upgrade window. During the upgrade,
 your Dgraph Cloud backend will switch to read-only.
 * **Dgraph Cloud rolling upgrades**: Dgraph Cloud service updates that don't
 include breaking API changes or data format changes are handled as rolling upgrades,
