@@ -37,10 +37,10 @@ Making our documentation easy to understand includes optimizing it for client-si
 
 We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to locally stage doc updates before or after creating a PR.
 
-1. Download and install the latest patch of hugo version v0.74.x from [here](https://github.com/gohugoio/hugo/releases/).
+1. Download and install the latest patch of hugo version v0.79.x from [here](https://github.com/gohugoio/hugo/releases/).
    ```bash
    pushd ~/Downloads
-   VERSION=v0.74
+   VERSION=v0.79
    TAG=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases | jq '.[].tag_name' -r | grep $VERSION | head -1)
    OS=$(uname -s)
    if [[ ${OS,,} == "darwin" ]]; then
