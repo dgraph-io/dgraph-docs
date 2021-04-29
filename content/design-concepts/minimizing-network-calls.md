@@ -16,7 +16,7 @@ In a distributed SQL/NoSQL database, this would require you to retrieve a lot of
 
 Method 1:
 
-* Find all the friends (~ 338 [friends](http://www.pewresearch.org/fact-tank/2014/02/03/6-new-facts-about-facebook/</ref>)).
+* Find all the friends (~ 338 [friends](https://www.pewresearch.org/fact-tank/2014/02/03/what-people-like-dislike-about-facebook/)).
 * Find all their friends (~ 338 * 338 = 40,000 people).
 * Find all the posts liked by these people over the last year (resulting set in millions).
 * Intersect these posts with posts authored by person X.

@@ -45,10 +45,10 @@ dgraph-ratel
 
 ## Run using Docker
 
-{{ notice "Note" }}
+{{% notice "note" %}}
 As of release v21.03, Dgraph no longer supports installation on Windows or macOS.
 Windows and macOS users who want to evaluate Dgraph can use the [standalone Docker image]({{<relref "dgraph-overview#to-run-dgraph-using-the-standalone-docker-image">}}).
-{{ /notice}}
+{{% /notice %}}
 
 Dgraph cluster can be setup running as containers on a single host. First, you'd want to figure out the host IP address. You can typically do that via
 

@@ -11,7 +11,7 @@ addition, Dgraph can now secure gRPC communications between Dgraph Alpha and
 Dgraph Zero server nodes using mutual TLS (mTLS). Dgraph can now also secure
 communications over the Dgraph Zero `gRPC-external-private` port used by
 Dgraph's Live Loader and Bulk Loader clients. To learn more about the HTTP and
-gRPC ports used by Dgraph Alpha and Dgraph Zero, see [Ports Usage](ports-usage).
+gRPC ports used by Dgraph Alpha and Dgraph Zero, see [Ports Usage]({{< relref "deploy/ports-usage" >}}).
 Password-protected private keys are **not supported**.
 
 To further improve TLS security, only TLS v1.2 cypher suites that use 128-bit or
