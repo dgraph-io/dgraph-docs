@@ -3,7 +3,7 @@ date = "2020-31-08T19:35:35+11:00"
 title = "Cluster"
 [menu.main]
     parent = "ratel"
-    weight = 4
+    weight = 5
 +++
 
 ## Cluster Management
