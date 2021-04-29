@@ -4,7 +4,7 @@ title = "Schema"
 [menu.main]
 	identifier = "schema-management"
     parent = "ratel"
-    weight = 3
+    weight = 4
 +++
 
 ## Predicate Section

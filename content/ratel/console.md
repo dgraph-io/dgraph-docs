@@ -3,7 +3,7 @@ date = "2020-31-08T19:35:35+11:00"
 title = "Console"
 [menu.main]
     parent = "ratel"
-    weight = 2
+    weight = 3
 +++
 
 ## Query Panel
