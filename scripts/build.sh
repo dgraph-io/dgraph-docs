@@ -24,30 +24,26 @@ PUBLIC="${PUBLIC:-public}"
 LOOP="${LOOP:-true}"
 # Binary of hugo command to run.
 HUGO="${HUGO:-hugo}"
-OLD_THEME="${OLD_THEME:-old-theme}"
-NEW_THEME="${NEW_THEME:-master}"
-
-# TODO - Maybe get list of released versions from Github API and filter
-# those which have docs.
+THEME_BRANCH="${THEME_BRANCH:-master}"
 
 # Place the latest version at the beginning so that version selector can
 # append '(latest)' to the version string, followed by the master version,
 # and then the older versions in descending order, such that the
 # build script can place the artifact in an appropriate location.
 
-# these versions use new theme
-NEW_VERSIONS=(
-        'v20.11'
-        'master'
-        'v20.07'
+getMajorVersions=$(curl -s https://get.dgraph.io/latest \
+| grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
+| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g")
+
+MAJOR_VERSIONS=(
+  $getMajorVersions
 )
 
-# these versions use old theme
-OLD_VERSIONS=(
-	'v20.03'
+VERSIONS_ARRAY=(
+  ${MAJOR_VERSIONS:0}
+  'master'
+  ${MAJOR_VERSIONS[@]:1}
 )
-
-VERSIONS_ARRAY=("${NEW_VERSIONS[@]}" "${OLD_VERSIONS[@]}")
 
 joinVersions() {
 	versions=$(printf ",%s" "${VERSIONS_ARRAY[@]}")
@@ -147,11 +143,11 @@ while true; do
 		[ ! -d 'themes/hugo-docs' ] && git clone https://github.com/dgraph-io/hugo-docs themes/hugo-docs
 	fi
 
-	# Lets check if the new theme was updated.
+	# Lets check if the theme was updated.
 	pushd themes/hugo-docs > /dev/null
 	git remote update > /dev/null
 	themeUpdated=1
-	if branchUpdated "${NEW_THEME}" ; then
+	if branchUpdated "${THEME_BRANCH}" ; then
 		echo -e "$(date) $GREEN Theme has been updated. Now will update the docs.$RESET"
 		themeUpdated=0
 	fi
@@ -160,30 +156,9 @@ while true; do
 	echo -e "$(date)  Starting to check branches."
 	git remote update > /dev/null
 
-	for version in "${NEW_VERSIONS[@]}"
+	for version in "${VERSIONS_ARRAY[@]}"
 	do
-	    latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
-		SETO="${latest_version:-master}" 
-		checkAndUpdate "$version" "$SETO"
-		echo "version => '$version'"
-		echo "latest_version => '$SETO'"
-		latest_version=''
-	done
-
-	# Lets check if the old theme was updated.
-	pushd themes/hugo-docs > /dev/null
-	themeUpdated=1
-	if branchUpdated "${OLD_THEME}" ; then
-		echo -e "$(date) $GREEN Theme has been updated. Now will update the docs.$RESET"
-		themeUpdated=0
-	fi
-	popd > /dev/null
-
-	git remote update > /dev/null
-
-	for version in "${OLD_VERSIONS[@]}"
-	do
-		latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
 		SETO="${latest_version:-master}" 
 		checkAndUpdate "$version" "$SETO"
 		echo "version => '$version'"
@@ -197,8 +172,8 @@ while true; do
 	popd > /dev/null
 
 	firstRun=0
-        if ! $LOOP; then
-            exit
-        fi
+  if ! $LOOP; then
+    exit
+  fi
 	sleep 60
 done

@@ -2,6 +2,9 @@ canonifyURLs = true
 languageCode = "en-us"
 theme = "hugo-docs"
 
+disableKinds = ["taxonomy"]
+ignoreErrors = ["error-disable-taxonomy"]
+
 [markup.goldmark.renderer]
 unsafe = true
 
@@ -32,3 +35,4 @@ title = "Dgraph Documentation"
 
 [params]
 discourse = "https://discuss.dgraph.io/"
+site = "dgraph-docs"
