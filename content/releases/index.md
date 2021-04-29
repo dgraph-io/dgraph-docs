@@ -58,7 +58,8 @@ your Dgraph Cloud backend will switch to read-only.
 include breaking API changes or data format changes are handled as rolling upgrades,
 with no impact on HA clusters and a few minutes of downtime for non-HA clusters.
 
-<!-- Original API deprecation wording, for reviewer reference:  
+<!--
+Original API deprecation wording, for reviewer reference:  
 If there're API breaking changes, we'll give the user plenty of notice (months) and work with them to upgrade them to the new version — this might require code changes at their end, so we have to be more careful.
 
 If there're no API changes, but underlying data format changes, then we'd upgrade the user automatically based on the downtime slots the user chooses. Downtime for us means moving existing backend to "read-only" for 15-30 mins, and upgrading them.
