@@ -7,6 +7,11 @@ description = "Introduction to Dgraph Database. Dgraph is a horizontally scalabl
     weight = 2
 +++
 
+{{% notice "tip" %}}
+Dgraph Cloud currently runs release v20.11. To see docs for that release, select
+**v20.11** from the drop-down on this page, or [click here](https://dgraph.io/docs/v20.11/dgraph-overview/).
+{{% /notice %}}
+
 Dgraph is a horizontally scalable and distributed GraphQL database with a graph
 backend. Dgraph is built for the heavy transactional workloads required to 
 power modern apps and websites, but it isn’t limited to only these types of
@@ -30,7 +35,7 @@ To learn more about how organizations are using Dgraph, see
 [Dgraph Case Studies](https://dgraph.io/case-studies).
 
 
-## Dgraph database and Dgraph cloud services
+## Dgraph database and Dgraph Cloud
 
 You can run Dgraph database in a variety of ways:
 
