@@ -63,6 +63,22 @@ Once logged in, the client can perform all the operations allowed to the `groot`
 If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
 
 ```python
+def from_slash_endpoint(slash_end_point, api_key):
+    """Returns Dgraph Client stub for the Slash GraphQL endpoint"""
+    url = urlparse(slash_end_point)
+    url_parts = url.netloc.split(".", 1)
+    host = url_parts[0] + ".grpc." + url_parts[1]
+    creds = grpc.ssl_channel_credentials()
+    call_credentials = grpc.metadata_call_credentials(
+        lambda context, callback: callback((("authorization", api_key),), None))
+    composite_credentials = grpc.composite_channel_credentials(
+        creds, call_credentials)
+    client_stub = DgraphClientStub('{host}:{port}'.format(
+        host=host, port="443"), composite_credentials, options=(('grpc.enable_http_proxy', 0),))
+    return client_stub
+```
+
+```python
 import pydgraph
 
 client_stub = pydgraph.DgraphClientStub.from_slash_endpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
