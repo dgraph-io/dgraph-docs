@@ -85,6 +85,33 @@ Once logged-in, the `dgraphClient` object can be used to do any further operatio
 If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows :
 
 ```java
+/**
+   * Creates a gRPC stub that can be used to construct clients to connect with Slash GraphQL.
+   *
+   * @param slashEndpoint The url of the Slash GraphQL endpoint. Example:
+   *     https://your-slash-instance.cloud.dgraph.io/graphql
+   * @param apiKey The API key used to connect to your Slash GraphQL instance.
+   * @return A new DgraphGrpc.DgraphStub object to be used with DgraphClient/DgraphAsyncClient.
+   */
+  public static DgraphGrpc.DgraphStub clientStubFromSlashEndpoint(
+      String slashEndpoint, String apiKey) throws MalformedURLException {
+    String[] parts = new URL(slashEndpoint).getHost().split("[.]", 2);
+    if (parts.length < 2) {
+      throw new MalformedURLException("Invalid Slash URL.");
+    }
+    String gRPCAddress = parts[0] + ".grpc." + parts[1];
+
+    Metadata metadata = new Metadata();
+    metadata.put(
+        Metadata.Key.of(gRPC_AUTHORIZATION_HEADER_NAME, Metadata.ASCII_STRING_MARSHALLER), apiKey);
+    return MetadataUtils.attachHeaders(
+        DgraphGrpc.newStub(
+            ManagedChannelBuilder.forAddress(gRPCAddress, 443).useTransportSecurity().build()),
+        metadata);
+  }
+```
+
+```java
 DgraphStub stub = DgraphClient.clientStubFromSlashEndpoint("https://civic-wine.us-west-2.aws.cloud.dgraph.io/graphql", "your-api-key");
 DgraphClient dgraphClient = new DgraphClient(stub);
 ```
