@@ -73,7 +73,7 @@ type User {
 
 With this schema, Dgraph requires a unique `username` when creating a new user. This schema provides the benefits of both of the previous examples above. Your app can then use the `getUser(...) { ... }` query to provide either the Dgraph-generated `id` or the externally-generated `username`.
 
-<!--
+<!-- 
 ### More to come
 
 We are currently considering allowing types other than `String` with `@id`, see [here](https://discuss.dgraph.io/t/id-with-type-int/10402)
