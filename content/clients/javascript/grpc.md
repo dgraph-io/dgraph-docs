@@ -82,35 +82,6 @@ Once logged in, the client can perform all the operations allowed to the `groot`
 If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
 
 ```js
-export function clientStubFromSlashGraphQLEndpoint(
-    graphqlEndpoint: string,
-    apiKey: string,
-) {
-    const url = new Url(graphqlEndpoint);
-    const urlParts = url.host.split(".");
-    const firstHalf = urlParts[0];
-    const secondHalf = `${urlParts.splice(1).join(".")}:${PORT}`;
-    const backenedURL = `${firstHalf}.grpc.${secondHalf}`;
-
-    const metaCreds = grpc.credentials.createFromMetadataGenerator(
-        (
-            _: Object,
-            callback: (_: undefined, metadata: grpc.Metadata) => void,
-        ) => {
-            const metadata = new grpc.Metadata();
-            metadata.add("authorization", apiKey);
-            callback(undefined, metadata);
-        },
-    );
-    const credentials = grpc.credentials.combineChannelCredentials(
-        grpc.credentials.createSsl(),
-        metaCreds,
-    );
-    return new DgraphClientStub(backenedURL, credentials);
-}
-```
-
-```js
 const dgraph = require("dgraph-js");
 
 const clientStub = dgraph.clientStubFromSlashGraphQLEndpoint(
@@ -119,6 +90,10 @@ const clientStub = dgraph.clientStubFromSlashGraphQLEndpoint(
 );
 const dgraphClient = new dgraph.DgraphClient(clientStub);
 ```
+
+{{% notice "note" %}}
+The `dgraph.clientStubFromSlashGraphQLEndpoint()` method has been deprecated and will be removed in v21.07.
+{{% /notice %}}
 
 ### Altering the Database
 
