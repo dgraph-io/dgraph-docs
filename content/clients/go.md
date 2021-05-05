@@ -92,41 +92,19 @@ Once logged in, the client can perform all the operations allowed to the `groot`
 
 If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
 
-
-```go
-func DialSlashEndpoint(endpoint, key string) (*grpc.ClientConn, error) {
-	u, err := url.Parse(endpoint)
-	if err != nil {
-		return nil, err
-	}
-
-	urlParts := strings.SplitN(u.Host, ".", 2)
-
-	host := urlParts[0] + ".grpc." + urlParts[1] + ":" + slashPort
-	pool, err := x509.SystemCertPool()
-	if err != nil {
-		return nil, err
-	}
-
-	creds := credentials.NewClientTLSFromCert(pool, "")
-	return grpc.Dial(
-		host,
-		grpc.WithTransportCredentials(creds),
-		grpc.WithPerRPCCredentials(&authCreds{key}),
-	)
-}
-```
-
-
 ```go
 // This example uses dgo
-conn, err := dgo.DialSlashEndpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
+conn, err := dgo.DialCloud("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
 if err != nil {
   log.Fatal(err)
 }
 defer conn.Close()
 dgraphClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
 ```
+
+{{% notice "note" %}}
+The `dgo.DialSlashEndpoint()` method has been deprecated and will be removed in v21.07. Please use `dgo.DialCloud()` instead.
+{{% /notice %}}
 
 ## Alter the database
 
