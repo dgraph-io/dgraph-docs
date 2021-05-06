@@ -6,13 +6,13 @@ weight = 13
   parent = "graphql"
 +++
 
-How to use GraphQL on an existing Dgraph instance.
+## How to use GraphQL on an existing Dgraph instance
 
 If you have an existing Dgraph instance and want to also expose GraphQL, you need to add a GraphQL schema that maps to your Dgraph schema.  You don't need to expose your entire Dgraph schema as GraphQL, but do note that adding a GraphQL schema can alter the Dgraph schema.
 
 Dgraph also allows type and edge names that aren't valid in GraphQL, so, often, you'll need to expose valid GraphQL names. Dgraph admits special characters and even different languages (see [here](https://docs.dgraph.io/query-language/#predicate-name-rules)), while the GraphQL Spec requires that type and field (predicate) names are generated from `/[_A-Za-z][_0-9A-Za-z]*/`.
 
-# Mapping GraphQL to a Dgraph schema
+## Mapping GraphQL to a Dgraph schema
 
 By default, Dgraph generates a new predicate for each field in a GraphQL type. The name of the generated predicate is composed of the type name followed by a dot `.` and ending with the field name. Therefore, two different types with fields of the same name will turn out to be different Dgraph predicates and can have different indexes.  For example, the types:
 
@@ -95,7 +95,64 @@ type Movie {
 
 *Note: the current behavior requires that when two fields are mapped to the same Dgraph predicate both should have the same `@search` directive.  This is likely to change in a future release where the underlying Dgraph indexes will be the union of the `@search` directives, while the generated GraphQL API will expose only the search given for the particular field.  Allowing, for example, dgraph predicate name to have `term` and `hash` indexes, but exposing only term search for GraphQL movies and hash search for GraphQL people.*
 
-# Roadmap
+## Language tag support in GraphQL
+
+In your GraphQL schema, you need to define different fields for each language tag that you want to use. 
+You also need to set the Dgraph predicate name of the untagged field in the `@dgraph` argument of language tag field. 
+Dgraph will automatically add a `@lang` directive in the Dgraph schema for the corresponding predicate.
+
+For example:
+
+```graphql
+type Person {
+     name: String   // Person.name is the corresponding dgraph field for this field
+     nameHi: String @dgraph(pred:"Person.name@hi")
+     nameEn: String @dgraph(pred:"Person.name@en")
+     nameHi_En:  String @dgraph(pred:"Person.name@hi:en") // won't be added to mutation patch
+     nameHi_En_untag:  String @dgraph(pred:"Person.name@hi:en:.") //won't be added to mutation patch
+  }
+```
+
+
+{{% notice "tip" %}}
+The Dgraph predicate name for the corresponding GraphQL field is defined as `typename.fieldname`.
+{{% /notice %}}
+
+For example, in `nameHi: String @dgraph(pred:"Person.name@hi")`, the Dgraph predicate for the corresponding field name in GraphQL is `Person.name`.
+If you set the argument with a different field name, then it won’t work as expected.
+
+{{% notice "note" %}}
+You need to define all language fields at one place, either in Type or in the Interface.
+Dgraph won’t add fields in mutation patch which have multiple language tags.
+For example, field `nameHi_En: String @dgraph(pred:"Person.name@hi:en")` can only be queried.
+{{% /notice %}}
+
+### Limitations
+
+- Dgraph won’t be able to query `Person.name@*` type of code because it returns a list. Although this can be achieved by querying all the codes.
+- Fields which  corresponding to multiple language tags, such as: 
+    ```graphql
+    nameHiEn: String @dgraph(pred: "Person.name@hi:en"`)
+    nameHi_En_Untag: String @dgraph(pred: "Person.name@hi:en:.")
+    ```
+  are not updatable/mutable, and won’t be added to update/add, mutation/reference type or in any filter, orders type.
+
+### Interaction with exiting directives for language tagged fields
+
+**Schema directives**
+
+- `@id`: currently not required.
+- `@search`: applicable only on one field (tagged or untagged value) and will apply on all GraphQL fields which map to the same Dgraph predicate.
+- `@lambda`: doesn’t work with `@dgraph` directive
+- `@custom`: doesn’t work with `@dgraph` directive
+- `@hasinverse`: doesn’t apply on `String` fields
+
+**Query directives**
+
+- `@skip`: Work normally as with other fields
+- `@include`: Work normally as with other fields
+
+## Roadmap
 
 Be careful with mapping to an existing Dgraph instance.  Updating the GraphQL schema updates the underlying Dgraph schema. We understand that exposing a GraphQL API on an existing Dgraph instance is a delicate process and we plan on adding multiple checks to ensure the validity of schema changes to avoid issues caused by detectable mistakes.
 
