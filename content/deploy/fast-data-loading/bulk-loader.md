@@ -254,7 +254,7 @@ This will print the following message:
 ```
 {"startId":"1","endId":"10000000","readOnly":"0"}
 ```
-Now you need to double-check if this timestamp has been increased correctly. This can be checked by sending a `curl` request to the zero `/state` endpoint:
+Now you need to confirm whether this timestamp has been increased as expected. You can do this by sending a `curl` request to the zero `/state` endpoint, as follows:
 
 ```
 curl zero-address:port/state | jq
