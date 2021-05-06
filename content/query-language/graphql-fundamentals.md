@@ -12,7 +12,9 @@ DQL is a work in progress. We're adding more features and we might further simpl
 
 ## Take a Tour - https://dgraph.io/tour/
 
-This document is the Dgraph query reference material.  It is not a tutorial.  It's designed as a reference for users who already know how to write queries in DQL but need to check syntax, or indices, or functions, etc.
+This document provides the language reference for DQL. Rather than a tutorial,
+it provides a reference for users who already know how to write queries in DQL
+but need to check syntax or other language features (indices, functions, etc.).
 
 {{% notice "note" %}}If you are new to Dgraph and want to learn how to use Dgraph and DQL, take the tour - https://dgraph.io/tour/{{% /notice %}}
 
@@ -20,6 +22,52 @@ This document is the Dgraph query reference material.  It is not a tutorial.  It
 ### Running examples
 
 The examples in this reference use a database of 21 million triples about movies and actors.  The example queries run and return results.  The queries are executed by an instance of Dgraph running at https://play.dgraph.io/.  To run the queries locally or experiment a bit more, see the [Getting Started]({{< relref "get-started/index.md" >}}) guide, which also shows how to load the datasets used in the examples here.
+
+#### Example database schema
+
+The example movie database uses the following schema:
+
+```
+# Define Directives and index
+
+director.film: [uid] @reverse .
+actor.film: [uid] @count .
+genre: [uid] @reverse .
+initial_release_date: dateTime @index(year) .
+name: string @index(exact, term) @lang .
+starring: [uid] .
+performance.film: [uid] .
+performance.character_note: string .
+performance.character: [uid] .
+performance.actor: [uid] .
+performance.special_performance_type: [uid] .
+type: [uid] .
+
+# Define Types
+
+type Person {
+    name
+    director.film
+    actor.film
+}
+
+type Movie {
+    name
+    initial_release_date
+    genre
+    starring
+}
+
+type Genre {
+    name
+}
+
+type Performance {
+    performance.film
+    performance.character
+    performance.actor
+}
+```
 
 ## Queries
 
