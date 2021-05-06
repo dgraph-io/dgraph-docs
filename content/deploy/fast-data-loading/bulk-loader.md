@@ -274,7 +274,7 @@ At the end of the response, look for the value shown for `"maxTxnTs"`. This valu
     "enabled": true
   }
 ```
-Only at this point you can start all your Alpha nodes and check that the Snapshot created has a `ReadTs` equal or higher that the `"maxTxnTs"`.
+Now, start your Alpha nodes and check that the Snapshot created has a `ReadTs` value that's greater than or equal to the `"maxTxnTs"` value you viewed in the previous step.
 
 ```
 I0322 14:52:40.858626 2885131 draft.go:606] Creating snapshot at Index: 180, ReadTs: 10000011
