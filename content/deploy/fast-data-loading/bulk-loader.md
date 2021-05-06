@@ -242,7 +242,7 @@ Note that `snapshot at index` value must be the same within the same Alpha group
 
 ### Using "p" directories coming from different Dgraph clusters
 
-In case you are using a `p` directory coming from a different Dgraph cluster (e.g. you are copying the `p` directory from your current Dgraph cluster and you want to spin up another Dgraph cluster using the same `p`) you will need to do an additional step before starting your Alpha nodes. 
+In some cases, you might want to use the `p` directory from an existing Dgraph cluster when creating a new cluster. You can do this by copying the `p` directory from your current Dgraph cluster into the new cluster, but you will need to perform an additional step before starting the Alpha nodes in the new cluster, as described below. 
 
 After starting your Zero nodes, you need to increase the Zero's timestamp by sending the following `curl` request to the Zero leader node:
 
