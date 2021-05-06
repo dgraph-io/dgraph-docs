@@ -136,6 +136,72 @@ For example, field `nameHi_En: String @dgraph(pred:"Person.name@hi:en")` can onl
     nameHi_En_Untag: String @dgraph(pred: "Person.name@hi:en:.")
     ```
   are not updatable/mutable, and won’t be added to update/add, mutation/reference type or in any filter, orders type.
+  
+### Caveats
+
+Dgraph automatically adds the `@lang` directive to the untagged language field in the Dgraph schema.
+If an untagged language field doesn’t exist for a language tagged field, then Dgraph automatically adds that field in the corresponding Dgraph schema.
+
+For example, consider the following GraphQL schema:
+
+```graphql
+type Person {   
+     name: String! @id    
+     nameHi: String @dgraph(pred: "Person.name@hi") @search(by: [term, exact])  
+     professionEn: String @dgraph(pred: "Person.profession@en")
+ }
+```
+
+The generated Dgraph schema will be:
+
+```graphql
+ type Person {     
+     Person.name
+     Person.profession 
+ }
+
+Person.name: string @index(exact, hash, term) @lang @upsert .
+Person.profession: string @lang .
+```
+
+It is also possible that an untagged field is defined in the interface and a tagged field is defined in an implementation type. 
+There can also be a case where the type specified in the tagged language field doesn’t exist in the GraphQL schema.
+In that case, Dgraph simply assumes that the DQL schema already has that type and generates the corresponding predicate with a `@lang` predicate.
+
+For example:
+
+```graphql
+interface Node {
+  f1: String
+}
+
+type Person implements Node {
+    f1Hi: String @dgraph(pred: "Node.f1@hi")
+    f2: String @dgraph(pred: "T.f@no")
+
+    name: String! @id
+
+}
+```
+
+The generated Dgraph schema:
+
+```graphql
+type Node {
+    Node.f1
+}
+
+Node.f1: string @lang .
+
+type Person {
+    Node.f1
+    T.f
+    Person.name
+}
+
+T.f: string @lang .
+Person.name: string @index(hash) @upsert .
+```
 
 ### Interaction with exiting directives for language tagged fields
 
