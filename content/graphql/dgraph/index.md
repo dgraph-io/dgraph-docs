@@ -118,14 +118,11 @@ type Person {
 By default, the DQL predicate for a GraphQL field is generated as `Typename.FieldName`.
 {{% /notice %}}
 
-For example, in `nameHi: String @dgraph(pred:"Person.name@hi")`, the Dgraph predicate for the corresponding field name in GraphQL is `Person.name`.
-If you set the argument with a different field name, then it won’t work as expected.
+If a GraphQL field uses more than one language tag, then it won't be part of any mutation input. Like, in the above example the fields `nameHi_En` and `nameHi_En_untag` can't be given as an input to any mutation. Only the fields which use one or no language can be given in a mutation input, like `name`, `nameHi`, and `nameEn`.
 
-{{% notice "note" %}}
-You need to define all language fields at one place, either in Type or in the Interface.
-Dgraph won’t add fields in mutation patch which have multiple language tags.
-For example, field `nameHi_En: String @dgraph(pred:"Person.name@hi:en")` can only be queried.
-{{% /notice %}}
+All the fields can be queried, irrespective of whether they use one language or more.
+
+To know more about language support in DQL, please refer: https://dgraph.io/docs/master/tutorial-4
 
 ### Limitations
 
