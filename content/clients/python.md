@@ -65,9 +65,13 @@ If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dg
 ```python
 import pydgraph
 
-client_stub = pydgraph.DgraphClientStub.from_slash_endpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
+client_stub = pydgraph.DgraphClientStub.from_cloud("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
 client = pydgraph.DgraphClient(client_stub)
 ```
+
+{{% notice "note" %}}
+The `DgraphClientStub.from_slash_endpoint()` method has been deprecated and will be removed in v21.07. Please use `DgraphClientStub.from_cloud()` instead.
+{{% /notice %}}
 
 ### Altering the Database
 
