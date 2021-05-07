@@ -97,25 +97,25 @@ type Movie {
 
 ## Language support in GraphQL
 
-In your GraphQL schema, you need to define different fields for each language tag that you want to use. 
-You also need to set the Dgraph predicate name of the untagged field in the `@dgraph` argument of language tag field. 
-Dgraph will automatically add a `@lang` directive in the Dgraph schema for the corresponding predicate.
+In your GraphQL schema, you need to define a field for each language that you want to use. 
+In addition, you also need to apply the `@dgraph(pred: "...")` directive on that field, with the `pred` argument set to point to the correct DQL predicate with a language tag for the language that you want to use it for.
+Dgraph will automatically add a `@lang` directive in the DQL schema for the corresponding predicate.
 
 For example:
 
 ```graphql
 type Person {
      name: String   # Person.name is the auto-generated DQL predicate for this GraphQL field, unless overridden using @dgraph(pred: "...")
-     nameHi: String @dgraph(pred:"Person.name@hi")
+     nameHi: String @dgraph(pred:"Person.name@hi") # this field exposes the value for the language tag `@hi` for the DQL predicate `Person.name` to GraphQL
      nameEn: String @dgraph(pred:"Person.name@en")
-     nameHi_En:  String @dgraph(pred:"Person.name@hi:en") // won't be added to mutation patch
-     nameHi_En_untag:  String @dgraph(pred:"Person.name@hi:en:.") //won't be added to mutation patch
+     nameHi_En:  String @dgraph(pred:"Person.name@hi:en") # this field uses multiple language tags: `@hi` and `@en`
+     nameHi_En_untag:  String @dgraph(pred:"Person.name@hi:en:.") # as this uses `.`, it will give untagged values if there is no value for `@hi` or `@en`
   }
 ```
 
 
 {{% notice "tip" %}}
-The Dgraph predicate name for the corresponding GraphQL field is defined as `typename.fieldname`.
+By default, the DQL predicate for a GraphQL field is generated as `Typename.FieldName`.
 {{% /notice %}}
 
 For example, in `nameHi: String @dgraph(pred:"Person.name@hi")`, the Dgraph predicate for the corresponding field name in GraphQL is `Person.name`.
