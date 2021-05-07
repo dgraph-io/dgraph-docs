@@ -126,14 +126,7 @@ To know more about language support in DQL, please refer: https://dgraph.io/docs
 
 ### Limitations
 
-- Dgraph won’t be able to query `Person.name@*` type of code because it returns a list. Although this can be achieved by querying all the codes.
-- Fields which  corresponding to multiple language tags, such as: 
-    ```graphql
-    nameHiEn: String @dgraph(pred: "Person.name@hi:en"`)
-    nameHi_En_Untag: String @dgraph(pred: "Person.name@hi:en:.")
-    ```
-  are not updatable/mutable, and won’t be added to update/add, mutation/reference type or in any filter, orders type.
-  
+GraphQL won’t be able to query `Person.name@*` type of language tags because of the structural requirements of GraphQL.
 ### Caveats
 
 Dgraph automatically adds the `@lang` directive to the untagged language field in the Dgraph schema.
