@@ -105,7 +105,7 @@ For example:
 
 ```graphql
 type Person {
-     name: String   // Person.name is the corresponding dgraph field for this field
+     name: String   # Person.name is the auto-generated DQL predicate for this GraphQL field, unless overridden using @dgraph(pred: "...")
      nameHi: String @dgraph(pred:"Person.name@hi")
      nameEn: String @dgraph(pred:"Person.name@en")
      nameHi_En:  String @dgraph(pred:"Person.name@hi:en") // won't be added to mutation patch
