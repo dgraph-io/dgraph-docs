@@ -11,7 +11,7 @@ Dgraph provides two types of built-in identifiers: the `ID` scalar type and the 
 * The `ID` scalar type is used when you don't need to set an identifier outside of Dgraph.
 * The `@id` directive is used for external identifiers, such as email addresses.
 
-### The `ID` type
+## The `ID` type
 
 In Dgraph, every node has a unique 64-bit identifier that you can expose in GraphQL using the `ID` type. An `ID` is auto-generated, immutable and never reused. Each type can have at most one `ID` field.
 
@@ -32,7 +32,7 @@ For input and output, `ID`s are treated as strings.
 
 You can also update and delete posts by `ID`.
 
-### The `@id` directive
+## The `@id` directive
 
 For some types, you'll need a unique identifier set from outside Dgraph.  A common example is a username.
 
@@ -82,8 +82,35 @@ query {
 
 This will yield a positive response if both the `name` **and** `isbn` match any data in the database.
 
+### Unique `@id` on interfaces
 
-### Combining `ID` and `@id`
+Dgraph allows the `@id` field on interfaces to be unique across all the implementing types. 
+In order to enforce this constraint, you need to set the boolean argument `interface` in the `@id` field.
+
+If the `interface` argument is not present or its value is `false`, then that field will be unique only for one implementing type.
+Such fields won't be allowed in argument to get query on interface in the future.
+
+{{% notice "note" %}}
+If an `@id` field in interface type has an `interface` argument set, then its value will be unique across all the implementing types.
+{{% /notice %}}
+
+You will get an error if you try to add a node with such a field and there is already a node with the same value of that field even in some other implementing types. This is valid for other scenarios like adding nested values or while using upserts.
+
+For example:
+
+```graphql
+interface LibraryItem {
+    refID: String! @id                     #  This field is unique only for one implementing type
+    itemID: String! @id(interface:true)    #  This field will be unique over all the implementing types inheriting this interface
+}
+
+type Book implements LibraryItem {
+    title: String
+    author: String
+}
+```
+
+## Combining `ID` and `@id`
 
 You can use both the `ID` type and the `@id` directive on another field definition to have both a unique identifier and a generated identifier.
 
