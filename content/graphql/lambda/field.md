@@ -14,12 +14,12 @@ For example, to define a lambda function for the `rank` and `bio` fields in `Aut
 
 ```graphql
 type Author {
-        id: ID!
-        name: String! @search(by: [hash, trigram])
-        dob: DateTime @search
-        reputation: Float @search
-        bio: String @lambda
-        rank: Int @lambda
+  id: ID!
+  name: String! @search(by: [hash, trigram])
+  dob: DateTime @search
+  reputation: Float @search
+  bio: String @lambda
+  rank: Int @lambda
 }
 ```
 
@@ -27,17 +27,17 @@ You can also define `@lambda` fields on interfaces:
 
 ```graphql
 interface Character {
-        id: ID!
-        name: String! @search(by: [exact])
-        bio: String @lambda
+  id: ID!
+  name: String! @search(by: [exact])
+  bio: String @lambda
 }
 
 type Human implements Character {
-        totalCredits: Float
+  totalCredits: Float
 }
 
 type Droid implements Character {
-        primaryFunction: String
+  primaryFunction: String
 }
 ```
 
@@ -69,10 +69,10 @@ const humanBio = ({parent: {name, totalCredits}}) => `My name is ${name}. I have
 const droidBio = ({parent: {name, primaryFunction}}) => `My name is ${name}. My primary function is ${primaryFunction}.`
 
 self.addGraphQLResolvers({
-    "Author.bio": authorBio,
-    "Character.bio": characterBio,
-    "Human.bio": humanBio,
-    "Droid.bio": droidBio
+  "Author.bio": authorBio,
+  "Character.bio": characterBio,
+  "Human.bio": humanBio,
+  "Droid.bio": droidBio
 })
 ```
 
@@ -80,17 +80,17 @@ Another example, adding a resolver for `rank` using a `graphql` call:
 
 ```javascript
 async function rank({parents}) {
-    const idRepList = parents.map(function (parent) {
-        return {id: parent.id, rep: parent.reputation}
-    });
-    const idRepMap = {};
-    idRepList.sort((a, b) => a.rep > b.rep ? -1 : 1)
-        .forEach((a, i) => idRepMap[a.id] = i + 1)
-    return parents.map(p => idRepMap[p.id])
+  const idRepList = parents.map(function (parent) {
+    return {id: parent.id, rep: parent.reputation}
+  });
+  const idRepMap = {};
+  idRepList.sort((a, b) => a.rep > b.rep ? -1 : 1)
+    .forEach((a, i) => idRepMap[a.id] = i + 1)
+  return parents.map(p => idRepMap[p.id])
 }
 
 self.addMultiParentGraphQLResolvers({
-    "Author.rank": rank
+  "Author.rank": rank
 })
 ```
 
