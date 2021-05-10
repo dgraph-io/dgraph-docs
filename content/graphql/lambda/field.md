@@ -24,7 +24,7 @@ type Author {
 }
 ```
 
-You can also define `@lambda` fields on interfaces:
+You can also define `@lambda` fields on interfaces, as follows:
 
 ```graphql
 interface Character {
@@ -44,7 +44,7 @@ type Droid implements Character {
 
 ### Resolvers
 
-Once the schema is ready, you can define your JavaScript mutation function and add it as a resolver in your JS source code. 
+After the schema is ready, you can define your JavaScript mutation function and add it as a resolver in your JS source code. 
 To add the resolver you can use either the `addGraphQLResolvers` or `addMultiParentGraphQLResolvers` methods.
 
 {{% notice "note" %}}
@@ -95,8 +95,8 @@ self.addMultiParentGraphQLResolvers({
 })
 ```
 
-The following example demonstrates using the client-provided JWT to return true if the custom claim
-for `USER` from the JWT matches the Author's `id`.`
+The following example demonstrates using the client-provided JWT to return `true` if the custom claim
+for `USER` from the JWT matches the `id` of the `Author`.
 
 ```javascript
 async function isMe({ parent, authHeader }) {
@@ -119,7 +119,7 @@ self.addGraphQLResolvers({
 
 ### Example
 
-If you execute this GraphQL query
+For example, if you execute the following GraphQL query:
 
 ```graphql
 query {
@@ -132,7 +132,7 @@ query {
 }
 ```
 
-You should see a response such as
+...you should see a response such as the following:
 
 ```json
 {
@@ -147,7 +147,7 @@ You should see a response such as
 }
 ```
 
-In the same way, if you execute this GraphQL query on the `Character` interface
+In the same way, if you execute the following GraphQL query on the `Character` interface:
 
 ```graphql
 query {
@@ -158,7 +158,7 @@ query {
 }
 ```
 
-You should see a response such as
+...you should see a response such as the following:
 
 ```json
 {
@@ -175,9 +175,11 @@ You should see a response such as
 }
 ```
 
-Note that the `Human` and `Droid` types will inherit the `bio` lambda field from the `Character` interface. 
+{{% notice "Note" %}}
+The `Human` and `Droid` types will inherit the `bio` lambda field from the `Character` interface. 
+{{% /notice %}}
 
-For example, if you execute a `queryHuman` query with a selection set containing `bio`, then the lambda function registered for `Human.bio` will be executed:
+For example, if you execute a `queryHuman` query with a selection set containing `bio`, then the lambda function registered for `Human.bio` is executed, as follows:
 
 ```graphql
 query {
@@ -188,7 +190,7 @@ query {
 }
 ```
 
-Response:
+This query generates the following response:
 
 ```json
 {

@@ -10,9 +10,9 @@ weight = 1
 
 Lambda provides a way to write your custom logic in JavaScript, integrate it with your GraphQL schema, and execute it using the GraphQL API in a few easy steps:
 
-- Setup a Dgraph cluster with a working lambda server (not required for [Dgraph Cloud](https://dgraph.io/cloud) users)
-- Declare lambda queries, mutations, and fields in your GraphQL schema as needed
-- Define lambda resolvers for them in a JavaScript file
+1. Set up a Dgraph cluster with a working lambda server (not required for [Dgraph Cloud](https://dgraph.io/cloud) users)
+2. Declare lambda queries, mutations, and fields in your GraphQL schema as needed
+3. Define lambda resolvers for them in a JavaScript file
 
 This also simplifies the job of developers, as they can build a complex backend that is rich with business logic, without setting up multiple different services. Also, you can build your backend in JavaScript, which means you can build both your frontend and backend using the same language.
 
@@ -30,7 +30,7 @@ If you're using [Dgraph Cloud](https://dgraph.io/cloud), the final compiled scri
 
 There are three places where you can use the `@lambda` directive and thus tell Dgraph where to apply custom JavaScript logic.
 
-1. You can add lambda fields to your types and interfaces
+- You can add lambda fields to your types and interfaces, as follows:
 
 ```graphql
 type MyType {
@@ -39,7 +39,7 @@ type MyType {
 }
 ```
 
-2. You can add lambda queries to the Query type
+- You can add lambda queries to the Query type, as follows:
 
 ```graphql
 type Query {
@@ -47,7 +47,7 @@ type Query {
 }
 ```
 
-3. You can add lambda mutations to the Mutation type
+- You can add lambda mutations to the Mutation type, as follows:
 
 ```graphql
 type Mutation {
@@ -220,7 +220,7 @@ self.addMultiParentGraphQLResolvers({
 Scripts containing import packages (such as the example above) require compilation using Webpack.
 {{% /notice %}}
 
-A resolver example using a `dql` call:
+The following example resolver uses a `dql` call:
 
 ```javascript
 async function reallyComplexDql({parents, dql}) {
@@ -234,7 +234,7 @@ self.addMultiParentGraphQLResolvers({
 })
 ```
 
-A resolver example using a `graphql` call and manually overriding the authHeader provided by the client:
+The following resolver example uses a `graphql` call and manually overrides the `authHeader` provided by the client:
 
 ```javascript
 async function secretGraphQL({ parents, graphql }) {
@@ -272,7 +272,7 @@ self.addMultiParentGraphQLResolvers({
 
 ## Example
 
-If you execute this lambda query
+For example, if you execute the following lambda query:
 
 ```graphql
 query {
@@ -282,7 +282,7 @@ query {
 }
 ```
 
-You should see a response such as
+...you should see a response such as the following:
 
 ```json
 {
@@ -296,7 +296,7 @@ You should see a response such as
 
 ## Learn more
 
-Find out more about the  `@lambda` directive here:
+To learn more about the `@lambda` directive, see:
 
 * [Lambda fields](/graphql/lambda/field)
 * [Lambda queries](/graphql/lambda/query)
