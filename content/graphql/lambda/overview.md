@@ -34,8 +34,8 @@ There are three places where you can use the `@lambda` directive and thus tell D
 
 ```graphql
 type MyType {
-    ...
-    customField: String @lambda
+  ...
+  customField: String @lambda
 }
 ```
 
@@ -43,7 +43,7 @@ type MyType {
 
 ```graphql
 type Query {
-    myCustomQuery(...): QueryResultType @lambda
+  myCustomQuery(...): QueryResultType @lambda
 }
 ```
 
@@ -51,7 +51,7 @@ type Query {
 
 ```graphql
 type Mutation {
-    myCustomMutation(...): MutationResult @lambda
+  myCustomMutation(...): MutationResult @lambda
 }
 ```
 
@@ -112,7 +112,7 @@ In the following example, the resolver function `myTypeResolver` registered for 
 const myTypeResolver = ({parent: {customField}}) => `My value is ${customField}.`
 
 self.addGraphQLResolvers({
-    "MyType.customField": myTypeResolver
+  "MyType.customField": myTypeResolver
 })
 ```
 
@@ -176,10 +176,10 @@ In the following example, the resolver function `rank()` registered for the `ran
 
 ```graphql
 type Author {
-    id: ID!
-    name: String! @search(by: [hash, trigram])
-    reputation: Float @search
-    rank: Int @lambda
+  id: ID!
+  name: String! @search(by: [hash, trigram])
+  reputation: Float @search
+  rank: Int @lambda
 }
 ```
 
@@ -190,13 +190,13 @@ import { sortBy } from 'lodash';
 This function computes the rank of each author based on the reputation of the author relative to other authors.
 */
 async function rank({parents}) {
-    const idRepMap = {};
-    sortBy(parents, 'reputation').forEach((parent, i) => idRepMap[parent.id] = parents.length - i)
-    return parents.map(p => idRepMap[p.id])
+  const idRepMap = {};
+  sortBy(parents, 'reputation').forEach((parent, i) => idRepMap[parent.id] = parents.length - i)
+  return parents.map(p => idRepMap[p.id])
 }
 
 self.addMultiParentGraphQLResolvers({
-    "Author.rank": rank
+  "Author.rank": rank
 })
 ```
 
@@ -224,9 +224,9 @@ If you execute this lambda query
 
 ```graphql
 query {
-	queryMyType {
-		customField
-	}
+  queryMyType {
+    customField
+  }
 }
 ```
 
@@ -234,11 +234,11 @@ You should see a response such as
 
 ```json
 {
-	"queryMyType": [
-		{
-			"customField":"My value is Lambda Example"
-		}
-	]
+  "queryMyType": [
+    {
+      "customField":"My value is Lambda Example"
+    }
+  ]
 }
 ```
 
