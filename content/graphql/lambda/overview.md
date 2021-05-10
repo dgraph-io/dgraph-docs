@@ -76,6 +76,8 @@ Available only for types and interfaces (`null` for queries and mutations)
 - `args`,  the set of arguments for lambda queries and mutations
 - `graphql`, a function to execute auto-generated GraphQL API calls from the lambda server. The user's auth header is passed back to the `graphql` function, so this can be used securely
 - `dql`, provides an API to execute DQL from the lambda server
+- `authHeader`, provides the JWT key and value of the auth header passed from
+  the client
 
 The `addGraphQLResolvers` can be represented with the following TypeScript types:
 
@@ -142,6 +144,8 @@ This method takes an object as an argument, which maps a resolver name to the re
 - `args`,  the set of arguments for lambda queries and mutations (`null` for types and interfaces)
 - `graphql`, a function to execute auto-generated GraphQL API calls from the lambda server
 - `dql`, provides an API to execute DQL from the lambda server
+- `authHeader`, provides the JWT key and value of the auth header passed from
+  the client
 
 The `addMultiParentGraphQLResolvers` can be represented with the following TypeScript types:
 
