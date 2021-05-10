@@ -24,6 +24,10 @@ These third-party clients are contributed by the community and are not officiall
 - https://github.com/liveforeverx/dlex
 - https://github.com/ospaarmann/exdgraph
 
+## Go
+
+- https://github.com/fenos/dqlx
+
 ## JavaScript
 
 - https://github.com/ashokvishwakarma/dgraph-orm
