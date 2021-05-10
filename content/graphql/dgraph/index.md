@@ -101,6 +101,10 @@ In your GraphQL schema, you need to define a field for each language that you wa
 In addition, you also need to apply the `@dgraph(pred: "...")` directive on that field, with the `pred` argument set to point to the correct DQL predicate with a language tag for the language that you want to use it for.
 Dgraph will automatically add a `@lang` directive in the DQL schema for the corresponding predicate.
 
+{{% notice "tip" %}}
+By default, the DQL predicate for a GraphQL field is generated as `Typename.FieldName`.
+{{% /notice %}}
+
 For example:
 
 ```graphql
@@ -113,20 +117,15 @@ type Person {
   }
 ```
 
-
-{{% notice "tip" %}}
-By default, the DQL predicate for a GraphQL field is generated as `Typename.FieldName`.
-{{% /notice %}}
-
 If a GraphQL field uses more than one language tag, then it won't be part of any mutation input. Like, in the above example the fields `nameHi_En` and `nameHi_En_untag` can't be given as an input to any mutation. Only the fields which use one or no language can be given in a mutation input, like `name`, `nameHi`, and `nameEn`.
 
 All the fields can be queried, irrespective of whether they use one language or more.
 
-To know more about language support in DQL, please refer: https://dgraph.io/docs/master/tutorial-4
-
-### Limitations
-
+{{% notice "note" %}}
 GraphQL won’t be able to query `Person.name@*` type of language tags because of the structural requirements of GraphQL.
+{{% /notice %}}
+
+To know more about language support in DQL, please refer to [this tutorial]({{< relref "/tutorial-4/index.md" >}}).
 
 ## Roadmap
 
