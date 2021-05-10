@@ -20,6 +20,7 @@ type Author {
   reputation: Float @search
   bio: String @lambda
   rank: Int @lambda
+  isMe: Boolean @lambda
 }
 ```
 
@@ -76,7 +77,7 @@ self.addGraphQLResolvers({
 })
 ```
 
-Another example, adding a resolver for `rank` using a `graphql` call:
+For example, you can add a resolver for `rank` using a `graphql` call, as follows:
 
 ```javascript
 async function rank({parents}) {
@@ -94,17 +95,40 @@ self.addMultiParentGraphQLResolvers({
 })
 ```
 
+The following example demonstrates using the client-provided JWT to return true if the custom claim
+for `USER` from the JWT matches the Author's `id`.`
+
+```javascript
+async function isMe({ parent, authHeader }) {
+  if (!authHeader) return false;
+  if (!authHeader.value) return false;
+  const headerValue = authHeader.value;
+  if (headerValue === "") return false;
+  const base64Url = headerValue.split(".")[1];
+  const base = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const allClaims = JSON.parse(atob(base64));
+  if (!allClaims["https://my.app.io/jwt/claims"]) return false;
+  const customClaims = allClaims["https://my.app.io/jwt/claims"];
+  return customClaims.USER === parent.id;
+}
+
+self.addGraphQLResolvers({
+  "Author.isMe": isMe,
+});
+```
+
 ### Example
 
-If you execute this lambda query
+If you execute this GraphQL query
 
 ```graphql
 query {
-	queryAuthor {
-		name
-		bio
-		rank
-	}
+  queryAuthor {
+    name
+    bio
+    rank
+    isMe
+  }
 }
 ```
 
@@ -112,24 +136,25 @@ You should see a response such as
 
 ```json
 {
-	"queryAuthor": [
-		{
-			"name":"Ann Author",
-			"bio":"My name is Ann Author and I was born on 2000-01-01T00:00:00Z.",
-			"rank":3
-		}
-	]
+  "queryAuthor": [
+    {
+      "name":"Ann Author",
+      "bio":"My name is Ann Author and I was born on 2000-01-01T00:00:00Z.",
+      "rank":3,
+      "isMe": false
+    }
+  ]
 }
 ```
 
-In the same way, if you execute this lambda query on the `Character` interface
+In the same way, if you execute this GraphQL query on the `Character` interface
 
 ```graphql
 query {
-	queryCharacter {
-		name
-		bio
-	}
+  queryCharacter {
+    name
+    bio
+  }
 }
 ```
 
@@ -137,16 +162,16 @@ You should see a response such as
 
 ```json
 {
-	"queryCharacter": [
-		{
-			"name":"Han",
-			"bio":"My name is Han."
-		},
-		{
-			"name":"R2-D2",
-			"bio":"My name is R2-D2."
-		}
-	]
+  "queryCharacter": [
+    {
+      "name":"Han",
+      "bio":"My name is Han."
+    },
+    {
+      "name":"R2-D2",
+      "bio":"My name is R2-D2."
+    }
+  ]
 }
 ```
 
