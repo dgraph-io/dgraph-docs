@@ -84,11 +84,13 @@ This will yield a positive response if both the `name` **and** `isbn` match any 
 
 ### `@id` and interfaces
 
-By default, if used in an interface, the `@id` directive will ensure field uniqueness for each implementing type separately, i.e., the `@id` field in the interface won't be unique for the interface but for each of its implementing types. This allows two different types implementing the same interface to have the same value for the inherited `@id` field. 
+By default, if used in an interface, the `@id` directive will ensure field uniqueness for each implementing type separately.
+In this case, the `@id` field in the interface won't be unique for the interface but for each of its implementing types.
+This allows two different types implementing the same interface to have the same value for the inherited `@id` field. 
 
-But, there may be scenarios where this behavior might not be desired, and one may want to constrain the `@id` field to be unique across all the implementing types. In that case, you can set the `interface` argument of the `@id` directive to `true`, and Dgraph will ensure that the field has unique values across all the implementing types of an interface.
+There are scenarios where this behavior might not be desired, and you may want to constrain the `@id` field to be unique across all the implementing types. In that case, you can set the `interface` argument of the `@id` directive to `true`, and Dgraph will ensure that the field has unique values across all the implementing types of an interface.
 
-Here's an example:
+For example:
 
 ```graphql
 interface Item {
@@ -98,9 +100,14 @@ interface Item {
 
 type Book implements Item { ... }
 type Chair implements Item { ... }
-\```
+```
 
-Note that, in the above example, `itemID` won't be present as an argument to the `getItem` query as it might return more than one Item. i.e., `get` queries generated for an interface will have only the `@id(interface: true)` fields as arguments.
+In the above example, `itemID` won't be present as an argument to the `getItem` query as it might return more than one `Item`.
+
+{{% notice "note" %}}
+`get` queries generated for an interface will have only the `@id(interface: true)` fields as arguments.
+{{% /notice %}}
+
 ## Combining `ID` and `@id`
 
 You can use both the `ID` type and the `@id` directive on another field definition to have both a unique identifier and a generated identifier.
