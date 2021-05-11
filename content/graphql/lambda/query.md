@@ -10,6 +10,10 @@ weight = 3
 
 To set up a lambda query, first you need to define it on your GraphQL schema by using the `@lambda` directive.
 
+{{% notice "note" %}}
+`get`, `query`, and `aggregate` are reserved prefixes and they can't be used to define Lambda queries.
+{{% /notice %}}
+
 For example, to define a lambda query for `Author` that finds out authors given an author's `name`:
 
 ```graphql
