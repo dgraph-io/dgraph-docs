@@ -84,32 +84,23 @@ This will yield a positive response if both the `name` **and** `isbn` match any 
 
 ### `@id` and interfaces
 
-Dgraph allows the `@id` field on interfaces to be unique across all the implementing types. 
-In order to enforce this constraint, you need to set the boolean argument `interface` in the `@id` field.
+By default, if used in an interface, the `@id` directive will ensure field uniqueness for each implementing type separately, i.e., the `@id` field in the interface won't be unique for the interface but for each of its implementing types. This allows two different types implementing the same interface to have the same value for the inherited `@id` field. 
 
-If the `interface` argument is not present or its value is `false`, then that field will be unique only for one implementing type.
-Such fields won't be allowed in argument to get query on interface in the future.
+But, there may be scenarios where this behavior might not be desired, and one may want to constrain the `@id` field to be unique across all the implementing types. In that case, you can set the `interface` argument of the `@id` directive to `true`, and Dgraph will ensure that the field has unique values across all the implementing types of an interface.
 
-{{% notice "note" %}}
-If an `@id` field in interface type has an `interface` argument set, then its value will be unique across all the implementing types.
-{{% /notice %}}
-
-You will get an error if you try to add a node with such a field and there is already a node with the same value of that field even in some other implementing types. This is valid for other scenarios like adding nested values or while using upserts.
-
-For example:
+Here's an example:
 
 ```graphql
-interface LibraryItem {
-    refID: String! @id                     #  This field is unique only for one implementing type
-    itemID: String! @id(interface:true)    #  This field will be unique over all the implementing types inheriting this interface
+interface Item {
+  refID: Int! @id(interface: true) # if there is a Book with refID = 1, then there can't be a chair with that refID.
+  itemID: Int! @id # If there is a Book with itemID = 1, there can still be a Chair with the same itemID.
 }
 
-type Book implements LibraryItem {
-    title: String
-    author: String
-}
-```
+type Book implements Item { ... }
+type Chair implements Item { ... }
+\```
 
+Note that, in the above example, `itemID` won't be present as an argument to the `getItem` query as it might return more than one Item. i.e., `get` queries generated for an interface will have only the `@id(interface: true)` fields as arguments.
 ## Combining `ID` and `@id`
 
 You can use both the `ID` type and the `@id` directive on another field definition to have both a unique identifier and a generated identifier.
