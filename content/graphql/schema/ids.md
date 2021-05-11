@@ -82,7 +82,7 @@ query {
 
 This will yield a positive response if both the `name` **and** `isbn` match any data in the database.
 
-### Unique `@id` on interfaces
+### `@id` and interfaces
 
 Dgraph allows the `@id` field on interfaces to be unique across all the implementing types. 
 In order to enforce this constraint, you need to set the boolean argument `interface` in the `@id` field.
