@@ -11,37 +11,41 @@ While editing your schema, you might find it useful to include this GraphQL sche
 Don't include it in your input schema to Dgraph - use your editing environment to set it up as an import.  The details will depend on your setup.
 
 ```graphql
-# The Int64 scalar type represents a signed 64‐bit numeric non‐fractional value.
-# Int64 can represent values in range [-(2^63),(2^63 - 1)].
+"""
+The Int64 scalar type represents a signed 64‐bit numeric non‐fractional value.
+Int64 can represent values in range [-(2^63),(2^63 - 1)].
+"""
 scalar Int64
 
-# The DateTime scalar type represents date and time as a string in RFC3339 format.
-# For example: "1985-04-12T23:20:50.52Z" represents 20 minutes and 50.52 seconds after the 23rd hour of April 12th, 1985 in UTC.
+"""
+The DateTime scalar type represents date and time as a string in RFC3339 format.
+For example: "1985-04-12T23:20:50.52Z" represents 20 minutes and 50.52 seconds after the 23rd hour of April 12th, 1985 in UTC.
+"""
 scalar DateTime
 
 input IntRange{
-	min: Int
-	max: Int
+	min: Int!
+	max: Int!
 }
 
 input FloatRange{
-	min: Float
-	max: Float
+	min: Float!
+	max: Float!
 }
 
 input Int64Range{
-	min: Int64
-	max: Int64
+	min: Int64!
+	max: Int64!
 }
 
 input DateTimeRange{
-	min: DateTime
-	max: DateTime
+	min: DateTime!
+	max: DateTime!
 }
 
 input StringRange{
-	min: String
-	max: String
+	min: String!
+	max: String!
 }
 
 enum DgraphIndex {
@@ -159,24 +163,46 @@ input PolygonGeoFilter {
 	intersects: IntersectsFilter
 }
 
+input GenerateQueryParams {
+	get: Boolean
+	query: Boolean
+	password: Boolean
+	aggregate: Boolean
+}
+
+input GenerateMutationParams {
+	add: Boolean
+	update: Boolean
+	delete: Boolean
+}
+
 directive @hasInverse(field: String!) on FIELD_DEFINITION
 directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
 directive @dgraph(type: String, pred: String) on OBJECT | INTERFACE | FIELD_DEFINITION
-directive @id on FIELD_DEFINITION
-directive @withSubscription on OBJECT | INTERFACE
+directive @id(interface: Boolean) on FIELD_DEFINITION
+directive @withSubscription on OBJECT | INTERFACE | FIELD_DEFINITION
 directive @secret(field: String!, pred: String) on OBJECT | INTERFACE
 directive @auth(
+	password: AuthRule
 	query: AuthRule,
 	add: AuthRule,
 	update: AuthRule,
-	delete:AuthRule) on OBJECT
+	delete: AuthRule) on OBJECT | INTERFACE
 directive @custom(http: CustomHTTP, dql: String) on FIELD_DEFINITION
 directive @remote on OBJECT | INTERFACE | UNION | INPUT_OBJECT | ENUM
+directive @remoteResponse(name: String) on FIELD_DEFINITION
 directive @cascade(fields: [String]) on FIELD
 directive @lambda on FIELD_DEFINITION
+directive @lambdaOnMutate(add: Boolean, update: Boolean, delete: Boolean) on OBJECT | INTERFACE
+directive @cacheControl(maxAge: Int!) on QUERY
+directive @generate(
+	query: GenerateQueryParams,
+	mutation: GenerateMutationParams,
+	subscription: Boolean) on OBJECT | INTERFACE
 
 input IntFilter {
 	eq: Int
+	in: [Int]
 	le: Int
 	lt: Int
 	ge: Int
@@ -186,6 +212,7 @@ input IntFilter {
 
 input Int64Filter {
 	eq: Int64
+	in: [Int64]
 	le: Int64
 	lt: Int64
 	ge: Int64
@@ -195,6 +222,7 @@ input Int64Filter {
 
 input FloatFilter {
 	eq: Float
+	in: [Float]
 	le: Float
 	lt: Float
 	ge: Float
@@ -204,6 +232,7 @@ input FloatFilter {
 
 input DateTimeFilter {
 	eq: DateTime
+	in: [DateTime]
 	le: DateTime
 	lt: DateTime
 	ge: DateTime
