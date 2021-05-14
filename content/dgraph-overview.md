@@ -34,14 +34,14 @@ To learn more about how organizations are using Dgraph, see
 
 You can run Dgraph database in a variety of ways:
 
-* Self-managed: You can use [Dgraph](https://dgraph.io/dgraph) on-premises, hosted on your own physical
-infrastructure. You can also run Dgraph in your AWS, GCP, or Azure cloud
-infrastructure.
 * Fully-managed (hosted): Dgraph Cloud provides Dgraph as a fully-managed cloud
 service. Dgraph Cloud [Shared Instances](https://dgraph.io/graphql) (formerly called *Slash GraphQL*)
 give you the power of Dgraph in a low-cost hosted service running on a shared cluster.
 Dgraph Cloud [Dedicated Instances](https://dgraph.io/cloud) provide an enterprise-grade
 service that runs on dedicated cluster instances. To learn more, see [Fully-Managed Dgraph](#fully-managed-dgraph).
+* Self-managed: You can use [Dgraph](https://dgraph.io/dgraph) on-premises, hosted on your own physical
+infrastructure. You can also run Dgraph in your AWS, GCP, or Azure cloud
+infrastructure.
 
 {{% notice "note" %}}
 The documentation provided on [this Dgraph Docs site](https://dgraph.io/docs)
@@ -50,16 +50,42 @@ to Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/depl
 [Dgraph cloud services docs](https://dgraph.io/docs/cloud).
 {{% /notice %}}
 
-### Get started with Dgraph Cloud
+## Dgraph Cloud
 
-{{% notice "tip" %}}
-Check which Dgraph release version is running on your Dgraph Cloud backend in [Dgraph Cloud Settings](https://cloud.dgraph.io/_/settings), and then use the version selector on this page to find docs.
-{{% /notice %}}
+Dgraph Cloud with [shared instances](https://dgraph.io/graphql) is a
+fully-managed GraphQL database service that lets you focus on building apps, not
+managing infrastructure. Dgraph Cloud is built from the ground up to support
+GraphQL, and uses a graph database structure down to its lowest layers. So it 
+integrates seamlessly with your existing ecosystem of GraphQL tools.
+
+Dgraph Cloud gives you the power of Dgraph database in a hosted environment,
+providing the flexibility and performance of a horizontally-scalable and distributed
+GraphQL database with a graph backend, so you don’t need to configure and manage
+VMs, servers, firewalls, and HTTP endpoints to power your modern apps and websites.
+Dgraph Cloud with shared instances runs on a shared cluster so we can offer it
+at a low price. To learn more about Dgraph Cloud, see [Dgraph Cloud Overview](https://dgraph.io/docs/cloud/introduction).
+
+Dgraph Cloud with [dedicated instances](https://dgraph.io/cloud) extends the
+capabilities of the lower-cost shared instances offering to meet the heavy workloads
+and other needs of enterprise customers. With Dgraph Cloud, you get dedicated cluster
+instances, high availability, and the option to run Dgraph in your own virtual 
+private cloud (VPC) or bring your own Kubernetes (BYOK) environment.
+
+## Get started
+
+Use the instructions in this section to get started using Dgraph Cloud or
+self-managed Dgraph today.
+
+### Get started with Dgraph Cloud
 
 You can [get started with Dgraph Cloud](https://cloud.dgraph.io) today with a
 free trial. To use Dgraph Cloud, visit our [Pricing Page](https://dgraph.io/pricing) or 
 [Pricing Calculator](https://cloud.dgraph.io/pricing-calculator/) to get an
 estimate, or [contact us](https://dgraph.io/connect).
+
+{{% notice "tip" %}}
+Check which Dgraph release version is running on your Dgraph Cloud backend in [Dgraph Cloud Settings](https://cloud.dgraph.io/_/settings), and then use the version selector on this page to find docs.
+{{% /notice %}}
 
 ### Get started with self-managed Dgraph
 
@@ -103,27 +129,6 @@ To learn more about Dgraph's GraphQL implementation,
 see [GraphQL Overview]({{< relref "/graphql/overview" >}}). If you are a SQL
 user, see:
 [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
-
-## Fully-Managed Dgraph
-
-Dgraph Cloud with [shared instances](https://dgraph.io/graphql) is a
-fully-managed GraphQL database service that lets you focus on building apps, not
-managing infrastructure. Dgraph Cloud is built from the ground up to support
-GraphQL, and uses a graph database structure down to its lowest layers. So it 
-integrates seamlessly with your existing ecosystem of GraphQL tools.
-
-Dgraph Cloud gives you the power of Dgraph database in a hosted environment,
-providing the flexibility and performance of a horizontally-scalable and distributed
-GraphQL database with a graph backend, so you don’t need to configure and manage
-VMs, servers, firewalls, and HTTP endpoints to power your modern apps and websites.
-Dgraph Cloud with shared instances runs on a shared cluster so we can offer it
-at a low price. To learn more about Dgraph Cloud, see [Dgraph Cloud Overview](https://dgraph.io/docs/cloud/introduction).
-
-Dgraph Cloud with [dedicated instances](https://dgraph.io/cloud) extends the
-capabilities of the lower-cost shared instances offering to meet the heavy workloads
-and other needs of enterprise customers. With Dgraph Cloud, you get dedicated cluster
-instances, high availability, and the option to run Dgraph in your own virtual 
-private cloud (VPC) or bring your own Kubernetes (BYOK) environment.
 
 ## Glossary of Dgraph and GraphQL terms
 
