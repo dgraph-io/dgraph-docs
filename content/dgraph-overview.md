@@ -7,10 +7,6 @@ description = "Introduction to Dgraph Database. Dgraph is a horizontally scalabl
     weight = 2
 +++
 
-{{% notice "tip" %}}
-Check which Dgraph release version is running on your Dgraph Cloud backend in [Dgraph Cloud Settings](https://cloud.dgraph.io/_/settings), and then find docs for that release using the version selector on this page.
-{{% /notice %}}
-
 Dgraph is a horizontally scalable and distributed GraphQL database with a graph
 backend. Dgraph is built for the heavy transactional workloads required to 
 power modern apps and websites, but it isn’t limited to only these types of
@@ -50,9 +46,20 @@ service that runs on dedicated cluster instances. To learn more, see [Fully-Mana
 {{% notice "note" %}}
 The documentation provided on [this Dgraph Docs site](https://dgraph.io/docs)
 is applicable to self-managed instances of Dgraph, and also largely applicable
-to Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/deploy/overview" >}}) section). To learn more about Dgraph Cloud and Dgraph Cloud, see
+to Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/deploy/overview" >}}) section). To learn more about Dgraph Cloud, see
 [Dgraph cloud services docs](https://dgraph.io/docs/cloud).
 {{% /notice %}}
+
+### Get started with Dgraph Cloud
+
+{{% notice "tip" %}}
+Check which Dgraph release version is running on your Dgraph Cloud backend in [Dgraph Cloud Settings](https://cloud.dgraph.io/_/settings), and then use the version selector on this page to find docs.
+{{% /notice %}}
+
+You can [get started with Dgraph Cloud](https://cloud.dgraph.io) today with a
+free trial. To use Dgraph Cloud, visit our [Pricing Page](https://dgraph.io/pricing) or 
+[Pricing Calculator](https://cloud.dgraph.io/pricing-calculator/) to get an
+estimate, or [contact us](https://dgraph.io/connect).
 
 ### Get started with self-managed Dgraph
 
@@ -83,13 +90,6 @@ in the command shown above to the version number for a previous release, such as
 
 After following these steps, Dgraph Alpha now runs and listens for HTTP requests
 on port 8080, and Ratel listens on port 8000.
-
-### Get started with fully-managed Dgraph
-
-You can [get started with Dgraph Cloud](https://cloud.dgraph.io) today with a
-free trial. To use Dgraph Cloud, visit our [Pricing Page](https://dgraph.io/pricing) or 
-[Pricing Calculator](https://cloud.dgraph.io/pricing-calculator/) to get an
-estimate, or [contact us](https://dgraph.io/connect).
 
 ## Dgraph and GraphQL
 
