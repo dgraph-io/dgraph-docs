@@ -8,8 +8,7 @@ description = "Introduction to Dgraph Database. Dgraph is a horizontally scalabl
 +++
 
 {{% notice "tip" %}}
-Dgraph Cloud currently runs release v20.11. To see docs for that release, select
-**v20.11** from the drop-down on this page, or [click here](https://dgraph.io/docs/v20.11/dgraph-overview/).
+Check which Dgraph release version is running on your Dgraph Cloud backend in [Dgraph Cloud Settings](https://cloud.dgraph.io/_/settings), and then find docs for that release using the version selector on this page.
 {{% /notice %}}
 
 Dgraph is a horizontally scalable and distributed GraphQL database with a graph
