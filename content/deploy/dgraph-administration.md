@@ -24,10 +24,8 @@ Admin endpoints usually start with the `/admin` path. The current list of admin
 endpoints includes the following:
 
 * `/admin`
-* `/admin/backup`
 * `/admin/config/lru_mb`
 * `/admin/draining`
-* `/admin/export`
 * `/admin/shutdown`
 * `/admin/schema`
 * `/alter`
@@ -152,6 +150,13 @@ mutation {
   }
 }
 ```
+
+{{% notice "note" %}}
+Since v21.07, the `export` API is asynchronous: instead of returning the requested data,
+it will queue the export task and return a `taskId` immediately.
+Dgraph has a worker thread that runs these tasks in the background one at a time.
+{{% /notice %}}
+
 {{% notice "warning" %}}By default, this won't work if called from outside the server where the Dgraph Alpha is running.
 You can specify a list or range of whitelisted IP addresses to initiate admin operations like export. You can do so using the `--security` superflag's `whitelist` option with the `dgraph alpha` command.
 {{% /notice %}}
@@ -165,6 +170,17 @@ It is up to the user to retrieve the right export files from the Alphas in the
 cluster. Dgraph does not copy all files to the Alpha that initiated the export.
 The user must also ensure that there is sufficient space on disk to store the
 export.
+
+### Check queued tasks
+
+A new Task API has been added to the `/admin` endpoint. This allows you to check the status of a queued task (either `backup` or `export`).
+You can provide the `taskId`, and the response will give you the current task status.
+
+For example:
+
+```bash
+. example .
+```
 
 ### Configure Dgraph Alpha server nodes
 
