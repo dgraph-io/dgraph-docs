@@ -11,7 +11,7 @@ weight = 7
     <p>
       Dgraph client libraries in various programming languages.
     </p>
-    <img class="hero-deco" src="/images/hero-deco.png" />
+    <img class="hero-deco" src="/images/hero-deco_403x160.png" />
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-play" aria-hidden="true"></i></div>
