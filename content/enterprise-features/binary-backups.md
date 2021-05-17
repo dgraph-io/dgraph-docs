@@ -111,6 +111,7 @@ mutation {
       message
       code
     }
+    taskId
   }
 }
 ```
@@ -125,6 +126,7 @@ mutation {
       message
       code
     }
+    taskId
   }
 }
 ```
@@ -194,6 +196,7 @@ mutation {
       message
       code
     }
+    taskId
   }
 }
 ```
@@ -220,6 +223,7 @@ mutation {
       message
       code
     }
+    taskId
   }
 }
 ```
@@ -244,6 +248,7 @@ mutation {
       message
       code
     }
+    taskId
   }
 }
 ```
