@@ -152,8 +152,8 @@ mutation {
 ```
 
 {{% notice "note" %}}
-Since v21.07, the `export` API is asynchronous: instead of returning the requested data,
-it will queue the export task and return a `taskId` immediately.
+Since v21.03, the `export` and `backup` APIs are asynchronous: instead of returning the requested data,
+they queue the task and return a `taskId` immediately.
 Dgraph has a worker thread that runs these tasks in the background one at a time.
 {{% /notice %}}
 
@@ -179,7 +179,13 @@ You can provide the `taskId`, and the response will give you the current task st
 For example:
 
 ```bash
-. example .
+query {
+    task(input: {id: "0x1234"}) {
+        status
+        lastUpdated
+        kind
+    }
+}
 ```
 
 ### Configure Dgraph Alpha server nodes

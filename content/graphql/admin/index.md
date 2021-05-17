@@ -266,7 +266,6 @@ Here are the important types, queries, and mutations from the `admin` schema.
 	}
 
 	type ExportPayload {
-		exportedFiles: [String]
 		response: Response
 		taskId: String
 	}
