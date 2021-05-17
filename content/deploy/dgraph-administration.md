@@ -154,7 +154,7 @@ mutation {
 {{% notice "note" %}}
 Since v21.03, the `export` and `backup` APIs are asynchronous: instead of returning the requested data,
 they queue the task and return a `taskId` immediately.
-Dgraph has a worker thread that runs these tasks in the background one at a time.
+These tasks run in the background, and Dgraph has a worker thread that executes them one at a time.
 {{% /notice %}}
 
 {{% notice "warning" %}}By default, this won't work if called from outside the server where the Dgraph Alpha is running.
