@@ -160,7 +160,7 @@ You can further configure Bulk Loader using the following options:
 
 - `--schema`, `-s`: set the location of the schema file.
 
-- `--graphql_schema`, `-g`: set the location of the GraphQL schema file.
+- `--graphql_schema`, `-g` (optional): set the location of the GraphQL schema file.
 
 - `--badger` superflag's `compression` option: Configure the compression of data
 on disk. By default, the Snappy compression format is used, but you can also use
@@ -175,7 +175,7 @@ in operation.
 load multiple files in a given path. If the path is a directory, then all files
 ending in `.rdf`, `.rdf.gz`, `.json`, and `.json.gz` will be loaded.
 
-- `--format`: Specify file format (rdf or json) instead of getting it from
+- `--format` (optional): Specify file format (`rdf` or `json`) instead of getting it from
 filenames. This is useful if you need to define a strict format manually.
 
 - `--store_xids`: Generate a xid edge for each node. It will store the XIDs (The identifier / Blank-nodes) in an attribute named `xid` in the entity itself. It is useful if you gonna
