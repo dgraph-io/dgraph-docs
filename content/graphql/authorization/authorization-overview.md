@@ -14,17 +14,16 @@ First, let's get some concepts defined. There are two important concepts include
 * authentication: establishment of identity (who you are)
 * authorization: access permissions (what are you allowed to do)
 
-### Authentication
+## Authentication
 
 You can authenticate your users with a cloud service like OneGraph, Firebase or Auth0, use some social sign-in options, or write bespoke authentication code. Dgraph's GraphQL implementation is completely flexible about how your app does authentication - instead, it focuses on authorization.  
 
-The connection between Dgraph and your authentication mechanism can be a JSON Web Key URL (JWK URL) or a signed JSON Web Token (JWT). For example, you can provide Dgraph with the public key of the JWT signer (such as Firebase or Auth0) and Dgraph trusts JWTs signed by the corresponding private key. 
+Dgraph's GraphQL implementation supports both symmetric (secret-based) and asymmetric (public key) 
+encryption. The connection between Dgraph and your authentication mechanism can be a JSON Web Key URL (JWK URL) or a signed JSON Web Token (JWT). For example, you can provide Dgraph with the public key of the JWT signer (such as Firebase or Auth0) and Dgraph trusts JWTs signed by the corresponding private key.
 
 {{% notice "tip" %}}
 To learn more about adding JWTs from a third-party JWT signer to your app, see
 [Auth0 Authentication]({{< relref "graphql/todo-app-tutorial/todo-auth0-jwt" >}}) or [Firebase Authentication]({{< relref "graphql/todo-app-tutorial/todo-firebase-jwt" >}}). {{% /notice %}}
-
-
 
 #### `Dgraph.Authorization` parameters
 
@@ -34,10 +33,11 @@ To define the connection method, you must set the `# Dgraph.Authorization` objec
 {"Header":"", "Namespace":"", "Algo":"", "VerificationKey":"", "JWKURL":"", "Audience":[], "ClosedByDefault": false}
 ```
 
+This object contains the following values.
 * `Header` is the header in which requests will send the signed JWT
-* `Namespace` is the key inside the JWT that contains the claims relevant to Dgraph auth
+* `Namespace` is the key inside the JWT that contains the claims relevant to Dgraph authorization
 * `Algo` is the JWT verification algorithm which can be either `HS256` or `RS256`
-* `VerificationKey` is the string value of the key (newlines replaced with `\n`) wrapped in `""`
+* `VerificationKey` is the string value of the key, with newlines replaced with `\n` and the key string wrapped in `""`. If you are using asymmetric encryption, `VerificationKey` contains the public key string; if you are using symmetric (secret-based) encryption, `VerificationKey` is the secret key string generated using a tool like OpenSSL.
 * `JWKURL`/`JWKURLs` is the URL for the JSON Web Key sets. If you want to pass multiple URLs, use `JWKURLs` as an array of multiple JWK URLs for the JSON Web Key sets
 * `Audience` is used to verify the `aud` field of a JWT which might be set by certain providers. It indicates the intended audience for the JWT. When doing authentication with `JWKURL`, this field is mandatory as Identity Providers share JWKs among multiple tenants
 * `ClosedByDefault`, if set to `true`, requires authorization for all requests even if the type does not specify the [`@auth`]({{< relref "directive.md" >}}) directive. If omitted, the default setting is `false`.
@@ -120,10 +120,6 @@ The value of the `X-My-App-Auth` header is expected to be in one of these two fo
     ```txt
     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJodHRwczovL215LmFwcC5pby9qd3QvY2xhaW1zIjp7fX0.Pjlxpf-3FhH61EtHBRo2g1amQPRi0pNwoLUooGbxIho
     ```
-
-{{% notice "note" %}}
-Authorization is in beta and some aspects may change - for example, it's possible that the method to specify the `header`, `key`, etc. will move into the /admin `updateGQLSchema` mutation that sets the schema. Some features are also in active improvement and development.
-{{% /notice %}}
 
 #### Using Standard claims
 
