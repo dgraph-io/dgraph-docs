@@ -295,23 +295,27 @@ Alternatively, starting with v20.07.0, the `vault_*` options can be used instead
 
 ### Other Bulk Loader options
 
-`--new_uids` (default: false): Assign new UIDs instead of using the existing
+- `--schema`, `-s`: set the location of the schema file.
+
+- `--graphql_schema`, `-g` (optional): set the location of the GraphQL schema file.
+
+- `--new_uids` (default: false): Assign new UIDs instead of using the existing
 UIDs in data files. This is useful to avoid overriding the data in a DB already
 in operation.
 
-`-f, --files`: Location of *.rdf(.gz) or *.json(.gz) file(s) to load. It can
+- `-f, --files`: Location of `*.rdf(.gz)` or `*.json(.gz)` file(s) to load. It can
 load multiple files in a given path. If the path is a directory, then all files
-ending in .rdf, .rdf.gz, .json, and .json.gz will be loaded.
+ending in `.rdf`, `.rdf.gz`, `.json`, and `.json.gz` will be loaded.
 
-`--format`: Specify file format (rdf or json) instead of getting it from
+- `--format`: Specify file format (`rdf` or `json`) instead of getting it from
 filenames. This is useful if you need to define a strict format manually.
 
-`--store_xids`: Generate a xid edge for each node. It will store the XIDs (The identifier / Blank-nodes) in an attribute named `xid` in the entity itself. It is useful if you gonna
+- `--store_xids`: Generate a xid edge for each node. It will store the XIDs (The identifier / Blank-nodes) in an attribute named `xid` in the entity itself. It is useful if you gonna
 use [External IDs]({{< relref "mutations/external-ids.md" >}}).
 
-`--xidmap` (default: disabled. Need a path): Store xid to uid mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. It is recommended to use this flag if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific UID.
+- `--xidmap` (default: disabled. Need a path): Store xid to uid mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. It is recommended to use this flag if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific UID.
 
-`--vault_*` flags specifies the Vault server address, role id, secret id and 
+- `--vault_*` flags specifies the Vault server address, role id, secret id and 
 field that contains the encryption key that can be used to decrypt the encrypted export. 
 
 ### Tuning & monitoring
