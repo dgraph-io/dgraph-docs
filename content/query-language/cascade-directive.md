@@ -45,3 +45,63 @@ You can apply `@cascade` on inner query blocks as well.
   }
 }
 {{< /runnable >}}
+
+## Parameterized `@cascade`
+
+The `@cascade` directive can optionally take a list of fields as an argument.
+This changes the default behavior, considering only the supplied fields as mandatory instead of all the fields for a type.
+Listed fields are automatically cascaded as a required argument to nested selection sets.
+
+{{% notice "tip" %}}
+The rule with `@cascade(predicate)` is that the predicate needs to be in the query at the same level `@cascade` is.
+{{% /notice %}}
+
+In the example below, `name` is supplied in the `fields` argument. For an author to be in the query response, it must have a `name`, and if it has a `country` subfield, then that subfield must also have `name`.
+
+{{< runnable >}}
+{
+    queryAuthor(func: allofterms(name@en, "Harry Potter")) @cascade(name) {
+        reputation
+        name
+        country{
+           Id
+           name
+        }
+    }
+}
+{{< /runnable >}}
+
+The query below only return those `posts` which have a non-null `text` field.
+
+{{< runnable >}}
+{
+    queryAuthor(func: allofterms(name@en, "Harry Potter")) {
+        reputation
+        name
+        posts @cascade(text) {
+           title
+           text
+        }
+    }
+}
+{{< /runnable >}}
+
+### Nesting and parameterized cascade
+
+The cascading nature of field selection is overwritten by a nested `@cascade`.
+
+For example, the query below ensures that an author has the `reputation` and `name` fields, and, if it has a `posts` subfield, then that subfield must have a `text` field.
+
+{{< runnable >}}
+{
+    queryAuthor(func: allofterms(name@en, "Harry Potter")) @cascade(reputation, name) {
+        reputation
+        name
+        dob
+        posts @cascade(text) {
+            title
+            text
+        }
+    }
+}
+{{< /runnable >}}
