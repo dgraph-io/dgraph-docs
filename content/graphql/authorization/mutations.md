@@ -88,7 +88,7 @@ For add, what matters is the resulting state of the database, for delete it's th
 
 Updates have both a before and after state that can be important for auth.  
 
-For example, consider a rule stating that you can only update your own todos.  If evaluated in the database before the mutation, like the delete rules, it would prevent you updating anyone elses todos, but does it stop you updating your own todo to have a different `owner`.  If evaluated in the database after the mutation occurs, like for add rules, it would stop setting the `owner` to another user, but would it prevent editing other's posts.
+For example, consider a rule stating that you can only update your own todos.  If evaluated in the database before the mutation, like the delete rules, it would prevent you updating anyone elses todos, but does not stop you from updating your own todo to have a different `owner`.  If evaluated in the database after the mutation occurs, like for add rules, it would stop setting the `owner` to another user, but would it prevent editing other's posts.
 
 Currently, Dgraph evaluates `update` rules _before_ the mutation.  Our auth support is still in beta and we may extend this for example to make the `update` rule an invariant of the mutation, or enforce pre and post conditions, or even allow custom logic to validate the update data.
 
