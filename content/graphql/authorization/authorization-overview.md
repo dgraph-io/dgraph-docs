@@ -30,7 +30,7 @@ for the `@auth` directive to work, you also need to configure authentication
 using the `Dgraph.Authorization` object (which handles authentication) on the
 last line of your schema, as described below.
 
-When complete, your schema will look similar to the following:
+When authentication and authorization are complete, your schema should look similar to the following:
 
 ```graphql
 type A @auth(...) {
@@ -79,10 +79,10 @@ The `Dgraph.Authorization` object uses the following syntax:
 ```
 
 This object contains the following values:
-* `Header` is the header in which requests will send the signed JWT.
+* `Header` is the header that requests use to store the signed JWT.
 * `Namespace` is the key inside the JWT that contains the claims relevant to Dgraph authorization.
 * `Algo` is the JWT verification algorithm which can be either `HS256` or `RS256`.
-* `VerificationKey` is the string value of the key, with newlines replaced with `\n` and the key string wrapped in `""`. 
+* `VerificationKey` is the string value of the key, with newlines replaced with `\n` and the key string wrapped in `""`.
   * If you are using asymmetric encryption, `VerificationKey` contains the public key string. 
   * If you are using symmetric (secret-based) encryption, `VerificationKey` is the secret key - a string that you can generate using a tool like OpenSSL.
 * `JWKURL`/`JWKURLs` is the URL for the JSON Web Key sets. If you want to pass multiple URLs, use `JWKURLs` as an array of multiple JWK URLs for the JSON Web Key sets.
@@ -148,9 +148,7 @@ The value of the `X-My-App-Auth` header is expected to be in one of these two fo
 
 ### Authorization with standard claims
 
-Apart from the custom claims belonging to a given namespace, you can use standard claims in the authorization rules.
-
-For example:
+Apart from the custom claims belonging to a given namespace, you can use standard claims in the authorization rules, as shown in the following example:
 
 ```json
 {
@@ -168,8 +166,8 @@ For example:
 }
 ```
 
-The authorization variables will include the rest of the given claims along with the claims provided under namespace `https://xyz.io/jwt/claims`.
+The authorization variables include the rest of the given claims along with the claims provided under namespace `https://xyz.io/jwt/claims`.
 
 {{% notice "note" %}}
-In case the same variable is present in both custom claims and standard claims, the value in the custom claims will take precedence.
+In case the same variable is present in both custom claims and standard claims, the value in the custom claims takes precedence.
 {{% /notice %}}
