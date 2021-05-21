@@ -56,33 +56,63 @@ Listed fields are automatically cascaded as a required argument to nested select
 The rule with `@cascade(predicate)` is that the predicate needs to be in the query at the same level `@cascade` is.
 {{% /notice %}}
 
-In the example below, `name` is supplied in the `fields` argument. For an author to be in the query response, it must have a `name`, and if it has a `country` subfield, then that subfield must also have `name`.
+Take the following query as an example:
 
 {{< runnable >}}
 {
-    queryAuthor(func: allofterms(name@en, "Harry Potter")) @cascade(name) {
-        reputation
-        name
-        country{
-           Id
-           name
-        }
+  nodes(func: allofterms(name@en, "jones indiana")) {
+    name@en
+    genre @filter(anyofterms(name@en, "action adventure")) {
+      name@en
     }
+    produced_by {
+      name@en
+    }
+  }
 }
 {{< /runnable >}}
 
-The query below only return those `posts` which have a non-null `text` field.
+This query gets nodes that have all the terms _"jones indiana"_ and then traverses to `genre` and `produced_by`.
+It also adds an additional filter for `genre`, to only get the ones that either have _"action"_ or _"adventure"_ in the name.
+The results include nodes that have no `genre` and nodes that have no `genre` and no `producer`.
+
+If you apply a regular `@cascade` without a parameter, you'll loose the ones that had `genre` but no `producer`.
+
+To get the nodes that have the traversed `genre` but posibly no `produced_by`, you can parameterize the cascade:
 
 {{< runnable >}}
 {
-    queryAuthor(func: allofterms(name@en, "Harry Potter")) {
-        reputation
-        name
-        posts @cascade(text) {
-           title
-           text
-        }
+  nodes(func: allofterms(name@en, "jones indiana")) @cascade(genre) {
+    name@en
+    genre @filter(anyofterms(name@en, "action adventure")) {
+      name@en
     }
+    produced_by {
+      name@en
+    }
+    written_by {
+      name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+If you want to check for multiple fields, just comma separate them. For example, to cascade over `produced_by` and `written_by`:
+
+{{< runnable >}}
+{
+  nodes(func: allofterms(name@en, "jones indiana")) @cascade(produced_by,written_by) {
+    name@en
+    genre @filter(anyofterms(name@en, "action adventure")) {
+      name@en
+    }
+    produced_by {
+      name@en
+    }
+    written_by {
+      name@en
+    }
+  }
 }
 {{< /runnable >}}
 
@@ -90,18 +120,51 @@ The query below only return those `posts` which have a non-null `text` field.
 
 The cascading nature of field selection is overwritten by a nested `@cascade`.
 
-For example, the query below ensures that an author has the `reputation` and `name` fields, and, if it has a `posts` subfield, then that subfield must have a `text` field.
+The previous example can be cascaded down the chain as well, and be overriden on each level as needed.
+
+For example, if you only want the _"Indiana Jones movies that were produced by the same person who produced a Jurassic World movie"_:
 
 {{< runnable >}}
 {
-    queryAuthor(func: allofterms(name@en, "Harry Potter")) @cascade(reputation, name) {
-        reputation
-        name
-        dob
-        posts @cascade(text) {
-            title
-            text
-        }
+  nodes(func: allofterms(name@en, "jones indiana")) @cascade(produced_by) {
+    name@en
+    genre @filter(anyofterms(name@en, "action adventure")) {
+      name@en
     }
+    produced_by @cascade(producer.film) {
+      name@en
+      producer.film @filter(allofterms(name@en, "jurassic world")) {
+        name@en
+      }
+    }
+    written_by {
+      name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+Another nested example: _"Find the Indiana Jones movie that was written by the same person who wrote a Star Wars movie and was produced by the same person who produced Jurassic World"_:
+
+{{< runnable >}}
+{
+  nodes(func: allofterms(name@en, "jones indiana")) @cascade(produced_by,written_by) {
+    name@en
+    genre @filter(anyofterms(name@en, "action adventure")) {
+      name@en
+    }
+    produced_by @cascade(producer.film) {
+      name@en
+      producer.film @filter(allofterms(name@en, "jurassic world")) {
+        name@en
+      }
+    }
+    written_by @cascade(writer.film) {
+      name@en
+      writer.film @filter(allofterms(name@en, "star wars")) {
+        name@en
+      }
+    }
+  }
 }
 {{< /runnable >}}
