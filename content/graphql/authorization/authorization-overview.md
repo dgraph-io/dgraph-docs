@@ -136,13 +136,13 @@ to use the `X-My-App-Auth` header and use namespace-based authorization claims:
 In both of the examples above, the header `X-My-App-Auth` is required and the
 JWT is expected to contain a custom claims object (in this case, `"https://my.app.io/jwt/claims": { ... }`) with the claims used in authorization rules.
 
-The value of the `X-My-App-Auth` header is expected to be in one of these two forms:
-1. Just the JWT token. For example:
+The value of the `X-My-App-Auth` header is expected to be in one of the following forms:
+* Just the JWT token. For example:
     ```txt
     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJodHRwczovL215LmFwcC5pby9qd3QvY2xhaW1zIjp7fX0.Pjlxpf-3FhH61EtHBRo2g1amQPRi0pNwoLUooGbxIho
     ```
 
-2. A Bearer token, e.g., a JWT prepended with `Bearer ` prefix (including space). For example:
+* A Bearer token, e.g., a JWT prepended with `Bearer ` prefix (including space). For example:
     ```txt
     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJodHRwczovL215LmFwcC5pby9qd3QvY2xhaW1zIjp7fX0.Pjlxpf-3FhH61EtHBRo2g1amQPRi0pNwoLUooGbxIho
     ```
