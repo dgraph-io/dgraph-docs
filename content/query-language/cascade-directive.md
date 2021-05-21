@@ -120,7 +120,7 @@ If you want to check for multiple fields, just comma separate them. For example,
 
 The cascading nature of field selection is overwritten by a nested `@cascade`.
 
-The previous example can be cascaded down the chain as well, and be overriden on each level as needed.
+The previous example can be cascaded down the chain as well, and be overridden on each level as needed.
 
 For example, if you only want the _"Indiana Jones movies that were produced by the same person who produced a Jurassic World movie"_:
 
