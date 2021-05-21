@@ -86,20 +86,20 @@ If the predicate in mutation doesn't exist in the schema,
 the predicate gets added to the schema with an appropriate
 [Dgraph Type]({{< relref "query-language/schema.md" >}}).
 
-You can use `--mutations disallow` to disable all mutations,
+You can use `--limit "mutations=disallow"` to disable all mutations,
 which is set to `allow` by default.
 
 ```sh
-dgraph alpha --mutations disallow
+dgraph alpha --limit "mutations=disallow;"
 ```
 
-Enforce a strict schema by setting `--mutations strict`.
+Enforce a strict schema by setting `--limit "mutations=strict`.
 This mode allows mutations only on predicates already in the schema.
 Before performing a mutation on a predicate that doesn't exist in the schema,
 you need to perform an alter operation with that predicate and its schema type.
 
 ```sh
-dgraph alpha --mutations strict
+dgraph alpha --limit "mutation=strict; mutations-nquad=1000000"
 ```
 
 ## Secure Alter Operations
