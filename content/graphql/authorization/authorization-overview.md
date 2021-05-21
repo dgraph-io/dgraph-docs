@@ -1,8 +1,9 @@
 +++
-title = "Authorization and Authentication Overview"
-description = "Dgraph's GraphQL implementation comes with built-in authorization. This lets you annotate your schema with rules that determine who can access or mutate the data."
+title = "Overview of Authorization and Authentication with GraphQL"
+description = "Dgraph's GraphQL implementation comes with built-in authorization, and supports various authentication methods, so you can annotate your schema with rules that determine who can access or mutate the data."
 weight = 1
 [menu.main]
+    name = "Overview"
     parent = "authorization"
     identifier = "authorization-overview"
 +++
