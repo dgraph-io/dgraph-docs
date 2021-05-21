@@ -86,7 +86,7 @@ This object contains the following values:
   * If you are using asymmetric encryption, `VerificationKey` contains the public key string. 
   * If you are using symmetric (secret-based) encryption, `VerificationKey` is the secret key - a string that you can generate using a tool like OpenSSL.
 * `JWKURL`/`JWKURLs` is the URL for the JSON Web Key sets. If you want to pass multiple URLs, use `JWKURLs` as an array of multiple JWK URLs for the JSON Web Key sets.
-* `Audience` is used to verify the `aud` field of a JWT, which is used by certain providers to indicate the intended audience for the JWT. When doing authentication with `JWKURL`, this field is mandatory as Identity Providers share JWKs among multiple tenants.
+* `Audience` is used to verify the `aud` field of a JWT, which is used by certain providers to indicate the intended audience for the JWT. When doing authentication with `JWKURL`, this field is mandatory as identity providers share JWKs among multiple tenants.
 * `ClosedByDefault`, if set to `true`, requires authorization for all requests even if the type does not specify the [`@auth`]({{< relref "directive.md" >}}) directive. If omitted, the default setting is `false`.
 
 {{% notice "tip" %}}
