@@ -11,25 +11,26 @@ Dgraph's GraphQL implementation comes with built-in authorization. This lets you
 
 First, let's get some concepts defined. There are two important concepts included in what's often called *auth*:
 
-* authorization: access permissions (what are you allowed to do)
-* authentication: establishment of identity (who you are)
+* Authorization: access permissions (what are you allowed to do)
+* Authentication: establishment of identity (who you are)
 
-Dgraph lets you use your GraphQL schema to manage both authentication and authorization:
+Dgraph lets you use your GraphQL schema to manage both authorization and authentication:
 * You set authorization rules by annotating your schema with the `@auth` directive
 * You configure authentication methods by providing those settings to Dgraph in the last
 line of your schema, in a commented-out `Dgraph.Authorization` object.
 
 Establishing identity and managing identity-based permissions are closely related,
 so this page covers both Dgraph's authorization capabilities, and how Dgraph works with
-authentication.
+various authentication methods.
 
 ## Authorization
 
 You can add authorization rules to your schema with the `@auth` directive, but
 for the `@auth` directive to work, you also need to configure authentication
-using the `Dgraph.Authorization` object (as described below).
+using the `Dgraph.Authorization` object (which handles authentication) on the
+last line of your schema, as described below.
 
-When complete, your schema will look like the following:
+When complete, your schema will look similar to the following:
 
 ```graphql
 type A @auth(...) {
@@ -46,15 +47,19 @@ type B @auth(...) {
 
 ## Authentication
 
-You can authenticate your users in a variety of ways:
-* Using a cloud service like OneGraph, Firebase, or Auth0
-* Using social sign-in options (like Google or Facebook authentication)
-* Write your own custom authentication code
+You can authenticate your users using the following methods:
+* A cloud service like OneGraph, Firebase, or Auth0
+* Social sign-in options (like Google or Facebook authentication)
+* Your own custom authentication code
 
-Dgraph's GraphQL implementation is completely flexible about how your app does authentication - instead, it focuses on authorization.  
+Dgraph's GraphQL implementation is completely flexible about how your app does
+authentication; instead, Dgraph focuses on authorization.  
 
 Dgraph's GraphQL endpoint supports both symmetric (secret-based) and asymmetric (public key) 
-encryption. The connection between Dgraph and your authentication mechanism can be a JSON Web Key (JWK) URL or a signed JSON Web Token (JWT). So, you can provide Dgraph with the public key of the JWT signer (such as Firebase or Auth0) and Dgraph trusts JWTs signed by the corresponding private key.
+encryption. The connection between Dgraph and your authentication mechanism can
+be a JSON Web Key (JWK) URL or a signed JSON Web Token (JWT). So, you can provide
+Dgraph with the public key of the JWT signer (such as Firebase or Auth0) and
+Dgraph trusts JWTs signed by the corresponding private key.
 
 {{% notice "tip" %}}
 To learn more about adding JWTs from a third-party JWT signer to your app, see
@@ -62,9 +67,10 @@ To learn more about adding JWTs from a third-party JWT signer to your app, see
 
 ### `Dgraph.Authorization` parameters
 
-To define the authentication connection method, Dgraph uses a `# Dgraph.Authorization`
-object that you should add as the last line of your schema. You can only use one
-authentication connection method, either JWT, a single JWK URL, or multiple JWK URLs.
+To define the authentication connection method, Dgraph uses a commented-out
+`Dgraph.Authorization` object that you should add as the last line of your schema.
+You can only use one authentication connection method, either JWT, a single JWK
+URL, or multiple JWK URLs.
 
 The `Dgraph.Authorization` object uses the following syntax:
 
