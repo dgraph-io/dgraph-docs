@@ -168,3 +168,57 @@ Another nested example: _"Find the Indiana Jones movie that was written by the s
   }
 }
 {{< /runnable >}}
+
+## Cascade Performance
+
+The cascade directive processes the nodes post-query, but pre-return. This means that all of the nodes that would normally be returned if there was no cascade applied are still touched in the internal query process.
+In some situations where a query would normally return a very high amount of nodes and the cascade results in a much smaller set of nodes, there may be better alternatives to using or improving cascade performance in a query.
+
+### Cascade with `var` blocks
+
+Many of the above examples could be replaced entirely using [`var` blocks]({{< relref "multiple-query-blocks.md#var-blocks" >}}) instead of utilizing `@cascade`. The performance impacts of using `var` blocks is that it reduces the graph that is needed to be touched to formulate the final results.
+
+Here is an alternative query to _"Find the Indiana Jones movie that was written by the same person who wrote a Star Wars movie and was produced by the same person who produced Jurassic World"_ without using a cascade directive:
+
+{{< runnable >}}
+{
+  var(func: allofterms(name@en, "jurassic world")) {
+    produced_by {
+      ProducedBy as producer.film
+    }
+  }
+  var(func: allofterms(name@en, "star wars")) {
+    written_by {
+      WrittenBy as writer.film
+    }
+  }
+  nodes(func: allofterms(name@en,"indiana jones")) @filter(uid(ProducedBy) AND uid(WrittenBy)) {
+    name@en
+    genre {
+      name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+The performance impacts of queries with multiple var blocks vs. cascade greatly depends upon the nodes touched to reach the end results. Depending on your data size and distribution between nodes, refactoring a query with var blocks instead of cascade might actually decrease performance if the query must touch more nodes as a result of the refactor.
+
+### Cascade with `has` filter
+
+In situations where only a smaller set of nodes have the predicates where cascade is being applies, it might be beneficial to include a has filter for those predicates.
+
+In this example we query for movies that have a sequel whose name contains the terms _"Star Wars"_:
+
+{{< runnable >}}
+{
+  nodes(func: has(sequel)) @filter(type(Film)) @cascade {
+    count(uid)
+    name@en
+    sequel @filter(allofterms(name@en,"Star Wars")) {
+      name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+By using a has filter in the root function instead of type(Movie) we reduce the root graph from `275,195` nodes down to `7,747` nodes. Reducing the root graph before the post-query cascade process will yield a better performant query.
