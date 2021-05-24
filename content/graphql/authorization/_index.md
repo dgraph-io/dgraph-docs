@@ -1,6 +1,6 @@
 +++
 title = "Authorization"
-weight = 10
+weight = 4
 [menu.main]
   identifier = "authorization"
   parent = "graphql"
