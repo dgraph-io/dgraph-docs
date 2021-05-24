@@ -80,9 +80,9 @@ The `Dgraph.Authorization` object uses the following syntax:
 ```
 
 This object contains the following values:
-* `Header` is the header that requests use to store the signed JWT
-* `Namespace` is the key inside the JWT that contains the claims relevant to Dgraph authorization
-* `Algo` is the JWT verification algorithm which can be either `HS256` or `RS256`
+* `Header` is the header that requests use to store the signed JWT.
+* `Namespace` is the key inside the JWT that contains the claims relevant to Dgraph authorization.
+* `Algo` is the JWT verification algorithm which can be either `HS256` or `RS256`.
 * `VerificationKey` is the string value of the key, with newlines replaced with `\n` and the key string wrapped in `""`:
   * **For asymmetric encryption**: `VerificationKey` contains the public key string
   * **For symmetric (secret-based) encryption**: `VerificationKey` is the secret key; this can be any secret string you choose, such as one that you generate using a tool like OpenSSL
@@ -170,5 +170,5 @@ Apart from the custom claims belonging to a given namespace, you can use standar
 The authorization variables include the rest of the given claims along with the claims provided under namespace `https://xyz.io/jwt/claims`.
 
 {{% notice "note" %}}
-In case the same variable is present in both custom claims and standard claims, the value in the custom claims takes precedence.
+In cases where the same variable is present in both custom claims and standard claims, the variable value in the custom claim takes precedence.
 {{% /notice %}}
