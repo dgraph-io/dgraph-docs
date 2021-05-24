@@ -26,10 +26,10 @@ various authentication methods.
 
 ## Authorization
 
-You can add authorization rules to your schema with the `@auth` directive, but
-for the `@auth` directive to work, you also need to configure authentication
-using the `Dgraph.Authorization` object (which handles authentication) on the
-last line of your schema, as described below.
+You can add authorization rules to your schema using the `@auth` directive. But,
+you also need to configure the `Dgraph.Authorization` object (which handles
+authentication) on the last line of your schema for the `@auth` directive to
+work (as described below).
 
 When authentication and authorization are complete, your schema should look similar to the following:
 
@@ -50,7 +50,7 @@ type B @auth(...) {
 
 You can authenticate your users using the following methods:
 * A cloud service like OneGraph, Firebase, or Auth0
-* Social sign-in options (like Google or Facebook authentication)
+* Social sign-in options (such as Google authentication)
 * Your own custom authentication code
 
 Dgraph's GraphQL implementation is completely flexible about how your app does
