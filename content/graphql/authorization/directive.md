@@ -19,7 +19,12 @@ it to authorize the `check<Type>Password` query.
 The [Union type](/graphql/schema/types#union-type) does not support the `@auth` directive. 
 {{% /notice %}}
 
-In each case, `@auth` specifies rules that Dgraph applies during queries and mutations.  Those rules are expressed in exactly the same syntax as GraphQL queries.  Why?  Because the authorization you add to your app is about the graph of your application, so graph rules make sense.  It's also the syntax you already know about, you get syntax help from GraphQL tools in writing such rules, and it turns out to be exactly the kinds of rules Dgraph already knows how to evaluate.
+You create authorization rules using the `@auth` directive, and those rules are
+expressed in exactly the same syntax as GraphQL queries. Why? Because the
+authorization you add to your app is about the graph of your application, so
+graph rules make sense.  It's also a syntax that you already know about, and you
+get syntax help from GraphQL tools in writing such rules. And these are exactly
+the kinds of rules Dgraph already knows how to evaluate.
 
 Here's how the rules work.
 
