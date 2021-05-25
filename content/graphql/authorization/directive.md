@@ -46,9 +46,13 @@ type Todo @auth(
 }
 ```
 
-In addition to it, details of the authentication provider should be given in the last line of the schema, as discussed in the [Authorization overview](/graphql/authorization/authorization-overview) section.
+{{% notice "note" %}}
+To use the `@auth` directive, you must configure the authentication method used
+by Dgraph in the last line of your schema with a `Dgraph.Authorization` object,
+as described in the [Authorization Overview](/graphql/authorization/authorization-overview).
+{{% /notice %}}
 
-Here we define a type `Todo`, that's got an `id`, the `text` of the todo and the username of the `owner` of the todo.  What todos can a user query?  Any `Todo` that the `query` rule would also return.
+Here we define a type `Todo`, that has an `id`, the `text` of the todo and the username of the `owner` of the todo.  What todos can a user query?  Any `Todo` that the `query` rule would also return.
 
 The `query` rule in this case expects the JWT to contain a claim `"USER": "..."` giving the username of the logged in user, and says: you can query any todo that has your username as the owner.
 
