@@ -6,10 +6,17 @@ weight = 2
     parent = "authorization"
 +++
 
-Given an authentication mechanism and a signed JSON Web Token (JWT), the `@auth` directive tells Dgraph how to apply authorization.  The directive can be used on any type except `union` (that isn't a `@remote` type) and specifies the authorization for `query` as well as the `add`, `update`, and `delete` mutations. Additionally, this directive can also be used with the [`@secret`](/graphql/schema/types#password-type) directive. If you specify a `password` auth rule, Dgraph will use it to authorize the `check<Type>Password` query.
+The `@auth` directive tells Dgraph how to apply authorization. You can use it
+to define authorization rules for most types (except for `union` and `@remote`
+types). It lets you can control which users can run which queries - as well as
+which users can add, update, and delete data using mutations. 
+
+Additionally, you can use this directive with the [`@secret`](/graphql/schema/types#password-type)
+directive; and, if you specify a `password` authorization rule, Dgraph will use
+it to authorize the `check<Type>Password` query.
 
 {{% notice "note" %}}
-The [Union type](/graphql/schema/types#union-type) does not support the `@auth` directive 
+The [Union type](/graphql/schema/types#union-type) does not support the `@auth` directive. 
 {{% /notice %}}
 
 In each case, `@auth` specifies rules that Dgraph applies during queries and mutations.  Those rules are expressed in exactly the same syntax as GraphQL queries.  Why?  Because the authorization you add to your app is about the graph of your application, so graph rules make sense.  It's also the syntax you already know about, you get syntax help from GraphQL tools in writing such rules, and it turns out to be exactly the kinds of rules Dgraph already knows how to evaluate.
