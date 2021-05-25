@@ -26,8 +26,6 @@ graph rules make sense.  It's also a syntax that you already know about, and you
 get syntax help from GraphQL tools in writing such rules. And these are exactly
 the kinds of rules Dgraph already knows how to evaluate.
 
-Here's how the rules work.
-
 ## Authorization rules
 
 A valid type and rule looks like the following.
