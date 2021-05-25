@@ -94,13 +94,17 @@ If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dg
 
 ```go
 // This example uses dgo
-conn, err := dgo.DialSlashEndpoint("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
+conn, err := dgo.DialCloud("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
 if err != nil {
   log.Fatal(err)
 }
 defer conn.Close()
 dgraphClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
 ```
+
+{{% notice "note" %}}
+The `dgo.DialSlashEndpoint()` method has been deprecated and will be removed in v21.07. Please use `dgo.DialCloud()` instead.
+{{% /notice %}}
 
 ## Alter the database
 

@@ -50,7 +50,7 @@ type User {
   name: String
   tasks: [Task] @hasInverse(field: user)
 }
-# Dgraph.Authorization X-Auth0-Token https://dgraph.io/jwt/claims RS256 "<AUTH0-APP-PUBLIC-KEY>"
+# Dgraph.Authorization {"VerificationKey":"<AUTH0-APP-PUBLIC-KEY>","Header":"X-Auth-Token","Namespace":"https://dgraph.io/jwt/claims","Algo":"RS256","Audience":["<AUTH0-APP-CLIENT-ID>"]}
 ```
 
 Once the schema is submitted successfully, we can use the GraphQL API endpoint.

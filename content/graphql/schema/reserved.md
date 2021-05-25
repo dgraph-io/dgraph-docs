@@ -40,4 +40,16 @@ For each type, Dgraph generates a number of GraphQL types needed to operate the 
 - `UpdateAuthorPayload`
 - `AuthorAggregateResult`
 
+**Mutations**
+
+- `addAuthor`
+- `updateAuthor`
+- `deleteAuthor`
+
+**Queries**
+
+- `getAuthor`
+- `queryAuthor`
+- `aggregateAuthor`
+
 Thus if `Author` is present in the input schema, all of those become reserved type names.

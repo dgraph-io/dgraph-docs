@@ -154,7 +154,39 @@ Each Dgraph Alpha must have a copy of the group's `p` directory output.
 
 ![Bulk Loader diagram](/images/deploy/bulk-loader.png)
 
-### Load from S3
+### Other Bulk Loader options
+
+You can further configure Bulk Loader using the following options:
+
+- `--schema`, `-s`: set the location of the schema file.
+
+- `--graphql_schema`, `-g` (optional): set the location of the GraphQL schema file.
+
+- `--badger` superflag's `compression` option: Configure the compression of data
+on disk. By default, the Snappy compression format is used, but you can also use
+Zstandard compression. Or, you can choose no compression to minimize CPU usage. 
+To learn more, see [Data Compression on Disk]({{< relref "/deploy/data-compression.md" >}}).
+
+- `--new_uids`: (default: false): Assign new UIDs instead of using the existing
+UIDs in data files. This is useful to avoid overriding the data in a DB already
+in operation.
+
+- `-f`, `--files`: Location of `*.rdf(.gz)` or `*.json(.gz)` file(s) to load. It can
+load multiple files in a given path. If the path is a directory, then all files
+ending in `.rdf`, `.rdf.gz`, `.json`, and `.json.gz` will be loaded.
+
+- `--format` (optional): Specify file format (`rdf` or `json`) instead of getting it from
+filenames. This is useful if you need to define a strict format manually.
+
+- `--store_xids`: Generate a xid edge for each node. It will store the XIDs (The identifier / Blank-nodes) in an attribute named `xid` in the entity itself. It is useful if you gonna
+use [External IDs]({{< relref "mutations/external-ids.md" >}}).
+
+- `--xidmap` (default: `disabled`. Need a path): Store xid to uid mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. It is recommended to use this flag if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific UID.
+
+- `--vault` superflag (and its options): specify the Vault server address, role id, secret id, and
+field that contains the encryption key required to decrypt the encrypted export.
+
+## Load from S3
 
 To bulk load from Amazon S3, you must have either [IAM](#iam-setup) or the following AWS credentials set
 via environment variables:
@@ -164,7 +196,7 @@ via environment variables:
  `AWS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY`     | AWS access key with permissions to write to the destination bucket.
  `AWS_SECRET_ACCESS_KEY` or `AWS_SECRET_KEY` | AWS access key with permissions to write to the destination bucket.
 
-#### IAM setup
+### IAM setup
 
 In AWS, you can accomplish this by doing the following:
 1. Create an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) with an IAM Policy that grants access to the S3 bucket.
@@ -179,7 +211,7 @@ Once your setup is ready, you can execute the bulk load from S3:
 dgraph bulk -f s3:///bucket-name/directory-with-rdf -s s3:///bucket-name/directory-with-rdf/schema.txt
 ```
 
-### Load from MinIO
+## Load from MinIO
 
 To bulk load from MinIO, you must have the following MinIO credentials set via
 environment variables:
@@ -240,6 +272,46 @@ I1227 13:27:53.959671   29781 draft.go:571] Creating snapshot at index: 34. Read
 ```
 Note that `snapshot at index` value must be the same within the same Alpha group and `ReadTs` must be the same value within and among all the Alpha groups.
 
+### Using "p" directories coming from different Dgraph clusters
+
+In some cases, you might want to use the `p` directory from an existing Dgraph cluster when creating a new cluster. You can do this by copying the `p` directory from your current Dgraph cluster into the new cluster, but you will need to perform an additional step before starting the Alpha nodes in the new cluster, as described below. 
+
+After starting your Zero nodes, you need to increase the Zero's timestamp by sending the following `curl` request to the Zero leader node:
+
+```
+curl "zero_address:port/assign?what=timestamps&num=X" #with X = high number e.g. 100000 or higher
+```
+This will print the following message:
+
+```
+{"startId":"1","endId":"10000000","readOnly":"0"}
+```
+Now you need to confirm whether this timestamp has been increased as expected. You can do this by sending a `curl` request to the zero `/state` endpoint, as follows:
+
+```
+curl zero-address:port/state | jq
+```
+At the end of the response, look for the value shown for `"maxTxnTs"`. This value should be greater than or equal to the timestamp you assigned in the previous `curl` request, as shown in the following example:
+
+```json
+  "maxLeaseId": "0",
+  "maxTxnTs": "10010000",
+  "maxRaftId": "0",
+  "removed": [],
+  "cid": "47285b0d-6223-421e-aab5-e6910620a8ed",
+  "license": {
+    "user": "",
+    "maxNodes": "18446744073709551615",
+    "expiryTs": "1619041648",
+    "enabled": true
+  }
+```
+Now, start your Alpha nodes and check that the Snapshot created has a `ReadTs` value that's greater than or equal to the `"maxTxnTs"` value you viewed in the previous step.
+
+```
+I0322 14:52:40.858626 2885131 draft.go:606] Creating snapshot at Index: 180, ReadTs: 10000011
+```
+
 ## Enterprise Features
 
 ### Multi-tenancy (Enterprise Feature)
@@ -293,34 +365,6 @@ Input is not encrypted and the output `p` dir is also not encrypted.
 Input is not encrypted but the output is encrypted. (This is the migration use case mentioned above).
 
 Alternatively, starting with v20.07.0, the `vault_*` options can be used instead of the `--encryption key-file=value` option above to achieve the same effect except that the keys are sitting in a Vault server.
-
-## Other Bulk Loader options
-
-You can further configure Bulk Loader using the following options:
-
-`--badger` superflag's `compression` option: Configure the compression of data
-on disk. By default, the Snappy compression format is used, but you can also use
-Zstandard compression. Or, you can choose no compression to minimize CPU usage. 
-To learn more, see [Data Compression on Disk]({{< relref "/deploy/data-compression.md" >}}).
-
-`--new_uids`: (default: false): Assign new UIDs instead of using the existing
-UIDs in data files. This is useful to avoid overriding the data in a DB already
-in operation.
-
-`-f, --files`: Location of *.rdf(.gz) or *.json(.gz) file(s) to load. It can
-load multiple files in a given path. If the path is a directory, then all files
-ending in .rdf, .rdf.gz, .json, and .json.gz will be loaded.
-
-`--format`: Specify file format (rdf or json) instead of getting it from
-filenames. This is useful if you need to define a strict format manually.
-
-`--store_xids`: Generate a xid edge for each node. It will store the XIDs (The identifier / Blank-nodes) in an attribute named `xid` in the entity itself. It is useful if you gonna
-use [External IDs]({{< relref "mutations/external-ids.md" >}}).
-
-`--xidmap` (default: disabled. Need a path): Store xid to uid mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. It is recommended to use this flag if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific UID.
-
-The `--vault` superflag and its options specify the Vault server address, role id, secret id, and
-field that contains the encryption key required to decrypt the encrypted export.
 
 ## Tuning & monitoring
 

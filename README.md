@@ -13,9 +13,9 @@ As a contributor to Dgraph documentation, we ask that you do the following:
  **Exception**: Changes that *only* apply to older Dgraph versions (for example `release/v20.07`), can occur directly in a release branch, but will not be cherry-picked forward.
 - **Note planned cherry-pick(s) in your PR description**: If you are creating a PR in `master` and you know it needs to be cherry-picked to a release branch, please mention that in your PR description (for example: "cherry-pick to v20.07"). Cherry-pick PRs should reference the original PR.
 
-- **Link to discuss.dgraph.io posts when applicable**: If your PR is based on discussions on Discuss, feel free to include a link to the relevant discussion in your PR description.
+- **Link to discuss.dgraph.io posts when applicable**: If your PR is based on discussions on [Discuss](https://discuss.dgraph.io), feel free to include a link to the relevant discussion in your PR description.
 
-- **Technical writing style**: As much as possible, please follow technical writing style conventions (More on this below).
+- **Technical writing style**: As much as possible, please follow [technical writing style](#technical-writing-style) conventions (More on this below).
 
 - **(Dgraph core team only)**: Include the ID of any issues/tickets related to your PR in the description (i.e., "Fixes DGRAPH-12345" or "Per DGRAPH-54321").
 
@@ -37,10 +37,10 @@ Making our documentation easy to understand includes optimizing it for client-si
 
 We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to locally stage doc updates before or after creating a PR.
 
-1. Download and install the latest patch of hugo version v0.74.x from [here](https://github.com/gohugoio/hugo/releases/).
+1. Download and install the latest patch of hugo version v0.79.x from [here](https://github.com/gohugoio/hugo/releases/).
    ```bash
    pushd ~/Downloads
-   VERSION=v0.74
+   VERSION=v0.79
    TAG=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases | jq '.[].tag_name' -r | grep $VERSION | head -1)
    OS=$(uname -s)
    if [[ ${OS,,} == "darwin" ]]; then

@@ -10,6 +10,10 @@ weight = 4
 
 To set up a lambda mutation, first you need to define it on your GraphQL schema by using the `@lambda` directive.
 
+{{% notice "note" %}}
+`add`, `update`, and `delete` are reserved prefixes and they can't be used to define Lambda mutations.
+{{% /notice %}}
+
 For example, to define a lambda mutation for `Author` that creates a new author with a default `reputation` of `3.0` given just the `name`:
 
 ```graphql
