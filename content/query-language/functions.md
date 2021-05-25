@@ -1,15 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Functions"
+title = "Functions with DQL"
+description = "A brief guide to functions in Dgraph using Dgraph Query Language (DQL). Functions allow filtering based on properties of nodes or variables."
 weight = 2
 [menu.main]
+    name = "Functions"
     parent = "query-language"
 +++
 
-Functions allow filtering based on properties of nodes or [variables]({{<relref "query-language/value-variables.md">}}).  Functions can be applied in the query root or in filters.
-
-{{% notice "note" %}}Support for filters on non-indexed predicates was added with Dgraph `v1.2.0`.
-{{% /notice %}}
+Dgraph Query Language (DQL) functions allow filtering based on properties of nodes or [variables]({{<relref "query-language/value-variables.md">}}). Functions can be applied in the query root or in filters.
 
 Comparison functions (`eq`, `ge`, `gt`, `le`, `lt`) in the query root (aka `func:`) can only
 be applied on [indexed predicates]({{< relref "query-language/schema.md#indexing" >}}). Since v1.2, comparison functions

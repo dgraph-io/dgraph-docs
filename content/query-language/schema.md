@@ -1,12 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Schema"
+title = "Schemas in DQL"
+description = "Schemas in Dgraph Query Language (DQL) specify the type of each predicate. This guide discusses types supported in DQL schemas, and also covers indexing in the background."
 weight = 20
 [menu.main]
+    title = "Schemas"
     parent = "query-language"
 +++
 
-For each predicate, the schema specifies the target's type.  If a predicate `p` has type `T`, then for all subject-predicate-object triples `s p o` the object `o` is of schema type `T`.
+For each predicate, the Dgraph Query Language (DQL) schema specifies the target's type. If a predicate `p` has type `T`, then for all subject-predicate-object triples `s p o` the object `o` is of schema type `T`.
 
 * On mutations, scalar types are checked and an error thrown if the value cannot be converted to the schema type.
 

@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Deploy and Manage"
+description = "This section covers deployment and management of Dgraph in various deployment modes: either a single-host setup, or over multiple nodes in a cluster."
 weight = 8
 [menu.main]
   identifier = "deploy"
@@ -9,8 +10,9 @@ weight = 8
 <div class="landing">
   <div class="hero">
     <p>
-      This section talks about running Dgraph in various deployment modes, in a distributed fashion and involves
-running multiple instances of Dgraph, over multiple servers in a cluster.
+      This section covers deployment and management of Dgraph in various
+      deployment modes: either a single-host setup, or over multiple nodes in a
+      cluster.
     </p>
     <img class="hero-deco" src="/images/hero-deco.png" />
   </div>
