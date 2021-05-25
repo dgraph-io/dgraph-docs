@@ -41,8 +41,8 @@ MAJOR_VERSIONS=(
 
 VERSIONS_ARRAY=(
   ${MAJOR_VERSIONS:0}
-  'master'
   ${MAJOR_VERSIONS[@]:1}
+  'master'
 )
 
 joinVersions() {
