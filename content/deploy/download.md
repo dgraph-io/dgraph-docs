@@ -10,6 +10,10 @@ weight = 2
 For a single server setup, recommended for new users, please see [Get Started]({{< relref "get-started/index.md" >}}) page.
 {{% /notice %}}
 
+## text text
+
+a {{< version >}} and a {{< version >}}
+
 ## Docker
 
 ```sh
