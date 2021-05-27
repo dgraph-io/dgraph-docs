@@ -27,6 +27,8 @@ run() {
   export VERSIONS=${VERSION_STRING} \
   export CURRENT_BRANCH="master" \
   export CURRENT_VERSION=${CURRENT_VERSION}
+  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+  export CURRENT_LATEST_TAG="${latest_version:-master}"
 
   pushd "$(dirname "$0")/.." > /dev/null
   pushd themes > /dev/null
