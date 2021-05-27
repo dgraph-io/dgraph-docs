@@ -6,14 +6,16 @@ weight = 5
     parent = "javascript"
 +++
 
-The official Dgraph client implementation for JavaScript (Node.js v6 and above),
-using [gRPC](https://grpc.io/).
+The official Dgraph client implementation for JavaScript, using
+[gRPC-js](https://www.npmjs.com/package/@grpc/grpc-js) (the original
+[gRPC](https://grpc.io/) client for JavaScript is now deprecated).
+
 This client follows the [Dgraph Go client]({{< relref "go.md" >}}) closely.
 
 
 {{% notice "tip" %}}
-The official JavaScript gRPC client [can be found here](https://github.com/dgraph-io/dgraph-js).
-Follow the [install instructions](https://github.com/dgraph-io/dgraph-js#install) to get it up and running.
+You can find the official Dgraph JavaScript gRPC client at: https://github.com/dgraph-io/dgraph-js.
+Follow the [installation instructions](https://github.com/dgraph-io/dgraph-js#install) to get it up and running.
 {{% /notice %}}
 
 ## Supported Versions
