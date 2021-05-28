@@ -170,3 +170,76 @@ Another nested example: _"Find the Indiana Jones movie that was written by the s
   }
 }
 {{< /runnable >}}
+
+## Cascade Performance
+
+The `@cascade` directive processes the nodes after the query, but before Dgraph 
+returns query results. This means that all of the nodes that would normally be
+returned if there was no `@cascade` applied are still touched in the internal
+query process. If you see slower-than-expected performance when using the
+`@cascade` directive, it is probably because the internal query process returns
+a large set of nodes but the cascade reduces those to a small set of nodes in query
+results. To improve the performance of queries that use the `@cascade` directive,
+you  might want to use `var` blocks or `has` filters, as described below.
+
+### Cascade with `var` blocks
+
+The performance impact of using `var` blocks is that it reduces the graph that is touched to generate the final query results.
+For example, many of the previous examples could be replaced entirely using [`var` blocks]({{< relref "multiple-query-blocks.md#var-blocks" >}}) instead of utilizing `@cascade`.
+
+The following query provides an alternative way to structure the query shown above,
+_"Find the Indiana Jones movie that was written by the same person who wrote a
+Star Wars movie and was produced by the same person who produced Jurassic World"_,
+without using the `@cascade` directive:
+
+{{< runnable >}}
+{
+  var(func: allofterms(name@en, "jurassic world")) {
+    produced_by {
+      ProducedBy as producer.film
+    }
+  }
+  var(func: allofterms(name@en, "star wars")) {
+    written_by {
+      WrittenBy as writer.film
+    }
+  }
+  nodes(func: allofterms(name@en,"indiana jones")) @filter(uid(ProducedBy) AND uid(WrittenBy)) {
+    name@en
+    genre {
+      name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+The performance impact of building queries with multiple `var` blocks versus
+using `@cascade` depends on the nodes touched to reach the end results. Depending
+on the size of your data set and distribution between nodes, refactoring a query
+with `var` blocks instead of `@cascade` might actually decrease performance
+if the query must touch more nodes as a result of the refactor.
+
+### Cascade with `has` filter
+
+In cases where only a small set of nodes have the predicates where `@cascade` is
+applied, it might be beneficial to query performance to include a `has` filter
+for those predicates.
+
+For example, you could run a query like _"Find movies that have a sequel whose name contains the term **Star Wars**"_ as follows:
+
+{{< runnable >}}
+{
+  nodes(func: has(sequel)) @filter(type(Film)) @cascade {
+    count(uid)
+    name@en
+    sequel @filter(allofterms(name@en,"Star Wars")) {
+      name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+By using a `has` filter in the root function instead of `type(Movie)`, you can
+reduce the root graph from `275,195` nodes down to `7,747` nodes. Reducing the
+root graph before the post-query cascade process results in a higher-performing
+query.
