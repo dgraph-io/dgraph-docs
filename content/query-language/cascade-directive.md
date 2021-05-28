@@ -171,14 +171,21 @@ Another nested example: _"Find the Indiana Jones movie that was written by the s
 
 ## Cascade Performance
 
-The cascade directive processes the nodes post-query, but pre-return. This means that all of the nodes that would normally be returned if there was no cascade applied are still touched in the internal query process.
-In some situations where a query would normally return a very high amount of nodes and the cascade results in a much smaller set of nodes, there may be better alternatives to using or improving cascade performance in a query.
+The cascade directive processes the nodes after the query but before the return.
+This means that all of the nodes that would normally be returned if there was
+no `@cascade` applied are still touched in the internal query process.
+When a query returns a high amount of nodes and the cascade results in a small set of nodes,
+there might be better alternatives to improve the cascade performance.
 
 ### Cascade with `var` blocks
 
-Many of the above examples could be replaced entirely using [`var` blocks]({{< relref "multiple-query-blocks.md#var-blocks" >}}) instead of utilizing `@cascade`. The performance impacts of using `var` blocks is that it reduces the graph that is needed to be touched to formulate the final results.
+The performance impact of using `var` blocks is that it reduces the graph that needs to be touched to generate the final results.
+For example, many of the previous examples could be replaced entirely using [`var` blocks]({{< relref "multiple-query-blocks.md#var-blocks" >}})
+instead of utilizing `@cascade`.
 
-Here is an alternative query to _"Find the Indiana Jones movie that was written by the same person who wrote a Star Wars movie and was produced by the same person who produced Jurassic World"_ without using a cascade directive:
+Here is an alternative query to _"Find the Indiana Jones movie that was written by the same
+person who wrote a Star Wars movie and was produced by the same person who produced
+Jurassic World"_ without using a `@cascade` directive:
 
 {{< runnable >}}
 {
@@ -201,13 +208,17 @@ Here is an alternative query to _"Find the Indiana Jones movie that was written 
 }
 {{< /runnable >}}
 
-The performance impacts of queries with multiple var blocks vs. cascade greatly depends upon the nodes touched to reach the end results. Depending on your data size and distribution between nodes, refactoring a query with var blocks instead of cascade might actually decrease performance if the query must touch more nodes as a result of the refactor.
+The performance impact of queries with multiple `var` blocks versus `@cascade` depends upon the
+nodes touched to reach the end results. Depending on your data size and distribution between nodes,
+refactoring a query with `var` blocks instead of cascade might actually decrease performance
+if the query must touch more nodes as a result of the refactor.
 
 ### Cascade with `has` filter
 
-In situations where only a smaller set of nodes have the predicates where cascade is being applies, it might be beneficial to include a has filter for those predicates.
+In cases where only a small set of nodes have the predicates where `@cascade` is applied,
+it might be beneficial to include a `has` filter for those predicates.
 
-In this example we query for movies that have a sequel whose name contains the terms _"Star Wars"_:
+For example, if you query for movies that have a sequel whose name contains the terms _"Star Wars"_:
 
 {{< runnable >}}
 {
@@ -221,4 +232,6 @@ In this example we query for movies that have a sequel whose name contains the t
 }
 {{< /runnable >}}
 
-By using a has filter in the root function instead of type(Movie) we reduce the root graph from `275,195` nodes down to `7,747` nodes. Reducing the root graph before the post-query cascade process will yield a better performant query.
+By using a `has` filter in the root function instead of `type(Movie)`, you can reduce
+the root graph from `275,195` nodes down to `7,747` nodes.
+Reducing the root graph before the post-query cascade process will yield a better performant query.
