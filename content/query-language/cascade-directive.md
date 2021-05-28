@@ -171,21 +171,24 @@ Another nested example: _"Find the Indiana Jones movie that was written by the s
 
 ## Cascade Performance
 
-The cascade directive processes the nodes after the query but before the return.
-This means that all of the nodes that would normally be returned if there was
-no `@cascade` applied are still touched in the internal query process.
-When a query returns a high amount of nodes and the cascade results in a small set of nodes,
-there might be better alternatives to improve the cascade performance.
+The `@cascade` directive processes the nodes after the query, but before Dgraph 
+returns query results. This means that all of the nodes that would normally be
+returned if there was no `@cascade` applied are still touched in the internal
+query process. If you see slower-than-expected performance when using the
+`@cascade` directive, it is probably because the internal query process returns
+a large set of nodes but the cascade reduces those to a small set of nodes in query
+results. To improve the performance of queries that use the `@cascade` directive,
+you  might want to use `var` blocks or `has` filters, as described below.
 
 ### Cascade with `var` blocks
 
-The performance impact of using `var` blocks is that it reduces the graph that needs to be touched to generate the final results.
-For example, many of the previous examples could be replaced entirely using [`var` blocks]({{< relref "multiple-query-blocks.md#var-blocks" >}})
-instead of utilizing `@cascade`.
+The performance impact of using `var` blocks is that it reduces the graph that is touched to generate the final query results.
+For example, many of the previous examples could be replaced entirely using [`var` blocks]({{< relref "multiple-query-blocks.md#var-blocks" >}}) instead of utilizing `@cascade`.
 
-Here is an alternative query to _"Find the Indiana Jones movie that was written by the same
-person who wrote a Star Wars movie and was produced by the same person who produced
-Jurassic World"_ without using a `@cascade` directive:
+The following query provides an alternative way to structure the query shown above,
+_"Find the Indiana Jones movie that was written by the same person who wrote a
+Star Wars movie and was produced by the same person who produced Jurassic World"_,
+without using the `@cascade` directive:
 
 {{< runnable >}}
 {
@@ -208,17 +211,19 @@ Jurassic World"_ without using a `@cascade` directive:
 }
 {{< /runnable >}}
 
-The performance impact of queries with multiple `var` blocks versus `@cascade` depends upon the
-nodes touched to reach the end results. Depending on your data size and distribution between nodes,
-refactoring a query with `var` blocks instead of cascade might actually decrease performance
+The performance impact of building queries with multiple `var` blocks versus
+using `@cascade` depends on the nodes touched to reach the end results. Depending
+on the size of your data set and distribution between nodes, refactoring a query
+with `var` blocks instead of `@cascade` might actually decrease performance
 if the query must touch more nodes as a result of the refactor.
 
 ### Cascade with `has` filter
 
-In cases where only a small set of nodes have the predicates where `@cascade` is applied,
-it might be beneficial to include a `has` filter for those predicates.
+In cases where only a small set of nodes have the predicates where `@cascade` is
+applied, it might be beneficial to query performance to include a `has` filter
+for those predicates.
 
-For example, if you query for movies that have a sequel whose name contains the terms _"Star Wars"_:
+For example, you could run a query like _"Find movies that have a sequel whose name contains the term **Star Wars**"_ as follows:
 
 {{< runnable >}}
 {
@@ -232,6 +237,7 @@ For example, if you query for movies that have a sequel whose name contains the 
 }
 {{< /runnable >}}
 
-By using a `has` filter in the root function instead of `type(Movie)`, you can reduce
-the root graph from `275,195` nodes down to `7,747` nodes.
-Reducing the root graph before the post-query cascade process will yield a better performant query.
+By using a `has` filter in the root function instead of `type(Movie)`, you can
+reduce the root graph from `275,195` nodes down to `7,747` nodes. Reducing the
+root graph before the post-query cascade process results in a higher-performing
+query.
