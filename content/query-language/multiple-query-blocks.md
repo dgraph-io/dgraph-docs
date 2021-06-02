@@ -99,3 +99,58 @@ Query Example: Angelina Jolie's movies ordered by genre.
 }
 {{< /runnable >}}
 
+## Multiple Var Blocks
+
+Multiple var blocks are also supported within a single query operation. Variables
+from one var block can be used in any of the following blocks but not within the
+same block.
+
+Query Example: Movies containing both Angelina Jolie and Morgan Freeman sorted by name.
+
+{{< runnable >}}
+{
+  var(func:allofterms(name@en, "angelina jolie")) {
+    name@en
+    actor.film {
+      A AS performance.film
+    }
+  }
+  var(func:allofterms(name@en, "morgan freeman")) {
+    name@en
+    actor.film {
+      B as performance.film @filter(uid(A))
+    }
+  }
+  
+  films(func: uid(B), orderasc: name@en) {
+    name@en
+  }
+}
+{{< /runnable >}}
+
+{{% notice "note" %}}
+This same results could have been obtained by logically combining both both var blocks
+in the films block.
+```
+{
+  var(func:allofterms(name@en, "angelina jolie")) {
+    name@en
+    actor.film {
+      A AS performance.film
+    }
+  }
+  var(func:allofterms(name@en, "morgan freeman")) {
+    name@en
+    actor.film {
+      B as performance.film
+    }
+  }
+  films(func: uid(A,B), orderasc: name@en) @filter(uid(A) AND uid(B)) {
+    name@en
+  }
+}
+```
+The root `uid` function unions the uids from var `A` and `B` hence the need for the filter
+to intersect the uids from var `A` and `B`.
+{{% /notice %}}
+
