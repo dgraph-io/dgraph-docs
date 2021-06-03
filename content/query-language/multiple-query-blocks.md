@@ -1,18 +1,17 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Multiple Query Blocks"
+title = "Multiple Query Blocks with DQL"
+description = "With Dgraph Query Language (DQL), you can include multiple query blocks in a single query, and have those query blocks execute in parallel."
 weight = 8
 [menu.main]
     parent = "query-language"
 +++
 
-Inside a single query, multiple query blocks are allowed.  The result is all blocks with corresponding block names.
+Inside a single query, multiple query blocks are allowed, and each block can 
+have a name. Multiple query blocks are executed in parallel, and they don't
+need to be related in any way.
 
-Multiple query blocks are executed in parallel.
-
-The blocks need not be related in any way.
-
-Query Example: All of Angelina Jolie's films, with genres, and Peter Jackson's films since 2008.
+Query Example: _"All of Angelina Jolie's films, with genres, and Peter Jackson's films since 2008"_
 
 {{< runnable >}}
 {
@@ -40,7 +39,10 @@ Query Example: All of Angelina Jolie's films, with genres, and Peter Jackson's f
 
 If queries contain some overlap in answers, the result sets are still independent.
 
-Query Example: The movies Mackenzie Crook has acted in and the movies Jack Davenport has acted in.  The results sets overlap because both have acted in the Pirates of the Caribbean movies, but the results are independent and both contain the full answers sets.
+Query Example: _"The movies Mackenzie Crook has acted in and the movies Jack Davenport has acted in"_
+
+The results sets overlap because both have acted in the _Pirates of the Caribbean_
+movies, but the results are independent and both contain the full answers sets.
 
 {{< runnable >}}
 {
@@ -73,11 +75,12 @@ Query Example: The movies Mackenzie Crook has acted in and the movies Jack Daven
 {{< /runnable >}}
 
 
-## Var Blocks
+## Variable (Var) Blocks
 
-Var blocks start with the keyword `var` and are not returned in the query results.
+Variable blocks (var blocks) start with the keyword `var` and are not returned
+in the query results, but do affect the contents of query results.
 
-Query Example: Angelina Jolie's movies ordered by genre.
+Query Example: _"Angelina Jolie's movies ordered by genre"_
 
 {{< runnable >}}
 {
@@ -101,11 +104,11 @@ Query Example: Angelina Jolie's movies ordered by genre.
 
 ## Multiple Var Blocks
 
-Multiple var blocks are also supported within a single query operation. Variables
-from one var block can be used in any of the following blocks but not within the
+You can also use multiple var blocks within a single query operation. Variables
+from one var block can be used in any of the following blocks, but not within the
 same block.
 
-Query Example: Movies containing both Angelina Jolie and Morgan Freeman sorted by name.
+Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman, sorted by name"_
 
 {{< runnable >}}
 {
@@ -129,8 +132,8 @@ Query Example: Movies containing both Angelina Jolie and Morgan Freeman sorted b
 {{< /runnable >}}
 
 {{% notice "note" %}}
-This same results could have been obtained by logically combining both both var blocks
-in the films block.
+You could get the same query results by logically combining both both var blocks
+in the films block, as follows:
 ```
 {
   var(func:allofterms(name@en, "angelina jolie")) {
@@ -150,7 +153,7 @@ in the films block.
   }
 }
 ```
-The root `uid` function unions the uids from var `A` and `B` hence the need for the filter
-to intersect the uids from var `A` and `B`.
+The root `uid` function unions the `uid`s from var `A` and `B`, so you need a
+filter to intersect the `uid`s from var `A` and `B`.
 {{% /notice %}}
 
