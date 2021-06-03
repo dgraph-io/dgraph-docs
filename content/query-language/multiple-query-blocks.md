@@ -101,8 +101,8 @@ Query Example: Angelina Jolie's movies ordered by genre.
 
 ## Multiple Var Blocks
 
-Multiple var blocks are also supported within a single query operation. Variables
-from one var block can be used in any of the following blocks but not within the
+Multiple `var` blocks are also supported within a single query operation. Variables
+from one `var` block can be used in any of the following blocks but not within the
 same block.
 
 Query Example: Movies containing both Angelina Jolie and Morgan Freeman sorted by name.
@@ -153,4 +153,3 @@ in the films block.
 The root `uid` function unions the uids from var `A` and `B` hence the need for the filter
 to intersect the uids from var `A` and `B`.
 {{% /notice %}}
-
