@@ -105,7 +105,7 @@ Multiple `var` blocks are also supported within a single query operation. Variab
 from one `var` block can be used in any of the following blocks but not within the
 same block.
 
-Query Example: Movies containing both Angelina Jolie and Morgan Freeman sorted by name.
+Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman sorted by name"_
 
 {{< runnable >}}
 {
