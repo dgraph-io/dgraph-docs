@@ -4,6 +4,7 @@ title = "Multiple Query Blocks with DQL"
 description = "With Dgraph Query Language (DQL), you can include multiple query blocks in a single query, and have those query blocks execute in parallel."
 weight = 8
 [menu.main]
+    name = "Multiple Query Blocks"
     parent = "query-language"
 +++
 
@@ -75,7 +76,7 @@ movies, but the results are independent and both contain the full answers sets.
 {{< /runnable >}}
 
 
-## Variable (Var) Blocks
+## Variable (`var`) blocks
 
 Variable blocks (var blocks) start with the keyword `var` and are not returned
 in the query results, but do affect the contents of query results.
@@ -102,7 +103,7 @@ Query Example: _"Angelina Jolie's movies ordered by genre"_
 }
 {{< /runnable >}}
 
-## Multiple Var Blocks
+## Multiple `var` blocks
 
 You can also use multiple `var` blocks within a single query operation. You can
 use variables from one `var` block in any of the subsequent blocks, but not
@@ -131,7 +132,9 @@ Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman sorted
 }
 {{< /runnable >}}
 
-{{% notice "note" %}}
+
+### Combining multiple `var` blocks
+
 You could get the same query results by logically combining both both var blocks
 in the films block, as follows:
 ```
@@ -155,4 +158,4 @@ in the films block, as follows:
 ```
 The root `uid` function unions the `uid`s from var `A` and `B`, so you need a
 filter to intersect the `uid`s from var `A` and `B`.
-{{% /notice %}}
+
