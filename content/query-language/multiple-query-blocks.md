@@ -104,11 +104,11 @@ Query Example: _"Angelina Jolie's movies ordered by genre"_
 
 ## Multiple Var Blocks
 
-You can also use multiple var blocks within a single query operation. Variables
-from one var block can be used in any of the following blocks, but not within the
-same block.
+You can also use multiple `var` blocks within a single query operation. You can
+use variables from one `var` block in any of the subsequent blocks, but not
+within the same block.
 
-Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman, sorted by name"_
+Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman sorted by name"_
 
 {{< runnable >}}
 {
@@ -156,4 +156,3 @@ in the films block, as follows:
 The root `uid` function unions the `uid`s from var `A` and `B`, so you need a
 filter to intersect the `uid`s from var `A` and `B`.
 {{% /notice %}}
-
