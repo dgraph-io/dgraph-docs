@@ -10,7 +10,7 @@ weight = 13
 
 If you have an existing Dgraph instance and want to also expose GraphQL, you need to add a GraphQL schema that maps to your Dgraph schema.  You don't need to expose your entire Dgraph schema as GraphQL, but do note that adding a GraphQL schema can alter the Dgraph schema.
 
-Dgraph also allows type and edge names that aren't valid in GraphQL, so, often, you'll need to expose valid GraphQL names. Dgraph admits special characters and even different languages (see [here](https://docs.dgraph.io/query-language/#predicate-name-rules)), while the GraphQL Spec requires that type and field (predicate) names are generated from `/[_A-Za-z][_0-9A-Za-z]*/`.
+Dgraph also allows type and edge names that aren't valid in GraphQL, so, often, you'll need to expose valid GraphQL names. Dgraph admits special characters and even different languages (see [Predicate name rules]({{< relref "query-language/schema.md#predicate-name-rules">}})), while the GraphQL Spec requires that type and field (predicate) names are generated from `/[_A-Za-z][_0-9A-Za-z]*/`.
 
 ## Mapping GraphQL to a Dgraph schema
 
@@ -93,7 +93,11 @@ type Movie {
 }
 ```
 
-*Note: the current behavior requires that when two fields are mapped to the same Dgraph predicate both should have the same `@search` directive.  This is likely to change in a future release where the underlying Dgraph indexes will be the union of the `@search` directives, while the generated GraphQL API will expose only the search given for the particular field.  Allowing, for example, dgraph predicate name to have `term` and `hash` indexes, but exposing only term search for GraphQL movies and hash search for GraphQL people.*
+{{% notice "note" %}}
+The current behavior requires that when two fields are mapped to the same Dgraph predicate both should have the same `@search` directive.
+This is likely to change in a future release where the underlying Dgraph indexes will be the union of the `@search` directives, while the generated GraphQL API will expose only the search given for the particular field.
+Allowing, for example, a Dgraph predicate name to have `term` and `hash` indexes, but exposing only `term` search for GraphQL movies and `hash` search for GraphQL people.
+{{% /notice %}}
 
 ## Language support in GraphQL
 
@@ -136,5 +140,3 @@ Future features are likely to include:
 * Generating a first pass GraphQL schema from an existing dgraph schema.
 * A way to show what schema diff will happen when you apply a new GraphQL schema.
 * Better handling of `@dgraph` with `@search`
-
-We look forward to you letting us know what features you'd like, so please join us on [discuss](https://discuss.dgraph.io/) or [GitHub](https://github.com/dgraph-io/dgraph).
