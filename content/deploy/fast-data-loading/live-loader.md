@@ -18,28 +18,31 @@ data](https://www.w3.org/TR/n-quads/) or JSON in plain or gzipped format. Data
 in other formats must be converted.{{% /notice %}}
 
 ```sh
-$ dgraph live --help # To see the available flags.
+dgraph live --help # To see the available flags.
 
 # Read RDFs or JSON from the passed file, and send them to Dgraph on localhost:9080.
-$ dgraph live -f <path-to-gzipped-RDF-or-JSON-file>
+dgraph live --files <path-to-gzipped-RDF-or-JSON-file>
 
 # Read multiple RDFs or JSON from the passed path, and send them to Dgraph on localhost:9080.
-$ dgraph live -f <./path-to-gzipped-RDF-or-JSON-files>
+dgraph live --files <./path-to-gzipped-RDF-or-JSON-files>
 
 # Read multiple files strictly by name.
-$ dgraph live -f <file1.rdf, file2.rdf>
+dgraph live --files <file1.rdf, file2.rdf>
 
 # Use compressed gRPC connections to and from Dgraph.
-$ dgraph live -C -f <path-to-gzipped-RDF-or-JSON-file>
+dgraph live --use_compression --files <path-to-gzipped-RDF-or-JSON-file>
 
 # Read RDFs and a schema file and send to Dgraph running at given address.
-$ dgraph live -f <path-to-gzipped-RDf-or-JSON-file> -s <path-to-schema-file> -a <dgraph-alpha-address:grpc_port> -z <dgraph-zero-address:grpc_port>
+dgraph live \
+  --files <path-to-gzipped-RDf-or-JSON-file> \
+  --schema <path-to-schema-file> \
+  --alpha <dgraph-alpha-address:grpc_port> \
+  --zero <dgraph-zero-address:grpc_port>
 ```
 
 ## Load from S3
 
-To live load from Amazon S3, you must have either [IAM](#iam-setup) or the following AWS credentials set
-via environment variables:
+To live load from [Amazon S3 (Simple Storage Service)](https://aws.amazon.com/s3/), you must have either permissions to access the S3 bucket from the system performing live load (see [IAM setup](#iam-setup) below) or explicitly add the following AWS credentials set via environment variables:
 
  Environment Variable                        | Description
  --------------------                        | -----------
@@ -49,17 +52,31 @@ via environment variables:
 ### IAM setup
 
 In AWS, you can accomplish this by doing the following:
+
 1. Create an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) with an IAM Policy that grants access to the S3 bucket.
 2. Depending on whether you want to grant access to an EC2 instance, or to a pod running on [EKS](https://aws.amazon.com/eks/), you can do one of these options:
    * [Instance Profile](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) can pass the IAM Role to an EC2 Instance
    * [IAM Roles for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) to attach the IAM Role to a running EC2 Instance
    * [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to associate the IAM Role to a [Kubernetes Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
 
-Once your setup is ready, you can execute the bulk load from S3:
+Once your setup is ready, you can execute the live load from S3.  As examples:
 
 ```sh
-dgraph live -f s3:///bucket-name/directory-with-rdf -s s3:///bucket-name/directory-with-rdf/schema.txt
+## short form of S3 URL
+dgraph live \
+  --files s3:///<bucket-name>/<directory-with-data-files> \
+  --schema s3:///<bucket-name>/<directory-with-data-files>/schema.txt
+
+## long form of S3 URL
+dgraph live \
+  --files s3://s3.<region>.amazonaws.com/<bucket>/<directory-with-data-files> \
+  --schema s3://s3.<region>.amazonaws.com/<bucket>/<directory-with-data-files>/schema.txt
 ```
+
+{{% notice "note" %}}
+The short form of the S3 URL requires S3 URL is prefixed with `s3:///` (noticed the triple-slash `///`).  The long form for S3 buckets requires a double slash, e.g. `s3://`.
+{{% /notice %}}
+
 
 ## Load from MinIO
 
@@ -75,7 +92,9 @@ environment variables:
 Once your setup is ready, you can execute the bulk load from MinIO:
 
 ```sh
-dgraph live -f minio://minio-server:port/bucket-name/directory-with-rdf -s minio://minio-server:port/bucket-name/directory-with-rdf/schema.txt
+dgraph live \
+  --files minio://minio-server:port/<bucket-name>/<directory-with-data-files> \
+  --schema minio://minio-server:port/<bucket-name>/<directory-with-data-files>/schema.txt
 ```
 
 ## Enterprise Features
@@ -96,13 +115,20 @@ The Live loader requires that the `namespace` from the data and schema files exi
 For example, to preserve the namespace while loading data first you need to create the namespace(s) and then run the live loader command:
 
 ```sh
-dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace -1
+dgraph live \
+  --schema /tmp/data/1million.schema \
+  --files /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" \
+  --force-namespace -1
 ```
 
 A _Guardian of the Galaxy_ can also load data into a specific namespace. For example, to force the data loading into namespace `123`:
 
 ```sh
-dgraph live -s /tmp/data/1million.schema -f /tmp/data/1million.rdf.gz --creds="user=groot;password=password;namespace=0" --force-namespace 123
+dgraph live \
+  --schema /tmp/data/1million.schema \
+  --files /tmp/data/1million.rdf.gz \
+  --creds="user=groot;password=password;namespace=0" \
+  --force-namespace 123
 ```
 
 ### Encrypted imports (Enterprise Feature)
@@ -117,10 +143,13 @@ If the live Alpha instance has encryption turned on, the `p` directory will be e
 For example, to load an encrypted RDF/JSON file and schema via Live Loader:
 
 ```sh
-dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption key-file=<path-to-keyfile-to-decrypt-files>
+dgraph live \
+ --files <path-containering-encrypted-data-files> \
+ --schema <path-to-encrypted-schema> \
+ --encryption key-file=<path-to-keyfile-to-decrypt-files>
 ```
 
-## Batch Upserts
+## Batch upserts
 
 With batch upserts in Live Loader, you can insert big data-sets (multiple files) into an existing cluster that might contain nodes that already exist in the graph.
 Live Loader generates an `upsertPredicate` query for each of the ids found in the request, while
@@ -134,7 +163,7 @@ When the `upsertPredicate` already exists in the data, the existing node with th
 
 For example:
 ```sh
-dgraph live -f <path-to-gzipped-RDf-or-JSON-file> -s <path-to-schema-file> -U <xid>
+dgraph live --files <directory-with-data-files> --schema <path-to-schema-file> --upsertPredicate <xid>
 ```
 
 ## Other Live Loader options
@@ -160,7 +189,7 @@ Alpha server.
 
 `-a, --alpha` (default: `localhost:9080`): Dgraph Alpha gRPC server address to connect for live loading. This can be a comma-separated list of Alphas addresses in the same cluster to distribute the load, e.g.,  `"alpha:grpc_port,alpha2:grpc_port,alpha3:grpc_port"`.
 
-`-x, --xidmap` (default: disabled. Need a path): Store `xid` to `uid` mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. 
+`-x, --xidmap` (default: disabled. Need a path): Store `xid` to `uid` mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load.
 
 {{% notice "tip" %}}
 Using the `--xidmap` flag is recommended if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific `uid`.
@@ -179,11 +208,11 @@ You should only use the `--ludicrous` superflag's `enabled` option if Dgraph is 
 `--vault` [superflag's]({{< relref "deploy/cli-command-reference" >}}) options specify the Vault server address, role id, secret id, and
 field that contains the encryption key required to decrypt the encrypted export.
 
-## `upsertPredicate` Example
+## `upsertPredicate` example
 
-You might find that discrete pieces of information regarding entities are arriving through independent data feeds. 
-The feeds might involve adding basic information (first and last name), income, and address in separate files. 
-You can use the live loader to correlate individual records from these files and combine attributes to create a consolidated Dgraph node. 
+You might find that discrete pieces of information regarding entities are arriving through independent data feeds.
+The feeds might involve adding basic information (first and last name), income, and address in separate files.
+You can use the live loader to correlate individual records from these files and combine attributes to create a consolidated Dgraph node.
 
 Start by adding the following schema:
 
@@ -199,8 +228,8 @@ Start by adding the following schema:
 
 ### The Upsert predicate
 
-You can upload the files individually using the live loader (`dgraph live`) with the `-U` or `--upsertPredicate` option. 
-Each file has records with external keys for customers (e.g., `my.org/customer/1`) and addresses (e.g., `my.org/customer/1/address/1`). 
+You can upload the files individually using the live loader (`dgraph live`) with the `-U` or `--upsertPredicate` option.
+Each file has records with external keys for customers (e.g., `my.org/customer/1`) and addresses (e.g., `my.org/customer/1/address/1`).
 
 The schema has the required fields in addition to a field named `xid`. This field will be used to hold the external key value. Please note that there's a `hash` index for the `xid` field. You will be using this `xid` field as the "Upsert" predicate (`-U` option) and pass it as an argument to the `dgraph live` command. The live loader uses the predicate's content provided by the `-U` option (`xid` in this case) to identify and update the corresponding Dgraph node. In case the corresponding Dgraph node does not exist, the live loader will create a new node.
 
@@ -216,7 +245,7 @@ The schema has the required fields in addition to a field named `xid`. This fiel
 You can load the customer information with the following command:
 
 ```sh
-dgraph live -f customerNames.rdf -U "xid"
+dgraph live --files customerNames.rdf --upsertPredicate "xid"
 ```
 
 Next, you can inspect the loaded data:  
@@ -254,10 +283,10 @@ The query will return the newly created Dgraph nodes as shown below.
     "lastName": "Doe",
     "xid": "my.org/customer/2"
   }
-] 
+]
 ```
 
-You can see the new customer added with name information and the contents of the `xid` field. 
+You can see the new customer added with name information and the contents of the `xid` field.
 The `xid` field holds a reference to the externally provided id.
 
 **File** `customer_income.rdf` - Income information about the customer:
@@ -270,7 +299,7 @@ The `xid` field holds a reference to the externally provided id.
 You can load the income information by running:
 
 ```sh
-dgraph live -f customer_income.rdf -U "xid"
+dgraph live --files customer_income.rdf --upsertPredicate "xid"
 ```
 
 Now you can execute a query to check the income data:
@@ -328,11 +357,11 @@ Note that the corresponding nodes have been correctly updated with the `annualIn
 <_:my.org/customer/2/address/2>  <city> "Mumbai" .
 ```
 
-You can extend the same approach to update `uid` predicates. 
-To load the addresses linked to customers, you can launch the live loader as below. 
+You can extend the same approach to update `uid` predicates.
+To load the addresses linked to customers, you can launch the live loader as below.
 
 ```sh
-dgraph live -f customer_address.rdf -U "xid"
+dgraph live --files customer_address.rdf --upsertPredicate "xid"
 ```
 
 You can check the output of the query:
