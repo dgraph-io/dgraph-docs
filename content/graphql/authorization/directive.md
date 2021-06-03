@@ -39,6 +39,27 @@ type Todo @auth(
             } 
         }"""
     }
+    add: { rule: """
+        query ($USER: String!) { 
+            queryTodo(filter: { owner: { eq: $USER } } ) { 
+                id 
+            } 
+        }"""
+    }
+    delete: { rule: """
+        query ($USER: String!) { 
+            queryTodo(filter: { owner: { eq: $USER } } ) { 
+                id 
+            } 
+        }"""
+    }
+    update: { rule: """
+        query ($USER: String!) { 
+            queryTodo(filter: { owner: { eq: $USER } } ) { 
+                id 
+            } 
+        }"""
+    }
 ){
     id: ID!
     text: String! @search(by: [term])
