@@ -18,22 +18,26 @@ data](https://www.w3.org/TR/n-quads/) or JSON in plain or gzipped format. Data
 in other formats must be converted.{{% /notice %}}
 
 ```sh
-$ dgraph live --help # To see the available flags.
+dgraph live --help # To see the available flags.
 
 # Read RDFs or JSON from the passed file, and send them to Dgraph on localhost:9080.
-$ dgraph live -f <path-to-gzipped-RDF-or-JSON-file>
+dgraph live --files <path-to-gzipped-RDF-or-JSON-file>
 
 # Read multiple RDFs or JSON from the passed path, and send them to Dgraph on localhost:9080.
-$ dgraph live -f <./path-to-gzipped-RDF-or-JSON-files>
+dgraph live --files <./path-to-gzipped-RDF-or-JSON-files>
 
 # Read multiple files strictly by name.
-$ dgraph live -f <file1.rdf, file2.rdf>
+dgraph live --files <file1.rdf, file2.rdf>
 
 # Use compressed gRPC connections to and from Dgraph.
-$ dgraph live -C -f <path-to-gzipped-RDF-or-JSON-file>
+dgraph live --use_compression --files <path-to-gzipped-RDF-or-JSON-file>
 
 # Read RDFs and a schema file and send to Dgraph running at given address.
-$ dgraph live -f <path-to-gzipped-RDf-or-JSON-file> -s <path-to-schema-file> -a <dgraph-alpha-address:grpc_port> -z <dgraph-zero-address:grpc_port>
+dgraph live \
+  --files <path-to-gzipped-RDf-or-JSON-file> \
+  --schema <path-to-schema-file> \
+  --alpha <dgraph-alpha-address:grpc_port> \
+  --zero <dgraph-zero-address:grpc_port>
 ```
 
 ### Encrypted imports via Live Loader (Enterprise Feature)
@@ -48,7 +52,7 @@ If the live Alpha instance has encryption turned on, the `p` directory will be e
 #### Encrypted RDF/JSON file and schema via Live Loader
 
 ```sh
-dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption_keyfile <path-to-keyfile-to-decrypt-files>
+dgraph live -f <path-to-encrypted-gzipped-RDF-or-JSON-file> -s <path-to-encrypted-schema> --encryption_key_file <path-to-keyfile-to-decrypt-files>
 ```
 
 ### Batch Upserts in Live Loader
@@ -65,7 +69,7 @@ When the `upsertPredicate` already exists in the data, the existing node with th
 
 For example:
 ```sh
-dgraph live -f <path-to-gzipped-RDf-or-JSON-file> -s <path-to-schema-file> -U <xid>
+dgraph live --files <directory-with-data-files> --schema <path-to-schema-file> --upsertPredicate <xid>
 ```
 
 ### Other Live Loader options
@@ -91,7 +95,7 @@ Alpha server.
 
 `-a, --alpha` (default: `localhost:9080`): Dgraph Alpha gRPC server address to connect for live loading. This can be a comma-separated list of Alphas addresses in the same cluster to distribute the load, e.g.,  `"alpha:grpc_port,alpha2:grpc_port,alpha3:grpc_port"`.
 
-`-x, --xidmap` (default: disabled. Need a path): Store `xid` to `uid` mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load. 
+`-x, --xidmap` (default: disabled. Need a path): Store `xid` to `uid` mapping to a directory. Dgraph will save all identifiers used in the load for later use in other data ingest operations. The mapping will be saved in the path you provide and you must indicate that same path in the next load.
 
 {{% notice "tip" %}}
 Using the `--xidmap` flag is recommended if you have full control over your identifiers (Blank-nodes). Because the identifier will be mapped to a specific `uid`.
@@ -112,9 +116,9 @@ field that contains the encryption key that can be used to decrypt the encrypted
 
 ### `upsertPredicate` Example
 
-You might find that discrete pieces of information regarding entities are arriving through independent data feeds. 
-The feeds might involve adding basic information (first and last name), income, and address in separate files. 
-You can use the live loader to correlate individual records from these files and combine attributes to create a consolidated Dgraph node. 
+You might find that discrete pieces of information regarding entities are arriving through independent data feeds.
+The feeds might involve adding basic information (first and last name), income, and address in separate files.
+You can use the live loader to correlate individual records from these files and combine attributes to create a consolidated Dgraph node.
 
 Start by adding the following schema:
 
@@ -130,8 +134,8 @@ Start by adding the following schema:
 
 #### The Upsert predicate
 
-You can upload the files individually using the live loader (`dgraph live`) with the `-U` or `--upsertPredicate` option. 
-Each file has records with external keys for customers (e.g., `my.org/customer/1`) and addresses (e.g., `my.org/customer/1/address/1`). 
+You can upload the files individually using the live loader (`dgraph live`) with the `-U` or `--upsertPredicate` option.
+Each file has records with external keys for customers (e.g., `my.org/customer/1`) and addresses (e.g., `my.org/customer/1/address/1`).
 
 The schema has the required fields in addition to a field named `xid`. This field will be used to hold the external key value. Please note that there's a `hash` index for the `xid` field. You will be using this `xid` field as the "Upsert" predicate (`-U` option) and pass it as an argument to the `dgraph live` command. The live loader uses the predicate's content provided by the `-U` option (`xid` in this case) to identify and update the corresponding Dgraph node. In case the corresponding Dgraph node does not exist, the live loader will create a new node.
 
@@ -147,7 +151,7 @@ The schema has the required fields in addition to a field named `xid`. This fiel
 You can load the customer information with the following command:
 
 ```sh
-dgraph live -f customerNames.rdf -U "xid"
+dgraph live --files customerNames.rdf --upsertPredicate "xid"
 ```
 
 Next, you can inspect the loaded data:  
@@ -185,10 +189,10 @@ The query will return the newly created Dgraph nodes as shown below.
     "lastName": "Doe",
     "xid": "my.org/customer/2"
   }
-] 
+]
 ```
 
-You can see the new customer added with name information and the contents of the `xid` field. 
+You can see the new customer added with name information and the contents of the `xid` field.
 The `xid` field holds a reference to the externally provided id.
 
 **File** `customer_income.rdf` - Income information about the customer:
@@ -201,7 +205,7 @@ The `xid` field holds a reference to the externally provided id.
 You can load the income information by running:
 
 ```sh
-dgraph live -f customer_income.rdf -U "xid"
+dgraph live --files customer_income.rdf --upsertPredicate "xid"
 ```
 
 Now you can execute a query to check the income data:
@@ -259,11 +263,11 @@ Note that the corresponding nodes have been correctly updated with the `annualIn
 <_:my.org/customer/2/address/2>  <city> "Mumbai" .
 ```
 
-You can extend the same approach to update `uid` predicates. 
-To load the addresses linked to customers, you can launch the live loader as below. 
+You can extend the same approach to update `uid` predicates.
+To load the addresses linked to customers, you can launch the live loader as below.
 
 ```sh
-dgraph live -f customer_address.rdf -U "xid"
+dgraph live --files customer_address.rdf --upsertPredicate "xid"
 ```
 
 You can check the output of the query:
