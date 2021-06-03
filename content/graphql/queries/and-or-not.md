@@ -66,8 +66,12 @@ queryPost(filter: {
 } ) { ... }
 ```
 
-{{% notice "note" %}}
+### Nesting
+
 Nested logic with the same `and`/`or` conjunction can be simplified into a single list.
+
+For example:
+
 ```
 queryPost(filter: {
   or: [
