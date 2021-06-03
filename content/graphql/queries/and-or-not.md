@@ -1,5 +1,5 @@
 +++
-title = "And, Or and Not"
+title = "And, Or and Not Operators in GraphQL"
 description = "Every GraphQL search filter can use AND, OR and NOT operators."
 weight = 5
 [menu.main]
@@ -7,17 +7,19 @@ weight = 5
     name = "And, Or and Not"
 +++
 
-Every GraphQL search filter can use `and`, `or` and `not` operators.
+Every GraphQL search filter can use `and`, `or`, and `not` operators.
 
 GraphQL syntax uses infix notation, so: "a and b" is `a, and: { b }`, "a or b or c" is `a, or: { b, or: c }`, and "not" is a prefix (`not:`).
 
-Example: Posts that do not have "GraphQL" in the title.
+The following example queries demonstrate the use of `and`, `or`, and `not` operators:
+
+Example: _"Posts that do not have "GraphQL" in the title"_
 
 ```graphql
 queryPost(filter: { not: { title: { allofterms: "GraphQL"} } } ) { ... }
 ```
 
-Example: Posts that have "GraphQL" or "Dgraph" in the title.
+Example: _"Posts that have "GraphQL" or "Dgraph" in the title"_
 
 ```graphql
 queryPost(filter: {
@@ -26,7 +28,7 @@ queryPost(filter: {
 } ) { ... }
 ```
 
-Example: Posts that have "GraphQL" and "Dgraph" in the title.
+Example: _"Posts that have "GraphQL" and "Dgraph" in the title"_
 
 ```graphql
 queryPost(filter: {
@@ -35,7 +37,7 @@ queryPost(filter: {
 } ) { ... }
 ```
 
-The "and" operator is implicit for a single filter object, if the fields don't overlap.  For example, above the `and` is required because `title` is in both filters, whereas below, `and` is not required.
+The `and` operator is implicit for a single filter object, if the fields don't overlap.  For example, above the `and` is required because `title` is in both filters; whereas below, `and` is not required.
 
 ```graphql
 queryPost(filter: {
@@ -44,7 +46,7 @@ queryPost(filter: {
 } ) { ... }
 ```
 
-Example: Posts that have "GraphQL" in the title, or have the tag "GraphQL" and mention "Dgraph" in the title
+Example: _"Posts that have "GraphQL" in the title, or have the tag "GraphQL" and mention "Dgraph" in the title"_
 
 ```graphql
 queryPost(filter: {
@@ -53,9 +55,9 @@ queryPost(filter: {
 } ) { ... }
 ```
 
-The `and` and `or` filter both accept a list of filters. Per the GraphQL specification, non-list filters are coerced into a list. This provides backwards compatibility while allowing for more complex filters.
+The `and` and `or` filter both accept a list of filters. Per the GraphQL specification, non-list filters are coerced into a list. This provides backwards-compatibility while allowing for more complex filters.
 
-Example: Query for posts that have `GraphQL` in the title but that lack the `GraphQL` tag, or that have `Dgraph` in the title but lack the `Dgraph` tag.
+Example: _"Query for posts that have `GraphQL` in the title but that lack the `GraphQL` tag, or that have `Dgraph` in the title but lack the `Dgraph` tag"_
 
 ```graphql
 queryPost(filter: {
@@ -70,7 +72,7 @@ queryPost(filter: {
 
 Nested logic with the same `and`/`or` conjunction can be simplified into a single list.
 
-For example:
+For example, the following complex query:
 
 ```
 queryPost(filter: {
@@ -80,7 +82,7 @@ queryPost(filter: {
   ]
 } ) { ... }
 ```
-Can be simplified into
+...can be simplified into the following simplified query syntax:
 ```
 queryPost(filter: {
   or: [
