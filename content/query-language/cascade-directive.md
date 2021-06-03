@@ -51,6 +51,8 @@ You can apply `@cascade` on inner query blocks as well.
 The `@cascade` directive can optionally take a list of fields as an argument.
 This changes the default behavior, considering only the supplied fields as mandatory instead of all the fields for a type.
 Listed fields are automatically cascaded as a required argument to nested selection sets.
+A parameterized cascade works on levels (e.g. on the root function or on lower levels), so
+you need to specify `@cascade(param)` on the exact level where you want it to be applied.
 
 {{% notice "tip" %}}
 The rule with `@cascade(predicate)` is that the predicate needs to be in the query at the same level `@cascade` is.
