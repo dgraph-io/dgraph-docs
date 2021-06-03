@@ -78,7 +78,7 @@ movies, but the results are independent and both contain the full answers sets.
 
 ## Variable (`var`) blocks
 
-Variable blocks (var blocks) start with the keyword `var` and are not returned
+Variable blocks (`var` blocks) start with the keyword `var` and are not returned
 in the query results, but do affect the contents of query results.
 
 Query Example: _"Angelina Jolie's movies ordered by genre"_
@@ -135,7 +135,7 @@ Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman sorted
 
 ### Combining multiple `var` blocks
 
-You could get the same query results by logically combining both both var blocks
+You could get the same query results by logically combining both both `var` blocks
 in the films block, as follows:
 ```
 {
@@ -156,6 +156,6 @@ in the films block, as follows:
   }
 }
 ```
-The root `uid` function unions the `uid`s from var `A` and `B`, so you need a
-filter to intersect the `uid`s from var `A` and `B`.
+The root `uid` function unions the `uid`s from `var` `A` and `B`, so you need a
+filter to intersect the `uid`s from `var` `A` and `B`.
 
