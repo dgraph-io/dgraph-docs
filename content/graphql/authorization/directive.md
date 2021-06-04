@@ -167,7 +167,7 @@ type Question implements Post @auth(
 }
 
 type Answer implements Post @auth(
-	# The JWT should contain a boolean claim "USEFUL".
+    # The JWT should contain a boolean claim "USEFUL".
     # This query rule would ensure that only the answers that have the markedUseful field matching
     # the USEFUL claim are returned in response.
     query: { rule: """
