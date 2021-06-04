@@ -16,6 +16,10 @@ Dgraph's native DQL syntax allows type and edge names that aren't valid in Graph
 Be careful with mapping to an existing Dgraph instance. Updating the GraphQL schema will also update the underlying Dgraph schema. 
 {{% /notice %}}
 
+{{% notice "tip" %}}
+To learn more about common GraphQL and Dgraph schema migration scenarios, see [Schema Migration]({{< relref "graphql/schema/migration.md" >}}).
+{{% /notice %}}
+
 ## Mapping GraphQL to a Dgraph schema
 
 By default, Dgraph generates a new predicate for each field in a GraphQL type. The name of the generated predicate is composed of the type name followed by a dot `.` and ending with the field name. Therefore, two different types with fields of the same name will turn out to be different Dgraph predicates and can have different indexes.  For example, the types:
