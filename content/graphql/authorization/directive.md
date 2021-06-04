@@ -28,7 +28,7 @@ the kinds of rules Dgraph already knows how to evaluate.
 
 ## Authorization rules
 
-A valid type and rule looks like the following.
+A valid type and rule looks like the following:
 
 ```graphql
 type Todo @auth(
@@ -195,7 +195,8 @@ Mutations on an interface works in the same manner. For example, in case of a `d
 
 ## Graph traversal in auth rules
 
-Often authorization depends not on the object being queried, but on the connections in the graph that object has or doesn't have.  Because the auth rules are graph queries, they can express very powerful graph search and traversal.
+Often authorization depends not on the object being queried, but on the connections in the graph that object has or doesn't have.
+Because the auth rules are graph queries, they can express very powerful graph search and traversal.
 
 For a simple todo app, it's more likely that you'll have types like this:
 
@@ -212,9 +213,10 @@ type Todo {
 }
 ```
 
-This means your auth rule for todos will depend not on a value in the todo, but on checking which owner it's linked to.  This means our auth rule must make a step further into the graph to check who the owner is.
+This means your auth rule for todos will depend not on a value in the todo, but on checking which owner it's linked to.
+This means our auth rule must make a step further into the graph to check who the owner is.
 
-So, we will have to modify the above schema like this:
+So, you will have to modify the above schema like this:
 
 ```graphql
 type User {
