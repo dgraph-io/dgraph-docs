@@ -9,7 +9,7 @@ weight = 13
 Syntax Examples:
 
 * `q(func: ...) @groupby(predicate) { min(...) }`
-* `predicate @groupby(pred) { count(uid) }``
+* `predicate @groupby(pred) { count(uid) }`
 
 
 A `groupby` query aggregates query results given a set of properties on which to group elements.  For example, a query containing the block `friend @groupby(age) { count(uid) }`, finds all nodes reachable along the friend edge, partitions these into groups based on age, then counts how many nodes are in each group.  The returned result is the grouped edges and the aggregations.
