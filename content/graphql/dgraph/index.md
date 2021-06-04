@@ -17,7 +17,7 @@ Be careful with mapping to an existing Dgraph instance. Updating the GraphQL sch
 {{% /notice %}}
 
 {{% notice "tip" %}}
-Check the [Schema Migration]({{< relref "graphql/schema/migration.md" >}}) article to learn more about common GraphQL and Dgraph schema migration scenarios.
+To learn more about common GraphQL and Dgraph schema migration scenarios, see [Schema Migration]({{< relref "graphql/schema/migration.md" >}}).
 {{% /notice %}}
 
 ## Mapping GraphQL to a Dgraph schema
