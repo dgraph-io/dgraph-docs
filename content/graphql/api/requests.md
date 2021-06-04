@@ -1,5 +1,5 @@
 +++
-title = "Requests and Responses"
+title = "Requests and Responses in GraphQL"
 description = "Get the structure for GraphQL requests and responses, how to enable compression for them, and configuration options for extensions."
 weight = 2
 [menu.main]

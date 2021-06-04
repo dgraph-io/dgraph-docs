@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Delete"
+title = "Del"
+description = "In this guide we explain how to use delete mutations, allowing you to delete objects of a particular type. You can also delete multiple types of data using wildcard delete."
 weight = 7
 [menu.main]
+    name = "Delete"
     parent = "mutations"
 +++
 

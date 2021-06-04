@@ -1,6 +1,8 @@
 +++
-title = "DQL: Tips and Tricks"
+title = "Tips and Tricks with DQL"
+description = "DQL tips and tricks from Dgraph, including: Get sample data, count number of connecting nodes, search on non-indexed predicates, and more."
 [menu.main]
+  name = "Tips and Tricks"
   identifier = "tips"
   parent = "dql"
   weight = 5
