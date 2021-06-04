@@ -12,6 +12,10 @@ If you have an existing Dgraph instance and want to also expose GraphQL, you nee
 
 Dgraph's native DQL syntax allows type and edge names that aren't valid in GraphQL; so, you'll often need to expose valid GraphQL names. Dgraph permits special characters, including Unicode characters from a variety of  languages (see [Predicate name rules]({{< relref "query-language/schema.md#predicate-name-rules">}})). Conversely, the [GraphQL specification on naming](https://spec.graphql.org/June2018/#sec-Names) requires that entity names, including types and fields (predicate), are composed of ASCII characters and generated as follows: `/[_A-Za-z][_0-9A-Za-z]*/`.
 
+{{% notice "note" %}}
+Be careful with mapping to an existing Dgraph instance. Updating the GraphQL schema will also update the underlying Dgraph schema. 
+{{% /notice %}}
+
 ## Mapping GraphQL to a Dgraph schema
 
 By default, Dgraph generates a new predicate for each field in a GraphQL type. The name of the generated predicate is composed of the type name followed by a dot `.` and ending with the field name. Therefore, two different types with fields of the same name will turn out to be different Dgraph predicates and can have different indexes.  For example, the types:
@@ -95,8 +99,6 @@ type Movie {
 
 {{% notice "note" %}}
 In Dgraph's current GraphQL implementation, if two fields are mapped to the same Dgraph predicate, both should have the same `@search` directive.
-This is likely to change in a future release where the underlying Dgraph indexes will be the union of the `@search` directives, while the generated GraphQL API will expose only the search given for the particular field.
-Allowing, for example, a Dgraph predicate name to have `term` and `hash` indexes, but exposing only `term` search for GraphQL movies and `hash` search for GraphQL people.
 {{% /notice %}}
 
 ## Language support in GraphQL
@@ -130,13 +132,3 @@ GraphQL won’t be able to query `Person.name@*` type of language tags because o
 {{% /notice %}}
 
 To know more about language support in DQL, please refer to [this tutorial]({{< relref "/tutorial-4/index.md" >}}).
-
-## Roadmap
-
-Be careful with mapping to an existing Dgraph instance.  Updating the GraphQL schema updates the underlying Dgraph schema. We understand that exposing a GraphQL API on an existing Dgraph instance is a delicate process and we plan on adding multiple checks to ensure the validity of schema changes to avoid issues caused by detectable mistakes.
-
-Future features are likely to include:
-
-* Generating a first pass GraphQL schema from an existing dgraph schema.
-* A way to show what schema diff will happen when you apply a new GraphQL schema.
-* Better handling of `@dgraph` with `@search`
