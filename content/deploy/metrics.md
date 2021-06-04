@@ -42,7 +42,10 @@ not interact directly with the filesystem. Instead it relies on
  `badger_memtable_gets_total`     | Total count of memtable accesses to Badger's `get`.
  `badger_puts_total`              | Total count of calls to Badger's `put`.
  `badger_read_bytes`              | Total bytes read from Badger.
+ `badger_lsm_bloom_hits_total`    | Total number of LSM tree bloom hits.
  `badger_written_bytes`           | Total bytes written to Badger.
+ `badger_lsm_size_bytes`          | Total size in bytes of the LSM tree.
+ `badger_vlog_size_bytes`         | Total size in bytes of the value log.
 
 ## Go Metrics
 
