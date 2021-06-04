@@ -8,7 +8,7 @@ weight = 2
 
 The `@auth` directive tells Dgraph how to apply authorization. You can use it
 to define authorization rules for most types (except for `union` and `@remote`
-types). It lets you can control which users can run which queries - as well as
+types). It lets you control which users can run which queries - as well as
 which users can add, update, and delete data using mutations. 
 
 Additionally, you can use this directive with the [`@secret`](/graphql/schema/types#password-type)
@@ -133,6 +133,8 @@ type Author {
 }
 
 interface Post @auth(
+    # The JWT should contain a claim "USER", which should be the ID of the logged in author.
+    # This query rule would ensure that the logged-in author sees only their posts.
     query: { rule: """
         query ($USER: ID!) { 
             queryPost {
@@ -150,6 +152,9 @@ interface Post @auth(
 }
 
 type Question implements Post @auth(
+    # The JWT should contain a boolean claim "ANSWERED".
+    # This query rule would ensure that only the questions that have the answered field matching 
+    # the ANSWERED claim are returned in response.
     query: { rule: """
         query ($ANSWERED: Boolean!) { 
             queryQuestion(filter: { answered: $ANSWERED } ) { 
@@ -162,6 +167,9 @@ type Question implements Post @auth(
 }
 
 type Answer implements Post @auth(
+	# The JWT should contain a boolean claim "USEFUL".
+    # This query rule would ensure that only the answers that have the markedUseful field matching
+    # the USEFUL claim are returned in response.
     query: { rule: """
         query ($USEFUL:Boolean!) { 
             queryAnswer(filter: { markedUseful: $USEFUL } ) { 
@@ -206,13 +214,28 @@ type Todo {
 
 This means your auth rule for todos will depend not on a value in the todo, but on checking which owner it's linked to.  This means our auth rule must make a step further into the graph to check who the owner is.
 
+So, we will have to modify the above schema like this:
+
 ```graphql
-query ($USER: String!) { 
-    queryTodo {
-        owner(filter: { username: { eq: $USER } } ) { 
-            username
-        } 
-    } 
+type User {
+	username: String! @id
+	todos: [Todo]
+}
+
+type Todo @auth(
+    query: { rule: """
+        query ($USER: String!) {
+            queryTodo {
+                owner(filter: { username: { eq: $USER } } ) {
+                    username
+                }
+            }
+        }"""
+    }
+){
+	id: ID!
+	text: String!
+	owner: User
 }
 ```
 
