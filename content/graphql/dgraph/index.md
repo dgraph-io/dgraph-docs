@@ -94,7 +94,7 @@ type Movie {
 ```
 
 {{% notice "note" %}}
-The current behavior requires that when two fields are mapped to the same Dgraph predicate both should have the same `@search` directive.
+In Dgraph's current GraphQL implementation, if two fields are mapped to the same Dgraph predicate, both should have the same `@search` directive.
 This is likely to change in a future release where the underlying Dgraph indexes will be the union of the `@search` directives, while the generated GraphQL API will expose only the search given for the particular field.
 Allowing, for example, a Dgraph predicate name to have `term` and `hash` indexes, but exposing only `term` search for GraphQL movies and `hash` search for GraphQL people.
 {{% /notice %}}
