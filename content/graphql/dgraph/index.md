@@ -6,7 +6,7 @@ weight = 13
   parent = "graphql"
 +++
 
-How to use GraphQL on an existing Dgraph instance.
+## How to use GraphQL on an existing Dgraph instance
 
 If you have an existing Dgraph instance and want to also expose GraphQL, you need to add a GraphQL schema that maps to your Dgraph schema.  You don't need to expose your entire Dgraph schema as GraphQL, but do note that adding a GraphQL schema can alter the Dgraph schema.
 
@@ -101,7 +101,7 @@ type Movie {
 In Dgraph's current GraphQL implementation, if two fields are mapped to the same Dgraph predicate, both should have the same `@search` directive.
 {{% /notice %}}
 
-# Roadmap
+## Language support in GraphQL
 
 In your GraphQL schema, you need to define a field for each language that you want to use. 
 In addition, you also need to apply the `@dgraph(pred: "...")` directive on that field, with the `pred` argument set to point to the correct DQL predicate with a language tag for the language that you want to use it for.
