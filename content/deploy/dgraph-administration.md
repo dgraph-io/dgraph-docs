@@ -152,8 +152,8 @@ mutation {
 ```
 
 {{% notice "note" %}}
-Since v21.03, the `export` and `backup` APIs are asynchronous: instead of returning the requested data,
-they queue the task and return a `taskId` immediately.
+Since v21.03, the `export` API is asynchronous: instead of returning the requested data,
+it queues the task and return a `taskId` immediately.
 These tasks run in the background, and Dgraph has a worker thread that executes them one at a time.
 {{% /notice %}}
 
@@ -173,7 +173,7 @@ export.
 
 ### Check queued tasks
 
-A new Task API has been added to the `/admin` endpoint. This allows you to check the status of a queued task (either `backup` or `export`).
+A new Task API has been added to the `/admin` endpoint. This allows you to check the status of a queued `backup` task.
 You can provide the `taskId`, and the response will give you the current task status.
 
 For example:
