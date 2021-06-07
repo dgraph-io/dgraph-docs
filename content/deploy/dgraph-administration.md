@@ -26,6 +26,7 @@ endpoints includes the following:
 * `/admin`
 * `/admin/config/lru_mb`
 * `/admin/draining`
+* `/admin/export`
 * `/admin/shutdown`
 * `/admin/schema`
 * `/alter`
