@@ -24,6 +24,7 @@ Admin endpoints usually start with the `/admin` path. The current list of admin
 endpoints includes the following:
 
 * `/admin`
+* `/admin/backup`
 * `/admin/config/lru_mb`
 * `/admin/draining`
 * `/admin/export`
