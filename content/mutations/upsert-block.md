@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Upsert Blocks in DQL"
-description = "In this guide, we explain the upsert block in Dgraph, which lets you perform queries and mutations in a single request. "
+description = "In this guide, we explain the upsert block in DQL, which lets you perform queries and mutations in a single request."
 weight = 11
 [menu.main]
     name = "Upsert Blocks"

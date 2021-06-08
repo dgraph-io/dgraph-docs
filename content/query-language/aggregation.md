@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Aggregation"
+title = "Aggregation in DQL"
+description = "In this guide, we explain aggregation within DQL, including summary statistics like min, max, and average."
 weight = 11
 [menu.main]
+    name = "Aggregation"
     parent = "query-language"
 +++
 

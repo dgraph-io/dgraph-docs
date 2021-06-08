@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Expand Predicates"
+title = "Expand Predicates in DQL"
+description = "In this guide, we explain how to expand predicates when using Dgraph Query Language (DQL), allowing you to expand the predicates out of a node. "
 weight = 14
 [menu.main]
+    name = "Expand Predicates"
     parent = "query-language"
 +++
 
@@ -11,9 +13,9 @@ use `expand()`, the [type system]({{< relref "query-language/type-system.md" >}}
 Refer to the section on the type system to check how to set the types
 nodes. The rest of this section assumes familiarity with that section.
 
-There are two ways to use the `expand` function.
+There are two ways to use the `expand` function:
 
-* Types can be passed to `expand()` to expand all the predicates in the type.
+## 1. Types can be passed to `expand()` to expand all the predicates in the type.
 
 Query example: List the movies from the Harry Potter series:
 
@@ -29,7 +31,9 @@ Query example: List the movies from the Harry Potter series:
 }
 {{< /runnable >}}
 
-* If `_all_` is passed as an argument to `expand()`, the predicates to be
+# 2. Expand all predicates
+
+If `_all_` is passed as an argument to `expand()`, the predicates to be
 expanded will be the union of fields in the types assigned to a given node.
 
 The `_all_` keyword requires that the nodes have types. Dgraph will look for all

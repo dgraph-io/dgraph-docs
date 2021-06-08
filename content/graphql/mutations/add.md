@@ -1,5 +1,5 @@
 +++
-title = "Add Mutations"
+title = "Add Mutations in GraphQL"
 description = "Add mutations allows you to add new objects of a particular type. Dgraph automatically generates input and return types in the schema for the add mutation"
 weight = 2
 [menu.main]

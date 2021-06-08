@@ -1,24 +1,25 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Value Variables"
+title = "Value Variables in DQL"
+description = "In this guide, we explain Value Variables with Dgraph, which can be used to store scalar values and create a map from UIDs to the corresponding values."
 weight = 10
 [menu.main]
+    name = "Value Variables"
     parent = "query-language"
 +++
 
+Value variables store scalar values in DQL. Value variables are a map from the UIDs of the enclosing block to the corresponding values.
 
-Syntax Examples:
+The following are examples of value variables:
 
 * `varName as scalarPredicate`
 * `varName as count(predicate)`
 * `varName as avg(...)`
 * `varName as math(...)`
 
-Types : `int`, `float`, `String`, `dateTime`, `default`, `geo`, `bool`
+These variables map to the following types: `int`, `float`, `String`, `dateTime`, `default`, `geo`, `bool`
 
-Value variables store scalar values.  Value variables are a map from the UIDs of the enclosing block to the corresponding values.
-
-It therefore only makes sense to use the values from a value variable in a context that matches the same UIDs - if used in a block matching different UIDs the value variable is undefined.
+It only makes sense to use the values from a value variable in a context that matches the same UIDs - if used in a block matching different UIDs the value variable is undefined.
 
 It is an error to define a value variable but not use it elsewhere in the query.
 

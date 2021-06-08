@@ -1,18 +1,19 @@
 +++
-title = "Overview"
+title = "GraphQL Queries Overview"
 description = "Dgraph automatically generates GraphQL queries for each type that you define in your schema. There are three types of queries generated for each type."
 weight = 1
 [menu.main]
+    name = "Overview"
     parent = "graphql-queries"
     identifier = "queries-overview"
 +++
 
-How to use queries to fetch data from Dgraph.
+This guide explains how to use GraphQL queries to fetch data from Dgraph.
 
 Dgraph automatically generates GraphQL queries for each type that you define in
 your schema. There are three types of queries generated for each type.
 
-Example
+Example schema:
 
 ```graphql
 type Post {
@@ -34,7 +35,9 @@ type Author {
 ```
 
 With the above schema, there would be three queries generated for Post and three
-for Author. Here are the queries that are generated for the Post type:
+for Author. 
+
+The following queries that are generated for the `Post` type:
 
 ```graphql
 getPost(postID: ID!): Post

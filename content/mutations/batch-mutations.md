@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Batch Mutations"
+title = "Batch Mutations in DQL"
+description = "In this guide, we explain batch mutations on Dgraph, which can be used to contain multiple RDF triples; for large data uploads, mutations can be batched in parallel."
 weight = 6
 [menu.main]
+    name = "Batch Mutations"
     parent = "mutations"
 +++
 
