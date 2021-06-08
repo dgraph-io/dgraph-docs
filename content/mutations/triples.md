@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Triples"
+title = "Triples in DQL"
+description = "In this guide, we explain the use of the set keyword to create a mutation that adds triples in the W3C standard RDF N-Quad format."
 weight = 1
 [menu.main]
+    name = "Triples"
     parent = "mutations"
 +++
 

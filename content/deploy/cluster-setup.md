@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Cluster Setup"
+description = "In this guide, we explain Dgraph cluster functionality, including sharding, shard rebalancing, consistent replication, and more."
 weight = 9
 [menu.main]
     parent = "deploy"

@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Clients"
+description = "Get documentation for Dgraph client libraries in various programming languages; including Go, C#, Java, Javascript, and Python."
 weight = 7
 [menu.main]
   identifier = "clients"

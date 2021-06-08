@@ -1,20 +1,23 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Access Control Lists"
+description = "In this guide, we explain Access Control Lists on Dgraph, which can be used to provide access protection to your data stored in Dgraph or Dgraph Cloud dedicated instances."
 weight = 1
 [menu.main]
     parent = "enterprise-features"
 +++
 
-{{% notice "note" %}}
-This feature was introduced in [v1.1.0](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.0).
-The `dgraph acl` command is deprecated and will be removed in a future release. ACL changes can be made by using the `/admin` GraphQL endpoint on any Alpha node.
-{{% /notice %}}
-
 Access Control List (ACL) provides access protection to your data stored in
 Dgraph. When the ACL feature is enabled, a client, e.g. [dgo](https://github.com/dgraph-io/dgo) or [dgraph4j](https://github.com/dgraph-io/dgraph4j), must
 authenticate with a username and password before executing any transactions, and
 is only allowed to access the data permitted by the ACL rules.
+
+ACLs are available to Dgraph Cloud users with dedicated instances.
+
+{{% notice "note" %}}
+This feature was introduced in [v1.1.0](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.0).
+The `dgraph acl` command is deprecated and will be removed in a future release. ACL changes can be made by using the `/admin` GraphQL endpoint on any Alpha node.
+{{% /notice %}}
 
 ## Enable enterprise ACL feature
 

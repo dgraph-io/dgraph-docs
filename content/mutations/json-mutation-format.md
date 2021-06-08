@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "JSON Mutation Format"
+description = "Learn to specify mutations using JSON objects. This can allow mutations to be expressed in a more natural way."
 weight = 10
 [menu.main]
     parent = "mutations"

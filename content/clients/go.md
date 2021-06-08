@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Go"
+description = "In this guide, we explain the steps to create a client using Go on Dgraph, including: create client, create a transaction, run a query, run a mutation, and commit the transaction."
 weight = 2
 [menu.main]
     parent = "clients"

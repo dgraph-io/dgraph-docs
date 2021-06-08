@@ -1,5 +1,6 @@
 +++
-title = "Delete Mutations"
+title = "Delete Mutations in GraphQL"
+description = "In this guide we explain how to use delete mutations in GraphQL, allowing you to delete objects of a particular type. Also included is the schema used in GraphQL examples."
 weight = 4
 [menu.main]
     parent = "graphql-mutations"

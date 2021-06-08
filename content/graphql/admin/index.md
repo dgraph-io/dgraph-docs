@@ -1,5 +1,5 @@
 +++
-title = "Administrative API"
+title = "Administrative API on GraphQL"
 description = "This documentation presents the Admin API and explains how to run a Dgraph database with GraphQL."
 weight = 12
 [menu.main]

@@ -1,8 +1,9 @@
 +++
-title = "IDs"
+title = "IDs in GraphQL"
 description = "Dgraph database provides two types of identifiers: the ID scalar type and the @id directive."
 weight = 3
 [menu.main]
+    name = "IDs"
     parent = "schema"
 +++
 

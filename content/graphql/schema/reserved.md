@@ -1,8 +1,9 @@
 +++
-title = "Reserved Names"
+title = "Reserved Names in GraphQL"
 description = "This document provides the full list of names that are reserved and can’t be used to define any other identifiers."
 weight = 1
 [menu.main]
+    name = "Reserved Names"
     parent = "schema"
 +++
 

@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T19:35:35+11:00"
 title = "Enterprise Features"
+description = "Exclusive features like ACLs, binary backups, encryption at rest, and more are available with a Dgraph enterprise license, or with Dgraph Cloud dedicated instances."
 weight = 9
 [menu.main]
   identifier = "enterprise-features"
@@ -9,7 +10,9 @@ weight = 9
 <div class="landing">
   <div class="hero">
     <p>
-      Exclusive features like ACLs, binary backups, encryption at rest, and more.
+      Exclusive features like ACLs, binary backups, encryption at rest, and more
+      are available with a Dgraph enterprise license, or with Dgraph Cloud dedicated
+      instances.
     </p>
     <img class="hero-deco" src="/images/hero-deco_403x160.png" />
   </div>

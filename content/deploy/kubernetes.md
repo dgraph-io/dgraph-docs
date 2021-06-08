@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Using Kubernetes"
+description = "In this guide, we explain the details about using Dgraph with Kubernetes, including deploying, verifying, testing, and removing single servers and clusters."
 weight = 8
 [menu.main]
     parent = "deploy"

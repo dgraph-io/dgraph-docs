@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Count"
+title = "Count in DQL"
+description = "In this guide, we explain how to use count functionality in DQL, including count(predicate) and count(uid)."
 weight = 6
 [menu.main]
+    name = "Count"
     parent = "query-language"
 +++
 

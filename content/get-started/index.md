@@ -1,5 +1,6 @@
 +++
 title = "DQL Quickstart"
+description = "A quick start guide for your first steps to get started with Dgraph and DQL: 1: Run Dgraph. 2: Run Mutation. 3: Alter Schema. 4: Run Queries."
 aliases = ["/get-started-old"]
 [menu.main]
   name = "DQL quickstart"

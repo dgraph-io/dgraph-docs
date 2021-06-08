@@ -1,6 +1,6 @@
 +++
-title = "Index of Directives"
-description = "The list of all directives supported by Dgraph. Full details linked within for all directives available with GraphQL."
+title = "Index of Directives in GraphQL"
+description = "The list of all directives supported by Dgraph's GraphQL implementation. Full details linked within for all directives available with GraphQL."
 weight = 11
 [menu.main]
   name = "Directives"

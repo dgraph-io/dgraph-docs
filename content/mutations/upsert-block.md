@@ -1,12 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Upsert Block"
+title = "Upsert Blocks in DQL"
+description = "In this guide, we explain the upsert block in DQL, which lets you perform queries and mutations in a single request."
 weight = 11
 [menu.main]
+    name = "Upsert Blocks"
     parent = "mutations"
 +++
 
-The upsert block allows performing queries and mutations in a single request. The upsert
+Upsert blocks allow you to perform both queries and mutations in a single request. The upsert
 block contains one query block and one or more than one mutation blocks. Variables defined
 in the query block can be used in the mutation blocks using the `uid` and `val` function.
 
