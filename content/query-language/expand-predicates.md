@@ -15,8 +15,9 @@ nodes. The rest of this section assumes familiarity with that section.
 
 There are two ways to use the `expand` function:
 
-## 1. Types can be passed to `expand()` to expand all the predicates in the type.
+## 1. Expand predicates by type
 
+Types can be passed to `expand()` to expand all the predicates of the specified type.
 Query example: List the movies from the Harry Potter series:
 
 {{< runnable >}}
