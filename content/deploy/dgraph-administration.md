@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Dgraph Administration"
+description = "In this guide, we explain Dgraph administration operations, including white-listing, mutation restriction, shutting down / deleting databases, and more."
 weight = 1
 [menu.main]
     parent = "admin"

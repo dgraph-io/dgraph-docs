@@ -1,8 +1,9 @@
 +++
-title = "The @auth Directive"
+title = "The @auth Directive in GraphQL"
 description = "Given an authentication mechanism and a signed JSON Web Token (JWT), the @auth directive tells Dgraph how to apply authorization."
 weight = 2
 [menu.main]
+    name = "The @auth Directive"
     parent = "authorization"
 +++
 

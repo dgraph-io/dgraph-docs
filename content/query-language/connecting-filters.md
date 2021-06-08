@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Connecting Filters"
+description = "In this guide, we explain the details about connecting filters using Dgraph, allowing multiple functions to be used with boolean connectives."
 weight = 3
 [menu.main]
     parent = "query-language"

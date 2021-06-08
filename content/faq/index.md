@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T19:35:35+11:00"
 title = "FAQ"
+description = "Review frequently asked questions about Dgraph, a distributed, low-latency, high-throughput graph database that is written in Go."
 [menu.main]
   identifier = "faq"
   weight = 10

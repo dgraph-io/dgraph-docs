@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Type System"
+title = "DQL Type System"
+description = "In this guide, we explain the Dgraph type system that can be used to categorize nodes, query them based on their type, and expand queries."
 weight = 21
 [menu.main]
+    name = "Type System"
     parent = "query-language"
 +++
 
