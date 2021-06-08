@@ -14,7 +14,7 @@ weight = 8
       deployment modes: either a single-host setup, or over multiple nodes in a
       cluster.
     </p>
-    <img class="hero-deco" src="/images/hero-deco.png" />
+    <img class="hero-deco" src="/images/hero-deco_403x160.png" />
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-checkbox" aria-hidden="true"></i></div>
