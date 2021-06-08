@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Ports Usage"
+description = "In this guide, we explain Port Usage on Dgraph, including cluster nodes which use a range of ports to communicate over gRPC and HTTP."
 weight = 1
 [menu.main]
     parent = "security"

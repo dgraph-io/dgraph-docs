@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "DQL Fundamentals"
+description = "GraphQL wasn’t developed for Graph databases, but its graph-like query syntax and subgraph-shaped response make it a compelling choice for a graph database. Dgraph modified GraphQL to create DQL, a language better suited to supporting graph database operations."
 weight = 1   
 [menu.main]
     parent = "query-language"

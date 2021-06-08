@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Query Variables"
+title = "Query Variables in DQL"
+description = "In this guide, we explain Query Variable functionality on Dgraph, including their use in other query blocks or in a child node of the defining block."
 weight = 9
 [menu.main]
+    name = "Query Variables"
     parent = "query-language"
 +++
 

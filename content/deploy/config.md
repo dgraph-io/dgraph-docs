@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Config"
+title = "Configuration"
+description = "In this guide, we explain how to configure options in multiple ways, including: using command line flags, using environment variables, and using a configuration file."
 weight = 3
 [menu.main]
     parent = "deploy"

@@ -1,12 +1,13 @@
 +++
-title = "Types"
-description = "How to use GraphQL types to set a GraphQL schema for the Dgraph database. Includes scalars, enums, types, interfaces, union, password, & geolocation types."
+title = "Types in GraphQL"
+description = "How to use GraphQL types to set up a GraphQL schema for the Dgraph database. Includes scalars, enums, types, interfaces, union, password, &amp; geolocation types."
 weight = 2
 [menu.main]
+    name = "Types"
     parent = "schema"
 +++
 
-This page describes how to use GraphQL types to set the a GraphQL schema for
+This page describes how you can use GraphQL types to set up a GraphQL schema for
 Dgraph database.
 
 ### Scalars

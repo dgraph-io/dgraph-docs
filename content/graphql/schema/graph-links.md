@@ -1,8 +1,9 @@
 +++
-title = "Links in the Graph"
+title = "Links in the GraphQL Graph"
 description = "All the data in your app form a GraphQL data graph. That graph has nodes of particular types and links between the nodes to form the data graph."
 weight = 4
 [menu.main]
+    name = "Links in the Graph"
     parent = "schema"
 +++
 

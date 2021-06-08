@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Facets and Edge attributes"
+title = "Facets and Edge Attributes in DQL"
+description = "In this guide, we explain Dgraph's support for facets — key value pairs on edges — as an extension to RDF triples."
 weight = 22
 [menu.main]
+    name = "Facets and Edge Attributes"
     parent = "query-language"
 +++
 

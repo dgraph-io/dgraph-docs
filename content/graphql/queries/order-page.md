@@ -1,10 +1,10 @@
 +++
-title = "Order and Pagination"
+title = "Order and Pagination in GraphQL"
 description = "Every type with fields whose types can be ordered gets ordering built into the query and any list fields of that type."
 weight = 7
 [menu.main]
-    parent = "graphql-queries"
     name = "Order and Pagination"
+    parent = "graphql-queries"
 +++
 
 Every type with fields whose types can be ordered (`Int`, `Float`, `String`, `DateTime`) gets

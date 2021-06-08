@@ -1,10 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Download"
+title = "Download Dgraph"
+description = "In this guide, we explain how to download Dgraph as a docker image, as well as other options that include building from source."
 weight = 2
 [menu.main]
+    title = "Download"
     parent = "deploy"
 +++
+
+Dgraph is available to download in a variety of ways:
 
 {{% notice "tip" %}}
 For a single server setup, recommended for new users, please see [Get Started]({{< relref "get-started/index.md" >}}) page.

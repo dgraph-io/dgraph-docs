@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Pagination"
+title = "Pagination in DQL"
+description = "In this guide, we explain pagination in Dgraph Query Language (DQL), which lets you paginate results so that you return only a portion, rather than the whole, result set. "
 weight = 5
 [menu.main]
     parent = "query-language"

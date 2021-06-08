@@ -1,5 +1,6 @@
 +++
 title = "DQL"
+description = "Here, we explain Dgraph Query Language (DQL, formerly GraphQL+-), which is used to extend and modify the GraphQL standard created by Facebook to support deep queries for modern apps."
 [menu.main]
   identifier = "dql"
   weight = 4

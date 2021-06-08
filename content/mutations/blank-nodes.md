@@ -1,8 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Blank Nodes and UID"
+title = "Blank Nodes and UIDs in DQL"
+description = "In this guide, we explain Blank Nodes and UID Mutations. Dgraph creates a UID identifying each blank node and returns the created UIDs as the mutation result."
 weight = 2
 [menu.main]
+    name = "Blank Nodes and UIDs"
     parent = "mutations"
 +++
 
