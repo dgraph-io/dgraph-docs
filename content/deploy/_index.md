@@ -12,7 +12,7 @@ weight = 8
       This section talks about running Dgraph in various deployment modes, in a distributed fashion and involves
 running multiple instances of Dgraph, over multiple servers in a cluster.
     </p>
-    <img class="hero-deco" src="/images/hero-deco.png" />
+    <img class="hero-deco" src="/images/hero-deco_403x160.png" />
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-checkbox" aria-hidden="true"></i></div>
