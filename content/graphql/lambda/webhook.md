@@ -10,6 +10,10 @@ weight = 5
 
 To set up a lambda webhook, you need to define it in your GraphQL schema by using the `@lambdaOnMutate` directive along with the mutation events (`add`/`update`/`delete`) you want to listen on.
 
+{{% notice "note" %}}
+Lambda webhooks only listen for events from the root mutation. You can create a schema that is capable of creating deeply nested objects, but only the parent level webhooks will be evoked for the mutation.
+{{% /notice %}}
+
 For example, to define a lambda webhook for all mutation events (`add`/`update`/`delete`) on any `Author` object:
 
 ```graphql
