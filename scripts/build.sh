@@ -26,22 +26,10 @@ LOOP="${LOOP:-true}"
 HUGO="${HUGO:-hugo}"
 THEME_BRANCH="${THEME_BRANCH:-master}"
 
-# Place the latest version at the beginning so that version selector can
-# append '(latest)' to the version string, followed by the master version,
-# and then the older versions in descending order, such that the
-# build script can place the artifact in an appropriate location.
-
-getMajorVersions=$(curl -s https://get.dgraph.io/latest \
-| grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
-| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g")
-
-MAJOR_VERSIONS=(
-  $getMajorVersions
-)
+. ./versions.sh
 
 VERSIONS_ARRAY=(
-  ${MAJOR_VERSIONS:0}
-  ${MAJOR_VERSIONS[@]:1}
+  ${MAJOR_VERSIONS[@]}
   'master'
 )
 
@@ -158,7 +146,7 @@ while true; do
 
 	for version in "${VERSIONS_ARRAY[@]}"
 	do
-	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+	  latest_version=$LATEST
 		SETO="${latest_version:-master}" 
 		checkAndUpdate "$version" "$SETO"
 		echo "version => '$version'"
