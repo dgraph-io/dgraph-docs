@@ -90,7 +90,7 @@ Dgraph is a database and can be considered as a single layer in a tech stack, bu
 inner workings of Dgraph you will find it concists of 3 separate entities:
 
 - [Badger](https://dgraph.io/badger) - Dgraph's custom built key-value store
-- [Ristrettor](https://dgraph.io/ristretto) - Dgraph's custom built cache
+- [Ristretto](https://dgraph.io/ristretto) - Dgraph's custom built cache
 - Dgraph ([Repo Link](https://github.com/dgraph-io/dgraph)) - the methods and algorithms used to parse DQL (and now GraphQL) and act accordingly
 
 External to the core of Dgraph you will find tools and communication clients.
