@@ -569,6 +569,27 @@ Query Example: First five directors and all their movies that have a release dat
   }
 }
 {{< /runnable >}}
+
+## type
+
+Syntax Examples: `type(Film)`
+
+Equivalent to `eq(dgraph.type, "Film")`
+
+Schema Types: none.
+
+Index Required: none. `dgraph.type` is automatically indexed.
+
+Determines if nodes have a particular type. See [Type System]({{< relref "query-language/type-system.md">}}).
+
+{{< runnable >}}
+{
+  allFilms(func: type(Film), first: 5) {
+    name@en
+  }
+}
+{{< /runnable >}}
+
 ## Geolocation
 
 {{% notice "note" %}} As of now we only support indexing Point, Polygon and MultiPolygon [geometry types](https://github.com/twpayne/go-geom#geometry-types). However, Dgraph can store other types of gelocation data. {{% /notice %}}
