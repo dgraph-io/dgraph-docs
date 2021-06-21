@@ -100,7 +100,7 @@ External to the core of Dgraph you will find tools and communication clients.
 
 ## Dgraph's Journey Back to GraphQL
 
-In the beginning there was only a single schema, know known as a DQL Schema. As Dgraph developed,
+In the beginning there was only a single schema, known as a DQL Schema. As Dgraph developed,
 it drew much attention from the GraphQL community, but developers still faced the challenge that
 has almost always been present when implementing GraphQL in a tech stack — building the layer of
 resolvers for qureies, mutations, and subscriptions. The need for a layer of resolvers required
