@@ -87,7 +87,7 @@ GraphQL+- has since been renamed to Dgraph Query Language (DQL) as we know it to
 ## The Dgraph Stack
 
 Dgraph is a database and can be considered as a single layer in a tech stack, but inside the
-inner workings of Dgraph you will find it concists of 3 separate entities:
+inner workings of Dgraph you will find it consists of 3 separate entities:
 
 - [Badger](https://dgraph.io/badger) - Dgraph's custom built key-value store
 - [Ristretto](https://dgraph.io/ristretto) - Dgraph's custom built cache
