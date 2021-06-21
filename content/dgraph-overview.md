@@ -80,7 +80,7 @@ realized the official GraphQL specification could not support everything that wa
 database query language. GraphQL was not created to be a database query language, but it could
 easily be extended as a database query language.
 
-The Dgraph team formed their own language based off from the foundation of GraphQL and initially
+The Dgraph team formed their own language based off the foundation of GraphQL and initially
 termed this language GraphQL+- (GraphQL Plus Minus). For simplicity and SEO improvements,
 GraphQL+- has since been renamed to Dgraph Query Language (DQL) as we know it today.
 
