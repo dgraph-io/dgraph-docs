@@ -80,18 +80,18 @@ realized the official GraphQL specification could not support everything that wa
 database query language. GraphQL was not created to be a database query language, but it could
 easily be extended as a database query language.
 
-The Dgraph team formed their own language based off from the foundation of GraphQL and initially
+The Dgraph team formed their own language based off the foundation of GraphQL and initially
 termed this language GraphQL+- (GraphQL Plus Minus). For simplicity and SEO improvements,
 GraphQL+- has since been renamed to Dgraph Query Language (DQL) as we know it today.
 
 ## The Dgraph Stack
 
 Dgraph is a database and can be considered as a single layer in a tech stack, but inside the
-inner workings of Dgraph you will find it concists of 3 separate entities:
+inner workings of Dgraph you will find it consists of 3 separate entities:
 
 - [Badger](https://dgraph.io/badger) - Dgraph's custom built key-value store
-- [Ristrettor](https://dgraph.io/ristretto) - Dgraph's custom built cache
-- Dgraph ([Repo Link](https://github.com/dgraph-io/dgraph)) - the methods and algorithms used to parse DQL (and now GraphQL) and act accordingly
+- [Ristretto](https://dgraph.io/ristretto) - Dgraph's custom built cache
+- [Dgraph](https://github.com/dgraph-io/dgraph) - the methods and algorithms used to parse DQL (and now GraphQL) and act accordingly
 
 External to the core of Dgraph you will find tools and communication clients.
 
@@ -100,7 +100,7 @@ External to the core of Dgraph you will find tools and communication clients.
 
 ## Dgraph's Journey Back to GraphQL
 
-In the beginning there was only a single schema, know known as a DQL Schema. As Dgraph developed,
+In the beginning there was only a single schema, known as a DQL Schema. As Dgraph developed,
 it drew much attention from the GraphQL community, but developers still faced the challenge that
 has almost always been present when implementing GraphQL in a tech stack — building the layer of
 resolvers for qureies, mutations, and subscriptions. The need for a layer of resolvers required
