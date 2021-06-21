@@ -53,10 +53,10 @@ itself.
 - Oct. 2016: Featured in [React, etc. Tech Stack](https://react-etc.net/entry/dgraph-has-the-potential-to-become-a-defacto-standard-for-graphql-graph-databases) as having the potential to become a defacto standard for GraphQL powered DBs
 - May 2017: [Dgraph introduces Badger](https://dgraph.io/blog/post/badger/) replacing RocksDB in the Dgraph stack.
 - May 2017: Dgraph's GraphQL Community [request GraphQL spec compliant query language](https://github.com/dgraph-io/dgraph/issues/933).
-- Nov 2017: Dgraph commits to [reconciling GraphQL+- with GraphQL spec](https://github.com/dgraph-io/dgraph/issues/933#issuecomment-344505456).
-- May 2017: Due to complexity nature of GraphQL+-, [spec reconciliation could not be achieved](https://github.com/dgraph-io/dgraph/issues/933#issuecomment-412283699).
+- Nov. 2017: Dgraph commits to [reconciling GraphQL+- with GraphQL spec](https://github.com/dgraph-io/dgraph/issues/933#issuecomment-344505456).
 - Dec. 2017: Dgraph releases [production-ready graph database v1.0](https://dgraph.io/blog/post/releasing-v1.0/)
 - Aug. 2018: Dgraph becomes first GraphQL DB to be Jepsen tested.
+- Aug. 2018: Due to complexity nature of GraphQL+-, [spec reconciliation could not be achieved](https://github.com/dgraph-io/dgraph/issues/933#issuecomment-412283699).
 - Aug. 2018: Dgraph criticized for being a ["stuck in the middle approach"](https://github.com/dgraph-io/dgraph/issues/933#issuecomment-412351583)
 - Feb. 2019: [GraphSchema Tools converter](https://github.com/MichaelJCompton/GraphSchemaTools) built by community member.
 - July 2019: Dgraph celebrates [10K Github stargazers](https://dgraph.io/blog/post/10k-github-stars/)!
@@ -69,7 +69,7 @@ itself.
 - Sept. 2020: Dgraph [announces Slash GraphQL](https://dgraph.io/blog/post/announcing-slash-graphql/) (later renamed as Dgraph Cloud).
 - Oct. 2020: Dgraph [renames GraphQL+- to DQL](https://dgraph.io/blog/post/graphql+-to-dql/) (Dgraph Query Language).
 - Dec. 2020: Dgraph [releases v20.11](https://dgraph.io/blog/post/v2011-release/) featuring support for GraphQL interfaces, unions, aggregation queries, geospatial types, and lambda resolvers. Dramatically improves memory management.
-- Janu. 2021: Dgraph [named Graph Data Platform Contender](https://dgraph.io/blog/post/dgraph-forrester/) by Forrester
+- Jan. 2021: Dgraph [named Graph Data Platform Contender](https://dgraph.io/blog/post/dgraph-forrester/) by Forrester
 - April 2021: Dgraph [releases v21.03](https://dgraph.io/blog/post/v2103-release/) featuring webhooks, upserts, and Apollo Federation support for GraphQL.
 
 ## Dgraph Query Language
