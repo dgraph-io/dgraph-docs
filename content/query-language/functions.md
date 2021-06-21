@@ -39,7 +39,7 @@ Query Example: All nodes that have `name` containing terms `indiana` and `jones`
 
 {{< runnable >}}
 {
-  me(func: allofterms(name@en, "jones indiana")) {
+  idiana_jones(func: allofterms(name@en, "jones indiana")) {
     name@en
     genre {
       name@en
@@ -53,7 +53,7 @@ Query Example: All Steven Spielberg films that contain the words `indiana` and `
 
 {{< runnable >}}
 {
-  me(func: eq(name@en, "Steven Spielberg")) @filter(has(director.film)) {
+  steven_spielberg(func: eq(name@en, "Steven Spielberg")) @filter(has(director.film)) {
     name@en
     director.film @filter(allofterms(name@en, "jones indiana"))  {
       name@en
@@ -79,7 +79,7 @@ Query Example: All nodes that have a `name` containing either `poison` or `peaco
 
 {{< runnable >}}
 {
-  me(func:anyofterms(name@en, "poison peacock")) {
+  poison_peacock(func:anyofterms(name@en, "poison peacock")) {
     name@en
     genre {
       name@en
@@ -94,7 +94,7 @@ Query Example: All Steven Spielberg movies that contain `war` or `spies`.  The `
 
 {{< runnable >}}
 {
-  me(func: eq(name@en, "Steven Spielberg")) @filter(has(director.film)) {
+  steven_spielberg(func: eq(name@en, "Steven Spielberg")) @filter(has(director.film)) {
     name@en
     director.film @filter(anyofterms(name@en, "war spies"))  {
       name@en
@@ -275,7 +275,7 @@ Query Example: Movies with exactly thirteen genres.
 
 {{< runnable >}}
 {
-  me(func: eq(count(genre), 13)) {
+  movies(func: eq(count(genre), 13)) {
     name@en
     genre {
       name@en
@@ -332,7 +332,7 @@ Query Example: Ridley Scott movies released before 1980.
 
 {{< runnable >}}
 {
-  me(func: eq(name@en, "Ridley Scott")) {
+  ridley_scott(func: eq(name@en, "Ridley Scott")) {
     name@en
     director.film @filter(lt(initial_release_date, "1980-01-01"))  {
       initial_release_date
@@ -376,7 +376,7 @@ Query Example: A movie in each genre that has over 30000 movies.  Because there 
 }
 {{< /runnable >}}
 
-Query Example: Directors called Steven and their movies which have `initial_release_date` greater
+Query Example: Directors called Steven Spielberg and their movies which have `initial_release_date` greater
 than that of the movie Minority Report.
 
 {{< runnable >}}
@@ -385,7 +385,7 @@ than that of the movie Minority Report.
     d as initial_release_date
   }
 
-  me(func: eq(name@en, "Steven Spielberg")) {
+  steven_spielberg(func: eq(name@en, "Steven Spielberg")) {
     name@en
     director.film @filter(ge(initial_release_date, val(d))) {
       initial_release_date
@@ -416,7 +416,7 @@ Query Example: Movies initially released in 1977, listed by genre.
 
 {{< runnable >}}
 {
-  me(func: between(initial_release_date, "1977-01-01", "1977-12-31")) {
+  movies_1977(func: between(initial_release_date, "1977-01-01", "1977-12-31")) {
     name@en
     genre {
       name@en
@@ -560,7 +560,7 @@ Determines if a node has a particular predicate.
 Query Example: First five directors and all their movies that have a release date recorded.  Directors have directed at least one film --- equivalent semantics to `gt(count(director.film), 0)`.
 {{< runnable >}}
 {
-  me(func: has(director.film), first: 5) {
+  directors(func: has(director.film), first: 5) {
     name@en
     director.film @filter(has(initial_release_date))  {
       initial_release_date
@@ -582,6 +582,7 @@ Index Required: none. `dgraph.type` is automatically indexed.
 
 Determines if nodes have a particular type. See [Type System]({{< relref "query-language/type-system.md">}}).
 
+Query Example: First five films.
 {{< runnable >}}
 {
   allFilms(func: type(Film), first: 5) {
