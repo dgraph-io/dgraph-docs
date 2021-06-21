@@ -272,7 +272,7 @@ user, see:
 - [`/assign`]({{< relref "/deploy/dgraph-zero" >}}) - used allocate a range of UIDs and request timestamps. (Zero)
 - [`/removeNode`]({{< relref "/deploy/dgraph-zero" >}}) - used to remove a dead Zero or Alpha node from a cluster. (Zero)
 - [`/moveTablet`]({{< relref "/deploy/dgraph-zero" >}}) - used to force move tablets to a group. (Zero)
-- [`/enterpriseLicense`]({{< relref "/" >}}) - used to apply an enterprise licence to a cluster. (Zero)
+- [`/enterpriseLicense`]({{< relref "/" >}}) - used to apply an enterprise license to a cluster. (Zero)
 
 ## Glossary of Dgraph and GraphQL terms
 
