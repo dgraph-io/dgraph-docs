@@ -29,21 +29,25 @@ the following real-world scenarios:
 To learn more about how organizations are using Dgraph, see
 [Dgraph Case Studies](https://dgraph.io/case-studies).
 
-## What's Underneath Dgraph?
+## How does Dgraph work?
 
 Dgraph is not a layer on top of another SQL or No-SQL database such as Postgres or MongoDB.
-Instead, Dgraph is a whole new database. Dgraph reads data from the disk, accesses RAM, and talks
-over network via HTTP and gRPC. Below you can read about the three entities that comprise a
-Dgraph database instance, but these three entities work together in a single layer.
+Instead, Dgraph is a new database built from the ground-up to manage data natively in graphs.
+Dgraph reads data from disk, accesses RAM, and talks over the network using HTTP
+and gRPC. A single Dgraph database instance consists of multiple entitles,
+described below in [Dgraph architecture](#dgraph-architecture), but these three entities work together in a single layer.
 
-## What's Above Dgraph for the GraphQL Endpoint?
+### What's behind Dgraph's GraphQL endpoints?
 
-Dgraph is the world's first, and only service at this time, to offer a specification compliant
-GraphQL endpoint without needing an additional layer in the tech stack. You will not find a hidden
-layer of GraphQL resolvers in Dgraph. GraphQL is natively executed within the core of Dgraph
-itself.
+Dgraph is the world's first, and at this time only, service to offer a
+specification-compliant GraphQL endpoint without the need for an additional
+translation layer in the tech stack. You will not find a hidden layer of GraphQL
+resolvers in Dgraph. GraphQL is natively executed within the core of Dgraph itself.
 
-## Brief History and Timeline of Dgraph
+<!-- I'd suggest cutting this section, as this level of detail isn't interesting to those still considering whether to try Dgraph... also, the next section provides enough history
+
+### Brief History and Timeline of Dgraph 
+
 
 - Oct. 2015: Dgraph's founder, Manish, sends email debating whether to use GraphQL as the query language for a new graph db.
 - Dec. 2015: Launched Dgraph [v0.1](https://github.com/dgraph-io/dgraph/tree/c83506478e7650174f39453d3db905fe5cd75a41)
@@ -72,86 +76,70 @@ itself.
 - Jan. 2021: Dgraph [named Graph Data Platform Contender](https://dgraph.io/blog/post/dgraph-forrester/) by Forrester
 - April 2021: Dgraph [releases v21.03](https://dgraph.io/blog/post/v2103-release/) featuring webhooks, upserts, and Apollo Federation support for GraphQL.
 
-## Dgraph Query Language
+-->
 
-Dgraph started out as its own proprieatary graph database without support for the native GraphQL
-endpoint it has today. During its conception, Dgraph engineers wanted to use GraphQL, but
-realized the official GraphQL specification could not support everything that was needed for a
-database query language. GraphQL was not created to be a database query language, but it could
-easily be extended as a database query language.
+### Dgraph Query Language (DQL)
 
-The Dgraph team formed their own language based off the foundation of GraphQL and initially
-termed this language GraphQL+- (GraphQL Plus Minus). For simplicity and SEO improvements,
-GraphQL+- has since been renamed to Dgraph Query Language (DQL) as we know it today.
+Dgraph started out as its own proprietary graph database without support for the native GraphQL
+endpoint it has today. Early on, Dgraph engineers wanted to use GraphQL, but
+realized the official GraphQL specification could not support everything that customers
+would need from a database query language. GraphQL was not created to be a
+database query language, but it could easily be extended as a database query language.
 
-## The Dgraph Stack
+So, Dgraph Labs forked our language from GraphQL and initially named this
+language *GraphQL+-* ("GraphQL, plus or minus"). For simplicity, GraphQL+- has
+since been renamed to Dgraph Query Language (DQL).
 
-Dgraph is a database and can be considered as a single layer in a tech stack, but inside the
-inner workings of Dgraph you will find it consists of 3 separate entities:
+### Dgraph and GraphQL
 
-- [Badger](https://dgraph.io/badger) - Dgraph's custom built key-value store
-- [Ristretto](https://dgraph.io/ristretto) - Dgraph's custom built cache
+Dgraph was developed around DQL, which like GraphQL, uses a schema to classify and
+manage data. As Dgraph developed, it drew much attention from the GraphQL community,
+ but developers still faced the challenge that
+has almost always been present when implementing GraphQL in a tech stack — the need to 
+build a layer of GraphQL resolvers for queries, mutations, and subscriptions.
+The need for a layer of resolvers required developers to translate GraphQL into DQL,
+handling middleware, authorization, and custom business logic. Without a resolving layer,
+developers were not able to utilize the spec compliant, GraphQL community tools that continue to be developed.
+
+In response to user feedback, Dgraph Labs decided to add a spec-compliant GraphQL
+solution into the core of Dgraph. But unlike other GraphQL solutions, Dgraph's
+GraphQL implementation creates a spec-compliant GraphQL API with only developer-provided
+GraphQL schema. A developer defines types and fields, and applies directives in a GraphQL schema file
+that is provided to their Dgraph database instance. Dgraph then creates
+a full-featured CRUD-compliant GraphQL API endpoint, including the queries and mutations
+that one would expect when working with data under the provided GraphQL schema.
+
+For more information about when and why to use either DQL or GraphQL and a side-by-side
+comparison, please see the [GraphQL vs. DQL](https://dgraph.io/blog/post/graphql-vs-dql/) blog.
+
+### Dgraph architecture
+
+Dgraph is a single layer in your tech stack, but inside the inner workings of a
+Dgraph database instance, there are three distinct entities:
+
+- [Badger](https://dgraph.io/badger) - Dgraph's custom-built key-value store
+- [Ristretto](https://dgraph.io/ristretto) - Dgraph's custom-built cache
 - [Dgraph](https://github.com/dgraph-io/dgraph) - the methods and algorithms used to parse DQL (and now GraphQL) and act accordingly
 
-External to the core of Dgraph you will find tools and communication clients.
+External to the core Dgraph database instance, you will find tools and communication clients to support Dgraph:
 
 - [Ratel]({{< relref "/ratel/overview" >}}) - a GUI Layer to work directly with DQL. (Ratel does not work with the graphql)
 - [DQL Clients]({{< relref "/clients" >}}) written in Go, C#, Java, JavaScript, and Python.
 
-## Dgraph's Journey Back to GraphQL
+## Dgraph database clusters
 
-In the beginning there was only a single schema, known as a DQL Schema. As Dgraph developed,
-it drew much attention from the GraphQL community, but developers still faced the challenge that
-has almost always been present when implementing GraphQL in a tech stack — building the layer of
-resolvers for qureies, mutations, and subscriptions. The need for a layer of resolvers required
-developers to translate GraphQL into DQL, handle middleware, authorization, and custom business
-logic. Without a resolving layer, developers were not able to utilize the spec compliant, GraphQL
-community tools that continue to be developed.
-
-Dgraph's community members continued to build half-baked layers to do handle these resolvers.
-Dgraph listened its users and decided to bring a spec compliant GraphQL solution into the core of
-Dgraph. Developers have to give instructions to the Dgraph database in order for the database to
-generate a spec compliant GraphQL API. Draph enabled users to direct the database with something
-that GraphQL developers are alerady familiar with, a GraphQL Schema. A developer defines types,
-fields and applies directives in a GraphQL Schema file fed to the Dgraph database. The Dgraph
-database with this GraphQL schema, even without any inputs, queries, or mutations defined, will
-generate a full CRUD featured GraphQL API endpoint inside of the core of the database itself.
-
-For more information regarding when and why to use either DQL or GraphQL and a side-by-side
-comparison, refer to this [GraphQL vs. DQL](https://dgraph.io/blog/post/graphql-vs-dql/) blog
-article.
-
-## A Dgraph Cluster
-
-Dgraph is designed specifically to distribute horizontally. You can scale Dgraph and maintain
-high availability by sharding data and replicating those shards. Thankfully, Dgraph handles the
+Dgraph is designed specifically to distribute data horizontally. You can scale Dgraph and maintain
+high availability by sharding data and replicating those shards. Dgraph handles the
 mundane tasks of actually sharding and replicating the data, you just need to setup and configure
-your Dgraph Cluster appropriately.
+your Dgraph cluster appropriately. For more information on deloying and managing
+Dgraph your self, see [Production Checklist]({{< relref "/deploy/production-checklist" >}})
 
 Dgraph now offers a fully managed service with high availability. This relieves you from all the
 stress of deployment and relies upon our team of expert engineers. Continue reading this section
 for a quick overview of deployment, or skip to the next section to learn more about Dgraph Cloud,
-our fully managed Dgraph service!
+our fully managed Dgraph database-as-a-service offering 
 
-A Dgraph cluster consists of one or more instances of Dgraph usually distributed across multiple
-machines. Each instance of Dgraph is either a Zero or an Alpha. A Dgraph Zero instance is a
-director in the cluster, and the Dgraph Alpha instance is a worker in the cluster. The most basic
-setup requires one Zero and one Alpha. You achieve high availability by creating groups of alphas
-and groups of zeros. Each group must contain an odd number of instances to ensure a qurom can be
-achieved. The recommendation also involves allowing each instance to be on it's own dedicated
-machine thus a group can span multiple machines. If a leader instance dies, another insance within
-the same group will be chosen to be the new leader. Data is replicated across every Dgraph instance
-within a group. For a minimum high availability deployment a minimum of 6 Dgraph instances are
-required. Dgraph can scale above high availability and into distribution. Distribution involves
-sharding data between groups. Each group would then be responsible for a separate portion of data
-from within the graph. Queries and Mutations would be handled by any group and the cluster would
-form a coordinated effort to provide the data requested from whichever group contained the actual
-data.
-
-This is a high level overview of Dgraph distribution and promise of high availability. For more
-information and actual deployment, refer to [Production Checklist]({{< relref "/deploy/production-checklist" >}})
-
-## Running the Dgraph database and Dgraph Cloud
+## Running Dgraph database and Dgraph Cloud
 
 You can run Dgraph database in a variety of ways:
 
@@ -251,22 +239,25 @@ see [GraphQL Overview]({{< relref "/graphql/overview" >}}). If you are a SQL
 user, see:
 [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
 
-## Dgraph Endpoints
+## Dgraph endpoints
 
-### DQL Endpoints
+Dgraph exposes a variety of HTTP and gRPC endpoints. The type of Dgraph cluster
+node that exposes each endpoint (*Alpha* or *Zero*) is noted with each endpoint description below:
 
-- [`/query`]({{< relref "/query-language/graphql-fundamentals" >}}) - used to make query requests with DQL. (Alpha)
-- [`/mutate`]({{< relref "/mutations/mutations-using-curl" >}}) - used to send mutations in DQL. (Alpha)
+### DQL endpoints
 
-### GraphQL Endpoints
+- [`/query`]({{< relref "/query-language/graphql-fundamentals" >}}) - used to make query requests with DQL (Alpha)
+- [`/mutate`]({{< relref "/mutations/mutations-using-curl" >}}) - used to send mutations in DQL (Alpha)
 
-- [`/graphql`]({{< relref "/graphql/overview" >}}) - used to host the GraphQL API, rewriting GraphQL to DQL. (Alpha)
-- [`/admin`]({{< relref "/deploy/dgraph-administration" >}}) - used to administer the Dgraph cluster. (Alpha)
+### GraphQL endpoints
 
-### Other Endpoints
+- [`/graphql`]({{< relref "/graphql/overview" >}}) - used to host the GraphQL API, rewriting GraphQL to DQL (Alpha)
+- [`/admin`]({{< relref "/deploy/dgraph-administration" >}}) - used to administer the Dgraph cluster (Alpha)
 
-- [`/alter`]({{< relref "/deploy/dgraph-administration" >}}) - used to alter the DQL schema. (Alpha)
-- [`/health`]({{< relref "/deploy/dgraph-alpha" >}}#querying-health) - used to query the health. (Alpha)
+### Other endpoints
+
+- [`/alter`]({{< relref "/deploy/dgraph-administration" >}}) - used to alter the DQL schema (Alpha)
+- [`/health`]({{< relref "/deploy/dgraph-alpha" >}}#querying-health) - used to query the health (Alpha)
 - [`/login`]({{< relref "/enterprise-features/access-control-lists" >}}) - used to log-in an ACL user, and provides them with a JWT. (Enterprise Feature)
 - [`/state`]({{< relref "/deploy/dgraph-zero" >}}#more-about-the-state-endpoint) - used to view information about the nodes that are part of the cluster. (Zero)
 - [`/assign`]({{< relref "/deploy/dgraph-zero" >}}) - used allocate a range of UIDs and request timestamps. (Zero)
