@@ -140,7 +140,7 @@ type Event {
 }
 ```
 
-The search directive would allow filtering events that fall between dates like this:
+The search directive would let you filter events that fall within a date range, as follows:
 
 ```
 query {
