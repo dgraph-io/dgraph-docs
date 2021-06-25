@@ -130,7 +130,7 @@ query {
 
 Before filtering an object by a predicate, you need to add a `@search` directive to the field that will be used to filter the results.
 
-For example, if you wanted to query events between two dates, or events that fall within a certain radius of a point, you could have an Event schema like this:
+For example, if you wanted to query events between two dates, or events that fall within a certain radius of a point, you could have an `Event` schema, as follows:
 
 ```
 type Event {
