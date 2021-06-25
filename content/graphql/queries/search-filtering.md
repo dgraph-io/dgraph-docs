@@ -150,7 +150,7 @@ query {
 }
 ```
 
-And events that have a location near a certain point can be filtered like this:
+You can also filter events that have a location near a certain point with the following query:
 
 ```
 query {
