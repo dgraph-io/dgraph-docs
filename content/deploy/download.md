@@ -88,7 +88,7 @@ dgraph
 You can build the Ratel UI from source separately following its build
 [instructions](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md).
 Ratel UI is distributed via Dgraph releases using any of the download methods
-listed above.
+listed above. You can also use http://play.dgraph.io/ to run Ratel.
 {{% /notice %}}
 
 Make sure you have [Go](https://golang.org/dl/) v1.11+ installed.

@@ -40,9 +40,7 @@ To learn more about other flags, run the following command:
 
 ### Run Dgraph's Ratel UI
 
-```sh
-dgraph-ratel
-```
+Ratel's binary now has its own Docker image https://hub.docker.com/r/dgraph/ratel/tags?page=1&ordering=last_updated - You can also use http://play.dgraph.io/ instead of the image.
 
 ## Run using Docker
 
