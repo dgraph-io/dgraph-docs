@@ -113,3 +113,27 @@ For example, the query below ensures that an author has the `reputation` and `na
     }
 }
 ```
+
+
+#### Filtering
+
+Filters can be used with the `@cascade` directive if they are placed before it:
+
+```graphql
+{
+    queryAuthor (filter: {
+        name: {
+          anyofterms: "Alice Bob"
+        }
+      }) @cascade(fields:["reputation","name"]) {
+        reputation
+        name
+        dob
+        posts @cascade(fields:["text"]) {
+            title
+            text
+        }
+    }
+}
+```
+
