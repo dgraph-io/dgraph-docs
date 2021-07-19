@@ -126,7 +126,46 @@ query {
 }
 ```
 
-You also filter posts by different fields in the `Post` type that have a `@search` directive applied. To only fetch posts which have `GraphQL` in their title and have a `score > 100`, you can run the following query:
+### Query that filters objects by predicate
+
+Before filtering an object by a predicate, you need to add a `@search` directive to the field that will be used to filter the results.
+
+For example, if you wanted to query events between two dates, or events that fall within a certain radius of a point, you could have an `Event` schema, as follows:
+
+```
+type Event {
+  id: ID!
+  date: DateTime! @search
+  location: Point @search
+}
+```
+
+The search directive would let you filter events that fall within a date range, as follows:
+
+```
+query {
+  queryEvent (filter: { date: { between: { min: "2020-01-01", max: "2020-02-01" } } }) {
+    id
+  }
+}
+```
+
+You can also filter events that have a location near a certain point with the following query:
+
+```
+query {
+  queryEvent (filter: { location: { near: { coordinate: { latitude: 37.771935, longitude: -122.469829 }, distance: 1000 } } }) {
+    id
+  }
+}
+```
+
+
+You can also use connectors such as the `and` keyword to show results with multiple filters applied. In the query below, we fetch posts that have `GraphQL` in their title and have a `score > 100`.
+
+This example assumes that the `Post` type has a `@search` directive applied to the `title` field and the `score` field.
+
+
 
 ```graphql
 query {
