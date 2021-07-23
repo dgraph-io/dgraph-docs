@@ -1,6 +1,6 @@
 +++
 date = "2017-09-10T22:25:17+11:00"
-title = "Update "Created At" date for newly created data using Lambda Webhooks"
+title = "Update creation date for newly created data using Lambda Webhooks"
 weight = 12
 [menu.main]
     parent = "howto"
