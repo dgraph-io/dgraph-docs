@@ -11,7 +11,7 @@ Let's start by going to our Auth0 dashboard where we can see the application whi
 ![Dashboard](/images/graphql/tutorial/todo/dashboard.png)
 
 Now we want to use the JWT that Auth0 generates, but we also need to add custom claims to that token which will be used by our auth rules.
-So we can use something known as "Rules" (left sidebar on dashboard page) to add custom claims to a token. Let's create a new empty rule.
+So we can use something known as "Rules" (left sidebar on dashboard page under "Auth Pipeline") to add custom claims to a token. Let's create a new empty rule.
 
 ![Rule](/images/graphql/tutorial/todo/rule.png)
 
