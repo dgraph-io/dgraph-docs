@@ -1,12 +1,12 @@
 +++
 date = "2017-09-10T22:25:17+11:00"
-title = "Update creation date for newly created data using Lambda Webhooks"
+title = "Lambda Webhooks Example"
 weight = 12
 [menu.main]
     parent = "howto"
 +++
 
-It is a common need to populate a "Created At" date whenever a new data is created. Using [Lambda Webhooks]({{< relref "graphql/lambda/webhook.md#schema" >}}), the population of this field can be offloaded from the clients to a Dgraph Lambda. Lambda Webhooks are special kind of lambdas that are automatically invoked whenever a GraphQL type is added, modified, or deleted.
+It is a common need to populate a "Created At" date whenever a new data is created. Using Lambda [Webhooks]({{< relref "graphql/lambda/webhook.md#schema" >}}), the population of this field can be offloaded from the clients to a Dgraph Lambda. Lambda Webhooks are special kind of lambdas that are automatically invoked whenever a GraphQL type is added, modified, or deleted.
 
 Steps to run this example are as follows.
 
