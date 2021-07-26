@@ -19,7 +19,7 @@ type Author @lambdaOnMutate(add: true, update: true, delete: true) {
 }
 ```
 
-In the schema providedm there is a type `Author` which has an `id`, and `name` as well as a `createAt` field. The `createdAt` field is to be populated with the date when a new `Author` is created.
+In the schema provided, there is a type `Author` which has an `id`, and `name` as well as a `createAt` field. The `createdAt` field is to be populated with the date when a new `Author` is created.
 
 Please note that a special directive, `lambdaOnMutate` is configured. This configureation allowd Dgraph to invoke a lambda whenever an `Author` is added, updated or deleted.
 
