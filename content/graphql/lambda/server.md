@@ -71,7 +71,7 @@ services:
   dgraph:
     image: dgraph/standalone:latest
     environment: 
-      DGRAPH_ALPHA_GRAPHQL_LAMBDA_URL: "http://dgraph_lambda:8686/graphql-worker"
+      DGRAPH_ALPHA_GRAPHQL: "lambda-url=http://dgraph_lambda:8686/graphql-worker"
     ports:
       - "8080:8080"
       - "9080:9080"
