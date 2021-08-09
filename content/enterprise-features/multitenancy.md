@@ -134,272 +134,237 @@ By sending the mutation above, a namespace is created. A _Guardian group_ is als
 A `groot` user with password `mypass` (default is `password`) is created in the guardian group.
 You can then use these credentials to login into the namespace and perform operations like [`addUser`]({{< relref "access-control-lists.md#create-a-regular-user" >}}).
 
-## List Namespaces
+## Explore Namespaces
 
-Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can list active namespaces.
-You can check available namespaces using the `/state` endpoint.
+You can explore namespaces available on your cluster by querying the `/state` endpoint. Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can use this endpoint to explore namespaces.
 
-For example, if you have a multi-tenant cluster with multiple namespaces, as a _Guardian of the Galaxy_ you can query `state` from GraphQL:
+Here is an example. You will need to populate the header `Dg-Auth` with an Admin key. You will need to authenticate (into namespace `0`) as described [here](https://dgraph.io/docs/enterprise-features/access-control-lists/#logging-in), fetch the `accessJWT`, and use it to populate the `X-Dgraph-AccessToken` header.
 
-```graphql
-query{
-  state {
-    groups {
-      tablets{
-        predicate
-      }
-    }
-  }
-}
+```shell
+curl --location --request GET '<your-endpoint>/state' \
+--header 'Dg-Auth: <admin-key>' \
+--header 'X-Dgraph-AccessToken: <generated-by-login-into-admin-endpoint>'
 ```
 
-In the response, each predicate will have a namespace prefix.
-In this way administrators can identify which namespaces are available and active.
-E.g., for predicate `2-dgraph.type`, `2` is the namespace.
+When you inspect the `tablets` segment of the response, you will observe that each `predicate` attribute will have a namespace prefix. E.g., for predicate `1-dgraph.type`, `1` is the namespace. In this way administrators can identify which namespaces are available and active.
 
 ```json
 {
-  "data": {
-    "state": {
-      "groups": [
-        {
-          "tablets": [
-            {
-              "predicate": "1-dgraph.password"
-            },
-            {
-              "predicate": "2-dgraph.user.group"
-            },
-            {
-              "predicate": "2-dgraph.xid"
-            },
-            {
-              "predicate": "4-dgraph.rule.predicate"
-            },
-            {
-              "predicate": "3-dgraph.password"
-            },
-            {
-              "predicate": "3-dgraph.user.group"
-            },
-            {
-              "predicate": "5-dgraph.type"
-            },
-            {
-              "predicate": "3-dgraph.acl.rule"
-            },
-            {
-              "predicate": "6-dgraph.graphql.xid"
-            },
-            {
-              "predicate": "5-dgraph.graphql.xid"
-            },
-            {
-              "predicate": "2-dgraph.password"
-            },
-            {
-              "predicate": "0-dgraph.password"
-            },
-            {
-              "predicate": "5-dgraph.rule.predicate"
-            },
-            {
-              "predicate": "6-dgraph.type"
-            },
-            {
-              "predicate": "4-dgraph.xid"
-            },
-            {
-              "predicate": "0-dgraph.rule.permission"
-            },
-            {
-              "predicate": "5-dgraph.xid"
-            },
-            {
-              "predicate": "1-dgraph.graphql.xid"
-            },
-            {
-              "predicate": "0-dgraph.drop.op"
-            },
-            {
-              "predicate": "4-dgraph.drop.op"
-            },
-            {
-              "predicate": "3-dgraph.graphql.xid"
-            },
-            {
-              "predicate": "5-dgraph.acl.rule"
-            },
-            {
-              "predicate": "6-dgraph.rule.permission"
-            },
-            {
-              "predicate": "2-dgraph.drop.op"
-            },
-            {
-              "predicate": "5-dgraph.user.group"
-            },
-            {
-              "predicate": "5-dgraph.drop.op"
-            },
-            {
-              "predicate": "1-dgraph.user.group"
-            },
-            {
-              "predicate": "1-dgraph.xid"
-            },
-            {
-              "predicate": "5-dgraph.graphql.p_query"
-            },
-            {
-              "predicate": "6-dgraph.rule.predicate"
-            },
-            {
-              "predicate": "4-dgraph.graphql.schema"
-            },
-            {
-              "predicate": "4-dgraph.rule.permission"
-            },
-            {
-              "predicate": "2-dgraph.graphql.p_query"
-            },
-            {
-              "predicate": "2-dgraph.graphql.xid"
-            },
-            {
-              "predicate": "5-dgraph.rule.permission"
-            },
-            {
-              "predicate": "0-dgraph.user.group"
-            },
-            {
-              "predicate": "0-dgraph.xid"
-            },
-            {
-              "predicate": "6-dgraph.drop.op"
-            },
-            {
-              "predicate": "0-dgraph.graphql.schema"
-            },
-            {
-              "predicate": "0-dgraph.acl.rule"
-            },
-            {
-              "predicate": "3-dgraph.type"
-            },
-            {
-              "predicate": "3-dgraph.rule.permission"
-            },
-            {
-              "predicate": "1-dgraph.drop.op"
-            },
-            {
-              "predicate": "6-dgraph.graphql.p_query"
-            },
-            {
-              "predicate": "3-dgraph.rule.predicate"
-            },
-            {
-              "predicate": "1-dgraph.graphql.p_query"
-            },
-            {
-              "predicate": "1-dgraph.rule.predicate"
-            },
-            {
-              "predicate": "1-dgraph.graphql.schema"
-            },
-            {
-              "predicate": "6-dgraph.user.group"
-            },
-            {
-              "predicate": "5-dgraph.graphql.schema"
-            },
-            {
-              "predicate": "1-dgraph.rule.permission"
-            },
-            {
-              "predicate": "2-dgraph.acl.rule"
-            },
-            {
-              "predicate": "1-dgraph.acl.rule"
-            },
-            {
-              "predicate": "4-dgraph.user.group"
-            },
-            {
-              "predicate": "3-dgraph.graphql.schema"
-            },
-            {
-              "predicate": "3-dgraph.drop.op"
-            },
-            {
-              "predicate": "4-dgraph.password"
-            },
-            {
-              "predicate": "6-dgraph.graphql.schema"
-            },
-            {
-              "predicate": "5-dgraph.password"
-            },
-            {
-              "predicate": "3-dgraph.xid"
-            },
-            {
-              "predicate": "4-dgraph.graphql.p_query"
-            },
-            {
-              "predicate": "0-dgraph.graphql.p_query"
-            },
-            {
-              "predicate": "2-dgraph.rule.predicate"
-            },
-            {
-              "predicate": "0-dgraph.rule.predicate"
-            },
-            {
-              "predicate": "6-dgraph.acl.rule"
-            },
-            {
-              "predicate": "4-dgraph.graphql.xid"
-            },
-            {
-              "predicate": "2-dgraph.rule.permission"
-            },
-            {
-              "predicate": "0-dgraph.graphql.xid"
-            },
-            {
-              "predicate": "1-dgraph.type"
-            },
-            {
-              "predicate": "3-dgraph.graphql.p_query"
-            },
-            {
-              "predicate": "2-dgraph.graphql.schema"
-            },
-            {
-              "predicate": "6-dgraph.password"
-            },
-            {
-              "predicate": "4-dgraph.type"
-            },
-            {
-              "predicate": "6-dgraph.xid"
-            },
-            {
-              "predicate": "0-dgraph.type"
-            },
-            {
-              "predicate": "4-dgraph.acl.rule"
-            },
-            {
-              "predicate": "2-dgraph.type"
-            }
-          ]
+    "counter": "66",
+    "groups": {
+        "1": {
+            "members": {
+                "1": {
+                    "id": "1",
+                    "groupId": 1,
+                    "addr": "alphastatefulset-0.dgraph-alpha-service.cluster-0x1178b21.svc.cluster.local:7080",
+                    "leader": true,
+                    "amDead": false,
+                    "lastUpdate": "1627470080",
+                    "learner": false,
+                    "clusterInfoOnly": false,
+                    "forceGroupId": false
+                }
+            },
+            "tablets": {
+                "0-dgraph.acl.rule": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.acl.rule",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.drop.op": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.drop.op",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.graphql.p_query": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.graphql.p_query",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.graphql.schema": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.graphql.schema",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.graphql.xid": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.graphql.xid",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.password": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.password",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.rule.permission": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.rule.permission",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.rule.predicate": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.rule.predicate",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.type": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.type",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.user.group": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.user.group",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "0-dgraph.xid": {
+                    "groupId": 1,
+                    "predicate": "0-dgraph.xid",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.acl.rule": {
+                    "groupId": 1,
+                    "predicate": "1-dgraph.acl.rule",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.drop.op": {
+                    "groupId": 1,
+                    "predicate": "1-dgraph.drop.op",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.graphql.p_query": {
+                    "groupId": 1,
+                    "predicate": "1-dgraph.graphql.p_query",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.graphql.schema": {
+                    "groupId": 1,
+                    "predicate": "1-dgraph.graphql.schema",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.graphql.xid": {
+                    "groupId": 1,
+                    "predicate": "1-dgraph.graphql.xid",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.password": {
+                    "groupId": 1,
+                    "predicate": "1-dgraph.password",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.rule.permission": {
+                    "groupId": 1,
+                    "predicate": "1-dgraph.rule.permission",
+                    "force": false,
+                    "onDiskBytes": "0",
+                    "remove": false,
+                    "readOnly": false,
+                    "moveTs": "0",
+                    "uncompressedBytes": "0"
+                },
+                "1-dgraph.type": {
+                  "groupId": 1,
+                  "predicate": "1-dgraph.type",
+                  "force": false,
+                  "onDiskBytes": "0",
+                  "remove": false,
+                  "readOnly": false,
+                  "moveTs": "0",
+                  "uncompressedBytes": "0"
+                }
+            },
+            // ... more like this for each namespace
+            "snapshotTs": "5",
+            "checksum": "5521934463577244351",
+            "checkpointTs": "0"
+
         }
-      ]
     }
-  }
 }
 ```
 
