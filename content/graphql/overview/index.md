@@ -12,21 +12,21 @@ weight = 1
 
 Designed from the ground up to be run in production, Dgraph is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
 
-* These docs tell you all the details.  If you are looking for a walk through tutorial, then head over to our [tutorials section](/graphql/todo-app-tutorial/todo-overview).
+* These docs tell you all the details.  If you are looking for a walk through tutorial, then head over to our [tutorials section](/docs/graphql/todo-app-tutorial/todo-overview).
 
 Dgraph gives you GraphQL.  You're always working with GraphQL, not a translation layer.  When you build an app with Dgraph, Dgraph is your GraphQL database.
 
 ## Exploring the docs
 
-* How it Works - Once you've got yourself started with [tutorials](/graphql/todo-app-tutorial/todo-overview), you might need to review [how it works](/graphql/how-dgraph-graphql-works).
-* [Schema](/graphql/schema/schema-overview) - You'll need the schema reference to find out about all the options of what can be in your schema.
-* [The API](/graphql/api/api-overview) - The API section tells you about how the GraphQL API is served and how you can access it.
-* [Queries](/graphql/queries/queries-overview) - Everything you need to know about writing GraphQL queries.
-* [Mutations](/graphql/mutations/mutations-overview) - Everything you need to know about writing GraphQL mutations with Dgraph.
-* [Subscriptions](/graphql/subscriptions) - GraphQL subscriptions help you make your APP more responsive or, for example, add live feeds.  Dgraph can generate subscriptions for you.
-* [Custom Logic](/graphql/custom/custom-overview) - Dgraph's auto generated GraphQL API is fantastic, but as your app gets more complicated, you'll need to add custom business logic to your API.
-* [Authorization](/graphql/authorization/authorization-overview) - Find out how Dgraph can add automated authorization to your GraphQL API.
-* [Local Administration](/graphql/admin) - Once you're up and running you might also need to know a few details about administering your Dgraph instance if you are running locally.  
+* How it Works - Once you've got yourself started with [tutorials](/docs/graphql/todo-app-tutorial/todo-overview), you might need to review [how it works](/docs/graphql/how-dgraph-graphql-works).
+* [Schema](/docs/graphql/schema/schema-overview) - You'll need the schema reference to find out about all the options of what can be in your schema.
+* [The API](/docs/graphql/api/api-overview) - The API section tells you about how the GraphQL API is served and how you can access it.
+* [Queries](/docs/graphql/queries/queries-overview) - Everything you need to know about writing GraphQL queries.
+* [Mutations](/docs/graphql/mutations/mutations-overview) - Everything you need to know about writing GraphQL mutations with Dgraph.
+* [Subscriptions](/docs/graphql/subscriptions) - GraphQL subscriptions help you make your APP more responsive or, for example, add live feeds.  Dgraph can generate subscriptions for you.
+* [Custom Logic](/docs/graphql/custom/custom-overview) - Dgraph's auto generated GraphQL API is fantastic, but as your app gets more complicated, you'll need to add custom business logic to your API.
+* [Authorization](/docs/graphql/authorization/authorization-overview) - Find out how Dgraph can add automated authorization to your GraphQL API.
+* [Local Administration](/docs/graphql/admin) - Once you're up and running you might also need to know a few details about administering your Dgraph instance if you are running locally.  
 * [Dgraph Cloud](https://dgraph.io/docs/cloud/admin/overview) - If you are using hosted Dgraph on Dgraph Cloud, then head over here to learn about administering your backend.
 
 ## Contribute

@@ -79,7 +79,7 @@ Variables:
 ```
 
 {{% notice "note" %}}
-You can convert an `add` mutation to an `upsert` mutation by setting the value of the input variable `upsert` to `true`. For more information, see [Upsert Mutations](/graphql/mutations/upsert).
+You can convert an `add` mutation to an `upsert` mutation by setting the value of the input variable `upsert` to `true`. For more information, see [Upsert Mutations](/docs/graphql/mutations/upsert).
 {{% /notice %}}
 
 ## Examples

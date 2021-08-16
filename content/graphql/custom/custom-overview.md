@@ -46,11 +46,11 @@ type MyType {
 
 ## Learn more
 
-Find out more about the  `@custom` directive [here](/graphql/custom/directive), or check out:
+Find out more about the  `@custom` directive [here](/docs/graphql/custom/directive), or check out:
 
-* [custom query examples](/graphql/custom/query)
-* [custom mutation examples](/graphql/custom/mutation), or
-* [custom field examples](/graphql/custom/field)
+* [custom query examples](/docs/graphql/custom/query)
+* [custom mutation examples](/docs/graphql/custom/mutation), or
+* [custom field examples](/docs/graphql/custom/field)
 
 
 

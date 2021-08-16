@@ -15,7 +15,7 @@ DQL lets you build custom logic that goes beyond what is possible with the
 current GraphQL CRUD API.
 
 {{% notice "tip" %}}
-Since v21.03, you can also [subscribe to custom DQL](/graphql/subscriptions/#subscriptions-to-custom-dql) queries.
+Since v21.03, you can also [subscribe to custom DQL](/docs/graphql/subscriptions/#subscriptions-to-custom-dql) queries.
 {{% /notice %}}
 
 For example, lets say you had following schema:
@@ -108,6 +108,6 @@ There are following points to note while specifying the DQL query for such custo
 * For variables, only scalar GraphQL arguments like `Boolean`, `Int`, `Float`, etc are allowed. Lists and Object types are not allowed to be used as variables with DQL queries.
 * You would be able to query only those many levels with GraphQL which you have mapped with the DQL query. For instance, in the first custom query above, we haven't mapped an author's tweets to GraphQL alias, so, we won't be able to fetch author's tweets using that query.
 * If the custom GraphQL query returns an interface, and you want to use `__typename` in GraphQL query, then you should add `dgraph.type` as a field in DQL query without any alias. This is not required for types, only for interfaces.
-* to subscribe to a custom DQL query, use the `@withSubscription` directive. See the [Subscriptions article](/graphql/subscriptions/) for more information.
+* to subscribe to a custom DQL query, use the `@withSubscription` directive. See the [Subscriptions article](/docs/graphql/subscriptions/) for more information.
 
 ---

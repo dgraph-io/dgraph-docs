@@ -12,12 +12,12 @@ to define authorization rules for most types (except for `union` and `@remote`
 types). It lets you control which users can run which queries - as well as
 which users can add, update, and delete data using mutations. 
 
-Additionally, you can use this directive with the [`@secret`](/graphql/schema/types#password-type)
+Additionally, you can use this directive with the [`@secret`](/docs/graphql/schema/types#password-type)
 directive; and, if you specify a `password` authorization rule, Dgraph will use
 it to authorize the `check<Type>Password` query.
 
 {{% notice "note" %}}
-The [Union type](/graphql/schema/types#union-type) does not support the `@auth` directive. 
+The [Union type](/docs/graphql/schema/types#union-type) does not support the `@auth` directive. 
 {{% /notice %}}
 
 You create authorization rules using the `@auth` directive, and those rules are
@@ -71,7 +71,7 @@ type Todo @auth(
 {{% notice "note" %}}
 To use the `@auth` directive, you must configure the authentication method used
 by Dgraph in the last line of your schema with a `Dgraph.Authorization` object,
-as described in the [Authorization Overview](/graphql/authorization/authorization-overview).
+as described in the [Authorization Overview](/docs/graphql/authorization/authorization-overview).
 {{% /notice %}}
 
 Here we define a type `Todo`, that has an `id`, the `text` of the todo and the username of the `owner` of the todo.  What todos can a user query?  Any `Todo` that the `query` rule would also return.

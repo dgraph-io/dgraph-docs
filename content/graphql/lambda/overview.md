@@ -19,7 +19,7 @@ This also simplifies the job of developers, as they can build a complex backend 
 Dgraph doesn't execute your custom logic itself. It makes external HTTP requests to a user-defined lambda server. [Dgraph Cloud](https://dgraph.io/cloud) will do all of this for you. 
 
 {{% notice "tip" %}}
-If you want to deploy your own lambda server, you can find the implementation of Dgraph Lambda in our [open-source repository](https://github.com/dgraph-io/dgraph-lambda). Please refer to the documentation on [setting up a lambda server](/graphql/lambda/server) for more details.
+If you want to deploy your own lambda server, you can find the implementation of Dgraph Lambda in our [open-source repository](https://github.com/dgraph-io/dgraph-lambda). Please refer to the documentation on [setting up a lambda server](/docs/graphql/lambda/server) for more details.
 {{% /notice %}}
 
 {{% notice "note" %}}
@@ -298,7 +298,7 @@ query {
 
 To learn more about the `@lambda` directive, see:
 
-* [Lambda fields](/graphql/lambda/field)
-* [Lambda queries](/graphql/lambda/query)
-* [Lambda mutations](/graphql/lambda/mutation)
-* [Lambda server setup](/graphql/lambda/server)
+* [Lambda fields](/docs/graphql/lambda/field)
+* [Lambda queries](/docs/graphql/lambda/query)
+* [Lambda mutations](/docs/graphql/lambda/mutation)
+* [Lambda server setup](/docs/graphql/lambda/server)
