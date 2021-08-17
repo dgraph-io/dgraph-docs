@@ -26,14 +26,15 @@ For functions on string valued predicates, if no language preference is given, t
 
 ### allofterms
 
-Syntax Example: `allofterms(predicate, "space-separated term list")`
+Syntax Example: `allofterms(predicate, "term list")`
 
 Schema Types: `string`
 
 Index Required: `term`
 
 
-Matches strings that have all specified terms in any order; case insensitive.
+Matches strings that have all specified terms in any order; case insensitive. Any non-alphabetic characters can be used as delimiters for the list of terms. For example, a search for `new-tag` will match `random-tag`, `random tag` and `random.tag`.
+
 #### Usage at root
 
 Query Example: All nodes that have `name` containing terms `indiana` and `jones`, returning the English name and genre in English.
