@@ -67,14 +67,15 @@ Query Example: All Steven Spielberg films that contain the words `indiana` and `
 ### anyofterms
 
 
-Syntax Example: `anyofterms(predicate, "space-separated term list")`
+Syntax Example: `anyofterms(predicate, "term list")`
 
 Schema Types: `string`
 
 Index Required: `term`
 
 
-Matches strings that have any of the specified terms in any order; case insensitive.
+Matches strings that have any of the specified terms in any order; case insensitive. Any non-alphabetic character can be used as the delimiter for the list of terms. For example, a search for `new-tag` would match `random-tag`, `random tag` and `random.tag`.
+
 #### Usage at root
 
 Query Example: All nodes that have a `name` containing either `poison` or `peacock`.  Many of the returned nodes are movies, but people like Joan Peacock also meet the search terms because without a [cascade directive]({{< relref "query-language/cascade-directive.md">}}) the query doesn't require a genre.
