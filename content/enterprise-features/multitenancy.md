@@ -456,7 +456,7 @@ mutation {
 
 The `drop all` and `drop data` operations can be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
 They're executed at cluster level and delete data across namespaces.
-All other `drop` operations run at namespace level and are namespace specific.
+All other `drop` operations run at namespace level and are namespace specific. For more information, see  [Delete Data Operation] (https://deploy-preview-263--dgraph-docs-repo.netlify.app/mutations/delete/#delete-data)
 
 {{% notice "note" %}}
 `drop all` and `drop data` operations are executed at cluster level and deletes across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only. Guardian of the namespace cannot trigger `drop schema` or `drop types` within the namespace.
