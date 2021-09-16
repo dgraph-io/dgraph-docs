@@ -92,28 +92,4 @@ For language-tagged values, the following special syntax is supported:
 In this example, the value of the `name` field that is tagged with the language
 tag `es` is deleted. Other tagged values are left untouched.
 
-## Delete Data Operation
 
-You can delete or drop the `data` within a namespace if you are the Gaurdian of a namespace. However, you cannot delete the `schemas` or `types`. The Gaurdian of the Galaxy can trigger `drop all` and `drop data` operations across the namespaces.
-
-For example:
-
-```
-curl 'http://localhost:8080/alter' \
-  -H 'Connection: keep-alive' \
-  -H 'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"' \
-  -H 'X-Dgraph-AccessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE2MzE0MTUsImdyb3VwcyI6WyJndWFyZGlhbnMiXSwibmFtZXNwYWNlIjoxLCJ1c2VyaWQiOiJncm9vdCJ9.hMs_ySrBBl318GZ4wpeyxJgCLloAj195WxT_dVIXlas' \
-  -H 'X-Auth-Token: undefined' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36' \
-  -H 'Content-Type: text/plain;charset=UTF-8' \
-  -H 'Accept: */*' \
-  -H 'Origin: https://play.dgraph.io' \
-  -H 'Sec-Fetch-Site: cross-site' \
-  -H 'Sec-Fetch-Mode: cors' \
-  -H 'Sec-Fetch-Dest: empty' \
-  -H 'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' \
-  --data-raw '{"drop_op":"DATA"}' \
-  --compressed
-
-```
