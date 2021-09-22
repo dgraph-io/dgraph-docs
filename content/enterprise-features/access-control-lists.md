@@ -534,12 +534,10 @@ mutation {
 }
 ```
 
-### Assign permissions over all predicates in a namespace
 
-When you have the [Multi-tenancy](https://dgraph.io/docs/enterprise-features/multitenancy/) feature enabled for your backend, you could have different predicates created for different tenants. There could be a need to assign the same set of permissions to a group over all the predicates of a specific namespace.
-Also, assigning permissions to new predicates as they get created could turn out to be a tedious process for a backend with multi-tenancy enabled.
+In some cases, it may be desirable to manage permissions for all the predicates together rather than individual ones. This can be achieved using the `dgraph.all` keyword.
 
-Dgraph allows for providing a group, access to all the predicates in a particular namespace using a keyword `dgraph.all`. The following example provides to `dev` group, `read+write` access to all the predicates using the `dgraph.all` keyword:
+The following example provides `read+write` access to the `dev` group over all the predicates of a given namespace using the `dgraph.all` keyword.
 
 ```graphql
 mutation {
@@ -561,7 +559,7 @@ mutation {
 ```
 
 {{% notice "note" %}}
-The permission assigned to a group e.g. `dev` is a union of permissions from `dgraph.all` and the permissions over a specific predicate e.g. `name`. So if `dgraph.all` is assigned the `READ` permission and predicate `name` is assigned the `WRITE` permission the group will have both `READ` and `WRITE` permissions as a result of that union. 
+The permissions assigned to a group `dev` is the union of permissions from `dgraph.all` and permissions for a specific predicate `name`. So if the group is assigned `READ` permission for `dgraph.all` and `WRITE` permission for predicate `name` it will have both, `READ` and `WRITE` permissions for the `name` predicate, as a result of the union. 
 {{% /notice %}}
 
 
