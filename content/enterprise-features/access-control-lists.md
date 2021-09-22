@@ -534,6 +534,37 @@ mutation {
 }
 ```
 
+### Assign permissions over all predicates in a namespace
+
+When you have the [Multi-tenancy](https://dgraph.io/docs/enterprise-features/multitenancy/) feature enabled for your backend, you could have different predicates created for different tenants. There could be a need to assign the same set of permissions to a group over all the predicates of a specific namespace.
+Also, assigning permissions to new predicates as they get created could turn out to be a tedious process for a backend with multi-tenancy enabled.
+
+Dgraph allows for providing a group, access to all the predicates in a particular namespace using a keyword `dgraph.all`. The following example provides to `dev` group, `read+write` access to all the predicates using the `dgraph.all` keyword:
+
+```graphql
+mutation {
+  updateGroup(
+    input: {
+      filter: { name: { eq: "dev" } }
+      set: { rules: [{ predicate: "dgraph.all", permission: 6 }] }
+    }
+  ) {
+    group {
+      name
+      rules {
+        permission
+        predicate
+      }
+    }
+  }
+}
+```
+
+{{% notice "note" %}}
+The permission assigned to a group e.g. `dev` is a union of permissions from `dgraph.all` and the permissions over a specific predicate e.g. `name`. So if `dgraph.all` is assigned the `READ` permission and predicate `name` is assigned the `WRITE` permission the group will have both `READ` and `WRITE` permissions as a result of that union. 
+{{% /notice %}}
+
+
 ### Remove a rule from a group
 
 To remove a rule or rules from the group `dev`, the mutation should be:
