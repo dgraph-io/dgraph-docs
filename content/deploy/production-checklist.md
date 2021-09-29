@@ -45,7 +45,7 @@ At a the bare minimum, we recommend machines with at least 8 CPUs and 16 GiB of 
 
 You'll want a ensure that your CPU and memory resources are sufficient for your production workload. A common configuration for Dgraph is 16 CPUs and 32 GiB of memory per machine. Dgraph is designed with concurrency in mind, so more cores means quicker processing and higher throughput of requests.
 
-You may find you'll need more CPU cores and memory for your specific use case.
+You may find you'll need more CPU cores and memory for your specific use case. In addition, we highly recommend that your CPU clock rate is equal or above 3.4GHz
 
 ### Disk
 
