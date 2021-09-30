@@ -46,9 +46,10 @@ The super admin is used only for database administration operations, such as exp
 
 - What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
 
-    The access controls are applied per tenant to either specific predicates or all predicates that exist for the tenant.
-    For example, the user `John Smith` belonging to the group `Data Approvers` for a tenant `Accounting` may only have read-only access over predicates while user `Jane Doe`, belonging to the group `Data Editors` within that same tenant, may have access to modify those predicates.
-    All the ACL rules need to be defined for each tenant in your backend. The level of granularity available allows for defining rules over specific predicates or all predicates belonging to that tenant.
+    The access controls are applied per tenant at a predicate level.
+    For example, the user `John Smith` belonging to the group `Data Approvers` may only have read-only access to predicates,
+    while user `Jane Doe`, who belongs to the group `Data Editors`, can be given access to modify predicates.
+    All of these ACL constraints have to be configured for each tenant. 
 
 - Are tenants a physical separation or a logical one?
 
