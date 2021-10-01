@@ -467,7 +467,7 @@ For example:
 
 ```
 curl 'http://localhost:8080/alter' \
-  -H 'X-Dgraph-AccessToken: <your-access -token>' \
+  -H 'X-Dgraph-AccessToken: <your-access-token>' \
   --data-raw '{"drop_op":"DATA"}' \
   --compressed
 
