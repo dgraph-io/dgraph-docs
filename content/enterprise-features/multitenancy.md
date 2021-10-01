@@ -460,7 +460,7 @@ All other `drop` operations run at namespace level and are namespace specific. F
 
 
 {{% notice "note:" %}}
-`drop all` operation is executed at cluster level and deletes data, and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only. 
+`drop all` operation is executed at cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only. 
 {{% /notice %}}
 
 For example:
