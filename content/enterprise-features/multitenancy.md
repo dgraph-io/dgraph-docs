@@ -79,19 +79,27 @@ users of other namespaces.
 Multi-tenancy defines certain ACL roles for the shared cluster:
 
 - [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins) 
-- Guardians of the Namespace
-  - They can create users and groups inside their own namespace
-  - They can assign users to groups inside their own namespace
-  - They can assign predicates to groups inside their own namespace
-  - They can add users to groups inside the namespace
-  - They can export their namespace 
-  - They can query and mutate in their namespace
-  - They can't query or mutate across namespaces
-- Normal users
-  - They can login into a namespace
-  - They can query in their namespace
-  - They can mutate in their namespace
-  - They can't query or mutate across namespaces
+- Guardians of the namespace can perform the following operations:
+  - create users and groups within the namespace
+  - assign users to groups within the namespace
+  - assign predicates to groups within the namespace
+  - add users to groups within the namespace
+  - export namespace 
+  - drop data within the namespace
+  - query and mutate within the namespace
+  
+  {{% notice "note" %}}
+ Guardians of the namespace cannot query or mutate across namespaces.
+{{% /notice %}}
+
+- Normal users can perform the following operations:
+  - login into a namespace
+  - query within the namespace
+  - mutate within the namespace
+  
+  {{% notice "note" %}}
+Normal users cannot query or mutate across namespaces.
+{{% /notice %}}
 
 ### Guardians of the Galaxy
 
@@ -443,15 +451,26 @@ mutation {
 }
 ```
 
-## Drop operations
+## Drop Operations
 
-The `drop all` and `drop data` operations can only be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
+The `drop all` operations can be triggered only by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
 They're executed at cluster level and delete data across namespaces.
-All other `drop` operations run at namespace level and are namespace specific.
+All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database]({{< relref "raw-http.md#alter-the-database" >}}). 
 
-{{% notice "note" %}}
-`drop all` and `drop data` operations are executed at cluster level and will delete across namespaces. The `drop data` operation will delete all the data but will keep the schema only.
+
+{{% notice "note:" %}}
+`drop all` operation is executed at cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only. 
 {{% /notice %}}
+
+For example:
+
+```
+curl 'http://localhost:8080/alter' \
+  -H 'X-Dgraph-AccessToken: <your-access-token>' \
+  --data-raw '{"drop_op":"DATA"}' \
+  --compressed
+
+```
 
 ## Backups
 
