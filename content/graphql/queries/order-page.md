@@ -11,6 +11,8 @@ Every type with fields whose types can be ordered (`Int`, `Float`, `String`, `Da
 ordering built into the query and any list fields of that type. Every query and list field
 gets pagination with `first` and `offset` and ordering with `order` parameter.
 
+The `order` parameter is not required for pagination.
+
 For example, find the most recent 5 posts.
 
 ```graphql
