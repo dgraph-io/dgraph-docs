@@ -196,7 +196,7 @@ Dgraph Alpha:
 # Note that you must specify in node.crt the host name or IP addresses that clients use connect:
 $ dgraph cert -n localhost,104.25.165.23,104.25.165.25,104.25.165.27
 # Set up Dgraph Alpha nodes using the following default command (after generating certificates and private keys)
-$ dgraph alpha --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key
+$ dgraph alpha --tls "ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key"
 ```
 
 Dgraph Zero:
@@ -205,14 +205,14 @@ Dgraph Zero:
 # First, copy the root CA, node certificates and private keys used to set up Dgraph Alpha (above) to the Dgraph Zero node.
 # Optionally, you can generate and use a separate Zero node certificate, where you specify the host name or IP addresses used by Live Loader and Bulk Loader to connect to Dgraph Zero.
 # Next, set up Dgraph Zero nodes using the following default command:
-$ dgraph zero --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key
+$ dgraph zero --tls "ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key"
 ```
 
 You can then run Dgraph Live Loader on a Dgraph Alpha node using the following command:
 
 ```sh
 # Now, connect to server using TLS
-$ dgraph live --tls ca-cert=./dgraph-tls/ca.crt; server-name "localhost" -s 21million.schema -f 21million.rdf.gz
+$ dgraph live --tls "ca-cert=./dgraph-tls/ca.crt; server-name=localhost" -s 21million.schema -f 21million.rdf.gz
 ```
 
 ### Using TLS with internal and external ports encrypted
@@ -233,8 +233,8 @@ Dgraph Alpha:
 $ dgraph cert -n localhost,104.25.165.23,104.25.165.25,104.25.165.27
 # Set up Dgraph Alpha nodes using the following default command (after generating certificates and private keys)
 $ dgraph alpha
-      --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key;
-internal-port=true; client-cert=/dgraph-tls/client.alpha1.crt; client-key=/dgraph-tls/client.alpha1.key
+      --tls "ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key;
+internal-port=true; client-cert=/dgraph-tls/client.alpha1.crt; client-key=/dgraph-tls/client.alpha1.key"
 ```
 
 Dgraph Zero:
@@ -243,18 +243,15 @@ Dgraph Zero:
 # First, copy the certificates and private keys used to set up Dgraph Alpha (above) to the Dgraph Zero node.
 # Next, set up Dgraph Zero nodes using the following default command:
 $ dgraph zero
-      --tls ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key; internal-port=true; client-cert=/dgraph-tls/client.zero1.crt; client-key=/dgraph-tls/client.zero1.key
+      --tls "ca-cert=/dgraph-tls/ca.crt; server-cert=/dgraph-tls/node.crt; server-key=/dgraph-tls/node.key; internal-port=true; client-cert=/dgraph-tls/client.zero1.crt; client-key=/dgraph-tls/client.zero1.key"
 ```
 
 You can then run Dgraph Live Loader using the following:
 
 ```sh
 # Now, connect to server using mTLS (mutual TLS)
-$ dgraph live --tls ca-cert=./tls/ca.crt; \
-   client-cert=./tls/client.dgraphuser.crt; \
-   client-key ./tls/client.dgraphuser.key; \
-   server-name=localhost; \
-   internal-port=true \
+$ dgraph live
+   --tls "ca-cert=./tls/ca.crt; client-cert=./tls/client.dgraphuser.crt; client-key=./tls/client.dgraphuser.key; server-name=localhost; internal-port=true" \
    -s 21million.schema \
    -f 21million.rdf.gz
 ```
@@ -262,7 +259,7 @@ $ dgraph live --tls ca-cert=./tls/ca.crt; \
 ### Client Authentication Options
 
 The server will always **request** client authentication.  There are four
-different values for the `--tls_client_auth` option that change the security
+different values for the `client-auth-type` option that change the security
 policy of the client certificate.
 
 | Value              | Client Cert/Key | Client Certificate Verified |
