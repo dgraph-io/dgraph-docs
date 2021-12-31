@@ -106,7 +106,7 @@ Docker image to try out Dgraph on Windows or macOS.
 4. Run the Dgraph Docker standalone image, as follows:
 
 ```sh
-  docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 -p 9080:9080 -p 8000:8000 -v ~/dgraph:/dgraph --name dgraph dgraph/standalone:v21.03.0
+  docker run -it -p 5080:5080 -p 6080:6080 -p 8080:8080 -p 9080:9080 -v ~/dgraph:/dgraph --name dgraph dgraph/standalone:v21.03.0
 ```  
 
 {{% notice "tip" %}}
@@ -115,7 +115,13 @@ in the command shown above to the version number for a previous release, such as
 {{% /notice %}}
 
 After following these steps, Dgraph Alpha now runs and listens for HTTP requests
-on port 8080, and Ratel listens on port 8000.
+on port 8080.
+
+{{% notice "tip" %}}
+As of v21.03, Ratel is no longer part of the standalone image.
+
+Ratel provides data visualization and cluster management for Dgraph. To get started with Ratel, use it online with the [Dgraph Ratel Dashboard](https://play.dgraph.io) or clone and build Ratel using the [instructions
+from the Ratel repository on GitHub](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md). To learn more, see [Ratel Overview]({{< relref "/ratel/overview" >}}).
 
 ## Dgraph and GraphQL
 
