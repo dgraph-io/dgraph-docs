@@ -118,7 +118,7 @@ After following these steps, Dgraph Alpha now runs and listens for HTTP requests
 on port 8080.
 
 {{% notice "tip" %}}
-As of v20.03, Ratel is no longer part of the standalone image.
+As of v21.03, Ratel is no longer part of the standalone image.
 
 Ratel provides data visualization and cluster management for Dgraph. To get started with Ratel, use it online with the [Dgraph Ratel Dashboard](https://play.dgraph.io) or clone and build Ratel using the [instructions
 from the Ratel repository on GitHub](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md). To learn more, see [Ratel Overview]({{< relref "/ratel/overview" >}}).
