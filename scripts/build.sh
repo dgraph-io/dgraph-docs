@@ -33,7 +33,7 @@ THEME_BRANCH="${THEME_BRANCH:-master}"
 
 getMajorVersions=$(curl -s https://get.dgraph.io/latest \
 | grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
-| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g")
+| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g" | sed "s/v20.07/ /g")
 
 MAJOR_VERSIONS=(
   $getMajorVersions
