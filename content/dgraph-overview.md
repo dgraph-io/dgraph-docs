@@ -34,7 +34,7 @@ To learn more about how organizations are using Dgraph, see
 Dgraph is not a layer on top of another SQL or No-SQL database such as Postgres or MongoDB.
 Instead, Dgraph is a new database built from the ground-up to manage data natively in graphs.
 Dgraph reads data from disk, accesses RAM, and talks over the network using HTTP
-and gRPC. A single Dgraph database instance consists of multiple entitles,
+and gRPC. A single Dgraph database instance consists of multiple entities,
 described below in [Dgraph architecture](#dgraph-architecture), but these three entities work together in a single layer.
 
 ### What's behind Dgraph's GraphQL endpoints?
