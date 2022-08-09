@@ -52,25 +52,25 @@ and hence, the predicate `posts.Body` is of type `string`: `posts.Body: string .
 
 ### Using the Migration tool
 
-Create a `config.properties` file that has the following settings (values should not be in quotes):
+Create a `config.yml` file that has the following settings (values should not be in quotes):
 
 ```txt
-user = <the username for logging in to the SQL database>
-password = <the password for logging in to the SQL database>
-db = <the SQL database to be migrated>
+user: <the username for logging in to the SQL database>
+password: <the password for logging in to the SQL database>
+db: <the SQL database to be migrated>
 ```
 
 For example:
 
-```txt
-user = lucas
-password = MySecretPassword123
-db = stackoverflow
+```yml
+user: lucas
+password: MySecretPassword123
+db: stackoverflow
 ```
 
 Next, export the SQL database into a schema and RDF file, e.g. the `schema.txt` and `sql.rdf` file below:
 ```sh
-dgraph migrate --config config.properties --output_schema schema.txt --output_data sql.rdf
+dgraph migrate --config config.yml --output_schema schema.txt --output_data sql.rdf
 ```
 
 You should get an output such as:
