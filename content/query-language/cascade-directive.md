@@ -78,9 +78,9 @@ This query gets nodes that have all the terms _"jones indiana"_ and then travers
 It also adds an additional filter for `genre`, to only get the ones that either have _"action"_ or _"adventure"_ in the name.
 The results include nodes that have no `genre` and nodes that have no `genre` and no `producer`.
 
-If you apply a regular `@cascade` without a parameter, you'll loose the ones that had `genre` but no `producer`.
+If you apply a regular `@cascade` without a parameter, you'll lose the ones that had `genre` but no `producer`.
 
-To get the nodes that have the traversed `genre` but posibly no `produced_by`, you can parameterize the cascade:
+To get the nodes that have the traversed `genre` but possibly not `produced_by`, you can parameterize the cascade:
 
 {{< runnable >}}
 {
