@@ -23,9 +23,9 @@ Alpha nodes to avoid interruptions in the stream of CDC events.
 
 ## Enable CDC with Kafka sink
 
-Kafka records CDC events under the `dgraph-cdc` topic. To enable CDC and sink
-events to Kafka, start Dgraph Alpha with the `--cdc` command and the sub-options
-shown below, as follows:
+Kafka records CDC events under the `dgraph-cdc` topic. The topic must be created before events
+are sent to the broker. To enable CDC and sink events to Kafka, start Dgraph Alpha with the `--cdc` 
+command and the sub-options shown below, as follows:
 
 ```bash
 dgraph alpha --cdc "kafka=kafka-hostname:port; sasl-user=tstark; sasl-password=m3Ta11ic"
@@ -37,6 +37,9 @@ specify the hostname and port used by Kafka, as follows:
 ```bash
 dgraph alpha --cdc "localhost:9092"
 ```
+
+If the Kafka cluster to which you are connecting requires TLS, the `ca-cert` option is required. 
+Note that this certificate can be self-signed.
 
 ## Enable CDC with file sink
 
@@ -54,13 +57,14 @@ CDC when running the `dgraph alpha` command:
 
 | Sub-option       | Example `dgraph alpha` command option     | Notes                                                                |
 |------------------|-------------------------------------------|----------------------------------------------------------------------|
-|  `ca-cert`       | `--cdc "ca-cert=/cert-dir/ca.crt"`        | Path and filename of the CA root certificate used for TLS encryption |
+|  `ca-cert`       | `--cdc "ca-cert=/cert-dir/ca.crt"`        | Path and filename of the CA root certificate used for TLS encryption, required if Kafka endpoint requires TLS |
 |  `client-cert`   | `--cdc "client-cert=/c-certs/client.crt"` | Path and filename of the client certificate used for TLS encryption  |
 |  `client-key`    | `--cdc "client-cert=/c-certs/client.key"` | Path and filename of the client certificate private key              |
 |  `file`          | `--cdc "file=/sink-dir/cdc-file"`         | Path and filename of a local file sink (alternative to Kafka sink)   |
-|  `kafka`         | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | Hostname(s) of the Kafka hosts. May require authentication using the `sasl-user` and `sasl-password` sub-options. |
-|  `sasl-user`     | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options. |
-|  `sasl-password` | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL password for Kafka. Requires the `kafka` and `sasl-username` sub-options. |
+|  `kafka`         | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | Hostname(s) of the Kafka hosts. May require authentication using the `sasl-user` and `sasl-password` sub-options |
+|  `sasl-user`     | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL username for Kafka. Requires the `kafka` and `sasl-password` sub-options |
+|  `sasl-password` | `--cdc "kafka=kafka-hostname; sasl-user=tstark; sasl-password=m3Ta11ic"` | SASL password for Kafka. Requires the `kafka` and `sasl-username` sub-options |
+|  `sasl-mechanism` | `--cdc "kafka=kafka-hostname; sasl-mechanism=PLAIN"` | The SASL mechanism for Kafka (PLAIN, SCRAM-SHA-256 or SCRAM-SHA-512). The default is PLAIN |
 
 ## CDC data format
 
