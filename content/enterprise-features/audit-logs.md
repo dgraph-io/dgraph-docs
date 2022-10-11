@@ -143,7 +143,7 @@ To decrypt encrypted audit logs, you can use the `dgraph audit decrypt` command,
 as follows:
 
 ```bash
-dgraph audit decrypt --encryption_key_file=/path/encrypt/key/file --in /path/to/encrypted/log/file --out /path/to/output/file
+dgraph audit decrypt --encryption key-file=/path/encrypt/key/file --in /path/to/encrypted/log/file --out /path/to/output/file
 ```
 
 ## Next steps
