@@ -115,7 +115,7 @@ You could extend this command a bit to specify larger log files (200 MB, instead
 of 100 MB) and retain them for longer (15 days instead of 10 days):
 
 ```bash
-dgraph alpha --audit output=audit-log-dir;size=200;days=15
+dgraph alpha --audit 'output=audit-log-dir;size=200;days=15"
 ```
 
 ### Enable audit logging with compression
@@ -124,7 +124,7 @@ In many cases you will want to compress older audit logs to save storage space.
 You can do this with a command like the following:
 
 ```bash
-dgraph alpha --audit output=audit-log-dir;compress=true
+dgraph alpha --audit "output=audit-log-dir;compress=true"
 ```
 
 ### Enable audit logging with encryption
@@ -134,7 +134,7 @@ might exist in logged requests. You can do this, along with compression, with a
 command like the following:
 
 ```bash
-dgraph alpha --audit output=audit-log-dir;compress=true;encrypt-file=/path/to/encrypt/key/file
+dgraph alpha --audit "output=audit-log-dir;compress=true;encrypt-file=/path/to/encrypt/key/file"
 ```
 
 ### Decrypt audit logs
