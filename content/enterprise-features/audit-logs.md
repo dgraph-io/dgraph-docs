@@ -115,7 +115,7 @@ You could extend this command a bit to specify larger log files (200 MB, instead
 of 100 MB) and retain them for longer (15 days instead of 10 days):
 
 ```bash
-dgraph alpha --audit 'output=audit-log-dir;size=200;days=15"
+dgraph alpha --audit "output=audit-log-dir;size=200;days=15"
 ```
 
 ### Enable audit logging with compression
