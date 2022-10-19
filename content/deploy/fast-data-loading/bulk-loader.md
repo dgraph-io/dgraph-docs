@@ -15,7 +15,7 @@ datasets into Dgraph.
 Only one or more Dgraph Zeros should be running for bulk loading. Dgraph Alphas
 will be started later.
 
-You can [read some technical details](https://blog.dgraph.io/post/bulkloader/)
+You can [read some technical details](https://dgraph.io/blog/post/bulkloader/)
 about the bulk loader on the blog.
 
 {{% notice "warning" %}}
