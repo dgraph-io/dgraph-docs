@@ -96,7 +96,7 @@ The `DgraphClient.clientStubFromSlashEndpoint()` method has been deprecated and 
 ### Creating a Secure Client using TLS
 
 To setup a client using TLS, you could use the following code snippet. The server needs to be
-setup using the instructions provided [here](https://docs.dgraph.io/deploy/#tls-configuration).
+setup using the instructions provided [here]({{< relref "deploy/tls-configuration.md" >}}).
 
 If you are doing client verification, you need to convert the client key from PKCS#1 format to
 PKCS#8 format. By default, grpc doesn't support reading PKCS#1 format keys. To convert the
@@ -154,7 +154,7 @@ dgraphClient.alter(operation);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can call the function `setRunInBackground(true)` as shown below before
 calling `alter`. You can find more details
-[here](https://docs.dgraph.io/main/query-language/#indexes-in-background).
+[here]({{< relref "/query-language/schema.md#indexes-in-background" >}}).
 
 ```java
 String schema = "name: string @index(exact) .";
@@ -386,7 +386,7 @@ one mutation. Variables can be defined in the query and used in the mutation.
 You could also use `txn.doRequest` to perform a query followed by a mutation.
 
 To know more about upsert, we highly recommend going through the docs at
-https://docs.dgraph.io/mutations/#upsert-block.
+[upsert-block]({{< relref "mutations/upsert-block.md" >}}).
 
 ```java
 String query = "query {\n" +
@@ -408,7 +408,7 @@ txn.doRequest(request);
 The upsert block also allows specifying a conditional mutation block using an `@if` directive. The mutation is executed
 only when the specified condition is true. If the condition is false, the mutation is silently ignored.
 
-See more about Conditional Upsert [Here](https://docs.dgraph.io/mutations/#conditional-upsert).
+See more about Conditional Upsert [Here]({{< relref "mutations/conditional-upsert.md" >}}).
 
 ```java
 String query = "query {\n" +
