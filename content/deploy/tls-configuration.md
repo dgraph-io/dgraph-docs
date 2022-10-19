@@ -27,7 +27,7 @@ write that header and key can't be decrypted.{{% /notice %}}
 
 {{% notice "note" %}}
 This section refers to the `dgraph cert` command which was introduced in v1.0.9.
-For previous releases, see the previous [TLS configuration documentation](https://dgraph.io/docs/v1.0.7/deploy/#tls-configuration).
+For previous releases, see the previous [TLS configuration documentation](https://github.com/dgraph-io/dgraph/blob/release/v1.0.7/wiki/content/deploy/index.md#tls-configuration).
 {{% /notice %}}
 
 The `dgraph cert` program creates and manages CA-signed certificates and private
