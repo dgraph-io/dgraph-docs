@@ -369,7 +369,7 @@ Some examples of connecting via a [Client](/clients) when TLS is in use can be f
 
 - [dgraph4j](https://github.com/dgraph-io/dgraph4j#creating-a-secure-client-using-tls)
 - [dgraph-js](https://github.com/dgraph-io/dgraph-js/tree/master/examples/tls)
-- [dgo](https://github.com/dgraph-io/dgraph/blob/master/tlstest/acl/acl_over_tls_test.go)
+- [dgo](https://github.com/dgraph-io/dgraph/blob/main/tlstest/acl/acl_over_tls_test.go)
 - [pydgraph](https://github.com/dgraph-io/pydgraph/tree/master/examples/tls)
 
 ## Troubleshooting Ratel's Client authentication

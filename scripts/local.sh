@@ -17,7 +17,7 @@ joinVersions() {
 VERSION_STRING=$(joinVersions)
 
 run() {
-  export CURRENT_BRANCH="master"
+  export CURRENT_BRANCH="main"
   export CURRENT_VERSION=${VERSIONS_ARRAY[0]}
   export VERSIONS=${VERSION_STRING}
   export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
@@ -25,7 +25,7 @@ run() {
 
   export HUGO_TITLE="Dgraph Doc - Preview" \
   export VERSIONS=${VERSION_STRING} \
-  export CURRENT_BRANCH="master" \
+  export CURRENT_BRANCH="main" \
   export CURRENT_VERSION=${CURRENT_VERSION}
 
   pushd "$(dirname "$0")/.." > /dev/null

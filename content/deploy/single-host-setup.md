@@ -137,7 +137,7 @@ instructions [here](https://docs.docker.com/compose/install/) to install it.
 Run the command below to download the `docker-compose.yml` file on your machine.
 
 ```sh
-wget https://github.com/dgraph-io/dgraph/raw/master/contrib/config/docker/docker-compose.yml
+wget https://github.com/dgraph-io/dgraph/raw/main/contrib/config/docker/docker-compose.yml
 ```
 
 {{% notice "note" %}}The config mounts `/data`(you could mount something else) on the instance to `/dgraph` within the

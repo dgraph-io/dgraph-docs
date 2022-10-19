@@ -151,7 +151,7 @@ Do the following to set up on the [Hashicorp Vault](https://www.vaultproject.io/
 5. Using the `role_id` generated from the previous step, create a corresponding `secret_id`, and copy the `role_id` and `secret_id` over to local files, like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`, that will be used by Dgraph Alpha nodes.
 
 {{% notice "tip" %}}
-To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
+To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/vault/docker/README.md).
 {{% /notice %}}
 
 {{% notice "note" %}}
@@ -310,7 +310,7 @@ With ACL configured, you need to log in as a user to access data protected by AC
 
 Here are some code samples using a client:
 
-* **Go** ([dgo client](https://github.com/dgraph-io/dgo)): example `acl_over_tls_test.go` ([here](https://github.com/dgraph-io/dgraph/blob/master/tlstest/acl/acl_over_tls_test.go))
+* **Go** ([dgo client](https://github.com/dgraph-io/dgo)): example `acl_over_tls_test.go` ([here](https://github.com/dgraph-io/dgraph/blob/main/tlstest/acl/acl_over_tls_test.go))
 * **Java** ([dgraph4j](https://github.com/dgraph-io/dgraph4j)): example `AclTest.java` ([here](https://github.com/dgraph-io/dgraph4j/blob/master/src/test/java/io/dgraph/AclTest.java))
 
 

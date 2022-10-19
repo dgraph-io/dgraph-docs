@@ -62,7 +62,7 @@ installed on your machine.
 Let's begin by starting Dgraph standalone by running the command below:
 
 ```
-docker run -it -p 8080:8080 dgraph/standalone:master
+docker run -it -p 8080:8080 dgraph/standalone:%VERSION_HERE
 ```
 
 Let's load up the GraphQL schema file to Dgraph:

@@ -153,7 +153,7 @@ waqdyimp8llvca9i09k4202x5 *   aws01               Ready               Active    
 Run the command below to download the `docker-compose-multi.yml` file on your machine.
 
 ```sh
-wget https://github.com/dgraph-io/dgraph/raw/master/contrib/config/docker/docker-compose-multi.yml
+wget https://github.com/dgraph-io/dgraph/raw/main/contrib/config/docker/docker-compose-multi.yml
 ```
 
 Run the following command on the Swarm leader to deploy the Dgraph Cluster.
@@ -222,7 +222,7 @@ If you are on AWS, below is the security group (**docker-machine**) after necess
 Run the command below to download the `docker-compose-ha.yml` file on your machine.
 
 ```sh
-wget https://github.com/dgraph-io/dgraph/raw/master/contrib/config/docker/docker-compose-ha.yml
+wget https://github.com/dgraph-io/dgraph/raw/main/contrib/config/docker/docker-compose-ha.yml
 ```
 
 Run the following command on the Swarm leader to deploy the Dgraph Cluster.

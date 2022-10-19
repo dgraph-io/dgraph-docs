@@ -84,4 +84,4 @@ You can convert an `add` mutation to an `upsert` mutation by setting the value o
 
 ## Examples
 
-You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/master/graphql/resolve/add_mutation_test.yaml) for more examples.
+You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/main/graphql/resolve/add_mutation_test.yaml) for more examples.

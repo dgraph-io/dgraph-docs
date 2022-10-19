@@ -84,7 +84,7 @@ To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prere
 5. Using the `role_id` generated from the previous step, create a corresponding `secret_id`, and copy the `role_id` and `secret_id` over to local files, like `./dgraph/vault/role_id` and `./dgraph/vault/secret_id`, that will be used by Dgraph Alpha nodes.
 
 {{% notice "tip" %}}
-To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/master/contrib/config/vault/docker/README.md).
+To learn more about the above steps, see [Dgraph Vault Integration: Docker](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/vault/docker/README.md).
 {{% /notice %}}
 
 {{% notice "note" %}}
