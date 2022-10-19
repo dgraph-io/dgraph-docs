@@ -124,12 +124,12 @@ $ curl -s localhost:8080/alter -d '{ "drop_all": true }'
 ```
 
 ```sh
-$ curl -s -H 'X-Dgraph-AuthToken: <wrongsecret>' localhost:8180/alter -d '{ "drop_all": true }'
+$ curl -s -H 'X-Dgraph-AuthToken: <wrongsecret>' localhost:8080/alter -d '{ "drop_all": true }'
 # Permission denied. Incorrect token.
 ```
 
 ```sh
-$ curl -H 'X-Dgraph-AuthToken: <authtokenstring>' localhost:8180/alter -d '{ "drop_all": true }'
+$ curl -H 'X-Dgraph-AuthToken: <authtokenstring>' localhost:8080/alter -d '{ "drop_all": true }'
 # Success. Token matches.
 ```
 
