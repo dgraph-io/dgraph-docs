@@ -37,7 +37,7 @@ Dgraph gives you GraphQL.  You're always working with GraphQL, not a translation
       <div class="col-12 col-sm-6">
         <div class="section-item">
           <div class="section-name">
-            <a href="https://github.com/dgraph-io/dgraph/blob/master/CONTRIBUTING.md">
+            <a href="https://github.com/dgraph-io/dgraph/blob/main/CONTRIBUTING.md">
               Contribute to Dgraph
             </a>
           </div>

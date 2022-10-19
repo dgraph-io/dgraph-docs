@@ -106,4 +106,4 @@ If a post with the ID `mm2` exists, it will update the post with the new details
 {{% /notice %}}
 
 ## Examples
-You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/master/graphql/resolve/add_mutation_test.yaml) for more examples.
+You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/main/graphql/resolve/add_mutation_test.yaml) for more examples.

@@ -127,7 +127,7 @@ the indexes. You should retry the Alter operation in order to update the schema,
 or sync the schema across all the alphas.
 
 To learn about how to check background indexing status, see
-[Querying Health](https://dgraph.io/docs/master/deploy/dgraph-alpha/#querying-health).
+[Querying Health](https://dgraph.io/docs/main/deploy/dgraph-alpha/#querying-health).
 
 ### HTTP API
 

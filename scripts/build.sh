@@ -24,10 +24,10 @@ PUBLIC="${PUBLIC:-public}"
 LOOP="${LOOP:-true}"
 # Binary of hugo command to run.
 HUGO="${HUGO:-hugo}"
-THEME_BRANCH="${THEME_BRANCH:-master}"
+THEME_BRANCH="${THEME_BRANCH:-main}"
 
 # Place the latest version at the beginning so that version selector can
-# append '(latest)' to the version string, followed by the master version,
+# append '(latest)' to the version string, followed by the main version,
 # and then the older versions in descending order, such that the
 # build script can place the artifact in an appropriate location.
 
@@ -42,7 +42,7 @@ MAJOR_VERSIONS=(
 VERSIONS_ARRAY=(
   ${MAJOR_VERSIONS:0}
   ${MAJOR_VERSIONS[@]:1}
-  'master'
+  'main'
 )
 
 joinVersions() {
@@ -112,8 +112,8 @@ checkAndUpdate()
 	local branch=""
 	local tag="$2"
 
-	if [[ $version == "master" ]]; then
-		branch="master"
+	if [[ $version == "main" ]]; then
+		branch="main"
 	else
 		branch="release/$version"
 	fi
@@ -159,7 +159,7 @@ while true; do
 	for version in "${VERSIONS_ARRAY[@]}"
 	do
 	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
-		SETO="${latest_version:-master}" 
+		SETO="${latest_version:-main}" 
 		checkAndUpdate "$version" "$SETO"
 		echo "version => '$version'"
 		echo "latest_version => '$SETO'"

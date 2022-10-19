@@ -51,4 +51,4 @@ Once your license has expired, you will see the following warning message in the
 Your enterprise license has expired and enterprise features are disabled. To continue using enterprise features, apply a valid license. To receive a new license, contact us at https://dgraph.io/contact.
 ```
 
-[dcl]: https://github.com/dgraph-io/dgraph/blob/master/licenses/DCL.txt
+[dcl]: https://github.com/dgraph-io/dgraph/blob/main/licenses/DCL.txt

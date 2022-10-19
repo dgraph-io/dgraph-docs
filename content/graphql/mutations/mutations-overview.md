@@ -223,4 +223,4 @@ mutation {
 
 ## Examples
 
-You can refer to the following [link](https://github.com/dgraph-io/dgraph/tree/master/graphql/schema/testdata/schemagen) for more examples.
+You can refer to the following [link](https://github.com/dgraph-io/dgraph/tree/main/graphql/schema/testdata/schemagen) for more examples.

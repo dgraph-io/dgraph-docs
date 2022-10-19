@@ -107,4 +107,4 @@ Variables:
 
 ### Examples
 
-You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/master/graphql/resolve/update_mutation_test.yaml) for more examples.
+You can refer to the following [link](https://github.com/dgraph-io/dgraph/blob/main/graphql/resolve/update_mutation_test.yaml) for more examples.

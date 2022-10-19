@@ -37,7 +37,7 @@ Here are some actual benchmarks:
 
 ### How is Dgraph Licensed?
 
-Dgraph is licensed under Apache v2.0. The full text of the license can be found [here](https://github.com/dgraph-io/dgraph/blob/master/LICENSE.md).
+Dgraph is licensed under Apache v2.0. The full text of the license can be found [here](https://github.com/dgraph-io/dgraph/blob/main/LICENSE.md).
 
 ## Internals
 
@@ -72,7 +72,7 @@ Please see Dgraph [product roadmap](https://github.com/dgraph-io/dgraph/issues/4
 
 ### Is Dgraph open-core?
 
-Yes. The main core of Dgraph is [under the Apache 2.0 license](https://github.com/dgraph-io/dgraph/blob/master/LICENSE.md). Enterprise features will be released under a proprietary license. Unlike other databases, we include running Dgraph distributedly under an open source license because we want all our users to be able to scale as demand grows.
+Yes. The main core of Dgraph is [under the Apache 2.0 license](https://github.com/dgraph-io/dgraph/blob/main/LICENSE.md). Enterprise features will be released under a proprietary license. Unlike other databases, we include running Dgraph distributedly under an open source license because we want all our users to be able to scale as demand grows.
 
 ### Would Dgraph be well supported?
 Yes. We're VC funded and plan to use the funds for development. We have a dedicated team of really smart engineers working on this as their full-time job. And of course, we're always open to contributions from the wider community.
@@ -81,7 +81,7 @@ Yes. We're VC funded and plan to use the funds for development. We have a dedica
 It's currently too early to say. It's very likely that we will offer commercially licensed plugins and paid support to interested customers. This model would enable us to continue advancing Dgraph while standing by our commitment to keeping the core project free and open.
 
 ### How can I contribute to Dgraph?
-We accept both code and documentation contributions. Please see [link](https://github.com/dgraph-io/dgraph/blob/master/CONTRIBUTING.md) for more information about how to contribute.
+We accept both code and documentation contributions. Please see [link](https://github.com/dgraph-io/dgraph/blob/main/CONTRIBUTING.md) for more information about how to contribute.
 
 ## Criticism
 
