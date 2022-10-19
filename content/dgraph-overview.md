@@ -115,7 +115,7 @@ in the command shown above to the version number for a previous release, such as
 {{% /notice %}}
 
 After following these steps, Dgraph Alpha now runs and listens for HTTP requests
-on port 8080, and Ratel listens on port 8000(you can also use http://play.dgraph.io/ to run Ratel).
+on port 8080, and Ratel listens on port 8000(you can also use https://play.dgraph.io/ to run Ratel).
 
 ## Dgraph and GraphQL
 

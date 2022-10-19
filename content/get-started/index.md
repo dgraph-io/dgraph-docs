@@ -68,7 +68,7 @@ You would find the Dgraph data stored in a folder named *dgraph* of your *home d
 
 {{% notice "tip" %}}
 Once Dgraph is running, you can access **Ratel** at
-http://play.dgraph.io. It allows browser-based
+https://play.dgraph.io. It allows browser-based
 queries, mutations and visualizations. You can connect Ratel with your Dgraph
 cluster by putting in your Dgraph Alpha address (`http://localhost:8080`) inside the
 **Dgraph Server URL** box in Ratel. To learn more, see the docs on Ratel's [Connection]({{< relref "ratel/connection.md"
