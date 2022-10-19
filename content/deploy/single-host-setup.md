@@ -39,9 +39,11 @@ To learn more about other flags, run the following command:
 
 ### Run Dgraph's Ratel UI
 
-```sh
-dgraph-ratel
-```
+Ratel's binary now has its own Docker image https://hub.docker.com/r/dgraph/ratel/tags?page=1&ordering=last_updated - You can also use https://play.dgraph.io/ instead of the image.
+
+{{% notice "note" %}}
+Pay attention that this is an HTTPS site. Google has removed communication between non-HTTPS applications. That is, a local Dgraph will hardly connect to a Ratel using TLS/SSL. In case of a local cluster without HTTPS, use the docker image locally as well.
+{{% /notice %}}
 
 ## Run using Docker
 

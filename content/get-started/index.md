@@ -18,7 +18,7 @@ You can find the getting started tutorial series [here]({{< relref "tutorials/in
 Designed from the ground up to be run in production, **Dgraph** is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
 
 
-Dgraph cluster consists of different nodes (Zero, Alpha & Ratel), and each node serves a
+Dgraph cluster consists of different nodes (Zero, Alpha), and each node serves a
 different purpose.
 
 - **Dgraph Zero** controls the Dgraph cluster, assigns servers to a group,
@@ -55,25 +55,28 @@ Follow the instructions [here](https://docs.docker.com/install) to install
 Docker if you don't have it already.
 
 ```sh
-docker run --rm -it -p "8080:8080" -p "9080:9080" -p "8000:8000" -v ~/dgraph:/dgraph "dgraph/standalone:{{< version >}}"
+docker run --rm -it -p "8080:8080" -p "9080:9080" -v ~/dgraph:/dgraph "dgraph/standalone:{{< version >}}"
 ```
 {{% notice "note" %}}This standalone image is meant for quickstart purposes only.
 It is not recommended for production environments.
 {{% /notice %}}
 
-This would start a single container with **Dgraph Alpha**, **Dgraph Zero** and **Ratel** running in it.
+This would start a single container with **Dgraph Alpha** and **Dgraph Zero** running in it.
 You would find the Dgraph data stored in a folder named *dgraph* of your *home directory*.
 
 ### Step 2: Run Mutation
 
 {{% notice "tip" %}}
-Once Dgraph is running, you can access **Ratel** at [`http://localhost:8000`](http://localhost:8000).
-It allows browser-based queries, mutations and visualizations.
+Once Dgraph is running, you can access **Ratel** at
+http://play.dgraph.io. It allows browser-based
+queries, mutations and visualizations. You can connect Ratel with your Dgraph
+cluster by putting in your Dgraph Alpha address (`http://localhost:8080`) inside the
+**Dgraph Server URL** box in Ratel. To learn more, see the docs on Ratel's [Connection]({{< relref "ratel/connection.md"
+>}}). 
 
 You can run the mutations and queries below from either curl in the command line
 or by pasting the mutation data in **Ratel**.
 {{% /notice %}}
-
 #### Dataset
 The dataset is a movie graph, where the graph nodes are
 entities of the type directors, actors, genres, or movies.
