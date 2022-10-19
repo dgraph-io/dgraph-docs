@@ -32,8 +32,8 @@ THEME_BRANCH="${THEME_BRANCH:-main}"
 # build script can place the artifact in an appropriate location.
 
 getMajorVersions=$(curl -s https://get.dgraph.io/latest \
-ep -o '"> | grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
-> | sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g" | sed  "s/v21.12/ /g")
+| grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
+| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g" | sed  "s/v21.12/ /g")
 
 MAJOR_VERSIONS=(
   $getMajorVersions
