@@ -78,7 +78,7 @@ $ sudo tar -C /usr/local/bin -xzf dgraph-darwin-amd64-VERSION.tar.gz
 dgraph
 ```
 
-## Building from Source
+## Install from Source
 
 {{% notice "note" %}}
 You can build the Ratel UI from source separately following its build
@@ -87,26 +87,33 @@ Ratel UI is distributed via Dgraph releases using any of the download methods
 listed above.
 {{% /notice %}}
 
-Make sure you have [Go](https://golang.org/dl/) v1.11+ installed.
+If you want to install from source, install Go 1.13+ or later and the following dependencies:
 
-You'll need the following dependencies to install Dgraph using `make`:
+#### Ubuntu
+
 ```bash
 sudo apt-get update
-sudo apt-get install gcc make
+sudo apt-get install build-essential
 ```
 
-After installing Go, run
-```sh
-# This should install dgraph binary in your $GOPATH/bin.
+#### macOS
 
+As a prerequisite, first install [XCode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) (or the [XCode Command-line Tools](https://developer.apple.com/downloads/)) and [Homebrew](https://brew.sh/).
+
+Next, install the required dependencies:
+
+```bash
+brew update
+brew install jemalloc go
+```
+
+### Build and Install
+
+Then clone the Dgraph repository and use `make install` to install the Dgraph binary in the directory named by the GOBIN environment variable, which defaults to $GOPATH/bin or $HOME/go/bin if the GOPATH environment variable is not set. 
+
+
+```bash
 git clone https://github.com/dgraph-io/dgraph.git
-cd ./dgraph
+cd dgraph
 make install
-```
-
-If you get errors related to `grpc` while building them, your
-`go-grpc` version might be outdated. We don't vendor in `go-grpc`(because it
-causes issues while using the Go client). Update your `go-grpc` by running.
-```sh
-go get -u -v google.golang.org/grpc
 ```
