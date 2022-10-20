@@ -115,7 +115,7 @@ Here are the important types, queries, and mutations from the `admin` schema.
 
 		"""
 		The group this node belongs to in the Dgraph cluster.
-		See : [cluster setup]({{< relref "deploy/cluster-setup.md" >}}).
+		See : https://dgraph.io/docs/deploy/cluster-setup/.
 		"""
 		group: String
 
@@ -759,7 +759,7 @@ Here are the important types, queries, and mutations from the `admin` schema.
 		"""
 		Starts an export of all data in the cluster.  Export format should be 'rdf' (the default
 		if no format is given), or 'json'.
-		See : [export database]({{< relref "deploy/dgraph-administration.md#export-database" >}})
+		See : https://dgraph.io/docs/deploy/dgraph-administration/#export-database
 		"""
 		export(input: ExportInput!): ExportPayload
 
@@ -791,12 +791,11 @@ Here are the important types, queries, and mutations from the `admin` schema.
 		assign(input: AssignInput!): AssignPayload
 
 		"""
-		Start a binary backup.  See : [binary backup]({{< relref "enterprise-features/binary-backups.md" >}})
+		Start a binary backup.  See : https://dgraph.io/docs/enterprise-features/binary-backups/#create-a-backup
 		"""
 		backup(input: BackupInput!) : BackupPayload
 		"""
-		Start restoring a binary backup.  See :
-			[binary backup]({{< relref "enterprise-features/binary-backups.md" >}})
+		Start restoring a binary backup.  See : https://dgraph.io/docs/enterprise-features/binary-backups/#online-restore
 		"""
 		restore(input: RestoreInput!) : RestorePayload
 		"""
