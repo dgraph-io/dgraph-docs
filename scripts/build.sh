@@ -33,7 +33,7 @@ THEME_BRANCH="${THEME_BRANCH:-main}"
 
 getMajorVersions=$(curl -s https://get.dgraph.io/latest \
 | grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
-| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g")
+| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g" | sed  "s/v21.12/ /g" | sed "s/v20.07/ /g")
 
 MAJOR_VERSIONS=(
   $getMajorVersions
@@ -43,6 +43,7 @@ VERSIONS_ARRAY=(
   ${MAJOR_VERSIONS:0}
   ${MAJOR_VERSIONS[@]:1}
   'main'
+  'v21.12'
 )
 
 joinVersions() {
@@ -158,7 +159,7 @@ while true; do
 
 	for version in "${VERSIONS_ARRAY[@]}"
 	do
-	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
+	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$' | sed  "/^v21.12/d" | sed  "/^v20.03/d" | sed  "/^v20.07/d" | grep  "$version" | head -n1)
 		SETO="${latest_version:-main}" 
 		checkAndUpdate "$version" "$SETO"
 		echo "version => '$version'"
