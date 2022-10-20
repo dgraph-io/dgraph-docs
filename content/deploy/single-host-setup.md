@@ -39,9 +39,14 @@ To learn more about other flags, run the following command:
 
 ### Run Dgraph's Ratel UI
 
-```sh
-dgraph-ratel
-```
+Ratel provides data visualization and cluster management for Dgraph. To get started with Ratel, use it online with the [Dgraph Ratel Dashboard](https://play.dgraph.io) or clone and build Ratel using the [instructions
+from the Ratel repository on GitHub](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md). To learn more, see [Ratel Overview]({{< relref "/ratel/overview" >}}).
+
+Ratel's binary now has its own Docker image https://hub.docker.com/r/dgraph/ratel/tags?page=1&ordering=last_updated
+
+{{% notice "note" %}}
+Pay attention that this is an HTTPS site. Google has removed communication between non-HTTPS applications. That is, a local Dgraph will hardly connect to a Ratel using TLS/SSL. In case of a local cluster without HTTPS, use the docker image locally as well.
+{{% /notice %}}
 
 ## Run using Docker
 
@@ -84,11 +89,6 @@ mkdir ~/server2 # Or any other directory where data should be stored.
 docker run -it -p 7081:7081 --network dgraph_default -p 8081:8081 -p 9081:9081 -v ~/server2:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=HOSTIPADDR:5080 --my=HOSTIPADDR:7081  -o=1
 ```
 Notice the use of -o for server2 to override the default ports for server2.
-
-### Run Dgraph's Ratel UI
-
-Ratel provides data visualization and cluster management for Dgraph. To get started with Ratel, use it online with the [Dgraph Ratel Dashboard](https://play.dgraph.io) or clone and build Ratel using the [instructions
-from the Ratel repository on GitHub](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md). To learn more, see [Ratel Overview]({{< relref "/ratel/overview" >}}).
 
 ## Run using Docker Compose (On single AWS instance)
 

@@ -190,7 +190,7 @@ Output:
 
 ```
 ID                NAME               MODE            REPLICAS      IMAGE                     PORTS
-vp5bpwzwawoe      dgraph_ratel       replicated      1/1           dgraph/dgraph:latest      *:8000->8000/tcp
+vp5bpwzwawoe      dgraph_ratel       replicated      1/1           dgraph/ratel:latest      *:8000->8000/tcp
 69oge03y0koz      dgraph_alpha2      replicated      1/1           dgraph/dgraph:latest      *:8081->8081/tcp,*:9081->9081/tcp
 kq5yks92mnk6      dgraph_alpha3      replicated      1/1           dgraph/dgraph:latest      *:8082->8082/tcp,*:9082->9082/tcp
 uild5cqp44dz      dgraph_zero        replicated      1/1           dgraph/dgraph:latest      *:5080->5080/tcp,*:6080->6080/tcp
@@ -247,7 +247,7 @@ i3iq5mwhxy8a      dgraph_alpha2      replicated      1/1           dgraph/dgraph
 wgn5adzk67n4      dgraph_alpha4      replicated      1/1           dgraph/dgraph:latest      *:8083->8083/tcp, *:9083->9083/tcp
 uzviqxv9fp2a      dgraph_alpha5      replicated      1/1           dgraph/dgraph:latest      *:8084->8084/tcp, *:9084->9084/tcp
 nl1j457ko54g      dgraph_alpha6      replicated      1/1           dgraph/dgraph:latest      *:8085->8085/tcp, *:9085->9085/tcp
-s11bwr4a6371      dgraph_ratel       replicated      1/1           dgraph/dgraph:latest      *:8000->8000/tcp
+s11bwr4a6371      dgraph_ratel       replicated      1/1           dgraph/ratel:latest      *:8000->8000/tcp
 vchibvpquaes      dgraph_zero1       replicated      1/1           dgraph/dgraph:latest      *:5080->5080/tcp, *:6080->6080/tcp
 199rezd7pw7c      dgraph_zero2       replicated      1/1           dgraph/dgraph:latest      *:5081->5081/tcp, *:6081->6081/tcp
 yb8ella56oxt      dgraph_zero3       replicated      1/1           dgraph/dgraph:latest      *:5082->5082/tcp, *:6082->6082/tcp
