@@ -24,7 +24,7 @@ To learn about the latest releases and other important announcements, watch the
  Dgraph Release Series | Current Release | Supported? | First Release Date | End of life
 -----------------------|-----------------|------------|--------------------|--------------
  v22.0.x               | [v22.0.0][]     | Yes        | October 2022       | October 2023
- v21.12.x              | [v21.12.0][]    | No         | December 2021      | December 2022 (discontinued)
+ v21.12.x(discontinued)| [v21.12.0][]    | No         | December 2021      | December 2022
  v21.03.x              | [v21.03.0][]    | No         | March 2021         | March 2022
  v20.11.x              | [v20.11.0][]    | No         | December 2020      | December 2021
  v20.07.x              | [v20.07.3][]    | No         | July 2020          | July 2021
