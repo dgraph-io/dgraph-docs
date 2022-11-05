@@ -55,12 +55,13 @@ Regarding disk IOPS, we recommend:
 * 1000 IOPS minimum
 * 3000 IOPS for medium and large datasets
 
-Instances such as c5d.4xlarge have locally-attached NVMe SSDs with high IOPS. You can also use EBS volumes with provisioned IOPS (io1). If you are not running performance-critical workloads, you can also choose to use cheaper gp2 EBS volumes. AWS introduced the new [gp3](https://aws.amazon.com/about-aws/whats-new/2020/12/introducing-new-amazon-ebs-general-purpose-volumes-gp3/?nc1=h_ls) disks that gives 3000 IOPS at any disk size.
+Instances such as c5d.4xlarge have locally-attached NVMe SSDs with high IOPS. You can also use EBS volumes with provisioned IOPS (io1).  AWS [gp3](https://aws.amazon.com/about-aws/whats-new/2020/12/introducing-new-amazon-ebs-general-purpose-volumes-gp3/?nc1=h_ls) disks are a good option and have 3000 Baseline IOPS at any disk size. If you are not running performance-critical workloads, you can also choose to use cheaper gp2 EBS volumes.
 
 Recommended disk sizes for Dgraph Zero and Dgraph Alpha:
 
 * Dgraph Zero: 200 GB to 300 GB. Dgraph Zero stores cluster metadata information and maintains a write-ahead log for cluster operations.
 * Dgraph Alpha: 250 GB to 750 GB. Dgraph Alpha stores database data, including the schema, indices, and the data values. It maintains a write-ahead log of changes to the database. Your cloud provider may provide better disk performance based on the volume size.
+* If you plan to store over 1.1TB per Dgraph Alpah instance, you must increase either the MaxLevels or TableSizeMultiplier. 
 
 Additional recommendations:
 
