@@ -1,6 +1,6 @@
 +++
 title = "Dgraph Glossary"
-description = "Introduction to Dgraph Database. Dgraph is a horizontally scalable and distributed GraphQL database that you can run on-premises, in your cloud infrastructure, or fully-managed (hosted). Learn Dgraph and GraphQL terms from our glossary."
+description = "Dgraph terms"
 [menu.main]
     name = "Dgraph Glossary"
     identifier = "glossary"
@@ -25,8 +25,6 @@ More at [Dgraph Cloud documentation](https://dgraph.io/docs/cloud)
 
 **DQL** Dgraph Query Language is Dgraph's proprietary language to insert, update, delete and query data.
 
-**Endpoints**
-
 
 **Entity<a name="entity"></a>**
 
@@ -39,7 +37,7 @@ In Dgraph terminology edges are `entity predicates`.
 
 **Group**
 
-**gRPC**
+**gRPC** gRPC is a high performance Remote Procedure Call (RPC) framework used by Dgraph to interface with clients. Dgraph has official gRPC clients for go, C#, Java, JavaScript and Python. Applications written in those language can perform mutations and queries inside transactions using Dgraph clients.
 
 **Lambda** Dgraph takes care of all the logic to execute GraphQL queries when a GraphQL data model is deployed. Lambda provides a way to extend this capability and to write your custom logic integrated with Dgraph execution model.
 
