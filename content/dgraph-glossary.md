@@ -9,7 +9,7 @@ description = "Dgraph terms"
 
 
 **Alpha**
-Dgraph consists of different servers, zero and alpha. Alpha servers host predicates and indexes. A Dgraph instance, aka a Dgraph cluster, has at least 1 Alpha server and scale horizontally by adding more Alpha servers.
+Dgraph consists of Zero and Alpha servers. Alpha servers host predicates and indexes. A Dgraph instance or a Dgraph cluster, has at least one Alpha server and can be scaled horizontally by adding more Alpha servers.
 
 **Badger**
 A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph.
