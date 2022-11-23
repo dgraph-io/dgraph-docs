@@ -72,4 +72,4 @@ Dgraph uses RDF format to create, import and export data. Note that Dgraph also 
 **Upsert**
 
 **Zero**
-Dgraph consists of different servers, zero and alpha. Zero servers control the Dgraph database cluster : assign Alpha servers to groups, re-balance data between groups, handle transaction timestamp and UID assignment.
+Dgraph consists of zero and alpha. servers. Zero servers control the Dgraph database cluster. It assigns Alpha servers to groups, re-balances data between groups, handles transaction timestamp and UID assignment.
