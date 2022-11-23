@@ -1,6 +1,6 @@
 +++
 title = "Dgraph Database Overview"
-description = "Introduction to Dgraph Database. Dgraph is a horizontally scalable and distributed GraphQL database that you can run on-premises, in your cloud infrastructure, or fully-managed (hosted). Learn Dgraph and GraphQL terms from our glossary."
+description = "Introduction to Dgraph Database. Dgraph is a horizontally scalable and distributed GraphQL database that you can run on-premises, in your cloud infrastructure, or fully-managed (hosted)."
 [menu.main]
     name = "Dgraph Overview"
     identifier = "overview"
@@ -8,9 +8,9 @@ description = "Introduction to Dgraph Database. Dgraph is a horizontally scalabl
 +++
 
 Dgraph is a horizontally scalable and distributed GraphQL database with a graph
-backend. Dgraph is built for the heavy transactional workloads required to 
+backend. Dgraph is built for the heavy transactional workloads required to
 power modern apps and websites, but it isn’t limited to only these types of
-applications. Whether you are looking to power the backend of your app, create 
+applications. Whether you are looking to power the backend of your app, create
 elastic search for your website, or build a new database purely for data
 analysis, Dgraph is up to the task. In fact, it is in production today in
 the following real-world scenarios:
@@ -55,7 +55,7 @@ to Dgraph Cloud (except for content in the [Deploy and Manage]({{< relref "/depl
 Dgraph Cloud with [shared instances](https://dgraph.io/graphql) is a
 fully-managed GraphQL database service that lets you focus on building apps, not
 managing infrastructure. Dgraph Cloud is built from the ground up to support
-GraphQL, and uses a graph database structure down to its lowest layers. So it 
+GraphQL, and uses a graph database structure down to its lowest layers. So it
 integrates seamlessly with your existing ecosystem of GraphQL tools.
 
 Dgraph Cloud gives you the power of Dgraph database in a hosted environment,
@@ -68,7 +68,7 @@ at a low price. To learn more about Dgraph Cloud, see [Dgraph Cloud Overview](ht
 Dgraph Cloud with [dedicated instances](https://dgraph.io/cloud) extends the
 capabilities of the lower-cost shared instances offering to meet the heavy workloads
 and other needs of enterprise customers. With Dgraph Cloud, you get dedicated cluster
-instances, high availability, and the option to run Dgraph in your own virtual 
+instances, high availability, and the option to run Dgraph in your own virtual
 private cloud (VPC) or bring your own Kubernetes (BYOK) environment.
 
 ## Get started
@@ -79,7 +79,7 @@ self-managed Dgraph today.
 ### Get started with Dgraph Cloud
 
 You can [get started with Dgraph Cloud](https://cloud.dgraph.io) today with a
-free trial. To use Dgraph Cloud, visit our [Pricing Page](https://dgraph.io/pricing) or 
+free trial. To use Dgraph Cloud, visit our [Pricing Page](https://dgraph.io/pricing) or
 [Pricing Calculator](https://cloud.dgraph.io/pricing-calculator/) to get an
 estimate, or [contact us](https://dgraph.io/connect).
 
@@ -125,26 +125,7 @@ database running in the background, so your data has the ability to grow and
 change with your app, without the need to add new tables. And when it comes time
 to deploy a new schema, you can do that in seconds, not hours.
 
-To learn more about Dgraph's GraphQL implementation, 
+To learn more about Dgraph's GraphQL implementation,
 see [GraphQL Overview]({{< relref "/graphql/overview" >}}). If you are a SQL
 user, see:
 [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
-
-## Glossary of Dgraph and GraphQL terms
-
-| Term            |Definition	                                                   |Learn More                  |
-|-----------------|--------------------------------------------------------------|----------------------------|
-|Dgraph Cloud|	A fully-managed GraphQL database service powered by Dgraph database.	|[Dgraph Cloud documentation](https://dgraph.io/docs/cloud) |
-|Badger | A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph database.|[Badger documentation](https://dgraph.io/docs/badger)|
-|data node| A basic unit of data representing an entity in a graph database. Nodes are connected by *edges* and have predicates (or *fields*) that contain node data.||
-|Dgraph Alpha| A server node that serves data to clients of Dgraph database, and also provides administrator endpoints.|[Dgraph Alpha documentation]({{< relref "/deploy/dgraph-alpha" >}})|
-|Dgraph database| A horizontally-scalable and distributed GraphQL database with a graph backend.	||
-|Dgraph Query Language (DQL)|	A query language that extends and modifies GraphQL to support deep queries for modern apps. Formerly known as *GraphQL+-*.	|[DQL documentation]({{< relref "/dql" >}})|
-|Dgraph Zero| A server node that controls a Dgraph database cluster. |[Dgraph Zero documentation]({{< relref "/deploy/dgraph-zero" >}})|
-|edge|	A relationship between two data nodes in a graph database.	| |
-|field|	See *predicate*.	| |
-|GraphQL|	An open-source query language for APIs and a runtime for fulfilling those queries. |[Dgraph GraphQL documentation]({{< relref "/graphql/overview" >}})|
-|object|	See *data node*.	| |
-|server node|	A server that makes up part of a server cluster. See *Dgraph Alpha* and *Dgraph Zero*. |[Dgraph Cluster Setup documentation]({{< relref "/deploy/cluster-setup" >}}) |
-|superflag|	A Dgraph CLI flag that contains one or more options used to specify command settings. |[Dgraph Cluster Setup documentation]({{< relref "/deploy/cli-command-reference" >}}) |
-|predicate|	A property of a data node in a graph database; also a discrete piece of information available to request in a graph database.	| |
