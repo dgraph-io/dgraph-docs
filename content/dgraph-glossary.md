@@ -62,7 +62,7 @@ Dgraph uses RDF format to create, import and export data. Note that Dgraph also 
 
 **Relation<a name="relation"></a>** A relation is a predicate which object is an entity. It's simply an information that an entity is related to another entity. See [predicate](#predicate).
 
-**Sharding** Sharding is a database architecture pattern to achieve horizontal scaling allowing near-limitless scalability. This allows for data to be split and stored in multiple data nodes or servers and for nodes to be added when required to share the load. Dgraph colocates data per predicate, an approach refered to as 'predicate sharding'.
+**Sharding** Sharding is a database architecture pattern to achieve horizontal scaling allowing near-limitless scalability. This allows for data to be split and stored in multiple data nodes or servers and for nodes to be added when required to share the load. Dgraph colocates data per predicate, an approach referred to as 'predicate sharding'.
 
 **Triple** Because RDF statements consist of three elements <subject> <predicate> <object> they are called triples.
 
