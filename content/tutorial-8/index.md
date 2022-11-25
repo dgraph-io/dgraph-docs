@@ -1568,7 +1568,7 @@ to refresh our previous discussions around using the `@filter` directive.
 {
   find_hotel(func: near(location, [-122.479784,37.82883295],7000)) {
     name
-    has_type @filter(eq(loc_type, "hotel")){
+    has_type @filter(eq(loc_type, "Hotel")){
       loc_type 
     }
   }
