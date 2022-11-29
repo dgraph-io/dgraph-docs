@@ -28,8 +28,6 @@ In Dgraph terminology edges are `entity predicates` i.e an information about the
 **GraphQL** is a declarative language for querying data used by application developers to get the data they need using GraphQL APIs. Dgraph supports the deployment of GraphQL data model (GraphQL schema) and automatically exposes a GraphQL API endpoint accepting GraphQL queries.
 
 
-**Group**
-
 **gRPC** gRPC is a high performance Remote Procedure Call (RPC) framework used by Dgraph to interface with clients. Dgraph has official gRPC clients for go, C#, Java, JavaScript and Python. Applications written in those language can perform mutations and queries inside transactions using Dgraph clients.
 
 **Lambda** Dgraph takes care of all the logic to execute GraphQL queries when a GraphQL data model is deployed. Lambda provides a way to extend this capability and to write your custom logic integrated with Dgraph execution model.
