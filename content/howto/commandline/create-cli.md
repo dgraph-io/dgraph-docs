@@ -11,7 +11,7 @@ The completion script is code that uses the builtin bash command complete to def
 
 ## Before you begin
 
-*  Install the [Dgraph command line tool](https://github.com/ondrowan/dgraph-cli).
+*  [Install Dgraph]({{< relref "/deploy/download" >}}#buil-and-install).
 *  Determine the shell you are running:
    ```bash
    echo $0
