@@ -24,10 +24,10 @@ The completion script is code that uses the builtin bash command complete to def
 
 ### Creating a completion script for Bash shell
 
-1. To generate a `dgraph-completion.sh` configuration file for your `bash` shell, run the `completion` command:
+1. To generate a `dgraph-completion.sh` configuration file for your `<SHELL>`, run the `completion` command:
 
     ```bash
-    dgraph completion bash > ~/dgraph-completion.sh
+    dgraph completion <SHELL> > ~/dgraph-completion.sh
     ```
     The contents of the file is similar to:
   
