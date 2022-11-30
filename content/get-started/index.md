@@ -13,24 +13,7 @@ This is a quick start guide.
 You can find the getting started tutorial series [here]({{< relref "tutorials/index.md" >}}).
 {{% /notice %}}
 
-## Dgraph
 
-Designed from the ground up to be run in production, **Dgraph** is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
-
-
-Dgraph cluster consists of different nodes (Zero, Alpha), and each node serves a
-different purpose.
-
-- **Dgraph Zero** controls the Dgraph cluster, assigns servers to a group,
-and re-balances data between server groups.
-
-- **Dgraph Alpha** hosts predicates and indexes. Predicates are either the properties
-associated with a node or the relationship between two nodes. Indexes are the tokenizers
-that can be associated with the predicates to enable filtering using appropriate functions.
-
-- **Ratel** serves the UI to run queries, mutations & altering schema.
-
-You need at least one Dgraph Zero and one Dgraph Alpha to get started.
 
 **Here's a four-step tutorial to get you up and running.**
 
@@ -72,7 +55,7 @@ https://play.dgraph.io. It allows browser-based
 queries, mutations and visualizations. You can connect Ratel with your Dgraph
 cluster by putting in your Dgraph Alpha address (`http://localhost:8080`) inside the
 **Dgraph Server URL** box in Ratel. To learn more, see the docs on Ratel's [Connection]({{< relref "ratel/connection.md"
->}}). 
+>}}).
 
 You can run the mutations and queries below from either curl in the command line
 or by pasting the mutation data in **Ratel**.

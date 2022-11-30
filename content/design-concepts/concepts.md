@@ -6,37 +6,7 @@ weight = 3
     parent = "design-concepts"
 +++
 
-## Edges
 
-Typical data format is RDF [N-Quad](https://www.w3.org/TR/n-quads/) which is:
-
-* `Subject, Predicate, Object, Label`, aka
-* `Entity, Attribute, Other Entity / Value, Label`
-
-Both the terminologies get used interchangeably in our code. Dgraph considers edges to be directional,
-i.e. from `Subject -> Object`. This is the direction that the queries would be run.
-
-{{% notice "tip" %}}Dgraph can automatically generate a reverse edge. If the user wants to run
-queries in that direction, they would need to define the [reverse edge]({{< relref "query-language/schema.md#reverse-edges" >}})
-as part of the schema.{{% /notice %}}
-
-Internally, the RDF N-Quad gets parsed into this format.
-
-```
-type DirectedEdge struct {
-  Entity      uint64
-  Attr        string
-  Value       []byte
-  ValueType   Posting_ValType
-  ValueId     uint64
-  Label       string
-  Lang 	      string
-  Op          DirectedEdge_Op // Set or Delete
-  Facets      []*api.Facet
-}
-```
-
-Note that irrespective of the input, both `Entity` and `Object/ValueId` get converted in `UID` format.
 
 ## Posting List
 Conceptually, a posting list contains all the `DirectedEdges` corresponding to an `Attribute`, in the
