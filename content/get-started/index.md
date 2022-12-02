@@ -25,35 +25,21 @@ This guide helps you:
 
 ## Step 1: Run Dgraph
 
-The easiest way to get Dgraph up and running is using the `dgraph/standalone` docker image.
-Follow the Docker [install instructions](https://docs.docker.com/install) to install
-Docker if you don't have it already.
+The easiest way to get Dgraph up and running is using the [Dgraph Cloud](https://cloud.dgraph.io).  
+You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitHub** or any other email account that you prefer to use.
 
-1. Create a folder to store Dgraph data outside of the container, as follows:
-
-   ```sh
-    mkdir -p ~/dgraph
-   ``` 
-1. Start a standalone instance of Dgraph in Docker:
-
-    ```sh
-    docker run --rm -it -p "8080:8080" -p "9080:9080" -v ~/dgraph:/dgraph "dgraph/standalone:{{< version >}}"
-    ```
-    This starts a single container with **Dgraph Alpha** and **Dgraph Zero**. The Dgraph data required for this quickstart is located in a folder named *dgraph* of your *home directory*.
-  
-1. Access **Ratel** at https://play.dgraph.io. It allows browser-based queries, mutations and visualizations.
-
-1. To connect Ratel with your Dgraph cluster add `http://localhost:8080` in the **Dgraph server URL** field of
-   the **Dgraph Server Connection** dialog in Ratel. To learn more about using Ratel, see [Connection]({{< relref "ratel/connection.md">}}).
-
-1. Click **Connect**.
+1. In the Dgraph cloud console, click **Launch new backend**.
+1. Select a plan, cloud provider, and region that meets your requirements.
+1. Type a name for your Dgraph cloud instance.
+1. Click **Launch**  
+1. Click **Ratel** to access the UI that provides browser-based queries, mutations and visualizations.
 
 ### Step 2: Run Mutation
 
 Changing the data stored in Dgraph is a mutation. Dgraph supports mutation for two kinds of data: RDF and JSON. 
 The dataset on which you can run in the mutation is a movie graph and entities of the type directors, actors, genres, or movies. Store the data in the graph using the RDF mutation that stores information about the first three releases of the the ''Star Wars''series and one of the ''Star Trek'' movies.
 
-To store data in Dgraph, in the **Console** page, click **Mutate** tab and paste the following:
+To store data in Dgraph, in the **Console** page, select **Mutate** tab and paste the following:
    
    ```dql
   {
@@ -113,7 +99,7 @@ To store data in Dgraph, in the **Console** page, click **Mutate** tab and paste
 ### Step 3: Alter Schema
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
-In the **Schema** page, click **Bulk Edit**, and paste the schema, and click **Apply Schema**.
+In the **Schema** page, select **Bulk Edit**, and paste the schema, and click **Apply Schema**.
 
 ```dql
 name: string @index(term) .
@@ -138,7 +124,7 @@ type Film {
 ```
 ### Step 4: Run Queries
 
-To Get all movies, in the **Console** page, click **Query** tab and run this query: 
+To Get all movies, in the **Console** page, select **Query** tab and run this query: 
 ```dql
 {
  me(func: has(starring)) {
@@ -152,7 +138,7 @@ A Graph output appears:
 
 {{% load-img "/images/deploy/query1.png" "graph of query1" %}}
 
-To get all "Star Wars" movies released after "1980" in the **Console** page click **Query** tab and run this query:
+To get all "Star Wars" movies released after "1980" in the **Console** page select **Query** tab and run this query:
 
 ```dql
 {
