@@ -10,7 +10,7 @@ description = "Dgraph terms"
 <div class="glossary">
 
 ### Alpha ###
-Dgraph consists of Zero and Alpha server nodes. Alpha nodes host predicates and indexes. A Dgraph instance or a Dgraph cluster, has at least one Alpha node and can be scaled horizontally by adding more Alphas.
+Dgraph consists of [Zero](#zero) and Alpha nodes. Alpha nodes host predicates and indexes. A Dgraph instance or a Dgraph cluster, has at least one Alpha node and can be scaled horizontally by adding more Alphas. Note that the term Alpha sometimes refers to the group of all Alpha nodes of a Dgraph instance.
 
 ### Badger ###
 A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph.
@@ -78,5 +78,5 @@ An upsert operation is an operation where an entity is searched for, and then
 depending on if it is found or not, a new entity is created with associated predicates or the entity predicates are updated. Upsert operations are important to implement uniqueness of predicates.
 
 ### Zero ###
-Dgraph consists of zero and alpha. servers. Zero servers control the Dgraph database cluster. It assigns Alpha servers to groups, re-balances data between groups, handles transaction timestamp and UID assignment.
+Dgraph consists of Zero and [Alpha](#alpha) nodes. Zero nodes control the Dgraph database cluster. It assigns Alpha nodes to groups, re-balances data between groups, handles transaction timestamp and UID assignment.
 </div>
