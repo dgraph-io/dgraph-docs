@@ -44,45 +44,7 @@ for each transaction.
      with the existing set. Optionally, a client can de-dup these keys while
      merging.
 
-## Alter the database
 
-The `/alter` endpoint is used to create or change the schema. Here, the
-predicate `name` is the name of an account. It's indexed so that we can look up
-accounts based on their name.
-
-```sh
-$ curl -X POST localhost:8080/alter -d \
-'name: string @index(term) .
-type Person {
-   name
-}'
-```
-
-If all goes well, the response should be `{"code":"Success","message":"Done"}`.
-
-Other operations can be performed via the `/alter` endpoint as well. A specific
-predicate or the entire database can be dropped.
-
-To drop the predicate `name`:
-
-```sh
-$ curl -X POST localhost:8080/alter -d '{"drop_attr": "name"}'
-```
-
-To drop the type `Film`:
-```sh
-$ curl -X POST localhost:8080/alter -d '{"drop_op": "TYPE", "drop_value": "Film"}'
-```
-
-To drop all data and schema:
-```sh
-$ curl -X POST localhost:8080/alter -d '{"drop_all": true}'
-```
-
-To drop all data only (keep schema):
-```sh
-$ curl -X POST localhost:8080/alter -d '{"drop_op": "DATA"}'
-```
 
 ## Start a transaction
 
