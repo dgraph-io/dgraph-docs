@@ -12,31 +12,32 @@ description = "Introduction to Dgraph Database. Dgraph is a horizontally scalabl
 
 Designed from the ground up to be distributed for scale and speed, **Dgraph** is the native Graph database with native GraphQL support. It is open-source, scalable, distributed, highly-available and lightning fast.
 
-Dgraph is different from other graph databases in a number of ways
+Dgraph is different from other graph databases in a number of ways, including:
 
-| | |
-|:----|:----|
-| **Distributed Scale**   |  Built from day 1 to be distributed, to handle larger data sets |
-| **GraphQL Support** |  GraphQL is built in to make data access simple and standards-compliant. Unlike most GraphQL solutions, no resolvers are needed - Dgraph resolves queries automatically through graph navigation |
-| **True Free Open Source Software (FOSS)**  | Dgraph is free to use, and [available on github](https://github.com/dgraph-io/dgraph) |
-| **Fully Transactional and ACID Compliant** | Satisfy demanding OLTP workloads that require frequent inserts and updates  |
-| **Full Text Search**  | Full-text searching is included in query options |
+- **Distributed Scale**: &emsp; *Built from day 1 to be distributed, to handle larger data sets.*
+
+- **GraphQL Support**: &emsp; *GraphQL is built in to make data access simple and standards-compliant. Unlike most GraphQL solutions, no resolvers are needed - Dgraph resolves queries automatically through graph navigation.*
+
+- **True Free Open Source Software (FOSS)**: &emsp; *Dgraph is free to use, and [available on github](https://github.com/dgraph-io/dgraph).*
+
+- **Fully Transactional and ACID Compliant**: &emsp; *Satisfy demanding OLTP workloads that require frequent inserts and updates.*
+
+- **Text Search**: &emsp; *Full-text searching is included.*
 ## Who is using Dgraph & How
-Dgraph is a horizontally scalable and distributed graph database with native GraphQL support. Querying across links in a social netowrk, or detecting networks of interconnected fraudsters in a fraud application are natural graph use cases.
+Dgraph is a graph database with some special differentiators. Any graph databases will be better when relationships and connections really matter, such as when querying across links in a social network, or detecting networks of interconnected fraudsters in a fraud application are natural graph use cases.
 
-Graph databases are ideal when relationships and connections really matter. In SQL or most NoSQL platforms relationships are slow to query and inconvenient to model, requiring join tables and extra primary and foreign keys. Dgraph is the best graph database when ease-of-use or massive scale are key.
+Dgraph particularly excels when teams need simplicity and elegance to start fast, or anticipate large data sets and loads down the road.
 
-
-To get a sample of production use of Dgraph you can dig into the following real-world scenarios:
+To get a sample of the kinds of things that are natural with Dgraph, consider the following real-world scenarios 
+(and click the embedded links):
 
 * [Data unification](https://dgraph.io/case-studies/factset/)
 * [Customer 360](https://dgraph.io/capventis)
-* [Fraud detection](https://www.youtube.com/watch?v=rAuDfb1dhl0)
-* Content Management Systems
+* [Fraud detection](https://www.youtube.com/watch?v=rAuDfb1dhl0) <!-- Knights Analytics Dgraph Day video -->
 * Ecommerce stores
 * [Entity resolution](https://dgraph.io/blog/post/introducing-entity-resolution/)
-* HR management applications
-* Master data management (MDM)
+* [HR management applications](https://www.idgconnect.com/article/3615990/why-graphs-will-form-the-basis-for-a-new-hr-industry.html)
+* [Entity Resolution and Master data management (MDM)](https://dgraph.io/blog/post/introducing-entity-resolution/)
 * Product recommendation engines
 * Real-time chat applications
 * [Logistics] (https://dgraph.io/case-studies/ke-holdings/)
@@ -45,20 +46,20 @@ To learn more about how organizations are using Dgraph, read more
 [Dgraph Case Studies](https://dgraph.io/case-studies).
 
 ## GraphQL in Dgraph
-In Dgraph, GraphQL is not an afterghtough or an add-on; it is core to the product. GraphQL allows developers to get started immediately - simply define a schema and Dgraph automatically builds out CRUD and query APIs. Dgraph works as a standards-compliant GraphQL server, so many web and app developers may not know (or care) that Dgraph is a powerful graph database as well.
+In Dgraph, GraphQL is not an afterghtough or an add-on; it is core to the product. Our GraphQL feature allows developers to get started immediately - simply define a schema and Dgraph automatically builds out CRUD and query APIs. Dgraph works as a standards-compliant GraphQL server, so many web and app developers may not know (or care) that Dgraph is a powerful graph database as well.
 
-The big time savings is that there are no resolvers needed to get started. All GraphQL fields are "resolved" simply by following a graph database edge to the required field. 
+We often call this "single schema development." The big time savings is that there are no resolvers needed to get started. All GraphQL fields are "resolved" simply by following a graph database edge to the required field. There is no separate database schema that does not fit your GraphQL schema. Change your GraphQL schema and hit your APIs seconds later.
 
-For some custom queries that the GraphQL specification cannot support, Dgraph provides an extension of pure GraphQL called "DQL." Between the two languages, all data is easily and efficiently updated and accessed.
+For some custom queries that the GraphQL specification cannot support, Dgraph provides an extension of pure GraphQL called "DQL." With GraphQL and some DQL extensions, all data is easily and efficiently updated and accessed.
 
 ## Database expert use vs GraphQL app developer use
 Dgraph is ideal for both graph database experts and users who prefer to be insulated from graph database details by using GraphQL. 
 
 ### Database experts
-Database experts using graph databases need a simple languge to query networked or interconnected data, and expect those qeries to scale well. These users work on systems such as data fabrics or data hubs which combine data from many sources, or innovative systems pushing the boundaries beyond what SQL and other slow-joining technologies can do.
+Database experts using graph databases need a simple languge to query networked or interconnected data, and expect those qeries to scale well. The most powerful way to query Dgraph is to use DQL. Read more here. <!-- TODO add link -->
 
 ### GraphQL users
-GraphQL users may still be database experts, but are focused on providing easy, fast and flexible access to data. GraphQL allows people to specify the "shape" and "extent" of data to retreive from a database as a JSON-like skeleton. Then Dgraph does the rest of the work. By specifying the data in the request, GraphQL developers get only the data they need and want, without writing custom REST services, or worrying about over- and under-fetching. 
+GraphQL users may still be database experts, but are focused on providing easy, fast and flexible access to data. GraphQL is simpler and standards-compliant, with extensive tooling. Read more here. <!-- TODO add link -->
 
 Read more about the motivations for GraphQL in [the original annoucement of the spec from Facebook](https://engineering.fb.com/2015/09/14/core-data/graphql-a-data-query-language/).
 ## Hosting options
