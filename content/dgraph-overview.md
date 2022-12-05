@@ -15,24 +15,12 @@ Designed from the ground up to be distributed for scale and speed, **Dgraph** is
 Dgraph is different from other graph databases in a number of ways
 
 | | |
-|----|----|
+|:----|:----|
 | **Distributed Scale**   |  Built from day 1 to be distributed, to handle larger data sets |
 | **GraphQL Support** |  GraphQL is built in to make data access simple and standards-compliant. Unlike most GraphQL solutions, no resolvers are needed - Dgraph resolves queries automatically through graph navigation |
 | **True Free Open Source Software (FOSS)**  | Dgraph is free to use, and [available on github](https://github.com/dgraph-io/dgraph) |
 | **Fully Transactional and ACID Compliant** | Satisfy demanding OLTP workloads that require frequent inserts and updates  |
 | **Full Text Search**  | Full-text searching is included in query options |
-
-
-
-- **Distributed Scale**: Built from day 1 to be distributed, to handle larger data sets.
-
-- **GraphQL Support**: GraphQL is built in to make data access simple and standards-compliant. Unlike most GraphQL solutions, no resolvers are needed - Dgraph resolves queries automatically through graph navigation.
-
-- **True Free Open Source Software (FOSS)**: Dgraph is free to use, and [available on github](https://github.com/dgraph-io/dgraph).
-
-- **Fully Transactional and ACID Compliant**: Satisfy demanding OLTP workloads that require frequent inserts and updates.
-
-- **Text Search**: Full-text searching is included.
 ## Who is using Dgraph & How
 Dgraph is a horizontally scalable and distributed graph database with native GraphQL support. Querying across links in a social netowrk, or detecting networks of interconnected fraudsters in a fraud application are natural graph use cases.
 
