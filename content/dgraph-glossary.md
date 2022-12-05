@@ -7,61 +7,76 @@ description = "Dgraph terms"
     weight = 15
 +++
 
+<div class="glossary">
 
-**Alpha**
-Dgraph consists of Zero and Alpha servers. Alpha servers host predicates and indexes. A Dgraph instance or a Dgraph cluster, has at least one Alpha server and can be scaled horizontally by adding more Alpha servers.
+### Alpha ###
+Dgraph consists of Zero and Alpha server nodes. Alpha nodes host predicates and indexes. A Dgraph instance or a Dgraph cluster, has at least one Alpha node and can be scaled horizontally by adding more Alphas.
 
-**Badger**
+### Badger ###
 A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph.
 More at [Badger documentation](https://dgraph.io/docs/badger)
 
+### DQL ###
+Dgraph Query Language is Dgraph's proprietary language to insert, update, delete and query data.
 
-**DQL** Dgraph Query Language is Dgraph's proprietary language to insert, update, delete and query data.
-
-
-**Entity<a name="entity"></a>** Traditional databases use the concepts of tables, rows and columns to store information. Dgraph key concepts are [entities](#entity) and [predicates](#predicate). An entity is "a thing" Dgraph knows something about. What Dgraph knows about an entity is simply its [UID](#uid) and a list of [predicates](#predicate).
-
-**Edge**
+### Edge ###
 In the mental picture of a graph: bubbles connected by lines ; the bubbles are nodes, the lines are edges.
-In Dgraph terminology edges are `entity predicates` i.e an information about the relation between two entities.
+In Dgraph terminology edges are [relationships](#relationship) i.e an information about the relation between two nodes.
 
-**GraphQL** is a declarative language for querying data used by application developers to get the data they need using GraphQL APIs. Dgraph supports the deployment of GraphQL data model (GraphQL schema) and automatically exposes a GraphQL API endpoint accepting GraphQL queries.
+### Facet ###
+A facet represent a property of a [relationship](#relationship).
 
+### Graph ###
+A graphs is a simple structure that maps relations between objects. In Dgraph terminology, the objects are [nodes](#node) and the connections between them are [relationships](#relationship).
 
-**gRPC** gRPC is a high performance Remote Procedure Call (RPC) framework used by Dgraph to interface with clients. Dgraph has official gRPC clients for go, C#, Java, JavaScript and Python. Applications written in those language can perform mutations and queries inside transactions using Dgraph clients.
+### GraphQL ###
+GraphQL is a declarative language for querying data used by application developers to get the data they need using GraphQL APIs. Dgraph supports the deployment of GraphQL data model (GraphQL schema) and automatically exposes a GraphQL API endpoint accepting GraphQL queries.
 
-**Lambda** Dgraph takes care of all the logic to execute GraphQL queries when a GraphQL data model is deployed. Lambda provides a way to extend this capability and to write your custom logic integrated with Dgraph execution model.
+### gRPC ###
+gRPC is a high performance Remote Procedure Call (RPC) framework used by Dgraph to interface with clients. Dgraph has official gRPC clients for go, C#, Java, JavaScript and Python. Applications written in those language can perform mutations and queries inside transactions using Dgraph clients.
 
-**Mutation** A mutation is a request to modify server-side data. It is covering insert, update, or delete operations.
+### Lambda ###
+Dgraph takes care of all the logic to execute GraphQL queries when a GraphQL data model is deployed. Lambda provides a way to extend this capability and to write your custom logic integrated with Dgraph execution model.
 
-**Node**
-In the mental picture of a graph: bubbles connected by lines ; the bubbles are nodes, the lines are edges.
-Dgraph terminology favors the term [Entity](#entity), but the two terms are used interchangeably in our documentation.
+### Mutation ###
+A mutation is a request to modify server-side data. It is covering insert, update, or delete operations.
 
-Node is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. E.g : 'our archictecture has 3 Alpha nodes'.
+### Node ###
+An node is "a thing" or an object of the business domain. For every node, Dgraph stores and maintains a universal identifier [UID](#uid), a list of properties and the [relationships](#relationship) this node has with other nodes.
 
-**Predicate<a name="predicate"></a>** From [Cambridge Dictionary](https://dictionary.cambridge.org/us/dictionary/english/predicate) a predicate is *the part of a sentence that gives information about the subject*. In Dgraph, a predicate is the smallest piece of information about an [entity](#entity). A predicate can hold a literal value or can describe a relation to another entity :
-- when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice". In that case, ``name`` is a **value predicate**.
-- when we store that Alice knows Bob, we may use a predicate ``knows`` for the entity representing Alice. The value of this predicate would be the [uid](#uid) of the entity representing Bob. In that case, ``knows`` is an **entity predicate** or a [relation](#relation).
+Node is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. See for example [Aplha node](#alpha).
 
-
-**RATEL** Ratel is an open source tool for data visualization and cluster management that’s designed to work with Dgraph and DQL. More at [Ratel User's guide](https://dgraph.io/docs/ratel/overview/).
-
-**RDF**  RDF 1.1 is a Semantic Web Standards for data interchange. It allows us to make statements about resources. The format of these statements is simple and in the form of `<subject>> <predicate> <object>`.
-Dgraph uses RDF format to create, import and export data. Note that Dgraph also supports JSON format.
-
-
-**Relation<a name="relation"></a>** A relation is a predicate which object is an entity. It's simply an information that an entity is related to another entity. See [predicate](#predicate).
-
-**Sharding** Sharding is a database architecture pattern to achieve horizontal scaling allowing near-limitless scalability. This allows for data to be split and stored in multiple data nodes or servers and for nodes to be added when required to share the load. Dgraph colocates data per predicate, an approach referred to as 'predicate sharding'.
-
-**Triple** Because RDF statements consist of three elements <subject> <predicate> <object> they are called triples.
-
-**UID<a name="uid"></a>** UID is the Universal Identifier of an entity. `uid` is a reserved predicate holding the UID value. UIDs are generated by Dgraph when creating entities.
+### Predicate ###
+In [RDF](#RDF) terminology, a predicate is the smallest piece of information about an object. A predicate can hold a literal value or can describe a relation to another entity :
+- when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice". It becomes a node property.
+- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](#uid) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
 
 
-**Upsert** An upsert operation is an operation where an entity is searched for, and then
+### RATEL ###
+Ratel is an open source tool for data visualization and cluster management that’s designed to work with Dgraph and DQL. More at [Ratel User's guide](https://dgraph.io/docs/ratel/overview/).
+
+### RDF ###
+RDF 1.1 is a Semantic Web Standards for data interchange. It allows us to make statements about resources. The format of these statements is simple and in the form of `<subject>> <predicate> <object>`.
+Dgraph supports RDF format to create, import and export data. Note that Dgraph also supports JSON format.
+
+
+### Relationship ###
+A relationship is simply an information that a node is related to another node. A relationship is directed from one node to another and has a name. It may also have properties usually used to store quantitative information about the relation, such as weigh or cost. In Dgraph the properties of a relationship are [facets](#facets).
+
+### Sharding ###
+Sharding is a database architecture pattern to achieve horizontal scaling allowing near-limitless scalability. This allows for data to be split and stored in multiple data nodes or servers and for nodes to be added when required to share the load. Dgraph colocates data per predicate, an approach referred to as 'predicate sharding'.
+
+### Triple ###
+Because RDF statements consist of three elements <subject> <predicate> <object> they are called triples.
+
+### UID ###
+UID is the Universal Identifier of a node. `uid` is a reserved property holding the UID value. UIDs are generated by Dgraph when creating nodes.
+
+
+### Upsert ###
+An upsert operation is an operation where an entity is searched for, and then
 depending on if it is found or not, a new entity is created with associated predicates or the entity predicates are updated. Upsert operations are important to implement uniqueness of predicates.
 
-**Zero**
+### Zero ###
 Dgraph consists of zero and alpha. servers. Zero servers control the Dgraph database cluster. It assigns Alpha servers to groups, re-balances data between groups, handles transaction timestamp and UID assignment.
+</div>
