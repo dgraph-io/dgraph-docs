@@ -63,6 +63,9 @@ We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to loc
 
 (Optional) To run queries _within_ the documentation using a different Dgraph instance, set the `DGRAPH_ENDPOINT` environment variable before starting the local web server:
 
+(MacOS) As an alternative, download version 0.79 as a binary from https://github.com/gohugoio/hugo/releases and copy the binary to /usr/local/bin, or set your path to your preferred location. On MacOS you may need to open the binary from Finder via ctrl+click and acknowledge that it is an unsignged applciation from the internet, after which you can run it from the command line without issue.
+
+
 ```bash
 DGRAPH_ENDPOINT="http://localhost:8080/query?latency=true" ./scripts/local.sh
 ```
