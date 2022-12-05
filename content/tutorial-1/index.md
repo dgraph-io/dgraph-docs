@@ -13,7 +13,7 @@ In this tutorial,  we'll learn about:
  - store entity relation in the form of entity predicates.
  - Query the graph.
 
-Our use case will represent a person named "Karthic", age 28, who "follows" in social media, a person named "Jessica", age 31.
+Our use case will represent a person named "Ann", age 28, who "follows" in social media, a person named "Ben", age 31.
 
 You can see the accompanying video below.
 
@@ -36,21 +36,21 @@ Now, it's just a matter of running the following command, and you have Dgraph up
 docker run --rm -d -p 8080:8080 -p 9080:9080 dgraph/standalone:{{< version >}}
 ```
 
-### Entities and Predicates
+### Nodes and relationships
 
 In this section, we'll save the information of our use case.
 
-The mental picture of the use case may be a graph where we have 2 nodes representing the 2 persons and an edge representing the fact that "Karthic" follows "Jessica" :
+The mental picture of the use case may be a graph where we have 2 nodes representing the 2 persons and an relationship representing the fact that "Ann" follows "Ben" :
 
-{{% load-img "/images/tutorials/1/gs-1.JPG" "The simple graph" %}}
+{{% load-img "/images/tutorials/1/gs-1.png" "The simple graph" %}}
 
-In Dgraph, concepts or things are represented as `entities`, may it be a sale, a transaction, a place, or a person etc.
+Dgraph is using those very same concepts, making it simple to store and manipulate your data.
 
-We will then create two entities, one representing the information we know about `Karthic` and one holding the information about `Jessica`.
+We will then create two nodes, one representing the information we know about `Ann` and one holding the information about `Ben`.
 
-What we know is the `name` and the `age` of those persons. They will be stored in Dgraph has `predicates` associated with the entities.
+What we know is the `name` and the `age` of those persons.
 
-We also know that Khartic follows Jessica. This will also be stored as a predicate in Dgraph, creating a relation between the 2 entities.
+We also know that Ann follows Jessica. This will also be stored as a relationship between the two nodes.
 ### Using Ratel
 Launch Ratel image
 
@@ -63,7 +63,7 @@ Just visit [http://localhost:8000](http://localhost:8000) from your browser, and
 
 {{% load-img "/images/tutorials/1/gs-2.png" "ratel-1" %}}
 
-We'll be using the latest stable release of Ratel.
+We'll be using the Console tab of Ratel.
 
 {{% load-img "/images/tutorials/1/gs-3.png" "ratel-2" %}}
 
@@ -71,19 +71,17 @@ We'll be using the latest stable release of Ratel.
 
 The create, update, and delete operations in Dgraph are called mutations.
 
-Ratel makes it easier to run queries and mutations.
-We'll be exploring more of its features all along with the tutorial series.
 
-Let's go to the Mutate tab and paste the following mutation into the text area.
+In Ratel console, select the `Mutate` tab and paste the following mutation into the text area.
 
 ```json
 {
   "set": [
     {
-      "name": "Karthic",
+      "name": "Ann",
       "age": 28,
       "follows": {
-        "name": "Jessica",
+        "name": "Ben",
         "age": 31
       }
     }
@@ -104,7 +102,7 @@ Let's execute this mutation. Click Run!
 
 You can see in the response that two UIDs (Universal IDentifiers) have been created.
 The two values in the `"uids"` field of the response correspond
-to the two entities created for "Karthic" and "Jessica".
+to the two entities created for "Ann" and "Ben".
 
 ### Querying using the has function
 
