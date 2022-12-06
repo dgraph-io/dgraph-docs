@@ -69,7 +69,7 @@ aliases = ["/contribute"]
     <a href="https://dgraph.io/docs/cloud/">
       <h2>Dgraph Cloud</h2>
       <p>
-        Run Dgraph in the Cloud. 
+        Run Dgraph in the Cloud.
         Work with your data in a fully-managed cloud service.
       </p>
     </a>
@@ -84,15 +84,7 @@ aliases = ["/contribute"]
     </a>
   </div>
 
-  <div class="item">
-    <div class="icon"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
-    <a href="{{< relref "faq/_index.md">}}">
-      <h2>FAQ</h2>
-      <p>
-        Frequently asked questions
-      </p>
-    </a>
-  </div>
+
 
 </div>
 
