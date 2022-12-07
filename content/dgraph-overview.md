@@ -91,7 +91,7 @@ In addition, Dgraph supports [RDF triples]({{< relref "mutations/triples/" >}}) 
 Dgraph relationships are directed (or from a node to a value), so it is recommended to define a [reverse edge]({{< relref "query-language/schema.md#reverse-edges" >}})
 as part of a schema if fast graph query in both directions is needed.
 ## App teams and data teams work together seamlessly
-Dgraph allows a particularlly smoooth interaction among data teams or experts and data consumers. GraphQL's flexibility empowers data consumers to get exactly the data they want, in the format they want it, at the speed they need, without writing custom REST APIs or understanding a new graph query language.
+Dgraph allows a particularly smoooth interaction among data teams or experts and data consumers. GraphQL's flexibility empowers data consumers to get exactly the data they want, in the format they want it, at the speed they need, without writing custom REST APIs or understanding a new graph query language.
 
 Database experts can focus on the data, schema and indexes, without maintaining a sprawling set of REST APIs, views, or optimized queries tailored to each data consumer or app.
 
@@ -118,7 +118,7 @@ managing infrastructure. This is a fast and easy way to get started with GraphQL
 
 Dgraph's cloud offering is currently available in AWS and Google Cloud (GCP), with an Azure version coming soon.
 ## Internal architecture
-Dgraph scales to larger data sizes than other graph databases becuase it is designed from the groud up to be distributed. Therefore Dgraph runs as a cluster of server nodes which communicate to form a single logical data store. There are two main types of processes (nodes) running: Zeros and Alphas.
+Dgraph scales to larger data sizes than other graph databases because it is designed from the groud up to be distributed. Therefore Dgraph runs as a cluster of server nodes which communicate to form a single logical data store. There are two main types of processes (nodes) running: Zeros and Alphas.
 
 - **Dgraph Zero** server nodes hold metadata for the Dgraph cluster, coordinate distributed transactions, and re-balance data among server groups.
 
