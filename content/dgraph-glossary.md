@@ -10,10 +10,10 @@ description = "Dgraph terms"
 <div class="glossary">
 
 ### Alpha ###
-Dgraph consists of [Zero](#zero) and Alpha nodes. Alpha nodes host predicates and indexes. A Dgraph instance or a Dgraph cluster, has at least one Alpha node and can be scaled horizontally by adding more Alphas. Note that the term Alpha sometimes refers to the group of all Alpha nodes of a Dgraph instance.
+Dgraph consists of [Zero](#zero) and Alpha nodes. Alpha nodes host predicates and indexes. Dgraph scales horizontally by adding more Alphas.
 
 ### Badger ###
-A fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph.
+Badger is a fast, open-source key-value database written in pure Go that provides the disk layer for Dgraph.
 More at [Badger documentation](https://dgraph.io/docs/badger)
 
 ### DQL ###
