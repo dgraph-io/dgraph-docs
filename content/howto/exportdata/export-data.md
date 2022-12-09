@@ -79,11 +79,11 @@ The export configuration can be configured as an environment variable `DGRAPH_AL
 
 ### Export data format
 
-By default, Dgraph exports data in RDF format. You can explicitly set the output format with the `format` field. For example:
+By default, Dgraph exports data in RDF format. Replace `<FORMAT>`with `json` or `rdf` in this GraphQL mutaion:
 
 ```graphql
 mutation {
-  export(input: { format: "rdf" }) {
+  export(input: { format: "<FORMAT>" }) {
     response {
       message
       code
@@ -91,35 +91,15 @@ mutation {
   }
 }
 ```
-
-
-You can specify a different output format using the `format` field. For example:
-
-```graphql
-mutation {
-  export(input: { format: "json" }) {
-    response {
-      message
-      code
-    }
-  }
-}
-```
-
-Currently, `rdf` and `json` are the only formats supported.
 
 ### Export to NFS or a file path
 
-{{% notice "note" %}}
-This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
-{{% /notice %}}
-
-You can override the default folder path by adding the `destination` input field to the directory where you want to export data in the GraphQL mutation request, as follows:
+You can override the default folder path by adding the `destination` input field to the directory where you want to export data. Replace `<PATH>` in this GraphQL mutaion with the absolute path of the directory to export data.
 
 ```graphql
 mutation {
   export(input: {
-    format: "rdf"
+    format: "<FORMAT>"
     destination: "<absolute-path-to-your-export-dir>"
   }) {
     response {
@@ -131,14 +111,10 @@ mutation {
 ```
 
 ### Export to an object store
-
-{{% notice "note" %}}
-This feature was introduced in [v20.11.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.11.0).
-{{% /notice %}}
-
 You can export to an S3 or MinIO object store by specifying a URL in the `destination` input field.
+Use this GraphQL mutation to export data to an object store:
 
-#### Export to S3
+#### Example mutation to export to AWS S3
 
 ```graphql
 mutation {
@@ -160,7 +136,7 @@ The Dgraph URL used for S3 is different than the AWS CLI tools with the `aws s3`
 {{% /notice %}}
 
 
-#### Export to MinIO
+#### Example mutation to export to MinIO
 
 ```graphql
 mutation {
@@ -177,17 +153,17 @@ mutation {
 }
 ```
 
-#### Export to a MinIO gateway
+### Export to a MinIO gateway
 
 You can use MinIO as a gateway to other object stores, such as [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage).  You can use the above MinIO GraphQL mutation with MinIO configured as a gateway.
 
-##### Azure Blob Storage
+#### Azure Blob Storage
 
 You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a Blob [container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs. The name of the blob container is what you use for `<bucket-name>` when specifying the `destination` in the GraphQL mutation.
 
-For MinIO configuration, you will need to [retrieve storage accounts keys](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage). The [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) will use `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` to correspond to Azure Storage Account `AccountName` and `AccountKey`.
+For MinIO configuration, you need to [retrieve storage accounts keys](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage). The [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) uses `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` to correspond to Azure Storage Account `AccountName` and `AccountKey`.
 
-Once you have the `AccountName` and `AccountKey`, you can access Azure Blob Storage locally using one of these methods:
+When you have the `AccountName` and `AccountKey`, you can access Azure Blob Storage locally using one of these methods:
 
 *  Using [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) with the MinIO Binary
    ```bash
@@ -211,7 +187,7 @@ Once you have the `AccountName` and `AccountKey`, you can access Azure Blob Stor
      --set azuregateway.enabled=true
    ```
 
-##### Google Cloud Storage
+#### Google Cloud Storage
 
 You can use [Google Cloud Storage](https://cloud.google.com/storage) through the [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html).  You will need to create [storage buckets](https://cloud.google.com/storage/docs/creating-buckets), create a Service Account key for GCS and get a credentials file.  See [Create a Service Account key](https://github.com/minio/minio/blob/master/docs/gateway/gcs.md#11-create-a-service-account-ey-for-gcs-and-get-the-credentials-file) for further information.
 
@@ -254,9 +230,9 @@ Once you have a `credentials.json`, you can access GCS locally using one of thes
      --values myvalues.yaml
    ```
 
-#### Disable HTTPS for exports to S3 and Minio
+### Disable HTTPS for exports to S3 and Minio
 
-By default, Dgraph assumes the destination bucket is using HTTPS. If that is not the case, the export will fail. To export to a bucket using HTTP (insecure), set the query parameter `secure=false` with the destination endpoint in the destination field:
+By default, Dgraph assumes the destination bucket is using HTTPS. If that is not the case, the export fails. To export to a bucket using HTTP (insecure), set the query parameter `secure=false` with the destination endpoint in the `destination` field:
 
 ```graphql
 mutation {
@@ -273,9 +249,9 @@ mutation {
 }
 ```
 
-#### Use anonymous credentials
+### Use anonymous credentials
 
-If exporting to S3 or MinIO where credentials are not required, you can set `anonymous` to true.
+When exporting to S3 or MinIO where credentials are not required, you can set `anonymous` to true.
 
 ```graphql
 mutation {
