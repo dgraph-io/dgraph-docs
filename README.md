@@ -33,6 +33,13 @@ Making our documentation easy to understand includes optimizing it for client-si
 
 **Note:** Please don't let these style conventions stop you from creating a PR to share your contribution to Dgraph Docs! PR reviewers can help with style guide issues.
 
+### references ###
+
+Use hugo shortcode for relref.
+
+Example, to reference a term, use a relref to the glossary :
+>  [entity]({{< relref "dgraph-glossary.md#entity" >}})
+
 ### Staging doc updates locally
 
 We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to locally stage doc updates before or after creating a PR.

@@ -23,7 +23,7 @@ aliases = ["/contribute"]
     <a href="{{< relref "dgraph-overview.md">}}">
       <h2>Overview</h2>
       <p>
-      Dgraph basics, including deployment options and a glossary of terms
+      Dgraph basics, including hosting options.
       </p>
     </a>
   </div>
