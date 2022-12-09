@@ -3,7 +3,7 @@ title = "Export data from Dgraph Cloud"
 keywords = "export, data, cloud"
 [menu.main]
     parent = "exportdata"
-    weight = 1
+    weight = 2
 +++
 
 As an `Administrator` from a multi-tenancy feature enabled Dgraph Cloud instance you can export data across the cluster, or a specific namespace depending on the type of administative previleges you have.

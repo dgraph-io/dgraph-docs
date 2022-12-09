@@ -1,10 +1,9 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
-title = "Overview"
-weight = 1
+title = "Import data"
+keywords = "import data, load data"
 [menu.main]
-    parent = "fast-data-loading"
-    identifier = "data-loading-overview"
+    parent = "importdata"
+    weight = 1
 +++
 
 There are two different tools that can be used for fast data loading:

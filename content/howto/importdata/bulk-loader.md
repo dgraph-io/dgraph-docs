@@ -1,9 +1,9 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
-title = "Bulk Loader"
-weight = 12
+title = "Dgraph Bulk Loader"
+keywords = "import, data, bulk, load"
 [menu.main]
-    parent = "fast-data-loading"
+    parent = "importdata"
+    weight = 3
 +++
 
 Dgraph Bulk Loader serves a similar purpose to the Dgraph Live Loader, but can
