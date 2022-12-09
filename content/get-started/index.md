@@ -34,9 +34,9 @@ You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitH
 1. Click **Launch**  
 1. Click **Ratel** to access the UI that provides browser-based queries, mutations and visualizations.
 
-### Step 2: Run Mutation
+## Step 2: Run Mutation
 
-Changing the data stored in Dgraph is a mutation. Dgraph supports mutation for two kinds of data: RDF and JSON. 
+Changing the data stored in Dgraph is a mutation.Dgraph supports mutation of data in RDF and JSON formats. 
 The dataset on which you can run in the mutation is a movie graph and entities of the type directors, actors, genres, or movies. Store the data in the graph using the RDF mutation that stores information about the first three releases of the the ''Star Wars''series and one of the ''Star Trek'' movies.
 
 To store data in Dgraph, in the **Console** page, select **Mutate** tab and paste the following:
@@ -96,7 +96,7 @@ To store data in Dgraph, in the **Console** page, select **Mutate** tab and past
   }  
    ```
 
-### Step 3: Alter Schema
+## Step 3: Alter Schema
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 In the **Schema** page, select **Bulk Edit**, and paste the schema, and click **Apply Schema**.
@@ -122,7 +122,7 @@ type Film {
   director
 }
 ```
-### Step 4: Run Queries
+## Step 4: Run Queries
 
 To Get all movies, in the **Console** page, select **Query** tab and run this query: 
 ```dql
