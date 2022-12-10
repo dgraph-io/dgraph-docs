@@ -13,8 +13,8 @@ into Dgraph. This section demonstrates converting CSV into JSON.
 
 {{% notice "tip" %}}
 Once you have converted your `.csv` files to [RDF N-Quad/Triple](https://www.w3.org/TR/n-quads/) or JSON, 
-you can use [Dgraph Live Loader]({{< relref "/howto/importdata/live-loader.md" >}}) or 
-[Dgraph Bulk Loader]({{< relref "/howto/importdata/bulk-loader.md" >}}) to import your data.
+you can use [Dgraph Live Loader]({{< relref "/deploy/fast-data-loadinglive-loader.md" >}}) or 
+[Dgraph Bulk Loader]({{< relref "/deploy/fast-data-loadingbulk-loader.md" >}}) to import your data.
 {{% /notice %}}
 
 There are many tools available to convert CSV to JSON. For example, you can use

@@ -77,7 +77,7 @@ You can override the default folder path by adding the `destination` input field
 mutation {
   export(input: {
     format: "<FORMAT>"
-    destination: "<absolute-path-to-your-export-dir>"
+    destination: "<PATH>"
   }) {
     response {
       message

@@ -80,8 +80,60 @@ Ensure that you download these files as soon as possible because the links to do
 Ensure that you download these files as soon as possible because the signed URLs to download these files expire after 48 hours from the time they were generated. You can use `curl -O <SIGNED_URL>` to download the files to the current directory.
 {{% /notice %}}   
 
+### Exporting data from Dgraph Cloud using an API
+
+To export data from Dgraph CLoud using an API you need the `<GRAPHQL_ENDPOINT>` and the `<deployment-jwt>`.
+For more information, see 
+
+**GET**: https://${DEPLOYMENT_URL}/admin/slash
+
+**Mutation**
+
+```graphql
+mutation {
+  export {
+    signedUrls
+  }
+}
+```
+
+#### Example
+
+{{% tabs %}} {{< tab "request" >}}
+```bash
+#!/usr/bin/env bash
+
+DEPLOYMENT_URL="<GRAPHQL_ENDPOINT>"
+DEPLOYMENT_JWT="<deployment-jwt>"
+
+curl "https://${DEPLOYMENT_URL}/admin/slash" \
+  -H 'Content-Type: application/json' \
+  -H "X-Auth-Token: ${DEPLOYMENT_JWT}" \
+  --data-binary '{"query":"mutation {\n export {\n signedUrls\n }\n }","variables":{}}' \
+  --compressed
+```
+{{< /tab >}} 
+
+{{% tab "response" %}}
+```json
+{
+  "data": {
+    "export": {
+      "signedUrls": [
+        "<SIGNED_URL>",
+        "<SIGNED-URL>",
+        "<SIGNED-URL>"
+      ]
+    }
+  }
+}
+```
+{{% /tab %}} {{% /tabs %}}
 
 
+{{% notice "note" %}}
+Ensure that you download these files as soon as possible because the signed URLs to download these files expire after 48 hours from the time they were generated. You can use `curl -O <SIGNED_URL>` to download the files to the current directory.
+{{% /notice %}}  
 
 
 
