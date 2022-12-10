@@ -1,9 +1,9 @@
 +++
-title = "Dgraph Live Loader"
-keywords = "import, data, load"
+date = "2017-03-20T22:25:17+11:00"
+title = "Live Loader"
+weight = 12
 [menu.main]
-    parent = "importdata"
-    weight = 2
+    parent = "fast-data-loading"
 +++
 
 Dgraph Live Loader (run with `dgraph live`) is a small helper program which reads RDF N-Quads from a gzipped file, batches them up, creates mutations (using the go client) and shoots off to Dgraph.
