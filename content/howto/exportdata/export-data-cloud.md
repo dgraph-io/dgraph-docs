@@ -11,7 +11,6 @@ As an `Administrator` from a multi-tenancy feature enabled Dgraph Cloud instance
 ## Before you begin
 
 *  Generate API Key for authentication 
-*  
 
 ### Exporting data from Dgraph Cloud using the console
 
@@ -23,25 +22,28 @@ As an `Administrator` from a multi-tenancy feature enabled Dgraph Cloud instance
 Depending on the format that you chose to create an export, three files are generated.
 
 {{% notice "note" %}}
-Ensure that you download these files as soon as possible because the links to download these files expire after 48 hours from the time they were generated..
+Ensure that you download these files as soon as possible because the links to download these files expire after 48 hours from the time they were generated.
 {{% /notice %}}
 
 
 ### Exporting data from Dgraph Cloud using a GraphQL client
 
-1. Make a note of the GraphQL `<GRAPHQL_ENDPOINT>` for the instance from `Overview` in the Dgraph Cloud console.
+1. Make a note of the GraphQL endpoint for the instance from `Overview` in the Dgraph Cloud console. Replace `/graphql` with `/admin/slash`in the GraphQL endpoint to get the `<ADMIN_ENDPOINT>`.
 1. Authenticate the `admin` API requests by adding the `<APIKEY>` as the `Dg-Auth` header to every HTTP request.
-1. To export data you need to send autheticated request to the `admin` endpoint *`<GRAPHQL_ENDPOINT>`/admin/slash*.
+1. To export data you need to send autheticated request to `<ADMIN_ENDPOINT>`. 
 1. Export data in JSON or RDF `<FORMAT>` using this mutation:
 
     ```graphql
     mutation {
-      export(input: { format: "<FORMAT>" })
-        response { code message }
+      export(format:"<FORMAT>") {
+        response {
+          message
+          code
+        }
         exportId
         taskId
-      }
-   }
+     }
+    }
    ``` 
    A response similar to this appears:
 
@@ -80,60 +82,9 @@ Ensure that you download these files as soon as possible because the links to do
 Ensure that you download these files as soon as possible because the signed URLs to download these files expire after 48 hours from the time they were generated. You can use `curl -O <SIGNED_URL>` to download the files to the current directory.
 {{% /notice %}}   
 
-### Exporting data from Dgraph Cloud using an API
+### Exporting data from Dgraph Cloud programatically
 
-To export data from Dgraph CLoud using an API you need the `<GRAPHQL_ENDPOINT>` and the `<deployment-jwt>`.
-For more information, see 
-
-**GET**: https://${DEPLOYMENT_URL}/admin/slash
-
-**Mutation**
-
-```graphql
-mutation {
-  export {
-    signedUrls
-  }
-}
-```
-
-#### Example
-
-{{% tabs %}} {{< tab "request" >}}
-```bash
-#!/usr/bin/env bash
-
-DEPLOYMENT_URL="<GRAPHQL_ENDPOINT>"
-DEPLOYMENT_JWT="<deployment-jwt>"
-
-curl "https://${DEPLOYMENT_URL}/admin/slash" \
-  -H 'Content-Type: application/json' \
-  -H "X-Auth-Token: ${DEPLOYMENT_JWT}" \
-  --data-binary '{"query":"mutation {\n export {\n signedUrls\n }\n }","variables":{}}' \
-  --compressed
-```
-{{< /tab >}} 
-
-{{% tab "response" %}}
-```json
-{
-  "data": {
-    "export": {
-      "signedUrls": [
-        "<SIGNED_URL>",
-        "<SIGNED-URL>",
-        "<SIGNED-URL>"
-      ]
-    }
-  }
-}
-```
-{{% /tab %}} {{% /tabs %}}
-
-
-{{% notice "note" %}}
-Ensure that you download these files as soon as possible because the signed URLs to download these files expire after 48 hours from the time they were generated. You can use `curl -O <SIGNED_URL>` to download the files to the current directory.
-{{% /notice %}}  
+You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation](https://dgraph.io/cloud-docs/blob/master/content/cloud-api/backup.md#export-data).
 
 
 
