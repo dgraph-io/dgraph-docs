@@ -9,8 +9,8 @@ weight = 6
 {{% notice "note" %}}
 This feature was introduced in [v1.1.1](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.1).
 For migrating unencrypted data to a new Dgraph cluster with encryption enabled, you need to
-[export the database]({{< relref "deploy/dgraph-administration.md#export-database" >}}) and [fast data load]({{< relref "deploy/fast-data-loadingoverview.md" >}}),
-preferably using the [bulk loader]({{< relref "deploy/fast-data-loadingbulk-loader.md" >}}).
+[export the database]({{< relref "deploy/dgraph-administration.md#export-database" >}}) and [fast data load]({{< relref "deploy/fast-data-loading/overview.md" >}}),
+preferably using the [bulk loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}}).
 {{% /notice %}}
 
 Encryption at rest refers to the encryption of data that is stored physically in any

@@ -241,8 +241,8 @@ The commands in these groups are shown in the following table:
 | (root)           | [`dgraph`](#dgraph-root-command) | Root command for Dgraph CLI  |          
 | Dgraph core      | [`alpha`](#dgraph-alpha) | Dgraph Alpha database node commands |
 | Dgraph core      | [`zero`](#dgraph-zero) | Dgraph Zero management node commands |
-| Data loading     | [`bulk`](#dgraph-bulk) | Dgraph [Bulk Loader]({{< relref "deploy/fast-data-loadingbulk-loader.md" >}}) commands     |
-| Data loading     | [`live`](#dgraph-live) | Dgraph [Live Loader]({{< relref "deploy/fast-data-loadinglive-loader.md" >}}) commands     |
+| Data loading     | [`bulk`](#dgraph-bulk) | Dgraph [Bulk Loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}}) commands     |
+| Data loading     | [`live`](#dgraph-live) | Dgraph [Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) commands     |
 | Data loading     | [`restore`](#dgraph-restore) | Command used to restore backups created using Dgraph Enterprise Edition     |
 | Dgraph security  | [`acl`](#dgraph-acl) | Dgraph [Access Control List (ACL)]({{< relref "enterprise-features/access-control-lists.md" >}}) commands |
 | Dgraph security  | [`audit`](#dgraph-audit) | Decrypt audit files     |
@@ -530,7 +530,7 @@ Use "dgraph zero [command] --help" for more information about a command.
 #### `dgraph bulk`
 
 This command is used to bulk load data with the Dgraph
-[Bulk Loader]({{< relref "deploy/fast-data-loadingbulk-loader.md"  >}}) tool.
+[Bulk Loader]({{< relref "deploy/fast-data-loading/bulk-loader.md"  >}}) tool.
 The following replicates the help listing shown when you run `dgraph bulk --help`:
 
 ```shell
@@ -597,7 +597,7 @@ Use "dgraph bulk [command] --help" for more information about a command.
 
 #### `dgraph live`
 
-This command is used to load live data with the Dgraph [Live Loader]({{< relref "deploy/fast-data-loadinglive-loader.md" >}}) tool.
+This command is used to load live data with the Dgraph [Live Loader]({{< relref "deploy/fast-data-loading/live-loader.md" >}}) tool.
 The following replicates the help listing shown when you run `dgraph live --help`:
 
 ```shell
