@@ -161,7 +161,7 @@ while true; do
 
 	for version in "${VERSIONS_ARRAY[@]}"
 	do
-	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$' | sed  "/^v21.12/d" | sed  "/^v20.03/d" | sed  "/^v20.07/d" | grep  "$version" | head -n1)
+	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$' | sed  "/^v22.0/d" | sed  "/^v21.12/d" | sed  "/^v21.03/d" | sed  "/^v20.03/d" | sed  "/^v20.07/d" | grep  "$version" | head -n1)
 		SETO="${latest_version:-main}" 
 		checkAndUpdate "$version" "$SETO"
 		echo "version => '$version'"
