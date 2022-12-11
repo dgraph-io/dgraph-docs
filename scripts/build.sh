@@ -45,6 +45,7 @@ VERSIONS_ARRAY=(
   ${MAJOR_VERSIONS[@]:1}
   'main'
   'v21.12'
+  'v21.03'
 )
 
 joinVersions() {
