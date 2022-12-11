@@ -31,8 +31,16 @@ You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitH
 1. In the Dgraph cloud console, click **Launch new backend**.
 1. Select a plan, cloud provider, and region that meets your requirements.
 1. Type a name for your Dgraph cloud instance.
-1. Click **Launch**  
+1. Click **Launch**
+1. In the **Admin** section go to **Settings**.
+1. In the **API Keys** tab, click **Create New**.
+1. Type a name for the API key in the **Name** field.
+1. Choose **Admin** and click **Create**.
+1. Make a note of the API keys that appears. It is required to access the Dgraph Cloud instance. 
 1. Click **Ratel** to access the UI that provides browser-based queries, mutations and visualizations.
+1. In the **Ratel** console, click the **Dgraph Server Connection**
+1. Click **Extra Settings** tab add the API keys that you generated in the **Slash API Key** field.
+1. Click **Continue**.
 
 ## Step 2: Run Mutation
 
