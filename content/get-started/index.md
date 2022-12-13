@@ -8,19 +8,14 @@ aliases = ["/get-started-old"]
   weight = 2
 +++
 
-This is a quickstart guide to run Dgraph. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
+This is a quickstart guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
 
-{{% notice "note" %}}
-[DQL](https://dgraph.io/docs/main/query-language/#graphql) is a powerful query language of Dgraph,
-which is a variation of [GraphQL](https://graphql.org/), a query language created by Facebook.
-For GraphQL quickstart information see, [dgraph.io/graphql](https://dgraph.io/graphql). This guide is not recommended for production environment.
-{{% /notice %}}
 
 This guide helps you:
 
-* Obtain a basic understanding of DQL principles
-* Alter a schema that represents the structure of the data set
-* Run an instance of Dgraph Server that lets you execute queries against your schema
+* Understand how JSON data are represented as a graph
+* Query the graph using DQL
+* Use indexes
 
 
 ## Step 1: Run Dgraph
@@ -36,113 +31,121 @@ You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitH
 
 ### Step 2: Run Mutation
 
-Changing the data stored in Dgraph is a mutation. Dgraph supports mutation for two kinds of data: RDF and JSON. 
-The dataset on which you can run in the mutation is a movie graph and entities of the type directors, actors, genres, or movies. Store the data in the graph using the RDF mutation that stores information about the first three releases of the the ''Star Wars''series and one of the ''Star Trek'' movies.
+The create, update, and delete operations in Dgraph are called mutations.
 
-To store data in Dgraph, in the **Console** page, select **Mutate** tab and paste the following:
-   
+Ratel makes it easier to run queries and mutations.
+
+In the **Console** page, select **Mutate** tab and paste the following:
+
+
+
    ```dql
-  {
-   set {
-    _:luke <name> "Luke Skywalker" .
-    _:luke <dgraph.type> "Person" .
-    _:leia <name> "Princess Leia" .
-    _:leia <dgraph.type> "Person" .
-    _:han <name> "Han Solo" .
-    _:han <dgraph.type> "Person" .
-    _:lucas <name> "George Lucas" .
-    _:lucas <dgraph.type> "Person" .
-    _:irvin <name> "Irvin Kernshner" .
-    _:irvin <dgraph.type> "Person" .
-    _:richard <name> "Richard Marquand" .
-    _:richard <dgraph.type> "Person" .
+   {
+   "set": [
+     {
+       "name":"Star Wars: Episode IV - A New Hope",
+       "release_date": "1977-05-25",
+       "director": {
+         "name": "George Lucas",
+         "dgraph.type": "Person"
+       },
+       "starring" : [
+         {
+           "name": "Luke Skywalker"
+         },
+         {
+           "name": "Princess Leia"
+         },
+         {
+           "name": "Han Solo"
+         }
+       ]
+     },
+     {
+       "name":"Star Trek: The Motion Picture",
+       "release_date": "1979-12-07"
+     }
+   ]
 
-    _:sw1 <name> "Star Wars: Episode IV - A New Hope" .
-    _:sw1 <release_date> "1977-05-25" .
-    _:sw1 <revenue> "775000000" .
-    _:sw1 <running_time> "121" .
-    _:sw1 <starring> _:luke .
-    _:sw1 <starring> _:leia .
-    _:sw1 <starring> _:han .
-    _:sw1 <director> _:lucas .
-    _:sw1 <dgraph.type> "Film" .
-
-    _:sw2 <name> "Star Wars: Episode V - The Empire Strikes Back" .
-    _:sw2 <release_date> "1980-05-21" .
-    _:sw2 <revenue> "534000000" .
-    _:sw2 <running_time> "124" .
-    _:sw2 <starring> _:luke .
-    _:sw2 <starring> _:leia .
-    _:sw2 <starring> _:han .
-    _:sw2 <director> _:irvin .
-    _:sw2 <dgraph.type> "Film" .
-
-    _:sw3 <name> "Star Wars: Episode VI - Return of the Jedi" .
-    _:sw3 <release_date> "1983-05-25" .
-    _:sw3 <revenue> "572000000" .
-    _:sw3 <running_time> "131" .
-    _:sw3 <starring> _:luke .
-    _:sw3 <starring> _:leia .
-    _:sw3 <starring> _:han .
-    _:sw3 <director> _:richard .
-    _:sw3 <dgraph.type> "Film" .
-
-    _:st1 <name> "Star Trek: The Motion Picture" .
-    _:st1 <release_date> "1979-12-07" .
-    _:st1 <revenue> "139000000" .
-    _:st1 <running_time> "132" .
-    _:st1 <dgraph.type> "Film" .
-   }
-  }  
+ }  
    ```
+The input data is in JSON. (Dgraph also support [RDF]({{<relref "dgraph-glossary.md#RDF">}}) notation).
+The sample JSON data is an array of two movies with some attributes.
 
-### Step 3: Alter Schema
+There will be stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
-Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
-In the **Schema** page, select **Bulk Edit**, and paste the schema, and click **Apply Schema**.
+The "Star Wars" movie has a `director` field which is an json object and a `starring` field which is and array of json objects.
+Each object will be also stored as a Node in Dgraph and `director` and `starring` will be stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
 
-```dql
-name: string @index(term) .
-release_date: datetime @index(year) .
-revenue: float .
-running_time: int .
-starring: [uid] .
-director: [uid] .
 
-type Person {
-  name
-}
+Click Run to execute the mutation.
 
-type Film {
-  name
-  release_date
-  revenue
-  running_time
-  starring
-  director
-}
-```
-### Step 4: Run Queries
+Have a look at DGraph response in the JSON tab:
 
-To Get all movies, in the **Console** page, select **Query** tab and run this query: 
 ```dql
 {
- me(func: has(starring)) {
+  "data": {
+    "code": "Success",
+    "message": "Done",
+    "queries": null,
+    "uids": {
+      "dg.1119451236.100": "0xfffd8d726c1de414",
+      "dg.1119451236.101": "0xfffd8d726c1de40f",
+      "dg.1119451236.102": "0xfffd8d726c1de410",
+      "dg.1119451236.103": "0xfffd8d726c1de411",
+      "dg.1119451236.104": "0xfffd8d726c1de412",
+      "dg.1119451236.99": "0xfffd8d726c1de413"
+    }
+  }, ...
+  ```
+
+Note that Dgraph gives you the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the created nodes.
+### Step 3: First query
+To Get all movies, in the **Console** page, select **Query** tab and run this query:
+```dql
+{
+ movies(func: has(release_date)) {
    name
+   director { name }
+   starring { name }
   }
 }
 ```
-The query lists all movies that have a `starring` edge.
+The query lists all nodes that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provide the name attribute of the related nodes if any.
 
-A Graph output appears:
+On the response panel, select the panel "Graph", a Graph output appears:
 
-{{% load-img "/images/deploy/query1.png" "graph of query1" %}}
+{{<figure class="small" src="/images/dql-quickstart/img1.png" title="Query result" >}}
+### Step 4: Alter Schema
 
-To get all "Star Wars" movies released after "1980" in the **Console** page select **Query** tab and run this query:
+Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
+
+In the **Schema** page, select **Predicates**. You notice that Dgraph has created the precates `name`, `release-date`,`director` and `starring`.
+
+A [predicate]({{<relref "dgraph-glossary.md#predicate">}})) is Dgraph internal representation of a node attribute or a relation.
+
+Select the `name` predicate. Ratel displays details about the predicate type and indexes.
+
+Select `index` and select `term` for the index type.
+
+Click Update to apply the index.
+
+{{<figure class="small" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" >}}
+
+Select `release_date` predicate, change the type to `date`, select `index` and select `year` for the index type.
+
+Click Update to apply the index on the release-date.
+
+
+### Step 5: Queries using indexes
+
+Let's get the movies having the term "Star" in their name and released before "1979".
+
+In the **Console** page select **Query** tab and run this query:
 
 ```dql
 {
-  me(func: allofterms(name, "Star Wars"), orderasc: release_date) @filter(ge(release_date, "1980")) {
+  me(func: allofterms(name, "Star"), orderasc: release_date) @filter(lt(release_date, "1978")) {
     name
     release_date
     revenue
@@ -157,21 +160,20 @@ To get all "Star Wars" movies released after "1980" in the **Console** page sele
 }
 ```
 
-A Graph output appears:
+Observe the JSON result and the graph result.
 
-{{% load-img "/images/deploy/query2.png" "graph of query2" %}}
+You can play with the release date and the search terms conditions to see Dgraph search and filtering in action.
 
-In these four steps, we set up Dgraph, added some data, set a schema and queried that data .
+
+In these five steps, we set up Dgraph, added some data, visualize it as a graph, add indexes and queried the data .
 
 ## Where to go from here
 
-- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to
-communicate with Dgraph from your application.
 - Take the [Tour](https://dgraph.io/tour/) for a guided tour of how to write queries in Dgraph.
 - A wider range of queries can also be found in the
 [Query Language]({{< relref "query-language/_index.md" >}}) reference.
-- See [Deploy]({{< relref "deploy/_index.md" >}}) if you wish to run Dgraph
-  in a cluster.
+- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to
+communicate with Dgraph from your application.
 
 ## Need Help
 
