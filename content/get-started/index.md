@@ -78,7 +78,7 @@ The "Star Wars" movie has a `director` field which is an json object and a `star
 Each object will be also stored as a Node in Dgraph and `director` and `starring` will be stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
 
 
-Click Run to execute the mutation.
+1.    Click **Run** to execute the mutation.
 
 Have a look at DGraph response in the JSON tab:
 
