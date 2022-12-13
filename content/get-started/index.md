@@ -166,7 +166,7 @@ Observe the JSON result and the graph result.
 You can play with the release date and the search terms conditions to see Dgraph search and filtering in action.
 
 
-In these five steps, we set up Dgraph, added some data, visualize it as a graph, add indexes and queried the data .
+In these five steps, you set up Dgraph, added some data, visualized it as a graph, added indexes and queried the data .
 
 ## Where to go from here
 
