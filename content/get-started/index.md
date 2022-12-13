@@ -115,14 +115,14 @@ The query lists all nodes that have a `release_date` and for each, it looks for 
 
 On the response panel, select the panel "Graph", a Graph output appears:
 
-{{<figure class="small" src="/images/dql-quickstart/img1.png" title="Query result" >}}
+{{<figure class="smallimage" src="/images/dql-quickstart/img1.png" title="Query result" >}}
 ### Step 4: Alter Schema
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 
 In the **Schema** page, select **Predicates**. You notice that Dgraph has created the precates `name`, `release-date`,`director` and `starring`.
 
-A [predicate]({{<relref "dgraph-glossary.md#predicate">}})) is Dgraph internal representation of a node attribute or a relation.
+A [predicate]({{<relref "dgraph-glossary.md#predicate">}}) is Dgraph internal representation of a node attribute or a relation.
 
 Select the `name` predicate. Ratel displays details about the predicate type and indexes.
 
@@ -130,7 +130,7 @@ Select `index` and select `term` for the index type.
 
 Click Update to apply the index.
 
-{{<figure class="small" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" >}}
+{{<figure class="smallimage" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" >}}
 
 Select `release_date` predicate, change the type to `date`, select `index` and select `year` for the index type.
 
