@@ -135,7 +135,7 @@ Click Update to apply the index.
 
 Select `release_date` predicate, change the type to `date`, select `index` and select `year` for the index type.
 
-Click Update to apply the index on the release-date.
+1.    Click **Update** to apply the index on the `release-date`.
 
 
 ### Step 5: Queries using indexes
