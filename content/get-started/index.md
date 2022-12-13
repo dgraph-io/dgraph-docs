@@ -116,7 +116,7 @@ The query lists all nodes that have a `release_date` and for each, it looks for 
 On the response panel, select the panel "Graph", a Graph output appears:
 
 {{<figure class="smallimage" src="/images/dql-quickstart/img1.png" title="Query result" alt="Query result in GraphQL">}}
-### Step 4: Alter Schema
+## Step 4: Alter Schema
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 
