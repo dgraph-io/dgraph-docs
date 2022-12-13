@@ -130,7 +130,7 @@ Select `index` and select `term` for the index type.
 
 Click Update to apply the index.
 
-{{<figure class="smallimage" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" >}}
+{{<figure class="smallimage" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" alt="Add index in Ratel">}}
 
 Select `release_date` predicate, change the type to `date`, select `index` and select `year` for the index type.
 
