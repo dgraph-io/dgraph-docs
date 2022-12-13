@@ -29,7 +29,7 @@ You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitH
 1. Click **Launch**  
 1. Click **Ratel** to access the UI that provides browser-based queries, mutations and visualizations.
 
-### Step 2: Run Mutation
+## Step 2: Run Mutation
 
 The create, update, and delete operations in Dgraph are called mutations.
 
@@ -100,7 +100,7 @@ Have a look at DGraph response in the JSON tab:
   ```
 
 Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the nodes that were created.
-### Step 3: First query
+## Step 3: First query
 To Get all movies, in the **Console** page, select **Query** tab and run this query:
 ```dql
 {
@@ -116,7 +116,7 @@ The query lists all nodes that have a `release_date` and for each, it looks for 
 On the response panel, select the panel "Graph", a Graph output appears:
 
 {{<figure class="smallimage" src="/images/dql-quickstart/img1.png" title="Query result" alt="Query result in GraphQL">}}
-### Step 4: Alter Schema
+## Step 4: Alter Schema
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 
@@ -138,7 +138,7 @@ Select `index` and select `term` for the index type.
 1.    Click **Update** to apply the index on the `release-date`.
 
 
-### Step 5: Queries using indexes
+## Step 5: Queries using indexes
 
 Let's get the movies having the term "Star" in their name and released before "1979".
 
@@ -146,7 +146,7 @@ In the **Console** page select **Query** tab and run this query:
 
 ```dql
 {
-  me(func: allofterms(name, "Star"), orderasc: release_date) @filter(lt(release_date, "1978")) {
+  me(func: allofterms(name, "Star"), orderasc: release_date) @filter(lt(release_date, "1979")) {
     name
     release_date
     revenue
