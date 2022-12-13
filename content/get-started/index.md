@@ -29,7 +29,7 @@ You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitH
 1. Click **Launch**  
 1. Click **Ratel** to access the UI that provides browser-based queries, mutations and visualizations.
 
-### Step 2: Run Mutation
+## Step 2: Run Mutation
 
 The create, update, and delete operations in Dgraph are called mutations.
 
