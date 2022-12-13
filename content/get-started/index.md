@@ -35,11 +35,11 @@ The create, update, and delete operations in Dgraph are called mutations.
 
 Ratel makes it easier to run queries and mutations.
 
-In the **Console** page, select **Mutate** tab and paste the following:
+1. In the **Console** page, select **Mutate** tab.
+2. Paste the following:
 
 
-
-   ```dql
+```dql
    {
    "set": [
      {
@@ -66,9 +66,9 @@ In the **Console** page, select **Mutate** tab and paste the following:
        "release_date": "1979-12-07"
      }
    ]
-
  }  
-   ```
+```
+
 The input data is in JSON. (Dgraph also support [RDF]({{<relref "dgraph-glossary.md#RDF">}}) notation).
 The sample JSON data is an array of two movies with some attributes.
 
@@ -78,7 +78,7 @@ The "Star Wars" movie has a `director` field which is an json object and a `star
 Each object will be also stored as a Node in Dgraph and `director` and `starring` will be stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
 
 
-1.    Click **Run** to execute the mutation.
+3. Click **Run** to execute the mutation.
 
 Have a look at DGraph response in the JSON tab:
 
@@ -120,22 +120,20 @@ On the response panel, select the panel "Graph", a Graph output appears:
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 
-1.    In the **Schema** page, select **Predicates**. 
-       Dgraph creates and displays the predicates `name`, `release-date`,`director` and `starring`.
-
-A [predicate]({{<relref "dgraph-glossary.md#predicate">}}) is Dgraph internal representation of a node attribute or a relation.
-
-Select the `name` predicate. Ratel displays details about the predicate type and indexes.
-
-Select `index` and select `term` for the index type.
-
-1.    Click **Update** to apply the index.
+1.    In the **Schema** page, select **Predicates**.
+      Dgraph creates and displays the predicates `name`, `release-date`,`director` and `starring`.
+      A [predicate]({{<relref "dgraph-glossary.md#predicate">}}) is Dgraph internal representation of a node attribute or a relation.
+2.    Select the `name` predicate. Ratel displays details about the predicate type and indexes.
+3.    Select `index` and select `term` for the index type.
+4.    Click **Update** to apply the index.
 
 {{<figure class="smallimage" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" alt="Add index in Ratel">}}
 
-1.    Select `release_date` predicate, change the type to **date**, select **index** and choose **year**for the index type.
-
-1.    Click **Update** to apply the index on the `release-date`.
+Set the index for the `release_date`:
+1.    Select `release_date` predicate.
+2.    Change the type to **date**
+3.    Select **index** and choose **year**for the index type.
+4.    Click **Update** to apply the index on the `release-date` predicate.
 
 
 ## Step 5: Queries using indexes
