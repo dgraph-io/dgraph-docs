@@ -146,7 +146,7 @@ In the **Console** page select **Query** tab and run this query:
 
 ```dql
 {
-  me(func: allofterms(name, "Star"), orderasc: release_date) @filter(lt(release_date, "1978")) {
+  me(func: allofterms(name, "Star"), orderasc: release_date) @filter(lt(release_date, "1979")) {
     name
     release_date
     revenue
