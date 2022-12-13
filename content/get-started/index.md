@@ -129,7 +129,7 @@ Select the `name` predicate. Ratel displays details about the predicate type and
 
 Select `index` and select `term` for the index type.
 
-Click Update to apply the index.
+1.    Click **Update** to apply the index.
 
 {{<figure class="smallimage" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" alt="Add index in Ratel">}}
 
