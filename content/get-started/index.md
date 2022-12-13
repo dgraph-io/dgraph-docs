@@ -120,7 +120,8 @@ On the response panel, select the panel "Graph", a Graph output appears:
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 
-In the **Schema** page, select **Predicates**. You notice that Dgraph has created the precates `name`, `release-date`,`director` and `starring`.
+1.    In the **Schema** page, select **Predicates**. 
+       Dgraph creates and displays the predicates `name`, `release-date`,`director` and `starring`.
 
 A [predicate]({{<relref "dgraph-glossary.md#predicate">}}) is Dgraph internal representation of a node attribute or a relation.
 
