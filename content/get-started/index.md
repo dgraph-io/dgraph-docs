@@ -138,7 +138,7 @@ Select `index` and select `term` for the index type.
 1.    Click **Update** to apply the index on the `release-date`.
 
 
-### Step 5: Queries using indexes
+## Step 5: Queries using indexes
 
 Let's get the movies having the term "Star" in their name and released before "1979".
 
