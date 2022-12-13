@@ -99,7 +99,7 @@ Have a look at DGraph response in the JSON tab:
   }, ...
   ```
 
-Note that Dgraph gives you the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the created nodes.
+Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the nodes that were created.
 ### Step 3: First query
 To Get all movies, in the **Console** page, select **Query** tab and run this query:
 ```dql
