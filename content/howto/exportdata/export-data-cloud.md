@@ -8,11 +8,7 @@ keywords = "export, data, cloud"
 
 As an `Administrator` you can export data from a Dgraph Cloud shared instance or dedicated instance. On a dedicated instance with multi-tenancy feature enabled you can export data across the cluster, or a specific namespace depending on the type of administative previleges you have.
 
-## Before you begin
-
-*  Generate API Key for authentication 
-
-### Exporting data from Dgraph Cloud using the console
+## Exporting data from Dgraph Cloud using the console
 
 1. In the `Admin` section of the Dgraph Cloud console, go to `Settings`. 
 1. In the `Exports` tab, click `Create Export`.
@@ -26,8 +22,10 @@ Ensure that you download these files as soon as possible because the links to do
 {{% /notice %}}
 
 
+
 ### Exporting data from Dgraph Cloud using a GraphQL client
 
+1. Generate API Key for authentication.
 1. Make a note of the GraphQL endpoint for the instance from `Overview` in the Dgraph Cloud console. Replace `/graphql` with `/admin/slash`in the GraphQL endpoint to get the `<ADMIN_ENDPOINT>`.
 1. Authenticate the `admin` API requests by adding the `<APIKEY>` as the `Dg-Auth` header to every HTTP request.
 1. To export data you need to send autheticated request to `<ADMIN_ENDPOINT>`. 
@@ -84,7 +82,7 @@ Ensure that you download these files as soon as possible because the signed URLs
 
 ### Exporting data from Dgraph Cloud programatically
 
-You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation](https://dgraph.io/docs/cloud/cloud-api/backup/#export-data).
+You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation](https://dgraph.io/cloud-docs/blob/master/content/cloud-api/backup.md#export-data).
 
 
 

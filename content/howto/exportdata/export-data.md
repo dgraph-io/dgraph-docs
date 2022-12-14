@@ -8,17 +8,18 @@ keywords = "export, data, self hosted"
 
 As an `Administrator` you can export data on all nodes, configure the Alpha server, specify the export format, export to an object store, disable HTTPS for exports, and encrypt exports
 
-## Export data using  the GraphQL admin  endpoint
+## Export data using  the GraphQL admin endpoint
 
 You can export the entire data by executing a GraphQL mutation on the `/admin` endpoint of any Alpha node.
 
 **Before you begin**:
 
-*  Specify a list or range of IP addresses allowed to initiate admin operations such as export using the command `dgraph alpha --security whitelist <IP address>`.
-*  Ensure that there is sufficient space on disk to store the
-export.
+*  Ensure that there is sufficient space on disk to store the export. Each Dgraph Alpha leader for a group writes output as a gzipped file to the export directory specified through the `--export` flag (defaults to an **export** directory). If any of the groups fail because of insufficient space on the disk, the entire export process is considered failed and an error is returned.
 
-This mutation triggers the export.
+* Make a note of the export directories of the Alpha server nodes. For more information about configuring the Dgraph Alpha server, see [Config]({{< relref "deploy/admin/config" >}}).
+{{% /notice %}} 
+
+This mutation triggers the export from each of the Alpha leader for a group. Depending on the Dgraph configuration several files are exported. It is recommended that you copy the files from the Alpha server nodes to a safe place when the export is complete.
 
 ```graphql
 mutation {
@@ -35,30 +36,28 @@ The export data of the group:
 * in the Aplha instance is stored in the Alpha.
 * in every other group is stored in the Alpha leader of that group.
 
-You need to retrieve the right export files from the Alpha instances in the
-cluster. Dgraph does not copy all files to the Alpha that initiated the export.
+You need to retrieve the right export files from the Alpha instances in the cluster. Dgraph does not copy all files to the Alpha that initiated the export.
 
+When the export is complete a response similar to this appears:
 
-## Configure Dgraph Alpha server nodes
-
-Each Dgraph Alpha leader for a group writes output as a gzipped file to the export
-directory specified through the `--export` flag (defaults to an **export** directory). If any of the groups fail, the entire export process is considered failed and an error is returned.
-
-{{% notice "tip" %}}
-The export configuration can be configured as an environment variable `DGRAPH_ALPHA_EXPORT`, command line flag `--export`, or in a configuration file with the `export` key.  See [Config]({{< relref "config" >}}) for more information in general about configuring Dgraph.
-{{% /notice %}}
-
-Example of a configuration to export data:
-
-```bash
-docker run --detach --rm --name dgraph-standalone \
-  --publish 8080:8080 \
-  --publish 8000:8000 \
-  --volume ~/exports:/dgraph/myexports \
-  --env "DGRAPH_ALPHA_EXPORT=/dgraph/myexports" \
-  dgraph/standalone:{{< version >}}
 ```
-
+{"data":{
+  "export":{
+    "response":{
+      "message":"Export completed.",
+      "code":"Success"
+      }
+    }
+  },
+  "extensions":{
+    "tracing":{
+      "version":1,
+      "startTime":"2022-12-14T07:39:51.061712416Z","endTime":"2022-12-14T07:39:51.129431494Z",
+      "duration":67719080
+      }
+    }
+  }
+```
 
 ## Export data format
 
