@@ -10,7 +10,7 @@ As an `Administrator` you can export data on all nodes, configure the Alpha serv
 
 ## Export data using  the GraphQL admin  endpoint
 
-You can export all nodes by executing a GraphQL mutation on the `/admin` endpoint of an Alpha node ( `localhost:8080/admin`) using any GraphQL client.
+You can export the entire data by executing a GraphQL mutation on the `/admin` endpoint of any Alpha node.
 
 **Before you begin**:
 
