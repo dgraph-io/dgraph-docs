@@ -113,7 +113,7 @@ Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#u
 ```
 The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provide the name attribute of the related nodes if any.
 
-On the response panel, select the panel "Graph", a Graph output appears:
+1.    In the response panel, select **Graph**, to view a Graph output:
 
 {{<figure class="smallimage" src="/images/dql-quickstart/img1.png" title="Query result" alt="Query result in GraphQL">}}
 ## Step 4: Alter Schema
