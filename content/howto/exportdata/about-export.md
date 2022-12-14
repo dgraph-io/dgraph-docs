@@ -8,7 +8,7 @@ keywords = "export data,"
 
 ## Export
 
-As an `Administrator` you can export data from [Dgraph Cloud]({{< relref "howto/exportdata/export-data-cloud" >}}), using the Cloud console, a GraphQL Client, or the Cloud API. You can also export data from your self-hosted [Dgraph instace]({{< relref "howto/exportdata/export-data" >}}) to NFS or a file path or to an object store.
+As an `Administrator` you can export data from [Dgraph Cloud]({{< relref "howto/exportdata/export-data-cloud" >}}), using the Cloud console, a GraphQL Client, or the Cloud API. You can also export data from your self-hosted [Dgraph instance]({{< relref "howto/exportdata/export-data" >}}) to NFS or a file path or to an object store.
 
 When you export data, typically three files are generated:
 
