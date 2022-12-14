@@ -101,22 +101,24 @@ View the Dgraph response in the JSON tab:
   ```
 
 Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the nodes that were created.
-## Step 3: First query
-1.    In the **Console** page, select **Query** tab and run this query:
-```dql
-{
- movies(func: has(release_date)) {
-   name
-   director { name }
-   starring { name }
-  }
-}
-```
-The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provides the name attribute of the related nodes if any.
 
-1.    In the response panel, select **Graph**, to view a Graph output:
+## Step 3: First query
+    1.    In the **Console** page, select **Query** tab and run this query:
+         ```dql
+            {
+             movies(func: has(release_date)) {
+             name
+             director { name }
+             starring { name }
+               }
+             }
+          ```
+        The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provides the name attribute of the related nodes if any.
+
+    1.    In the response panel, select **Graph**, to view a Graph output:
 
 {{<figure class="smallimage" src="/images/dql-quickstart/img1.png" title="Query result" alt="Query result in GraphQL">}}
+
 ## Step 4: Alter Schema
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
@@ -125,7 +127,7 @@ Alter the schema to add indexes on some of the data so queries can use term matc
       Dgraph creates and displays the predicates `name`, `release-date`,`director` and `starring`.
       A [predicate]({{<relref "dgraph-glossary.md#predicate">}}) is Dgraph internal representation of a node attribute or a relation.
 2.    Select the `name` predicate. Ratel displays details about the predicate type and indexes.
-3.    Select `index` and select `term` for the index type.
+3.    Select **index** and select **term** for `name` predicate.
 4.    Click **Update** to apply the index.
 
 {{<figure class="smallimage" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" alt="Add index in Ratel">}}
@@ -133,7 +135,7 @@ Alter the schema to add indexes on some of the data so queries can use term matc
 Set the index for the `release_date`:
 1.    Select `release_date` predicate.
 2.    Change the type to **date**
-3.    Select **index** and choose **year**for the index type.
+3.    Select **index** and choose **year** for the index type.
 4.    Click **Update** to apply the index on the `release-date` predicate.
 
 
