@@ -8,7 +8,7 @@ keywords = "export, data, self hosted"
 
 As an `Administrator` you can export data on all nodes, configure the Alpha server, specify the export format, export to an object store, disable HTTPS for exports, and encrypt exports
 
-## Export data on all nodes
+## Export data using  the GraphQL admin  endpoint
 
 You can export all nodes by executing a GraphQL mutation on the `/admin` endpoint of an Alpha node ( `localhost:8080/admin`) using any GraphQL client.
 
