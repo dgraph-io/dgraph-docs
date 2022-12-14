@@ -70,12 +70,13 @@ Ratel makes it easier to run queries and mutations.
 ```
 
 The input data is in JSON Format. Dgraph also supports [RDF]({{<relref "dgraph-glossary.md#RDF">}}) notation.
-The sample JSON data is an array of two movies with some attributes. These are stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.```
+
+The sample JSON data is an array of two movies with some attributes. These are stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
 There will be stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
-The "Star Wars" movie has a `director` field which is an JSON object and a `starring` field which is and array of JSON objects.
-Each object is also stored as a Node in Dgraph . The `director` and `starring` is stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
+The "Star Wars" movie has a `director` field which is an JSON object and a `starring` field which is an array of JSON objects.
+Each object is also stored as a Node in Dgraph . The `director` and `starring` are stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
 
 
 3. Click **Run** to execute the mutation.
@@ -111,7 +112,7 @@ Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#u
   }
 }
 ```
-The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provide the name attribute of the related nodes if any.
+The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provides the name attribute of the related nodes if any.
 
 1.    In the response panel, select **Graph**, to view a Graph output:
 
