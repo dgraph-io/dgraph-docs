@@ -111,7 +111,7 @@ Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#u
   }
 }
 ```
-The query lists all nodes that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provide the name attribute of the related nodes if any.
+The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provide the name attribute of the related nodes if any.
 
 On the response panel, select the panel "Graph", a Graph output appears:
 
