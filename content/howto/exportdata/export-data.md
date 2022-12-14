@@ -94,7 +94,7 @@ mutation {
 ```
 
 ## Export to an object store
-You can export to an S3 or MinIO object store by specifying a URL in the `destination` input field.
+You can export to an AWS S3, Azure Blob Storage or Google Cloud Storage.
 
 ### Example mutation to export to AWS S3
 
