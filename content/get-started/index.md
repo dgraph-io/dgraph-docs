@@ -103,19 +103,20 @@ View the Dgraph response in the JSON tab:
 Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the nodes that were created.
 
 ## Step 3: First query
-    1.    In the **Console** page, select **Query** tab and run this query:
-         ```dql
-            {
-             movies(func: has(release_date)) {
-             name
-             director { name }
-             starring { name }
-               }
-             }
-          ```
-        The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provides the name attribute of the related nodes if any.
+1.   In the **Console** page, select **Query** tab and run this query:
+    
+```dql
+   {
+    movies(func: has(release_date)) {
+    name
+    director { name }
+    starring { name }
+     }
+    }
+```
+The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provides the name   attribute of the related nodes if any.
 
-    1.    In the response panel, select **Graph**, to view a Graph output:
+2.   In the response panel, select **Graph**, to view a Graph output:
 
 {{<figure class="smallimage" src="/images/dql-quickstart/img1.png" title="Query result" alt="Query result in GraphQL">}}
 
