@@ -69,7 +69,7 @@ Ratel makes it easier to run queries and mutations.
  }  
 ```
 
-The input data is in JSON. (Dgraph also support [RDF]({{<relref "dgraph-glossary.md#RDF">}}) notation).
+The input data is in JSON Format. Dgraph also supports [RDF]({{<relref "dgraph-glossary.md#RDF">}}) notation.
 The sample JSON data is an array of two movies with some attributes.
 
 There will be stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
