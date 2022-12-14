@@ -101,7 +101,7 @@ View the Dgraph response in the JSON tab:
 
 Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the nodes that were created.
 ## Step 3: First query
-To Get all movies, in the **Console** page, select **Query** tab and run this query:
+1.    In the **Console** page, select **Query** tab and run this query:
 ```dql
 {
  movies(func: has(release_date)) {
