@@ -75,7 +75,7 @@ The sample JSON data is an array of two movies with some attributes. These are s
 There will be stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
 The "Star Wars" movie has a `director` field which is an JSON object and a `starring` field which is and array of JSON objects.
-Each object will be also stored as a Node in Dgraph and `director` and `starring` will be stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
+Each object is also stored as a Node in Dgraph . The `director` and `starring` is stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
 
 
 3. Click **Run** to execute the mutation.
