@@ -18,7 +18,7 @@ You can export all nodes by executing a GraphQL mutation on the `/admin` endpoin
 *  Ensure that there is sufficient space on disk to store the
 export.
 
-This mutation triggers an export for all Alpha groups of the cluster.
+This mutation triggers the export.
 
 ```graphql
 mutation {
