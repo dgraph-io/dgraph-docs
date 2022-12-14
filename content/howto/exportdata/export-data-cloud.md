@@ -6,7 +6,7 @@ keywords = "export, data, cloud"
     weight = 2
 +++
 
-As an `Administrator` from a multi-tenancy feature enabled Dgraph Cloud instance you can export data across the cluster, or a specific namespace depending on the type of administative previleges you have.
+As an `Administrator` you can export data from a Dgraph Cloud shared instance or dedicated instance. On a dedicated instance with multi-tenancy feature enabled you can export data across the cluster, or a specific namespace depending on the type of administative previleges you have.
 
 ## Before you begin
 
