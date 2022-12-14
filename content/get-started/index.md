@@ -80,7 +80,7 @@ Each object is also stored as a Node in Dgraph . The `director` and `starring` i
 
 3. Click **Run** to execute the mutation.
 
-Have a look at DGraph response in the JSON tab:
+View the Dgraph response in the JSON tab:
 
 ```dql
 {
