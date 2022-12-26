@@ -1,8 +1,8 @@
 +++
-title = "DQL Quickstart"
+title = "Quick Start"
 aliases = ["/get-started-old"]
 [menu.main]
-  name = "DQL quickstart"
+  name = "Quick Start"
   identifier = "get-started"
   parent = "dql"
   weight = 2
@@ -104,7 +104,7 @@ Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#u
 
 ## Step 3: First query
 1.   In the **Console** page, select **Query** tab and run this query:
-    
+
 ```dql
    {
     movies(func: has(release_date)) {
