@@ -8,73 +8,89 @@ aliases = ["/dql-overview"]
   weight = 1
 +++
 
-Dgraph Query Language is Dgraph's proprietary language to insert, update, delete and query data.
+Dgraph Query Language (DQL) is Dgraph's proprietary language to add, modify, delete and fetch data.
 
-## Queries
+Fetching data is done through **DQL Queries**. Adding, modifying or deleting data is done through **DQL Mutations**.
 
-A DQL query finds nodes based on search criteria, matches patterns in a graph and returns a graph as a result.
+This overview explains the structure of DQL Queries and mutations.
 
-A query is composed of nested blocks, starting with a query root.  The root finds the initial set of nodes against which the following graph matching and filtering is applied.
+## DQL query structure
+DQL is **declarative**, which means that queries return a response back in a similar shape to the query. It gives the client application the control of what it gets: the request return exactly what you ask for, nothing less and nothing more. In this, DQL is similar to GraphQL from which it is inspired.
+
+A DQL query finds nodes based on search criteria, matches patterns in the graph and returns the node attributes, relationships specified in the query.
+
+A DQL query
+- has an optional parameterization, ie a name and a list of parameters
+- an opening curly bracket
+- query or var blocks with at least one query block
+- an closing curly bracket
+
+#### Query parameterization
+
+The query can optionally use variables (parameters). They must be defined using
+* `query title($<param name>: <type>[! | ( = "default value")], @param2) { ... }`
+
+
+##### Variables
+* must  have a name starting with a `$` symbol.
+* must have a type `int`, `float`, `bool` or `string`.
+* may have a default value. In the example below, `$age` has a default value of `95`
+* may be mandatory by suffixing the type with a `!`. Mandatory parameters can't have a default value.
+
+Variables can be used in the query where a string, float, int or bool value are needed.
+
+You can also use a variable holding ``uids`` by using a string variable and by providing the value as a quoted list in square brackets:  
+`query title($uidsParam: string = "[0x1, 0x2, 0x3]") { ... }`.
+
+
+
+##### Variables error handling
+When submitting a query using parameters, Dgraph responds with errors if
+* A parameter value is not parsable to the given type.
+* The query is using a parameter that is not declared.
+* A mandatory parameter is not provided
+
+
+
+#### Query block
+
+A query block specifies information to retrieve from Dgraph.
+
+A query block
+- must have name
+- must have a root nodes definition
+- may have a combination of node filters (to apply to the root nodes)
+- provides the list of attributes and relationships to return for each node matching the root nodes.
+
+For each relationships, the query may specify node filters which apply to the related nodes and use nested block to provide the list of attributes and relationships to return for the related nodes.
+
+A query can use any level of nested blocks.
+
+#### root nodes definition
+- must have a root criteria defined by the key word ``func:``
+- may have pagination
+- may have ordering
+- may have filters
+
+
+##### node criteria (used by root function or by filter)
+- text
+  - term matching with allofterms(), anyofterms
+  - Regular Expressions regexp
+  - match,
+  - Full-Text Search alloftext
+- Inequalities
+- presence of an attribute or relation has()
+- node ID : uid()
+- has a relation to a given node : uid_in()
+- type()
+- predicate value test : eq,
+(func: , first: ,after: | offset:, orderasc: <attribute>,
+A query block starts with root criteria defining the initial set of nodes against which the graph matching and filtering is applied.
 
 {{% notice "note" %}}See more about Queries in [Queries design concept]({{< relref "design-concepts/concepts.md#queries" >}}) {{% /notice %}}
 
-### Error Codes
 
-When running a DQL query you might get an error message from the `/query` endpoint.
-Here we will be focusing on the error `"code"` returned in the JSON error object.
-
-You can usually get two types of error codes:
-- [`ErrorInvalidRequest`](#errorinvalidrequest): this error can be either a bad request (`400`) or an internal server error (`500`).
-- [`Error`](#error): this is an internal server error (`500`)
-
-For example, if you submit a query with a syntax error, you'll get:
-
-```json
-{
-  "errors": [
-    {
-      "message": "while lexing {\nq(func: has(\"test)){\nuid\n}\n} at line 2 column 12: Unexpected end of input.",
-      "extensions": {
-        "code": "ErrorInvalidRequest"
-      }
-    }
-  ],
-  "data": null
-}
-```
-The error `"code"` value is returned with the query response.
-In this case, it's a syntax error and the error `code` is `ErrorInvalidRequest`.
-
-##### `Error`
-
-This is a rare code to get and it's always an internal server error (`500`).
-This can happen when JSON marsharling is failing (it's returned when the system tries to marshal a Go struct to JSON)
-
-##### `ErrorInvalidRequest`
-
-This is the most common error code that you can get from the `/query` endpoint. This error can be either a bad request (`400`) or an internal server error (`500`).
-
-For example, you can get this error:
-- If the query parameter is not being parsed correctly. The query parameter could be:
-  - `debug`
-  - `timeout`
-  - `startTs`
-  - `be` (best effort)
-  - `ro` (read-only)
-  - If the value of these query parameters is incorrect you would get this error code. This is basically a bad request (`400`)
-- If the header's `Content-Type` value is not parsed correctly. The only allowed content types in the header are:
-  - `application/json`
-  - `application/dql`
-  - `application/graphql+-` (deprecated)
-  - Anything else will be wrongly parsed and end up in a bad request (`400`)
-- Query timeout (deadline exceeded). This is an internal server error (`500`)
-- Any error in query processing like:
-  - syntax error - bad request (`400`)
-  - health failing (server not healthy) - internal server error (`500`)
-  - Alpha not able to reach zero because of network issue - internal server error (`500`)
-  - ACL error (user not found or user does not have privileges) - unauthenticated/unauthorized request (`401` or `403`)
-  - if you set `be=true` and `ro=false` - bad request (`400`)
-  - any error related to JSON formatting the response - internal server error (`500`)
 
 ## Returning Values
 
@@ -202,6 +218,8 @@ Query Example: Movies with either "Blade" or "Runner" in the title and released 
   }
 }
 {{< /runnable >}}
+
+
 
 ## Where to go from here
 - Follow the [DQL Quickstart]({{< relref "get-started/index.md" >}}) to run some queries and mutations.

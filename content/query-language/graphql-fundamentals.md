@@ -6,11 +6,11 @@ weight = 1
     parent = "query-language"
 +++
 
-This document provides the language reference for DQL.
+The following pages are the language reference for DQL.
 
-The examples in this reference use a database of 21 million triples about movies and actors.
+They contain examples that you can run interactively using a database of 21 million triples about movies and actors.
 
-The queries are executed by an instance of Dgraph running at https://play.dgraph.io/.
+The queries are executed on an instance of Dgraph running at https://play.dgraph.io/.
 
 #### Example database schema
 
