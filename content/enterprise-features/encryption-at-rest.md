@@ -114,11 +114,11 @@ If the Alpha server restarts, the `--encryption key-file` or the `--vault` super
 
 ## Turn off Encryption
 
-You can use [live loader]({{< relref "live-loader.md" >}}) or [bulk loader]({{< relref "bulk-loader.md" >}}) to decrypt the data while importing.
+You can use [live loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) or [bulk loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}) to decrypt the data while importing.
 
 ### Using live loader
 
-You can import your encrypted data using [live loader]({{< relref "live-loader.md" >}}) into a new Dgraph Alpha node without encryption enabled.
+You can import your encrypted data using [live loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) into a new Dgraph Alpha node without encryption enabled.
 
 ```bash
 # Encryption Key from the file path
@@ -135,7 +135,7 @@ dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-sche
 
 ### Using bulk loader
 
-You can also use [bulk loader]({{< relref "bulk-loader.md" >}}), to turn off encryption. This will generate a new unencrypted `p` that will be used by the Alpha process. In this, case you need to pass `--encryption key-file`, `--encrypted` and `--encrypted_out` flags.
+You can also use [bulk loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}), to turn off encryption. This will generate a new unencrypted `p` that will be used by the Alpha process. In this, case you need to pass `--encryption key-file`, `--encrypted` and `--encrypted_out` flags.
 
 ```bash
 # Encryption Key from the file path
