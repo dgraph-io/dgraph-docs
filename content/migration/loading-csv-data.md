@@ -50,9 +50,8 @@ There are many tools available to convert CSV to JSON. You can import large data
     ]
     ```
 
-    This JSON file can be loaded into Dgraph using the programmatic clients. This follows
-    the [JSON Mutation Format]({{< relref "mutations/json-mutation-format.md" >}}).
-    Note that each JSON object in the list is assigned a unique UID because the `uid` field is omitted.
+    This JSON file follows
+    the [JSON Mutation Format]({{< relref "mutations/json-mutation-format.md" >}}), it can be loaded into Dgraph using [Dgraph Live Loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) , [Dgraph Bulk Loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}) or the programmatic clients.
 
 4. To load the data to Ratel and HTTP clients. The JSON data has to be stored within the `"set"`
 [key]({{< relref "mutations/json-mutation-format.md#json-syntax-using-raw-http-or-ratel-ui"
