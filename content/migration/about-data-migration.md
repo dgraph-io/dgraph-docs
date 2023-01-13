@@ -6,9 +6,8 @@ keywords = "Data, migration, csv, sql,"
     weight = 1
 +++
 
-[Dgraph mutations]({{< relref "mutations/_index.md" >}}) are accepted in RDF
-N-Quad and JSON formats. To load CSV-formatted data or SQL data into Dgraph,
-first convert the dataset into one of the accepted formats and then load the
+To load CSV-formatted data or SQL data into Dgraph,
+first convert the dataset into one of the accepted formats ([RDF N-Quad/Triple](https://www.w3.org/TR/n-quads/) or JSON) and then load the
 resulting dataset into Dgraph.
 
 After you convert the `.csv` or `.sql` files to [RDF N-Quad/Triple](https://www.w3.org/TR/n-quads/) or JSON, 
