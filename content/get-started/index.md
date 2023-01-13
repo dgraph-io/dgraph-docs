@@ -5,7 +5,7 @@ aliases = ["/get-started-old"]
   name = "Quick Start"
   identifier = "get-started"
   parent = "dql"
-  weight = 2
+  weight = 1
 +++
 
 This is a quick start guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
