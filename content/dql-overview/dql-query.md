@@ -9,11 +9,11 @@ title = "DQL query"
 
 Dgraph Query Language (DQL) is Dgraph's proprietary language to add, modify, delete and fetch data.
 
-Fetching data is done through **DQL Queries**. Adding, modifying or deleting data is done through [DQL Mutations]({{< relref "dql-mutation.md" >}}).
+Fetching data is done through **DQL Queries**. Adding, modifying or deleting data is done through DQL Mutations.
 
 This overview explains the structure of DQL Queries and provides links to the appropriate DQL reference documentation.
 
-## DQL query structure
+### DQL query structure
 DQL is **declarative**, which means that queries return a response back in a similar shape to the query. It gives the client application the control of what it gets: the request return exactly what you ask for, nothing less and nothing more. In this, DQL is similar to GraphQL from which it is inspired.
 
 A DQL query finds nodes based on search criteria, matches patterns in the graph and returns the node attributes, relationships specified in the query.
@@ -70,22 +70,17 @@ A query block
 
 Refer to [pagination]({{< relref "pagination.md" >}}), [ordering]({{< relref "sorting.md" >}}), [connecting filters]({{< relref "connecting-filters.md" >}}) for more information.
 
-
 For each relationships to fetch, the query is using a nested block.
 
 A nested block
 - may specify filters to apply on the related nodes
-- may specify criteria on the relationships attributes (facets)
-- provides the list of relationship attributes (facets) to fetch.
+- may specify criteria on the relationships attributes using [filtering on facets]({{< relref "query-language/facets.md#filtering-on-facets" >}}))
+- provides the list of relationship attributes ([facets]({{< relref "query-language/facets.md" >}}))) to fetch.
 - provides the list of attributes and relationships to fetch for the related nodes.
-
 
 A nested block may contain another nested block, and such at any level.
 
-<example with facets and filters on relationships>
-
-
-### Tips
+### Formating options
 Dgraph returns the attributes and relationships that you specified in the query. You can specify an alternate name for the result by using [aliases]({{< relref "alias.md" >}}).
 
 You can flatten the response structure at any level using [@normalize]({{< relref "query-language/normalize-directive.md" >}}) directive.
@@ -131,25 +126,27 @@ Dgraph offers functions for
 
   Variables may be used as functions parameters in filters or root criteria in other blocks.
 
+### Summarizing functions
 
-### Summarizing and Math functions
+When dealing with array attributes or with relationships to many node, the query may use summary functions [count]({{< relref "query-language/count.md" >}}) , [min]({{< relref "query-language/aggregation.md#min" >}}), [max]({{< relref "query-language/aggregation.md#max" >}}), [avg]({{< relref "query-language/aggregation.md#sum-and-avg" >}}) or [sum]({{< relref "query-language/aggregation.md#sum-and-avg" >}}).
 
+The query may also contain [mathematical functions]({{< relref "query-language/math-on-value-variables.md" >}}) on value variables.
 
+Summary functions can be used in conjunction with [@grouby]({{< relref "query-language/groupby.md" >}}) directive to create aggregated value variables.
+
+The query may contain **anonymous block** to return computed values. **Anonymous block** don't have a root criteria as they are not used to search for nodes but only to returned computed values.
 
 ### Graph traversal
 
 When you specify nested blocks and filters you basically describe a way to traverse the graph.
 
-[@recurse]({{< relref "query-language/recurse-query.md" >}}) and [@ignorereflex]({{< relref "query-language/ignorereflex-directive.md" >}}) ...
+[@recurse]({{< relref "query-language/recurse-query.md" >}}) and [@ignorereflex]({{< relref "query-language/ignorereflex-directive.md" >}}) are  directives used to optionally configure the graph traversal.
 
+### Pattern matching
+Queries with nested blocks with filters may be turned into pattern matching using [@cascade]({{< relref "query-language/cascade-directive.md" >}}) directive : nodes that don’t have all attributes and all relationships specified in the query at any sub level are not considered in the result. So only nodes "matching" the complete query structure are returned.
+
+### Graph algorithms
+The query can ask for the shortest path between a source (from) node and destination (to) node using the [shortest]({{< relref "query-language/kshortest-path-quries.md" >}}) query block.
 
 ### Comments
-
 Anything on a line following a `#` is a comment
-
-
-@cascade
-
-@normalize
-
-expand() and expand(_all_)
