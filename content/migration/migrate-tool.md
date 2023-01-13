@@ -38,16 +38,9 @@ and hence, the predicate `posts.Body` is of type `string`: `posts.Body: string .
     An output similar to this appears:
 
     ```txt
-    Dumping table money
-    Dumping table posts
-    Dumping table users
-    Dumping table votes
-    Dumping table comments
-    Dumping table constraints votes
-    Dumping table constraints comments
-    Dumping table constraints money
-    Dumping table constraints posts
-    Dumping table constraints users
+    Dumping table xyz
+    Dumping table constraints xyz
+    ...
     ```
 
 {{% notice "note" %}}
