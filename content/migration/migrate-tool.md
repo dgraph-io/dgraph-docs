@@ -6,7 +6,7 @@ weight = 6
     parent = "migration"
 +++
 
-You can use the Dgraph migration tool to convert the SQL tables into a schema and RDF file, and then load the resulting dataset into Dgraph. In this example, the `Posts` table from `stackoverflow` SQL database is converted and then imported to Dgraph.
+You can use the Dgraph migration tool to convert a MySQL database tables into a schema and RDF file, and then load the resulting dataset into Dgraph.
 
 ## Deriving a Dgraph schema from SQL
 
