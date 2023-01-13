@@ -22,7 +22,7 @@ Dgraph is different from other graph databases in a number of ways, including:
 
 - **Text Search**: &emsp; *Full-text searching is included.*
 ## Who is using Dgraph & How
-Dgraph is a graph database with some special differentiators. Any graph database will be better when relationships and connections really matter, such as when querying across links in a social network, or detecting networks of interconnected fraudsters in a fraud application - these are natural graph use cases.
+Dgraph is a graph database with some special differentiators. Any graph database is better when relationships and connections really matter. For example, when querying across links in a social network, or detecting networks of interconnected fraudsters in a fraud application - these are natural graph use cases.
 
 Dgraph particularly excels when teams need simplicity and elegance to start fast, or anticipate large data sets and loads down the road.
 
