@@ -556,10 +556,6 @@ prefixed with `dgraph.`, and also do mutations to change the value of `dgraph.ty
 new type name and copy data from old predicate name to new predicate name for all the nodes which
 are affected. Then, you can drop the old types and predicates from DB.
 
-{{% notice "note" %}}
-If you are upgrading from v1.0, please make sure you follow the schema migration steps described in [this section]({{< relref "/migration/migrate-dgraph-1-1.md" >}}).
-{{% /notice %}}
-
 ### Upgrade from v20.11.0 to v21.03.0 for Enterprise customers
 
 1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from the old cluster

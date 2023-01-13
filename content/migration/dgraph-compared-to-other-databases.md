@@ -1,9 +1,9 @@
 +++
 title = "Dgraph Compared to Other Databases"
-weight = 13
+weight = 3
 [menu.main]
   identifier = "dgraph-compared-to-other-databases"
-  parent = "migration"
+
 +++
 
 This page attempts to draw a comparison between Dgraph and other popular graph databases/datastores. The summaries that follow are brief descriptions that may help a person decide if Dgraph will suit their needs.
