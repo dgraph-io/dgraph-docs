@@ -82,7 +82,7 @@ Ensure that you download these files as soon as possible because the signed URLs
 
 ### Exporting data from Dgraph Cloud programatically
 
-You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation](https://dgraph.io/cloud-docs/blob/master/content/cloud-api/backup.md#export-data).
+You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation](https://dgraph.io/docs/cloud/cloud-api/backup/#export-data).
 
 
 
