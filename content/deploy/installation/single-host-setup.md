@@ -1,9 +1,9 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Single Host Setup"
-weight = 6
+weight = 3
 [menu.main]
-    parent = "deploy"
+    parent = "installation"
 +++
 
 ## Run directly on the host
