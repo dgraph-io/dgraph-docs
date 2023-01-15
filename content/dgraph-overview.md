@@ -89,8 +89,8 @@ Check which Dgraph release version is running on your Dgraph Cloud backend in [D
 
 ### Get started with self-managed Dgraph
 
-To run Dgraph on your own server, see [instructions for single-node setup]({{< relref "/deploy/single-host-setup" >}})
-or [instructions for cluster setup]({{< relref "/deploy/multi-host-setup" >}}).
+To run Dgraph on your own server, see [instructions for single-node setup]({{< relref "/installation/single-host-setup" >}})
+or [instructions for cluster setup]({{< relref "/installation/multi-host-setup" >}}).
 
 {{% notice "note" %}}
 Dgraph is designed to run on Linux. As of release v21.03, Dgraph no longer
