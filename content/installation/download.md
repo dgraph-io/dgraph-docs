@@ -22,7 +22,7 @@ You can obtain Dgraph binary for the latest version as well as previous releases
 
 1. Pull the latest Dgraph image using docker:
    ```sh
-      docker pull dgraph/dgraph:{{< version >}}
+      docker pull dgraph/dgraph:latest
    ```
 1. Verify that the image is downloaded:
 
