@@ -7,7 +7,7 @@ weight = 1
 +++
 
 {{% notice "tip" %}}
-If you are new to Dgraph, the easiest way to get Dgraph up and running is using the [Dgraph Cloud](https://cloud.dgraph.io/). 
+If you are new to Dgraph, the easiest way to get Dgraph up and running is using the [Dgraph Cloud](https://cloud.dgraph.io/) or to use Dgraph standalone Docker image.
 {{% /notice %}}
 
 
