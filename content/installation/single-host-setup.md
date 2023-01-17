@@ -6,7 +6,8 @@ weight = 1
     parent = "installation"
 +++
 
-You can install and run Dgraph servers on a single host using Docker, Docker Compose, or Dgraph command line.
+ Dgraph does not recommend single host setup for a production environment. For a production environment you need to ensure High Availability with external persistent storage, automatic recovery of failed services, automatic recovery of failed systems such as virtual machines, and highly recommended disaster recovery such as backup/restore or export/import with automation.
+ You can install and run Dgraph cluster on a single host using Docker, Docker Compose, or Dgraph command line.
 
 ## Docker
 
@@ -24,7 +25,7 @@ Ensure that you have installed:
  * Docker [Compose](https://docs.docker.com/compose/)
 
 ### Using Docker
-To setup a Dgraph server on a single host using Docker:
+To setup a Dgraph cluster on a single host using Docker:
 
 1. Get the `<IP_ADDRESS>` of the host using:
    ```sh
@@ -44,26 +45,26 @@ To setup a Dgraph server on a single host using Docker:
     ```sh
        docker network create <DGRAPH_NETWORK>
     ```
-1.  Create a directory `<ZERO>`to store data for Dgraph Zero and run the container:
+1.  Create a directory `<ZERO_DATA>`to store data for Dgraph Zero and run the container:
     ```sh
        mkdir ~/<ZERO> # Or any other directory where data should be stored.
 
        docker run -it -p 5080:5080 --network <DGRAPH_NETWORK> -p 6080:6080 -v ~/zero:/dgraph dgraph/dgraph:{{< version >}} dgraph zero --my=<IP_ADDRESS>:5080
     ```
-1.  Create a directory `<SERVER1>` to store for Dgraph Alpha and run the container:
+1.  Create a directory `<ALPHA_DATA_1>` to store for Dgraph Alpha and run the container:
     ```sh
-     mkdir ~/<SERVER1> # Or any other directory where data should be stored.
+     mkdir ~/<ALPHA_DATA_1> # Or any other directory where data should be stored.
 
-     docker run -it -p 7080:7080 --network <DGRAPH_NETWORK> -p 8080:8080 -p 9080:9080 -v ~/server1:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=HOSTIPADDR:5080 --my=<IP_ADDRESS>:7080
+     docker run -it -p 7080:7080 --network <DGRAPH_NETWORK> -p 8080:8080 -p 9080:9080 -v ~/<ALPHA_DATA_1>:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=HOSTIPADDR:5080 --my=<IP_ADDRESS>:7080
     ```
-1.  Create a directory `<SERVER2>` to store for the second Dgraph Alpha and run the container:
+1.  Create a directory `<ALPHA_DATA_2>` to store for the second Dgraph Alpha and run the container:
     ```sh
-       mkdir ~/<SERVER2> # Or any other directory where data should be stored.
+       mkdir ~/<ALPHA_DATA_2> # Or any other directory where data should be stored.
 
-       docker run -it -p 7081:7081 --network <DGRAPH_NETWORK> -p 8081:8081 -p 9081:9081 -v ~/server2:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=HOSTIPADDR:5080 --my=<IP_ADDRESS>:7081  -o=1
+       docker run -it -p 7081:7081 --network <DGRAPH_NETWORK> -p 8081:8081 -p 9081:9081 -v ~/<ALPHA_DATA_2>:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=HOSTIPADDR:5080 --my=<IP_ADDRESS>:7081  -o=1
     ```
-    To override the default ports for the second server use `-o`.    
-1.   Connect the Dgraph servers that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).     
+    To override the default ports for the second Alpha use `-o`.    
+1.   Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).     
 
 ## Dgraph Command Line
 
@@ -76,7 +77,7 @@ Ensure that you have:
 * Made a note of the `<IP_ADDRESS>` of the host.
 
 ### Using Dgraph Command Line
-You can start Dgraph server on a singke host using the dgraph command line.
+You can start Dgraph on a single host using the dgraph command line.
 
 1. Run Dgraph zero
    ```sh
@@ -84,14 +85,15 @@ You can start Dgraph server on a singke host using the dgraph command line.
    ```
    The `--my` flag is the connection that Dgraph alphas dial to talk to zero. So, the port `5080` and the IP address must be visible to all the Dgraph alphas. For all other various flags, run `dgraph zero --help`.
 
-1. Run two Dgraph alpha servers:
+1. Run two Dgraph alpha nodea:
    ```sh
       dgraph alpha --my=<IP_ADDRESS>:7080 --zero=localhost:5080
       dgraph alpha --my=<IP_ADDRESS>:7081 --zero=localhost:5080 -o=1
    ```
    Dgraph alpha nodes use two directories to persist data and [WAL logs]({{< relref "design-concepts/concepts#write-ahead-logs" >}}), and these directories must be different for each alpha if they are running on the same host. You can use `-p` and `-w` to change the location of the data and WAL directories.To learn more about other flags, run `dgraph alpha --help`.
    
-1. Connect the Dgraph servers that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}). 
+1. Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).
+
 ## Docker Compose
 
 You can install Dgraph using the Docker Compose on a system hosted on any of the cloud provider.
@@ -136,7 +138,7 @@ You can install Dgraph using the Docker Compose on a system hosted on any of the
           - 8080:8080
           - 9080:9080
         restart: on-failure
-        command: dgraph alpha --my=alpha:7080 --zero=zero:5080 --security whitelist=<IPADDRESS>
+        command: dgraph alpha --my=alpha:7080 --zero=zero:5080 --security whitelist=<IP_ADDRESS>
       ratel:
         image: dgraph/ratel:latest
         ports:

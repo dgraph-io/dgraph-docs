@@ -6,6 +6,8 @@ weight = 4
     parent = "installation"
 +++
 
+Dgraph does not recommend multi-host setup for a production environment. For a production environment you need to ensure High Availability with external persistent storage, automatic recovery of failed services, automatic recovery of failed systems such as virtual machines, and highly recommended disaster recovery such as backup/restore or export/import with automation.
+
 ## Using Docker Swarm
 
 ### Cluster Setup Using Docker Swarm
