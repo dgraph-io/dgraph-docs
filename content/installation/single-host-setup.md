@@ -34,7 +34,7 @@ To setup a Dgraph cluster on a single host using Docker:
    ```
 1. Pull the latest Dgraph image using docker:
    ```sh
-      docker pull dgraph/dgraph:{{< version >}}
+      docker pull dgraph/dgraph:latest
    ```
 1. Verify that the image is downloaded:
 
@@ -49,19 +49,19 @@ To setup a Dgraph cluster on a single host using Docker:
     ```sh
        mkdir ~/<ZERO> # Or any other directory where data should be stored.
 
-       docker run -it -p 5080:5080 --network <DGRAPH_NETWORK> -p 6080:6080 -v ~/zero:/dgraph dgraph/dgraph:{{< version >}} dgraph zero --my=<IP_ADDRESS>:5080
+       docker run -it -p 5080:5080 --network <DGRAPH_NETWORK> -p 6080:6080 -v ~/<ZERO_DATA>:/dgraph dgraph/dgraph:latest dgraph zero --my=<IP_ADDRESS>:5080
     ```
 1.  Create a directory `<ALPHA_DATA_1>` to store for Dgraph Alpha and run the container:
     ```sh
      mkdir ~/<ALPHA_DATA_1> # Or any other directory where data should be stored.
 
-     docker run -it -p 7080:7080 --network <DGRAPH_NETWORK> -p 8080:8080 -p 9080:9080 -v ~/<ALPHA_DATA_1>:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=HOSTIPADDR:5080 --my=<IP_ADDRESS>:7080
+     docker run -it -p 7080:7080 --network <DGRAPH_NETWORK> -p 8080:8080 -p 9080:9080 -v ~/<ALPHA_DATA_1>:/dgraph dgraph/dgraph:latest dgraph alpha --zero=<IP_ADDRESS>:5080 --my=<IP_ADDRESS>:7080
     ```
 1.  Create a directory `<ALPHA_DATA_2>` to store for the second Dgraph Alpha and run the container:
     ```sh
        mkdir ~/<ALPHA_DATA_2> # Or any other directory where data should be stored.
 
-       docker run -it -p 7081:7081 --network <DGRAPH_NETWORK> -p 8081:8081 -p 9081:9081 -v ~/<ALPHA_DATA_2>:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=HOSTIPADDR:5080 --my=<IP_ADDRESS>:7081  -o=1
+       docker run -it -p 7081:7081 --network <DGRAPH_NETWORK> -p 8081:8081 -p 9081:9081 -v ~/<ALPHA_DATA_2>:/dgraph dgraph/dgraph:{{< version >}} dgraph alpha --zero=<IP_ADDRESS>:5080 --my=<IP_ADDRESS>:7081  -o=1
     ```
     To override the default ports for the second Alpha use `-o`.    
 1.   Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).     
