@@ -24,10 +24,10 @@ is only allowed to access the data permitted by the ACL rules.
    tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
    ```
    {{% notice "note" %}}
-   On a macOS you may have to use `LC_CTYPE=C; tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file`. 
+   On a macOS you may have to use `LC_CTYPE=C; tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file`.
    {{% /notice %}}
 
-1. To view the secret key value use `cat enc_key_file`. 
+1. To view the secret key value use `cat enc_key_file`.
 1. Create a plain text file named `hmac_secret_file`, and store a randomly generated `<SECRET KEY VALUE>` in it. The secret
    key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  
 
