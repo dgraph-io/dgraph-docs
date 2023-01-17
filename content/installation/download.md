@@ -14,7 +14,7 @@ If you are new to Dgraph, the easiest way to get Dgraph up and running is using 
 
 ## Options
 
-You can download the latest release of Dgraph and install on a Linux system. You use Docker, automatic install script or download the install file manually.
+You can obtain Dgraph binary for the latest version as well as previous releases using automatic install script, manual download, through Docker images  or by building the binary from the open source code.
 
 
 {{% tabs %}} {{< tab "Docker" >}}
