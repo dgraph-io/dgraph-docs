@@ -11,9 +11,6 @@ If you are new to Dgraph, the easiest way to get Dgraph up and running is using 
 {{% /notice %}}
 
 
-
-## Options
-
 You can obtain Dgraph binary for the latest version as well as previous releases using automatic install script, manual download, through Docker images  or by building the binary from the open source code.
 
 
@@ -32,7 +29,7 @@ You can obtain Dgraph binary for the latest version as well as previous releases
 {{< /tab >}} 
 
 {{% tab "Automatic" %}}
-
+On linux system, you can get the binary using the automatic script:
 1. Download the Dgraph installation script to install Dgraph automatically:
    ```sh
       curl https://get.dgraph.io -sSf | bash
@@ -45,7 +42,8 @@ You can obtain Dgraph binary for the latest version as well as previous releases
    For more information about the various installation scripts that you can use, see [install scripts](https://github.com/dgraph-io/Install-Dgraph).   
 {{< /tab >}}
 {{% tab "Manual" %}}
-If you don't want to follow the automatic installation method, you could manually download the appropriate tar for your platform from **[Dgraph releases](https://github.com/dgraph-io/dgraph/releases)**. After downloading the tar for your platform from Github, extract the binary to `/usr/local/bin` like so.
+On linux system, you can download a tar file and install manually. 
+Download the appropriate tar for your platform from **[Dgraph releases](https://github.com/dgraph-io/dgraph/releases)**. After downloading the tar for your platform from Github, extract the binary to `/usr/local/bin` like so.
 
 1. Download the installation file:
     ```
@@ -55,33 +53,8 @@ If you don't want to follow the automatic installation method, you could manuall
      ```
      dgraph version
      ```     
-{{% /tab %}} {{% /tabs %}}
-
-
-## Install from Source
-
-To install from source, install Go 1.13+ or later and the related dependencies:
-
-**Ubuntu**
-```bash
-sudo apt-get update
-sudo apt-get install build-essential
-```
-
-### Build and Install
-
-1. Clone the Dgraph repository in a directory named `<INSTALL>`.
-1. Set `<INSTALL>` in `GOBIN` environment variable, which defaults to `$GOPATH/bin`. 
-1. Use `make install` to install the Dgraph binary in the directory. 
-   If the `GOPATH` environment variable is not set the binaries are installed in or `$HOME/go/bin`. 
-   
-```bash
-git clone https://github.com/dgraph-io/dgraph.git
-cd dgraph
-make install
-```
-{{% notice "note" %}}
-You can build the Ratel UI from source separately following its build
-[instructions](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md).
-{{% /notice %}}
+{{% /tab %}}
+{{% tab "Source" %}}
+You can also build [Dgraph](https://github.com/dgraph-io/dgraph/blob/master/CONTRIBUTING.md) and [Ratel UI](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md) from source.
+{{% /tab %}}{{% /tabs %}}
 
