@@ -11,10 +11,6 @@ If you are new to Dgraph, the easiest way to get Dgraph up and running is using 
 {{% /notice %}}
 
 
-{{% notice "warning" %}}
-As of release v21.03, Dgraph no longer supports installation on Windows or macOS.
-Windows and macOS users can use the [standalone Docker image]({{<relref "dgraph-overview#to-run-dgraph-using-the-standalone-docker-image">}}) to evaluate Dgraph.
-{{% /notice %}}
 
 ## Options
 
