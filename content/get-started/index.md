@@ -1,14 +1,14 @@
 +++
-title = "DQL Quickstart"
+title = "Quick Start"
 aliases = ["/get-started-old"]
 [menu.main]
-  name = "DQL quickstart"
+  name = "Quick Start"
   identifier = "get-started"
   parent = "dql"
-  weight = 2
+  weight = 1
 +++
 
-This is a quickstart guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
+This is a quick start guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
 
 
 This guide helps you:
@@ -104,7 +104,7 @@ Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#u
 
 ## Step 3: First query
 1.   In the **Console** page, select **Query** tab and run this query:
-    
+
 ```dql
    {
     movies(func: has(release_date)) {

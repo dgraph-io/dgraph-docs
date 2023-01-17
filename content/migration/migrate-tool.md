@@ -1,44 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Migration Tool"
+title = "MySQL data"
 weight = 6
 [menu.main]
     parent = "migration"
 +++
 
-With the Dgraph migration tool you can import SQL data into Dgraph by converting
-the SQL tables into a schema and RDF file, and then loading the resulting dataset
-into Dgraph.
+You can use the Dgraph migration tool to convert a MySQL database tables into a schema and RDF file, and then load the resulting dataset into Dgraph.
 
-### Command-line options
-
-You can run the Dgraph migrate tool with:
-
-```sh
-dgraph migrate [flags]
-```
-
-Options:
-
-```txt
-Usage:
-  dgraph migrate [flags]
-
-Flags:
-      --db string              The database to import
-  -h, --help                   help for migrate
-      --host string            The hostname or IP address of the database server. (default "localhost")
-  -o, --output_data string     The data output file (default "sql.rdf")
-  -s, --output_schema string   The schema output file (default "schema.txt")
-      --password string        The password used for logging in
-      --port string            The port of the database server. (default "3306")
-  -q, --quiet                  Enable quiet mode to suppress the warning logs
-  -p, --separator string       The separator for constructing predicate names (default ".")
-      --tables string          The comma separated list of tables to import, an empty string means importing all tables in the database
-      --user string            The user for logging in
-```
-
-### Deriving a Dgraph schema from SQL
+## Deriving a Dgraph schema from SQL
 
 Before converting the data, the migration tool needs to derive the schema of each predicate.
 Dgraph follows two simple rules for converting the schema:
@@ -49,74 +19,57 @@ and hence, the predicate `posts.Body` is of type `string`: `posts.Body: string .
 2. The predicates representing inter-object relationships, like `posts.OwnerUserId.`, simply have the type
 `[uid]`, meaning following the predicate leads us to a set of other objects.
 
-
 ### Using the Migration tool
+You can run the Dgraph migrate tool using this command:
 
-Create a `config.properties` file that has the following settings (values should not be in quotes):
-
-```txt
-user = <the username for logging in to the SQL database>
-password = <the password for logging in to the SQL database>
-db = <the SQL database to be migrated>
-```
-
-For example:
-
-```txt
-user = lucas
-password = MySecretPassword123
-db = stackoverflow
-```
-
-Next, export the SQL database into a schema and RDF file, e.g. the `schema.txt` and `sql.rdf` file below:
 ```sh
-dgraph migrate --config config.properties --output_schema schema.txt --output_data sql.rdf
-```
+dgraph migrate [flags]
+1. Create a `config.properties` file that has the following settings and values should not be in quotes:
 
-You should get an output such as:
+    ```txt
+    user = <SQL_DB_USERNAME> 
+    password = <SQL_DB_PASSWORD>
+    db = <SQL_DB>
+    ```
 
-```txt
-Dumping table money
-Dumping table posts
-Dumping table users
-Dumping table votes
-Dumping table comments
-Dumping table constraints votes
-Dumping table constraints comments
-Dumping table constraints money
-Dumping table constraints posts
-Dumping table constraints users
-```
+2. Export the SQL database into `schema.txt` and `sql.rdf` file:
+
+    ```sh
+    dgraph migrate --config config.properties --output_schema schema.txt --output_data sql.rdf
+    ```
+
+    An output similar to this appears:
+
+    ```txt
+    Dumping table xyz
+    Dumping table constraints xyz
+    ...
+    ```
 
 {{% notice "note" %}}
-If you are connecting to a remote DB (something hosted on AWS, GCP, etc...), you need to pass the following flags
-```
--- host <the host of your remote DB>
--- port <if anything other than 3306>
-```
+If you are connecting to a remote DB hosted on AWS, GCP, and others, you need to pass the flags `--host`, and `--port`.
+For description of the various flags in the migration tool, see [command line options]({{< relref "about-data-migration.md" >}}).
 {{% /notice %}}
 
-Once the migration tool finishes, two new files are available:
+After the migration is complete, two new files are available:
 
-- an RDF file `sql.rdf` containing all the N-Quad entries,
+- an RDF file `sql.rdf` containing all the N-Quad entries
 - a schema file `schema.txt`.
 
 ### Importing the data
 
-The two files can then be imported into Dgraph using the [Dgraph Live Loader]({{< relref "live-loader.md" >}})
-or [Bulk Loader]({{< relref "bulk-loader.md" >}}). Sometimes you might want to customize your schema.
+The two files can then be imported into Dgraph using the [Dgraph Live Loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}})
+or [Bulk Loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}). Sometimes you might want to customize your schema.
 For example, you might add an index to a predicate, or change an inter-object predicate (edge) from
-unidirectional to bidirectional by adding the `@reverse` directive. If you would like such customizations, you should do it by editing
-the schema file generated by the migration tool before feeding the files to the Live Loader or Bulk Loader.
+unidirectional to bidirectional by adding the `@reverse` directive. If you would like such customizations, you should do it by editing the schema file generated by the migration tool before feeding the files to the Live Loader or Bulk Loader.
 
-{{% notice "tip" %}}
-Once you have converted your SQL tables to [RDF N-Quad/Triple](https://www.w3.org/TR/n-quads/), 
-you can use [Dgraph Live Loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) or 
-[Dgraph Bulk Loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}) to import your data.
-{{% /notice %}}
+* To import the data into Dgraph using the Live Loader to Dgraph Zero and Alpha servers running on the default ports use:
 
-For example, to import the data into Dgraph using the Live Loader (Dgraph Zero and Alpha servers running on the default ports):
-
-```sh
-dgraph live -z localhost:5080 -a localhost:9080 --files sql.rdf --format=rdf --schema schema.txt
-```
+    ```sh
+    dgraph live -z localhost:5080 -a localhost:9080 --files sql.rdf --format=rdf --schema schema.txt
+    ```
+* To import data to Dgraph Cloud use:
+    ```sh
+     dgraph live --slash_grpc_endpoint=<grpc-endpoint>:443 -f sql.rdf --format=rdf --schema schema.txt -t <api-token>
+    ```
+   For detailed instructions to import data to Dgraph cloud, see [import data](https://dgraph.io/docs/cloud/admin/import-export/).    
