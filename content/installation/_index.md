@@ -8,7 +8,7 @@ title = "Installation"
 <div class="landing">
   <div class="hero">
     <p>
-      This section is about installing Dgraph in various deployment modes, in a distributed fashion and involves running multiple instances of Dgraph, over multiple servers in a cluster.
+      This section is about installing Dgraph in dev or hobbyist environment as well as production environments with HA and  horizontal scalability using multiple servers in a cluster.
     </p>
     <img class="hero-deco" src="/images/hero-deco_403x160.png" />
   </div>
