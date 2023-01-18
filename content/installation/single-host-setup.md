@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Single Host Setup"
+title = "Single Host Cluster Setup"
 weight = 1
 [menu.main]
     parent = "installation"
