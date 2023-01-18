@@ -45,19 +45,21 @@ To setup a Dgraph cluster on a single host using Docker:
     ```sh
        docker network create <DGRAPH_NETWORK>
     ```
-1.  Create a directory `<ZERO_DATA>`to store data for Dgraph Zero and run the container:
+1.  Create a directory `<ZERO_DATA>`to store data for <abbr title="Zero nodes control the Dgraph cluster. It assigns Alpha nodes to groups, re-balances data between groups, handles transaction timestamp and UID assignment.">Dgraph Zero</abbr> and run the container:
     ```sh
        mkdir ~/<ZERO> # Or any other directory where data should be stored.
 
        docker run -it -p 5080:5080 --network <DGRAPH_NETWORK> -p 6080:6080 -v ~/<ZERO_DATA>:/dgraph dgraph/dgraph:latest dgraph zero --my=<IP_ADDRESS>:5080
     ```
-1.  Create a directory `<ALPHA_DATA_1>` to store for Dgraph Alpha and run the container:
+1.  Create a directory `<ALPHA_DATA_1>` to store for <abbr title="Alpha nodes host predicates and indexes. You can scale Dgraph horizontally by adding more Alphas.">Dgraph Alpha
+</abbr> and run the container:
     ```sh
      mkdir ~/<ALPHA_DATA_1> # Or any other directory where data should be stored.
 
      docker run -it -p 7080:7080 --network <DGRAPH_NETWORK> -p 8080:8080 -p 9080:9080 -v ~/<ALPHA_DATA_1>:/dgraph dgraph/dgraph:latest dgraph alpha --zero=<IP_ADDRESS>:5080 --my=<IP_ADDRESS>:7080
     ```
-1.  Create a directory `<ALPHA_DATA_2>` to store for the second Dgraph Alpha and run the container:
+1.  Create a directory `<ALPHA_DATA_2>` to store for the second <abbr title="Alpha nodes host predicates and indexes. You can scale Dgraph horizontally by adding more Alphas.">Dgraph Alpha
+</abbr> and run the container:
     ```sh
        mkdir ~/<ALPHA_DATA_2> # Or any other directory where data should be stored.
 
@@ -165,7 +167,7 @@ You can install Dgraph using the Docker Compose on a system hosted on any of the
    a6b5823b668d   dgraph/dgraph:latest   "dgraph alpha --my=a…"   2 days ago
    ```
 
-1. To access the Ratel UI for queries, mutations, and altering schema, open your web browser and navigate to `http://<CLOUD_IP_ADDRESS>:8000`.
+1. To access the <abbr title="Ratel is an open source tool for data visualization and cluster management that’s designed to work with Dgraph and DQL.">Ratel UI</abbr> for queries, mutations, and altering schema, open your web browser and navigate to `http://<CLOUD_IP_ADDRESS>:8000`.
 1. Click **Launch Latest** to access the latest stable release of Ratel UI.
 1. In the **Dgraph Server Connection** dialog that set the **Dgraph server URL** as `http://<CLOUD_IP_ADDRESS>:8080`
 1. Click **Connect** . The connection health appears green.
