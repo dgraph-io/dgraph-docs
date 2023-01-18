@@ -24,15 +24,6 @@ running multiple instances of Dgraph, over multiple servers in a cluster.
     </a>
   </div>
   <div class="item">
-    <div class="icon"><i class="lni lni-docker" aria-hidden="true"></i></div>
-    <a href="{{< relref "kubernetes.md">}}">
-      <h2>Using Kubernetes</h2>
-      <p>
-        Running Dgraph with Kubernetes
-      </p>
-    </a>
-  </div>
-  <div class="item">
     <div class="icon"><i class="lni lni-cogs" aria-hidden="true"></i></div>
     <a href="{{< relref "dgraph-administration.md">}}">
       <h2>Dgraph Administration</h2>

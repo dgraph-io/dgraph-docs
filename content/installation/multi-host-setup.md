@@ -1,10 +1,12 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Multi-Host Setup"
-weight = 7
+weight = 4
 [menu.main]
-    parent = "deploy"
+    parent = "installation"
 +++
+
+Dgraph does not recommend multi-host setup for a production environment. For a production environment you need to ensure High Availability with external persistent storage, automatic recovery of failed services, automatic recovery of failed systems such as virtual machines, and highly recommended disaster recovery such as backup/restore or export/import with automation.
 
 ## Using Docker Swarm
 
