@@ -24,6 +24,7 @@ You can run the Dgraph migrate tool using this command:
 
 ```sh
 dgraph migrate [flags]
+```
 1. Create a `config.properties` file that has the following settings and values should not be in quotes:
 
     ```txt
