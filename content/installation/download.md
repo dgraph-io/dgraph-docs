@@ -55,6 +55,6 @@ Download the appropriate tar for your platform from **[Dgraph releases](https://
      ```     
 {{% /tab %}}
 {{% tab "Source" %}}
-You can also build [Dgraph](https://github.com/dgraph-io/dgraph/blob/master/CONTRIBUTING.md) and [Ratel UI](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md) from source.
+You can also build **Dgraph** and **Ratel UI** from the source code by following the instructions from [Contributing to Dgraph](https://github.com/dgraph-io/dgraph/blob/master/CONTRIBUTING.md) or [Building and running ratel](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md).
 {{% /tab %}}{{% /tabs %}}
 
