@@ -8,7 +8,7 @@ weight = 6
 
 ## Convert CSV to JSON
 
-There are many tools available to convert CSV to JSON. You can import large data sets to Dgraph using [Dgraph Live Loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) or [Dgraph Bulk Loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}). In these examples, the `csv2json` tool is used, and the data is imported using the **Mutate** tab in Ratel.
+There are many tools available to convert CSV to JSON. You can import large data sets to Dgraph using [Dgraph Live Loader]({{< relref "live-loader.md" >}}) or [Dgraph Bulk Loader]({{< relref "bulk-loader.md" >}}). In these examples, the `csv2json` tool is used, and the data is imported using the **Mutate** tab in Ratel.
 
 ### Before you begin
 
@@ -51,7 +51,7 @@ There are many tools available to convert CSV to JSON. You can import large data
     ```
 
     This JSON file follows
-    the [JSON Mutation Format]({{< relref "mutations/json-mutation-format.md" >}}), it can be loaded into Dgraph using [Dgraph Live Loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) , [Dgraph Bulk Loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}) or the programmatic clients.
+    the [JSON Mutation Format]({{< relref "mutations/json-mutation-format.md" >}}), it can be loaded into Dgraph using [Dgraph Live Loader]({{< relref "live-loader.md" >}}) , [Dgraph Bulk Loader]({{< relref "bulk-loader.md" >}}) or the programmatic clients.
 
 4. To load the data to Ratel and HTTP clients. The JSON data has to be stored within the `"set"`
 [key]({{< relref "mutations/json-mutation-format.md#json-syntax-using-raw-http-or-ratel-ui"
@@ -102,14 +102,14 @@ There are many tools available to convert CSV to JSON. You can import large data
     ```
 
 2. To get the correct JSON format, you can convert the CSV into JSON and use `jq`
-to transform it in the correct format where the `connects` edge is a node `uid`. 
-This JSON file can be loaded into Dgraph using the programmatic clients. 
+to transform it in the correct format where the `connects` edge is a node `uid`.
+This JSON file can be loaded into Dgraph using the programmatic clients.
 
     ```sh
     $ csv2json connects.csv | jq '[ .[] | { uid: .uid, connects: { uid: .connects } } ]'
     ```
     The output is similar to:
-    
+
     ```json
     [
       {

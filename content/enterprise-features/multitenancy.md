@@ -16,7 +16,7 @@ Multi-tenancy is an enterprise feature and needs [Access Control Lists]({{< relr
 
 ## Overview
 
-Multi-tenancy is built upon [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL), 
+Multi-tenancy is built upon [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL),
 and enables multiple tenants to share a Dgraph cluster using unique namespaces.
 The tenants are logically separated, and their data lies in the same `p` directory.
 Each namespace has a group guardian, which has root access to that namespace.
@@ -28,7 +28,7 @@ users of other namespaces.
 {{% notice "note" %}}
 Dgraph provides a timeout limit per query that's configurable using the `--limit` superflag's `query-limit` option.
 There's no time limit for queries by default, but you can override it when running Dgraph Alpha.
-For multi-tenant environments a suggested `query-limit` value is 500ms. 
+For multi-tenant environments a suggested `query-limit` value is 500ms.
 {{% /notice %}}
 
 ## FAQ
@@ -49,7 +49,7 @@ The super admin is used only for database administration operations, such as exp
     The access controls are applied per tenant at a predicate level.
     For example, the user `John Smith` belonging to the group `Data Approvers` may only have read-only access to predicates,
     while user `Jane Doe`, who belongs to the group `Data Editors`, can be given access to modify predicates.
-    All of these ACL constraints have to be configured for each tenant. 
+    All of these ACL constraints have to be configured for each tenant.
 
 - Are tenants a physical separation or a logical one?
 
@@ -64,7 +64,7 @@ The super admin is used only for database administration operations, such as exp
 ## Namespace
 
 A multi-tenancy Namespace acts as a logical silo, so data stored in one namespace is not accessible from another namespace.
-Each namespace has a group guardian (with root access to that namespace), and a unique `uint64` identifier. 
+Each namespace has a group guardian (with root access to that namespace), and a unique `uint64` identifier.
 Users are members of a single namespace, and cross-namespace queries are not allowed.
 
 {{% notice "note" %}}
@@ -79,13 +79,13 @@ users of other namespaces.
 
 Multi-tenancy defines certain ACL roles for the shared cluster:
 
-- [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins) 
+- [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins)
 - Guardians of the Namespace
   - They can create users and groups inside their own namespace
   - They can assign users to groups inside their own namespace
   - They can assign predicates to groups inside their own namespace
   - They can add users to groups inside the namespace
-  - They can export their namespace 
+  - They can export their namespace
   - They can query and mutate in their namespace
   - They can't query or mutate across namespaces
 - Normal users
@@ -98,7 +98,7 @@ Multi-tenancy defines certain ACL roles for the shared cluster:
 
 A _Guardian of the Galaxy_ is a Super Admin of the default namespace (`0x00`).
 
-As a super-admin, a _Guardian of the Galaxy_ can: 
+As a super-admin, a _Guardian of the Galaxy_ can:
 - [Create](#create-a-namespace) and [delete](#delete-a-namespace) namespaces
 - Reset the passwords
 - Query and mutate the default namespace (`0x00`)
@@ -459,30 +459,10 @@ All other `drop` operations run at namespace level and are namespace specific.
 Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
 Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
-### Bulk Loader
+### Data import
 
-[Bulk loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}) can be used to load the data in bulk.
-By default, Bulk loader preserves the namespace in the data and schema files.
-If there's no namespace information available, it loads the data into the default namespace.
+[Initial import]({{< relref "bulk-loader.md" >}}) and [Live import]({{< relref "live-loader.md" >}}) tools support multi-tenancy.
 
-Please refer to the [Bulk loader documentation]({{< relref "/deploy/fast-data-loading/bulk-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
-
-### Live Loader
-
-Since multi-tenancy works with ACL enabled, when using the [Live loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}),
-you must provide the login credentials using the `--creds` flag.
-By default, Live loader loads the data into the user's namespace.
-[Guardians of the Galaxy](#guardians-of-the-galaxy) can load the data into multiple namespaces.
-
-Please refer to the [Live loader documentation]({{< relref "/deploy/fast-data-loading/live-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
-
-{{% notice "note" %}}
-The Live loader requires that the `namespace` from the data and schema files exist before loading the data.
-{{% /notice %}}
-
-{{% notice "tip" %}}
-[Live loader](#live-loader) supports loading data into specific namespaces.
-{{% /notice %}}
 
 ## Exports
 
@@ -495,7 +475,7 @@ If a _Guardian of the Galaxy_ exports the whole cluster, a single folder contain
 Guardians of a Namespace can trigger an Export for their namespace.
 {{% /notice %}}
 
-A namespace-specific export will contain the namespace value in the generated `.rdf` file: 
+A namespace-specific export will contain the namespace value in the generated `.rdf` file:
 
 ```rdf
 <0x01> "name" "ibrahim" <0x12> .     -> this belongs to namespace 0x12

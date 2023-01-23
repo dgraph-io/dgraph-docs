@@ -267,7 +267,7 @@ In order to expose the Alpha service and Ratel service publicly you can use Kube
 
 ##### LoadBalancer (Public Internet)
 
-To use an external load balancer, set the service type to `LoadBalancer`. 
+To use an external load balancer, set the service type to `LoadBalancer`.
 
 {{% notice "note" %}}For security purposes we recommend limiting access to any public endpoints, such as using a white list.{{% /notice %}}
 
@@ -294,7 +294,7 @@ An external load balancer can be configured to face internally to a private subn
 |Google Cloud|[GKE: Internal Load Balancing](https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balancing)|`cloud.google.com/load-balancer-type: "Internal"`|
 
 
-As an example, using Amazon [EKS](https://aws.amazon.com/eks/) as the provider, you could create a Helm chart configuration values like this below: 
+As an example, using Amazon [EKS](https://aws.amazon.com/eks/) as the provider, you could create a Helm chart configuration values like this below:
 
 ```yaml
 # my-config-values.yaml
@@ -659,7 +659,7 @@ require you to update the StatefulSet configuration.
 ## Kubernetes and Bulk Loader
 
 You may want to initialize a new cluster with an existing data set such as data
-from the [Dgraph Bulk Loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}}). You can use [Init
+from the [Dgraph Bulk Loader]({{< relref "bulk-loader.md" >}}). You can use [Init
 Containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 to copy the data to the pod volume before the Alpha process runs.
 

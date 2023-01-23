@@ -1,10 +1,15 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Live Loader"
-weight = 12
+title = "Live import"
+weight = 3
 [menu.main]
-    parent = "fast-data-loading"
+    parent = "importdata"
 +++
+
+[Dgraph Live Loader]({{< relref "live-loader.md" >}}) (run with `dgraph live`) imports data on a running Dgraph instance (which may have prior data). It is using our go client to send mutations to Dgraph and has options to handle unique IDs assigment and to update existing data.
+
+{{% notice "note" %}} Both options accept [RDF N-Quad/Triple
+data](https://www.w3.org/TR/n-quads/) or JSON format. Refers to [data migration]({{< relref "about-data-migration.md" >}}) to see how to convert other data formats.{{% /notice %}}
 
 Dgraph Live Loader (run with `dgraph live`) is a small helper program which reads RDF N-Quads from a gzipped file, batches them up, creates mutations (using the go client) and shoots off to Dgraph.
 
@@ -39,6 +44,28 @@ dgraph live \
   --alpha <dgraph-alpha-address:grpc_port> \
   --zero <dgraph-zero-address:grpc_port>
 ```
+
+## Importing data with Live Loader
+
+It is possible to import data into a Dgraph Cloud backend using [live loader](https://dgraph.io/docs/deploy/#live-loader). In order to import data, do the following steps:
+
+1. First import your schema into your Dgraph Cloud backend, using either the [Schema API](/admin/schema) or via [the Schema Page](https://cloud.dgraph.io/_/schema).
+2. Log into Dgraph Cloud, and find your backend's `gRPC Endpoint` on the Settings page. This will look like `frozen-mango.grpc.us-west-1.aws.cloud.dgraph.io:443`
+
+{{% notice "note" %}}
+The gRPC endpoint URL must have the string `.grpc.` added after the domain prefix. Without this change, Live Loader will not be able to find the endpoint.
+{{% /notice %}}
+
+3. Run the live loader as follows:
+
+    ```
+    docker run -it --rm -v /path/to/g01.json.gz:/tmp/g01.json.gz dgraph/dgraph:v21.03-slash \
+      dgraph live --slash_grpc_endpoint=<grpc-endpoint>:443 -f /tmp/g01.json.gz -t <api-token>
+    ```
+
+{{% notice "note" %}}
+Running this via Docker requires you to use an unreleased tag (either `master` or `v21.03-slash`).
+{{% /notice %}}
 
 ## Load from S3
 
@@ -130,6 +157,9 @@ dgraph live \
   --creds="user=groot;password=password;namespace=0" \
   --force-namespace 123
 ```
+{{% notice "note" %}}
+The Live loader requires that the `namespace` from the data and schema files exist before loading the data.
+{{% /notice %}}
 
 ### Encrypted imports (Enterprise Feature)
 
@@ -148,7 +178,20 @@ dgraph live \
  --schema <path-to-encrypted-schema> \
  --encryption key-file=<path-to-keyfile-to-decrypt-files>
 ```
+You can import your encrypted data into a new Dgraph Alpha node without encryption enabled.
 
+```bash
+# Encryption Key from the file path
+dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>"  \
+  --alpha "<dgraph-alpha-address:grpc_port>" --zero "<dgraph-zero-address:grpc_port>" \
+  --encryption key-file="<path-to-enc_key_file>"
+
+# Encryption Key from HashiCorp Vault
+dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-schema>"  \
+  --alpha "<dgraph-alpha-address:grpc_port>" --zero "<dgraph-zero-address:grpc_port>" \
+  --vault addr="http://localhost:8200";enc-field="enc_key";enc-format="raw";path="secret/data/dgraph/alpha";role-id-file="./role_id";secret-id-file="./secret_id"
+
+```
 ## Batch upserts
 
 With batch upserts in Live Loader, you can insert big data-sets (multiple files) into an existing cluster that might contain nodes that already exist in the graph.
