@@ -24,7 +24,7 @@
   package = "@algolia/netlify-plugin-crawler"
     [plugins.inputs]
     branches = ['main']
-    disabled = true
+    disabled = false
     pathPrefix = "/docs"
     customDomain = "dgraph.io"
     renderJavaScript = true
