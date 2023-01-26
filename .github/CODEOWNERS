@@ -1,4 +1,3 @@
 # CODEOWNERS info: https://help.github.com/en/articles/about-code-owners
 # Owners are automatically requested for review for PRs that changes code
-# that they own.
-* @bucanero @aaroncarey @danielmai
+# that they own. 
