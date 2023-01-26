@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Live import"
-weight = 3
+weight = 2
 [menu.main]
     parent = "importdata"
 +++
