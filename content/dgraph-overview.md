@@ -94,7 +94,7 @@ Dgraph scales to larger data sizes than other graph databases because it is desi
 
 - **Dgraph Alpha** server nodes store the graph data and indices. Unlike non-distributed graph databases, Dgraph alphas store and index "predicates" which represent the relations among data elements. This unique indexing approach allows Dgraph to perform a database query with depth N in only N network hops, making it faster and more scalable for distributed (sharded) data sets.
 
-{{<figure class="smallimage" src="/images/overview/dgraph-architecture.svg" title="Dgraph Architecture" alt="Architecture of Dgraph">}}
+{{<figure class="smallimage" src="/images/overview/dgraph-architecture.png" title="Dgraph Architecture" alt="Architecture of Dgraph">}}
 
 In addition, people use common tools to define schemas, load data, and query the database:
 
