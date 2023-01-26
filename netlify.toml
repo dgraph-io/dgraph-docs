@@ -23,7 +23,7 @@
 [[plugins]]
   package = "@algolia/netlify-plugin-crawler"
     [plugins.inputs]
-    branches = ['main','release/*']
+    branches = ['main','algolia-update','release/*']
     disabled = false
     renderJavaScript = false
-
+    template = "hierarchical"
