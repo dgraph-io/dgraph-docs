@@ -23,6 +23,6 @@
 [[plugins]]
   package = "@algolia/netlify-plugin-crawler"
     [plugins.inputs]
-    branches = ['main','algolia-update']
+    branches = ['main','release/*']
     disabled = false
     renderJavaScript = false
