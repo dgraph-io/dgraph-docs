@@ -23,8 +23,7 @@
 [[plugins]]
   package = "@algolia/netlify-plugin-crawler"
     [plugins.inputs]
-    branches = ['main']
+    branches = ['main','release/*']
     disabled = false
-    pathPrefix = "/docs"
-    customDomain = "dgraph.io"
-    renderJavaScript = true
+    renderJavaScript = false
+
