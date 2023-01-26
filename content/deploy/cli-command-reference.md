@@ -9,27 +9,27 @@ weight = 20
 You can use the Dgraph command-line interface (CLI) to deploy and manage Dgraph.
 You use it in self-managed deployment scenarios; such as running Dgraph on
 on-premises servers hosted on your physical infrastructure, or running Dgraph in
-the cloud on your AWS, GCP, or Azure infrastructure. 
+the cloud on your AWS, GCP, or Azure infrastructure.
 
 Dgraph has a root command used throughout its CLI: `dgraph`. The `dgraph` command
 is supported by multiple subcommands (such as `alpha` or `update`), some of which
 are also supported by their own subcommands. For example, the `dgraph acl`
 command requires you to specify one of its subcommands: `add`, `del`, `info` or
 `mod`. As with other CLIs, you provide command options using flags like `--help`
-or `--telemetry`. 
+or `--telemetry`.
 
 {{% notice "tip" %}}
-The term *command* is used instead of *subcommand* throughout this document, 
+The term *command* is used instead of *subcommand* throughout this document,
 except when clarifying relationships in the CLI command hierarchy. The
 term *command* is also used for combinations of commands and their subcommands,
-such as `dgraph alpha debug`. 
+such as `dgraph alpha debug`.
 {{% /notice %}}
 
 ## Dgraph CLI superflags in release v21.03
 
 Some flags are deprecated and replaced in release v21.03. In previous Dgraph
-releases, multiple related flags are often used in a command, causing some 
-commands to be very long. Starting in release v21.03, Dgraph uses *superflags* 
+releases, multiple related flags are often used in a command, causing some
+commands to be very long. Starting in release v21.03, Dgraph uses *superflags*
 for some flags used by the most complex commands: `alpha`, `backup`, `bulk`,
 `debug`, `live` and `zero`. Superflags are compound flags: they contain one or
 more options that let you define multiple settings in a semicolon-delimited list.
@@ -76,7 +76,7 @@ dgraph alpha --ludicrous enabled=true; concurrency=16;
 
 The following table maps Dgraph CLI flags from release v20.11 and earlier that
 have been replaced by superflags (and their options) in release v21.03. Any flags
-not shown here are unchanged in release v21.03. 
+not shown here are unchanged in release v21.03.
 
 ### ACL superflag
 
@@ -124,11 +124,11 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) superflag  |
+| | | **`--graphql`** | | | GraphQL superflag  |
 | `--graphql_introspection` | bool | `introspection` | bool |`alpha`| Enables GraphQL schema introspection |
 | `--graphql_debug` | bool | `debug` | bool |`alpha`| Enables debug mode in GraphQL |
 | `--graphql_extensions` | bool | `extensions` | bool |`alpha`| Enables extensions in GraphQL response body |
-| `--graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| The polling interval for GraphQL subscriptions | 
+| `--graphql_poll_interval` | time.Duration | `poll-interval` | [string](https://github.com/dgraph-io/ristretto/blob/master/z/flags.go#L80-L98) |`alpha`| The polling interval for GraphQL subscriptions |
 | `--graphql_lambda_url` | string | `lambda-url` | string |`alpha`| The URL of a lambda server that implements custom GraphQL JavaScript resolvers |
 
 ### Limit superflag
@@ -223,7 +223,7 @@ flag.
 
 {{% notice "note" %}}
 Although many of the commands listed below have subcommands, only `dgraph` and
-subcommands of `dgraph` are included in this listing. 
+subcommands of `dgraph` are included in this listing.
 {{% /notice %}}
 
 The Dgraph CLI has several commands, which are organized into the following groups:
@@ -236,7 +236,7 @@ The Dgraph CLI has several commands, which are organized into the following grou
 
 The commands in these groups are shown in the following table:
 
-|Group             | Command                        | Note                         | 
+|Group             | Command                        | Note                         |
 |------------------|--------------------------------|------------------------------|
 | (root)           | [`dgraph`](#dgraph-root-command) | Root command for Dgraph CLI  |          
 | Dgraph core      | [`alpha`](#dgraph-alpha) | Dgraph Alpha database node commands |
@@ -266,17 +266,17 @@ the help listing for `dgraph --help` is shown below:
 
 ```shell
 Usage:
-  dgraph [command] 
+  dgraph [command]
 
 Generic:             
  help          Help about any command        
- version       Prints the dgraph version details 
+ version       Prints the dgraph version details
 
 Available Commands:
 
 Dgraph Core:   
   alpha         Run Dgraph Alpha database server                   
-  zero          Run Dgraph Zero management server 
+  zero          Run Dgraph Zero management server
 
 Data Loading:     
   bulk          Run Dgraph Bulk Loader          
@@ -289,17 +289,17 @@ Dgraph Security:
   cert          Dgraph TLS certificate management                
 
 Dgraph Debug:         
-  debug         Debug Dgraph instance 
+  debug         Debug Dgraph instance
   debuginfo     Generate debug information on the current node            
 
 Dgraph Tools:       
-  completion    Generates shell completion scripts for bash or zsh 
+  completion    Generates shell completion scripts for bash or zsh
   conv          Dgraph Geo file converter   
-  decrypt       Run the Dgraph decryption tool 
+  decrypt       Run the Dgraph decryption tool
   export_backup Export data inside single full or incremental backup  
   increment     Increment a counter transactionally  
-  lsbackup      List info on backups in a given location 
-  migrate       Run the Dgraph migration tool from a MySQL database to Dgraph 
+  lsbackup      List info on backups in a given location
+  migrate       Run the Dgraph migration tool from a MySQL database to Dgraph
   raftmigrate   Run the Raft migration tool  
   upgrade       Run the Dgraph upgrade tool  
 
@@ -336,9 +336,9 @@ your deployment. The following replicates the help listing for `dgraph alpha --h
 A Dgraph Alpha instance stores the data. Each Dgraph Alpha is responsible for
 storing and serving one data group. If multiple Alphas serve the same group,
 they form a Raft group and provide synchronous replication.
- 
+
 Usage:
-  dgraph alpha [flags] 
+  dgraph alpha [flags]
 
 Flags:
       --acl string                 [Enterprise Feature] ACL options
@@ -466,9 +466,9 @@ your deployment. The following replicates the help listing shown when you run
 A Dgraph Zero instance manages the Dgraph cluster.  Typically, a single Zero
 instance is sufficient for the cluster; however, one can run multiple Zero
 instances to achieve high-availability.
- 
+
 Usage:
-  dgraph zero [flags] 
+  dgraph zero [flags]
 
 Flags:
       --audit string                  Audit options
@@ -476,7 +476,7 @@ Flags:
                                           days=10; The number of days audit logs will be preserved.
                                           encrypt-file=; The path to the key file to be used for audit log encryption.
                                           output=; [stdout, /path/to/dir] This specifies where audit logs should be output to.
-                                      			"stdout" is for standard output. You can also specify the directory where audit logs 
+                                      			"stdout" is for standard output. You can also specify the directory where audit logs
                                       			will be saved. When stdout is specified as output other fields will be ignored.
                                           size=100; The audit log max size in MB after which it will be rolled over.
                                        (default "compress=false; days=10; size=100; dir=; output=; encrypt-file=;")
@@ -534,9 +534,9 @@ This command is used to bulk load data with the Dgraph
 The following replicates the help listing shown when you run `dgraph bulk --help`:
 
 ```shell
- Run Dgraph Bulk Loader 
+ Run Dgraph Bulk Loader
 Usage:
-  dgraph bulk [flags] 
+  dgraph bulk [flags]
 
 Flags:
       --badger string              Badger options (Refer to badger documentation for all possible options)
@@ -601,9 +601,9 @@ This command is used to load live data with the Dgraph [Live Loader]({{< relref 
 The following replicates the help listing shown when you run `dgraph live --help`:
 
 ```shell
- Run Dgraph Live Loader 
+ Run Dgraph Live Loader
 Usage:
-  dgraph live [flags] 
+  dgraph live [flags]
 
 Flags:
   -a, --alpha string                 Comma-separated list of Dgraph alpha gRPC server addresses (default "127.0.0.1:9080")
@@ -703,9 +703,9 @@ $ dgraph restore -p /var/db/dgraph -l s3://s3.us-west-2.amazonaws.com/srfrog/dgr
 # Restore from dir and update Ts:
 $ dgraph restore -p . -l /var/backups/dgraph -z localhost:5080
 
-		 
+
 Usage:
-  dgraph restore [flags] 
+  dgraph restore [flags]
 
 Flags:
       --backup_id string    The ID of the backup series to restore. If empty, it will restore the latest series.
@@ -755,11 +755,11 @@ This command runs the Dgraph Enterprise Edition ACL tool. The following replicat
 the help listing shown when you run `dgraph acl --help`:
 
 ```shell
-Run the Dgraph Enterprise Edition ACL tool 
+Run the Dgraph Enterprise Edition ACL tool
 Usage:
- dgraph acl [command] 
+ dgraph acl [command]
 
-Available Commands: 
+Available Commands:
  add         Run Dgraph acl tool to add a user or group
  del         Run Dgraph acl tool to delete a user or group
  info        Show info about a user or group
@@ -792,11 +792,11 @@ when you run the `dgraph alpha` command. The following replicates the help listi
 shown when you run `dgraph audit --help`:
 
 ```shell
-Dgraph audit tool 
+Dgraph audit tool
 Usage:
- dgraph audit [command] 
+ dgraph audit [command]
 
-Available Commands: 
+Available Commands:
  decrypt     Run Dgraph Audit tool to decrypt audit files
 
 Flags:
@@ -811,12 +811,12 @@ This command lets you manage [TLS certificates]({{< relref "deploy/tls-configura
 The following replicates the help listing shown when you run `dgraph cert --help`:
 
 ```shell
-Dgraph TLS certificate management 
+Dgraph TLS certificate management
 Usage:
  dgraph cert [flags]
- dgraph cert [command] 
+ dgraph cert [command]
 
-Available Commands: 
+Available Commands:
  ls          lists certificates and keys
 
 Flags:
@@ -845,9 +845,9 @@ This command is used to debug issues with a Dgraph database instance. The
 following replicates the help listing shown when you run `dgraph debug --help`:
 
 ```shell
- Debug Dgraph instance 
+ Debug Dgraph instance
 Usage:
-  dgraph debug [flags] 
+  dgraph debug [flags]
 
 Flags:
       --at uint             Set read timestamp for all txns. (default 18446744073709551615)
@@ -886,13 +886,13 @@ Use "dgraph debug [command] --help" for more information about a command.
 
 #### `dgraph debuginfo`
 
-This command generates information about the current node that is useful for debugging. 
+This command generates information about the current node that is useful for debugging.
 The following replicates the help listing shown when you run `dgraph debuginfo --help`:
 
 ```shell
-Generate debug information on the current node 
+Generate debug information on the current node
 Usage:
- dgraph debuginfo [flags] 
+ dgraph debuginfo [flags]
 
 Flags:
  -a, --alpha string       Address of running dgraph alpha. (default "localhost:8080")
@@ -917,11 +917,11 @@ This command generates shell completion scripts for `bash` and `zsh` CLIs. The
 following replicates the help listing shown when you run `dgraph completion --help`:
 
 ```shell
-Generates shell completion scripts for bash or zsh 
+Generates shell completion scripts for bash or zsh
 Usage:
- dgraph completion [command] 
+ dgraph completion [command]
 
-Available Commands: 
+Available Commands:
  bash        bash shell completion
  zsh         zsh shell completion
 
@@ -938,9 +938,9 @@ files into RDF so that they can be consumed by Dgraph. The following replicates
 the help listing shown when you run `dgraph conv --help`:
 
 ```shell
-Dgraph Geo file converter 
+Dgraph Geo file converter
 Usage:
- dgraph conv [flags] 
+ dgraph conv [flags]
 
 Flags:
      --geo string       Location of geo file to convert
@@ -958,9 +958,9 @@ cluster. The following replicates the help listing shown when you run
 `dgraph decrypt --help`:
 
 ```shell
- A tool to decrypt an export file created by an encrypted Dgraph cluster 
+ A tool to decrypt an export file created by an encrypted Dgraph cluster
 Usage:
-  dgraph decrypt [flags] 
+  dgraph decrypt [flags]
 
 Flags:
       --encryption string   [Enterprise Feature] Encryption At Rest options
@@ -990,9 +990,9 @@ created using Dgraph Enterprise Edition into an exported folder. The following
 replicates key information from the help listing shown when you run `dgraph export_backup --help`:
 
 ```shell
- Export data inside single full or incremental backup 
+ Export data inside single full or incremental backup
 Usage:
-  dgraph export_backup [flags] 
+  dgraph export_backup [flags]
 
 Flags:
   -d, --destination string   The folder to which export the backups.
@@ -1017,20 +1017,20 @@ Flags:
                                  secret-id-file=; Vault SecretID file, used for AppRole authentication.
                               (default "addr=http://localhost:8200; role-id-file=; secret-id-file=; path=secret/data/dgraph; acl-field=; acl-format=base64; enc-field=; enc-format=base64")
 
-Use "dgraph export_backup [command] --help" for more information about a command. 
+Use "dgraph export_backup [command] --help" for more information about a command.
 ```
 
 #### `dgraph increment`
 
 This command increments a counter transactionally, so that you can confirm that
 an Alpha node is able to handle both query and mutation requests. To learn more,
-see [Using the Increment Tool]({{< relref "howto/using-increment-tool.md" >}}). 
+see [Using the Increment Tool]({{< relref "howto/using-increment-tool.md" >}}).
 The following replicates the help listing shown when you run `dgraph increment --help`:
 
 ```shell
-Increment a counter transactionally 
+Increment a counter transactionally
 Usage:
- dgraph increment [flags] 
+ dgraph increment [flags]
 
 Flags:
      --alpha string    Address of Dgraph Alpha. (default "localhost:9080")
@@ -1066,9 +1066,9 @@ Edition. To learn more, see [Backup List Tool]({{< relref "enterprise-features/l
 The following replicates the help listing shown when you run `dgraph lsbackup --help`:
 
 ```shell
-List info on backups in a given location 
+List info on backups in a given location
 Usage:
- dgraph lsbackup [flags] 
+ dgraph lsbackup [flags]
 
 Flags:
  -h, --help              help for lsbackup
@@ -1085,9 +1085,9 @@ to move data from a MySQL database to Dgraph. The following replicates the help
 listing shown when you run `dgraph migrate --help`:
 
 ```shell
-Run the Dgraph migration tool from a MySQL database to Dgraph 
+Run the Dgraph migration tool from a MySQL database to Dgraph
 Usage:
- dgraph migrate [flags] 
+ dgraph migrate [flags]
 
 Flags:
      --db string              The database to import
@@ -1107,13 +1107,13 @@ Use "dgraph migrate [command] --help" for more information about a command.
 
 #### `dgraph raftmigrate`
 
-This command runs the Dgraph Raft migration tool.<!-- TBD need to say more about this --> 
+This command runs the Dgraph Raft migration tool.<!-- TBD need to say more about this -->
 The following replicates the help listing shown when you run `dgraph raftmigrate --help`:
 
 ```shell
-Run the Raft migration tool 
+Run the Raft migration tool
 Usage:
- dgraph raftmigrate [flags] 
+ dgraph raftmigrate [flags]
 
 Flags:
      --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
@@ -1134,13 +1134,13 @@ Use "dgraph raftmigrate [command] --help" for more information about a command.
 
 #### `dgraph upgrade`
 
-This command helps you to upgrade from an earlier Dgraph release to a newer release. 
+This command helps you to upgrade from an earlier Dgraph release to a newer release.
 The following replicates the help listing shown when you run `dgraph upgrade --help`:
 
 ```shell
-This tool is supported only for the mainstream release versions of Dgraph, not for the beta releases. 
+This tool is supported only for the mainstream release versions of Dgraph, not for the beta releases.
 Usage:
- dgraph upgrade [flags] 
+ dgraph upgrade [flags]
 
 Flags:
      --acl               upgrade ACL from v1.2.2 to >=v20.03.0
