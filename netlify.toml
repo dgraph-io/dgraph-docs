@@ -27,5 +27,5 @@
     disabled = false
     renderJavaScript = false
     template = "hierarchical"
-    pathPrefix = "/docs"
+    pathPrefix = "/docs/"
     customDomain = "dgraph.io"
