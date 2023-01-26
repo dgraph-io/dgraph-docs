@@ -87,14 +87,13 @@ managing infrastructure. This is a fast and easy way to get started with GraphQL
 - **Dedicated instances** run on their own dedicated hardware to ensure consistent performance. This option extends the capabilities of the lower-cost shared instances to support enterprise, production workloads, and includes a high availability option.
 
 
-## Internal architecture
+## Dgraph Architecture
 Dgraph scales to larger data sizes than other graph databases because it is designed from the groud up to be distributed. Therefore Dgraph runs as a cluster of server nodes which communicate to form a single logical data store. There are two main types of processes (nodes) running: Zeros and Alphas.
 
 - **Dgraph Zero** server nodes hold metadata for the Dgraph cluster, coordinate distributed transactions, and re-balance data among server groups.
 
 - **Dgraph Alpha** server nodes store the graph data and indices. Unlike non-distributed graph databases, Dgraph alphas store and index "predicates" which represent the relations among data elements. This unique indexing approach allows Dgraph to perform a database query with depth N in only N network hops, making it faster and more scalable for distributed (sharded) data sets.
-
-{{<figure class="smallimage" src="/images/overview/dgraph-architecture.png" title="Dgraph Architecture" alt="Architecture of Dgraph">}}
+{{<figure class="medium image" src="/images/overview/dgraph-architecture.png" title="Dgraph Internal Architecture" alt="Architecture of Dgraph">}}
 
 In addition, people use common tools to define schemas, load data, and query the database:
 
