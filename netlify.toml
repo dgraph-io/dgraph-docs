@@ -9,12 +9,12 @@
   LOOP = "false"
 
 [context.deploy-preview]
-  command = "./scripts/local.sh --preview $DEPLOY_PRIME_URL"
+  command = "./scripts/local.sh --preview $DEPLOY_PRIME_URL/docs/v24.00/"
 
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.79.0"
   LOOP = "false"
-  HOST = "/docs/v24.00/"
+  HOST = "/"
 
 [context.branch-deploy.environment]
   HUGO_VERSION = "0.79.0"
