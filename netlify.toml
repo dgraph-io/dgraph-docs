@@ -14,7 +14,7 @@
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.79.0"
   LOOP = "false"
-  HOST = "/"
+  HOST = "/docs/v24.00/"
 
 [context.branch-deploy.environment]
   HUGO_VERSION = "0.79.0"
@@ -23,9 +23,7 @@
 [[plugins]]
   package = "@algolia/netlify-plugin-crawler"
     [plugins.inputs]
-    branches = ['main','release/*']
+    branches = ['main','algolia-test','release/*']
     disabled = false
     renderJavaScript = false
     template = "hierarchical"
-    pathPrefix = "/docs/"
-    customDomain = "dgraph.io"
