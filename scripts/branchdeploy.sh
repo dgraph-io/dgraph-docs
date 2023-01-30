@@ -16,6 +16,8 @@ RESET='\033[0m'
 
 releaseVersion=$(git rev-parse --abbrev-ref HEAD | sed 's/release\///')
 
+echo "branchdeploy => '$releaseVersion'"
+
 
 run() {
   export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
