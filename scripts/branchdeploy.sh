@@ -14,14 +14,14 @@ RESET='\033[0m'
 # expect the branch to be named release/<version>
 # argument is the netlify base url
 
-releaseVersion=$(git rev-parse --abbrev-ref HEAD | sed 's/release\///')
+releaseVersion=$(git rev-parse --abbrev-ref HEAD | sed 's/.*\///')
 
 echo "branchdeploy => '$releaseVersion'"
 
 
 run() {
   export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
-  export HUGO_TITLE="Dgraph Doc - Preview" \
+  export HUGO_TITLE="Dgraph Doc - ${releaseVersion}"
 
   pushd "$(dirname "$0")/.." > /dev/null
   pushd themes > /dev/null
@@ -39,6 +39,8 @@ run() {
   popd > /dev/null
 
     echo -e "$(date) $GREEN  Generating documentation static pages in the public folder. $RESET"
+
+    CURRENT_VERSION=${releaseVersion} \
       hugo --destination="public/docs/$releaseVersion" --baseURL="$1/docs/$releaseVersion" 1> /dev/null
     cp "public/docs/$releaseVersion/sitemap.xml" public > /dev/null
     echo -e "$(date) $GREEN  Done building. $RESET"
