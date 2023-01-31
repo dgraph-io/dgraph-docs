@@ -12,12 +12,15 @@ RESET='\033[0m'
 
 # script used to build a release branch
 # expect the branch to be named release/<version>
-# argument is the netlify base url
+# argument $1 is the netlify base url
+# argument $2 is the $HEAD netlify variable which is the branch name
 
-releaseVersion=$(git rev-parse --abbrev-ref HEAD | sed 's/.*\///')
+releaseVersion=$(echo $2 | sed 's/.*\///')
 
 echo "branchdeploy => '$releaseVersion'"
-
+VERSION_STRING="$releaseVersion"
+# In Unix environments, env variables should also be exported to be seen by Hugo
+export VERSIONS=${VERSION_STRING}
 
 run() {
   export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
@@ -38,9 +41,10 @@ run() {
   fi
   popd > /dev/null
 
-    echo -e "$(date) $GREEN  Generating documentation static pages in the public folder. $RESET"
+    echo -e "$(date) $GREEN  Generating documentation static pages in the folder public/docs/$releaseVersion. $RESET"
 
     CURRENT_VERSION=${releaseVersion} \
+    VERSIONS=${VERSION_STRING} \
       hugo --destination="public/docs/$releaseVersion" --baseURL="$1/docs/$releaseVersion" 1> /dev/null
     cp "public/docs/$releaseVersion/sitemap.xml" public > /dev/null
     echo -e "$(date) $GREEN  Done building. $RESET"
