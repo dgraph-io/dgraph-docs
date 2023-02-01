@@ -124,7 +124,7 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--graphql`** | | | [GraphQL]({{< relref "graphql/overview.md" >}}) superflag  |
+| | | **`--graphql`** | | | GraphQL superflag  |
 | `--graphql_introspection` | bool | `introspection` | bool |`alpha`| Enables GraphQL schema introspection |
 | `--graphql_debug` | bool | `debug` | bool |`alpha`| Enables debug mode in GraphQL |
 | `--graphql_extensions` | bool | `extensions` | bool |`alpha`| Enables extensions in GraphQL response body |
