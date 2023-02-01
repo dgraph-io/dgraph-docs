@@ -32,7 +32,7 @@ mutation {
 ```
 The export data of the group:
 
-* in the Aplha instance is stored in the Alpha.
+* in the Alpha instance is stored in the Alpha.
 * in every other group is stored in the Alpha leader of that group.
 
 You need to retrieve the right export files from the Alpha instances in the cluster. Dgraph does not copy all files to the Alpha that initiated the export.
