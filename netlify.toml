@@ -15,8 +15,16 @@
   HUGO_VERSION = "0.79.0"
   LOOP = "false"
   HOST = "/"
-
+[context.branch-deploy]
+  command = "./scripts/branchdeploy.sh $DEPLOY_PRIME_URL $HEAD"
 [context.branch-deploy.environment]
   HUGO_VERSION = "0.79.0"
   LOOP = "false"
   HOST = "/"
+[[plugins]]
+  package = "@algolia/netlify-plugin-crawler"
+    [plugins.inputs]
+    branches = ['main','release/*']
+    disabled = false
+    renderJavaScript = false
+    template = "hierarchical"

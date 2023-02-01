@@ -55,7 +55,7 @@ For complex queries that the GraphQL specification does not support, Dgraph prov
 
    As a native GraphQL database, Dgraph doesn’t have a relational database running in the background, or complex resolvers to map between database and GraphQL schemas. We often call this "single-schema development." The big time savings is that there are no GraphQL resolvers or custom queries needed to get started. All GraphQL fields are "resolved" simply by following our graph database edges to required fields. With single-schema development, you can change your GraphQL schema, insert data, and call your new APIs in seconds, not hours.
 
-   To learn more about Dgraph's GraphQL implementation, see this [GraphQL Overview]({{< relref "/graphql/overview" >}}). If you are a SQL user, check out:
+   If you are a SQL user, check out:
 
    [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/). 
    
