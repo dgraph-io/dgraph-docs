@@ -27,4 +27,4 @@ the nodes in your Dgraph cluster. Dgraph Zero automatically moves data between d
 
 You need at least one node of each type to run Dgraph. You need three nodes of
 each type to run Dgraph in a high-availability (HA) cluster configuration. To
-learn more about 2-node and 6-node deployment options, see the [Production Checklist]({{< relref "deploy/production-checklist.md" >}}).
+learn more about 2-node and 6-node deployment options, see the [Production Checklist]({{< relref "installation/production-checklist.md" >}}).
