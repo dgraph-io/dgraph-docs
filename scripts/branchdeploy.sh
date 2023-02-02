@@ -16,7 +16,12 @@ RESET='\033[0m'
 # argument $2 is the $HEAD netlify variable which is the branch name
 
 echo "branchdeploy URL $1 branch $2"
-releaseVersion=$(echo $2 | sed 's/.*\///')
+if [[ $2 == "main" ]]; then
+		releaseVersion="main"
+else
+		releaseVersion=$(echo $2 | sed 's/.*\///')
+fi
+
 echo "version '$releaseVersion'"
 VERSION_STRING="$releaseVersion"
 # In Unix environments, env variables should also be exported to be seen by Hugo
