@@ -29,5 +29,5 @@
       disabled = false
       renderJavaScript = false
       template = "hierarchical"
-      customDomain = "dgraph.io"
+      customDomain = "https://dgraph.io"
 
