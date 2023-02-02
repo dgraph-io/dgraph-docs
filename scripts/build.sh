@@ -40,7 +40,7 @@ VERSIONS_ARRAY=(
 )
 VERSION_STRING=$(printf ",%s" "${VERSIONS_ARRAY[@]}")
 
-VERSIONS_TO_BUILD=${VERSIONS_ARRAY}
+VERSIONS_TO_BUILD=${VERSIONS_ARRAY[@]}
 VERSIONS_TO_BUILD+=('main')
 
 function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }'; }
