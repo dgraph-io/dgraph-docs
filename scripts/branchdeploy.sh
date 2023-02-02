@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -e
 # Important for clean builds on Netlify
 if ! git remote | grep -q origin ; then
