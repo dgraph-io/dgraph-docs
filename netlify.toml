@@ -5,18 +5,29 @@
   ignore = "git diff --quiet HEAD^ HEAD ."
 
 [context.production.environment]
-  HUGO_VERSION = "0.79.0"
+  HUGO_VERSION = "0.91.0"
   LOOP = "false"
+  HOST = "https://dgraph.io/docs"
 
 [context.deploy-preview]
   command = "./scripts/local.sh --preview $DEPLOY_PRIME_URL"
 
 [context.deploy-preview.environment]
-  HUGO_VERSION = "0.79.0"
+  HUGO_VERSION = "0.91.0"
   LOOP = "false"
   HOST = "/"
 
 [context.branch-deploy.environment]
-  HUGO_VERSION = "0.79.0"
+  HUGO_VERSION = "0.91.0"
   LOOP = "false"
   HOST = "/"
+
+[[plugins]]
+  package = "@algolia/netlify-plugin-crawler"
+    [plugins.inputs]
+      branches = ['master']
+      disabled = false
+      renderJavaScript = false
+      template = "hierarchical"
+      customDomain = "dgraph.io"
+

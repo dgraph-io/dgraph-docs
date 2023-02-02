@@ -17,6 +17,7 @@ fi
 
 GREEN='\033[32;1m'
 RESET='\033[0m'
+# HOST is provided by the caller see netlify.toml
 HOST="${HOST:-https://dgraph.io/docs}"
 # Name of output public directory
 PUBLIC="${PUBLIC:-public}"
@@ -31,24 +32,16 @@ THEME_BRANCH="${THEME_BRANCH:-master}"
 # and then the older versions in descending order, such that the
 # build script can place the artifact in an appropriate location.
 
-getMajorVersions=$(curl -s https://get.dgraph.io/latest \
-| grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
-| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g" | sed "s/v20.07/ /g")
 
-MAJOR_VERSIONS=(
-  $getMajorVersions
-)
 
 VERSIONS_ARRAY=(
-  ${MAJOR_VERSIONS:0}
-  ${MAJOR_VERSIONS[@]:1}
-  'master'
+  'v22.0'
+  'v21.03'
 )
+VERSION_STRING=$(printf ",%s" "${VERSIONS_ARRAY[@]}")
 
-joinVersions() {
-	versions=$(printf ",%s" "${VERSIONS_ARRAY[@]}")
-	echo "${versions:1}"
-}
+VERSIONS_TO_BUILD=${VERSIONS_ARRAY}
+VERSIONS_TO_BUILD+=('main')
 
 function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }'; }
 
@@ -62,7 +55,6 @@ rebuild() {
 		dir=$2
 	fi
 
-	VERSION_STRING=$(joinVersions)
 	# In Unix environments, env variables should also be exported to be seen by Hugo
 	export CURRENT_BRANCH=${1}
 	export CURRENT_VERSION=${2}
@@ -112,8 +104,8 @@ checkAndUpdate()
 	local branch=""
 	local tag="$2"
 
-	if [[ $version == "master" ]]; then
-		branch="master"
+	if [[ $version == "main" ]]; then
+		branch="main"
 	else
 		branch="release/$version"
 	fi
@@ -155,8 +147,9 @@ while true; do
 
 	echo -e "$(date)  Starting to check branches."
 	git remote update > /dev/null
+    DGRAPH_VERSIONS=$(curl -s https://get.dgraph.io/latest)
 
-	for version in "${VERSIONS_ARRAY[@]}"
+	for version in "${VERSIONS_TO_BUILD[@]}"
 	do
 	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
 		SETO="${latest_version:-master}" 
