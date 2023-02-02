@@ -39,8 +39,9 @@ VERSIONS_ARRAY=(
   'v21.03'
 )
 VERSION_STRING=$(printf ",%s" "${VERSIONS_ARRAY[@]}")
-
+VERSION_STRING=${VERSION_STRING:1} # remove first comma
 VERSIONS_TO_BUILD=("${VERSIONS_ARRAY[@]}")
+
 VERSIONS_TO_BUILD+=('main')
 
 function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }'; }
@@ -62,7 +63,12 @@ rebuild() {
 	export VERSIONS=${VERSION_STRING}
 	export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
 	export CANONICAL_PATH="$HOST"
-
+    echo "building Dgraph Doc ${2}\
+		CANONICAL_PATH=${HOST}\
+		VERSIONS=${VERSION_STRING}\
+		CURRENT_BRANCH=${1}\
+		CURRENT_LATEST_TAG=${3}\
+		CURRENT_VERSION=${2}"
 	HUGO_TITLE="Dgraph Doc ${2}"\
 		CANONICAL_PATH=${HOST}\
 		VERSIONS=${VERSION_STRING}\
