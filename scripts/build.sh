@@ -49,12 +49,7 @@ function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }
 rebuild() {
 	echo -e "$(date) $GREEN Updating docs for branch: $1.$RESET"
 
-	# The latest documentation is generated in the root of /public dir
-	# Older documentations are generated in their respective `/public/vx.x.x` dirs
-	dir=''
-	if [[ $2 != "${VERSIONS_ARRAY[0]}" ]]; then
-		dir=$2
-	fi
+	
 
 	# In Unix environments, env variables should also be exported to be seen by Hugo
 	export CURRENT_BRANCH=${1}
@@ -63,6 +58,30 @@ rebuild() {
 	export VERSIONS=${VERSION_STRING}
 	export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
 	export CANONICAL_PATH="$HOST"
+
+	# The latest documentation is generated in the root of /public dir
+	# and also in public/docs dir so the Algolia crawler finds the correct URLs
+	# Older documentations are generated in their respective `/public/vx.x.x` dirs
+	dir=''
+	if [[ $2 != "${VERSIONS_ARRAY[0]}" ]]; then
+		dir=$2
+	else 
+	   echo "building Dgraph Doc ${2}\
+		CANONICAL_PATH=${HOST}\
+		VERSIONS=${VERSION_STRING}\
+		CURRENT_BRANCH=${1}\
+		CURRENT_LATEST_TAG=${3}\
+		CURRENT_VERSION=${2}"
+	HUGO_TITLE="Dgraph Doc ${2}"\
+		CANONICAL_PATH=${HOST}\
+		VERSIONS=${VERSION_STRING}\
+		CURRENT_BRANCH=${1}\
+		CURRENT_LATEST_TAG=${3}\
+		CURRENT_VERSION=${2} ${HUGO} \
+		--destination="${PUBLIC}"/"docs"\
+		--baseURL="$HOST" 1> /dev/null
+	fi
+
     echo "building Dgraph Doc ${2}\
 		CANONICAL_PATH=${HOST}\
 		VERSIONS=${VERSION_STRING}\
@@ -158,7 +177,7 @@ while true; do
 	for version in "${VERSIONS_TO_BUILD[@]}"
 	do
 	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$'  | grep  "$version" | head -n1)
-		SETO="${latest_version:-master}" 
+		SETO="${latest_version:-main}" 
 		checkAndUpdate "$version" "$SETO"
 		echo "version => '$version'"
 		echo "latest_version => '$SETO'"
