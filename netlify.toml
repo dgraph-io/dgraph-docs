@@ -25,13 +25,6 @@
 [[plugins]]
   package = "@algolia/netlify-plugin-crawler"
     [plugins.inputs]
-    branches = ['main','algolia-test','release/*']
-    disabled = false
-    renderJavaScript = false
-    template = "hierarchical"
-[[plugins]]
-  package = "@algolia/netlify-plugin-crawler"
-    [plugins.inputs]
     branches = ['algolia-test']
     disabled = false
     renderJavaScript = false
