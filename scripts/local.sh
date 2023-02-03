@@ -45,8 +45,10 @@ run() {
 
   if [[ $1 == "-p" || $1 == "--preview" ]]; then
     echo -e "$(date) $GREEN  Generating documentation static pages in the public folder. $RESET"
-      hugo --destination=public/docs/v24.00 --baseURL="$2" 1> /dev/null
-    cp public/docs/v24.00/sitemap.xml public > /dev/null
+    
+    hugo --destination=public/docs --baseURL="$2" 1> /dev/null
+    hugo --destination=public --baseURL="$2" 1> /dev/null
+    
     echo -e "$(date) $GREEN  Done building. $RESET"
   else
     hugo server -w --baseURL=http://localhost:1313
