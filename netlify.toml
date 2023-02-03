@@ -7,6 +7,7 @@
 [context.production.environment]
   HUGO_VERSION = "0.91.0"
   LOOP = "false"
+  HOST = "https://dgraph.io/docs"
 
 [context.deploy-preview]
   command = "./scripts/local.sh --preview $DEPLOY_PRIME_URL"
@@ -15,7 +16,8 @@
   HUGO_VERSION = "0.91.0"
   LOOP = "false"
   HOST = "/"
-
+[context.branch-deploy]
+  command = "./scripts/branchdeploy.sh $DEPLOY_PRIME_URL $HEAD"
 [context.branch-deploy.environment]
   HUGO_VERSION = "0.91.0"
   LOOP = "false"
