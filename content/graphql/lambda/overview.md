@@ -80,7 +80,7 @@ Available only for types and interfaces (`null` for queries and mutations)
 The `addGraphQLResolvers` can be represented with the following TypeScript types:
 
 ```TypeScript
-type GraphQLResponse {
+type GraphQLResponse = {
   data?: Record<string, any>,
   errors?: { message: string }[],
 }
