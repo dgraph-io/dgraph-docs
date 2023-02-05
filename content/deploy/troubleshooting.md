@@ -55,8 +55,20 @@ Depending on your OS, your shell session limits might not be the same as the Dgr
 For example, to properly set up the `ulimit` values on Ubuntu 20.04 systems:
 
 ```sh
-sudo sed -i 's/#DefaultLimitNOFILE=/DefaultLimitNOFILE=1048576/' /etc/systemd/system.conf
+sudo sed -i 's/#DefaultLimitNOFILE=1024:524288/DefaultLimitNOFILE=1048576:1048576/' /etc/systemd/system.conf
 sudo sed -i 's/#DefaultLimitNOFILE=/DefaultLimitNOFILE=1048576/' /etc/systemd/user.conf
 ```
+Also need edit limits.conf file:
+```sh
+sudo sh -c '* soft nofile 1048576 >> /etc/security/limits.conf'
+sudo sh -c '* hard nofile 1048576 >> /etc/security/limits.conf'
+```
+If you re running Kubernetes containers as root user then:
+```sh
+sudo sh -c 'root soft nofile 1048576 >> /etc/security/limits.conf'
+sudo sh -c 'root hard nofile 1048576 >> /etc/security/limits.conf'
+```
+
+
 
 This affects the base limits for all processes. After a reboot, your OS will pick up the new values.
