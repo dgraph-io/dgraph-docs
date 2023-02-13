@@ -26,7 +26,7 @@ There are many tools available to convert CSV to JSON. You can import large data
     Badger,https://github.com/dgraph-io/badger
     ```
 
-2. Change to the directory that conntains the `names.csv` file and convert it to `names.json`:
+2. Change to the directory that contains the `names.csv` file and convert it to `names.json`:
 
     ```sh
     $ csv2json names.csv --out names.json

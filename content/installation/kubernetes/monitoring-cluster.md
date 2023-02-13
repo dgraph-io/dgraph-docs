@@ -6,132 +6,166 @@ weight = 4
     parent = "kubernetes"
 +++
 
-
-
-## Monitoring in Kubernetes
+## Monitoring the Kubernetes Cluster
 
 Dgraph exposes Prometheus metrics to monitor the state of various components involved in the cluster, including Dgraph Alpha and Zero nodes. You can setup Prometheus monitoring for your cluster.
 
-* [prometheus-operator](https://prometheus-operator.dev/) - a Kubernetes operator to install and configure Prometheus and Alert Manager.
-* [Prometheus](https://prometheus.io/) - the service that will scrape Dgraph for metrics
-* [AlertManager](https://prometheus.io/docs/alerting/latest/alertmanager/) - the service that will trigger alerts to a service (Slack, PagerDuty, etc) that you specify based on metrics exceeding threshold specified in Alert rules.
-* [Grafana](https://grafana.com/) - optional visualization solution that will use Prometheus as a source to create dashboards.
+You can use Helm to install [kube-prometheus-stack](https://github.com/prometheus-operator/kube-prometheus) chart. This Helm chart is a collection of Kubernetes manifests, [Grafana](http://grafana.com/) dashboards, [Prometheus rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) combined with scripts to provide monitoring with [Prometheus](https://prometheus.io/) using the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator). This Helm chart also installs [Grafana](http://grafana.com/), [node_exporter](https://github.com/prometheus/node_exporter), [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics).
 
-### Installation through Manifests
+### Before you begin:
 
-Follow the below mentioned steps to setup Prometheus monitoring for your cluster.
+* Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+* Ensure that you have a production-ready Kubernetes cluster with atleast three worker nodes running in a cloud provider of your choice.
+* Install [Helm](https://helm.sh/docs/intro/install/).
+* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "deploy/tls-configuration.md" >}}).
 
-#### Install Prometheus operator
+### Install using Helm Chart
 
-```sh
-kubectl apply --filename https://raw.githubusercontent.com/coreos/prometheus-operator/release-0.34/bundle.yaml
-```
+1. Create a `YAML` file named `dgraph-prometheus-operator.yaml` and edit the values as appropriate for adding endpoints, adding alert rules, adjusting alert manager configuration, adding Grafana dashboard, and others. For more information see, [Dgraph helm chart values](https://github.com/dgraph-io/dgraph/tree/main/contrib/config/monitoring/prometheus/chart-values).
 
-Ensure that the instance of `prometheus-operator` has started before continuing.
+   ```yaml
+   prometheusOperator:
+     createCustomResource: true
 
-```sh
-$ kubectl get deployments prometheus-operator
-NAME                  DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-prometheus-operator   1         1         1            1           3m
-```
+   grafana:
+     enabled: true
+     persistence:
+       enabled: true
+       accessModes: ["ReadWriteOnce"]
+       size: 5Gi
+     defaultDashboardsEnabled: true
+     service:
+       type: ClusterIP
+   
+   alertmanager:
+     service:
+       labels:
+         app: dgraph-io
+     alertmanagerSpec:
+       storage:
+         volumeClaimTemplate:
+           spec:
+             accessModes: ["ReadWriteOnce"]
+             resources:
+               requests:
+                 storage: 5Gi
+       replicas: 1
+       logLevel: debug
+     config:
+       global:
+         resolve_timeout: 2m
+       route:
+         group_by: ['job']
+         group_wait: 30s
+         group_interval: 5m
+         repeat_interval: 12h
+         receiver: 'null'
+         routes:
+         - match:
+             alertname: Watchdog
+              receiver: 'null'
+       receivers:
+       - name: 'null'
+   
+   prometheus:
+     service:
+         type: ClusterIP
+     serviceAccount:
+       create: true
+       name: prometheus-dgraph-io
+   
+     prometheusSpec:
+       storageSpec:
+         volumeClaimTemplate:
+           spec:
+             accessModes: ["ReadWriteOnce"]
+             resources:
+               requests:
+                 storage: 25Gi
+       resources:
+         requests:
+           memory: 400Mi
+       enableAdminAPI: false
 
-#### Install Prometheus
+     additionalServiceMonitors:
+       - name: zero-dgraph-io
+         endpoints:
+           - port: http-zero
+             path: /debug/prometheus_metrics
+         namespaceSelector:
+           any: true
+         selector:
+           matchLabels:
+             monitor: zero-dgraph-io
+       - name: alpha-dgraph-io
+         endpoints:
+           - port: http-alpha
+             path: /debug/prometheus_metrics
+         namespaceSelector:
+           any: true
+         selector:
+           matchLabels:
+             monitor: alpha-dgraph-io
+   ```
+1. Create a `YAML` file named `secrets.yaml` that has the credentials for Grafana.
 
-* Apply Prometheus manifest present [here](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/prometheus/prometheus.yaml).
+   ```yaml
+   grafana:
+     adminPassword: <GRAFANA-PASSWORD>
+   ```  
 
-```sh
-$ kubectl apply --filename prometheus.yaml
+1. Add the `prometheus-operator` Helm chart:
 
-serviceaccount/prometheus-dgraph-io created
-clusterrole.rbac.authorization.k8s.io/prometheus-dgraph-io created
-clusterrolebinding.rbac.authorization.k8s.io/prometheus-dgraph-io created
-servicemonitor.monitoring.coreos.com/alpha.dgraph-io created
-servicemonitor.monitoring.coreos.com/zero-dgraph-io created
-prometheus.monitoring.coreos.com/dgraph-io created
-```
+   ```bash
+   helm repo add stable https://charts.helm.sh/stable
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   helm repo update
+   ```
 
-To view Prometheus UI locally run:
+1. Install [kube-prometheus-stack](https://github.com/prometheus-operator/kube-prometheus) with the `<MY-RELEASE-NAME>` in the namescape named `monitoring`:
 
-```sh
-kubectl port-forward prometheus-dgraph-io-0 9090:9090
-```
+   ```bash
+   helm install <MY-RELEASE-NAME>\                                    
+     --values dgraph-prometheus-operator.yaml \
+     --values secrets.yaml \
+     prometheus-community/kube-prometheus-stack --namespace monitoring
+   ```
+   An output similar to the following appears:
 
-The UI is accessible at port 9090. Open http://localhost:9090 in your browser to play around.
+   ```bash
+   NAME: dgraph-prometheus-release
+   LAST DEPLOYED: Sun Feb  5 21:35:45 2023
+   NAMESPACE: monitoring
+   STATUS: deployed
+   REVISION: 1
+   NOTES:
+   kube-prometheus-stack has been installed. Check its status by running:
+     kubectl --namespace monitoring get pods -l "release=dgraph-prometheus-release"
+   
+   Visit https://github.com/prometheus-operator/kube-prometheus instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
+   ```   
+1. Check the list of services in the `monitoring` namespace using `kubectl get svc -n monitoring`:
 
-#### Registering Alerts and Installing Alert Manager
+   ```bash
+   NAME                                                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+   alertmanager-operated                                ClusterIP   None             <none>        9093/TCP,9094/TCP,9094/UDP   29s
+   dgraph-prometheus-release-alertmanager               ClusterIP   10.128.239.240   <none>        9093/TCP                     32s
+   dgraph-prometheus-release-grafana                    ClusterIP   10.128.213.70    <none>        80/TCP                       32s
+   dgraph-prometheus-release-kube-state-metrics         ClusterIP   10.128.139.145   <none>        8080/TCP                     32s
+   dgraph-prometheus-release-operator                   ClusterIP   10.128.6.5       <none>        443/TCP                      32s
+   dgraph-prometheus-release-prometheus                 ClusterIP   10.128.255.88    <none>        9090/TCP                     32s
+   dgraph-prometheus-release-prometheus-node-exporter   ClusterIP   10.128.103.131   <none>        9100/TCP                     32s
+   prometheus-operated                                  ClusterIP   None             <none>        9090/TCP                     29s
+  
+   ```
+1. Use `kubectl port-forward svc/dgraph-prometheus-release-prometheus -n monitoring 9090` to access Prometheus at `localhost:9090`.
+1. Use `kubectl --namespace monitoring port-forward svc/grafana 3000:80` to access Grafana at `localhost:3000`. 
+1. Log in to Grafna using the password that you had set in the `secrets.yaml` file.
+1. In the **Dashboards** menu of Grafana, select **Import**.
+1. In the **Dashboards/Import dashboard** page copy the contents of the [dgraph-kubernetes-grafana-dashboard.json](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/grafana/dgraph-kubernetes-grafana-dashboard.json) file in **Import via panel json** and click **Load**.
 
-To register alerts from Dgraph cluster with your Prometheus deployment, follow the steps below:
-
-* Create a Kubernetes secret containing alertmanager configuration. Edit the configuration file present [here](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/prometheus/alertmanager-config.yaml)
-with the required receiver configuration including the slack webhook credential and create the secret.
-
-You can find more information about alertmanager configuration [here](https://prometheus.io/docs/alerting/configuration/).
-
-```sh
-$ kubectl create secret generic alertmanager-alertmanager-dgraph-io \
-    --from-file=alertmanager.yaml=alertmanager-config.yaml
-
-$ kubectl get secrets
-NAME                                            TYPE                 DATA   AGE
-alertmanager-alertmanager-dgraph-io             Opaque               1      87m
-```
-
-* Apply the [alertmanager](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/prometheus/alertmanager.yaml) along with [alert-rules](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/prometheus/alert-rules.yaml) manifest
-to use the default configured alert configuration. You can also add custom rules based on the metrics exposed by Dgraph cluster similar to [alert-rules](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/prometheus/alert-rules.yaml)
-manifest.
-
-```sh
-$ kubectl apply --filename alertmanager.yaml
-alertmanager.monitoring.coreos.com/alertmanager-dgraph-io created
-service/alertmanager-dgraph-io created
-
-$ kubectl apply --filename alert-rules.yaml
-prometheusrule.monitoring.coreos.com/prometheus-rules-dgraph-io created
-```
-
-### Install Using Helm Chart
-
-There are Helm chart values that will install Prometheus, Alert Manager, and Grafana.
-
-You will first need to add the `prometheus-operator` Helm chart:
-
-```bash
-$ helm repo add stable https://kubernetes-charts.storage.googleapis.com
-```
-
-Afterward you will want to copy the Helm chart values present [here](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/prometheus/chart-values/dgraph-prometheus-operator.yaml) and edit them as appropriate, such as adding endpoints, adding alert rules, adjusting alert manager configuration, adding Grafana dashboard, etc.
-
-Once ready, install this with the following:
-
-```bash
-$ helm install my-prometheus-release \
-  --values dgraph-prometheus-operator.yaml \
-  --set grafana.adminPassword='<put-secret-password-here>' \
-  stable/prometheus-operator
-```
-
-**NOTE**: For security best practices, we want to keep secrets, such as the Grafana password outside of general configuration, so that it is not accidentally checked into anywhere.  You can supply it through the command line, or create a separate `secrets.yaml` that is never checked into a code repository:
-
-```yaml
-grafana:
-  adminPassword: <put-secret-password-here>
-```
-
-Then you can install this in a similar fashion:
-
-```bash
-$ helm install my-prometheus-release \
-  --values dgraph-prometheus-operator.yaml \
-  --values secrets.yaml \
-  stable/prometheus-operator
-```
-
-
-### Adding Dgraph Kubernetes Grafana Dashboard
-
-You can use the Grafana dashboard present [here](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/monitoring/grafana/dgraph-kubernetes-grafana-dashboard.json).  You can import this dashboard and select the Prometheus data source installed earlier.
-
-This will visualize all Dgraph Alpha and Zero Kubernetes Pods, using the regex pattern `"/dgraph-.*-[0-9]*$/`.  This can be changed by through the dashboard configuration and selecting the variable Pod.  This might be desirable when you have had multiple releases, and only want to visualize the current release.  For example, if you installed a new release `my-release-3` with the [Dgraph helm chart](https://github.com/dgraph-io/charts/), you can change the regex pattern to `"/my-release-3.*dgraph-.*-[0-9]*$/"` for the Pod variable.
+    You can visualize all Dgraph Alpha and Zero Kubernetes Pods, using the regex pattern `"/dgraph-.*-[0-9]*$/`. You can change this in the dashboard configuration and select the variable Pod. For example, if you have multiple releases, and only want to visualize the current release named `my-release-3`, change the regex pattern to `"/my-release-3.*dgraph-.*-[0-9]*$/"` in the Pod variable of the dashboard configuration.
+    By default, the Prometheus that you installed is configured as the `Datasource` in Grafana. 
 
 ## Kubernetes Storage
 
@@ -148,7 +182,7 @@ SSD storage which provide consistent very high IOPS. The Dgraph team uses
 i3.large instances on AWS to test Dgraph.
 
 You can create a Kubernetes `StorageClass` object to provision a specific type
-of storage volume which you can then attach to your Dgraph pods. You can set up
+of storage volume which you can then attach to your Dgraph Pods. You can set up
 your cluster with local SSDs by using [Local Persistent
 Volumes](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 This Kubernetes feature is in beta at the time of this writing (Kubernetes
@@ -243,7 +277,7 @@ Example: Requesting a disk size of 250Gi with this storage class would provide
 
 ## Removing a Dgraph Pod
 
-In the event that you need to completely remove a pod (e.g., its disk got
+In the event that you need to completely remove a Pod (e.g., its disk got
 corrupted and data cannot be recovered), you can use the `/removeNode` API to
 remove the node from the cluster. With a Kubernetes StatefulSet, you'll need to
 remove the node in this order:
@@ -252,16 +286,16 @@ remove the node in this order:
    the cluster (see [More about Dgraph Zero]({{< relref "/deploy/dgraph-zero" >}})). The removed instance will immediately stop
    running. Any further attempts to join the cluster will fail for that instance
    since it has been removed.
-2. Remove the PersistentVolumeClaim associated with the pod to delete its data.
-   This prepares the pod to join with a clean state.
-3. Restart the pod. This will create a new PersistentVolumeClaim to create new
+2. Remove the PersistentVolumeClaim associated with the Pod to delete its data.
+   This prepares the Pod to join with a clean state.
+3. Restart the Pod. This will create a new PersistentVolumeClaim to create new
    data directories.
 
-When an Alpha pod restarts in a replicated cluster, it will join as a new member
+When an Alpha Pod restarts in a replicated cluster, it will join as a new member
 of the cluster, be assigned a group and an unused index from Zero, and receive
 the latest snapshot from the Alpha leader of the group.
 
-When a Zero pod restarts, it must join the existing group with an unused index
+When a Zero Pod restarts, it must join the existing group with an unused index
 ID. You set the index ID with the `--raft` superflag's `idx` option. This might
 require you to update the StatefulSet configuration.
 
@@ -270,7 +304,7 @@ require you to update the StatefulSet configuration.
 You may want to initialize a new cluster with an existing data set such as data
 from the [Dgraph Bulk Loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}}). You can use [Init
 Containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
-to copy the data to the pod volume before the Alpha process runs.
+to copy the data to the Pod volume before the Alpha process runs.
 
 See the `initContainers` configuration in
 [dgraph-ha.yaml](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/kubernetes/dgraph-ha/dgraph-ha.yaml)
