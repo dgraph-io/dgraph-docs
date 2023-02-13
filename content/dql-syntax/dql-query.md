@@ -7,9 +7,7 @@ title = "DQL query"
   weight = 1
 +++
 
-Dgraph Query Language (DQL) is Dgraph's proprietary language to add, modify, delete and fetch data.
-
-Fetching data is done through **DQL Queries**. Adding, modifying or deleting data is done through DQL Mutations.
+Fetching data with Dgraph Query Language (DQL), is done through **DQL Queries**. Adding, modifying or deleting data is done through [DQL Mutations]({{< relref "dql-mutation.md" >}}).
 
 This overview explains the structure of DQL Queries and provides links to the appropriate DQL reference documentation.
 
