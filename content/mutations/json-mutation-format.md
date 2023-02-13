@@ -11,7 +11,7 @@ be expressed in a more natural way. It also eliminates the need for apps to
 have custom serialization code, since most languages already have a JSON
 marshaling library.
 
-When Dgraph receives a mutation as a JSON object, it first converts it into an 
+When Dgraph receives a mutation as a JSON object, it first converts it into an
 internal edge format that is then processed into Dgraph.
 
 > JSON  -> Edges -> Posting list \
@@ -62,9 +62,9 @@ In this case, the assigned UIDs map would have a key called `diggy` with the val
 assigned to it.
 
 ### Forbidden values
- 
+
 {{% notice "note" %}}
-When using JSON mutations, the following string values are not accepted: `uid( )`, `val( )` 
+When using JSON mutations, the following string values are not accepted: `uid( )`, `val( )`
 {{% /notice %}}
 
 For example, the following JSON can't be processed by Dgraph:
@@ -256,7 +256,7 @@ If no predicates are specified, then all of the node's known outbound edges (to
 other nodes and to literal values) are deleted (corresponding to deleting `S *
 *`). The predicates to delete are derived using the type system. Refer to the
 [RDF format]({{< relref "mutations/delete.md" >}}) documentation and the section on the
-[type system]({{< relref "query-language/type-system.md" >}}) for more
+[type system]({{< relref "type-system.md" >}}) for more
 information:
 
 ```JSON
