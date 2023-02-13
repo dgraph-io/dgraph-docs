@@ -193,10 +193,12 @@ kubectl delete persistentvolumeclaims --selector app=dgraph-alpha
 
 ### Dgraph configuration files
 
-You can supply Dgraph config files (see [Config]({{< relref "deploy/config.md" >}})) for Alpha and Zero with Helm chart configuration values. For more information about the values, see the latest [configuration settings](https://github.com/dgraph-io/charts/blob/master/charts/dgraph/README.md#configuration).
+You can create a Dgraph [Config]({{< relref "deploy/config.md" >}}) files for Alpha server and Zero server with Helm chart configuration values, `<MY-CONFIG-VALUES>`. For more information about the values, see the latest [configuration settings](https://github.com/dgraph-io/charts/blob/master/charts/dgraph/README.md#configuration).
+
+1. Open an editor of your choice and create a config file named `<MY-CONFIG-VALUES>.yaml`:
 
 ```yaml
-# my-config-values.yaml
+# <MY-CONFIG-VALUES>.yaml
 alpha:
   configFile:
     config.yaml: |
@@ -214,10 +216,10 @@ zero:
       wal: /dgraph/data/zw
 ```
 
-And then install with Alpha and Zero configuration using this:
+2. Change to the director in which you created `<MY-CONFIG-VALUES>`.yaml and then install with Alpha and Zero configuration using:
 
 ```sh
-helm install my-release dgraph/dgraph --values my-config-values.yaml
+helm install <RELEASE-NAME> dgraph/dgraph --values <MY-CONFIG-VALUES>.yaml
 ```
 
 ### Exposing Alpha and Ratel Services
@@ -235,16 +237,16 @@ To use an external load balancer, set the service type to `LoadBalancer`.
 
 {{% notice "note" %}}For security purposes we recommend limiting access to any public endpoints, such as using a white list.{{% /notice %}}
 
-You can expose Alpha service to the Internet as follows:
+1.  To expose Alpha service to the Internet use:
 
 ```sh
-helm install my-release dgraph/dgraph --set alpha.service.type="LoadBalancer"
+helm install <RELEASE-NAME> dgraph/dgraph --set alpha.service.type="LoadBalancer"
 ```
 
-Similarly, you can expose Alpha and Ratel service to the Internet as follows:
+2.  To expose Alpha and Ratel services to the Internet use:
 
 ```sh
-helm install my-release dgraph/dgraph --set alpha.service.type="LoadBalancer" --set ratel.service.type="LoadBalancer"
+helm install <RELEASE-NAME> dgraph/dgraph --set alpha.service.type="LoadBalancer" --set ratel.service.type="LoadBalancer"
 ```
 
 ##### Private Internal Network
@@ -258,10 +260,12 @@ An external load balancer can be configured to face internally to a private subn
 |Google Cloud|[GKE: Internal Load Balancing](https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balancing)|`cloud.google.com/load-balancer-type: "Internal"`|
 
 
-As an example, using Amazon [EKS](https://aws.amazon.com/eks/) as the provider, you could create a Helm chart configuration values like this below: 
+As an example, using Amazon [EKS](https://aws.amazon.com/eks/) as the provider.
+
+1. Create a Helm chart configuration values file `<MY-CONFIG-VALUES>`.yaml file: 
 
 ```yaml
-# my-config-values.yaml
+# <MY-CONFIG-VALUES>.yaml
 alpha:
   service:
     type: LoadBalancer
@@ -274,20 +278,22 @@ ratel:
       service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 ```
 
-And then expose Alpha and Ratel services privately:
+1. To expose Alpha and Ratel services privately, use:
 
 ```sh
-helm install my-release dgraph/dgraph --values my-config-values.yaml
+helm install <RELEASE-NAME> dgraph/dgraph --values <MY-CONFIG-VALUES>.yaml
 ```
 {{% /tab %}}
 {{% tab "Ingress Resource" %}}
 
 You can expose Alpha and Ratel using an [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource that can route traffic to service resources.  Before using this option you may need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) first, as is the case with [AKS](https://docs.microsoft.com/azure/aks/) and [EKS](https://aws.amazon.com/eks/), while in the case of [GKE](https://cloud.google.com/kubernetes-engine), this comes bundled with a default ingress controller.  When routing traffic based on the `hostname`, you may want to integrate an addon like [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) so that DNS records can be registered automatically when deploying Dgraph.
 
-As an example, you can configure a single ingress resource that uses [ingress-nginx](https://github.com/kubernetes/ingress-nginx) for Alpha and Ratel services, by creating Helm chart configuration values like this below:
+As an example, you can configure a single ingress resource that uses [ingress-nginx](https://github.com/kubernetes/ingress-nginx) for Alpha and Ratel services.
+
+1.  Create a Helm chart configuration values file, `<MY-CONFIG-VALUES>`.yaml file:
 
 ```yaml
-# my-config-values.yaml
+# <MY-CONFIG-VALUES>.yaml
 global:
   ingress:
     enabled: false
@@ -297,13 +303,13 @@ global:
     alpha_hostname: "alpha.<my-domain-name>"
 ```
 
-And then expose Alpha and Ratel services through an ingress:
+2. To expose Alpha and Ratel services through an ingress:
 
 ```sh
-helm install my-release dgraph/dgraph --values my-config-values.yaml
+helm install <RELEASE-NAME> dgraph/dgraph --values <MY-CONFIG-VALUES>.yaml
 ```
 
-Afterward you can run `kubectl get ingress` to see the status and access these through their hostname, such as `http://alpha.<my-domain-name>` and `http://ratel.<my-domain-name>`
+You can run `kubectl get ingress` to see the status and access these through their hostname, such as `http://alpha.<my-domain-name>` and `http://ratel.<my-domain-name>`
 
 
 {{% notice "tip" %}}Ingress controllers will likely have an option to configure access for private internal networks.  Consult documentation from the ingress controller provider for further information.{{% /notice %}}
@@ -327,12 +333,12 @@ To upgrade to an [HA cluster setup]({{< relref "#ha-cluster-setup-using-kubernet
 1. Ensure that the shard replication setting is more than one and `zero.shardReplicaCount`. For example, set the shard replica flag on the Zero node group to 3,`zero.shardReplicaCount=3`.
 2. Run the Helm upgrade command to restart the Zero node group:
    ```sh
-   helm upgrade my-release dgraph/dgraph [options]
+   helm upgrade <RELEASE-NAME> dgraph/dgraph [options]
    ```
 3. Set the Alpha replica count flag. For example: `alpha.replicaCount=3`.
 4. Run the Helm upgrade command again:
    ```sh
-   helm upgrade my-release dgraph/dgraph [options]
+   helm upgrade <RELEASE-NAME> dgraph/dgraph [options]
    ```
 
 

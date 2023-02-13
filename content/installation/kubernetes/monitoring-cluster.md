@@ -10,11 +10,9 @@ weight = 4
 
 ## Monitoring in Kubernetes
 
-Dgraph exposes Prometheus metrics to monitor the state of various components involved in the cluster, including Dgraph Alpha and Zero nodes.
+Dgraph exposes Prometheus metrics to monitor the state of various components involved in the cluster, including Dgraph Alpha and Zero nodes. You can setup Prometheus monitoring for your cluster.
 
-Below are instructions to setup Prometheus monitoring for your cluster. This solution has the following parts:
-
-* [prometheus-operator](https://coreos.com/blog/the-prometheus-operator.html) - a Kubernetes operator to install and configure Prometheus and Alert Manager.
+* [prometheus-operator](https://prometheus-operator.dev/) - a Kubernetes operator to install and configure Prometheus and Alert Manager.
 * [Prometheus](https://prometheus.io/) - the service that will scrape Dgraph for metrics
 * [AlertManager](https://prometheus.io/docs/alerting/latest/alertmanager/) - the service that will trigger alerts to a service (Slack, PagerDuty, etc) that you specify based on metrics exceeding threshold specified in Alert rules.
 * [Grafana](https://grafana.com/) - optional visualization solution that will use Prometheus as a source to create dashboards.
