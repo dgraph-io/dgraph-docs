@@ -10,7 +10,7 @@ A minimal implementation for a Dgraph client for Java 1.8 and above, using [gRPC
 This client follows the [Dgraph Go client]({{< relref "go.md" >}}) closely.
 
 {{% notice "tip" %}}
-The official Java client [can be found here](https://github.com/dgraph-io/dgraph4j). 
+The official Java client [can be found here](https://github.com/dgraph-io/dgraph4j).
 Follow the [install instructions](https://github.com/dgraph-io/dgraph4j#download) to get it up and running.
 {{% /notice %}}
 
@@ -35,7 +35,7 @@ be found in the [Using the Asynchronous Client](#using-the-asynchronous-client) 
 ## Using the Synchronous Client
 
 {{% notice "tip" %}}
-You can find a [DgraphJavaSample](https://github.com/dgraph-io/dgraph4j/tree/master/samples/DgraphJavaSample) project, 
+You can find a [DgraphJavaSample](https://github.com/dgraph-io/dgraph4j/tree/master/samples/DgraphJavaSample) project,
 which contains an end-to-end working example of how to use the Java client.
 {{% /notice %}}
 
@@ -154,7 +154,7 @@ dgraphClient.alter(operation);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can call the function `setRunInBackground(true)` as shown below before
 calling `alter`. You can find more details
-[here]({{< relref "/query-language/schema.md#indexes-in-background" >}}).
+[here]({{< relref "/predicate-types.md#indexes-in-background" >}}).
 
 ```java
 String schema = "name: string @index(exact) .";
@@ -357,7 +357,7 @@ txn.doRequest(request);
 
 ### Running a Query with RDF response
 
-You can get query results as an RDF response by calling either `queryRDF()` or `queryRDFWithVars()`. 
+You can get query results as an RDF response by calling either `queryRDF()` or `queryRDFWithVars()`.
 The response contains the `getRdf()` method, which will provide the RDF encoded output.
 
 **Note**: If you are querying for `uid` values only, use a JSON format response
@@ -510,7 +510,7 @@ Here is the asynchronous version of the code above, which runs a query.
 
 ```java
 // Query
-String query = 
+String query =
 "query all($a: string){\n" +
 "  all(func: eq(name, $a)) {\n" +
 "    name\n" +
