@@ -170,7 +170,7 @@ be used in all subsequent interactions with Dgraph for this transaction, and so
 should become part of the transaction state.
 
 ## Run a Mutation
-
+Mutations can be done over HTTP by making a `POST` request to an Alpha's `/mutate` endpoint.
 Now that we have the current balances, we need to send a mutation to Dgraph
 with the updated balances. If Bob transfers $10 to Alice, then the RDFs to send
 are:
@@ -234,6 +234,7 @@ The result:
 We get some `keys`. These should be added to the set of `keys` stored in the
 transaction state. We also get some `preds`, which should be added to the set of
 `preds` stored in the transaction state.
+
 
 ## Committing the transaction
 

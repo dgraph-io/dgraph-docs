@@ -385,8 +385,6 @@ The `txn.doRequest` function allows you to run upserts consisting of one query a
 one mutation. Variables can be defined in the query and used in the mutation.
 You could also use `txn.doRequest` to perform a query followed by a mutation.
 
-To know more about upsert, we highly recommend going through the docs at
-[upsert-block]({{< relref "mutations/upsert-block.md" >}}).
 
 ```java
 String query = "query {\n" +
@@ -408,7 +406,7 @@ txn.doRequest(request);
 The upsert block also allows specifying a conditional mutation block using an `@if` directive. The mutation is executed
 only when the specified condition is true. If the condition is false, the mutation is silently ignored.
 
-See more about Conditional Upsert [Here]({{< relref "mutations/conditional-upsert.md" >}}).
+See more about Conditional Upsert [Here]({{< relref "dql-mutation.md#conditional-upsert" >}}).
 
 ```java
 String query = "query {\n" +
