@@ -22,8 +22,18 @@ Ensure that you have installed:
  * Docker [Engine](https://docs.docker.com/engine/install/)
 
 
-#### Using Docker
-To setup a Dgraph cluster on a single host using Docker:
+#### Launch a Dgraph standalone cluster using Docker
+1.  Select a name `<CONTAINER_NAME>` for you Docker container and create a directory `<GRAPH_DATA_PATH>` that will hold the Dgraph data on your local file system.
+1.  Run a container with the dgraph/standalone image:
+    ```sh
+       docker run --name <CONTAINER_NAME> -d -p "8080:8080" -p "9080:9080" -v <DGRAPH_DATA_PATH>:/dgraph dgraph/standalone:latest
+    ```
+1. Optionaly launch [Ratel UI]({{< relref "ratel/overview.md" >}}) using the dgraph/ratel docker image :
+    ``` sh
+    docker run --name ratel  -d -p "8000:8000"  dgraph/ratel:latest
+    ```
+You can now use Ratel UI on your browser at localhost:8000 and connect to you Dgraph cluster at localhost:8080
+#### Setup a Dgraph cluster on a single host using Docker
 
 1. Get the `<IP_ADDRESS>` of the host using:
    ```sh
