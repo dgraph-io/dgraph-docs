@@ -1,9 +1,9 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Schema"
-weight = 20
+title = "Predicate types"
+weight = 3
 [menu.main]
-    parent = "query-language"
+    parent = "dql"
 +++
 
 For each predicate, the schema specifies the target's type.  If a predicate `p` has type `T`, then for all subject-predicate-object triples `s p o` the object `o` is of schema type `T`.
@@ -258,7 +258,7 @@ email: string @index(exact) @noconflict .
 
 Dgraph supports a number of [RDF]({{< relref "dql-rdf.md" >}}) types.
 
-As well as implying a schema type for a [first mutation]({{< relref "query-language/schema.md" >}}), an RDF type can override a schema type for storage.
+As well as implying a schema type for a first mutation, an RDF type can override a schema type for storage.
 
 If a predicate has a schema type and a mutation has an RDF type with a different underlying Dgraph type, the convertibility to schema type is checked, and an error is thrown if they are incompatible, but the value is stored in the RDF type's corresponding Dgraph type.  Query results are always returned in schema type.
 
@@ -381,7 +381,7 @@ Incorrect index choice can impose performance penalties and an increased
 transaction conflict rate. Use only the minimum number of and simplest indexes
 that your application needs.
 {{% /notice %}}
- 
+
 ### DateTime Indices
 
 The indices available for `dateTime` are as follows.

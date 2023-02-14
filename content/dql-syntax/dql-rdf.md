@@ -78,10 +78,10 @@ The supported [RDF datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Data
 | &#60;http&#58;//www.w3.org/2001/XMLSchema#float&#62;            | `float`          |
 
 
-See the section on [RDF schema types]({{< relref "query-language/schema.md#rdf-types" >}}) to understand how RDF types affect mutations and storage.
+
 
 ### Facets
-####  Creating a list with facets 
+####  Creating a list with facets
 
 ```sh
 {

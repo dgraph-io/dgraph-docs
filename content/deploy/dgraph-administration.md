@@ -87,7 +87,7 @@ This would allow admin operations from hosts with hostnames `admin-bastion` and 
 By default, you can perform mutation operations for any predicate.
 If the predicate in mutation doesn't exist in the schema,
 the predicate gets added to the schema with an appropriate
-[Dgraph Type]({{< relref "query-language/schema.md" >}}).
+[Dgraph Type]({{< relref "predicate-types.md" >}}).
 
 You can use `--limit "mutations=disallow"` to disable all mutations,
 which is set to `allow` by default.
