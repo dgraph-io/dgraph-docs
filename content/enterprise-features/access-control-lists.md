@@ -522,7 +522,7 @@ mutation {
 }
 ```
 
-In case you have [reverse edges]({{< relref "query-language/schema.md#reverse-edges" >}}), they have to be given the permission to the group as well
+In case you have [reverse edges]({{< relref "predicate-types.md#reverse-edges" >}}), they have to be given the permission to the group as well
 
 ```graphql
 mutation {
