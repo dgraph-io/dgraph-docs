@@ -1,6 +1,6 @@
 +++
-title = "GraphQL"
-description = "Find everything you need to know about using GraphQL with Dgraph Database. GraphQL doesn't have to be hard - these docs explain how to make it easy."
+title = "GraphQL API"
+description = "Generate a GraphQL API and a graph backend from a single GraphQL schema."
 [menu.main]
   identifier = "graphql"
   weight = 3

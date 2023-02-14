@@ -17,7 +17,7 @@ Both the terminologies get used interchangeably in our code. Dgraph considers ed
 i.e. from `Subject -> Object`. This is the direction that the queries would be run.
 
 {{% notice "tip" %}}Dgraph can automatically generate a reverse edge. If the user wants to run
-queries in that direction, they would need to define the [reverse edge]({{< relref "query-language/schema.md#reverse-edges" >}})
+queries in that direction, they would need to define the [reverse edge]({{< relref "predicate-types.md#reverse-edges" >}})
 as part of the schema.{{% /notice %}}
 
 Internally, the RDF N-Quad gets parsed into this format.

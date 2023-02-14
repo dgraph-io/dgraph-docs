@@ -1,231 +1,154 @@
 +++
-title = "Get Started - Quickstart Guide"
+title = "Quick Start"
 aliases = ["/get-started-old"]
 [menu.main]
-  name = "Get Started"
+  name = "Quick Start"
   identifier = "get-started"
   parent = "dql"
-  weight = 2
+  weight = 1
 +++
 
-{{% notice "note" %}}
-This is a quick start guide.
-You can find the getting started tutorial series [here]({{< relref "tutorials/index.md" >}}).
-{{% /notice %}}
-
-## Dgraph
-
-Designed from the ground up to be run in production, **Dgraph** is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
+This is a quick start guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
 
 
-Dgraph cluster consists of different nodes (Zero, Alpha), and each node serves a
-different purpose.
+This guide helps you:
 
-- **Dgraph Zero** controls the Dgraph cluster, assigns servers to a group,
-and re-balances data between server groups.
+* Understand how JSON data are represented as a graph
+* Query the graph using DQL
+* Use indexes
 
-- **Dgraph Alpha** hosts predicates and indexes. Predicates are either the properties
-associated with a node or the relationship between two nodes. Indexes are the tokenizers
-that can be associated with the predicates to enable filtering using appropriate functions.
 
-- **Ratel** serves the UI to run queries, mutations & altering schema.
+## Step 1: Run Dgraph
 
-You need at least one Dgraph Zero and one Dgraph Alpha to get started.
+The easiest way to get Dgraph up and running is using the [Dgraph Cloud](https://cloud.dgraph.io).  
+You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitHub** or any other email account that you prefer to use.
 
-**Here's a four-step tutorial to get you up and running.**
+1. In the Dgraph cloud console, click **Launch new backend**.
+1. Select a plan, cloud provider, and region that meets your requirements.
+1. Type a name for your Dgraph cloud instance.
+1. Click **Launch**  
+1. Click **Ratel** to access the UI that provides browser-based queries, mutations and visualizations.
 
-This is a quick-start guide to running Dgraph.
-For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
+## Step 2: Run Mutation
 
-{{% notice "tip" %}}
-This guide is for the powerful query language of Dgraph, [DQL](https://dgraph.io/docs/main/query-language/#graphql)
-which is a variation of a query language created by Facebook, [GraphQL](https://graphql.org/).
+The create, update, and delete operations in Dgraph are called mutations.
 
-You can find the instructions to get started with GraphQL from
-[dgraph.io/graphql](https://dgraph.io/graphql).
-{{% /notice %}}
+Ratel makes it easier to run queries and mutations.
 
-### Step 1: Run Dgraph
+1. In the **Console** page, select **Mutate** tab.
+2. Paste the following:
 
-There are several ways to install and run Dgraph, all of which
-you can find in the [Download page](https://dgraph.io/downloads)
 
-The easiest way to get Dgraph up and running is using the `dgraph/standalone` docker image.
-Follow the instructions [here](https://docs.docker.com/install) to install
-Docker if you don't have it already.
-
-```sh
-docker run --rm -it -p "8080:8080" -p "9080:9080" -v ~/dgraph:/dgraph "dgraph/standalone:{{< version >}}"
+```dql
+   {
+   "set": [
+     {
+       "name":"Star Wars: Episode IV - A New Hope",
+       "release_date": "1977-05-25",
+       "director": {
+         "name": "George Lucas",
+         "dgraph.type": "Person"
+       },
+       "starring" : [
+         {
+           "name": "Luke Skywalker"
+         },
+         {
+           "name": "Princess Leia"
+         },
+         {
+           "name": "Han Solo"
+         }
+       ]
+     },
+     {
+       "name":"Star Trek: The Motion Picture",
+       "release_date": "1979-12-07"
+     }
+   ]
+ }  
 ```
-{{% notice "note" %}}This standalone image is meant for quickstart purposes only.
-It is not recommended for production environments.
-{{% /notice %}}
 
-This would start a single container with **Dgraph Alpha** and **Dgraph Zero** running in it.
-You would find the Dgraph data stored in a folder named *dgraph* of your *home directory*.
+The input data is in JSON Format. Dgraph also supports [RDF]({{<relref "dgraph-glossary.md#RDF">}}) notation.
 
-### Step 2: Run Mutation
+The sample JSON data is an array of two movies with some attributes. These are stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
-{{% notice "tip" %}}
-Once Dgraph is running, you can access **Ratel** at
-https://play.dgraph.io. It allows browser-based
-queries, mutations and visualizations. You can connect Ratel with your Dgraph
-cluster by putting in your Dgraph Alpha address (`http://localhost:8080`) inside the
-**Dgraph Server URL** box in Ratel. To learn more, see the docs on Ratel's [Connection]({{< relref "ratel/connection.md"
->}}). 
+There will be stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
-You can run the mutations and queries below from either curl in the command line
-or by pasting the mutation data in **Ratel**.
-{{% /notice %}}
-#### Dataset
-The dataset is a movie graph, where the graph nodes are
-entities of the type directors, actors, genres, or movies.
+The "Star Wars" movie has a `director` field which is an JSON object and a `starring` field which is an array of JSON objects.
+Each object is also stored as a Node in Dgraph . The `director` and `starring` are stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
 
-#### Storing data in the graph
-Changing the data stored in Dgraph is a mutation. Dgraph as of now supports
-mutation for two kinds of data: RDF and JSON. The following RDF mutation
-stores information about the first three releases of the the ''Star Wars''
-series and one of the ''Star Trek'' movies. Running the RDF mutation, either
-through the curl or Ratel UI's mutate tab will store the data in Dgraph.
 
-```sh
-curl "localhost:8080/mutate?commitNow=true" --silent --request POST \
- --header  "Content-Type: application/rdf" \
- --data $'
+3. Click **Run** to execute the mutation.
+
+View the Dgraph response in the JSON tab:
+
+```dql
 {
-  set {
-   _:luke <name> "Luke Skywalker" .
-   _:luke <dgraph.type> "Person" .
-   _:leia <name> "Princess Leia" .
-   _:leia <dgraph.type> "Person" .
-   _:han <name> "Han Solo" .
-   _:han <dgraph.type> "Person" .
-   _:lucas <name> "George Lucas" .
-   _:lucas <dgraph.type> "Person" .
-   _:irvin <name> "Irvin Kernshner" .
-   _:irvin <dgraph.type> "Person" .
-   _:richard <name> "Richard Marquand" .
-   _:richard <dgraph.type> "Person" .
+  "data": {
+    "code": "Success",
+    "message": "Done",
+    "queries": null,
+    "uids": {
+      "dg.1119451236.100": "0xfffd8d726c1de414",
+      "dg.1119451236.101": "0xfffd8d726c1de40f",
+      "dg.1119451236.102": "0xfffd8d726c1de410",
+      "dg.1119451236.103": "0xfffd8d726c1de411",
+      "dg.1119451236.104": "0xfffd8d726c1de412",
+      "dg.1119451236.99": "0xfffd8d726c1de413"
+    }
+  }, ...
+  ```
 
-   _:sw1 <name> "Star Wars: Episode IV - A New Hope" .
-   _:sw1 <release_date> "1977-05-25" .
-   _:sw1 <revenue> "775000000" .
-   _:sw1 <running_time> "121" .
-   _:sw1 <starring> _:luke .
-   _:sw1 <starring> _:leia .
-   _:sw1 <starring> _:han .
-   _:sw1 <director> _:lucas .
-   _:sw1 <dgraph.type> "Film" .
+Dgraph displays the universal identifiers ([UID]({{<relref "dgraph-glossary.md#uid">}})) of the nodes that were created.
 
-   _:sw2 <name> "Star Wars: Episode V - The Empire Strikes Back" .
-   _:sw2 <release_date> "1980-05-21" .
-   _:sw2 <revenue> "534000000" .
-   _:sw2 <running_time> "124" .
-   _:sw2 <starring> _:luke .
-   _:sw2 <starring> _:leia .
-   _:sw2 <starring> _:han .
-   _:sw2 <director> _:irvin .
-   _:sw2 <dgraph.type> "Film" .
+## Step 3: First query
+1.   In the **Console** page, select **Query** tab and run this query:
 
-   _:sw3 <name> "Star Wars: Episode VI - Return of the Jedi" .
-   _:sw3 <release_date> "1983-05-25" .
-   _:sw3 <revenue> "572000000" .
-   _:sw3 <running_time> "131" .
-   _:sw3 <starring> _:luke .
-   _:sw3 <starring> _:leia .
-   _:sw3 <starring> _:han .
-   _:sw3 <director> _:richard .
-   _:sw3 <dgraph.type> "Film" .
-
-   _:st1 <name> "Star Trek: The Motion Picture" .
-   _:st1 <release_date> "1979-12-07" .
-   _:st1 <revenue> "139000000" .
-   _:st1 <running_time> "132" .
-   _:st1 <dgraph.type> "Film" .
-  }
-}
-' | python -m json.tool | less
+```dql
+   {
+    movies(func: has(release_date)) {
+    name
+    director { name }
+    starring { name }
+     }
+    }
 ```
+The query lists all movies that have a `release_date` and for each, it looks for the  `director` and `starring` relations and provides the name   attribute of the related nodes if any.
 
-{{% notice "tip" %}}
-To run an RDF/JSON mutation using a file via curl, you can use the curl option
-`--data-binary @/path/to/mutation.rdf` instead of `--data $''`.
-The `--data-binary` option skips curl's default URL-encoding which includes removal of all newlines. thus
-By using the data binary option you enable the use of `#` comments in the text since with the `--data` option, anything after the first `#` in the text would appear on the same line and therefore be taken as one long comment.
-{{% /notice %}}
+2.   In the response panel, select **Graph**, to view a Graph output:
 
-### Step 3: Alter Schema
+{{<figure class="smallimage" src="/images/dql-quickstart/img1.png" title="Query result" alt="Query result in GraphQL">}}
+
+## Step 4: Alter Schema
 
 Alter the schema to add indexes on some of the data so queries can use term matching, filtering and sorting.
 
-```sh
-curl "localhost:8080/alter" --silent --request POST \
-  --data $'
-name: string @index(term) .
-release_date: datetime @index(year) .
-revenue: float .
-running_time: int .
-starring: [uid] .
-director: [uid] .
+1.    In the **Schema** page, select **Predicates**.
+      Dgraph creates and displays the predicates `name`, `release-date`,`director` and `starring`.
+      A [predicate]({{<relref "dgraph-glossary.md#predicate">}}) is Dgraph internal representation of a node attribute or a relation.
+2.    Select the `name` predicate. Ratel displays details about the predicate type and indexes.
+3.    Select **index** and select **term** for `name` predicate.
+4.    Click **Update** to apply the index.
 
-type Person {
-  name
-}
+{{<figure class="smallimage" src="/images/dql-quickstart/predicate-name.png" title="Adding an index" alt="Add index in Ratel">}}
 
-type Film {
-  name
-  release_date
-  revenue
-  running_time
-  starring
-  director
-}
-' | python -m json.tool | less
-```
+Set the index for the `release_date`:
+1.    Select `release_date` predicate.
+2.    Change the type to **date**
+3.    Select **index** and choose **year** for the index type.
+4.    Click **Update** to apply the index on the `release-date` predicate.
 
-{{% notice "tip" %}}
-To submit the schema from the Ratel UI, go to Schema page,
-click on **Bulk Edit**, and paste the schema.
-{{% /notice %}}
 
-### Step 4: Run Queries
+## Step 5: Queries using indexes
 
-#### Get all movies
-Run this query to get all the movies. The query lists all movies that have a
-`starring` edge.
+Let's get the movies having the term "Star" in their name and released before "1979".
 
-{{% notice "tip" %}}
-You can also run the DQL query from the Query tab in the Ratel UI.
-{{% /notice %}}
+In the **Console** page select **Query** tab and run this query:
 
-```sh
-curl "localhost:8080/query" --silent --request POST \
-  --header "Content-Type: application/dql" \
-  --data $'
+```dql
 {
- me(func: has(starring)) {
-   name
-  }
-}
-' | python -m json.tool | less
-```
-
-{{% notice "note" %}}
-GraphQL+- has been renamed to Dgraph Query Language (DQL). While `application/dql`
-is the preferred value for the `Content-Type` header, we will continue to support
-`Content-Type: application/graphql+-` to avoid making breaking changes.
-{{% /notice %}}
-
-#### Get all movies released after "1980"
-Run this query to get "Star Wars" movies released after "1980".
-Try it in the user interface to see the result as a graph.
-
-```sh
-curl "localhost:8080/query" --silent --request POST \
-  --header "Content-Type: application/dql" \
-  --data $'
-{
-  me(func: allofterms(name, "Star Wars"), orderasc: release_date) @filter(ge(release_date, "1980")) {
+  me(func: allofterms(name, "Star"), orderasc: release_date) @filter(lt(release_date, "1979")) {
     name
     release_date
     revenue
@@ -238,76 +161,22 @@ curl "localhost:8080/query" --silent --request POST \
     }
   }
 }
-' | python -m json.tool | less
 ```
 
-Output:
+Observe the JSON result and the graph result.
 
-```json
-{
-  "data":{
-    "me":[
-      {
-        "name":"Star Wars: Episode V - The Empire Strikes Back",
-        "release_date":"1980-05-21T00:00:00Z",
-        "revenue":534000000.0,
-        "running_time":124,
-        "director":[
-          {
-            "name":"Irvin Kernshner"
-          }
-        ],
-        "starring":[
-          {
-            "name":"Han Solo"
-          },
-          {
-            "name":"Luke Skywalker"
-          },
-          {
-            "name":"Princess Leia"
-          }
-        ]
-      },
-      {
-        "name":"Star Wars: Episode VI - Return of the Jedi",
-        "release_date":"1983-05-25T00:00:00Z",
-        "revenue":572000000.0,
-        "running_time":131,
-        "director":[
-          {
-            "name":"Richard Marquand"
-          }
-        ],
-        "starring":[
-          {
-            "name":"Han Solo"
-          },
-          {
-            "name":"Luke Skywalker"
-          },
-          {
-            "name":"Princess Leia"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
+You can play with the release date and the search terms conditions to see Dgraph search and filtering in action.
 
-That's it! In these four steps, we set up Dgraph, added some
-data, set a schema and queried that data back.
+
+In these five steps, you set up Dgraph, added some data, visualized it as a graph, added indexes and queried the data .
 
 ## Where to go from here
 
-- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to
-communicate with Dgraph from your application.
 - Take the [Tour](https://dgraph.io/tour/) for a guided tour of how to write queries in Dgraph.
 - A wider range of queries can also be found in the
 [Query Language]({{< relref "query-language/_index.md" >}}) reference.
-- See [Deploy]({{< relref "deploy/_index.md" >}}) if you wish to run Dgraph
-  in a cluster.
+- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to
+communicate with Dgraph from your application.
 
 ## Need Help
 
