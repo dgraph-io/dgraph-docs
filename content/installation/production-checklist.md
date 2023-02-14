@@ -6,7 +6,7 @@ weight = 2
     parent = "installation"
 +++
 
-This guide describes important setup recommendations for a production-ready Dgraph cluster.
+This guide describes important setup recommendations for a production-ready Dgraph cluster, ensuring high availability with external persistent storage, automatic recovery of failed services, automatic recovery of failed systems such as virtual machines, and disaster recovery such as backup/restore or export/import with automation.
 
 {{% notice "note" %}}
 In this guide, a node refers to a Dgraph instance unless specified otherwise.
