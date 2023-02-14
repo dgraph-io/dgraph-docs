@@ -507,7 +507,7 @@ endpoint with the following format:
 mutation{
   restore(input:{
     location: "/path/to/backup/directory",
-    backupId: "id_of_backup_to_restore"'
+    backupId: "id_of_backup_to_restore"
   }){
     message
     code
