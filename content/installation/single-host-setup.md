@@ -6,9 +6,6 @@ weight = 3
     parent = "installation"
 +++
 
-  For a deploy Dgraph in a production environment you need to ensure high availability with external persistent storage, automatic recovery of failed services, automatic recovery of failed systems such as virtual machines, and highly recommended disaster recovery such as backup/restore or export/import with automation.
-  
-### Install Dgraph
 To learn about Dgraph and the components, you can install and run Dgraph cluster on a single host using Docker, Docker Compose, or Dgraph command line.
 
 {{% tabs %}} {{< tab "Docker" >}}
