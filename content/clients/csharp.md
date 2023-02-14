@@ -153,7 +153,6 @@ Console.Write(res.Value.Json);
 
 The `Transaction.Mutate` function allows you to run upserts consisting of one query and one mutation. 
 
-To know more about upsert, we highly recommend going through the [upsert block documentation]({{< relref "upsert-block.md" >}}).
 
 ```c#
 var query = @"

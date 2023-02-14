@@ -1,32 +1,13 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Upsert Block"
-weight = 11
+title = "uid function in upsert"
+weight = 1
 [menu.main]
     parent = "mutations"
 +++
 
-The upsert block allows performing queries and mutations in a single request. The upsert
-block contains one query block and one or more than one mutation blocks. Variables defined
+The upsert block contains one query block and mutation blocks. Variables defined
 in the query block can be used in the mutation blocks using the `uid` and `val` function.
-
-In general, the structure of the upsert block is as follows:
-
-```
-upsert {
-  query <query block>
-  [fragment <fragment block>]
-  mutation <mutation block 1>
-  [mutation <mutation block 2>]
-  ...
-}
-```
-
-Execution of an upsert block also returns the response of the query executed on the state
-of the database *before mutation was executed*. To get the latest result, we should commit
-the mutation and execute another query.
-
-## `uid` Function
 
 The `uid` function allows extracting UIDs from variables defined in the query block.
 There are two possible outcomes based on the results of executing the query block:
@@ -34,14 +15,6 @@ There are two possible outcomes based on the results of executing the query bloc
 * If the variable is empty i.e. no node matched the query, the `uid` function returns a new UID in case of a `set` operation and is thus treated similar to a blank node. On the other hand, for `delete/del` operation, it returns no UID, and thus the operation becomes a no-op and is silently ignored. A blank node gets the same UID across all the mutation blocks.
 * If the variable stores one or more than one UIDs, the `uid` function returns all the UIDs stored in the variable. In this case, the operation is performed on all the UIDs returned, one at a time.
 
-## `val` Function
-
-The `val` function allows extracting values from value variables. Value variables store
-a mapping from UIDs to their corresponding values. Hence, `val(v)` is replaced by the value
-stored in the mapping for the UID (Subject) in the N-Quad. If the variable `v` has no value
-for a given UID, the mutation is silently ignored. The `val` function can be used with the
-result of aggregate variables as well, in which case, all the UIDs in the mutation would
-be updated with the aggregate value.
 
 ## Example of `uid` Function
 
@@ -195,68 +168,9 @@ curl -H "Content-Type: application/json" -X POST localhost:8080/mutate?commitNow
 ```
 
 If we want to execute the mutation only when the user exists, we could use
-[Conditional Upsert]({{< relref "mutations/conditional-upsert.md" >}}).
+[Conditional Upsert]({{< relref "dql-mutation.md#conditional-upsert" >}}).
 
-## Example of `val` Function
 
-Let's say we want to migrate the predicate `age` to `other`. We can do this using the
-following mutation:
-
-```sh
-curl -H "Content-Type: application/rdf" -X POST localhost:8080/mutate?commitNow=true -d $'
-upsert {
-  query {
-    v as var(func: has(age)) {
-      a as age
-    }
-  }
-
-  mutation {
-    # we copy the values from the old predicate
-    set {
-      uid(v) <other> val(a) .
-    }
-
-    # and we delete the old predicate
-    delete {
-      uid(v) <age> * .
-    }
-  }
-}' | jq
-```
-
-Result:
-
-```json
-{
-  "data": {
-    "code": "Success",
-    "message": "Done",
-    "uids": {}
-  },
-  "extensions": {...}
-}
-```
-
-Here, variable `a` will store a mapping from all the UIDs to their `age`. The mutation
-block then stores the corresponding value of `age` for each UID in the `other` predicate
-and deletes the `age` predicate.
-
-We can achieve the same result using `json` dataset as follows:
-
-```sh
-curl -H "Content-Type: application/json" -X POST localhost:8080/mutate?commitNow=true -d $'{
-  "query": "{ v as var(func: regexp(email, /.*@company1.io$/)) }",
-  "delete": {
-    "uid": "uid(v)",
-    "age": null
-  },
-  "set": {
-    "uid": "uid(v)",
-    "other": "val(a)"
-  }
-}' | jq
-```
 
 ## Bulk Delete Example
 

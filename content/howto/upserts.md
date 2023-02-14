@@ -50,7 +50,7 @@ whichever way you wish.
 
 You can also use the `Upsert Block` in DQL to achieve the upsert procedure in a single
  mutation. The request will contain both the query and the mutation as explained
-[here]({{< relref "mutations/upsert-block.md" >}}).
+[here]({{< relref "dql-mutation.md#Update data with upsert block" >}}).
 
 In GraphQL, you can use the `upsert` input variable in an `add` mutation, as explained [here]({{< relref "graphql/mutations/upsert.md">}}).
 

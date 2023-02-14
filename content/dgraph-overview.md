@@ -29,15 +29,15 @@ The difference with Dgraph is that no resolvers or custom queries are needed. Si
 
 For complex queries that the GraphQL specification does not support, Dgraph provides a query language called "DQL" which is inspired by GraphQL, but includes more features. With GraphQL simple use cases remain simple, and with DQL more complex cases become possible.
 
-<!-- TODO: too long. move this part below to GraphQL page 
+<!-- TODO: too long. move this part below to GraphQL page
    Our GraphQL feature allows GraphQL users to get started immediately - simply define a schema and Dgraph automatically builds out CRUD and query APIs. Dgraph works as a standards-compliant GraphQL server, so many web and app developers may not know (or care) that Dgraph is a powerful graph database as well.
 
    As a native GraphQL database, Dgraph doesn’t have a relational database running in the background, or complex resolvers to map between database and GraphQL schemas. We often call this "single-schema development." The big time savings is that there are no GraphQL resolvers or custom queries needed to get started. All GraphQL fields are "resolved" simply by following our graph database edges to required fields. With single-schema development, you can change your GraphQL schema, insert data, and call your new APIs in seconds, not hours.
 
    If you are a SQL user, check out:
 
-   [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/). 
-   
+   [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
+
    Read more about the motivations for GraphQL and how Facebook still uses it to provide generic yet efficient data access in [the original annoucement of the spec from Facebook](https://engineering.fb.com/2015/09/14/core-data/graphql-a-data-query-language/).
 -->
 ## The Graph Model - Nodes, Relationships and Values
@@ -63,11 +63,11 @@ This JSON structure succinctly represents rich data:
 - **Facet** metadata: the Address relation is qualified with a property specifying the Address relationship started on February 20, 2022.
 -->
 
-Dgraph supports [JSON]({{< relref "mutations/json-mutation-format" >}}) data as both a return structure and an insert/update format. In Dgraph JSON nesting represents relations among nodes, so `{ "name":"Bob", "homeAddress": { "Street":"123 Main st" } }` efficiently and intuitively represents a Person node, an Address node, and a relation (called "homeAddress") between them. 
+Dgraph supports [JSON]({{< relref "json-mutation-format.md" >}}) data as both a return structure and an insert/update format. In Dgraph JSON nesting represents relations among nodes, so `{ "name":"Bob", "homeAddress": { "Street":"123 Main st" } }` efficiently and intuitively represents a Person node, an Address node, and a relation (called "homeAddress") between them.
 
-In addition, Dgraph supports [RDF triples]({{< relref "mutations/triples/" >}}) as an input and outpup format. 
+In addition, Dgraph supports [RDF triples]({{< relref "dql-rdf.md" >}}) as an input and outpup format. 
 
-Dgraph relationships are directed links between nodes, allowing optimized traversal from node to node. Dgraph allows a bidirectional relation via directed relationships in both directions if desired. 
+Dgraph relationships are directed links between nodes, allowing optimized traversal from node to node. Dgraph allows a bidirectional relation via directed relationships in both directions if desired.
 
 ## Application developers and data engineers work together seamlessly
 Dgraph allows a particularly smoooth interaction among data teams or experts and data consumers. GraphQL's flexibility empowers data consumers to get exactly the data they want, in the format they want it, at the speed they need, without writing custom REST APIs or understanding a new graph query language.
@@ -78,11 +78,11 @@ Database experts can focus on the data, schema and indexes, without maintaining 
 
  - **Shared Instance**: Dgraph Cloud with [shared instances](https://dgraph.io/graphql) is a
 fully-managed graph database service that lets you focus on building apps, not
-managing infrastructure. This is a fast and easy way to get started with GraphQL, and does not require any graph database knowledge to start and run. 
+managing infrastructure. This is a fast and easy way to get started with GraphQL, and does not require any graph database knowledge to start and run.
 
     Shared instances run in a common database using Dgraph multi-tenancy. Your data is protected but you share resources and will have limited scale.
 
-    Try the [Introduction to GraphQL](https://dgraph.io/tour/graphqlintro/2/) tutorial to define a GraphQL schema, insert and query data in just a few minutes. 
+    Try the [Introduction to GraphQL](https://dgraph.io/tour/graphqlintro/2/) tutorial to define a GraphQL schema, insert and query data in just a few minutes.
 
 - **Dedicated instances** run on their own dedicated hardware to ensure consistent performance. This option extends the capabilities of the lower-cost shared instances to support enterprise, production workloads, and includes a high availability option.
 
@@ -101,7 +101,7 @@ In addition, people use common tools to define schemas, load data, and query the
 
 - **Ratel** Ratel is a GUI app from Dgraph that runs DQL queries and mutations, and allows schema viewing and editing (as well as some cluster management operations).
 
-- **Dgraph lambdas**: A Dgraph lambda is a data function written in JavaScript that can augment results of a query. Lambdas implement database triggers and custom GraphQL resolvers, and run in an optional node.js server (included in any cloud deployment). 
+- **Dgraph lambdas**: A Dgraph lambda is a data function written in JavaScript that can augment results of a query. Lambdas implement database triggers and custom GraphQL resolvers, and run in an optional node.js server (included in any cloud deployment).
 
 ### Scale, replication and sharding
 Every cluster will have at least one Dgraph Zero node and one Dgraph Alpha node. Then databases are expanded in two ways.
@@ -114,7 +114,7 @@ Every cluster will have at least one Dgraph Zero node and one Dgraph Alpha node.
 
 ## What's Next
 
-- **Get Started** with a [free database instance](https://cloud.dgraph.io) 
+- **Get Started** with a [free database instance](https://cloud.dgraph.io)
 - get familiar with some terms in our [Glossary](/dgraph-glossary)
 - Take the [Dgraph tour](https://dgraph.io/tour/)
 - Go through some [tutorials]({{< relref "tutorials" >}})

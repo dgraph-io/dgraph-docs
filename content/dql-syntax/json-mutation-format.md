@@ -3,7 +3,8 @@ date = "2017-03-20T22:25:17+11:00"
 title = "JSON Mutation Format"
 weight = 10
 [menu.main]
-    parent = "mutations"
+  parent = "dql-syntax"
+  weight = 4
 +++
 
 Mutations can also be specified using JSON objects. This can allow mutations to
@@ -255,7 +256,7 @@ All edges for a predicate emanating from a single node can be deleted at once
 If no predicates are specified, then all of the node's known outbound edges (to
 other nodes and to literal values) are deleted (corresponding to deleting `S *
 *`). The predicates to delete are derived using the type system. Refer to the
-[RDF format]({{< relref "mutations/delete.md" >}}) documentation and the section on the
+[RDF format]({{< relref "dql-rdf.md" >}}) documentation and the section on the
 [type system]({{< relref "type-system.md" >}}) for more
 information:
 
