@@ -7,7 +7,7 @@ weight = 14
 +++
 
 The `expand()` function can be used to expand the predicates out of a node. To
-use `expand()`, the [type system]({{< relref "query-language/type-system.md" >}}) is required.
+use `expand()`, the [type system]({{< relref "type-system.md" >}}) is required.
 Refer to the section on the type system to check how to set the types
 nodes. The rest of this section assumes familiarity with that section.
 
