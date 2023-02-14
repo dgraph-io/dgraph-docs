@@ -171,8 +171,6 @@ This stops the Alpha on which the command is executed and not the entire cluster
 
 ## Delete database
 
-Individual triples, patterns of triples and predicates can be deleted as described in the [DQL docs]({{< relref "mutations/delete.md" >}}).
-
 To drop all data, you could send a `DropAll` request via `/alter` endpoint.
 
 Alternatively, you could:

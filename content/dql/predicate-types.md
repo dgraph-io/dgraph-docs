@@ -256,7 +256,7 @@ email: string @index(exact) @noconflict .
 
 ## RDF Types
 
-Dgraph supports a number of [RDF types in mutations]({{< relref "mutations/language-rdf-types.md" >}}).
+Dgraph supports a number of [RDF]({{< relref "dql-rdf.md" >}}) types.
 
 As well as implying a schema type for a first mutation, an RDF type can override a schema type for storage.
 

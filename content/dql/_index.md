@@ -1,5 +1,5 @@
 +++
-title = "DQL"
+title = "Dgraph Query Language"
 [menu.main]
   identifier = "dql"
   weight = 4
@@ -8,18 +8,16 @@ title = "DQL"
 <div class="landing">
   <div class="hero">
     <p>
-      Dgraph Query Language (DQL, formerly GraphQL+-)  extends and modifies
-      the GraphQL standard created by Facebook to support deep queries for
-      modern apps.
+    Dgraph Query Language (DQL) is Dgraph’s proprietary language to add, modify, delete and fetch data.
     </p>
     <img class="hero-deco" src="/images/hero-deco_403x160.png" />
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-play" aria-hidden="true"></i></div>
     <a  href="{{< relref "../get-started/index.md">}}">
-      <h2>Get Started</h2>
+      <h2>Quick Start</h2>
       <p>
-        A single page quickstart guide to get started with Dgraph
+        A quick start guide to run DQL queries and mutations.
       </p>
     </a>
   </div>
