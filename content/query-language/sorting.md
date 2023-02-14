@@ -18,7 +18,7 @@ Sortable Types: `int`, `float`, `String`, `dateTime`, `default`
 
 Results can be sorted in ascending order (`orderasc`) or descending order (`orderdesc`) by a predicate or variable.
 
-For sorting on predicates with [sortable indices]({{< relref "query-language/schema.md#sortable-indices">}}), Dgraph sorts on the values and with the index in parallel and returns whichever result is computed first.
+For sorting on predicates with [sortable indices]({{< relref "predicate-types.md#sortable-indices">}}), Dgraph sorts on the values and with the index in parallel and returns whichever result is computed first.
 
 {{% notice "note" %}}
 Dgraph returns `null` values at the end of the results, irrespective of their sort. This behavior is consistent across indexed and non-indexed sorts.
