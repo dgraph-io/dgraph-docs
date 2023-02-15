@@ -1,7 +1,7 @@
 +++
 title = "Dgraph Cloud"
 [menu.main]
-  identifier = "cloud"
+  identifier = "dgraphcloud"
   weight = 9
 +++
 
