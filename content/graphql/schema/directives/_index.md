@@ -1,11 +1,9 @@
 +++
-title = "Index of Directives"
-description = "The list of all directives supported by Dgraph. Full details linked within for all directives available with GraphQL."
-weight = 11
+title = "Directives"
+weight = 4
 [menu.main]
-  name = "Directives"
   identifier = "directives"
-  parent = "graphql"
+  parent = "schema"
 +++
 
 The list of all directives supported by Dgraph.
@@ -32,7 +30,7 @@ Reference: [Custom directive](/graphql/custom/directive)
 
 The `@deprecated` directive lets you mark the schema definition of a field or `enum` value as deprecated, and also lets you provide an optional reason for the deprecation.
 
-Reference: [Deprecation]({{< relref "graphql/schema/deprecated.md" >}})
+Reference: [Deprecation]({{< relref "deprecated.md" >}})
 
 ### @dgraph
 

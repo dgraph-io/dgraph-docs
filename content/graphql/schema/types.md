@@ -1,7 +1,7 @@
 +++
 title = "Types"
 description = "How to use GraphQL types to set a GraphQL schema for the Dgraph database. Includes scalars, enums, types, interfaces, union, password, & geolocation types."
-weight = 2
+weight = 1
 [menu.main]
     parent = "schema"
 +++
@@ -50,6 +50,27 @@ type User {
 ```
 
 Scalar lists in Dgraph act more like sets, so `tags: [String]` would always contain unique tags.  Similarly, `recentScores: [Float]` could never contain duplicate scores.
+
+### The `ID` type
+
+In Dgraph, every node has a unique 64-bit identifier that you can expose in GraphQL using the `ID` type. An `ID` is auto-generated, immutable and never reused. Each type can have at most one `ID` field.
+
+The `ID` type works great when you need to use an identifier on nodes and don't need to set that identifier externally (for example, posts and comments).
+
+For example, you might set the following type in a schema:
+
+```graphql
+type Post {
+    id: ID!
+    ...
+}
+```
+
+In a single-page app, you could generate the page for `http://.../posts/0x123` when a user clicks to view the post with `ID` 0x123. Your app can then use a `getPost(id: "0x123") { ... }` GraphQL query to fetch the data used to generate the page.
+
+For input and output, `ID`s are treated as strings.
+
+You can also update and delete posts by `ID`.
 
 ### Enums
 
