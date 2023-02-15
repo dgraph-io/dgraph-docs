@@ -1,7 +1,7 @@
 +++
 title = "Schema Migration"
 description = "This document describes all the things that you need to take care while doing a schema update or migration."
-weight = 1
+weight = 5
 [menu.main]
     parent = "schema"
     identifier = "schema-migration"

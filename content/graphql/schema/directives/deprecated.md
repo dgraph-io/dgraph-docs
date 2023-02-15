@@ -1,8 +1,8 @@
 +++
-title = "Deprecation"
-weight = 8
+title = "@deprecated"
+weight = 2
 [menu.main]
-    parent = "schema"
+    parent = "directives"
 +++
 
 The `@deprecated` directive allows you to tag the schema definition of a field or enum value as deprecated with an optional reason.

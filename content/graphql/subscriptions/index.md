@@ -1,7 +1,7 @@
 +++
 title = "GraphQL Subscriptions"
 description = "Subscriptions allow clients to listen to real-time messages from the server. In GraphQL, it’s straightforward to enable subscriptions on any type."
-weight = 8
+weight = 5
 [menu.main]
   name = "Subscriptions"
   identifier = "subscriptions"

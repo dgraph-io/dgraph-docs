@@ -24,7 +24,7 @@ description = "Generate a GraphQL API and a graph backend from a single GraphQL 
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-layout" aria-hidden="true"></i></div>
-    <a href="{{< relref "schema/schema-overview.md">}}">
+    <a href="{{< relref "schema">}}">
       <h2>Schema</h2>
       <p>
         All the things that you can put in your input GraphQL schema
