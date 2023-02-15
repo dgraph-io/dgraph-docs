@@ -78,6 +78,7 @@ The supported [RDF datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Data
 | &#60;http&#58;//www.w3.org/2001/XMLSchema#float&#62;            | `float`          |
 
 
+<<<<<<<< HEAD:content/dql-syntax/dql-rdf.md
 
 
 ### Facets
@@ -124,3 +125,6 @@ Result:
   }
 }
 ```
+========
+See the section on [RDF schema types]({{< relref "predicate-types.md#rdf-types" >}}) to understand how RDF types affect mutations and storage.
+>>>>>>>> main:content/mutations/language-rdf-types.md
