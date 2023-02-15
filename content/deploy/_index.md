@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Deploy and Manage"
-weight = 8
+title = "Self-managed cluster"
+weight = 10
 [menu.main]
   identifier = "deploy"
 +++
