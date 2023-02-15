@@ -8,7 +8,7 @@ weight = 1
 
 ### Terminology
 
-An **N-node cluster** is a Dgraph cluster that contains N number of Dgraph instances. For example, a 6-node cluster means six Dgraph instances. The **replication setting** specifies the number of Dgraph Alpha replicas that are assigned per group. The replication setting is a configuration flag (`--replicas`) on Dgraph Zero. A **Dgraph Alpha group** is a set of Dgraph Alphas that store replications of the data among each other. Every Dgraph Alpha group is assigned a set of distinct predicates to store and serve.
+An **N-node cluster** is a Dgraph cluster that contains N number of Dgraph instances. For example, a 6-node cluster means six Dgraph instances. The **replication setting** specifies the number of Dgraph Alpha replicas that are in each group. If this is higher than 1, each alpha in a group will hold a full copy of that group's data. The replication setting is a configuration flag (`--replicas`) on Dgraph Zero. Sharding is done (typically for databases near 1TB in size) by creating multiple **Dgraph Alpha groups**.  Every Dgraph Alpha group is automatically assigned a set of distinct predicates to store and serve, thus dividing up the data.
 
 Examples of different cluster settings:
 * No sharding
