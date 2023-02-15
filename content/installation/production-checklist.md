@@ -42,7 +42,8 @@ and macOS, use the [standalone Docker image]({{<relref "dgraph-overview#to-run-d
 
 ### CPU and Memory
 
-At a the bare minimum, we recommend machines with at least 8 CPUs and 16 GiB of memory for testing.
+
+We recommend 8 vCPUs or cores on each of three HA alpha instances for production loads, with 16 GiB+ memory per node.
 
 You'll want a ensure that your CPU and memory resources are sufficient for your production workload. A common configuration for Dgraph is 16 CPUs and 32 GiB of memory per machine. Dgraph is designed with concurrency in mind, so more cores means quicker processing and higher throughput of requests.
 
