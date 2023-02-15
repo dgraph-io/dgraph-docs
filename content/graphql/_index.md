@@ -33,7 +33,7 @@ description = "Generate a GraphQL API and a graph backend from a single GraphQL 
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-cloud-network" aria-hidden="true"></i></div>
-    <a href="{{< relref "api/api-overview.md">}}">
+    <a href="{{< relref "api">}}">
       <h2>API</h2>
       <p>
         How to use the GraphQL API
