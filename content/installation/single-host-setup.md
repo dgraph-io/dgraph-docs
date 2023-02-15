@@ -18,7 +18,7 @@ To evaluate Dgraph on Windows and macOS use the [standalone Docker image]({{<rel
 #### Before you begin
 
 Ensure that you have installed:
- * Docker [Desktop](https://docs.docker.com/desktop/)
+ * Docker [Desktop](https://docs.docker.com/desktop/) (required for windows or mac)
  * Docker [Engine](https://docs.docker.com/engine/install/)
 
 
