@@ -29,7 +29,7 @@ There can be multiple Dgraph Zeros and Dgraph Alphas running in a single cluster
 
 To ensure predictable performance characteristics, Dgraph instances should **not** run on "burstable" or throttled machines that limit resources. That includes t2 class machines on AWS.
 
-To ensure that Dgraph can take full advantage of machine resources, we recommend each Dgraph instance to be deployed to a single dedicated machine to ensure that Dgraph can take full advantage of machine resources. That is, for a 6-node Dgraph cluster with 3 Dgraph Zeros and 3 Dgraph Alphas, each process runs in its own machine (e.g., EC2 instance). In the event of a machine failure, only one instance is affected, instead of multiple if they were running on that same machine.
+To ensure that Dgraph is highly-available, we recommend each Dgraph instance be deployed to a different underlying host machine, and ideally that machines are in different availability zones or racks. In the event of an underlying machine failure, it is critical that only one Dgraph alpha and one Dgraph zero be offline so that 2 of the 3 instances in each group maintain a quorum. Also when using VMs or Docker/K8s, ensure machines are not over-subscribed and ideally not co-resident with other processes that will interrupt and delay Dgraph processing.
 
 If you'd like to run Dgraph with fewer machines, then the recommended configuration is to run a single Dgraph Zero and a single Dgraph Alpha per machine. In a high availability setup, that allows the cluster to lose a single machine (simultaneously losing a Dgraph Zero and a Dgraph Alpha) with continued availability of the database.
 
