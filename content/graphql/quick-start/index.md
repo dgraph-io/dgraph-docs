@@ -8,8 +8,10 @@ weight = 2
   parent = "graphql"
 +++
 
-Go from an empty Dgraph database to a running GraphQL API in just one step!  
-Just define the schema of your graph and how you’d like to search it; Dgraph does the rest.
+You might be familiar with GraphQL types, fields and resolvers.  Perhaps you've written an app that adds GraphQL over a REST endpoint or maybe over a relational database.  If so, you know how GraphQL sits over those sources and issues many queries to translate the REST/relational data into something that looks like a graph.  
+
+There's none of that with Dgraph : you can generate a running GraphQL API with the associated graph backend just by dpeloying the GraphQL schema of your API; Dgraph does the rest.
+
 
 ## Prerequisite : Run Dgraph
 
