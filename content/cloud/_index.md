@@ -28,7 +28,7 @@ title = "Dgraph Cloud"
     <a href="{{< relref "advanced-queries.md">}}">
       <h2>Advanced Queries with DQL</h2>
       <p>
-        Generate advanced queries to interact with your database using the HTTP or gRPC endpoint 
+        Generate advanced queries to interact with your database using the HTTP or gRPC endpoint
       </p>
     </a>
   </div>
@@ -82,4 +82,3 @@ You might also be interested in:
 
 - [Dgraph GraphQL Schema Reference](https://dgraph.io/docs/graphql/schema/schema-overview), which lists all the types and directives supported by Dgraph
 - [Dgraph GraphQL API Reference](https://dgraph.io/docs/graphql/api/api-overview), which serves as a guide to using your new `/graphql` endpoint
-
