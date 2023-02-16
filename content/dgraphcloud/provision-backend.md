@@ -4,7 +4,7 @@ date = "2023-02-14T22:25:17+11:00"
 title = "Provision a backend"
 weight = 1
 [menu.main]
-    parent = "dgraphcloud"
+    parent = "cloud"
 +++
 
 ### Before you begin

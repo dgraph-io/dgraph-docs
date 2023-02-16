@@ -1,61 +1,74 @@
 +++
 title = "Dgraph Cloud"
 [menu.main]
-  identifier = "dgraphcloud"
+  identifier = "cloud"
   weight = 9
 +++
 
 <div class="landing">
   <div class="hero">
+    <h1></h1>
     <p>
-      This section is about Dgraph Cloud.
+      Dgraph Cloud gives you the power of Dgraph database with the convenience of a fully-managed service.
     </p>
-    <img class="hero-deco" src="/images/hero-deco_403x160.png" />
+    <p>To learn more about Dgraph, see <a href="{{< relref "dgraph-overview.md">}}">Dgraph Database Overview</a>.</p>
+    <img class="hero-deco" src="images/hero-deco.png" />
   </div>
   <div class="item">
-    <div class="icon"><i class="lni lni-download" aria-hidden="true"></i></div>
-    <a  href="{{< relref "/installation/download.md">}}">
-      <h2>Download</h2>
+    <div class="icon"><i class="lni lni-play" aria-hidden="true"></i></div>
+    <a  href="{{< relref "cloud-quick-start.md">}}">
+      <h2>Dgraph Cloud Quick Start</h2>
       <p>
-        Download the images and source files to build and install for a production-ready Dgraph cluster
+        Get started with a simple "to-do" list app built on Dgraph Cloud
       </p>
     </a>
   </div>
   <div class="item">
-    <div class="icon"><i class="lni lni-docker" aria-hidden="true"></i></div>
-    <a href="{{< relref "/installation/kubernetes.md">}}">
-      <h2>Using Kubernetes</h2>
+    <div class="icon"><i class="lni lni-rocket" aria-hidden="true"></i></div>
+    <a href="{{< relref "advanced-queries.md">}}">
+      <h2>Advanced Queries with DQL</h2>
       <p>
-        Running Dgraph with Kubernetes
+        Generate advanced queries to interact with your database using the HTTP or gRPC endpoint 
+      </p>
+    </a>
+  </div>
+  <div class="item">
+    <div class="icon"><i class="lni lni-package" aria-hidden="true"></i></div>
+    <a href="{{< relref "cloud-api/overview.md">}}">
+      <h2>Dgraph Cloud API</h2>
+      <p>
+        Programmatically launch and manage your Cloud backups.
       </p>
     </a>
   </div>
 
-<style>
-  ul.contents {
-    display: none;
-  }
-</style>
-
-
   <div class="item">
-    <div class="icon"><i class="lni lni-cog" aria-hidden="true"></i></div>
-    <a href="{{< relref "../installation/single-host-setup.md">}}">
-      <h2>Single Host Setup</h2>
+    <div class="icon"><i class="lni lni-shield" aria-hidden="true"></i></div>
+    <a href="{{< relref "security.md">}}">
+      <h2>Secure Your Endpoint</h2>
       <p>
-        Setting up Dgraph on a single host
+        Tips for securing your Dgraph Cloud backend
       </p>
     </a>
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-cogs" aria-hidden="true"></i></div>
-    <a href="{{< relref "../installation/multi-host-setup.md">}}">
-      <h2>Multi Host Setup</h2>
+    <a href="{{< relref "migrating-from-hosted-dgraph.md">}}">
+      <h2>Migrate from Self-Managed Dgraph</h2>
       <p>
-        Setting up Dgraph on multiple hosts
+        Easily migrate your app's existing Dgraph backend to Dgraph Cloud
       </p>
     </a>
-
+  </div>
+  <div class="item">
+    <div class="icon"><i class="lni lni-control-panel" aria-hidden="true"></i></div>
+    <a href="{{< relref "admin/_index.md">}}">
+      <h2>Administer Your Backend</h2>
+      <p>
+        Programmatically set and update your schema, import or export your data, and switch or clone your Dgraph Cloud backend
+      </p>
+    </a>
+  </div>
 
 </div>
 
@@ -64,3 +77,9 @@ title = "Dgraph Cloud"
     display: none;
   }
 </style>
+
+You might also be interested in:
+
+- [Dgraph GraphQL Schema Reference](https://dgraph.io/docs/graphql/schema/schema-overview), which lists all the types and directives supported by Dgraph
+- [Dgraph GraphQL API Reference](https://dgraph.io/docs/graphql/api/api-overview), which serves as a guide to using your new `/graphql` endpoint
+
