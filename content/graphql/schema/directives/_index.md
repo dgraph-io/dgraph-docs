@@ -3,7 +3,7 @@ title = "Directives"
 weight = 4
 [menu.main]
   identifier = "directives"
-  parent = "schema"
+  parent = "gqlschema"
 +++
 
 The list of all directives supported by Dgraph.
