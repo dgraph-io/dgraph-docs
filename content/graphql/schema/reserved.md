@@ -3,7 +3,7 @@ title = "Reserved Names"
 description = "This document provides the full list of names that are reserved and can’t be used to define any other identifiers."
 weight = 3
 [menu.main]
-    parent = "schema"
+    parent = "gqlschema"
 +++
 
 The following names are reserved and can't be used to define any other identifiers:

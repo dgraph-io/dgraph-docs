@@ -3,7 +3,7 @@ title = "Authorization"
 weight = 5
 [menu.main]
   identifier = "authorization"
-  parent = "schema"
+  parent = "gqlschema"
 +++
 
 Dgraph's GraphQL implementation comes with built-in authorization. This lets you annotate your schema with rules that determine who can query and mutate your data.
