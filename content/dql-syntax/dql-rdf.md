@@ -79,7 +79,6 @@ The supported [RDF datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Data
 
 
 
-
 ### Facets
 ####  Creating a list with facets
 
