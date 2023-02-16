@@ -54,7 +54,7 @@ You can authenticate your users using the following methods:
 Dgraph's GraphQL implementation is completely flexible about how your app does
 authentication; instead, Dgraph focuses on authorization.  
 
-Dgraph's GraphQL endpoint supports both symmetric (secret-based) and asymmetric (public key) 
+Dgraph's GraphQL endpoint supports both symmetric (secret-based) and asymmetric (public key)
 encryption. The connection between Dgraph and your authentication mechanism can
 be a JSON Web Key (JWK) URL or a signed JSON Web Token (JWT). So, you can provide
 Dgraph with the public key of the JWT signer (such as Firebase or Auth0) and
