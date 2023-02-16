@@ -3,7 +3,7 @@ title = "Relationships"
 description = "All the data in your app form a GraphQL data graph. That graph has nodes of particular types and relationships between the nodes to form the data graph."
 weight = 2
 [menu.main]
-    parent = "schema"
+    parent = "gqlschema"
 +++
 
 All the data in your app form a GraphQL data graph. That graph has nodes of particular types and relationships between the nodes to form the data graph.

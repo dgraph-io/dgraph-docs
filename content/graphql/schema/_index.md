@@ -1,7 +1,7 @@
 +++
 title = "Schema"
 [menu.main]
-  identifier = "schema"
+  identifier = "gqlschema"
   parent = "graphql"
   weight = 2
 +++
