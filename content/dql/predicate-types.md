@@ -13,10 +13,10 @@ A predicate is the smallest piece of information about an object. A predicate ca
 
 Dgraph maintains a list of all predicates names and their type in the Dgraph schema.
 
-A predicate type is either created 
+A predicate type is either created
 - by an alter operation (See [Update Dgraph types]({{<relref "update-dgraph-types.md">}}) )
-or 
-- during a mutation : 
+or
+- during a mutation :
   If a predicate type isn't specified, then the type is inferred from the first mutation.
   If the mutation is using [RDF format]({{<relref "#rdf-types" >}}) with an RDF type, Dgraph uses this information to infer the predicate type.
 
@@ -47,11 +47,6 @@ convert your values to RFC 3339 format before sending them to Dgraph.{{% /notice
 ## UID Type
 
 The `uid` type denotes a relationship; internally each node is identified by it's UID which is a `uint64`.
-
-| Dgraph Type | Go type |
-| ------------|:--------|
-|  `uid`      | uint64  |
-
 
 
 ## Predicate name rules
@@ -126,11 +121,10 @@ Query:
 
 ## Upsert directive
 
-To use [upsert operations]({{<relref "howto/upserts.md">}}) on a
-predicate, specify the `@upsert` directive in the schema. When committing
-transactions involving predicates with the `@upsert` directive, Dgraph checks
-index keys for conflicts, helping to enforce uniqueness constraints when running
-concurrent upserts.
+
+To use [upsert operations]({{<relref "howto/upserts.md">}}) on a predicate, specify the `@upsert` directive in the schema.
+
+When committing transactions involving predicates with the `@upsert` directive, Dgraph checks index keys for conflicts, helping to enforce uniqueness constraints when running concurrent upserts.
 
 This is how you specify the upsert directive for a predicate.
 ```
@@ -175,8 +169,6 @@ Dgraph:
 * converts `"13"` to `int` on storage,
 * checks `"14"` can be converted to `int`, but stores as `string`,
 * throws an error for the remaining two triples, because `"14.5"` can't be converted to `int`.
-
-
 
 ## Password type
 
@@ -245,4 +237,3 @@ output:
   }
 }
 ```
-
