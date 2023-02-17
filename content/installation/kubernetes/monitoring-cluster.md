@@ -16,8 +16,7 @@ You can use Helm to install [kube-prometheus-stack](https://github.com/prometheu
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 * Ensure that you have a production-ready Kubernetes cluster with atleast three worker nodes running in a cloud provider of your choice.
-* Install [Helm](https://helm.sh/docs/intro/install/).
-* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "deploy/tls-configuration.md" >}}).
+* Install [Helm](https://helm.sh/docs/intro/install/)
 
 ### Install using Helm Chart
 
