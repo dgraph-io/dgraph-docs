@@ -318,7 +318,7 @@ To create a predicate as a list of string:
 
 Assuming `0x06` is the UID of the node created.
 
-To remove one value from the list :
+To remove one value from the list:
 
 ```JSON
 {
