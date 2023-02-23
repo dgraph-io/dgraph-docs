@@ -290,7 +290,7 @@ int or a float.
 
 ## Deleting Facets
 
-To delete a Facet, overwrite it :  when you run a mutation for the same entity without a facet, the existing facet will be deleted automatically.
+To delete a `Facet`, overwrite it. When you run a mutation for the same entity without a `Facet`, the existing `Facet` is deleted automatically.
 
 
 
