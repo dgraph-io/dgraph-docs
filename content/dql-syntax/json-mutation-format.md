@@ -187,14 +187,6 @@ Will result in the creation of three nodes and the `food` predicate will be a re
 You can use references to existing nodes at any level of your nested JSON.
 
 
-
-
-## Forbidden values
-
-The string values `uid(...)`, `val(...)`are not accepted:  
-
-
-
 ## Deleting literal values
 
 To delete node predicates, specify the UID of the node you are changing and set  
@@ -259,43 +251,6 @@ To delete all predicates of a given node:
    ]
 }
 ```
-
-## Facets
-
-Facets can be created by using the `|` character to separate the predicate
-and facet key in a JSON object field name. This is the same encoding schema
-used to show facets in query results. E.g.
-```JSON
-{
-  "name": "Carol",
-  "name|initial": "C",
-  "dgraph.type": "Person",
-  "friend": {
-    "name": "Daryl",
-    "friend|close": "yes",
-    "dgraph.type": "Person"
-  }
-}
-```
-
-Facets do not contain type information but Dgraph will try to guess a type from
-the input. If the value of a facet can be parsed to a number, it will be
-converted to either a float or an int. If it can be parsed as a Boolean, it will
-be stored as a Boolean. If the value is a string, it will be stored as a
-datetime if the string matches one of the time formats that Dgraph recognizes
-(YYYY, MM-YYYY, DD-MM-YYYY, RFC339, etc.) and as a double-quoted string
-otherwise. If you do not want to risk the chance of your facet data being
-misinterpreted as a time value, it is best to store numeric data as either an
-int or a float.
-
-## Deleting Facets
-
-To delete a `Facet`, overwrite it. When you run a mutation for the same entity without a `Facet`, the existing `Facet` is deleted automatically.
-
-
-
-
-
 ## Handling arrays 
 
 To create a predicate as a list of string:
@@ -351,6 +306,39 @@ To add a value:
    "testList": "Pineapple"
 }
 ```
+
+## Adding Facets
+
+Facets can be created by using the `|` character to separate the predicate
+and facet key in a JSON object field name. This is the same encoding schema
+used to show facets in query results. E.g.
+```JSON
+{
+  "name": "Carol",
+  "name|initial": "C",
+  "dgraph.type": "Person",
+  "friend": {
+    "name": "Daryl",
+    "friend|close": "yes",
+    "dgraph.type": "Person"
+  }
+}
+```
+
+Facets do not contain type information but Dgraph will try to guess a type from
+the input. If the value of a facet can be parsed to a number, it will be
+converted to either a float or an int. If it can be parsed as a Boolean, it will
+be stored as a Boolean. If the value is a string, it will be stored as a
+datetime if the string matches one of the time formats that Dgraph recognizes
+(YYYY, MM-YYYY, DD-MM-YYYY, RFC339, etc.) and as a double-quoted string
+otherwise. If you do not want to risk the chance of your facet data being
+misinterpreted as a time value, it is best to store numeric data as either an
+int or a float.
+
+## Deleting Facets
+
+To delete a `Facet`, overwrite it. When you run a mutation for the same entity without a `Facet`, the existing `Facet` is deleted automatically.
+
 
 ## Facets in List
 Schema:
@@ -425,4 +413,6 @@ And the final result is:
 }
 ```
 
+## Reserved values
 
+The string values `uid(...)`, `val(...)` are not accepted.   
