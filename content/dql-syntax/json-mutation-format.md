@@ -11,7 +11,7 @@ When using JSON format Dgraph creates nodes and relationships from the JSON stru
 
 ## Specifying node UIDs
 
-For example, if you run the following mutation 
+For example, if you run this mutation: 
 
 ```dql
    {
