@@ -298,7 +298,7 @@ To delete a Facet, overwrite it :  when you run a mutation for the same entity w
 
 ## Handling arrays 
 
-To create a predicate as a list of string :
+To create a predicate as a list of string:
 
 ```JSON
 {
