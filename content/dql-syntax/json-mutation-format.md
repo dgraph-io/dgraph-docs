@@ -247,7 +247,7 @@ deletes only one `food` relationship.
 To delete all predicates of a given node:
 - make sure the node has a `dgraph.type` predicate 
 - the type is defined by the [Dgraph type system]({{< relref "type-system.md" >}})
-- run a delete mutation specifying only the uid field :
+- run a delete mutation specifying only the uid field
 
 
 ```JSON
