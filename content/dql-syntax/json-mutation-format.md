@@ -7,7 +7,7 @@ weight = 10
   weight = 4
 +++
 Dgraph supports [Mutations]({{< relref "dql-mutation.md" >}}) in JSON or [RDF]({{< relref "dql-rdf.md" >}}) format.
-When using JSON format Dgraph creates nodes and relationships from the JSON structure and handles the assignation of UIDs to nodes.
+When using JSON format Dgraph creates nodes and relationships from the JSON structure and assigns UIDs to nodes.
 
 ## Specifying node UIDs
 
