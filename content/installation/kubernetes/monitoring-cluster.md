@@ -301,7 +301,7 @@ require you to update the StatefulSet configuration.
 ## Kubernetes and Bulk Loader
 
 You may want to initialize a new cluster with an existing data set such as data
-from the [Dgraph Bulk Loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}}). You can use [Init
+from the [Dgraph Bulk Loader]({{< relref "bulk-loader.md" >}}). You can use [Init
 Containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 to copy the data to the Pod volume before the Alpha process runs.
 
