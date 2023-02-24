@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Deploy and Manage"
-weight = 8
+title = "Self-managed cluster"
+weight = 10
 [menu.main]
   identifier = "deploy"
 +++
@@ -38,14 +38,14 @@ running multiple instances of Dgraph, over multiple servers in a cluster.
     <a href="{{< relref "tls-configuration.md">}}">
       <h2>TLS Configuration</h2>
       <p>
-        Setting up secure TLS connections between clients and servers 
+        Setting up secure TLS connections between clients and servers
       </p>
     </a>
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-upload" aria-hidden="true"></i></div>
-    <a href="{{< relref "fast-data-loading/overview.md">}}">
-      <h2>Fast Data Loading</h2>
+    <a href="{{< relref "about_import.md">}}">
+      <h2>Data Import</h2>
       <p>
         Dgraph tools for fast data loading
       </p>

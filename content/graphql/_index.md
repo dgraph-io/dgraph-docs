@@ -1,6 +1,6 @@
 +++
-title = "GraphQL"
-description = "Find everything you need to know about using GraphQL with Dgraph Database. GraphQL doesn't have to be hard - these docs explain how to make it easy."
+title = "GraphQL API"
+description = "Generate a GraphQL API and a graph backend from a single GraphQL schema."
 [menu.main]
   identifier = "graphql"
   weight = 3
@@ -24,7 +24,7 @@ description = "Find everything you need to know about using GraphQL with Dgraph 
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-layout" aria-hidden="true"></i></div>
-    <a href="{{< relref "schema/schema-overview.md">}}">
+    <a href="{{< relref "schema">}}">
       <h2>Schema</h2>
       <p>
         All the things that you can put in your input GraphQL schema
@@ -33,7 +33,7 @@ description = "Find everything you need to know about using GraphQL with Dgraph 
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-cloud-network" aria-hidden="true"></i></div>
-    <a href="{{< relref "api/api-overview.md">}}">
+    <a href="{{< relref "api">}}">
       <h2>API</h2>
       <p>
         How to use the GraphQL API

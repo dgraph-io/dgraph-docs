@@ -4,7 +4,7 @@ title = "Tutorials - Get Started with Dgraph series"
   name = "Tutorials"
   identifier = "tutorials"
   parent = "dql"
-  weight = 3
+  weight = 8
 +++
 
 {{% notice "note" %}}

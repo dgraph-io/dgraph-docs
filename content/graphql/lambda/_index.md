@@ -1,6 +1,6 @@
 +++
 title = "Lambda Resolvers"
-weight = 9
+weight = 7
 [menu.main]
   identifier = "lambda"
   parent = "graphql"

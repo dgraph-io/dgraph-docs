@@ -87,7 +87,7 @@ This would allow admin operations from hosts with hostnames `admin-bastion` and 
 By default, you can perform mutation operations for any predicate.
 If the predicate in mutation doesn't exist in the schema,
 the predicate gets added to the schema with an appropriate
-[Dgraph Type]({{< relref "query-language/schema.md" >}}).
+[Dgraph Type]({{< relref "predicate-types.md" >}}).
 
 You can use `--limit "mutations=disallow"` to disable all mutations,
 which is set to `allow` by default.
@@ -171,8 +171,6 @@ This stops the Alpha on which the command is executed and not the entire cluster
 
 ## Delete database
 
-Individual triples, patterns of triples and predicates can be deleted as described in the [DQL docs]({{< relref "mutations/delete.md" >}}).
-
 To drop all data, you could send a `DropAll` request via `/alter` endpoint.
 
 Alternatively, you could:
@@ -189,7 +187,7 @@ Doing periodic exports is always a good idea. This is particularly useful if you
 2. Ensure it is successful
 3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Start a new Dgraph cluster using new data directories (this can be done by passing empty directories to the options `-p` and `-w` for Alphas and `-w` for Zeros)
-5. Reload the data via [bulk loader]({{< relref "deploy/fast-data-loading/bulk-loader.md" >}})
+5. Reload the data via [bulk loader]({{< relref "bulk-loader.md" >}})
 6. Verify the correctness of the new Dgraph cluster. If all looks good, you can delete the old directories (export serves as an insurance)
 
 These steps are necessary because Dgraph's underlying data format could have changed, and reloading the export avoids encoding incompatibilities.
@@ -265,7 +263,7 @@ are affected. Then, you can drop the old types and predicates from DB.
     command will do.
 
 {{% notice "note" %}}
-The above steps are valid for migration from a cluster in `v20.11` to a single-tenant cluster in `v21.03`, 
+The above steps are valid for migration from a cluster in `v20.11` to a single-tenant cluster in `v21.03`,
 as backup and restore are cluster-wide operations and a single namespace cannot be restored in a multi-tenant cluster.
 {{% /notice %}}
 
