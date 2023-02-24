@@ -6,9 +6,7 @@ weight = 1
     parent = "installation"
 +++
 
-{{% notice "tip" %}}
-If you are new to Dgraph, the easiest way to get Dgraph up and running is using the [Dgraph Cloud](https://cloud.dgraph.io/) or to use Dgraph standalone Docker image.
-{{% /notice %}}
+
 
 
 You can obtain Dgraph binary for the latest version as well as previous releases using automatic install script, manual download, through Docker images  or by building the binary from the open source code.
@@ -21,12 +19,20 @@ You can obtain Dgraph binary for the latest version as well as previous releases
    ```sh
       docker pull dgraph/dgraph:latest
    ```
+   To set up a [learning environment](({{< relref "single-host-setup.md" >}})), you may pull the [dgraph standalone](https://hub.docker.com/r/dgraph/standalone) image :
+
+   ```sh
+      docker pull dgraph/standalone:latest
+   ```
 1. Verify that the image is downloaded:
 
    ```sh
       docker images
     ```
-{{< /tab >}} 
+
+
+
+{{< /tab >}}
 
 {{% tab "Automatic" %}}
 On linux system, you can get the binary using the automatic script:
@@ -42,7 +48,7 @@ On linux system, you can get the binary using the automatic script:
    For more information about the various installation scripts that you can use, see [install scripts](https://github.com/dgraph-io/Install-Dgraph).   
 {{< /tab >}}
 {{% tab "Manual" %}}
-On linux system, you can download a tar file and install manually. 
+On linux system, you can download a tar file and install manually.
 Download the appropriate tar for your platform from **[Dgraph releases](https://github.com/dgraph-io/dgraph/releases)**. After downloading the tar for your platform from Github, extract the binary to `/usr/local/bin` like so.
 
 1. Download the installation file:
@@ -57,4 +63,3 @@ Download the appropriate tar for your platform from **[Dgraph releases](https://
 {{% tab "Source" %}}
 You can also build **Dgraph** and **Ratel UI** from the source code by following the instructions from [Contributing to Dgraph](https://github.com/dgraph-io/dgraph/blob/master/CONTRIBUTING.md) or [Building and running ratel](https://github.com/dgraph-io/ratel/blob/master/INSTRUCTIONS.md).
 {{% /tab %}}{{% /tabs %}}
-

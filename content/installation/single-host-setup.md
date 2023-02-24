@@ -1,31 +1,39 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Single Host Cluster Setup"
-weight = 1
+title = "Learning Environment"
+weight = 3
 [menu.main]
     parent = "installation"
 +++
 
- Dgraph does not recommend single host setup for a production environment. For a production environment you need to ensure High Availability with external persistent storage, automatic recovery of failed services, automatic recovery of failed systems such as virtual machines, and highly recommended disaster recovery such as backup/restore or export/import with automation.
- You can install and run Dgraph cluster on a single host using Docker, Docker Compose, or Dgraph command line.
+To learn about Dgraph and the components, you can install and run Dgraph cluster on a single host using Docker, Docker Compose, or Dgraph command line.
 
-## Docker
+{{% tabs %}} {{< tab "Docker" >}}
 
 Dgraph cluster can be setup running as containers on a single host.
 {{% notice "note" %}}
-As of release v21.03, Dgraph no longer supports installation on Windows or macOS.
-Windows and macOS users who want to evaluate Dgraph can use the [standalone Docker image]({{<relref "dgraph-overview#to-run-dgraph-using-the-standalone-docker-image">}}).
+To evaluate Dgraph on Windows and macOS use the [standalone Docker image]({{<relref "dgraph-overview#to-run-dgraph-using-the-standalone-docker-image">}}).
 {{% /notice %}}
 
-### Before you begin
+#### Before you begin
 
 Ensure that you have installed:
- * Docker [Desktop](https://docs.docker.com/desktop/)
+ * Docker [Desktop](https://docs.docker.com/desktop/) (required for windows or mac)
  * Docker [Engine](https://docs.docker.com/engine/install/)
- * Docker [Compose](https://docs.docker.com/compose/)
 
-### Using Docker
-To setup a Dgraph cluster on a single host using Docker:
+
+#### Launch a Dgraph standalone cluster using Docker
+1.  Select a name `<CONTAINER_NAME>` for you Docker container and create a directory `<GRAPH_DATA_PATH>` that will hold the Dgraph data on your local file system.
+1.  Run a container with the dgraph/standalone image:
+    ```sh
+       docker run --name <CONTAINER_NAME> -d -p "8080:8080" -p "9080:9080" -v <DGRAPH_DATA_PATH>:/dgraph dgraph/standalone:latest
+    ```
+1. Optionaly launch [Ratel UI]({{< relref "ratel/overview.md" >}}) using the dgraph/ratel docker image :
+    ``` sh
+    docker run --name ratel  -d -p "8000:8000"  dgraph/ratel:latest
+    ```
+You can now use Ratel UI on your browser at localhost:8000 and connect to you Dgraph cluster at localhost:8080
+#### Setup a Dgraph cluster on a single host using Docker
 
 1. Get the `<IP_ADDRESS>` of the host using:
    ```sh
@@ -68,17 +76,18 @@ To setup a Dgraph cluster on a single host using Docker:
     To override the default ports for the second Alpha use `-o`.    
 1.   Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).     
 
-## Dgraph Command Line
+{{< /tab >}} 
+{{< tab "Dgraph Command Line" >}}
 
 You can run Dgraph directly on a single Linux host.
 
-### Before you begin
+#### Before you begin
 
 Ensure that you have:
 * Installed [Dgraph]({{< relref "installation/download.md" >}}) on the Linux host.
 * Made a note of the `<IP_ADDRESS>` of the host.
 
-### Using Dgraph Command Line
+#### Using Dgraph Command Line
 You can start Dgraph on a single host using the dgraph command line.
 
 1. Run Dgraph zero
@@ -96,17 +105,18 @@ You can start Dgraph on a single host using the dgraph command line.
    
 1. Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).
 
-## Docker Compose
+{{{< /tab >}} 
+{{< tab "Docker Compose" >}}
 
 You can install Dgraph using the Docker Compose on a system hosted on any of the cloud provider.
 
-### Before you begin
+#### Before you begin
 
    * Ensure that you have installed Docker [Compose](https://docs.docker.com/compose/).
    * IP address of the system on cloud `<CLOUD_IP_ADDRESS>`.
    * IP address of the local host `<IP_ADDRESS>`.
 
-### Using Docker Compose
+#### Using Docker Compose
 
 1. Download the Dgraph `docker-compose.yml` file:
 
@@ -172,3 +182,4 @@ You can install Dgraph using the Docker Compose on a system hosted on any of the
 1. In the **Dgraph Server Connection** dialog that set the **Dgraph server URL** as `http://<CLOUD_IP_ADDRESS>:8080`
 1. Click **Connect** . The connection health appears green.
 1. Click **Continue** to query or run mutations.
+{{% /tab %}}{{% /tabs %}}
