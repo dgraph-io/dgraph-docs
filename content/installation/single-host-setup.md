@@ -76,7 +76,7 @@ You can now use Ratel UI on your browser at localhost:8000 and connect to you Dg
     To override the default ports for the second Alpha use `-o`.    
 1.   Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).     
 
-{{< /tab >}} 
+{{< /tab >}}
 {{< tab "Dgraph Command Line" >}}
 
 You can run Dgraph directly on a single Linux host.
@@ -102,10 +102,10 @@ You can start Dgraph on a single host using the dgraph command line.
       dgraph alpha --my=<IP_ADDRESS>:7081 --zero=localhost:5080 -o=1
    ```
    Dgraph alpha nodes use two directories to persist data and [WAL logs]({{< relref "design-concepts/concepts#write-ahead-logs" >}}), and these directories must be different for each alpha if they are running on the same host. You can use `-p` and `-w` to change the location of the data and WAL directories.To learn more about other flags, run `dgraph alpha --help`.
-   
+
 1. Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).
 
-{{{< /tab >}} 
+{{{< /tab >}}
 {{< tab "Docker Compose" >}}
 
 You can install Dgraph using the Docker Compose on a system hosted on any of the cloud provider.
@@ -155,7 +155,7 @@ You can install Dgraph using the Docker Compose on a system hosted on any of the
         image: dgraph/ratel:latest
         ports:
           - 8000:8000
-    
+
       ```
 
 1. Run the `docker-compose` command to start the Dgraph services in the docker container:
