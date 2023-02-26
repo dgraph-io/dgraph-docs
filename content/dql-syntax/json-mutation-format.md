@@ -60,7 +60,7 @@ In this mutation, there are two JSON objects and because they are referring to t
  }  
 ```
 
-Running this mutation, you can see that Dgraph returns the UID of the created node with the `diggy` identifier :
+When you run this mutation, you can see that Dgraph returns the UID of the node that was created with the `diggy` identifier:
 
 {{< highlight json "linenos=false,hl_lines=7 " >}}
 {
