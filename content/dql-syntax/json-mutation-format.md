@@ -98,7 +98,7 @@ Adds the `specie` information to the node that was created earlier.
 ## Language support
 
 To set a string value for a specific lnguage, append the language tag to the field name.
-Assuming that `specie` predicate has the @lang directive, the JSON mutation
+In case, `specie` predicate has the @lang directive, the JSON mutation
 ```dql
    {
    "set": [
