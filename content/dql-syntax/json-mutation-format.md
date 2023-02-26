@@ -112,7 +112,7 @@ In case, `specie` predicate has the @lang directive, the JSON mutation
    ]
  }  
 ```
-Will set the `specie` string predficate in two english and in french.
+Dgraph sets the `specie` string predicate in English and in French.
 
 
 ## Geolocation support
