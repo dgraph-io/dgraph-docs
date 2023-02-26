@@ -166,7 +166,7 @@ For example:
 
 ```
 
-Will result in the creation of three nodes and the `food` predicate will be a relationship.
+This result in the creation of three nodes and the `food` predicate as a relationship.
 
 {{< highlight json "linenos=false,hl_lines=6-7 " >}}
 {
