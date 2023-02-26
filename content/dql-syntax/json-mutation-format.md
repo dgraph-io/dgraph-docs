@@ -42,7 +42,7 @@ You can control the identifier name by specifying a `uid` field in your JSON dat
 ``` "uid" : "_:<your-identifier>" ```
 
 
-In the following mutation we are using two JSON objects but as they are refering to the same identifier, Dgraph creates only one node :
+In this mutation, there are two JSON objects and because they are referring to the same identifier, Dgraph creates only one node:
 
 ```dql
    {
