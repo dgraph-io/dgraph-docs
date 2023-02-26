@@ -92,7 +92,7 @@ For example:
  }  
 ```
 
-Will add the specie information to the node we have created earlier.
+Adds the `specie` information to the node that was created earlier.
 
 
 ## Language support
