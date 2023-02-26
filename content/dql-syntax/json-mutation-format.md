@@ -38,7 +38,7 @@ You will see that Dgraph responds with
 
 Meaning that Dgraph has created one node from the JSON. It has used the identifier `dg.3162278161.22055` during the transaction. And the final UID value for this node is `0xfffd8d72745f0650`.
 
-You can control the identifier name by specifying a `uid` field in your JSON data and using the notation : 
+You can control the identifier name by specifying a `uid` field in your JSON data and using the notation: 
 ``` "uid" : "_:<your-identifier>" ```
 
 
