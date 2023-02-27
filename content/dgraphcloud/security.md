@@ -11,7 +11,7 @@ Here are a few tips for securing your Dgraph Cloud Backend
 
 To help secure your GraphQL API, Dgraph Cloud allows you to choose which GraphQL operations are available to end clients.
 
-You can visit the [access tab on the schema page](https://cloud.dgraph.io/_/schema) and choose the operations that you want to allow/deny for anonymous users. 
+You can visit the [access tab on the schema page](https://cloud.dgraph.io/_/schema) and choose the operations that you want to allow/deny for anonymous users.
 
 With Anonymous Access turned off, all GraphQL operations are restricted unless the client provides a valid [API Key]({{< relref "dgraphcloud/admin/authentication.md" >}}). With Anonymous Access turned on (Default configuration), you will have a button to "Edit Permissions"
 
@@ -121,7 +121,7 @@ Restricting the origins that your Dgraph Cloud responds to is an important step 
 To allow an origin, add the line `# Dgraph.Allow-Origin` at the end of your GraphQL schema either with a [schema update]({{< relref "graphql/admin.md#using-updategqlschema-to-add-or-modify-a-schema" >}}) or via the Cloud console's [Schema](https://cloud.dgraph.io/_/schema) page. For example, the following will restrict all origins except the ones specified.
 
 ```
-# Dgraph.Allow-Origin "https://example.com" 
+# Dgraph.Allow-Origin "https://example.com"
 # Dgraph.Allow-Origin "https://www.example.com"
 ```
 
