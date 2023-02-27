@@ -24,15 +24,6 @@ title = "Dgraph Cloud"
     </a>
   </div>
   <div class="item">
-    <div class="icon"><i class="lni lni-rocket" aria-hidden="true"></i></div>
-    <a href="{{< relref "advanced-queries.md">}}">
-      <h2>Advanced Queries with DQL</h2>
-      <p>
-        Generate advanced queries to interact with your database using the HTTP or gRPC endpoint 
-      </p>
-    </a>
-  </div>
-  <div class="item">
     <div class="icon"><i class="lni lni-package" aria-hidden="true"></i></div>
     <a href="{{< relref "cloud-api/overview.md">}}">
       <h2>Dgraph Cloud API</h2>
@@ -82,4 +73,3 @@ You might also be interested in:
 
 - [Dgraph GraphQL Schema Reference](https://dgraph.io/docs/graphql/schema/schema-overview), which lists all the types and directives supported by Dgraph
 - [Dgraph GraphQL API Reference](https://dgraph.io/docs/graphql/api/api-overview), which serves as a guide to using your new `/graphql` endpoint
-
