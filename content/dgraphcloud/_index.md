@@ -24,15 +24,6 @@ title = "Dgraph Cloud"
     </a>
   </div>
   <div class="item">
-    <div class="icon"><i class="lni lni-rocket" aria-hidden="true"></i></div>
-    <a href="{{< relref "advanced-queries.md">}}">
-      <h2>Advanced Queries with DQL</h2>
-      <p>
-        Generate advanced queries to interact with your database using the HTTP or gRPC endpoint 
-      </p>
-    </a>
-  </div>
-  <div class="item">
     <div class="icon"><i class="lni lni-package" aria-hidden="true"></i></div>
     <a href="{{< relref "cloud-api/overview.md">}}">
       <h2>Dgraph Cloud API</h2>
