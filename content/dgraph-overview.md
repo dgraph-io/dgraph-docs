@@ -110,7 +110,7 @@ Every cluster will have at least one Dgraph Zero node and one Dgraph Alpha node.
 
 - **Sharding**: When data sizes approach or exceed 1 TB, Dgraph databases are typically sharded so that full data replicas are not kept on any single alpha node. With sharding, data is distributed across many nodes (or node groups) to achieve higher scale. Sharding and high-availability combine when desired to provide massive scale and ideal reliability.
 
-**Self-healing**: In Dgraph's cloud offering, Kubernetes is used to automatically detect, restart and heal any cluster (HA, sharded, both or neither) to keep things running smoothly and at full capacity.
+- **Self-healing**: In Dgraph's cloud offering, Kubernetes is used to automatically detect, restart and heal any cluster (HA, sharded, both or neither) to keep things running smoothly and at full capacity.
 
 ## What's Next
 
