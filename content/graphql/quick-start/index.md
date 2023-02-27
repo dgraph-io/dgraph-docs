@@ -256,5 +256,5 @@ For GraphQL in Dgraph, you just concentrate on defining the schema of your graph
 
 
 ## What's Next
-- Learn more about [GraphQL schema](/graphql/schema/schema-overview/) and Dgraph directives.
+- Learn more about [GraphQL schema]({{< relref "graphql/schema/_index.md" >}}) and Dgraph directives.
 - Follow our [GraphQL tutorials](https://dgraph.io/learn/) to experience rapid application development by building more advanced apps.

@@ -13,13 +13,13 @@ To help secure your GraphQL API, Dgraph Cloud allows you to choose which GraphQL
 
 You can visit the [access tab on the schema page](https://cloud.dgraph.io/_/schema) and choose the operations that you want to allow/deny for anonymous users. 
 
-With Anonymous Access turned off, all GraphQL operations are restricted unless the client provides a valid [API Key](/admin/authentication). With Anonymous Access turned on (Default configuration), you will have a button to "Edit Permissions"
+With Anonymous Access turned off, all GraphQL operations are restricted unless the client provides a valid [API Key]({{< relref "dgraphcloud/admin/authentication.md" >}}). With Anonymous Access turned on (Default configuration), you will have a button to "Edit Permissions"
 
 In Edit Permissions, you will find options to turn on/off Anonymous Access to Lambda functions, custom Queries, and custom Mutations. For every Type defined in your GraphQL schema, Edit Permissions will show check boxes to enable Anonymous Access to Read and Write. Checking Read will allow the anonymous end clients to access the `get<Type>` and `query<Type>` query operations. Checking Write will allow anonymous end clients to access the `add<Type>`, `update<Type>`, and `delete<Type>` mutation operations.
 
 By default all operations are accessible to anonymous clients. However, this behavior will change in the near future. When this behavior is changed, it will apply only to newly created backends. Existing backends will remain unaffected by this future change.
 
-Anonymous Access works as an access control security one level above the [GraphQL `@auth` Directive](https://dgraph.io/docs/graphql/authorization/directive/). When you block anonymous access to your backend, the GraphQL requests from the client will not go through to the Dgraph database. When Anonymous Access is blocked, the GraphQL Auth Rules are not evaluated against the database.
+Anonymous Access works as an access control security one level above the [GraphQL `@auth` Directive]({{< relref "auth.md" >}}). When you block anonymous access to your backend, the GraphQL requests from the client will not go through to the Dgraph database. When Anonymous Access is blocked, the GraphQL Auth Rules are not evaluated against the database.
 
 Anonymous Access granted on level types only applies to the parent type operations and is not meant to be a way to secure all data of that type. It is still possible to read/write data of a Type that has been set with no read/write permissions if other types are granted read/write access to anonymous clients.
 
@@ -112,13 +112,13 @@ const client = new ApolloClient({
 
 ### Writing Auth Rules
 
-Once a client has been granted access to an operation with either Anonymous Access granted or as an authenticated client using an API Key, the GraphQL query or mutation is then unrestricted by default. In order to further restrict access, please see the [the @auth directive](https://dgraph.io/docs/graphql/authorization/directive/).
+Once a client has been granted access to an operation with either Anonymous Access granted or as an authenticated client using an API Key, the GraphQL query or mutation is then unrestricted by default. In order to further restrict access, please see the [the @auth directive]({{< relref "auth.md" >}}).
 
 ### Restricting CORS
 
 Restricting the origins that your Dgraph Cloud responds to is an important step in preventing XSS exploits. By default, we allow requesting code from any origin access to your Dgraph Cloud resources (`Access-Control-Allow-Origin: *`), but by explicitly specifying the permitted origins this default behavior can be overridden.
 
-To allow an origin, add the line `# Dgraph.Allow-Origin` at the end of your GraphQL schema either with a [schema update](https://dgraph.io/docs/graphql/admin/#using-updategqlschema-to-add-or-modify-a-schema) or via the Cloud console's [Schema](https://cloud.dgraph.io/_/schema) page. For example, the following will restrict all origins except the ones specified.
+To allow an origin, add the line `# Dgraph.Allow-Origin` at the end of your GraphQL schema either with a [schema update]({{< relref "graphql/admin.md#using-updategqlschema-to-add-or-modify-a-schema" >}}) or via the Cloud console's [Schema](https://cloud.dgraph.io/_/schema) page. For example, the following will restrict all origins except the ones specified.
 
 ```
 # Dgraph.Allow-Origin "https://example.com" 
