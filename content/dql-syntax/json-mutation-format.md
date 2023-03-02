@@ -14,7 +14,7 @@ When using JSON format Dgraph creates nodes and relationships from the JSON stru
 For example, if you run this mutation: 
 
 ```dql
-   {
+ {
    "set": [
      {
       "name": "diggy",
