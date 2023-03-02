@@ -43,4 +43,75 @@ Filter traces by tags matching `env=qa`:
 
 {{% load-img "/images/jaeger-server-query-2.png" "Jaeger Query Result" %}}
 
+### Other tags available
+
+#### Tag message and status.message
+
+This tag you will filter out based on the message.
+e.g:
+message="Found Raft entries: 1"
+message="Found a conflict. Aborting."
+message="Aborting txn due to context timing out."
+message="Snapshot proposed: Done"
+message="Saved to storage"
+message="Applying schema and types"
+message="Found pending transactions. Retry later."
+message="Starting stream list orchestrate"
+message="Waiting for checksum match"
+message="Done waiting for checksum match"
+message="Query parsed"
+message="Start".
+
+status.message="grpc: the client connection is closing"
+status.message="Cannot get linearized read (time expired or no configured leader)"
+status.message="No node has been set up yet"
+status.message="Raft group mismatch"
+status.message="Response not compressed"
+status.message="transaction could not be aborted"
+status.message="Failed to read key block"
+status.message="Failed to read cert block"
+status.message="Assigning IDs is only allowed on leader."
+status.message="Nothing to be leased"
+status.message="No healthy connection found to Leader of group zero"
+status.message="Only leader can decide to commit or abort"
+status.message="Raft isn't initialized yet."
+status.message="Unable to find group"
+
+#### Tag error
+
+This tag you will filter out based on error status.
+e.g: error=true
+
+#### Tag status.code
+
+This tag you will filter out based on status code 0, 1 or 2.
+e.g: status.code=1
+
+#### Tag ns(namespace)
+
+This tag you will filter out only the given namespace.
+e.g: ns=7
+
+#### Tag committed
+
+e.g: committed=true
+
+#### Tag funcName
+
+available attributes
+
+handleHasFunction, n.proposeAndWait, dgraph.Execute, resolveMutation,
+resolveQuery,resolveCustomDQLQuery, RequestResolver.Resolve, resolveHTTP,
+query.ProcessQuery, n.proposeAndWait, processSort, handleValuePostings,
+handleUidPostings, handleRegexFunction, handleCompareFunction, handleMatchFunction
+filterGeoFunction, handleHasFunction
+
+"expandSubgraph: " + Predicate
+e.g: funcName=expandSubgraph: dgraph.type
+
+"query.ProcessGraph" + suffix
+"processTask" + q.Attr
+
+e.g: funcName=handleHasFunction
+
 To learn more about Jaeger, see [Jaeger's Deployment Guide](https://www.jaegertracing.io/docs/deployment/).
