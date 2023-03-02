@@ -13,7 +13,7 @@ To help secure your GraphQL API, Dgraph Cloud allows you to choose which GraphQL
 
 You can visit the [access tab on the schema page](https://cloud.dgraph.io/_/schema) and choose the operations that you want to allow/deny for anonymous users.
 
-With Anonymous Access turned off, all GraphQL operations are restricted unless the client provides a valid [API Key](/admin/authentication). With Anonymous Access turned on (Default configuration), you will have a button to "Edit Permissions"
+With Anonymous Access turned off, all GraphQL operations are restricted unless the client provides a valid [API Key]({{< relref "dgraphcloud/admin/authentication.md" >}}). With Anonymous Access turned on (Default configuration), you will have a button to "Edit Permissions"
 
 In Edit Permissions, you will find options to turn on/off Anonymous Access to Lambda functions, custom Queries, and custom Mutations. For every Type defined in your GraphQL schema, Edit Permissions will show check boxes to enable Anonymous Access to Read and Write. Checking Read will allow the anonymous end clients to access the `get<Type>` and `query<Type>` query operations. Checking Write will allow anonymous end clients to access the `add<Type>`, `update<Type>`, and `delete<Type>` mutation operations.
 
