@@ -49,6 +49,7 @@ Filter traces by tags matching `env=qa`:
 
 This tag you will filter out based on the message.
 e.g:
+```
 message="Found Raft entries: 1"
 message="Found a conflict. Aborting."
 message="Aborting txn due to context timing out."
@@ -76,30 +77,34 @@ status.message="No healthy connection found to Leader of group zero"
 status.message="Only leader can decide to commit or abort"
 status.message="Raft isn't initialized yet."
 status.message="Unable to find group"
+```
 
 #### Tag error
 
 This tag you will filter out based on error status.
-e.g: error=true
+
+e.g: `error=true`
 
 #### Tag status.code
 
 This tag you will filter out based on status code 0, 1 or 2.
-e.g: status.code=1
+
+e.g: `status.code=1`
 
 #### Tag ns(namespace)
 
 This tag you will filter out only the given namespace.
-e.g: ns=7
+
+e.g: `ns=7`
 
 #### Tag committed
 
-e.g: committed=true
+e.g: `committed=true`
 
 #### Tag funcName
 
 available attributes
-
+```
 handleHasFunction, n.proposeAndWait, dgraph.Execute, resolveMutation,
 resolveQuery,resolveCustomDQLQuery, RequestResolver.Resolve, resolveHTTP,
 query.ProcessQuery, n.proposeAndWait, processSort, handleValuePostings,
@@ -111,7 +116,8 @@ e.g: funcName=expandSubgraph: dgraph.type
 
 "query.ProcessGraph" + suffix
 "processTask" + q.Attr
+```
 
-e.g: funcName=handleHasFunction
+e.g: `funcName=handleHasFunction`
 
 To learn more about Jaeger, see [Jaeger's Deployment Guide](https://www.jaegertracing.io/docs/deployment/).
