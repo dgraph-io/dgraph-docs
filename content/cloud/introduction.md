@@ -81,7 +81,6 @@ Please see the following topics to learn more about how to use Dgraph Cloud:
 - [Dgraph Cloud API]({{< relref "cloud-api/overview" >}}) Dgraph Cloud now includes a API so you can programmatically manage your backends
 - [Schema]({{< relref "cloud-api/schema" >}}) lists commands related to schema.
 
-
 You might also be interested in:
 
 - [Dgraph GraphQL Schema Reference]({{< relref "graphql/schema" >}}), which lists all the types and directives supported by Dgraph

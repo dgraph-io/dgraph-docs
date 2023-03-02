@@ -93,7 +93,7 @@ will add the `release_date` information to the node identified by UID `0x632ea2`
 
 ## delete block
 A delete mutation, identified by the `delete` keyword, removes
-[triples](/mutations/triples) from the store.
+[triples]({{< relref "dql-rdf.md" >}}) from the store.
 
 For example, if the store contained the following:
 ```RDF
