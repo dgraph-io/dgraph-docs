@@ -170,6 +170,8 @@ Dgraph:
 * checks `"14"` can be converted to `int`, but stores as `string`,
 * throws an error for the remaining two triples, because `"14.5"` can't be converted to `int`.
 
+
+
 ## Password type
 
 A password for an entity is set with setting the schema for the attribute to be of type `password`.  Passwords cannot be queried directly, only checked for a match using the `checkpwd` function.

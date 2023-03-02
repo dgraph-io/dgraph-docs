@@ -1,272 +1,313 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
+date = "2023-02-23T22:25:17+11:00"
 title = "JSON Mutation Format"
 weight = 10
 [menu.main]
   parent = "dql-syntax"
   weight = 4
 +++
+Dgraph supports [Mutations]({{< relref "dql-mutation.md" >}}) in JSON or [RDF]({{< relref "dql-rdf.md" >}}) format.
+When using JSON format Dgraph creates nodes and relationships from the JSON structure and assigns UIDs to nodes.
 
-Mutations can also be specified using JSON objects. This can allow mutations to
-be expressed in a more natural way. It also eliminates the need for apps to
-have custom serialization code, since most languages already have a JSON
-marshaling library.
+## Specifying node UIDs
 
-When Dgraph receives a mutation as a JSON object, it first converts it into an
-internal edge format that is then processed into Dgraph.
+For example, if you run this mutation:
 
-> JSON  -> Edges -> Posting list \
-> RDF   -> Edges -> Posting list
+```dql
+ {
+   "set": [
+     {
+      "name": "diggy",
+      "dgraph.type": "Mascot"
+     }
+   ]
+ }  
+```
+You will see that Dgraph responds with
+{{< highlight json "linenos=false,hl_lines=7 " >}}
+{
+  "data": {
+    "code": "Success",
+    "message": "Done",
+    "queries": null,
+    "uids": {
+      "dg.3162278161.22055": "0xfffd8d72745f0650"
+    }
+  }
+{{< / highlight >}}
 
-Each JSON object represents a single node in the graph.
+Meaning that Dgraph has created one node from the JSON. It has used the identifier `dg.3162278161.22055` during the transaction. And the final UID value for this node is `0xfffd8d72745f0650`.
 
-{{% notice "note" %}}
-JSON mutations are available via gRPC clients such as the Go client, JavaScript client, and Java client, and are available to HTTP clients with [dgraph-js-http](https://github.com/dgraph-io/dgraph-js-http) and cURL. See more about cURL [here]({{< relref "#using-json-operations-via-curl" >}})
-{{% /notice %}}
+You can control the identifier name by specifying a `uid` field in your JSON data and using the notation:
+``` "uid" : "_:<your-identifier>" ```
 
-## Setting literal values
 
-When setting new values, the `set_json` field in the `Mutation` message should
-contain a JSON object.
+In this mutation, there are two JSON objects and because they are referring to the same identifier, Dgraph creates only one node:
 
-Literal values can be set by adding a key/value to the JSON object. The key
-represents the predicate, and the value represents the object.
+```dql
+   {
+   "set": [
+     {
+      "uid": "_:diggy",
+      "name": "diggy",
+      "dgraph.type": "Mascot"
+     },
+     {
+      "uid": "_:diggy",
+      "specie": "badger"
+     }
+   ]
+ }  
+```
+
+When you run this mutation, you can see that Dgraph returns the UID of the node that was created with the `diggy` identifier:
+
+{{< highlight json "linenos=false,hl_lines=7 " >}}
+{
+  "data": {
+    "code": "Success",
+    "message": "Done",
+    "queries": null,
+    "uids": {
+      "diggy": "0xfffd8d72745f0691"
+    }
+{{< / highlight >}}
+
+Note that the `specie` field is added to the node already created with `name` and `dgraph.type` information.
+
+### Referencing existing nodes
+
+You can use the `"uid"` field to reference an existing node. To do so, you must specify the UID value of the node.
+
 
 For example:
-```json
-{
-  "name": "diggy",
-  "food": "pizza",
-  "dgraph.type": "Mascot"
-}
-```
-Will be converted into the RDFs:
-```RDF
-_:blank-0 <name> "diggy" .
-_:blank-0 <food> "pizza" .
-_:blank-0 <dgraph.type> "Mascot" .
+```dql
+   {
+   "set": [
+     {
+      "uid": "0xfffd8d72745f0650",
+      "specie": "badger"
+     }
+   ]
+ }  
 ```
 
-The result of the mutation would also contain a map, which would have the uid assigned corresponding
-to the key `blank-0`. You could specify your own key like
+Adds the `specie` information to the node that was created earlier.
 
-```json
-{
-  "uid": "_:diggy",
-  "name": "diggy",
-  "food": "pizza",
-  "dgraph.type": "Mascot"
-}
-```
-
-In this case, the assigned UIDs map would have a key called `diggy` with the value being the uid
-assigned to it.
-
-### Forbidden values
-
-{{% notice "note" %}}
-When using JSON mutations, the following string values are not accepted: `uid( )`, `val( )`
-{{% /notice %}}
-
-For example, the following JSON can't be processed by Dgraph:
-
-```json
-{
-  "uid": "uid(t)",
-  "user_name": "uid(s ia)",
-  "name": "val (s kl)",
-}
-```
 
 ## Language support
 
-An important difference between RDF and JSON mutations is in regards to specifying a string value's
-language. In JSON, the language tag is appended to the edge _name_, not the value like in RDF.
-
-For example, the JSON mutation
-```JSON
-{
-  "food": "taco",
-  "rating@en": "tastes good",
-  "rating@es": "sabe bien",
-  "rating@fr": "c'est bon",
-  "rating@it": "è buono",
-  "dgraph.type": "Food"
-}
+To set a string value for a specific lnguage, append the language tag to the field name.
+In case, `specie` predicate has the @lang directive, the JSON mutation
+```dql
+   {
+   "set": [
+     {
+      "uid": "_:diggy",
+      "name": "diggy",
+      "dgraph.type": "Mascot",
+      "specie@en" : "badger",
+      "specie@fr" : "blaireau"
+     }
+   ]
+ }  
 ```
+Dgraph sets the `specie` string predicate in English and in French.
 
-is equivalent to the following RDF:
-```RDF
-_:blank-0 <food> "taco" .
-_:blank-0 <dgraph.type> "Food" .
-_:blank-0 <rating> "tastes good"@en .
-_:blank-0 <rating> "sabe bien"@es .
-_:blank-0 <rating> "c'est bon"@fr .
-_:blank-0 <rating> "è buono"@it .
-```
 
 ## Geolocation support
 
-Support for geolocation data is available in JSON. Geo-location data is entered
-as a JSON object with keys "type" and "coordinates". Keep in mind we only
-support indexing on the Point, Polygon, and MultiPolygon types, but we can store
-other types of geolocation data. Below is an example:
+Geo-location data must be specified using keys `type` and `coordinates` in the JSON document.
+The supported types are `Point`, `Polygon`, or `MultiPolygon` .
 
-```JSON
-{
-  "food": "taco",
-  "location": {
-    "type": "Point",
-    "coordinates": [1.0, 2.0]
-  }
-}
+```dql
+ {
+   "set": [
+     {
+      "name": "diggy",
+      "dgraph.type": "Mascot",
+      "home" : {
+          "type": "Point",
+          "coordinates": [-122.475537, 37.769229 ]
+       }
+     }
+   ]
+ }    
 ```
 
-## Referencing existing nodes
 
-If a JSON object contains a field named `"uid"`, then that field is interpreted
-as the UID of an existing node in the graph. This mechanism allows you to
-reference existing nodes.
+
+
+
+## Relationships
+
+Relationships are simply created from the nested structure of JSON.
 
 For example:
-```json
+```dql
+ {
+   "set": [
+     {
+      "uid": "_:diggy",
+      "name": "diggy",
+      "dgraph.type": "Mascot",
+      "food" : [
+        {
+          "uid":"_:f1",
+          "name": "earthworms"
+        },
+        {
+          "uid":"_:f2",
+          "name": "apples"
+        }]
+     }
+   ]
+ }
+
+```
+
+This result in the creation of three nodes and the `food` predicate as a relationship.
+
+{{< highlight json "linenos=false,hl_lines=6-7 " >}}
 {
-  "uid": "0x467ba0",
-  "food": "taco",
-  "rating": "tastes good",
-  "dgraph.type": "Food"
-}
-```
-Will be converted into the RDFs:
-```RDF
-<0x467ba0> <food> "taco" .
-<0x467ba0> <rating> "tastes good" .
-<0x467ba0> <dgraph.type> "Food" .
-```
+  "data": {
+    "code": "Success",
+    "message": "Done",
+    "queries": null,
+    "uids": {
+      "diggy": "0xfffd8d72745f06d7",
+      "f1": "0xfffd8d72745f06d8",
+      "f2": "0xfffd8d72745f06d9"
+    }
+    ...
+{{< / highlight >}}
 
-## Edges between nodes
 
-Edges between nodes are represented in a similar way to literal values, except
-that the object is a JSON object.
 
-For example:
-```JSON
-{
-  "name": "Alice",
-  "friend": {
-    "name": "Betty"
-  }
-}
-```
-Will be converted into the RDFs:
-```RDF
-_:blank-0 <name> "Alice" .
-_:blank-0 <friend> _:blank-1 .
-_:blank-1 <name> "Betty" .
-```
+You can use references to existing nodes at any level of your nested JSON.
 
-The result of the mutation would contain the UIDs assigned to `blank-0` and `blank-1` nodes. If you
-wanted to return these UIDs under a different key, you could specify the `uid` field as a blank
-node.
-
-```JSON
-{
-  "uid": "_:alice",
-  "name": "Alice",
-  "friend": {
-    "uid": "_:bob",
-    "name": "Betty"
-  }
-}
-```
-
-Will be converted to:
-
-```RDF
-_:alice <name> "Alice" .
-_:alice <friend> _:bob .
-_:bob <name> "Betty" .
-```
-
-Existing nodes can be referenced in the same way as when adding literal values.
-E.g. to link two existing nodes:
-```JSON
-{
-  "uid": "0x123",
-  "link": {
-    "uid": "0x456"
-  }
-}
-```
-
-Will be converted to:
-
-```RDF
-<0x123> <link> <0x456> .
-```
-
-{{% notice "note" %}}
-A common mistake is to attempt to use `{"uid":"0x123","link":"0x456"}`.  This
-will result in an error. Dgraph interprets this JSON object as setting the
-`link` predicate to the string`"0x456"`, which is usually not intended.  {{%
-/notice %}}
 
 ## Deleting literal values
 
-Deletion mutations can also be sent in JSON format. To send a delete mutation,
-use the `delete_json` field instead of the `set_json` field in the `Mutation`
-message.
+To delete node predicates, specify the UID of the node you are changing and set  
+the predicates to delete to the JSON value `null`.
 
-{{% notice "note" %}} Check the [JSON Syntax using Raw HTTP or Ratel UI]({{< relref "#json-syntax-using-raw-http-or-ratel-ui">}}) section if you're using the dgraph-js-http client or Ratel UI. {{% /notice %}}
-
-When using delete mutations, an existing node always has to be referenced. So
-the `"uid"` field for each JSON object must be present. Predicates that should
-be deleted should be set to the JSON value `null`.
-
-For example, to remove a food rating:
-```JSON
+For example, to remove the predicate `name` from node  `0xfffd8d72745f0691` :
+```dql
 {
-  "uid": "0x467ba0",
-  "rating": null
+   "delete": [
+     {
+      "uid": "0xfffd8d72745f0691",
+      "name": null
+     }
+   ]
 }
 ```
 
-## Deleting edges
+## Deleting relationship
 
-Deleting a single edge requires the same JSON object that would create that
-edge. E.g. to delete the predicate `link` from `"0x123"` to `"0x456"`:
+A relationhsip can be defined with a cardinality of 1 or many (list).
+Setting a relationship to `null` removes all the relationships.
+
 ```JSON
 {
-  "uid": "0x123",
-  "link": {
-    "uid": "0x456"
+  "uid": "0xfffd8d72745f06d7",
+  "food": null
+}
+```
+
+
+To delete a single relationhsip in a list, you must specify the target node of the relationship.
+
+```dql
+{
+   "delete": [
+      {
+      "uid": "0xfffd8d72745f06d7",
+      "food": {
+          "uid": "0xfffd8d72745f06d9"
+        }
+      }
+   ]
+}
+
+```
+
+deletes only one `food` relationship.
+
+
+To delete all predicates of a given node:
+- make sure the node has a `dgraph.type` predicate
+- the type is defined by the [Dgraph type system]({{< relref "type-system.md" >}})
+- run a delete mutation specifying only the uid field
+
+
+```JSON
+{
+   "delete": [
+      {
+        "uid": "0x123"
+      }
+   ]
+}
+```
+## Handling arrays
+
+To create a predicate as a list of string:
+
+```JSON
+{
+   "set": [
+    {
+      "testList": [
+        "Grape",
+        "Apple",
+        "Strawberry",
+        "Banana",
+        "watermelon"
+      ]
+    }
+   ]
+}
+```
+
+For example, if  `0x06` is the UID of the node created.
+
+To remove one value from the list:
+
+```JSON
+{
+  "delete": {
+    "uid": "0x6", #UID of the list.
+    "testList": "Apple"
   }
 }
 ```
 
-All edges for a predicate emanating from a single node can be deleted at once
-(corresponding to deleting `S P *`):
+To remove multiple multiple values:
 ```JSON
 {
-  "uid": "0x123",
-  "link": null
+  "delete": {
+    "uid": "0x6",
+    "testList": [
+          "Strawberry",
+          "Banana",
+          "watermelon"
+        ]
+  }
 }
 ```
 
-If no predicates are specified, then all of the node's known outbound edges (to
-other nodes and to literal values) are deleted (corresponding to deleting `S *
-*`). The predicates to delete are derived using the type system. Refer to the
-[RDF format]({{< relref "dql-rdf.md" >}}) documentation and the section on the
-[type system]({{< relref "type-system.md" >}}) for more
-information:
+To add a value:
 
 ```JSON
 {
-  "uid": "0x123"
+   "uid": "0x6", #UID of the list.
+   "testList": "Pineapple"
 }
 ```
 
-## Facets
+## Adding Facets
 
 Facets can be created by using the `|` character to separate the predicate
 and facet key in a JSON object field name. This is the same encoding schema
@@ -283,14 +324,6 @@ used to show facets in query results. E.g.
   }
 }
 ```
-Produces the following RDFs:
-```
-_:blank-0 <name> "Carol" (initial="C") .
-_:blank-0 <dgraph.type> "Person" .
-_:blank-0 <friend> _:blank-1 (close="yes") .
-_:blank-1 <name> "Daryl" .
-_:blank-1 <dgraph.type> "Person" .
-```
 
 Facets do not contain type information but Dgraph will try to guess a type from
 the input. If the value of a facet can be parsed to a number, it will be
@@ -304,104 +337,10 @@ int or a float.
 
 ## Deleting Facets
 
-The easiest way to delete a Facet is overwriting it. When you create a new mutation for the same entity without a facet, the existing facet will be deleted automatically.
+To delete a `Facet`, overwrite it. When you run a mutation for the same entity without a `Facet`, the existing `Facet` is deleted automatically.
 
-e.g:
 
-```RDF
-<0x1> <name> "Carol" .
-<0x1> <friend> <0x2> .
-```
-
-Another way to do this is by using the Upsert Block.
-
-> In this query below, we are deleting Facet in the Name and Friend predicates. To overwrite we need to collect the values ​​of the edges on which we are performing this operation and use the function "val(var)" to complete the overwriting.
-
-```sh
-curl -H "Content-Type: application/rdf" -X POST localhost:8080/mutate?commitNow=true -d $'
-upsert {
-  query {
-    user as var(func: eq(name, "Carol")){
-      Name as name
-      Friends as friend
-    }
- }
-
-  mutation {
-    set {
-      uid(user) <name> val(Name) .
-      uid(user) <friend> uid(Friends) .
-    }
-  }
-}' | jq
-```
-
-## Creating a list with JSON and interacting with it
-
-Schema:
-
-```JSON
-testList: [string] .
-```
-
-```JSON
-{
-  "testList": [
-    "Grape",
-    "Apple",
-    "Strawberry",
-    "Banana",
-    "watermelon"
-  ]
-}
-```
-
-Let’s then remove "Apple" from this list (Remember, it’s case sensitive):
-
-```graphql
-{
-  q(func: has(testList)) {
-    uid
-    testList
-  }
-}
-```
-
-```JSON
-{
-  "delete": {
-    "uid": "0x6", #UID of the list.
-    "testList": "Apple"
-  }
-}
-```
-
-Also you can delete multiple values
-```JSON
-{
-  "delete": {
-    "uid": "0x6",
-    "testList": [
-          "Strawberry",
-          "Banana",
-          "watermelon"
-        ]
-  }
-}
-```
-
-{{% notice "note" %}} Check the [JSON Syntax using Raw HTTP or Ratel UI]({{< relref "#json-syntax-using-raw-http-or-ratel-ui">}}) section if you're using the dgraph-js-http client or Ratel UI. {{% /notice %}}
-
-Add another fruit:
-
-```JSON
-{
-   "uid": "0x6", #UID of the list.
-   "testList": "Pineapple"
-}
-```
-
-## Facets in List-type with JSON
+## Facets in List
 Schema:
 ```sh
 <name>: string @index(exact).
@@ -474,159 +413,6 @@ And the final result is:
 }
 ```
 
-## Specifying multiple operations
+## Reserved values
 
-When specifying add or delete mutations, multiple nodes can be specified
-at the same time using JSON arrays.
-
-For example, the following JSON object can be used to add two new nodes, each
-with a `name`:
-
-```JSON
-[
-  {
-    "name": "Edward"
-  },
-  {
-    "name": "Fredric"
-  }
-]
-```
-
-## JSON Syntax using Raw HTTP or Ratel UI
-
-This syntax can be used in the most current version of Ratel, in the [dgraph-js-http](https://github.com/dgraph-io/dgraph-js-http) client or even via cURL.
-
-You can also [download the Ratel UI](https://discuss.dgraph.io/t/ratel-installer-for-linux-macos-and-windows-preview-version-ratel-update-from-v1-0-6/2884/).
-
-Mutate:
-```JSON
-{
-  "set": [
-    {
-      # One JSON obj in here
-    },
-    {
-      # Another JSON obj in here for multiple operations
-    }
-  ]
-}
-```
-
-Delete:
-
-Deletion operations are the same as [Deleting literal values]({{< relref "#deleting-literal-values">}}) and [Deleting edges]({{< relref "#deleting-edges">}}).
-
-```JSON
-{
-  "delete": [
-    {
-      # One JSON obj in here
-    },
-    {
-      # Another JSON obj in here for multiple operations
-    }
-  ]
-}
-```
-
-## Using JSON operations via cURL
-
-First you have to configure the HTTP header to specify content-type.
-
-```sh
--H 'Content-Type: application/json'
-```
-
-{{% notice "note" %}}
-In order to use `jq` for JSON formatting you need the `jq` package. See the
-[`jq` downloads](https://stedolan.github.io/jq/download/) page for installation
-details. You can also use Python's built in `json.tool` module with `python -m
-json.tool` to do JSON formatting.
-{{% /notice %}}
-
-```sh
-curl -H "Content-Type: application/json" -X POST localhost:8080/mutate?commitNow=true -d $'
-    {
-      "set": [
-        {
-          "name": "Alice"
-        },
-        {
-          "name": "Bob"
-        }
-      ]
-    }' | jq
-
-```
-
-To delete:
-
-```sh
-curl -H "Content-Type: application/json" -X POST localhost:8080/mutate?commitNow=true -d $'
-    {
-      "delete": [
-        {
-          "uid": "0xa"
-        }
-      ]
-    }' | jq
-```
-
-Mutation with a JSON file:
-
-```sh
-curl -H "Content-Type: application/json" -X POST localhost:8080/mutate?commitNow=true -d @data.json
-```
-
-where the contents of data.json looks like the following:
-
-```json
-{
-  "set": [
-    {
-      "name": "Alice"
-    },
-    {
-      "name": "Bob"
-    }
-  ]
-}
-```
-
-The JSON file must follow the same format for mutations over HTTP: a single JSON
-object with the `"set"` or `"delete"` key and an array of JSON objects for the
-mutation. If you already have a file with an array of data, you can use `jq` to
-transform your data to the proper format. For example, if your data.json file
-looks like this:
-
-```json
-[
-  {
-    "name": "Alice"
-  },
-  {
-    "name": "Bob"
-  }
-]
-```
-
-then you can transform your data to the proper format with the following `jq`
-command, where the `.` in the `jq` string represents the contents of data.json:
-
-```sh
-cat data.json | jq '{set: .}'
-```
-
-```
-{
-  "set": [
-    {
-      "name": "Alice"
-    },
-    {
-      "name": "Bob"
-    }
-  ]
-}
-```
+The string values `uid(...)`, `val(...)` are not accepted.   
