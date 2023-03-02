@@ -19,7 +19,7 @@ You can obtain Dgraph binary for the latest version as well as previous releases
    ```sh
       docker pull dgraph/dgraph:latest
    ```
-   To set up a [learning environment](({{< relref "single-host-setup.md" >}})), you may pull the [dgraph standalone](https://hub.docker.com/r/dgraph/standalone) image :
+   To set up a [learning environment]({{< relref "single-host-setup.md" >}}), you may pull the [dgraph standalone](https://hub.docker.com/r/dgraph/standalone) image :
 
    ```sh
       docker pull dgraph/standalone:latest
