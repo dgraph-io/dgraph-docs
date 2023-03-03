@@ -28,3 +28,8 @@
     disabled = false
     renderJavaScript = false
     template = "hierarchical"
+[[redirects]]
+  from = "/docs/deploy/production-checklist"
+  to = "/docs/installation/production-checklist"
+  status = 301
+  force = false
