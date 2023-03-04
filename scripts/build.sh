@@ -151,7 +151,8 @@ firstRun=1
 while true; do
 	# Lets move to the docs directory.
 	pushd "$(dirname "$0")/.." > /dev/null
-    
+	mkdir -p public > /dev/null
+    cp _redirects public/_redirects > /dev/null
 	currentBranch=$(git rev-parse --abbrev-ref HEAD)
 
 	if [ "$firstRun" = 1 ];
@@ -183,7 +184,7 @@ while true; do
 		echo "latest_version => '$SETO'"
 		latest_version=''
 	done
-    cp _redirects public/_redirects > /dev/null
+    
 	echo -e "$(date)  Done checking branches.\n"
     
 	git checkout -q "$currentBranch"
