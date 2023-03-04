@@ -45,11 +45,14 @@ Filter traces by tags matching `env=qa`:
 
 ### Other tags available
 
+The OpenTrace information collected by Dgraph and displayed in Jaeger contains various messages and metadata that can also be filtered by tag. Below is a list of information that is in Jaeger as a tag.
+
 #### Tag message and status.message
 
 This tag you will filter out based on the message.
 e.g:
-```
+
+```php
 message="Found Raft entries: 1"
 message="Found a conflict. Aborting."
 message="Aborting txn due to context timing out."
@@ -104,7 +107,8 @@ e.g: `committed=true`
 #### Tag funcName
 
 available attributes
-```
+
+```php
 handleHasFunction, n.proposeAndWait, dgraph.Execute, resolveMutation,
 resolveQuery,resolveCustomDQLQuery, RequestResolver.Resolve, resolveHTTP,
 query.ProcessQuery, n.proposeAndWait, processSort, handleValuePostings,
@@ -117,6 +121,9 @@ e.g: funcName=expandSubgraph: dgraph.type
 "query.ProcessGraph" + suffix
 "processTask" + q.Attr
 ```
+
+For you to be able to see something you must execute a query corresponding to the function.
+For example, fun a has() function in a query and use the tag bellow.
 
 e.g: `funcName=handleHasFunction`
 
