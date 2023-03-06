@@ -251,7 +251,7 @@ To delete all predicates of a given node:
    ]
 }
 ```
-## Handling arrays
+## Handling arrays 
 
 To create a predicate as a list of string:
 

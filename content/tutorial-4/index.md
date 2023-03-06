@@ -1,7 +1,11 @@
 +++
-title = "Get Started with Dgraph - Multi-language strings"
+title = "Get Started with Dgraph -  Multi-language strings"
+[menu.main]
+  name = "Multi-language strings"
+  identifier = "tutorials-lang"
+  parent = "tutorials"
+  weight = 4
 +++
-
 **Welcome to the fourth tutorial of getting started with Dgraph.**
 
 In the [previous tutorial]({{< relref "tutorial-3/index.md" >}}), we learned about Datatypes, Indexing, Filtering, and Reverse traversals in Dgraph.
