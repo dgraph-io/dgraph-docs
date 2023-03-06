@@ -11,7 +11,7 @@ When using JSON format Dgraph creates nodes and relationships from the JSON stru
 
 ## Specifying node UIDs
 
-For example, if you run this mutation: 
+For example, if you run this mutation:
 
 ```dql
  {
@@ -23,7 +23,7 @@ For example, if you run this mutation:
    ]
  }  
 ```
-You will see that Dgraph responds with 
+You will see that Dgraph responds with
 {{< highlight json "linenos=false,hl_lines=7 " >}}
 {
   "data": {
@@ -38,7 +38,7 @@ You will see that Dgraph responds with
 
 Meaning that Dgraph has created one node from the JSON. It has used the identifier `dg.3162278161.22055` during the transaction. And the final UID value for this node is `0xfffd8d72745f0650`.
 
-You can control the identifier name by specifying a `uid` field in your JSON data and using the notation: 
+You can control the identifier name by specifying a `uid` field in your JSON data and using the notation:
 ``` "uid" : "_:<your-identifier>" ```
 
 
@@ -117,8 +117,8 @@ Dgraph sets the `specie` string predicate in English and in French.
 
 ## Geolocation support
 
-Geo-location data must be specified using keys `type` and `coordinates` in the JSON document. 
-The supported types are `Point`, `Polygon`, or `MultiPolygon` . 
+Geo-location data must be specified using keys `type` and `coordinates` in the JSON document.
+The supported types are `Point`, `Polygon`, or `MultiPolygon` .
 
 ```dql
  {
@@ -251,7 +251,7 @@ To delete all predicates of a given node:
    ]
 }
 ```
-## Handling arrays 
+## Handling arrays
 
 To create a predicate as a list of string:
 
