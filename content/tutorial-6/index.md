@@ -207,7 +207,12 @@ Here is our search string: `graph data and analyze it in graphdb`.
 
 Here's the matched tweet, which made it to the result.
 
-{{< tweet 1192822660679577602>}}
+```Let's Go and catch @francesc at @Gopherpalooza today, as he scans into Go source code by building its Graph in Dgraph!
+
+Be there, as he Goes through analyzing Go source code, using a Go program, that stores data in the GraphDB built in Go!#golang #GraphDB #Databases #Dgraph pic.twitter.com/sK90DJ6rLs
+
+— Dgraph Labs (@dgraphlabs) November 8, 2019
+```
 
 If you observe, you can see some of the words from the search strings are not present in the matched tweet, but the tweet has still made it to the result.
 
