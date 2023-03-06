@@ -1,7 +1,11 @@
 +++
-title = "Get Started with Dgraph - Advanced Text Search on Social Graphs"
+title = "Get Started with Dgraph -  Advanced Text Search"
+[menu.main]
+  name = "Advanced Text Search"
+  identifier = "tutorials-search"
+  parent = "tutorials"
+  weight = 6
 +++
-
 **Welcome to the sixth tutorial of getting started with Dgraph.**
 
 In the [previous tutorial]({{< relref "tutorial-5/index.md" >}}), we learned about building social graphs in Dgraph, by modeling tweets as an example.

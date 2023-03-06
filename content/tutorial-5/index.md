@@ -1,5 +1,10 @@
 +++
-title = "Get Started with Dgraph - String Indices and Modeling Tweet Graph"
+title = "Get Started with Dgraph -  String Indices"
+[menu.main]
+  name = "String Indices"
+  identifier = "tutorials-string"
+  parent = "tutorials"
+  weight = 5
 +++
 
 **Welcome to the fifth tutorial of getting started with Dgraph.**

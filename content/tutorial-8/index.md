@@ -1,7 +1,11 @@
 +++
-title = "Get Started with Dgraph - Native Geolocation Features"
+title = "Get Started with Dgraph - Geolocation"
+[menu.main]
+  name = "Fuzzy Search"
+  identifier = "tutorials-geolocation"
+  parent = "tutorials"
+  weight = 8
 +++
-
 **Welcome to the eight tutorial of getting started with Dgraph.**
 
 In the [previous tutorial]({{< relref "tutorial-7/index.md">}}),

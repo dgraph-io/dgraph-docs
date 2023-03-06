@@ -1,7 +1,11 @@
 +++
-title = "Get Started with Dgraph - Basic Operations"
+title = "Get Started with Dgraph -  Basic Operations"
+[menu.main]
+  name = " Basic Operations"
+  identifier = "tutorials-basics"
+  parent = "tutorials"
+  weight = 2
 +++
-
 **Welcome to the second tutorial of getting started with Dgraph.**
 
 In the [previous tutorial]({{< relref "tutorial-1/index.md" >}}) of getting started,
