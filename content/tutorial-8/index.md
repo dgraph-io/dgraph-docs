@@ -1,7 +1,7 @@
 +++
 title = "Get Started with Dgraph - Geolocation"
 [menu.main]
-  name = "Fuzzy Search"
+  name = "Geolocation"
   identifier = "tutorials-geolocation"
   parent = "tutorials"
   weight = 8
@@ -10,7 +10,7 @@ title = "Get Started with Dgraph - Geolocation"
 
 In the [previous tutorial]({{< relref "tutorial-7/index.md">}}),
 we learned about building a twitter-like user-search feature using
-[Dgraph's fuzzy search](https://dgraph.io/docs/query-language/#fuzzy-matching).
+[Dgraph's fuzzy search]({{< relref "query-language/functions.md#fuzzy-matching">}}).
 
 In this tutorial, we'll build a graph of tourist locations around San Francisco and
 help our Zoologist friend, Mary, and her team in their mission to conserve birds
