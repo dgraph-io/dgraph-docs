@@ -1,7 +1,7 @@
 +++
 title = "Get Started with Dgraph - Geolocation"
 [menu.main]
-  name = "Fuzzy Search"
+  name = "Geolocation"
   identifier = "tutorials-geolocation"
   parent = "tutorials"
   weight = 8
@@ -10,7 +10,7 @@ title = "Get Started with Dgraph - Geolocation"
 
 In the [previous tutorial]({{< relref "tutorial-7/index.md">}}),
 we learned about building a twitter-like user-search feature using
-[Dgraph's fuzzy search](https://dgraph.io/docs/query-language/#fuzzy-matching).
+[Dgraph's fuzzy search]({{< relref "query-language/functions.md#fuzzy-matching">}}).
 
 In this tutorial, we'll build a graph of tourist locations around San Francisco and
 help our Zoologist friend, Mary, and her team in their mission to conserve birds
@@ -1473,7 +1473,7 @@ Run the query below to fetch the entire graph:
   entire_graph(func: has(city)) {
     city
     has_location {
-    name 
+    name
     has_type {
       loc_type
       }
@@ -1496,7 +1496,7 @@ Our graph has:
 We just have one node which represents the city of `San Francisco`.
 - The green ones are the the `location` nodes.
 We have a total of 13 locations.
-- The pink nodes represent the `location types`. 
+- The pink nodes represent the `location types`.
 We have four kinds of locations in our dataset: `museum`, `zoo`, `hotel`, and `tourist attractions`.
 
 You can also see that Dgraph has auto-detected the data types of the predicates from
@@ -1573,7 +1573,7 @@ to refresh our previous discussions around using the `@filter` directive.
   find_hotel(func: near(location, [-122.479784,37.82883295],7000)) {
     name
     has_type @filter(eq(loc_type, "Hotel")){
-      loc_type 
+      loc_type
     }
   }
 }
@@ -1596,7 +1596,7 @@ The search result still contains nodes representing locations which are not hote
 That's because the root query first finds all the location nodes which are within
 7KM from the specified point location, and then it applies the filter while
 selectively traversing to the `location type nodes`.
- 
+
 Only the predicates in the location nodes can be filtered at the root level, and
 you cannot filter the `location types` without traversing to the `location type nodes`.
 
