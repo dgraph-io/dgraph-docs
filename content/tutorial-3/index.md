@@ -1,5 +1,10 @@
 +++
-title = "Get Started with Dgraph - Basic Types and Operations"
+title = "Get Started with Dgraph -  Types and Operations"
+[menu.main]
+  name = "Types and Operations"
+  identifier = "tutorials-types"
+  parent = "tutorials"
+  weight = 3
 +++
 
 **Welcome to the third tutorial of getting started with Dgraph.**

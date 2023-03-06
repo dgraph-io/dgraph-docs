@@ -1,5 +1,10 @@
 +++
-title = "Get Started with Dgraph - String Indices and Modeling Tweet Graph"
+title = "Get Started with Dgraph -  String Indices"
+[menu.main]
+  name = "String Indices"
+  identifier = "tutorials-string"
+  parent = "tutorials"
+  weight = 5
 +++
 
 **Welcome to the fifth tutorial of getting started with Dgraph.**
@@ -28,7 +33,12 @@ The accompanying video of the tutorial will be out shortly, so stay tuned to [ou
 
 Here's a sample tweet.
 
-{{< tweet 1194740206177402880>}}
+
+```Test tweet for the fifth episode of getting started series with @dgraphlabs.
+Wait for the video of the fourth one by @francesc the coming Wednesday! #GraphDB #GraphQL
+
+— Karthic Rao | karthic.eth (@hackintoshrao) November 13, 2019
+```
 
 Let's dissect the tweet above. Here are the components of the tweet:
 
@@ -136,9 +146,20 @@ Here is the graph of our sample tweet.
 
 Let's add a couple of tweets to the list.
 
-{{< tweet 1142124111650443273>}}
+```
+So many good talks at #graphqlconf, next year I'll make sure to be *at least* in the audience!
 
-{{< tweet 1192822660679577602>}}
+Also huge thanks to the live tweeting by @dgraphlabs for alleviating the FOMO 😊#GraphDB ♥️ #GraphQL https://t.co/5uDpbswFZi
+
+— francesc (@francesc) June 21, 2019
+Let's Go and catch @francesc at @Gopherpalooza today, as he scans into Go source code by building its Graph in Dgraph!
+
+Be there, as he Goes through analyzing Go source code, using a Go program, that stores data in the GraphDB built in Go!#golang #GraphDB #Databases #Dgraph pic.twitter.com/sK90DJ6rLs
+
+— Dgraph Labs (@dgraphlabs) November 8, 2019
+```
+
+
 
 We'll be using these two tweets and the sample tweet, which we used in the beginning as our dataset.
 Open Ratel, go to the mutate tab, paste the mutation, and click Run.
