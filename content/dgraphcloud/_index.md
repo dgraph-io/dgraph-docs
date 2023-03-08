@@ -34,15 +34,6 @@ title = "Dgraph Cloud"
   </div>
 
   <div class="item">
-    <div class="icon"><i class="lni lni-shield" aria-hidden="true"></i></div>
-    <a href="{{< relref "security.md">}}">
-      <h2>Secure Your Endpoint</h2>
-      <p>
-        Tips for securing your Dgraph Cloud backend
-      </p>
-    </a>
-  </div>
-  <div class="item">
     <div class="icon"><i class="lni lni-cogs" aria-hidden="true"></i></div>
     <a href="{{< relref "migrating-from-hosted-dgraph.md">}}">
       <h2>Migrate from Self-Managed Dgraph</h2>

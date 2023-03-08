@@ -1,31 +1,39 @@
 +++
-title = "Authentication"
+title = "API keys"
 weight = 2   
 [menu.main]
     parent = "cloud-admin"
 +++
 
-Administrating your Dgraph Cloud using the `/query`, `/mutate`, `/commit`, `/admin`, `/admin/slash`, or `/alter` endpoints on Dgraph Cloud. Also, bypassing Anonymous Access restrictions on the `/graphql` endpoint requires an API key. You can generate a new API key from Dgraph Cloud by selecting the ["Settings" button](https://cloud.dgraph.io/_/settings) from the sidebar, and then clicking the **Add API Key** button. Keep your API key safe, it will not be accessible once you leave the page.
+Client applications accessing the Dgraph Cloud cluster endpoints
+- `/query`
+- `/mutate`
+- `/commit`
 
-![Dgraph Cloud: Add an API Key](/images/cloud-4.png)
+must present a valid **client** or **admin** **API key** in the ``Dg-Auth`` or ``X-Auth-Token`` header of every HTTP request.
 
-There are two types of API keys: *client* and *admin*.
+Client applications accessing the Dgraph Cloud cluster endpoints
+- `/admin`
+- `/admin/slash`
+- `/alter`
 
-- **Client API keys** can only be used to perform query, mutation, and commit operations.
-- **Admin API keys** can be used to perform both client operations and admin operations like drop data, destroy backend, and update schema.
+must present a valid **admin API key** in the ``Dg-Auth`` or ``X-Auth-Token``  header of every HTTP request.
 
-{{% notice "note" %}}
-Either Client API keys or Admin API keys can be used to bypass [Anonymous Access](/security) restrictions.
-{{% /notice %}}
+Client applications accessing the Dgraph Cloud cluster endpoint
+- `/graphql`
 
-![Dgraph Cloud: Select API Key Role](/images/cloud-5.png)
-<br>
-<br>
-All admin API requests must be authenticated by passing the API key as the 'Dg-Auth' header to every HTTP request. You can verify that your API key works by using the following HTTP example.
+with [anonymous access]({{< relref "anonymous-access.md">}}) not set on the requested operation, must present a valid **client** or **admin API key** in the ``Dg-Auth`` or ``X-Auth-Token``  header of every HTTP request.
 
-```
-curl 'https://<your-backend>/admin' \
-  -H 'Dg-Auth: <your-api-key>' \
-  -H 'Content-Type: application/json' \
-  --data-binary '{"query":"{ getGQLSchema { schema } }"}'
-```
+
+**Client API keys** can only be used to perform query, mutation, and commit operations.
+**Admin API keys** can be used to perform both client operations and admin operations like drop data, destroy backend, and update schema.
+
+
+ ## Generate a new API
+ To generate a new API key :
+1. Go to the [Settings](https://cloud.dgraph.io/_/settings) section of Dgraph Cloud console.
+2. Access ``[API Keys](https://cloud.dgraph.io/_/settings?tab=api-keys)`` tab.
+3. Click <kbd>Create New</kbd> button.
+4. Give the key a name, and select **Client** or **Admin** type and click <kbd>Create</kbd>
+5. Copy the key in a safe place, it will not be accessible once you leave the page.
+

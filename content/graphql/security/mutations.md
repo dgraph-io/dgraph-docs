@@ -1,10 +1,10 @@
 +++
 title = "Mutations and GraphQL Authorization"
 description = "Mutations with authorization work like queries. But mutations involve a state change in the database, so you need to understand when the rules are applied."
-weight = 3
+weight = 5
 [menu.main]
     name = "Mutations"
-    parent = "authorization"
+    parent = "gql-auth"
 +++
 
 Mutations with authorization work like queries. But because mutations involve a state change in the database,  it's important to understand when the authorization rules are applied and what they mean.

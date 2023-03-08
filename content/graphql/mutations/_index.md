@@ -1,6 +1,6 @@
 +++
 title = "Mutations"
-weight = 4
+weight = 40
 [menu.main]
   identifier = "graphql-mutations"
   parent = "graphql"

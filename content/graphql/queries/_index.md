@@ -1,6 +1,6 @@
 +++
 title = "Queries"
-weight = 3
+weight = 30
 [menu.main]
   identifier = "graphql-queries"
   parent = "graphql"
