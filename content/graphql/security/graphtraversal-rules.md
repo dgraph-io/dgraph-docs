@@ -1,12 +1,12 @@
 +++
-title = "Graph traversal rules"
-description = "Dgraph support graph traversal rules on GraphQL API operations: you can specify which data a user can query, add, update or delete for each type of your GraphQL schema based on JWT claims, using the @auth directive."
+title = "ABAC rules"
+description = "Dgraph support Attribute Based Access Control (ABAC) on GraphQL API operations: you can specify which data a user can query, add, update or delete for each type of your GraphQL schema based on JWT claims, using the ``@auth`` directive and graph traversal queries."
 weight = 5
 [menu.main]
     parent = "gql-auth"
 +++
 
-Dgraph support graph traversal rules on GraphQL API operations: you can specify which data a user can query, add, update or delete for each type of your GraphQL schema based on JWT claims, using the ``@auth`` directive.
+Dgraph support Attribute Based Access Control (ABAC) on GraphQL API operations: you can specify which data a user can query, add, update or delete for each type of your GraphQL schema based on JWT claims, using the ``@auth`` directive and graph traversal queries.
 
 
 To implement graph traversal rule on GraphQL API operations  :
