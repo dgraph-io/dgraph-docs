@@ -55,7 +55,7 @@ To learn more about adding JWTs from a third-party JWT signer to your app, see o
 [Auth0 Authentication]({{< relref "graphql/todo-app-tutorial/todo-auth0-jwt" >}}) or [Firebase Authentication]({{< relref "graphql/todo-app-tutorial/todo-firebase-jwt" >}}). {{% /notice %}}
 
 ### ACL
-Note that another token will be needed to access the system if ACL security is also enabled, or a “shared” cloud back-end is in use (as any shared back-end is secured by ACLs set up on your behalf by Dgraph). See the [ACLs]({{< relref "access-control-lists.md">}}) section for details. The ACLs are a separate security mechanism.
+Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs]({{< relref "access-control-lists.md">}}) section for details. The ACLs are a separate security mechanism.
 
 ### JWT Claims
 
