@@ -19,7 +19,7 @@ Dgraph's GraphQL authorization features let you specify :
 
 {{% notice "note" %}}
 By default all operations are accessible to anonymous clients, no JWT token is required and no authorization rules are applied.
-It is your responsability to correctly configure the authorization for the ``/graphql`` endpoint.
+It is your responsibility to correctly configure the authorization for the ``/graphql`` endpoint.
 {{% /notice %}}
 
 Refer to the following documentation to set your ``/graphql`` endpoint security :
@@ -37,7 +37,7 @@ In summary, the Dgraph security flow on ``/graphql`` endpoint is as follow:
 {{<figure class="medium image" src="/images/graphql/RBAC.jpeg" title="graphql endpoint security" alt="graphql endpoint security">}}
 
 ### CORS
-Additionaly, you can [restrict the origins]({{< relref "cors.md">}}) that ``/graphql`` endpoint responds to.
+Additionally, you can [restrict the origins]({{< relref "cors.md">}}) that ``/graphql`` endpoint responds to.
 
 This is a best practice to prevent XSS exploits.
 

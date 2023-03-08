@@ -6,7 +6,7 @@ weight = 2
 +++
 
 {{% notice "note" %}}
-Controling **anonymous access** of the GraphQL endpoint is only available in Dgraph Cloud.
+Controlling **anonymous access** of the GraphQL endpoint is only available in Dgraph Cloud.
 {{% /notice %}}
 
 
