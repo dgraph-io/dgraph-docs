@@ -14,7 +14,7 @@ Dgraph's GraphQL authorization features let you specify :
 - if the client requires an API key or notif **anonymous access** is allowed to invoke a specific operation of the API.
 - if a client must present an identity in the form of a **JWT token** to use the API.
 - **RBAC rules** (Role Based Access Control) at operation level based on the claims included in the client JWT token.
-- **Graph traversal rules** at data level.
+- **ABAC rules** (Attribue Based Access COntrol) at data level using graph traversal queries.
 
 
 {{% notice "note" %}}
@@ -29,7 +29,7 @@ Refer to the following documentation to set your ``/graphql`` endpoint security 
 
 - [RBAC rules]({{< relref "RBAC-rules.md">}})
 
-- [Graph traversal rules]({{< relref "graphtraversal-rules.md">}})
+- [ABAC rules]({{< relref "graphtraversal-rules.md">}})
 
 ### ``/graphql`` security flow
 In summary, the Dgraph security flow on ``/graphql`` endpoint is as follow:
