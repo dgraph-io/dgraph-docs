@@ -3,7 +3,7 @@ title = "Lambda Server"
 description = "Setup a Dgraph database with a lambda server. Dgraph Lambda is a serverless platform for running JavaScript on Dgraph and Dgraph Cloud."
 weight = 6
 [menu.main]
-    parent = "lambda"
+    parent = "lambda-resolver"
 +++
 
 In this article you'll learn how to setup a Dgraph database with a lambda server.

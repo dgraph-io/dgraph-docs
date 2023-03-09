@@ -144,6 +144,7 @@ It is possible to import data into a Dgraph Cloud backend using [live loader](ht
 The gRPC endpoint URL must have the string `.grpc.` added after the domain prefix. Without this change, Live Loader will not be able to find the endpoint.
 {{% /notice %}}
 
+
 3. Run the live loader as follows:
 
     ```
