@@ -14,7 +14,7 @@ Dgraph's GraphQL authorization features let you specify :
 - if the client requires an API key or notif **anonymous access** is allowed to invoke a specific operation of the API.
 - if a client must present an identity in the form of a **JWT token** to use the API.
 - **RBAC rules** (Role Based Access Control) at operation level based on the claims included in the client JWT token.
-- **ABAC rules** (Attribue Based Access COntrol) at data level using graph traversal queries.
+- **ABAC rules** (Attribute Based Access COntrol) at data level using graph traversal queries.
 
 
 {{% notice "note" %}}
