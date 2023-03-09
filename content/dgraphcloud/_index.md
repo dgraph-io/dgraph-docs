@@ -4,6 +4,3 @@ title = "Dgraph Cloud"
   identifier = "cloud"
   weight = 9
 +++
-
-
-
