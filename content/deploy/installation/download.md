@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Download"
+description = "Download the images and source files to build and install for a production-ready Dgraph cluster"
 weight = 1
 [menu.main]
     parent = "installation"

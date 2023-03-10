@@ -84,7 +84,7 @@ You can run Dgraph directly on a single Linux host.
 #### Before you begin
 
 Ensure that you have:
-* Installed [Dgraph]({{< relref "installation/download.md" >}}) on the Linux host.
+* Installed [Dgraph]({{< relref "download.md" >}}) on the Linux host.
 * Made a note of the `<IP_ADDRESS>` of the host.
 
 #### Using Dgraph Command Line
