@@ -11,7 +11,7 @@ The completion script is code that uses the builtin bash command complete to def
 
 ## Before you begin
 
-*  [Install Dgraph]({{< relref "/installation/download" >}}#buil-and-install).
+*  [Install Dgraph]({{< relref "download" >}}#buil-and-install).
 *  Determine the shell you are running:
    ```bash
    echo $0
