@@ -14,7 +14,7 @@ Binary backups are full backups of Dgraph that are backed up directly to cloud
 storage such as Amazon S3 or any Minio storage backend. Backups can also be
 saved to an on-premise network file system shared by all Alpha servers. These
 backups can be used to restore a new Dgraph cluster to the previous state from
-the backup. Unlike [exports]({{< relref "deploy/dgraph-administration.md#exporting-database" >}}),
+the backup. Unlike [exports]({{< relref "dgraph-administration.md#exporting-database" >}}),
 binary backups are Dgraph-specific and can be used to restore a cluster quickly.
 
 
@@ -62,7 +62,7 @@ environment variables:
 To create a backup, make an HTTP POST request to `/admin` to a Dgraph
 Alpha HTTP address and port (default, "localhost:8080"). Like with all `/admin`
 endpoints, this is only accessible on the same machine as the Alpha server unless
-[whitelisted for admin operations]({{< relref "deploy/dgraph-administration.md#whitelisting-admin-operations" >}}).
+[whitelisted for admin operations]({{< relref "dgraph-administration.md#whitelisting-admin-operations" >}}).
 You can look at `BackupInput` given below for all the possible options.
 
 ```graphql

@@ -148,7 +148,7 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "deploy/ludicrous-mode.md" >}}) superflag  |
+| | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "ludicrous-mode.md" >}}) superflag  |
 | `--ludicrous_mode` | bool | `enabled` | bool |`alpha`| Enables Ludicrous mode |
 | `--ludicrous_concurrency` | int | `concurrency` | int |`alpha`| Number of concurrent threads to use in Ludicrous mode |
 
@@ -179,7 +179,7 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--tls`** | | | [TLS]({{< relref "deploy/tls-configuration.md" >}}) superflag  |
+| | | **`--tls`** | | | [TLS]({{< relref "tls-configuration.md" >}}) superflag  |
 | `--tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`| The CA cert file used to verify server certificates |
 | `--tls_use_system_ca` | bool | `use-system-ca` | bool |`alpha`, `zero`, `bulk`, `backup`, `live`| Include System CA with Dgraph Root CA |
 | `--tls_server_name` | string | `server-name` | string |`alpha`, `zero`, `bulk`, `backup`, `live`| Server name, used for validating the server’s TLS host name |
@@ -194,7 +194,7 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--trace`** | | | [Tracing]({{< relref "deploy/tracing.md" >}}) superflag  |
+| | | **`--trace`** | | | [Tracing]({{< relref "tracing.md" >}}) superflag  |
 | `--trace` | float64 | `ratio` | float64 |`alpha`, `zero`| The ratio of queries to trace |
 | `--jaeger.collector` | string | `jaeger` | string | `alpha`, `zero`| URL of Jaeger to send OpenCensus traces |
 | `--datadog.collector` | string | `datadog` | string | `alpha`, `zero`| URL of Datadog to send OpenCensus traces
@@ -807,7 +807,7 @@ Use "dgraph audit [command] --help" for more information about a command.
 
 #### `dgraph cert`
 
-This command lets you manage [TLS certificates]({{< relref "deploy/tls-configuration.md" >}}).
+This command lets you manage [TLS certificates]({{< relref "tls-configuration.md" >}}).
 The following replicates the help listing shown when you run `dgraph cert --help`:
 
 ```shell
