@@ -148,4 +148,4 @@ dgraph audit decrypt --encryption_key_file=/path/encrypt/key/file --in /path/to/
 
 ## Next steps
 
-To learn more about the logging features of Dgraph, see [Logging]({{< relref "deploy/log-format.md" >}}).
+To learn more about the logging features of Dgraph, see [Logging]({{< relref "log-format.md" >}}).

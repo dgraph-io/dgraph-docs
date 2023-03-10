@@ -58,7 +58,7 @@ aliases = ["/contribute"]
 
   <div class="item">
     <div class="icon"><i class="fa fa-wrench" aria-hidden="true"></i></div>
-    <a href="{{< relref "deploy/overview.md">}}">
+    <a href="{{< relref "deploy/_index.md">}}">
       <h2>Self-hosted cluster</h2>
       <p>
         Install and manage a Dgraph cluster in a variety of self-managed deployment scenarios.

@@ -17,7 +17,7 @@ You can run three Dgraph Alpha servers and three Dgraph Zero servers in a highly
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 * Ensure that you have a production-ready Kubernetes cluster with atleast three worker nodes running in a cloud provider of your choice.
-* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "deploy/tls-configuration.md" >}}).
+* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "tls-configuration.md" >}}).
 
 #### Installing a highly available Dgraph cluster
 
@@ -100,7 +100,7 @@ kubectl delete persistentvolumeclaims --selector app=dgraph-alpha
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 * Ensure that you have a production-ready Kubernetes cluster with atleast three worker nodes running in a cloud provider of your choice.
 * Install [Helm](https://helm.sh/docs/intro/install/).
-* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "deploy/tls-configuration.md" >}}).
+* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "tls-configuration.md" >}}).
 
 #### Installing a highly available Dgraph cluster using Helm
 

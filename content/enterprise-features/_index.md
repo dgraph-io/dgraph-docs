@@ -1,11 +1,9 @@
 +++
 date = "2017-03-20T19:35:35+11:00"
 title = "Enterprise Features"
-weight = 9
+weight = 10
 [menu.main]
   identifier = "enterprise-features"
-  parent = "deploy"
-  weight = 25
 +++
 
 <div class="landing">
