@@ -1,7 +1,8 @@
 +++
 title = "Lambda Resolvers"
+
 [menu.main]
   identifier = "lambda-resolver"
   parent = "graphql"
-  weight = 7
+  weight = 70
 +++

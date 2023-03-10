@@ -1,11 +1,11 @@
 +++
 title = "Quick Start"
+weight = 1
 aliases = ["/get-started-old"]
 [menu.main]
   name = "Quick Start"
   identifier = "get-started"
   parent = "dql"
-  weight = 1
 +++
 
 This is a quick start guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
