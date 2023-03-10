@@ -77,6 +77,13 @@ A nested block
 - provides the list of attributes and relationships to fetch for the related nodes.
 
 A nested block may contain another nested block, and such at any level.
+ 
+ ### Escape characters in predicate names
+ If your predicate has special characters, wrap it with angular brackets `< >` in the query. 
+ 
+ E.g.
+ `<https://myschema.org#name>
+ `
 
 ### Formating options
 Dgraph returns the attributes and relationships that you specified in the query. You can specify an alternate name for the result by using [aliases]({{< relref "alias.md" >}}).
