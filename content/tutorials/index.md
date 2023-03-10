@@ -9,7 +9,7 @@ title = "Tutorials - Get Started with Dgraph series"
 
 {{% notice "note" %}}
 This is a tutorial series on getting started with Dgraph. You can find a
-single page quickstart guide [here]({{< relref "get-started/index.md" >}}).
+single page quickstart guide [here]({{< relref "dql-get-started.md" >}}).
 {{% /notice %}}
 
 **Welcome to Dgraph. Here are a series of tutorials for getting started:**

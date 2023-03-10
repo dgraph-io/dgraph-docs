@@ -1,10 +1,10 @@
 +++
 title = "DQL syntax"
+weight = 2
 [menu.main]
   name = "DQL Syntax"
   identifier = "dql-syntax"
   parent = "dql"
-  weight = 2
 +++
 
 Dgraph Query Language (DQL) is Dgraph’s proprietary language to add, modify, delete and fetch data.

@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Predicate types"
 weight = 3
 [menu.main]
+    identifier = "dql-predicate-type"
     parent = "dql"
 +++
 

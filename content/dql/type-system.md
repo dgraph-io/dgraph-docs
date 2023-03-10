@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Node types"
 weight = 5
 [menu.main]
+    identifier = "dql-node-type"
     parent = "dql"
 +++
 

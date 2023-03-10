@@ -6,9 +6,6 @@ weight = 3
     parent = "deploy"
 +++
 
-{{% notice "tip" %}}
-For a single server setup, recommended for new users, please see [Get Started]({{< relref "get-started/index.md" >}}) page.
-{{% /notice %}}
 
 You can see the list of available subcommands with `dgraph --help`.  You can view the full set of configuration options for a given subcommand with `dgraph <subcommand> --help` (for example, `dgraph zero --help`).
 

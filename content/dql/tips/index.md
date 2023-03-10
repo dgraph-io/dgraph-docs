@@ -1,9 +1,9 @@
 +++
 title = "DQL: Tips and Tricks"
+weight = 5
 [menu.main]
   identifier = "tips"
   parent = "dql"
-  weight = 5
 +++
 
 ## Get Sample Data
