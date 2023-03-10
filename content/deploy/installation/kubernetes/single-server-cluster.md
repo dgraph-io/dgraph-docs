@@ -13,7 +13,7 @@ You can install a single server Dgraph cluster in Kubernetes.
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 * Ensure that you have a production-ready Kubernetes cluster running in a cloud provider of your choice.
-* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "deploy/tls-configuration.md" >}}).
+* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "tls-configuration.md" >}}).
 
 ## Installing a single server Dgraph cluster
 

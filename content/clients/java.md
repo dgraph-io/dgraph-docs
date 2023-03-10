@@ -96,7 +96,7 @@ The `DgraphClient.clientStubFromSlashEndpoint()` method has been deprecated and 
 ### Creating a Secure Client using TLS
 
 To setup a client using TLS, you could use the following code snippet. The server needs to be
-setup using the instructions provided [here]({{< relref "deploy/tls-configuration.md" >}}).
+setup using the instructions provided [here]({{< relref "tls-configuration.md" >}}).
 
 If you are doing client verification, you need to convert the client key from PKCS#1 format to
 PKCS#8 format. By default, grpc doesn't support reading PKCS#1 format keys. To convert the

@@ -9,8 +9,8 @@ weight = 5
 Dgraph Alpha provides several HTTP endpoints for administrators, as follows:
 
 * `/health?all` returns information about the health of all the servers in the cluster.
-* `/admin/shutdown` initiates a proper [shutdown]({{< relref "deploy/dgraph-administration.md#shutting-down-database" >}}) of the Alpha.
-* `/admin/export` initiates a data [export]({{< relref "deploy/dgraph-administration.md#exporting-database" >}}). The exported data will be
+* `/admin/shutdown` initiates a proper [shutdown]({{< relref "dgraph-administration.md#shutting-down-database" >}}) of the Alpha.
+* `/admin/export` initiates a data [export]({{< relref "dgraph-administration.md#exporting-database" >}}). The exported data will be
 encrypted if the alpha instance was configured with an encryption key file.
 
 By default the Alpha listens on `localhost` for admin actions (the loopback address only accessible from the same machine). The `--bindall=true` option binds to `0.0.0.0` and thus allows external connections.
