@@ -87,7 +87,7 @@ client.alter(op)
 Starting with Dgraph version 20.03.0, indexes can be computed in the background.
 You can set the `run_in_background` field of `pydgraph.Operation` to `True`
 before passing it to the `Alter` function. You can find more details
-[here]({{< relref "/query-language/schema.md#indexes-in-background" >}}).
+[here]({{< relref "/predicate-types.md#indexes-in-background" >}}).
 
 ```python
 schema = 'name: string @index(exact) .'
@@ -313,7 +313,7 @@ txn.do_request(request)
 The upsert block also allows specifying a conditional mutation block using an `@if` directive. The mutation is executed
 only when the specified condition is true. If the condition is false, the mutation is silently ignored.
 
-See more about Conditional Upserts [here]({{< relref "mutations/conditional-upsert.md" >}}).
+See more about Conditional Upserts [here]({{< relref "dql-mutation.md#conditional-upsert" >}}).
 
 ```python
 query = """

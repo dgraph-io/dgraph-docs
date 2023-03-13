@@ -1,78 +1,19 @@
 +++
-title = "GraphQL"
-description = "Find everything you need to know about using GraphQL with Dgraph Database. GraphQL doesn't have to be hard - these docs explain how to make it easy."
+title = "GraphQL API"
+description = "Generate a GraphQL API and a graph backend from a single GraphQL schema."
 [menu.main]
   identifier = "graphql"
   weight = 3
 +++
 
-<div class="landing">
-  <div class="hero">
-    <p>
-      Dgraph is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
-    </p>
-    <img class="hero-deco" src="/images/hero-deco_403x160.png" />
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-play" aria-hidden="true"></i></div>
-    <a  href="{{< relref "quick-start/index.md">}}">
-      <h2>Quick Start</h2>
-      <p>
-        A single page quick-start guide to get started with GraphQL
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-layout" aria-hidden="true"></i></div>
-    <a href="{{< relref "schema/schema-overview.md">}}">
-      <h2>Schema</h2>
-      <p>
-        All the things that you can put in your input GraphQL schema
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-cloud-network" aria-hidden="true"></i></div>
-    <a href="{{< relref "api/api-overview.md">}}">
-      <h2>API</h2>
-      <p>
-        How to use the GraphQL API
-      </p>
-    </a>
-  </div>
+Dgraph lets you generate a GraphQL API and a graph backend from a single [GraphQL schema]({{< relref "schema/_index.md">}}), no resolvers or custom queries are needed. Dgraph automatically generates the GraphQL operations for [queries]({{< relref "queries/_index.md">}}) and [mutations]({{< relref "mutations/_index.md">}}) 
 
-  <div class="item">
-    <div class="icon"><i class="lni lni-keyword-research" aria-hidden="true"></i></div>
-    <a href="{{< relref "queries/queries-overview.md">}}">
-      <h2>Queries</h2>
-      <p>
-        How to use GraphQL queries to fetch data
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-pencil-alt" aria-hidden="true"></i></div>
-    <a href="{{< relref "mutations/mutations-overview.md">}}">
-      <h2>Mutations</h2>
-      <p>
-        Modify server-side data, and return objects based on performed operations
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="fa fa-cog" aria-hidden="true"></i></div>
-    <a href="{{< relref "custom/custom-overview.md">}}">
-      <h2>Custom Resolvers</h2>
-      <p>
-        Customize the behavior of your schemas
-      </p>
-    </a>
-  </div>
+GraphQL developers can [get started]({{< relref "quick-start/index.md">}}) in minutes, and need not concern themselves with the powerful graph database running in the background.
 
-</div>
+Dgraph extends the [GraphQL specifications](https://spec.graphql.org/) with [directives]({{< relref "schema/directives/_index.md">}}) and allows you to customize the behavior of GraphQL operations using [custom resolvers]({{< relref "custom-overview.md">}}) or to write you own resolver logic with [Lambda resolvers]({{< relref "lambda-overview.md">}}).
 
-<style>
-  ul.contents {
-    display: none;
-  }
-</style>
+Dgraph also supports 
+- [GraphQL subscriptions]({{< relref "subscriptions/index.md">}}) with the `@withSubscription` directive: a client application can execute a subscription query and receive real-time updates when the subscription query result is updated.
+- [Apollo federation]({{< relref "federation/index.md" >}}) : you can create a gateway GraphQL service that includes the Dgraph GraphQL API and other GraphQL services.
+
+Refer to the following pages for more details:

@@ -112,7 +112,7 @@ await dgraphClient.alter(op);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can set `setRunInBackground` field of the `Operation` object to `true`
 before passing it to the `DgraphClient#alter(Operation)` method. You can find more details
-[here]({{< relref "/query-language/schema.md#indexes-in-background" >}}).
+[here]({{< relref "predicate-types.md#indexes-in-background" >}}).
 
 ```js
 const schema = "name: string @index(exact) .";
@@ -291,7 +291,6 @@ The `txn.doRequest` function allows you to run upserts consisting of one query a
 Query variables could be defined and can then be used in the mutation. You can also use the 
 `txn.doRequest` function to perform just a query or a mutation.
 
-To know more about upsert, we highly recommend going through the docs at [upsert-block]({{< relref "mutations/upsert-block.md" >}}).
 
 ```js
 const query = `
@@ -317,7 +316,7 @@ await dgraphClient.newTxn().doRequest(req);
 The upsert block allows specifying a conditional mutation block using an `@if` directive. The mutation is executed
 only when the specified condition is true. If the condition is false, the mutation is silently ignored.
 
-See more about Conditional Upsert [Here]({{< relref "mutations/conditional-upsert.md" >}}).
+See more about Conditional Upsert [Here]({{< relref "dql-mutation.md#conditional-upsert" >}}).
 
 ```js
 const query = `

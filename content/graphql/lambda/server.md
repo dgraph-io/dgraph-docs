@@ -3,7 +3,7 @@ title = "Lambda Server"
 description = "Setup a Dgraph database with a lambda server. Dgraph Lambda is a serverless platform for running JavaScript on Dgraph and Dgraph Cloud."
 weight = 6
 [menu.main]
-    parent = "lambda"
+    parent = "lambda-resolver"
 +++
 
 In this article you'll learn how to setup a Dgraph database with a lambda server.
@@ -71,7 +71,7 @@ services:
   dgraph:
     image: dgraph/standalone:latest
     environment: 
-      DGRAPH_ALPHA_GRAPHQL_LAMBDA_URL: "http://dgraph_lambda:8686/graphql-worker"
+      DGRAPH_ALPHA_GRAPHQL: lambda-url=http://dgraph_lambda:8686/graphql-worker
     ports:
       - "8080:8080"
       - "9080:9080"

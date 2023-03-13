@@ -1,7 +1,11 @@
 +++
-title = "Get Started with Dgraph - Fuzzy Search on Social Graphs"
+title = "Get Started with Dgraph -  Fuzzy Search"
+[menu.main]
+  name = "Fuzzy Search"
+  identifier = "tutorials-fuzzy-search"
+  parent = "tutorials"
+  weight = 6
 +++
-
 **Welcome to the seventh tutorial of getting started with Dgraph.**
 
 In the [previous tutorial]({{< relref "tutorial-6/index.md" >}}), we learned about

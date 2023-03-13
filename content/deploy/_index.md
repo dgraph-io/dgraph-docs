@@ -1,79 +1,32 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Deploy and Manage"
-weight = 8
+title = "Self-managed cluster"
+weight = 9
+aliases = ["/deploy/overview"]
 [menu.main]
   identifier = "deploy"
 +++
 
-<div class="landing">
-  <div class="hero">
-    <p>
-      This section talks about running Dgraph in various deployment modes, in a distributed fashion and involves
-running multiple instances of Dgraph, over multiple servers in a cluster.
-    </p>
-    <img class="hero-deco" src="/images/hero-deco_403x160.png" />
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-checkbox" aria-hidden="true"></i></div>
-    <a  href="{{< relref "production-checklist.md">}}">
-      <h2>Production Checklist</h2>
-      <p>
-        Important setup recommendations for a production-ready Dgraph cluster
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-docker" aria-hidden="true"></i></div>
-    <a href="{{< relref "kubernetes.md">}}">
-      <h2>Using Kubernetes</h2>
-      <p>
-        Running Dgraph with Kubernetes
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-cogs" aria-hidden="true"></i></div>
-    <a href="{{< relref "dgraph-administration.md">}}">
-      <h2>Dgraph Administration</h2>
-      <p>
-        A reference to Dgraph's exposed administrative endpoints
-      </p>
-    </a>
-  </div>
+You can deploy and manage Dgraph database in a variety of self-managed deployment scenarios, including:
 
-  <div class="item">
-    <div class="icon"><i class="lni lni-shield" aria-hidden="true"></i></div>
-    <a href="{{< relref "tls-configuration.md">}}">
-      <h2>TLS Configuration</h2>
-      <p>
-        Setting up secure TLS connections between clients and servers 
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-upload" aria-hidden="true"></i></div>
-    <a href="{{< relref "fast-data-loading/overview.md">}}">
-      <h2>Fast Data Loading</h2>
-      <p>
-        Dgraph tools for fast data loading
-      </p>
-    </a>
-  </div>
-  <div class="item">
-    <div class="icon"><i class="lni lni-keyword-research" aria-hidden="true"></i></div>
-    <a href="{{< relref "monitoring.md">}}">
-      <h2>Monitoring</h2>
-      <p>
-        Dgraph's exposed metrics and monitoring endpoints
-      </p>
-    </a>
-  </div>
+* Running Dgraph on your on-premises infrastructure (bare-metal physical servers)
+* Running Dgraph on your cloud infrastructure (AWS, GCP and Azure)
 
-</div>
+This section focuses exclusively on deployment and management for these self-managed
+scenarios. To learn about fully-managed options that let you focus on
+building apps and websites, rather than managing infrastructure, see the 
+[Dgraph cloud services docs](https://dgraph.io/docs/cloud/), or 
+[Try Dgraph Cloud](https://cloud.dgraph.io/).
 
-<style>
-  ul.contents {
-    display: none;
-  }
-</style>
+A Dgraph cluster consists of the following:
+
+* **Dgraph Alpha database server nodes**: The Dgraph Alpha server nodes in your deployment host and serve data. These nodes also host an `/admin` HTTP and GRPC endpoint that can
+be used for data and node administration tasks such as backup, export, draining,
+and shutdown.
+* **Dgraph Zero management server nodes**: The Dgraph Zero nodes in your deployment control
+the nodes in your Dgraph cluster. Dgraph Zero automatically moves data between different Dgraph Alpha instances based on the volume of data served by each Alpha instance.
+
+You need at least one node of each type to run Dgraph. You need three nodes of
+each type to run Dgraph in a high-availability (HA) cluster configuration. To
+learn more about 2-node and 6-node deployment options, see the [Production Checklist]({{< relref "installation/production-checklist.md" >}}).
+

@@ -10,7 +10,7 @@ A minimal implementation for a Dgraph client for Java 1.8 and above, using [gRPC
 This client follows the [Dgraph Go client]({{< relref "go.md" >}}) closely.
 
 {{% notice "tip" %}}
-The official Java client [can be found here](https://github.com/dgraph-io/dgraph4j). 
+The official Java client [can be found here](https://github.com/dgraph-io/dgraph4j).
 Follow the [install instructions](https://github.com/dgraph-io/dgraph4j#download) to get it up and running.
 {{% /notice %}}
 
@@ -35,7 +35,7 @@ be found in the [Using the Asynchronous Client](#using-the-asynchronous-client) 
 ## Using the Synchronous Client
 
 {{% notice "tip" %}}
-You can find a [DgraphJavaSample](https://github.com/dgraph-io/dgraph4j/tree/master/samples/DgraphJavaSample) project, 
+You can find a [DgraphJavaSample](https://github.com/dgraph-io/dgraph4j/tree/master/samples/DgraphJavaSample) project,
 which contains an end-to-end working example of how to use the Java client.
 {{% /notice %}}
 
@@ -96,7 +96,7 @@ The `DgraphClient.clientStubFromSlashEndpoint()` method has been deprecated and 
 ### Creating a Secure Client using TLS
 
 To setup a client using TLS, you could use the following code snippet. The server needs to be
-setup using the instructions provided [here]({{< relref "deploy/tls-configuration.md" >}}).
+setup using the instructions provided [here]({{< relref "tls-configuration.md" >}}).
 
 If you are doing client verification, you need to convert the client key from PKCS#1 format to
 PKCS#8 format. By default, grpc doesn't support reading PKCS#1 format keys. To convert the
@@ -154,7 +154,7 @@ dgraphClient.alter(operation);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can call the function `setRunInBackground(true)` as shown below before
 calling `alter`. You can find more details
-[here]({{< relref "/query-language/schema.md#indexes-in-background" >}}).
+[here]({{< relref "/predicate-types.md#indexes-in-background" >}}).
 
 ```java
 String schema = "name: string @index(exact) .";
@@ -357,7 +357,7 @@ txn.doRequest(request);
 
 ### Running a Query with RDF response
 
-You can get query results as an RDF response by calling either `queryRDF()` or `queryRDFWithVars()`. 
+You can get query results as an RDF response by calling either `queryRDF()` or `queryRDFWithVars()`.
 The response contains the `getRdf()` method, which will provide the RDF encoded output.
 
 **Note**: If you are querying for `uid` values only, use a JSON format response
@@ -385,8 +385,6 @@ The `txn.doRequest` function allows you to run upserts consisting of one query a
 one mutation. Variables can be defined in the query and used in the mutation.
 You could also use `txn.doRequest` to perform a query followed by a mutation.
 
-To know more about upsert, we highly recommend going through the docs at
-[upsert-block]({{< relref "mutations/upsert-block.md" >}}).
 
 ```java
 String query = "query {\n" +
@@ -408,7 +406,7 @@ txn.doRequest(request);
 The upsert block also allows specifying a conditional mutation block using an `@if` directive. The mutation is executed
 only when the specified condition is true. If the condition is false, the mutation is silently ignored.
 
-See more about Conditional Upsert [Here]({{< relref "mutations/conditional-upsert.md" >}}).
+See more about Conditional Upsert [Here]({{< relref "dql-mutation.md#conditional-upsert" >}}).
 
 ```java
 String query = "query {\n" +
@@ -510,7 +508,7 @@ Here is the asynchronous version of the code above, which runs a query.
 
 ```java
 // Query
-String query = 
+String query =
 "query all($a: string){\n" +
 "  all(func: eq(name, $a)) {\n" +
 "    name\n" +

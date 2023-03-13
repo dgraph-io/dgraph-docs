@@ -12,7 +12,7 @@ Functions allow filtering based on properties of nodes or [variables]({{<relref 
 {{% /notice %}}
 
 Comparison functions (`eq`, `ge`, `gt`, `le`, `lt`) in the query root (aka `func:`) can only
-be applied on [indexed predicates]({{< relref "query-language/schema.md#indexing" >}}). Since v1.2, comparison functions
+be applied on [indexed predicates]({{< relref "predicate-types.md#indexing" >}}). Since v1.2, comparison functions
 can now be used on [@filter]({{<relref "query-language/graphql-fundamentals.md#applying-filters" >}}) directives even on predicates
 that have not been indexed.
 Filtering on non-indexed predicates can be slow for large datasets, as they require
@@ -364,7 +364,7 @@ Query Example: Movies with directors with `Steven` in `name` and have directed m
 
 
 
-Query Example: A movie in each genre that has over 30000 movies.  Because there is no order specified on genres, the order will be by UID.  The [count index]({{< relref "query-language/schema.md#count-index">}}) records the number of edges out of nodes and makes such queries more .
+Query Example: A movie in each genre that has over 30000 movies.  Because there is no order specified on genres, the order will be by UID.  The [count index]({{< relref "predicate-types.md#count-index">}}) records the number of edges out of nodes and makes such queries more .
 
 {{< runnable >}}
 {

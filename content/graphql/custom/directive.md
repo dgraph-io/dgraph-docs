@@ -51,8 +51,8 @@ Used, for example, if the incoming request contains an auth token that must be p
 Used, for example, for a server side API key and other static value that must be passed to the custom logic.
 * the `graphql` query/mutation to call if the custom logic is a GraphQL server and whether to introspect or not (`skipIntrospection`) the remote GraphQL endpoint.
 * `mode` which is used for resolving fields by calling an external GraphQL query/mutation. It can either be `BATCH` or `SINGLE`.
-* a list of `introspectionHeaders` to take from the `Dgraph.Secret` defined in the schema file and added to the
-introspection requests sent to the `graphql` query/mutation.
+* a list of `introspectionHeaders` to take from the `Dgraph.Secret` [object](#dgraphsecret) defined in the schema file. They're added to the
+introspection requests sent to the endpoint.
 
 
 The result type of custom queries and mutations can be any object type in your schema, including `@remote` types.  For custom fields the type can be object types or scalar types.
@@ -82,10 +82,13 @@ on GitHub. These secrets can be specified as comments in the schema file and the
 ```
 
 In the above request, `Github-Api-Token` would be sent as a header with value `long-token` for
-the introspection request. For the actual request, the value `Authorization` would be sent along with
-the value `long-token`. Note `Authorization:Github-Api-Token` syntax tells us to use the value for the
-`Github-Api-Token` dgraph secret but to forward it to the custom API with the header key as `Authorization`.
+the introspection request. For the actual `/graphql` request, the `Authorization` header would be sent with
+the value `long-token`. 
 
+{{% notice "note" %}}
+`Authorization:Github-Api-Token` syntax tells us to use the value for 
+`Github-Api-Token` from `Dgraph.Secret` and forward it to the custom API with the header key as `Authorization`.
+{{% /notice %}}
 
 ## The URL and method
 

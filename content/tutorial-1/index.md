@@ -1,14 +1,18 @@
 +++
 title = "Get Started with Dgraph - Introduction"
+[menu.main]
+  name = "Introduction"
+  identifier = "tutorials-intro"
+  parent = "tutorials"
+  weight = 1
 +++
-
 **Welcome to getting started with Dgraph.**
 
 [Dgraph](https://dgraph.io) is an open-source, transactional, distributed, native Graph Database. Here is the first tutorial of the get started series on using Dgraph.
 
 In this tutorial, we'll learn how to build the following graph on Dgraph,
 
-{{% load-img "/images/tutorials/1/gs-1.JPG" "The simple graph" %}}
+{{<figure class="medium image" src="/images/tutorials/1/gs-1.jpg" title="A simple graph" alt="A simple graph">}}
 
 In the process, we'll learn about:
 

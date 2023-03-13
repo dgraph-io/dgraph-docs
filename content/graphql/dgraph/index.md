@@ -1,6 +1,6 @@
 +++
 title = "GraphQL on Existing Dgraph"
-weight = 13
+weight = 110
 [menu.main]
   identifier = "dgraph"
   parent = "graphql"
@@ -10,7 +10,7 @@ weight = 13
 
 If you have an existing Dgraph instance and want to also expose GraphQL, you need to add a GraphQL schema that maps to your Dgraph schema.  You don't need to expose your entire Dgraph schema as GraphQL, but do note that adding a GraphQL schema can alter the Dgraph schema.
 
-Dgraph's native DQL syntax allows type and edge names that aren't valid in GraphQL; so, you'll often need to expose valid GraphQL names. Dgraph permits special characters, including Unicode characters from a variety of  languages (see [Predicate name rules]({{< relref "query-language/schema.md#predicate-name-rules">}})). Conversely, the [GraphQL specification on naming](https://spec.graphql.org/June2018/#sec-Names) requires that entity names, including types and fields (predicate), are composed of ASCII characters and generated as follows: `/[_A-Za-z][_0-9A-Za-z]*/`.
+Dgraph's native DQL syntax allows type and edge names that aren't valid in GraphQL; so, you'll often need to expose valid GraphQL names. Dgraph permits special characters, including Unicode characters from a variety of  languages (see [Predicate name rules]({{< relref "predicate-types.md#predicate-name-rules">}})). Conversely, the [GraphQL specification on naming](https://spec.graphql.org/June2018/#sec-Names) requires that entity names, including types and fields (predicate), are composed of ASCII characters and generated as follows: `/[_A-Za-z][_0-9A-Za-z]*/`.
 
 {{% notice "note" %}}
 Be careful with mapping to an existing Dgraph instance. Updating the GraphQL schema will also update the underlying Dgraph schema. 

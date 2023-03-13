@@ -104,7 +104,7 @@ await clientStub.login();
 
 Some Dgraph configurations require extra access tokens.
 
-1. Alpha servers can be configured with [Secure Alter Operations]({{< relref "deploy/dgraph-administration.md" >}}).
+1. Alpha servers can be configured with [Secure Alter Operations]({{< relref "dgraph-administration.md" >}}).
    In this case the token needs to be set on the client instance:
 
 ```js
