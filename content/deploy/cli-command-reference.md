@@ -52,27 +52,12 @@ Release v21.03 includes the following superflags:
 * `--encryption`
 * `--graphql`
 * `--limit`
-* `--ludicrous`
 * `--raft`
 * `--security`
 * `--telemetry`
 * `--tls`
 * `--trace`
 * `--vault`
-
-For example, the following command that is valid in release v20.11 is no longer
-valid starting in release v21.03:
-
-```sh
-dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
-```
-
-Instead, you can express this command as follows starting in release v21.03:
-
-```sh
-
-dgraph alpha --ludicrous enabled=true; concurrency=16;
-```
 
 The following table maps Dgraph CLI flags from release v20.11 and earlier that
 have been replaced by superflags (and their options) in release v21.03. Any flags
@@ -143,14 +128,6 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 | `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`| Maximum number of edges that can be returned in a query |
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`| Maximum number of nodes that can be returned in a query that uses the normalize directive |
 | `--mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`| Maximum number of nquads that can be inserted in a mutation request |
-
-### Ludicrous mode superflag
-
-| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
-|---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "ludicrous-mode.md" >}}) superflag  |
-| `--ludicrous_mode` | bool | `enabled` | bool |`alpha`| Enables Ludicrous mode |
-| `--ludicrous_concurrency` | int | `concurrency` | int |`alpha`| Number of concurrent threads to use in Ludicrous mode |
 
 ### Raft superflag
 
@@ -397,10 +374,6 @@ Flags:
                                        query-timeout=0ms; Maximum time after which a query execution will fail. If set to 0, the timeout is infinite.
                                        txn-abort-after=5m; Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation.
                                     (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;")
-      --ludicrous string           Ludicrous options
-                                       concurrency=2000; The number of concurrent threads to use in Ludicrous mode.
-                                       enabled=false; Set enabled to true to run Dgraph in Ludicrous mode.
-                                    (default "enabled=false; concurrency=2000;")
       --my string                  addr:port of this server, so other Dgraph servers can talk to this.
   -o, --port_offset int            Value added to all listening port numbers. [Internal=7080, HTTP=8080, Grpc=9080]
   -p, --postings string            Directory to store posting lists. (default "p")
@@ -624,7 +597,6 @@ Flags:
       --format string                Specify file format (rdf or json) instead of getting it from filename
   -h, --help                         help for live
       --http string                  Address to serve http (pprof). (default "localhost:6060")
-      --ludicrous                    Run live loader in ludicrous mode (Should only be done when alpha is under ludicrous mode)
       --new_uids                     Ignore UIDs in load files and assign new ones.
   -s, --schema string                Location of schema file
       --slash_grpc_endpoint string   Path to Slash GraphQL GRPC endpoint. If --slash_grpc_endpoint is set, all other TLS options and connection options will beignored

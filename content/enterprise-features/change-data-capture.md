@@ -118,7 +118,6 @@ CDC has the following known limitations:
 
 * CDC events do not track old values that are updated or removed by mutation or
   drop operations; only new values are tracked
-* CDC is not currently supported when Dgraph is in Ludicrous mode
 * CDC does not currently track schema updates
 * You can only configure or enable CDC when starting Alpha nodes using the
  `dgraph alpha` command
