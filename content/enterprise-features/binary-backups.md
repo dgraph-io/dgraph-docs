@@ -608,12 +608,46 @@ input RestoreInput {
 		Set to true to allow backing up to S3 or Minio bucket that requires no credentials.
 		"""
 		anonymous: Boolean
+
+		"""
+		All the backups with num >= incrementalFrom will be restored.
+		"""
+		incrementalFrom: Int
+
+		"""
+		If `isPartial` is set to true then the cluster is kept in draining mode after
+		restore to ensure that the database is not corrupted by any mutations or tablet moves in
+		between two restores.
+		"""
+		isPartial: Boolean
+
 }
 ```
 
-Restore requests will return immediately without waiting for the operation to
-finish.
+Restore requests returns immediately without waiting for the operation to finish.
 
+## Incremental Restore
+
+You can use incremental restore to restore a set of incremental backups on a cluster with a part of the backup already restored.
+The system does not accept any mutations made between a normal restore and an incremental restore, because the cluster is in the draining mode. When the cluster is in a draining mode only an admin request to bring the cluster back to normal mode is accepted.
+
+Note: Before you start an incremental restore ensure that you set `isPartial` to `true` in your normal restore.
+
+To incrementally restore from a backup to a live cluster, execute a mutation on the `/admin`
+endpoint with the following format:
+
+```graphql
+mutation{
+  restore(input:{
+    incrementalFrom:"incremental_backup_from",
+    location: "/path/to/backup/directory",
+    backupId: "id_of_backup_to_restore"'
+  }){
+    message
+    code
+  }
+}
+```
 ## Offline restore
 
 The restore utility is now a standalone tool. A new flag, `--encryption key-file=value`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
