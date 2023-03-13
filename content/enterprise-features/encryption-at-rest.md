@@ -37,7 +37,9 @@ desired key size):
 ```bash
 tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
 ```
-
+{{% notice "note" %}}
+On a macOS you may have to use `LC_CTYPE=C; tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file`. To view the key use `cat enc_key_file`. 
+{{% /notice %}}
 Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-command-reference.md" >}}) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
 
 ## Turn on Encryption
@@ -71,7 +73,7 @@ To use [Hashicorp Vault](https://www.vaultproject.io/), meet the following prere
        "cas": 0
      },
      "data": {
-       "enc_key": "1234567890123456"
+       "enc_key": "qIvHQBVUpzsOp74PmMJjHAOfwIA1e6zm%"
      }
    }
    ```   
@@ -112,11 +114,11 @@ If the Alpha server restarts, the `--encryption key-file` or the `--vault` super
 
 ## Turn off Encryption
 
-You can use [live loader]({{< relref "live-loader.md" >}}) or [bulk loader]({{< relref "bulk-loader.md" >}}) to decrypt the data while importing.
+You can use [live loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) or [bulk loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}) to decrypt the data while importing.
 
 ### Using live loader
 
-You can import your encrypted data using [live loader]({{< relref "live-loader.md" >}}) into a new Dgraph Alpha node without encryption enabled.
+You can import your encrypted data using [live loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}) into a new Dgraph Alpha node without encryption enabled.
 
 ```bash
 # Encryption Key from the file path
@@ -133,7 +135,7 @@ dgraph live --files "<path-to-gzipped-RDF-or-JSON-file>" --schema "<path-to-sche
 
 ### Using bulk loader
 
-You can also use [bulk loader]({{< relref "bulk-loader.md" >}}), to turn off encryption. This will generate a new unencrypted `p` that will be used by the Alpha process. In this, case you need to pass `--encryption key-file`, `--encrypted` and `--encrypted_out` flags.
+You can also use [bulk loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}), to turn off encryption. This will generate a new unencrypted `p` that will be used by the Alpha process. In this, case you need to pass `--encryption key-file`, `--encrypted` and `--encrypted_out` flags.
 
 ```bash
 # Encryption Key from the file path

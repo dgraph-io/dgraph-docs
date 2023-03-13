@@ -18,13 +18,25 @@ is only allowed to access the data permitted by the ACL rules.
 
 ## Enable enterprise ACL feature
 
-The ACL feature can be turned on by following these steps:
+1. Generate a data encryption key that is 32 bytes long:
 
-1. Create a plain text file, and store a randomly generated secret key in it. The secret
-key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  Keep this secret key secret to avoid data security issues.  The secret key must have at least 256-bits (32 ASCII characters) to support the HMAC-SHA256 signing algorithm.
+   ```bash
+   tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
+   ```
+   {{% notice "note" %}}
+   On a macOS you may have to use `LC_CTYPE=C; tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file`.
+   {{% /notice %}}
 
-2. Start all the Dgraph Alpha nodes in your cluster with the option `--acl secret-file="/path/to/secret"`, and
-make sure that they are all using the same secret key file created in Step 1.  Alternatively, you can [store the secret in Hashicorp Vault](#storing-acl-secret-in-hashicorp-vault).
+1. To view the secret key value use `cat enc_key_file`.
+1. Create a plain text file named `hmac_secret_file`, and store a randomly generated `<SECRET KEY VALUE>` in it. The secret
+   key is used by Dgraph Alpha nodes to sign JSON Web Tokens (JWT).  
+
+   ```bash
+   echo '<SECRET KEY VALUE>' > hmac_secret_file
+   ```
+
+1. Start all the Dgraph Alpha nodes in your cluster with the option `--acl secret-file="/path/to/secret"`, and
+   make sure that they are all using the same secret key file created in Step 1.  Alternatively, you can [store the secret in Hashicorp Vault](#storing-acl-secret-in-hashicorp-vault).
 
 
    ```bash
@@ -41,7 +53,7 @@ Here is an example that starts a Dgraph Zero node and a Dgraph Alpha node with t
 
 ```bash
 ## Create ACL secret key file with 32 ASCII characters
-echo '12345678901234567890123456789012' > hmac_secret_file
+echo '<SECRET KEY VALUE>' > hmac_secret_file
 
 ## Start Dgraph Zero in different terminal tab or window
 dgraph zero --my=localhost:5080 --replicas 1 --raft idx=1
@@ -80,7 +92,7 @@ You can run this with:
 
 ```bash
 ## Create ACL secret key file with 32 ASCII characters
-echo '12345678901234567890123456789012' > hmac_secret_file
+echo '<SECRET KEY VALUE>' > hmac_secret_file
 
 ## Start Docker Compose
 docker-compose up
@@ -94,7 +106,7 @@ The first step is to encode the secret with base64:
 
 ```bash
 ## encode a secret without newline character and copy to the clipboard
-printf '12345678901234567890123456789012' | base64
+printf '<SECRET KEY VALUE>' | base64
 ```
 
 The next step is that we need to create a [Helm](https://helm.sh/) chart config values file, e.g. `dgraph_values.yaml`.  We want to copy the results of encoded secret as paste this into the `hmac_secret_file` like the example below:
@@ -105,7 +117,7 @@ alpha:
   acl:
     enabled: true
     file:
-      hmac_secret_file: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=
+      hmac_secret_file: <SECRET KEY VALUE>
   configFile:
     config.yaml: |
       acl:
@@ -138,7 +150,7 @@ Do the following to set up on the [Hashicorp Vault](https://www.vaultproject.io/
        "cas": 0
      },
      "data": {
-       "hmac_secret_file": "12345678901234567890123456789012"
+       "hmac_secret_file": "<SECRET KEY VALUE>"
      }
    }
    ```   

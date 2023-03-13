@@ -461,20 +461,20 @@ Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 ### Bulk Loader
 
-[Bulk loader]({{< relref "bulk-loader.md" >}}) can be used to load the data in bulk.
+[Bulk loader]({{< relref "/deploy/fast-data-loading/bulk-loader.md" >}}) can be used to load the data in bulk.
 By default, Bulk loader preserves the namespace in the data and schema files.
 If there's no namespace information available, it loads the data into the default namespace.
 
-Please refer to the [Bulk loader documentation]({{< relref "bulk-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
+Please refer to the [Bulk loader documentation]({{< relref "/deploy/fast-data-loading/bulk-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
 
 ### Live Loader
 
-Since multi-tenancy works with ACL enabled, when using the [Live loader]({{< relref "live-loader.md" >}}),
+Since multi-tenancy works with ACL enabled, when using the [Live loader]({{< relref "/deploy/fast-data-loading/live-loader.md" >}}),
 you must provide the login credentials using the `--creds` flag.
 By default, Live loader loads the data into the user's namespace.
 [Guardians of the Galaxy](#guardians-of-the-galaxy) can load the data into multiple namespaces.
 
-Please refer to the [Live loader documentation]({{< relref "live-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
+Please refer to the [Live loader documentation]({{< relref "/deploy/fast-data-loading/live-loader.md#multi-tenancy-enterprise-feature" >}}) for examples and additional information.
 
 {{% notice "note" %}}
 The Live loader requires that the `namespace` from the data and schema files exist before loading the data.

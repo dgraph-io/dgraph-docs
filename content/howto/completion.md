@@ -2,7 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 description = "Dgraph supports command-line completion, a common feature provided by shells like bash or zsh that helps you to type commands in a fast and easy way."
 title = "Shell Completion"
-weight = 1
+weight = 3
 [menu.main]
     parent = "howto"
 +++
