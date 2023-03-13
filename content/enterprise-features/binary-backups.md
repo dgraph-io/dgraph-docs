@@ -615,8 +615,8 @@ input RestoreInput {
 		incrementalFrom: Int
 
 		"""
-		If isPartial is set to true then the cluster will be kept in draining mode after
-		restore. This makes sure that the db is not corrupted by any mutations or tablet moves in
+		If `isPartial` is set to true then the cluster is kept in draining mode after
+		restore to ensure that the database is not corrupted by any mutations or tablet moves in
 		between two restores.
 		"""
 		isPartial: Boolean
@@ -629,9 +629,9 @@ Restore requests returns immediately without waiting for the operation to finish
 ## Incremental Restore
 
 You can use incremental restore to restore a set of incremental backups on a cluster with a part of the backup already restored.
-The system does not appect any mutations made between a normal restore and an incremental restore, because the cluster is in the draining mode. When the cluster is in a draining mode only an admin request to bring the cluster back to normal mode accepted.
+The system does not accept any mutations made between a normal restore and an incremental restore, because the cluster is in the draining mode. When the cluster is in a draining mode only an admin request to bring the cluster back to normal mode is accepted.
 
-Note: Before you start an incremental restore ensure that you set `isPartial` to `true` in your noraml restore.
+Note: Before you start an incremental restore ensure that you set `isPartial` to `true` in your normal restore.
 
 To incrementally restore from a backup to a live cluster, execute a mutation on the `/admin`
 endpoint with the following format:
