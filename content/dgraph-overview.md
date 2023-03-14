@@ -23,7 +23,7 @@ Dgraph is different from other graph databases in a number of ways, including:
 - **Text Search**: &emsp; *Full-text searching is included.*
 
 ## Dgraph and GraphQL
-In Dgraph, GraphQL is not an afterghtough or an add-on; it is core to the product. GraphQL developers can get started in minutes, and need not concern themselves with the powerful graph database running in the background.
+In Dgraph, GraphQL is not an afterthought or an add-on; it is core to the product. GraphQL developers can get started in minutes, and need not concern themselves with the powerful graph database running in the background.
 
 The difference with Dgraph is that no resolvers or custom queries are needed. Simply update a GraphQL schema, and all apis are ready to go. The "resolvers" are transparently implemented by simply following graph relationships from node to node and node to field, and with native graph performance.
 
@@ -38,7 +38,7 @@ For complex queries that the GraphQL specification does not support, Dgraph prov
 
    [Dgraph for SQL Users](https://dgraph.io/learn/courses/datamodel/sql-to-dgraph/overview/introduction/).
 
-   Read more about the motivations for GraphQL and how Facebook still uses it to provide generic yet efficient data access in [the original annoucement of the spec from Facebook](https://engineering.fb.com/2015/09/14/core-data/graphql-a-data-query-language/).
+   Read more about the motivations for GraphQL and how Facebook still uses it to provide generic yet efficient data access in [the original announcement of the spec from Facebook](https://engineering.fb.com/2015/09/14/core-data/graphql-a-data-query-language/).
 -->
 ## The Graph Model - Nodes, Relationships and Values
 
@@ -65,12 +65,12 @@ This JSON structure succinctly represents rich data:
 
 Dgraph supports [JSON]({{< relref "json-mutation-format.md" >}}) data as both a return structure and an insert/update format. In Dgraph JSON nesting represents relations among nodes, so `{ "name":"Bob", "homeAddress": { "Street":"123 Main st" } }` efficiently and intuitively represents a Person node, an Address node, and a relation (called "homeAddress") between them.
 
-In addition, Dgraph supports [RDF triples]({{< relref "dql-rdf.md" >}}) as an input and outpup format. 
+In addition, Dgraph supports [RDF triples]({{< relref "dql-rdf.md" >}}) as an input and output format. 
 
 Dgraph relationships are directed links between nodes, allowing optimized traversal from node to node. Dgraph allows a bidirectional relation via directed relationships in both directions if desired.
 
 ## Application developers and data engineers work together seamlessly
-Dgraph allows a particularly smoooth interaction among data teams or experts and data consumers. GraphQL's flexibility empowers data consumers to get exactly the data they want, in the format they want it, at the speed they need, without writing custom REST APIs or understanding a new graph query language.
+Dgraph allows a particularly smooth interaction among data teams or experts and data consumers. GraphQL's flexibility empowers data consumers to get exactly the data they want, in the format they want it, at the speed they need, without writing custom REST APIs or understanding a new graph query language.
 
 Database experts can focus on the data, schema and indexes, without maintaining a sprawling set of REST APIs, views, or optimized queries tailored to each data consumer or app.
 
@@ -88,7 +88,7 @@ managing infrastructure. This is a fast and easy way to get started with GraphQL
 
 
 ## Dgraph Architecture
-Dgraph scales to larger data sizes than other graph databases because it is designed from the groud up to be distributed. Therefore Dgraph runs as a cluster of server nodes which communicate to form a single logical data store. There are two main types of processes (nodes) running: Zeros and Alphas.
+Dgraph scales to larger data sizes than other graph databases because it is designed from the ground up to be distributed. Therefore Dgraph runs as a cluster of server nodes which communicate to form a single logical data store. There are two main types of processes (nodes) running: Zeros and Alphas.
 
 - **Dgraph Zero** server nodes hold metadata for the Dgraph cluster, coordinate distributed transactions, and re-balance data among server groups.
 
@@ -97,7 +97,7 @@ Dgraph scales to larger data sizes than other graph databases because it is desi
 
 In addition, people use common tools to define schemas, load data, and query the database:
 
-- **GraphQL IDEs**: A number of GraphQL IDEs are available to update GraphQL schemas and run GraphQL updates and queries. [One of these IDEs is GrahpiQL](https://github.com/graphql/graphiql)
+- **GraphQL IDEs**: A number of GraphQL IDEs are available to update GraphQL schemas and run GraphQL updates and queries. [One of these IDEs is GraphiQL](https://github.com/graphql/graphiql)
 
 - **Ratel** Ratel is a GUI app from Dgraph that runs DQL queries and mutations, and allows schema viewing and editing (as well as some cluster management operations).
 
