@@ -103,8 +103,8 @@ Go to Ratel, click on the mutate tab, paste the following mutation, and click Ru
      "publish_time": "2019-07-11T01:45:00",
      "tagged": [
       {
-       "uid": "_:annoucement",
-       "tag_name": "annoucement"
+       "uid": "_:announcement",
+       "tag_name": "announcement"
       },
       {
        "uid": "_:funding",
@@ -124,7 +124,7 @@ Go to Ratel, click on the mutate tab, paste the following mutation, and click Ru
        "uid": "_:devrel"
       },
       {
-       "uid": "_:annoucement"
+       "uid": "_:announcement"
       }
      ]
     }
