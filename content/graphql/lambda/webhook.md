@@ -48,7 +48,7 @@ You also have access to the `event` object within the resolver. Depending on the
       "input": [<AddTypeInput: i.e. all the data that was received as part of the `input` argument>]
     },
     "update": {
-      "rootUIDs": [<list-of-UIDs-of-root-nodes-for-which-somethig-was-set/removed-in-this-mutation>],
+      "rootUIDs": [<list-of-UIDs-of-root-nodes-for-which-something-was-set/removed-in-this-mutation>],
       "setPatch": <TypePatch: the object that was received as the patch for set>,
       "removePatch": <TypePatch: the object that was received as the patch for remove>
     },
@@ -69,7 +69,7 @@ async function addAuthorWebhook({event, dql, graphql, authHeader}) {
 }
 
 async function updateAuthorWebhook({event, dql, graphql, authHeader}) {
-    // execute what you want on updation of an author
+    // execute what you want on update of an author
     // maybe send a mail to the author informing that few details have been updated 
     
 }

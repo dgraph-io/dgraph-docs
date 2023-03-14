@@ -15,7 +15,7 @@ Let's start by going to the Firebase [website](https://firebase.google.com/) and
 
 ![Firebase Dashboard](/images/graphql/tutorial/todo/firebase-dashboard.png)
 
-In the **Authentication** section, enable `Email/Password` signin. You can add a custom domain to `Authorized domains` below according to where you want to deploy your app. By defaut localhost is added to the list. 
+In the **Authentication** section, enable `Email/Password` signin. You can add a custom domain to `Authorized domains` below according to where you want to deploy your app. By default localhost is added to the list. 
 
 ![Authentication Section](/images/graphql/tutorial/todo/firebase-domains.png)
 
