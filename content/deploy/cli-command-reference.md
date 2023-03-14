@@ -390,7 +390,7 @@ Flags:
                                        whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames you wish to whitelist for performing admin actions (i.e., --security "whitelist=144.142.126.254,127.0.0.1:127.0.0.3,192.168.0.0/16,host.docker.internal").
                                     (default "token=; whitelist=;")
       --survive string             Choose between "process" or "filesystem".
-                                       If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                       If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                        If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
                                        Most users should be OK with choosing "process". (default "process")
       --telemetry string           Telemetry (diagnostic) options
@@ -471,7 +471,7 @@ Flags:
       --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
       --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
       --survive string                Choose between "process" or "filesystem".
-                                          If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                          If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                           If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
                                           Most users should be OK with choosing "process". (default "process")
       --telemetry string              Telemetry (diagnostic) options
