@@ -200,7 +200,7 @@ upsert {
 
 Execution of an upsert block also returns the response of the query executed on the state
 of the database *before mutation was executed*.
-To get the latest result, you have to execute another query after the transaction is commited.
+To get the latest result, you have to execute another query after the transaction is committed.
 
 Variables defined in the query block can be used in the mutation blocks using the [uid]({{< relref "uid-upsert.md" >}}) and [val]({{< relref "val-upsert.md" >}}) functions.
 
