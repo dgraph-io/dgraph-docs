@@ -56,7 +56,7 @@ Algorithm:
     * Still on Server X, use the friends predicate again to get friends for all of those uids, generating a list of my friends of friends. Call this `result set myFOF`.
 * Server Y
     * Send result set myFOF to Server Y, which holds the posts_liked predicate **(1 RPC)**.
-    * Retreive all posts liked by my friends-of-friends. Call this `result set postsMyFOFLiked`.
+    * Retrieve all posts liked by my friends-of-friends. Call this `result set postsMyFOFLiked`.
 * Server Z
     * Send postsMyFOFLiked result set to Server Z **(1 RPC)**. 
     * Retrieve all posts authored by A. Call this `result set authoredByA`.

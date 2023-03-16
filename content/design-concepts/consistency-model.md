@@ -19,7 +19,7 @@ Dgraph uses the RAFT protocol to synchronize updates and ensure updates are dura
 ## Transactions are lockless
 Dgraph transactoins do not use locks, allowing fast, distributed transactions.
 
-For reads, queries execute at a particular timestamp based on snapshot isolation, which isolates reads from any concurrent write activity. All reads access snapshots across the entire cluster, seeing all previously committed transactions in full, regardless of which alpha node recieved earlier queries.
+For reads, queries execute at a particular timestamp based on snapshot isolation, which isolates reads from any concurrent write activity. All reads access snapshots across the entire cluster, seeing all previously committed transactions in full, regardless of which alpha node received earlier queries.
 
 Writes use optimistic lock semantics, where a transaction will be aborted if another (concurrent) transaction updates exactly the same data (same edge on the same node) first. This will be reported as an "aborted" transaction to the caller.
 
