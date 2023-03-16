@@ -33,7 +33,6 @@ This is unavoidable, since graph databases, RDF, and graph theory have separate 
 
 {{% notice "tip" %}}Dgraph can automatically generate a reverse relation. If the user wants to run
 queries in that direction, they would need to define the [reverse relationship]({{< relref "predicate-types.md#reverse-edges" >}})
-as part of the schema.{{% /notice %}}
 
 
 For `Relationships`, the subject and object are represented as 64-bit numeric UIDs and the relationship name itself links them: <subjectUID> <relationshipName> <objectUID>.
