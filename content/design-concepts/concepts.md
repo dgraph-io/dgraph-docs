@@ -35,7 +35,6 @@ This is unavoidable, since graph databases, RDF, and graph theory have separate 
 queries in that direction, they would need to define the [reverse relationship]({{< relref "predicate-types.md#reverse-edges" >}})
 as part of the schema.{{% /notice %}}
 
-Internally, the RDF N-Quad is represented in one of two ways:
 
 For `Relationships`, the subject and object are represented as 64-bit numeric UIDs and the relationship name itself links them: <subjectUID> <relationshipName> <objectUID>.
 
