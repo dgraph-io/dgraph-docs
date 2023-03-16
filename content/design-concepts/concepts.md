@@ -250,9 +250,3 @@ A Dgraph `Namespace` (aka Tenant) is a logically separate database within a Dgra
 
 There is no mechanism to query in a way that combines data from two namespaces, which simplifies and enforces security in use cases where this is the requirement. An API layer or client would have to pull data from multiple namespaces using different authenticated queries if data needed to be combined.
 
-## Live Loader
-The Dgraph Live Loader is a tool to load data into an existing, running Dgraph database.
-
-## Bulk Loader
-The Dgraph Bulk Loader is a tool to load data into a new/empty database at high speed.
-
