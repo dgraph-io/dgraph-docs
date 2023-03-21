@@ -117,4 +117,4 @@ Every cluster will have at least one Dgraph Zero node and one Dgraph Alpha node.
 - **Get Started** with a [free database instance](https://cloud.dgraph.io)
 - get familiar with some terms in our [Glossary](/dgraph-glossary)
 - Take the [Dgraph tour](https://dgraph.io/tour/)
-- Go through some [tutorials]({{< relref "tutorials" >}})
+- Go through some [tutorials]({{< relref "learn" >}})
