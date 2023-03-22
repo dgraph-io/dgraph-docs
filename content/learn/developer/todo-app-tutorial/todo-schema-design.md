@@ -2,7 +2,8 @@
 title = "Schema Design"
 description = "Starting with listing the entities that are involved in a basic to-do app, this step in the GraphQL tutorial walks you through schema design."
 weight = 2
-[menu.main]
+type = "learn"
+[menu.learn]
     parent = "todo-app-tutorial"
 +++
 

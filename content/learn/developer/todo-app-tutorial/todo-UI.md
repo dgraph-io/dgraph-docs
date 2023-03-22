@@ -2,7 +2,8 @@
 title = "Creating a Basic UI"
 description = "Create a simple to-do app and integrate it with Auth0. This step in the GraphQL tutorial walks you through creating a basic UI with React."
 weight = 3
-[menu.main]
+type = "learn"
+[menu.learn]
     parent = "todo-app-tutorial"
 +++
 

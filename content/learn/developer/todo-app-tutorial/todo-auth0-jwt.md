@@ -2,7 +2,8 @@
 title = "Using Auth0"
 description = "Get an app running with Auth0. This step in the GraphQL tutorial walks you through using Auth0 in an example to-do app tutorial."
 weight = 5
-[menu.main]
+type = "learn"
+[menu.learn]
     parent = "todo-app-tutorial"
 +++
 

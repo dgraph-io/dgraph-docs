@@ -1,7 +1,8 @@
 +++
 title = "Using Firebase Authentication"
 weight = 6
-[menu.main]
+type = "learn"
+[menu.learn]
     parent = "todo-app-tutorial"
 +++
 

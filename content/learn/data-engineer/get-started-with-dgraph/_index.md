@@ -117,15 +117,10 @@ type = "learn"
   </div>
 </section>
 
-## Where to go from here
 
-- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to communicate
-with Dgraph from your application.
-- Take the [Tour](https://dgraph.io/tour/) for a guided tour of how to write queries in Dgraph.
-- A wider range of queries can also be found in the [Query Language]({{< relref "query-language/_index.md" >}}) reference.
-- See [Deploy]({{< relref "deploy/_index.md" >}}) if you wish to run Dgraph
-  in a cluster.
 
-## Need Help
-
-* Please use [discuss.dgraph.io](https://discuss.dgraph.io) for questions, feature requests, bugs, and discussions.
+<style>
+  ul.contents {
+    display: none;
+  }
+</style>

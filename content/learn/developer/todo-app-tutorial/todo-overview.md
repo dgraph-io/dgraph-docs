@@ -2,7 +2,8 @@
 title = "Overview"
 description = "This is a simple tutorial that will take you through making a basic to-do app using Dgraph’s GraphQL API and integrating it with Auth0."
 weight = 1
-[menu.main]
+type = "learn"
+[menu.learn]
     parent = "todo-app-tutorial"
     identifier = "todo-overview"
 +++

@@ -12,11 +12,10 @@ weight = 4
 
 
 ### Recommended learning path
-- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to communicate
-with Dgraph from your application.
-- Take the [Tour](https://dgraph.io/tour/) for a guided tour of how to write queries in Dgraph.
-- A wider range of queries can also be found in the [Query Language]({{< relref "query-language/_index.md" >}}) reference.
-- See [Deploy]({{< relref "deploy/_index.md" >}}) if you wish to run Dgraph
-  in a cluster.
+
+- See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph cluster architecture.
+- Get familiar with some terms in our [Glossary](/dgraph-glossary)
+- Refer to [Self-managed cluster]({{< relref "deploy" >}}) to learn how to deploy and manage Dgraph database in a variety of self-managed deployment scenarios.
+- [Dgraph Administration]({{< relref "deploy/admin" >}}) describes the admin operations.
 
 

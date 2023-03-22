@@ -50,10 +50,6 @@ Dgraph supports both symmetric (HS256) and asymmetric (RS256) encryption and acc
 You can use any authentication method that is capable of generating such JWT token (Auth0, Cognito, Firebase, etc...) including Dgraph login mechanism.
 
 
-{{% notice "tip" %}}
-To learn more about adding JWTs from a third-party JWT signer to your app, see our tutorial 
-[Auth0 Authentication]({{< relref "graphql/todo-app-tutorial/todo-auth0-jwt" >}}) or [Firebase Authentication]({{< relref "graphql/todo-app-tutorial/todo-firebase-jwt" >}}). {{% /notice %}}
-
 ### ACL
 Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs]({{< relref "access-control-lists.md">}}) section for details. The ACLs are a separate security mechanism.
 

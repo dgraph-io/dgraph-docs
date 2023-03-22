@@ -2,8 +2,10 @@
 title = "Deploying on Dgraph Cloud"
 description = "In just two steps on Dgraph Cloud (deployment & schema), you get a GraphQL API that you can easily use in any application."
 weight = 7
-[menu.main]
+type = "learn"
+[menu.learn]
     parent = "todo-app-tutorial"
+    identifier = "todo-app-deploy"
 +++
 
 Let's now deploy our fully functional app on Dgraph Cloud [cloud.dgraph.io](https://cloud.dgraph.io).

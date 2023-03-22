@@ -2,7 +2,8 @@
 title = "Authorization Rules"
 description = "Use the @auth directive to limit access to the user’s to-dos. This step in the GraphQL tutorial walks you through authorization rules."
 weight = 4
-[menu.main]
+type = "learn"
+[menu.learn]
     parent = "todo-app-tutorial"
 +++
 
