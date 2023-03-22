@@ -3,17 +3,15 @@ title = "Design a Schema for the App"
 tutorial = "courses/messageboardapp/react"
 type = "learn"
 description = "Build a Message Board App in React with Dgraph Learn. Step 2: GraphQL schema design - how graph schemas and graph queries work."
+weight = 5
 [menu.learn]
   name = "Design a Schema "
   parent = "react-app-graphql"
   identifier = "react-app-graphql-schema"
-  weight = 1
-[nav.next]
-title = "The Schema as GraphQL"
-link = "/courses/messageboardapp/react/develop/graphql/graphql-schema/"
-[nav.previous]
-title = "Working in GraphQL"
-link = "/courses/messageboardapp/react/develop/graphql/"
+[nav]
+  nextpage =  "graphql-schema.md"
+  previouspage= "react/graphql.md"
+
 +++
 
 In this section, you'll start designing the schema of the message board app and
@@ -32,7 +30,7 @@ for your app's UI
 Although a single GraphQL query can save you lots of calls and return you a subgraph of data, a complete page might be built up of blocks that have different data requirements. For example, in a sketch of your app's UI you can already see these
 data requirements forming.
 
-![App UI requirements](/images/message-board/UI-components.gif)
+{{<figure class="medium image" src="/images/message-board/UI-components.gif" title="App UI requirements">}}
 
 You can start to see the building blocks of the UI and some of the entities
 (users, categories and posts) that will form the data in your app.
@@ -41,13 +39,12 @@ You can start to see the building blocks of the UI and some of the entities
 
 Designing a graph schema is about designing the things, or entities, that will form nodes in the graph, and designing the shape of the graph, or what links those entities have to other entities.
 
-There's really two concepts in play here.  One is the data itself, often called the application data graph.  The other is the schema, which is itself graph shaped but really forms the pattern for the data graph.  You can think of the difference as somewhat similar to objects (or data structure definitions) verses instances in a program, or a relational database schema verses rows of actual data.
+There's really two concepts in play here.  One is the data itself, often called the application data graph.  The other is the schema, which is itself graph shaped but really forms the pattern for the data graph.  You can think of the difference as somewhat similar to objects (or data structure definitions) versus instances in a program, or a relational database schema versus rows of actual data.
 
 Already you can start to tease out what some of the types of data and relationships in your graph are.  There's users who post posts, so you know there's a relationship between users and the posts they've made. You know the posts are going to be assigned to some set of categories and that each post might have a list of comments posted by users.
 
 So your schema is going to have these kinds of entities and relationships between them.
-
-![Graph schema sketch](/images/message-board/schema-inital-sketch.png)
+{{<figure class="medium image" src="/images/message-board/schema-inital-sketch.png" title="Graph schema sketch">}}
 
 I've borrowed some notation from other data modeling patterns here.  That's pretty much the modeling capability GraphQL allows, so let's start sketching with it for now.
 
@@ -57,15 +54,17 @@ How does that translate into the application data graph?  Let's sketch out some 
 
 Let's start with a single user who's posted three posts into a couple of different categories. Your graph might start looking like this.
 
-![data graph with user and posts](/images/message-board/first-posts-in-graph.png)
+{{<figure class="medium image" src="/images/message-board/first-posts-in-graph.png">}}
+
 
 Then another user joins and makes some posts. Your graph gets a bit bigger and more interesting, but the types of things in the graph and the links they can have follow what the schema sets out as the pattern --- for example you aren't linking users to categories.
+{{<figure class="medium image" src="/images/message-board/user2-posts-in-graph.png" title="more users and posts">}}
 
-![data graph with more users and posts](/images/message-board/user2-posts-in-graph.png)
 
 Next the users read some posts and start making and replying to comments.
+{{<figure class="medium image" src="/images/message-board/comments-in-graph.png" title="users, posts and comments">}}
 
-![data graph with users, posts and comments](/images/message-board/comments-in-graph.png)
+
 
 Each node in the graph will have the data (a bit like a document) that the schema says it can have, maybe a username for users and title, text and date published for posts, and the links to other nodes (the shape of the graph) as per what the schema allows.  
 
@@ -76,16 +75,16 @@ While you are still sketching things out here, let's take a look at how queries 
 Graph queries in GraphQL are really about entry points and traversals. A query picks certain nodes as a starting point and then selects data from the nodes or follows edges to traverse to other nodes.
 
 For example, to render a user's information, you might need only to find the user.  So your use of the graph might be like in the following sketch --- you'll find the user as an entry point into the graph, perhaps from searching users by username, query some of their data, but not traverse any further.
-
-![query a user](/images/message-board/user1-search-in-graph.png)
+{{<figure class="medium image" src="/images/message-board/user1-search-in-graph.png" title="query a user">}}
 
 Often, though, even in just presenting a user's information, you need to present information like most recent activity or sum up interest in recent posts.  So it's more likely that you'll start by finding the user as an entry point and then traversing some edges in the graph to explore a subgraph of interesting data.  That might look like this traversal, starting at the user and then following edges to their posts.
 
-![query a user and their posts](/images/message-board/user1-post-search-in-graph.png)
+{{<figure class="medium image" src="/images/message-board/user1-post-search-in-graph.png" title="query a user and their posts">}}
 
-You can really start to see that traversal when it comes to rendering an individual post. You'll need to find the post, probably by it's id when a user navigates to a url like `/post/0x2`, then you'll follow edges to the post's author and category, but you'll also need to follow the edges to all the comments, and from there to the authors of the comments.  That'll be a multi-step traversal like the following sketch.
 
-![query a post and follow edges](/images/message-board/post2-search-in-graph.png)
+You can really start to see that traversal when it comes to rendering an individual post. You'll need to find the post, probably by its id when a user navigates to a url like `/post/0x2`, then you'll follow edges to the post's author and category, but you'll also need to follow the edges to all the comments, and from there to the authors of the comments.  That'll be a multi-step traversal like the following sketch.
+{{<figure class="medium image" src="/images/message-board/post2-search-in-graph.png" title="query a post and follow edges">}}
+
 
 Graphs make these kinds of data traversals really clear, as compared to table joins or navigating your way through a RESTful API.  It can also really help to jot down a quick sketch.
 
@@ -100,8 +99,8 @@ Now that you have investigated and considered what you are going to show for pos
 Posts, for example, are going to need a title and some text for the post, both string valued.  Posts will also need some sort of date to record when they were uploaded.  They'll also need links to the author, category and a list of comments.
 
 The next iteration of your schema might look like this sketch.
+{{<figure class="medium image" src="/images/message-board/schema-sketch.png" title="Graph schema sketch with data">}}
 
-![Graph schema sketch with data](/images/message-board/schema-sketch.png)
 
 That's your first cut at a schema --- the pattern your application data graph will follow.
 

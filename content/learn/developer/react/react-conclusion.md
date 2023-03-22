@@ -3,11 +3,12 @@ title = "Conclusion"
 type = "learn"
 tutorial = "courses/messageboardapp/react"
 description = "This is the end of the Dgraph Learn course - Build a Message Board App in React. But there's still more to learn."
+weight = 18
 [menu.learn]
   name = "Conclusion"
   parent = "react-app"
   identifier = "react-app-conclusion"
-  weight = 6
+  
 [nav.previous]
 title = "GraphQL Mutations"
 link = "/docs/learn/developer/react/react-ui/"

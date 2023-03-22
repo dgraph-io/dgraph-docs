@@ -4,11 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "tutorial"
 description = "The tech stack for this project includes Dgraph Cloud, React, Typescript, Apollo Client 3.x, Semantic UI React, Tailwind CSS, and Luxon."
+weight = 12
 [menu.learn]
   name = "Tech Stack"
   parent = "react-app-ui"
   identifier = "react-app-ui-techstack"
-  weight = 1
+[nav]
+  nextpage = "react-app-boiler-plate.md"
 [nav.previous]
 title = "React UI Introduction"
 link = "/courses/messageboardapp/react/develop/react/"

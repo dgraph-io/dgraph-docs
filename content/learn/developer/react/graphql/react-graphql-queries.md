@@ -4,25 +4,23 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "tutorial"
 description = "GraphQL queries are about starting points and traversals. From simple queries to deep filters, dive into the queries use in the message board app."
+weight = 10
 [menu.learn]
   name = "GraphQL Queries"
   parent = "react-app-graphql"
   identifier = "react-app-graphql-queries"
-  weight = 6
-[nav.previous]
-title = "GraphQL Mutations"
-link = "/courses/messageboardapp/react/develop/graphql/graphql-mutations/"
-[nav.next]
-title = "Build a UI in React"
-link = "/courses/messageboardapp/react/develop/react/"
+[nav]
+  nextpage = "tech-stack.md"
+
 +++
 
 
 As we learned earlier, GraphQL queries are about starting points and traversals.
 For example, a query can start by finding a post, and then traversing edges from
 that post to find the author, category, comments and authors of all the comments.
+{{<figure class="medium image" src="/images/message-board/post2-search-in-graph.png" title="query a post and follow relationships">}}
 
-![query a post and follow edges](/images/message-board/post2-search-in-graph.png)
+
 
 ## Dgraph Cloud Query
 
@@ -97,7 +95,8 @@ Let's do a bit more traversal into the graph. In the example app's UI you can
 display the homepage of a user. You might need to find a user's
 data and some of their posts.
 
-![Graph schema sketch](/images/message-board/user1-post-search-in-graph.png)
+{{<figure class="medium image" src="/images/message-board/user1-post-search-in-graph.png" title="Graph schema sketch">}}
+
 
  Using GraphQL, you can get the same data using the following query:
 

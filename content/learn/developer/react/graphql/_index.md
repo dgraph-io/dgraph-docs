@@ -3,17 +3,14 @@ title = "Working in GraphQL"
 type = "learn"
 description = "Developing a Message Board App in React with Dgraph Learn. Step 2: GraphQL schema design and loading, queries, and mutations."
 pageType = "learn"
+weight = 4
 [menu.learn]
   name = "Working in GraphQL"
   parent = "react-app"
   identifier = "react-app-graphql"
-  weight = 4
-[nav.next]
-title = "Design the App's Schema"
-link = "/courses/messageboardapp/react/develop/graphql/design-app-schema/"
-[nav.previous]
-title = "Deploy a GraphqL Backend"
-link = "/courses/messageboardapp/react/develop/dgraph-cloud/deploy-a-graphql-backend/"
+[nav]
+  nextpage =  "design-app-schema.md"
+  previouspage= "react-provision-backend.md"
 +++
 
 To build an app with Dgraph Cloud, you design your application in GraphQL. You
@@ -24,3 +21,5 @@ GraphQL API with queries and mutations.
 In this section of the tutorial, you'll walk through the process of designing a
 schema for a message board app, loading the GraphQL schema into Dgraph Cloud,
 and then working through the queries and mutations that Dgraph Cloud makes available from that schema.
+
+### In this section

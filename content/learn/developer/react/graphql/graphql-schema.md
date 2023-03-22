@@ -4,17 +4,14 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "learn"
 description = "How to Build a Message Board App in React. Step 2: GraphQL schema - translate the schema design to the GraphQL SDL (Schema Definition Language)."
+weight = 6
 [menu.learn]
   name = "GraphQL Schema"
   parent = "react-app-graphql"
   identifier = "react-app-graphql-gqlschema"
-  weight = 2
-[nav.next]
-title = "Load the Schema to Dgraph Cloud"
-link = "/courses/messageboardapp/react/develop/graphql/load-schema-to-dgraph-cloud/"
-[nav.previous]
-title = "Design the App's Schema"
-link = "/courses/messageboardapp/react/develop/graphql/design-app-schema/"
+[nav]
+  nextpage =  "load-schema-to-dgraph-cloud.md"
+
 +++
 
 In this section, you'll learn about how to translate the schema design to the
@@ -24,8 +21,9 @@ GraphQL SDL (Schema Definition Language).
 
 In the schema design section, you saw the following sketch of a graph schema for
 the example message board app:
+{{<figure class="medium image" src="/images/message-board/schema-sketch.png" title="data model sketch">}}
 
-![Graph schema sketch](/images/message-board/schema-sketch.png)
+
 
 Using the GraphQL SDL, Dgraph Cloud generates a running GraphQL API from the description of a schema as GraphQL types. There are two different aspects of a GraphQL schema:
 

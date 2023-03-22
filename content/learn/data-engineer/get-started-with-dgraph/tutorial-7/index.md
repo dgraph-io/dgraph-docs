@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = "Fuzzy Search"
   identifier = "tutorials-fuzzy-search"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 6
 +++
 **Welcome to the seventh tutorial of getting started with Dgraph.**

@@ -4,17 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "learn"
 description = "Using your schema, Dgraph Cloud generated ways to interact with the graph. In GraphQL, the API can be inspected with introspection queries."
+weight = 8
 [menu.learn]
   name = "GraphQL Operations"
   parent = "react-app-graphql"
   identifier = "react-app-graphql-operations"
-  weight = 4
-[nav.next]
-title = "GraphQL Mutations"
-link = "/courses/messageboardapp/react/develop/graphql/graphql-mutations/"
-[nav.previous]
-title = "Load the Schema to Dgraph Cloud"
-link = "/courses/messageboardapp/react/develop/graphql/load-schema-to-dgraph-cloud/"
+[nav]
+  nextpage = "react-graphql-mutations.md"
 +++
 
 The schema that you developed and deployed to Dgraph Cloud in the previous

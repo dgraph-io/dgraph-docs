@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = " Basic Operations"
   identifier = "tutorials-basics"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 2
 +++
 **Welcome to the second tutorial of getting started with Dgraph.**

@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = "Introduction"
   identifier = "tutorials-intro"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 1
 +++
 **Welcome to getting started with Dgraph.**

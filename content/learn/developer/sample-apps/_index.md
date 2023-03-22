@@ -1,13 +1,13 @@
 +++
 date = "2023-03-20T19:35:35+11:00"
-title = "Build a ReactJS application using Dgraph GraphQL API"
-description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph docs have the information you need."
+title = "Sample Apps"
+description = "The following sample apps show some of the possibilities when you build your app with GraphQL and Dgraph database."
 type = "learn"
-weight = 1
+weight = 2
 [menu.learn]
-  name = "Build a React application"
+  name = "Sample Apps"
   parent = "developer"
-  identifier = "react-app"
+  identifier = "learn-apps"
 
 +++
 
@@ -33,4 +33,3 @@ In this tutorial, you will learn how to do the following:
 <!-- * Custom logic -->
 
 
-### In this section

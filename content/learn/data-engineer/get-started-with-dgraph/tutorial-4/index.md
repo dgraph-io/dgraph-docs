@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = "Multi-language strings"
   identifier = "tutorials-lang"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 4
 +++
 **Welcome to the fourth tutorial of getting started with Dgraph.**

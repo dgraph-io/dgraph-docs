@@ -4,11 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "tutorial"
 description = "In this step, you can move on to the GraphQL queries that get the data to render the main pages, thanks to Apollo Client, Dgraph Cloud, and React routing."
+weight = 16
 [menu.learn]
   name = "GraphQL Queries"
   parent = "react-app-ui"
   identifier = "react-app-ui-queries"
-  weight = 5
+[nav]
+  nextpage = "react-ui-graphql-mutations.md"
 [nav.previous]
 title = "React Routing"
 link = "/courses/messageboardapp/react/develop/react/react-routing/"

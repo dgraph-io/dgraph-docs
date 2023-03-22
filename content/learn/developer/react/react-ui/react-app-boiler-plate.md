@@ -4,11 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "tutorial"
 description = "Jump right in thanks to the Message Board App Tutorial repo on GitHub. Get started with your Message Board App in React with GraphQL."
+weight = 13
 [menu.learn]
   name = "App Boiler Plate"
   parent = "react-app-ui"
   identifier = "react-app-ui-boilerplate"
-  weight = 2
+[nav]
+  nextpage = "connect-to-dgraph-cloud.md"
 [nav.previous]
 title = "Tech Stack"
 link = "/courses/messageboardapp/react/develop/react/tech-stack/"

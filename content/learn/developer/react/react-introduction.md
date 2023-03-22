@@ -3,11 +3,13 @@ title = "Introduction"
 type = "learn"
 description = "Introduction - Learn to deploy a GraphQL Backend, design a schema, and implement a React UI. This 2-hour course walks you through it."
 aliases = ["/courses/messageboardapp/react/overview","/courses/messageboardapp/react","/courses/messageboardapp/"]
+weight = 1
 [menu.learn]
   name = "Introduction"
   identifier = "react-app-intro"
   parent = "react-app"
-  weight = 1
+[nav]
+nextpage =  "react-provision-backend.md"
 +++
 
 
@@ -22,7 +24,9 @@ subscriptions.
 This app is designed to manage lists of posts in in different categories. A home
 page lets each user view a feed of posts, as follows:
 
-![message board app main page](/images/message-board/main-screenshot.png)
+
+{{<figure class="medium image" src="/images/message-board/main-screenshot.png" title="message board app main page">}}
+
 
 This app will use Dgraph Cloud's built-in authorization to allow public posts
 that anyone can see (even without logging in) but restrict posting messages to
@@ -31,7 +35,7 @@ from any users who haven't been granted viewer permissions. Users who are
 logged-in can create new posts, and each post can have a stream of comments from
 other users. A post is rendered on its own page, as follows:
 
-![App post page](/images/message-board/post-screenshot.png)
+{{<figure class="medium image" src="/images/message-board/post-screenshot.png" title="App post page">}}
 
 This app will be completely serverless app:
 

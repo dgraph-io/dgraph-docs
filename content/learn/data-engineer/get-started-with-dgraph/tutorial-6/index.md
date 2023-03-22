@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = "Advanced Text Search"
   identifier = "tutorials-search"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 6
 +++
 **Welcome to the sixth tutorial of getting started with Dgraph.**

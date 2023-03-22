@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = "Types and Operations"
   identifier = "tutorials-types"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 3
 +++
 

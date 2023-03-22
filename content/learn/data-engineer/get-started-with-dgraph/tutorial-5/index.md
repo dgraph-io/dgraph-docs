@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = "String Indices"
   identifier = "tutorials-string"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 5
 +++
 

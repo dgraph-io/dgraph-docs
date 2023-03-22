@@ -4,11 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 description = "Apollo client provides a connection to the GraphQL endpoint & a GraphQL cache that lets you manipulate the visual state of the app from the internal cache."
 pageType = "tutorial"
+weight = 14
 [menu.learn]
   name = "Connect to Dgraph Cloud"
   parent = "react-app-ui"
   identifier = "react-app-ui-connect"
-  weight = 3
+[nav]
+  nextpage = "react-routing.md"
 [nav.previous]
 title = "App Boilerplate"
 link = "/courses/messageboardapp/react/develop/react/react-app-boiler-plate/"

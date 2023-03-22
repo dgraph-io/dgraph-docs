@@ -4,11 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "tutorial"
 description = "Before you can query, you need to add data. Use GraphQL Mutations to add a user, category, posts, and sample data."
+weight = 9
 [menu.learn]
   name = "GraphQL Mutations"
   parent = "react-app-graphql"
   identifier = "react-app-graphql-mutations"
-  weight = 5
+[nav]
+  nextpage = "react-graphql-queries.md"
 [nav.next]
 title = "GraphQL Queries"
 link = "/courses/messageboardapp/react/develop/graphql/graphql-queries/"
@@ -72,7 +74,7 @@ because you didn't provide that data. This user also has no `posts`  or
 `avatarImg`, but we aren't asking for those in the result. Here's how it looks
 when run in the Dgraph Cloud API Explorer.
 
-*![run a mutation in Dgraph Cloud](/images/message-board/dgraph-cloud-add-a-user.png)*
+{{<figure class="medium image" src="/images/message-board/dgraph-cloud-add-a-user.png" title="run a mutation in Dgraph Cloud">}}
 
 ## Add a category
 
@@ -98,7 +100,8 @@ When run in Dgraph Cloud's API Explorer, the mutation looks as shown below.
 Note that the category's `id` is auto generated and will be different on any
 execution of the mutation.
 
-*![run a mutation with auto generated id in Dgraph Cloud](/images/message-board/dgraph-cloud-add-a-category.png)*
+{{<figure class="medium image" src="/images/message-board/dgraph-cloud-add-a-category.png" title="run a mutation with auto generated id in Dgraph Cloud">}}
+
 
 ## Add Some Posts
 
@@ -106,7 +109,9 @@ Dgraph Cloud can do more than add single graph nodes at a time. The mutations
 can add whole subgraphs and link into the existing graph. To show this, let's do
 a few things at once. Remember our first sketch of some graph data?
 
-![sub graph with first posts](/images/message-board/first-posts-in-graph.png)
+{{<figure class="medium image" src="/images/message-board/first-posts-in-graph.png" title="sub graph with first posts">}}
+
+
 
 At the moment we only have the `User1` and `Category1` nodes.  It's not much of
 a graph, so let's flesh out the rest of the graph in a single mutation.  We'll
@@ -152,11 +157,12 @@ mutation {
 
 Because categories are referenced by an auto-generated `ID`, when you run such a mutation, you'll need to make sure that you use the right id value for `Category1` --- in my run that was `0xfffd8d6ab6e7890a`, but yours might differ. In the  Dgraph Cloud API explorer, that mutation looked like this:
 
-*![Deploy Dgraph Cloud Schema](/images/message-board/dgraph-cloud-deep-mutations.png)*
+{{<figure class="medium image" src="/images/message-board/dgraph-cloud-deep-mutations.png" >}}
+
 
 A real app probably wouldn't add multiple posts in that way, but this example
 shows the what you can do with mutations in Dgraph Cloud. For example, you
-could create a shopping cart and add the first items to that card in a single
+could create a shopping cart and add the first items to that cart in a single
 mutation.  
 
 The input format to Dgraph Cloud also shows you another important property that
@@ -236,7 +242,8 @@ needed variable, as follows:
 In Dgraph Cloud's UI, there's a **Query Variables** tab that you can use to
 enter the variables.
 
-*![Mutation with GraphQL Variables](/images/message-board/graphql-variables.png)*
+{{<figure class="medium image" src="/images/message-board/graphql-variables.png" title="Mutation with GraphQL Variables">}}
+
 
 GraphQL variables let an app depend on a fixed mutation string and simply inject
 the actual data into the mutation when it's executed, meaning same mutation can

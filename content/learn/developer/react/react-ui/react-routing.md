@@ -4,11 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "tutorial"
 description = "Use React Router to build a message board app. A routing library in the UI interprets the URL path and renders an appropriate page for that path."
+weight = 15
 [menu.learn]
   name = "Routing in React"
   parent = "react-app-ui"
   identifier = "react-app-ui-routing"
-  weight = 4
+[nav]
+  nextpage = "react-ui-graphql-queries.md"
 [nav.previous]
 title = "Connect to Dgraph Cloud"
 link = "/courses/messageboardapp/react/develop/react/connect-to-dgraph-cloud/"

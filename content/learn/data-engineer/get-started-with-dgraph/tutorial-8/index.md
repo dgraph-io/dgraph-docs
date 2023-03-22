@@ -4,7 +4,7 @@ type = "learn"
 [menu.learn]
   name = "Geolocation"
   identifier = "tutorials-geolocation"
-  parent = "learn-data-engineer"
+  parent = "learn-data-engineer-getstarted"
   weight = 8
 +++
 **Welcome to the eight tutorial of getting started with Dgraph.**

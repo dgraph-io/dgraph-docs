@@ -4,11 +4,13 @@ type = "learn"
 tutorial = "courses/messageboardapp/react"
 pageType = "tutorial"
 description = "With a working UI for querying sample data you added, you now need a UI to add new posts using GraphQL Mutations in Apollo React."
+weight = 17
 [menu.learn]
   name = "GraphQL Mutations"
   parent = "react-app-ui"
   identifier = "react-app-ui-mutations"
-  weight = 6
+[nav]
+  nextpage = "react-conclusion.md"
 [nav.previous]
 title = "GraphQL Queries"
 link = "/courses/messageboardapp/react/develop/react/graphql-queries/"
