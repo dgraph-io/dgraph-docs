@@ -16,8 +16,6 @@ weight = 2
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}}).
 - Follow the [GraphQL API Quickstart]({{< relref "graphql/quick-start" >}}) to create a first API.
 - Take the [GraphQL Tour](https://dgraph.io/tour/graphqlintro/).
-- Follow the [GraphQL API Quickstart]({{< relref "graphql/quick-start" >}}) to create a first API.
-- Take the [GraphQL Tour](https://dgraph.io/tour/graphqlintro/).
 - Do the [To-Do List App]({{< relref "todo-app-tutorial" >}}) tutorial or the more advanced [Message Board in React]({{< relref "learn/developer/react" >}}) tutorial.
 - Learn how Dgraph extends the [GraphQL specifications](https://spec.graphql.org/) with [directives]({{< relref "graphql/schema/directives">}})
 - Understand how to configure the GraphQL enpoint [Security]({{< relref "graphql/security">}}).
