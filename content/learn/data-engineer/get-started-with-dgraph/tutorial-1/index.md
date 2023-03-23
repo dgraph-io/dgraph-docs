@@ -40,14 +40,10 @@ Ensure that [Docker](https://docs.docker.com/install/) is installed and running 
 Now, it's just a matter of running the following command, and you have Dgraph up and running.
 
 ```sh
-docker run --rm -it -p 8080:8080 -p 9080:9080 dgraph/standalone:{{< version >}}
+docker run --rm -it -p 8080:8080 -p 9080:9080 dgraph/standalone:latest
 ```
 
 ### Nodes and Edges
-
-In this section, we'll build a simple graph with two nodes and an edge connecting them.
-
-{{% load-img "/images/tutorials/1/gs-1.JPG" "The simple graph" %}}
 
 In a Graph Database, concepts or entities are represented as nodes.
 May it be a sale, a transaction, a place, or a person, all these entities are
@@ -64,12 +60,12 @@ although this one points to another node rather than a string or an integer.
 
 The `dgraph/standalone` image setup comes with the useful Dgraph UI called Ratel.
 Just visit [http://localhost:8000](http://localhost:8000) from your browser, and you will be able to access it.
-
-{{% load-img "/images/tutorials/1/gs-2.png" "ratel-1" %}}
+{{<figure class="medium image" src="/images/tutorials/1/gs-2.png" title="Launch Ratel" alt="Ratel">}}
 
 We'll be using the latest stable release of Ratel.
 
-{{% load-img "/images/tutorials/1/gs-3.png" "ratel-2" %}}
+{{<figure class="medium image" src="/images/tutorials/1/gs-3.png" title="Ratel UI" alt="Ratel">}}
+
 
 ### Mutations using Ratel
 

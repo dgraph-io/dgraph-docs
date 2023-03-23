@@ -1,9 +1,9 @@
 +++
-title = "To-Do List App Tutorial"
+title = "To-Do List App"
 type = "learn"
 weight = 1
 [menu.learn]
-  name = "To-Do List App Tutorial"
+  name = "To-Do List App"
   parent = "developer"
   identifier = "todo-app-tutorial"
 +++

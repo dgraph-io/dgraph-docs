@@ -1,11 +1,11 @@
 +++
 date = "2023-03-20T19:35:35+11:00"
-title = "Build a ReactJS application using Dgraph GraphQL API"
+title = "Message Board in React"
 description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph docs have the information you need."
 type = "learn"
 weight = 2
 [menu.learn]
-  name = "Build a React application"
+  name = "Message Board in React"
   parent = "developer"
   identifier = "react-app"
 

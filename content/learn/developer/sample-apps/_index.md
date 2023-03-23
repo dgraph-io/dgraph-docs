@@ -1,11 +1,11 @@
 +++
 date = "2023-03-20T19:35:35+11:00"
-title = "Sample Apps"
+title = "More Sample Apps"
 description = "The following sample apps show some of the possibilities when you build your app with GraphQL and Dgraph database."
 type = "learn"
 weight = 3
 [menu.learn]
-  name = "Sample Apps"
+  name = "More Sample Apps"
   parent = "developer"
   identifier = "sample-apps"
 

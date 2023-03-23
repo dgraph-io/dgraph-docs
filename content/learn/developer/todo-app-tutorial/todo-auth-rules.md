@@ -5,6 +5,8 @@ weight = 4
 type = "learn"
 [menu.learn]
     parent = "todo-app-tutorial"
+[nav]
+  nextpage = "todo-auth0-jwt.md"
 +++
 
 In the current state of the app, we can view anyone's todos, but we want our to-dos to be private to us. Let's do that using the `@auth` directive to limit that to the user's to-dos.

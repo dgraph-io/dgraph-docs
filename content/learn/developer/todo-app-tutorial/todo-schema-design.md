@@ -5,6 +5,8 @@ weight = 2
 type = "learn"
 [menu.learn]
     parent = "todo-app-tutorial"
+[nav]
+  nextpage = "todo-UI.md"
 +++
 
 Let's start with listing down the entities that are involved in a basic todo app.

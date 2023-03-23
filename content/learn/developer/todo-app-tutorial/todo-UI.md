@@ -5,6 +5,8 @@ weight = 3
 type = "learn"
 [menu.learn]
     parent = "todo-app-tutorial"
+[nav]
+  nextpage = "todo-auth-rules.md"
 +++
 
 In this step, we will create a simple to-do app (in React) and integrate it with Auth0.
