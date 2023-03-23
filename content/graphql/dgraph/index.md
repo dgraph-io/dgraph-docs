@@ -1,6 +1,6 @@
 +++
 title = "GraphQL on Existing Dgraph"
-weight = 110
+weight = 12
 [menu.main]
   identifier = "dgraph"
   parent = "graphql"

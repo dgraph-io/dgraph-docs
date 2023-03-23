@@ -1,10 +1,10 @@
 +++
 title = "Security"
 description = "Dgraph's GraphQL implementation comes with built-in authorization, and supports various authentication methods, so you can annotate your schema with rules that determine who can access or mutate the data."
+weight = 3
 [menu.main]
   identifier = "gql-auth"
   parent = "graphql"
-  weight = 21
 +++
 
 When you deploy a GraphQL schema, Dgraph automatically generates the query and mutation operations for each type and exposes them as a GraphQL API on the ``/graphql`` endpoint.
