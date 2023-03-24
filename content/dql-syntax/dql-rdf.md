@@ -6,9 +6,9 @@ title = "RDF"
   parent = "dql-syntax"
   weight = 3
 +++
-Along with JSON, Dgraph supports RDF format to create,  delete, import and export data.
+Dgrpah supports Resource Description Framework (RDF) when creating, importing and exporting data. Queries always return JSON at this time.
 
-RDF 1.1 is a Semantic Web Standards for data interchange. It expresses statements about resources. The format of these statements is simple and in the form of triples.
+[RDF 1.1](https://www.w3.org/RDF/) is a Semantic Web Standard for data interchange defined by the W3C. It expresses statements about resources. The format of these statements is simple and in the form of triples.
 
 
 A triple has the form
@@ -16,26 +16,20 @@ A triple has the form
 <subject> <predicate> <object> .
 ```
 
-In RDF terminology, a predicate is the smallest piece of information about an object. A predicate can hold a literal value or can describe a relation to another entity :
+In RDF terminology, each triple represents one fact about a node. 
 
+In Dgraph, the <subject> of a triple is always a node, and must be a numeric UID.  The <object> of a triple may be another node or a literal value:
 ```
 <0x01> <name> "Alice" .
 <0x01> <knows> <0x02> .
 ```
-when we store that an entity name is “Alice”. The predicate is `name` and predicate value is the string `"Alice"`. It becomes a node property.
-when we store that Alice knows Bob, we may use a predicate `knows` with the node representing Alice. The value of this predicate would be the uid of the node representing Bob. In that case, knows is a relationship.
+The first triple specifies that a node has a name property of “Alice”. The subject is the UID of the first node, the predicate is `name`, and the object is the literal value string: `"Alice"`. 
+The second triple specifies that Alice knows Bob. The subject is again the UID of a node (the "alice" node), the predicate is `knows`, and the object of this triple is the uid of the other node (the "bob" node). When the object is a UID, the triple represents a relationship in Dgraph.
 
-Each triple ends with a period.  
-
-The subject of a triple is always a node in the graph, while the object may be a node or a value (a literal).
-
+Each triple representation in RDF ends with a period.  
 
 ### Blank nodes in mutations
-When creating nodes in Dgraph, you should let Dgraph assign a [UID]({{< relref "dgraph-glossary.md#uid" >}}).
-
-However you need to reference the node in the mutation.
-
-Blank nodes in mutations, written `_:identifier`, identify nodes within a mutation. Dgraph creates a UID identifying each blank node.
+When creating nodes in Dgraph, you often let Dgraph assign the node [UID]({{< relref "dgraph-glossary.md#uid" >}}) by specifing a blank node starting with "_:". All references to the same blank node, such as `_:identifier123`, will identify the same node within a mutation. Dgraph creates a UID identifying each blank node.
 ### Language for string values
 Languages are written using `@lang`. For example
 ```
@@ -47,13 +41,13 @@ Languages are written using `@lang`. For example
 See also [how language strings are handled in queries]({{< relref "query-language/graphql-fundamentals.md#language-support" >}}).
 
 ### Types
-You can specify literals type with the standard `^^` separator.  For example
+Dgraph understands standard RDF types specified in RDF using the `^^` separator.  For example
 ```
 <0x01> <age> "32"^^<xs:int> .
 <0x01> <birthdate> "1985-06-08"^^<xs:dateTime> .
 ```
 
-The supported [RDF datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) and the corresponding internal type in which the data is stored are as follows.
+The supported [RDF datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) and the corresponding internal Dgraph type are as follows.
 
 | Storage Type                                                    | Dgraph type     |
 | -------------                                                   | :------------:   |
@@ -78,11 +72,12 @@ The supported [RDF datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Data
 | &#60;http&#58;//www.w3.org/2001/XMLSchema#float&#62;            | `float`          |
 
 
-
-
 ### Facets
+
+Dgraph is more expressive than RDF in that it allows properties to be stored on every relation. These properties are called Facets in Dgraph, and dgraph allows an extension to RDF where facet values are incuded in any triple.
 ####  Creating a list with facets
 
+The following set operation uses a sequence of RDF statements with additional facet information:
 ```sh
 {
   set {
@@ -124,3 +119,22 @@ Result:
   }
 }
 ```
+{{% notice "tip" %}}Dgraph can automatically generate a reverse relation. If the user wants to run
+queries in that direction, they would define the [reverse relationship]({{< relref "predicate-types.md#reverse-edges" >}})
+## N-quads format
+While most RDF data uses only triples (with three parts) an optional fourth part is allowed. This fourth component in RDF is called a graph label, and in Dgraph it must be the UID of the namespace that the data should go into as described in [Multi-tenancy]({{< relref "cloud-multitenancy" >}}).  
+
+## Processing RDF to comply with Dgraph syntax for subjects
+
+While it is valid RDF to specify subjects that are IRI strings, Dgraph requires a numeric UID or a blank node as the subject. If a string IRI is required, Dgraph support them via [xid properties]({{< relref "external-ids-upsert-block" >}}). When importing RDF from another source that does not use numeric UID subjects, it will be required to replace arbitrary subject IRIs with blank node IRIs.
+
+Typically this is done simply by prepending "_:" to the start of the original IRI. So a triple such as:
+
+```<http://abc.org/schema/foo#item1> <http://abc.org/hasRelation> "somevalue"^^xs:string```
+
+may be rewritten as 
+
+```<_:http://abc.org/schema/foo#item1> <http://abc.org/hasRelation> "somevalue"^^xs:string```
+
+Dgraph will create a consistent UID for all references to the uniquely-named blank node. To maintain this uniqueness over multiple data loads, use the [dgraph live]({{< relref "dgraph-glossary.md#uid" >}}) utility with the xid option, or use specific UIDs such as the hash of the IRI in the source RDF directly.
+

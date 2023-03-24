@@ -6,22 +6,28 @@ weight = 1
     parent = "clients"
 +++
 
+Dgraph provides language-specific clients to communicate with Dgraph clusters using Go, C#, Java, JavaScript, Python and raw HTTP calls. Dgraph also supports the GraphQL specification, so any 3rd party GraphQL library can also communicate with Dgraph.
+
+### GUI Clients
+Here we are describing programmatic language bindings, not GUI clients. Dgraph does provide two web-based graphical clients (GUIs) to edit and submit queries and mutations. The first is 
+[Ratel]({{< relref "ratel">}}) and the second is the [Dgraph cloud GUI](https://cloud.dgraph.io) which has the ability to submit queries and perform other functions.
+
 ## Implementation
 
-Clients can communicate with the server in two different ways:
+Clients can communicate with the server using two different technologies:
 
 - **Via [gRPC](http://www.grpc.io/):** internally this uses [Protocol
   Buffers](https://developers.google.com/protocol-buffers) (the proto file
 used by Dgraph is located at
 [api.proto](https://github.com/dgraph-io/dgo/blob/master/protos/api.proto)).
 
-- **Via HTTP:** there are various endpoints, each accepting and returning JSON.
+- **Via HTTP:** Dgraph exposes various endpoints, each accepting and returning JSON.
   There is a one to one correspondence between the HTTP endpoints and the gRPC
 service methods.
 
 
 It's possible to interface with Dgraph directly via gRPC or HTTP. However, if a
-client library exists for you language, this will be an easier option.
+client library exists for your language, that will be an easier option.
 
 {{% notice "tip" %}}
 For multi-node setups, predicates are assigned to the group that first sees that
@@ -29,10 +35,15 @@ predicate. Dgraph also automatically moves predicate data to different groups in
 order to balance predicate distribution. This occurs automatically every 10
 minutes. It's possible for clients to aid this process by communicating with all
 Dgraph instances. For the Go client, this means passing in one
-`*grpc.ClientConn` per Dgraph instance. Mutations will be made in a round robin
-fashion, resulting in an initially semi random predicate distribution.
+`*grpc.ClientConn` per Dgraph instance, or routing traffic through a load balancer. 
+Mutations will be made in a round robin
+fashion, resulting in a semi-random initial predicate distribution.
 {{% /notice %}}
 
+### GraphQL Clients
+Dgraph does not force or insist on any particular GraphQL client. Any GraphQL client, GUI, tool, or library will work well with Dgraph, and it is the users' choice which to choose. Dgraph only provides clients for the proprietary DQL query language. GraphQL clients are available for free from many organizations.
+
+There is however, a basic GraphQL web-based tool included in the [Dgraph cloud GUI](https://cloud.dgraph.io) for convenience.
 ### Transactions
 
 Dgraph clients perform mutations and queries using transactions. A
