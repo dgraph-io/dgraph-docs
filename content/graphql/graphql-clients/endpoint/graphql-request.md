@@ -17,17 +17,20 @@ weight = 1
 
 <div class="tablenoheaders">
 
-| Header | Value |
-|:------|:------|
-| Content-Type | `application/graphql` or `application/json` |
-| Content-Encoding  | optional  `gzip` |
-| Accept-Encoding  |  optional  `gzip` |
+| Header | Needed | Value |
+|:------|:------|:------|
+| Content-Type | mandatory | `application/graphql` or `application/json` |
+| Content-Encoding  | optional | `gzip` to send compressed data |
+| Accept-Encoding  |  optional | `gzip` to enabled data compression on response|
+| X-Dgraph-AccessToken | if ``ACL`` is enabled | pass the access token you got in the login response to access predicates protected by an ACL|
+| X-Auth-Token | if ``anonymoous access`` is disabled |Admin Key or Client key|
+| your application header | if GraphQL ``Dgraph.Authorization`` is set | valid JWT used by @auth directives |
 </div>
-To use data compression for requests and POST gzip-compressed data:
-- set HTTP header `Content-Encoding` to `gzip`. 
+<br>
 
-To use data compression for responses:
-- set the HTTP header `Accept-Encoding` to `gzip`.
+Refer to GraphQL [security]({{< relref "graphql/security" >}}) settings for explanations about ``anonymoous access`` and ``Dgraph.Authorization`` and the configuration of an application header.
+
+
 
 ### Payload format
 POST requests sent with the Content-Type header `application/graphql` must have a POST body content as a GraphQL query string. For example, the following is a valid POST body for a query:
