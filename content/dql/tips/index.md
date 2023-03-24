@@ -1,6 +1,6 @@
 +++
 title = "DQL: Tips and Tricks"
-weight = 5
+weight = 7
 [menu.main]
   identifier = "tips"
   parent = "dql"
