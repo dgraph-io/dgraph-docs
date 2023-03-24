@@ -1,10 +1,9 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
 title = "Overview"
 weight = 1
 [menu.main]
     parent = "cloud-api"
-    identifier = "Overview"
+    identifier = "cloud-api-overview"
 +++
 
 Dgraph Cloud now includes an API so you can programmatically launch and manage your Cloud backups.

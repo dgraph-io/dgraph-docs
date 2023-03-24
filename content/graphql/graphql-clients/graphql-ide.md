@@ -1,9 +1,9 @@
 +++
 title = "GraphQL IDEs"
 description = "Dgraph"
-weight = 3
+weight = 2
 [menu.main]
-    parent = "api"
+    parent = "graphql-clients"
     name = "GraphQL IDEs"
 +++
 
