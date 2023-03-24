@@ -4,6 +4,7 @@ title = "Overview"
 weight = 1
 [menu.main]
     parent = "clients"
+    identifier = "clients-overview"
 +++
 
 ## Implementation

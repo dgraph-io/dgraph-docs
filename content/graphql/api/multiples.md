@@ -3,7 +3,8 @@ title = "Multiple GraphQL Operations in a Request"
 description = "GraphQL requests can contain one or more operations. Operations include query, mutation, or subscription."
 weight = 5
 [menu.main]
-    parent = "api"
+    parent = "graphql-http"
+    identifier = "graphql-http-multiple"
     name = "Multiple GraphQL Operations in a Request"
 +++
 
