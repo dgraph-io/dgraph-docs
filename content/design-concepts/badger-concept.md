@@ -1,3 +1,10 @@
++++
+date = "2017-03-27:12:00:00Z"
+title = "Badger (concept)"
+weight = 20
+[menu.main]
+    parent = "design-concepts"
++++
 
 ##  Badger
 [Badger](https://github.com/dgraph-io/badger) is a key-value store developed and maintained by Dgraph. It is also open source, and it is the backing store for Dgraph data. 

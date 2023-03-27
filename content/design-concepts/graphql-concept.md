@@ -1,5 +1,11 @@
 
-
++++
+date = "2017-03-27:12:00:00Z"
+title = "GraphQL (concept)"
+weight = 70
+[menu.main]
+    parent = "design-concepts"
++++
 ## GraphQL
  `GraphQL` is a query and update standard defined at [GraphQL.org](https://graphql.org/). `GraphQL` is natively supported by Dgraph, without requiring additional servers, data mappings or resolvers. Typically, "resolving" a data field in GraphQL simply corresponds to walking that relationship in Dgraph.
  

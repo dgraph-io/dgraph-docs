@@ -1,6 +1,14 @@
-## Queries
++++
+date = "2017-03-27:12:00:00Z"
+title = "Query Process (concept)"
+weight = 150
+[menu.main]
+    parent = "design-concepts"
++++
 
-Let's understand how query execution works, by looking at an example.
+## Query Processing
+
+To understand how query execution works, look at an example.
 
 ```
 {

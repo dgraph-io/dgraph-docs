@@ -1,11 +1,21 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
-title = "Transactions: FAQ"
-weight = 1
+date = "2017-03-27:12:00:00Z"
+title = "ACID Transactions (concept)"
+weight = 190
 [menu.main]
     parent = "design-concepts"
 +++
 
+## ACID Transactions
+ACID is an acronym for
+* Atomic
+* Consistent
+* Isolated
+* Durable
+
+If these properties are maintained, there is a guarantee that data updates will not be lost, corrupted or unpredictable. Broadly, an ACID database safely and reliably stores data, but other databases have failure modes where data can be lost or corrupted.
+
+## ACID in Dgraph 
 Dgraph supports distributed ACID transactions through snapshot isolation and the RAFT consensus protocol. Dgraph is fully transactional, and is tested via Jepsen tests, which is a gold standard to verify transactional consistency.
 
 Dgraph ensure snapshot isolation plus realtime safety: if transaction T1 commits before T2 begins, than the commit timestamp of T1 is strictly less than the start timestamp of T2. This ensures that the sequence of writes on shared data by many processes is reflected in database state.

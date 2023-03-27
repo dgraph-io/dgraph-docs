@@ -1,3 +1,10 @@
++++
+date = "2017-03-27:12:00:00Z"
+title = "Posting List and Tablet (concept)"
+weight = 130
+[menu.main]
+    parent = "design-concepts"
++++
 ## Posting Lists and Tablets
 Posting lists and tablets are internal storage mechanisms and are generally hidden from users or developers, but logs, core product code, blog posts and discussions about Dgraph may use the terms "posting list" and "tablet."
 

@@ -1,12 +1,12 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
-title = "RAFT"
-weight = 5
+date = "2017-03-27:12:00:00Z"
+title = "RAFT (concept)"
+weight = 160
 [menu.main]
     parent = "design-concepts"
 +++
 
-Dgraph uses RAFT whenever consensus among a distribued set of servers is required, such as ensuring that a transaction has been properly committed, or determining the proper timestamp for a read or write.
+Dgraph uses RAFT whenever consensus among a distribued set of servers is required, such as ensuring that a transaction has been properly committed, or determining the proper timestamp for a read or write. Each zero or alpha `group` uses raft to elect leaders.
 
 This section aims to explain the RAFT consensus algorithm in simple terms. The idea is to give you
 just enough to make you understand the basic concepts, without going into explanations about why it
