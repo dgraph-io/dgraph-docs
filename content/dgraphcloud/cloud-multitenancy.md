@@ -55,7 +55,7 @@ Namespaces are protected via ACLs. You need to create a user with username & pas
     
 
 4. You have the access token which you need to pass it in `X-Dgraph-AccessToken` header.
-5. On client side you will need to use the above mutation programatically to generate the access token for your namespace. 
+5. On client side you will need to use the above mutation programmatically to generate the access token for your namespace. 
 6. If you are using a [dgraph client](https://dgraph.io/docs/clients/) you need to set the username & password and the client handles fetching the token & refresh logic for you. 
 Note - Most of the dgraph clients will have a special method to login to a specific namespace. 
 

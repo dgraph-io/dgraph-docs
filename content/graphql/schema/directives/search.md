@@ -355,7 +355,7 @@ queryHotel(filter: {
     location: { 
         near: {
             coordinate: {
-                latitute: 37.771935, 
+                latitude: 37.771935, 
                 longitude: -122.469829
             }, 
             distance: 1000

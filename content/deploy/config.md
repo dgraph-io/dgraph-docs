@@ -82,7 +82,7 @@ option-a=value;option-b=value`) as follows:
 {
   "<superflag-name>": {
     "option-a": "value",
-    "opton-b": "value"
+    "option-b": "value"
   }
 }
 ```
@@ -136,7 +136,7 @@ option-a=value;option-b=value`) as follows:
 ```yaml
 <superflag-name>:
  option-a: value
- opton-b: value
+ option-b: value
 ```
 
 The following example YAML config file (`config.yml`) uses *kebab-case*:

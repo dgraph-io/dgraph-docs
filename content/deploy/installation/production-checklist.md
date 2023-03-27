@@ -64,7 +64,7 @@ Recommended disk sizes for Dgraph Zero and Dgraph Alpha:
 
 * Dgraph Zero: 200 GB to 300 GB. Dgraph Zero stores cluster metadata information and maintains a write-ahead log for cluster operations.
 * Dgraph Alpha: 250 GB to 750 GB. Dgraph Alpha stores database data, including the schema, indices, and the data values. It maintains a write-ahead log of changes to the database. Your cloud provider may provide better disk performance based on the volume size.
-* If you plan to store over 1.1TB per Dgraph Alpah instance, you must increase either the MaxLevels or TableSizeMultiplier. 
+* If you plan to store over 1.1TB per Dgraph Alpha instance, you must increase either the MaxLevels or TableSizeMultiplier. 
 
 Additional recommendations:
 

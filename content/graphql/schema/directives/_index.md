@@ -47,7 +47,7 @@ Reference: [Generate directive]({{< relref "generate.md" >}})
 ### @hasInverse
 
 `@hasInverse` is used to setup up two way edges such that adding a edge in
-one direction automically adds the one in the inverse direction.
+one direction automatically adds the one in the inverse direction.
 
 Reference: [Linking nodes in the graph]({{< relref "graph-links.md" >}})
 
@@ -103,7 +103,7 @@ Reference: [Skip directive]({{< relref "skip-include.md" >}})
 
 ### @withSubscription
 
-`@withSubscription` directive when applied on a type, generates subsciption queries for it.
+`@withSubscription` directive when applied on a type, generates subscription queries for it.
 
 Reference: [Subscriptions]({{< relref "subscriptions.md" >}})
 

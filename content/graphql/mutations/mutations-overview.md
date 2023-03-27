@@ -197,7 +197,7 @@ mutation {
         {
           "address": "United Street",
           "members": [
-            { "dogRef": { "category": Mammal, "breed": "German Shephard"} },
+            { "dogRef": { "category": Mammal, "breed": "German Shepherd"} },
             { "parrotRef": { "category": Bird, "repeatsWords": ["squawk"]} },
             { "humanRef": { "name": "Han Solo"} }
           ]
