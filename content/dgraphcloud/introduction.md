@@ -85,4 +85,4 @@ Please see the following topics to learn more about how to use Dgraph Cloud:
 You might also be interested in:
 
 - [Dgraph GraphQL Schema Reference]({{< relref "graphql/schema" >}}), which lists all the types and directives supported by Dgraph
-- [Dgraph GraphQL API Reference]({{< relref "graphql/api" >}}), which serves as a guide to using your new `/graphql` endpoint
+- [Dgraph GraphQL API Reference]({{< relref "graphql-clients" >}}), which serves as a guide to using your new `/graphql` endpoint

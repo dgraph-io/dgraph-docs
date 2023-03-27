@@ -1,23 +1,25 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
-title = "Overview"
-weight = 1
+date = "2023-03-23T22:25:17+11:00"
+title = "Client Libraries"
+description = "Dgraph client libraries in various programming languages."
+weight = 7
+aliases = ["/clients"]
 [menu.main]
-    parent = "clients"
+  identifier = "clients"
+  parent = "dql"
 +++
 
-## Implementation
+Dgraph client libraries allow you to run DQL transactions, queries and mutations in various programming languages.
 
-Clients can communicate with the server in two different ways:
+If you are in interested in clients for GraphQL endpoint, please refer to [GraphQL clients]({{< relref "graphql-clients">}}) section.
 
-- **Via [gRPC](http://www.grpc.io/):** internally this uses [Protocol
+
+Go, python, Java, C# and JavaScript clients are using **[gRPC](http://www.grpc.io/):** protocol and [Protocol
   Buffers](https://developers.google.com/protocol-buffers) (the proto file
 used by Dgraph is located at
 [api.proto](https://github.com/dgraph-io/dgo/blob/master/protos/api.proto)).
 
-- **Via HTTP:** there are various endpoints, each accepting and returning JSON.
-  There is a one to one correspondence between the HTTP endpoints and the gRPC
-service methods.
+A JavaScript client  using **HTTP:** is also available.
 
 
 It's possible to interface with Dgraph directly via gRPC or HTTP. However, if a
@@ -53,3 +55,7 @@ transactions conflict when both transactions:
 - write a value that conflicts on an index for a predicate with `@upsert` set in the schema (see [upserts]({{< relref "howto/upserts.md">}})).
 
 When a transaction is aborted, all its changes are discarded.  Transactions can be manually aborted.
+
+
+### In this section
+

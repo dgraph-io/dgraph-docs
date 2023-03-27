@@ -1,7 +1,7 @@
 +++
 title = "Quick Start"
 weight = 1
-aliases = ["/get-started-old"]
+aliases = ["/get-started"]
 [menu.main]
   name = "Quick Start"
   identifier = "get-started"
@@ -175,7 +175,7 @@ In these five steps, you set up Dgraph, added some data, visualized it as a grap
 - Take the [Tour](https://dgraph.io/tour/) for a guided tour of how to write queries in Dgraph.
 - A wider range of queries can also be found in the
 [Query Language]({{< relref "query-language/_index.md" >}}) reference.
-- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to
+- Go to [Clients]({{< relref "clients" >}}) to see how to
 communicate with Dgraph from your application.
 
 ## Need Help
