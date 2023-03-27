@@ -14,7 +14,7 @@ In this step, we will add Firebase authentication per the sample [Todo app with 
 
 Let's start by going to the  [Firebase console](https://console.firebase.google.com/u/0/project/_/authentication/users?pli=1) and create a new project (Todo-app).
 
-In the **Authentication** section, enable `Email/Password` signin. You can add a custom domain to `Authorized domains` below according to where you want to deploy your app. By defaut localhost is added to the list. 
+In the **Authentication** section, enable `Email/Password` signin. You can add a custom domain to `Authorized domains` below according to where you want to deploy your app. By default localhost is added to the list. 
 
 ![Authentication Section](/images/graphql/tutorial/todo/firebase-domains.png)
 

@@ -85,7 +85,7 @@ A nested block may contain another nested block, and such at any level.
  `<https://myschema.org#name>
  `
 
-### Formating options
+### Formatting options
 Dgraph returns the attributes and relationships that you specified in the query. You can specify an alternate name for the result by using [aliases]({{< relref "alias.md" >}}).
 
 You can flatten the response structure at any level using [@normalize]({{< relref "query-language/normalize-directive.md" >}}) directive.
@@ -98,7 +98,7 @@ Root criteria and filters are using [functions]({{< relref "functions.md" >}}) a
 
 Dgraph offers functions for
 - testing string attributes
-  - term matching : [allofterms]({{< relref "functions.md#allofterms" >}}) ,[anyofterms]({{< relref "functions.md#anyofterms" >}})
+  - term matching : [allofterms]({{< relref "functions.md#allofterms" >}}), [anyofterms]({{< relref "functions.md#anyofterms" >}})
   - regular Expression : [regexp]({{< relref "functions.md#regular-expressions" >}})
   - fuzzy match : [match]({{< relref "functions.md#fuzzy-matching" >}})
   - full-text search : [alloftext]({{< relref "functions.md#full-text-search" >}})
@@ -151,7 +151,7 @@ When you specify nested blocks and filters you basically describe a way to trave
 Queries with nested blocks with filters may be turned into pattern matching using [@cascade]({{< relref "query-language/cascade-directive.md" >}}) directive : nodes that don’t have all attributes and all relationships specified in the query at any sub level are not considered in the result. So only nodes "matching" the complete query structure are returned.
 
 ### Graph algorithms
-The query can ask for the shortest path between a source (from) node and destination (to) node using the [shortest]({{< relref "query-language/kshortest-path-quries.md" >}}) query block.
+The query can ask for the shortest path between a source (from) node and destination (to) node using the [shortest]({{< relref "query-language/kshortest-path-queries.md" >}}) query block.
 
 ### Comments
 Anything on a line following a `#` is a comment

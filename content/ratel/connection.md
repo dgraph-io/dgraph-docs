@@ -22,7 +22,7 @@ The list also has an icon which indicates the version of the cluster running:
 
 ## URL Input box
 
-In this box you add a valid Dgraph Alpha address. When you click on `Connect` Ratel will try to stablish a connection with the cluster. After Ratel has stablished a connection (all icons are green), click on the `Continue` button.
+In this box you add a valid Dgraph Alpha address. When you click on `Connect` Ratel will try to stablish a connection with the cluster. After Ratel has established a connection (all icons are green), click on the `Continue` button.
 
 Under the input box you have tree icons which gives you the status of the connection.
 

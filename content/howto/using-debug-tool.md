@@ -38,7 +38,7 @@ Debug the p directory, not opening in read-only mode. This is typically necessar
 $ dgraph debug --postings ./p --readonly=false
 ```
 
-Debug the p directory, only outputing the keys for the predicate `name`.
+Debug the p directory, only outputting the keys for the predicate `name`.
 
 ```sh
 $ dgraph debug --postings ./p --readonly=false --pred=name
