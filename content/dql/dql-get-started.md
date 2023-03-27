@@ -1,7 +1,7 @@
 +++
 title = "Quick Start"
 weight = 1
-aliases = ["/get-started-old"]
+aliases = ["/get-started"]
 [menu.main]
   name = "Quick Start"
   identifier = "get-started"
