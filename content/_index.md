@@ -67,7 +67,7 @@ aliases = ["/contribute"]
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-play" aria-hidden="true"></i></div>
-    <a href="{{< relref "clients/_index.md">}}">
+    <a href="{{< relref "clients">}}">
       <h2>gRPC and HTTP Clients</h2>
       <p>
         Interact with a Dgraph cluster using libraries in various programming languages.

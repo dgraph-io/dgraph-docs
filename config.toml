@@ -16,8 +16,9 @@ lineNoStart = 1
 lineNos = false
 lineNumbersInTable = true
 noClasses = true
-style = "vs"
+style = "emacs"
 tabWidth = 4
+highlight_style = "solarized-dark"
 
 [markup.tableOfContents]
 endLevel = 4
