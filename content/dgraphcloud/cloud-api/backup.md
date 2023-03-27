@@ -1,6 +1,6 @@
 +++
 title = "Backup"
-weight = 3
+weight = 5
 [menu.main]
     parent = "cloud-api"
     identifier = "backup"

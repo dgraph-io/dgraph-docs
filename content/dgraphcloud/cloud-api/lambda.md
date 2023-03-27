@@ -1,6 +1,6 @@
 +++
 title = "Lambda"
-weight = 3
+weight = 6
 [menu.main]
     parent = "cloud-api"
     identifier = "lambda"

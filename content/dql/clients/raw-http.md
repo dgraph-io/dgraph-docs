@@ -1,14 +1,12 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Raw HTTP"
-weight = 8
+weight = 7
 [menu.main]
     parent = "clients"
 +++
 
-{{% notice "warning" %}}
-Raw HTTP needs more chops to use than our language clients. We wrote this guide to help you build a Dgraph client in a new language.
-{{% /notice %}}
+
 
 It's also possible to interact with Dgraph directly via its HTTP endpoints.
 This allows clients to be built for languages that don't have access to a
@@ -17,7 +15,9 @@ working gRPC implementation.
 In the examples shown here, regular command line tools such as `curl` and
 [`jq`](https://stedolan.github.io/jq/) are used. However, the real intention
 here is to show other programmers how they could implement a client in their
-language on top of the HTTP API. For an example of how to build a client on top
+language on top of the HTTP API. 
+
+For an example of how to build a client on top
 of gRPC, refer to the implementation of the Go client.
 
 Similar to the Go client example, we use a bank account transfer example.
@@ -285,7 +285,7 @@ The result:
 ## Running read-only queries
 
 You can set the query parameter `ro=true` to `/query` to set it as a
-[read-only]({{< relref "clients/go.md#read-only-transactions" >}}) query.
+[read-only]({{< relref "go.md#read-only-transactions" >}}) query.
 
 
 ```sh
@@ -302,7 +302,7 @@ $ curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?ro=true"
 ## Running best-effort queries
 
 You can set the query parameter `be=true` to `/query` to set it as a
-[best-effort]({{< relref "clients/go.md#read-only-transactions" >}}) query.
+[best-effort]({{< relref "go.md#read-only-transactions" >}}) query.
 
 
 ```sh
