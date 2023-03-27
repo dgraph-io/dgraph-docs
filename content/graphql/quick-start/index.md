@@ -1,7 +1,7 @@
 +++
 title = "Quick Start"
 description = "Go from an empty Dgraph database to a running GraphQL API in just one step : just define the schema of your graph and how you’d like to search it; Dgraph does the rest."
-weight = 10
+weight = 1
 [menu.main]
   name = "Quick Start"
   identifier = "graphql-quick-start"

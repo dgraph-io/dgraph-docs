@@ -1,9 +1,10 @@
 +++
 title = "GraphQL API"
 description = "Generate a GraphQL API and a graph backend from a single GraphQL schema."
+weight = 3
 [menu.main]
   identifier = "graphql"
-  weight = 3
+
 +++
 
 Dgraph lets you generate a GraphQL API and a graph backend from a single [GraphQL schema]({{< relref "schema/_index.md">}}), no resolvers or custom queries are needed. Dgraph automatically generates the GraphQL operations for [queries]({{< relref "queries/_index.md">}}) and [mutations]({{< relref "mutations/_index.md">}}) 

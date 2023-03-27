@@ -1,9 +1,10 @@
 +++
 title = "Client API"
+weight = 9
 [menu.main]
   identifier = "api"
   parent = "graphql"
-  weight = 80
+
 +++
 
 How to use the GraphQL API. 
