@@ -13,9 +13,9 @@ As Dgraph serves a [spec-compliant GraphQL](https://graphql.github.io/graphql-sp
 - Postman
 - Insomnia
 - GraphiQL
-- ...
+- VSCode with GraphQL extensions
 
-### IDE setup
+### General IDE setup
 - Copy Dgraph GraphQL endpoint. 
 - Set the security header if needed ( <TO DO explain>)
 - use IDE instrospection capability
