@@ -15,21 +15,22 @@ weight = 1
 ### Headers
 
 
-<div class="tablenoheaders">
+<div >
 
-| Header | Needed | Value |
+| Header | Optionality | Value |
 |:------|:------|:------|
 | Content-Type | mandatory | `application/graphql` or `application/json` |
 | Content-Encoding  | optional | `gzip` to send compressed data |
 | Accept-Encoding  |  optional | `gzip` to enabled data compression on response|
 | X-Dgraph-AccessToken | if ``ACL`` is enabled | pass the access token you got in the login response to access predicates protected by an ACL|
-| X-Auth-Token | if ``anonymoous access`` is disabled |Admin Key or Client key|
-| your application header | if GraphQL ``Dgraph.Authorization`` is set | valid JWT used by @auth directives |
+| X-Auth-Token | if ``anonymous access`` is disabled |Admin Key or Client key|
+| header as set in ``Dgraph.Authorization`` | if GraphQL ``Dgraph.Authorization`` is set | valid JWT used by @auth directives |
 </div>
 <br>
 
-Refer to GraphQL [security]({{< relref "graphql/security" >}}) settings for explanations about ``anonymoous access`` and ``Dgraph.Authorization`` and the configuration of an application header.
-
+{{% notice "note" %}}
+Refer to GraphQL [security]({{< relref "graphql/security" >}}) settings for explanations about ``anonymous access`` and ``Dgraph.Authorization``.
+{{% /notice %}}
 
 
 ### Payload format
