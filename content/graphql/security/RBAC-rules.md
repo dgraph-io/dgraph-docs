@@ -75,9 +75,9 @@ For example, given the following JWT payload
 }
 ```
 
-The authorization rules can use ``$ROLE`` (if `https://xyz.io/jwt/claims` is declared as the namespace to use ) and also ``$USEROLE`` or ``$email``.
+The authorization rules can use ``$ROLE`` (if `https://xyz.io/jwt/claims` is declared as the namespace to use ) and also ``$USERROLE`` or ``$email``.
 
-In cases where the same claim is present in the namespace and at the root level, the claim value in the namespacetakes precedence.
+In cases where the same claim is present in the namespace and at the root level, the claim value in the namespace takes precedence.
 
 ## `@auth` on Interfaces
 

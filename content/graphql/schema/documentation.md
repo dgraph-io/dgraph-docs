@@ -50,7 +50,7 @@ getTopAuthors(id: ID!): [Author] @custom(http: {
   })
 }
 ```
-The screenshots below shows how the documentation appear in a Grapqhl API explorer.<br>
+The screenshots below shows how the documentation appear in a Graphql API explorer.<br>
 
 {{% load-img "/images/graphql/authors1.png" "Schema Documentation On Types" %}}
 <p style="text-align: left;">Schema Documentation on Types</p>

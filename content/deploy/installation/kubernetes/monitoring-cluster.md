@@ -15,7 +15,7 @@ You can use Helm to install [kube-prometheus-stack](https://github.com/prometheu
 ### Before you begin:
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-* Ensure that you have a production-ready Kubernetes cluster with atleast three worker nodes running in a cloud provider of your choice.
+* Ensure that you have a production-ready Kubernetes cluster with at least three worker nodes running in a cloud provider of your choice.
 * Install [Helm](https://helm.sh/docs/intro/install/)
 
 ### Install using Helm Chart

@@ -61,7 +61,7 @@ There are many tools available to convert CSV to JSON. You can import large data
     $ cat names.json | jq '{ set: . }'
     ```
 
-    An output simialr to this appears:
+    An output similar to this appears:
     ```json
     {
       "set": [

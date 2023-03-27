@@ -28,7 +28,7 @@ Ensure that you have installed:
     ```sh
        docker run --name <CONTAINER_NAME> -d -p "8080:8080" -p "9080:9080" -v <DGRAPH_DATA_PATH>:/dgraph dgraph/standalone:latest
     ```
-1. Optionaly launch [Ratel UI]({{< relref "ratel/overview.md" >}}) using the dgraph/ratel docker image :
+1. Optionally launch [Ratel UI]({{< relref "ratel/overview.md" >}}) using the dgraph/ratel docker image :
     ``` sh
     docker run --name ratel  -d -p "8000:8000"  dgraph/ratel:latest
     ```
@@ -126,7 +126,7 @@ You can install Dgraph using the Docker Compose on a system hosted on any of the
 
 1. Add a list of IPs allowed for Dgraph so that you can create the schema. Use an     editor of your choice and add the `<IP_ADDRESS>` of the local host in `docker-compose.yml` file:
     ```txt
-    # This Docker Compose file can be used to quickly bootup Dgraph Zero
+    # This Docker Compose file can be used to quickly boot up Dgraph Zero
     # and Alpha in different Docker containers.
     # It mounts /tmp/data on the host machine to /dgraph within the
     # container. You will need to change /tmp/data to a more appropriate location.

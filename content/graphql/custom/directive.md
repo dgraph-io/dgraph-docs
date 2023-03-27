@@ -148,7 +148,7 @@ type User {
 
 Note that:
 
-* Fields or arguments used in the path of a URL, such as `username` or `authorID` in the exapmles above, must be marked as non-nullable (have `!` in their type); whereas, those used in parameters, such as `numToFetch`, can be nullable.
+* Fields or arguments used in the path of a URL, such as `username` or `authorID` in the examples above, must be marked as non-nullable (have `!` in their type); whereas, those used in parameters, such as `numToFetch`, can be nullable.
 * Currently, only scalar fields or arguments are allowed to be used in URLs or bodies; though, see body below, this doesn't restrict the objects you can construct and pass to custom logic functions.
 * Currently, the body can only contain alphanumeric characters in the key and other characters like `_` are not yet supported.
 * Currently, constant values are not also not allowed in the body template. This would soon be supported.

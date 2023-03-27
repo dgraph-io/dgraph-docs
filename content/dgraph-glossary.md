@@ -44,7 +44,7 @@ A mutation is a request to modify server-side data. It is covering insert, updat
 ### Node ###
 An node is "a thing" or an object of the business domain. For every node, Dgraph stores and maintains a universal identifier [UID](#uid), a list of properties and the [relationships](#relationship) this node has with other nodes.
 
-Node is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. See for example [Aplha node](#alpha).
+Node is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. See for example [Alpha node](#alpha).
 
 ### Predicate ###
 In [RDF](#RDF) terminology, a predicate is the smallest piece of information about an object. A predicate can hold a literal value or can describe a relation to another entity :
@@ -64,7 +64,7 @@ Dgraph supports RDF format to create, import and export data. Note that Dgraph a
 A relationship is simply an information that a node is related to another node. A relationship is directed from one node to another and has a name. It may also have properties usually used to store quantitative information about the relation, such as weigh or cost. In Dgraph the properties of a relationship are [facets](#facets).
 
 ### Sharding ###
-Sharding is a database architecture pattern to achieve horizontal scaling allowing near-limitless scalability. This allows for data to be split and stored in multiple data nodes or servers and for nodes to be added when required to share the load. Dgraph colocates data per predicate, an approach referred to as 'predicate sharding'.
+Sharding is a database architecture pattern to achieve horizontal scaling allowing near-limitless scalability. This allows for data to be split and stored in multiple data nodes or servers and for nodes to be added when required to share the load. Dgraph collocates data per predicate, an approach referred to as 'predicate sharding'.
 
 ### Triple ###
 Because RDF statements consist of three elements `<subject> <predicate> <object>` they are called triples.
