@@ -6,7 +6,7 @@ weight = 12
     parent = "howto"
 +++
 
-This how-to guide provides an example on how to handle concurrent modifications using a multi-threaded Java Program. The example demonstrates [transaction]({{< relref "clients-overview.md#transactions" >}}) conflicts in Dgraph.
+This how-to guide provides an example on how to handle concurrent modifications using a multi-threaded Java Program. The example demonstrates [transaction]({{< relref "clients#transactions" >}}) conflicts in Dgraph.
 
 Steps to run this example are as follows.
 
