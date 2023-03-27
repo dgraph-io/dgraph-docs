@@ -1,55 +1,20 @@
 +++
-title = "Requests and Responses"
+title = "HTTP Response"
 description = "Get the structure for GraphQL requests and responses, how to enable compression for them, and configuration options for extensions."
-weight = 2
+weight = 3
 [menu.main]
-    parent = "api"
-    name = "Requests and Responses"
+    parent = "graphql-endpoint"
+    identifier = "graphql-response"
+    name = "HTTP Response"
 +++
 
-In this section, we'll cover the structure for GraphQL requests and responses, how to enable compression for them, and configuration options for extensions.
+<div class="api">
 
-## Requests
 
-GraphQL requests can be sent via HTTP POST or HTTP GET requests.
+### Responses
+All responses, including errors, always return HTTP 200 OK status codes.
 
-POST requests sent with the Content-Type header `application/graphql` must have a POST body content as a GraphQL query string. For example, the following is a valid POST body for a query:
-
-```graphql
-query {
-  getTask(id: "0x3") {
-    id
-    title
-    completed
-    user {
-      username
-      name
-    }
-  }
-}
-```
-
-POST requests sent with the Content-Type header `application/json` must have a POST body in the following JSON format:
-
-```json
-{
-  "query": "...",
-  "operationName": "...",
-  "variables": { "var": "val", ... }
-}
-```
-
-GET requests must be sent in the following format. The query, variables, and operation are sent as URL-encoded query parameters in the URL.
-
-```
-http://localhost:8080/graphql?query={...}&variables={...}&operation=...
-```
-
-In either request method (POST or GET), only `query` is required. `variables` is only required if the query contains GraphQL variables: i.e. the query starts like `query myQuery($var: String)`. `operationName` is only required if there are multiple operations in the query; in which case, operations must also be named.
-
-## Responses
-
-GraphQL responses are in JSON. Every response is a JSON map, and will include JSON keys for `"data"`, `"errors"`, or `"extensions"` following the GraphQL specification. They follow the following formats.
+The response is a JSON map including the fields `"data"`, `"errors"`, or `"extensions"` following the GraphQL specification. They follow the following formats.
 
 Successful queries are in the following format:
 
@@ -68,9 +33,8 @@ Queries that have errors are in the following format.
 }
 ```
 
-All responses, including errors, always return HTTP 200 OK status codes. An error response will contain an `"errors"` field.
 
-### "data" field
+#### "data" field
 
 The "data" field contains the result of your GraphQL request. The response has exactly the same shape as the result. For example, notice that for the following query, the response includes the data in the exact shape as the query.
 
@@ -108,7 +72,7 @@ Response:
 }
 ```
 
-### "errors" field
+#### "errors" field
 
 The "errors" field is a JSON list where each entry has a `"message"` field that describes the error and optionally has a `"locations"` array to list the specific line and column number of the request that points to the error described. For example, here's a possible error for the following query, where `getTask` needs to have an `id` specified as input:
 
@@ -137,8 +101,23 @@ Response:
   ]
 }
 ```
+#### Error propagation
+Before returning query and mutation results, Dgraph uses the types in the schema to apply GraphQL [value completion](https://graphql.github.io/graphql-spec/June2018/#sec-Value-Completion) and [error handling](https://graphql.github.io/graphql-spec/June2018/#sec-Errors-and-Non-Nullability).  That is, `null` values for non-nullable fields, e.g. `String!`, cause error propagation to parent fields.  
 
-### "extensions" field
+In short, the GraphQL value completion and error propagation mean the following.
+
+* Fields marked as nullable (i.e. without `!`) can return `null` in the json response.
+* For fields marked as non-nullable (i.e. with `!`) Dgraph never returns null for that field.
+* If an instance of type has a non-nullable field that has evaluated to null, the whole instance results in null.
+* Reducing an object to null might cause further error propagation.  For example, querying for a post that has an author with a null name results in null: the null name (`name: String!`) causes the author to result in null, and a null author causes the post (`author: Author!`) to result in null.
+* Error propagation for lists with nullable elements, e.g. `friends [Author]`, can result in nulls inside the result list.
+* Error propagation for lists with non-nullable elements results in null for `friends [Author!]` and would cause further error propagation for `friends [Author!]!`.
+
+Note that, a query that results in no values for a list will always return the empty list `[]`, not `null`, regardless of the nullability.  For example, given a schema for an author with `posts: [Post!]!`, if an author has not posted anything and we queried for that author, the result for the posts field would be `posts: []`.  
+
+A list can, however, result in null due to GraphQL error propagation.  For example, if the definition is `posts: [Post!]`, and we queried for an author who has a list of posts.  If one of those posts happened to have a null title (title is non-nullable `title: String!`), then that post would evaluate to null, the `posts` list can't contain nulls and so the list reduces to null.
+
+#### "extensions" field
 
 The "extensions" field contains extra metadata for the request with metrics and trace information for the request.
 
@@ -195,14 +174,13 @@ Here's an example of a query response with the extensions field:
 }
 ```
 
-### Turn off extensions
+**Turn off extensions**
 
-Extensions are returned in every response. These are completely optional. If you'd like to turn off extensions, you can set the
+To turn off extensions set the
 `--graphql` superflag's `extensions` option to false (`--graphql extensions=false`)
 when running Dgraph Alpha.
+</div>
 
-## Compression
 
-By default, requests and responses are not compressed. Typically, enabling compression saves from sending additional data to and from the backend while using a bit of extra processing time to do the compression.
 
-You can turn on compression for requests and responses by setting the standard HTTP headers. To send compressed requests, set HTTP header `Content-Encoding` to `gzip` to POST gzip-compressed data. To receive compressed responses, set the HTTP header `Accept-Encoding` to `gzip` in your request.
+

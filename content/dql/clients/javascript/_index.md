@@ -1,6 +1,6 @@
 +++
 title = "JavaScript"
-weight = 5
+weight = 3
 [menu.main]
   identifier = "javascript"
   parent = "clients"
