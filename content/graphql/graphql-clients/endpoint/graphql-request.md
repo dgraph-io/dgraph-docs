@@ -115,7 +115,7 @@ If a request only has a single query operation, then you can use the short-hand 
 }
 ```
 
-This simplfies queries when a query doesn't require an operation name or [variables](/graphql/api/variables).
+This simplifies queries when a query doesn't require an operation name or [variables](/graphql/api/variables).
 
 ## Multiple Operations
 
