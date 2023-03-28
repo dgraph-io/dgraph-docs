@@ -4,15 +4,18 @@ description = "Dgraph Query Language (DQL) includes support for custom logic. Sp
 weight = 6
 [menu.main]
     parent = "custom"
+	identifier = "custom-dql"
 +++
 
-Dgraph Query Language (DQL - formerly GraphQL+-) is rapidly evolving, and now
-includes support for custom logic. You can specify the DQL (aka GraphQL+-) query
-you want to execute while running a custom GraphQL query, and Dgraph's GraphQL
-API will execute that for you.
 
-DQL lets you build custom logic that goes beyond what is possible with the
-current GraphQL CRUD API.
+Dgraph Query Language ([DQL]({{<relref "dql">}})) lets you build custom resolvers logic that goes beyond what is possible with the current GraphQL CRUD API.
+
+To define a DQL custom query, use the notation:
+```graphql 
+ @custom(dql: """
+	...
+	""")
+```
 
 {{% notice "tip" %}}
 Since v21.03, you can also [subscribe to custom DQL](/graphql/subscriptions/#subscriptions-to-custom-dql) queries.
