@@ -11,7 +11,7 @@ The completion script is code that uses the builtin bash command complete to def
 
 ## Before you begin
 
-*  [Install Dgraph]({{< relref "/installation/download" >}}#buil-and-install).
+*  [Install Dgraph]({{< relref "download" >}}#build-and-install).
 *  Determine the shell you are running:
    ```bash
    echo $0
@@ -53,12 +53,12 @@ The completion script is code that uses the builtin bash command complete to def
    ```bash
    sed -i.bak '1d;2d' ~/dgraph-completion.sh
    ```
-1. Make the file executable by running the following command. You may require root user `sudo` previleges to run it:
+1. Make the file executable by running the following command. You may require root user `sudo` privileges to run it:
 
    ```bash
    chmod +x ~/dgraph-completion.sh
    ```
-1. Open the `.bashrc` file with any text editor. You might need `sudo` previliges to apply changes. For example:
+1. Open the `.bashrc` file with any text editor. You might need `sudo` privileges to apply changes. For example:
    ```bash
    nano ~/.bashrc
    ```

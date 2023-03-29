@@ -1,6 +1,6 @@
 +++
 title = "GraphQL on Existing Dgraph"
-weight = 13
+weight = 12
 [menu.main]
   identifier = "dgraph"
   parent = "graphql"
@@ -135,4 +135,4 @@ All the fields can be queried, irrespective of whether they use one language or 
 GraphQL won’t be able to query `Person.name@*` type of language tags because of the structural requirements of GraphQL.
 {{% /notice %}}
 
-To know more about language support in DQL, please refer to [this tutorial]({{< relref "/tutorial-4/index.md" >}}).
+

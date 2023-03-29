@@ -33,7 +33,7 @@ Export will usually return 3 files:
 * `g01.json.gz`: the data from your instance, which can be imported via live loader
 * `g01.schema.gz`: This file is the internal Dgraph schema. If you have set up your backend with a GraphQL schema, then you should be able to ignore this file.
 
-The following is an example of GraphQL query to check the status of the export and get the signed URLs for downloanding your export files.
+The following is an example of GraphQL query to check the status of the export and get the signed URLs for downloading your export files.
 
 ```graphql
 query {
@@ -91,7 +91,7 @@ mutation {
   }
 }
 ```
-3. Once done, you can now send the following GraqhQL mutation to get the `signedUrls` from where you can download your export files:
+3. Once done, you can now send the following GraphQL mutation to get the `signedUrls` from where you can download your export files:
 ```graphql
 query {
   exportStatus (
@@ -143,6 +143,7 @@ It is possible to import data into a Dgraph Cloud backend using [live loader](ht
 {{% notice "note" %}}
 The gRPC endpoint URL must have the string `.grpc.` added after the domain prefix. Without this change, Live Loader will not be able to find the endpoint.
 {{% /notice %}}
+
 
 3. Run the live loader as follows:
 

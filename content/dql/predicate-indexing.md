@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Predicate indexing"
 weight = 4
 [menu.main]
+    identifier = "dql-predicate-indexing"
     parent = "dql"
 +++
 
@@ -119,31 +120,31 @@ For existing data, Dgraph computes all reverse edges.  For data added after the 
 
 ```
 type Person {
-  name string
+  name
 }
 type Car {
-  regnbr string
-  owner Person
+  regnbr
+  owner
 }
-owner uid @reverse .
-regnbr string @index(exact) .
-name string @index(exact) .
+owner: uid @reverse .
+regnbr: string @index(exact) .
+name: string @index(exact) .
 ```
 
 This makes it possible to query Persons and their cars by using:
 ```
-q(func type(Person)) {
+q(func: type(Person)) {
   name
-  ~owner { name }
+  ~owner { regnbr }
 }
 ```
 To get a different key than `~owner` in the result, the query can be written with the wanted label
 (`cars` in this case):
 
 ```
-q(func type(Person)) {
+q(func: type(Person)) {
   name
-  cars: ~owner { name }
+  cars: ~owner { regnbr }
 }
 ```
 
@@ -158,7 +159,7 @@ _:p1 <name> "Mary" .
 _:p1 <dgraph.type> "Person" .
 _:c1 <regnbr> "ABC123" .
 _:c1 <dgraph.type> "Car" .
-_:c1 <owner> _:p1
+_:c1 <owner> _:p1 .
 ```
 
 ## Querying Schema

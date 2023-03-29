@@ -52,27 +52,12 @@ Release v21.03 includes the following superflags:
 * `--encryption`
 * `--graphql`
 * `--limit`
-* `--ludicrous`
 * `--raft`
 * `--security`
 * `--telemetry`
 * `--tls`
 * `--trace`
 * `--vault`
-
-For example, the following command that is valid in release v20.11 is no longer
-valid starting in release v21.03:
-
-```sh
-dgraph alpha --ludicrous_mode=true ludicrous_concurrency=16
-```
-
-Instead, you can express this command as follows starting in release v21.03:
-
-```sh
-
-dgraph alpha --ludicrous enabled=true; concurrency=16;
-```
 
 The following table maps Dgraph CLI flags from release v20.11 and earlier that
 have been replaced by superflags (and their options) in release v21.03. Any flags
@@ -144,14 +129,6 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`| Maximum number of nodes that can be returned in a query that uses the normalize directive |
 | `--mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`| Maximum number of nquads that can be inserted in a mutation request |
 
-### Ludicrous mode superflag
-
-| Old flag | Old type | New superflag and options | New type | Applies to | Notes |
-|---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--ludicrous`** | | | [Ludicrous Mode]({{< relref "deploy/ludicrous-mode.md" >}}) superflag  |
-| `--ludicrous_mode` | bool | `enabled` | bool |`alpha`| Enables Ludicrous mode |
-| `--ludicrous_concurrency` | int | `concurrency` | int |`alpha`| Number of concurrent threads to use in Ludicrous mode |
-
 ### Raft superflag
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
@@ -179,7 +156,7 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--tls`** | | | [TLS]({{< relref "deploy/tls-configuration.md" >}}) superflag  |
+| | | **`--tls`** | | | [TLS]({{< relref "tls-configuration.md" >}}) superflag  |
 | `--tls_cacert` | string | `ca-cert` | string |`alpha`, `zero`, `bulk`, `backup`, `live`| The CA cert file used to verify server certificates |
 | `--tls_use_system_ca` | bool | `use-system-ca` | bool |`alpha`, `zero`, `bulk`, `backup`, `live`| Include System CA with Dgraph Root CA |
 | `--tls_server_name` | string | `server-name` | string |`alpha`, `zero`, `bulk`, `backup`, `live`| Server name, used for validating the server’s TLS host name |
@@ -194,7 +171,7 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 
 | Old flag | Old type | New superflag and options | New type | Applies to | Notes |
 |---------:|:---------|---------:|:---------|:----:|:----:|
-| | | **`--trace`** | | | [Tracing]({{< relref "deploy/tracing.md" >}}) superflag  |
+| | | **`--trace`** | | | [Tracing]({{< relref "tracing.md" >}}) superflag  |
 | `--trace` | float64 | `ratio` | float64 |`alpha`, `zero`| The ratio of queries to trace |
 | `--jaeger.collector` | string | `jaeger` | string | `alpha`, `zero`| URL of Jaeger to send OpenCensus traces |
 | `--datadog.collector` | string | `datadog` | string | `alpha`, `zero`| URL of Datadog to send OpenCensus traces
@@ -397,10 +374,6 @@ Flags:
                                        query-timeout=0ms; Maximum time after which a query execution will fail. If set to 0, the timeout is infinite.
                                        txn-abort-after=5m; Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation.
                                     (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;")
-      --ludicrous string           Ludicrous options
-                                       concurrency=2000; The number of concurrent threads to use in Ludicrous mode.
-                                       enabled=false; Set enabled to true to run Dgraph in Ludicrous mode.
-                                    (default "enabled=false; concurrency=2000;")
       --my string                  addr:port of this server, so other Dgraph servers can talk to this.
   -o, --port_offset int            Value added to all listening port numbers. [Internal=7080, HTTP=8080, Grpc=9080]
   -p, --postings string            Directory to store posting lists. (default "p")
@@ -417,7 +390,7 @@ Flags:
                                        whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames you wish to whitelist for performing admin actions (i.e., --security "whitelist=144.142.126.254,127.0.0.1:127.0.0.3,192.168.0.0/16,host.docker.internal").
                                     (default "token=; whitelist=;")
       --survive string             Choose between "process" or "filesystem".
-                                       If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                       If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                        If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
                                        Most users should be OK with choosing "process". (default "process")
       --telemetry string           Telemetry (diagnostic) options
@@ -498,7 +471,7 @@ Flags:
       --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
       --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
       --survive string                Choose between "process" or "filesystem".
-                                          If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                          If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                           If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
                                           Most users should be OK with choosing "process". (default "process")
       --telemetry string              Telemetry (diagnostic) options
@@ -624,7 +597,6 @@ Flags:
       --format string                Specify file format (rdf or json) instead of getting it from filename
   -h, --help                         help for live
       --http string                  Address to serve http (pprof). (default "localhost:6060")
-      --ludicrous                    Run live loader in ludicrous mode (Should only be done when alpha is under ludicrous mode)
       --new_uids                     Ignore UIDs in load files and assign new ones.
   -s, --schema string                Location of schema file
       --slash_grpc_endpoint string   Path to Slash GraphQL GRPC endpoint. If --slash_grpc_endpoint is set, all other TLS options and connection options will beignored
@@ -807,7 +779,7 @@ Use "dgraph audit [command] --help" for more information about a command.
 
 #### `dgraph cert`
 
-This command lets you manage [TLS certificates]({{< relref "deploy/tls-configuration.md" >}}).
+This command lets you manage [TLS certificates]({{< relref "tls-configuration.md" >}}).
 The following replicates the help listing shown when you run `dgraph cert --help`:
 
 ```shell

@@ -1,7 +1,7 @@
 +++
 title = "Administrative API"
 description = "This documentation presents the Admin API and explains how to run a Dgraph database with GraphQL."
-weight = 12
+weight = 10
 [menu.main]
   name = "Administrative API"
   identifier = "graphql-admin"
@@ -943,15 +943,6 @@ mutation {
     }
   }
 }
-```
-
-### Adding CORS
-
-You can add CORS Origins by specifying `# Dgraph.Allow-Origin` at the end of the GraphQL schema using a schema update. For example:
-
-```graphql
-# Dgraph.Allow-Origin "https://example.com" 
-# Dgraph.Allow-Origin "https://www.exmaple.com"
 ```
 
 ## Initial schema

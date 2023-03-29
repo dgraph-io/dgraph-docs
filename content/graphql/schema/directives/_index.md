@@ -12,7 +12,7 @@ The list of all directives supported by Dgraph.
 
 `@auth` allows you to define how to apply authorization rules on the queries/mutation for a type.
 
-Reference: [Auth directive](/graphql/authorization/directive)
+Reference: [Auth directive]({{< relref "auth.md" >}})
 
 ### @cascade
 
@@ -24,7 +24,7 @@ Reference: [Cascade](/graphql/queries/cascade)
 
 `@custom` directive is used to define custom queries, mutations and fields.
 
-Reference: [Custom directive](/graphql/custom/directive)
+Reference: [Custom directive]({{< relref "graphql/custom/directive.md" >}})
 
 ### @deprecated
 
@@ -42,73 +42,79 @@ Reference: [GraphQL on Existing Dgraph]({{< relref "graphql/dgraph/index.md" >}}
 
 The `@generate` directive is used to specify which GraphQL APIs are generated for a type.
 
-Reference: [Generate directive](/graphql/schema/generate)
+Reference: [Generate directive]({{< relref "generate.md" >}})
 
 ### @hasInverse
 
 `@hasInverse` is used to setup up two way edges such that adding a edge in
-one direction automically adds the one in the inverse direction.
+one direction automatically adds the one in the inverse direction.
 
-Reference: [Linking nodes in the graph](/graphql/schema/graph-links)
+Reference: [Linking nodes in the graph]({{< relref "graph-links.md" >}})
 
 ### @id
 
 `@id` directive is used to annotate a field which represents a unique identifier coming from outside
  of Dgraph.
 
-Reference: [Identity](/graphql/schema/ids)
+Reference: [Identity](({{< relref "ids.md" >}})
 
 ### @include
 
 The `@include` directive can be used to include a field based on the value of an `if` argument.
 
-Reference: [Include directive](/graphql/queries/skip-include)
+Reference: [Include directive]({{< relref "skip-include.md" >}})
 
 ### @lambda
 
 The `@lambda` directive allows you to call custom JavaScript resolvers. The `@lambda` queries, mutations, and fields are resolved through the lambda functions implemented on a given lambda server.
 
-Reference: [Lambda directive](/graphql/lambda/overview)
+Reference: [Lambda directive]({{< relref "lambda-overview.md" >}})
 
 ### @remote
 
 `@remote` directive is used to annotate types for which data is not stored in Dgraph. These types
 are typically used with custom queries and mutations.
 
-Reference: [Remote directive](/graphql/custom/directive/#remote-types)
+Reference: [Remote directive]({{< relref "directive.md#remote-types" >}})
 
 ### @remoteResponse
 
 The `@remoteResponse` directive allows you to annotate the fields of a `@remote` type in order to map a custom query's JSON key response to a GraphQL field.
 
-Reference: [Remote directive](/graphql/custom/directive/#remote-response)
+Reference: [Remote directive]({{< relref "directive.md##remote-response" >}})
 
 ### @search
 
 `@search` allows you to perform filtering on a field while querying for nodes.
 
-Reference: [Search](/graphql/schema/search)
+Reference: [Search]({{< relref "search.md" >}})
 
 ### @secret
 
 `@secret` directive is used to store secret information, it gets encrypted and then stored in Dgraph.
 
-Reference: [Password Type](/graphql/schema/types/#password-type)
+Reference: [Password Type]({{< relref "types.md#password-type" >}})
 
 ### @skip
 
 The `@skip` directive can be used to fetch a field based on the value of a user-defined GraphQL variable.
 
-Reference: [Skip directive](/graphql/queries/skip-include)
+Reference: [Skip directive]({{< relref "skip-include.md" >}})
 
 ### @withSubscription
 
-`@withSubscription` directive when applied on a type, generates subsciption queries for it.
+`@withSubscription` directive when applied on a type, generates subscription queries for it.
 
-Reference: [Subscriptions](/graphql/subscriptions)
+Reference: [Subscriptions]({{< relref "subscriptions.md" >}})
 
 ### @lambdaOnMutate
 
 The `@lambdaOnMutate` directive allows you to listen to mutation events(`add`/`update`/`delete`). Depending on the defined events and the occurrence of a mutation event, `@lambdaOnMutate` triggers the appropriate lambda function implemented on a given lambda server.
 
-Reference: [LambdaOnMutate directive](/graphql/lambda/webhook)
+Reference: [LambdaOnMutate directive]({{< relref "webhook.md" >}})
+
+<style>
+  ul.contents {
+    display: none;
+  }
+</style>

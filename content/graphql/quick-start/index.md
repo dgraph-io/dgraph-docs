@@ -1,7 +1,7 @@
 +++
 title = "Quick Start"
 description = "Go from an empty Dgraph database to a running GraphQL API in just one step : just define the schema of your graph and how you’d like to search it; Dgraph does the rest."
-weight = 2
+weight = 1
 [menu.main]
   name = "Quick Start"
   identifier = "graphql-quick-start"
@@ -10,7 +10,7 @@ weight = 2
 
 You might be familiar with GraphQL types, fields and resolvers.  Perhaps you've written an app that adds GraphQL over a REST endpoint or maybe over a relational database.  If so, you know how GraphQL sits over those sources and issues many queries to translate the REST/relational data into something that looks like a graph.  
 
-There's none of that with Dgraph : you can generate a running GraphQL API with the associated graph backend just by dpeloying the GraphQL schema of your API; Dgraph does the rest.
+There's none of that with Dgraph : you can generate a running GraphQL API with the associated graph backend just by deploying the GraphQL schema of your API; Dgraph does the rest.
 
 
 ## Prerequisite : Run Dgraph
@@ -248,7 +248,7 @@ query {
 ```
 ## Discussion
 
-Dgraph allows you to have a fully functional GraphQL API in minutes with a highly performant graph backlend to serve complex nested queries.
+Dgraph allows you to have a fully functional GraphQL API in minutes with a highly performant graph backend to serve complex nested queries.
 
 Moreover, you can update or change your schema freely and just re-deploy new versions.
 
@@ -256,5 +256,5 @@ For GraphQL in Dgraph, you just concentrate on defining the schema of your graph
 
 
 ## What's Next
-- Learn more about [GraphQL schema](/graphql/schema/schema-overview/) and Dgraph directives.
+- Learn more about [GraphQL schema]({{< relref "graphql/schema/_index.md" >}}) and Dgraph directives.
 - Follow our [GraphQL tutorials](https://dgraph.io/learn/) to experience rapid application development by building more advanced apps.

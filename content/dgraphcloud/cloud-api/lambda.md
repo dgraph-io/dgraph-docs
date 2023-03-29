@@ -1,6 +1,6 @@
 +++
 title = "Lambda"
-weight = 3
+weight = 6
 [menu.main]
     parent = "cloud-api"
     identifier = "lambda"
@@ -157,7 +157,7 @@ curl "https://cerebro.cloud.dgraph.io/graphql" \
 
 You can update or delete your lambda by using the `updateLambda` mutation. You will need to pass a deployment id to uniquely identify your lambda. In case your backend is multi-tenant, you will need to pass the tenant Id as well.
 
-In order to update your lambda, you would need to convert your lamdba script into a Base64 endcoded format and send it as the `lambdaScript` argument.
+In order to update your lambda, you would need to convert your lamdba script into a Base64 encoded format and send it as the `lambdaScript` argument.
 In order to delete your lambda, you can simply send in an empty string in the `lambdaScript` argument.
 
 ### Cloud Endpoint

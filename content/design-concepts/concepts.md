@@ -7,17 +7,3 @@ weight = 3
 +++
 
 
-
-
-
-
-
-
-## Dgraph Ratel GUI
-Dgraph provides the `Ratel` GUI tool for DQL querying and basic graph visualization. Ratel does not support GraphQL queries, since there are many mature tools and every user or company is likely to have their own preferred tools for GraphQL development.
-
-
-
-
-
-

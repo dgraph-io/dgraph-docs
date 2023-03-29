@@ -1,9 +1,9 @@
 +++
 title = "Schema"
+weight = 2
 [menu.main]
   identifier = "gqlschema"
   parent = "graphql"
-  weight = 2
 +++
 
 This section describes all the things you can put in your input GraphQL schema, and what gets generated from that.

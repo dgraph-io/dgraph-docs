@@ -1,6 +1,6 @@
 +++
 title = "Custom Resolvers"
-weight = 6
+weight = 7
 [menu.main]
   identifier = "custom"
   parent = "graphql"

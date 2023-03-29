@@ -1,24 +1,24 @@
 +++
 title = "Backup"
-weight = 3
+weight = 5
 [menu.main]
     parent = "cloud-api"
     identifier = "backup"
 +++
 
 {{% notice "note" %}}
-Backup feature is only available for Dedicated Instances. This feature is not available for the Free and Shared Instances. 
+Backup feature is only available for Dedicated Instances. This feature is not available for the Free and Shared Instances.
 {{% /notice %}}
 
 ## Periodic Backups
 
 Periodic Backups are created at a given schedule that by default is:
-- Full Backup every week 
-- Incremental Backups every 4 hours 
+- Full Backup every week
+- Incremental Backups every 4 hours
 
-You can trigger the Backup on-demand directelly from your Dgraph Cloud Dashboard, simply go to Admin>Setting>Backups and click on "Create Backup" button on the top left. 
+You can trigger the Backup on-demand directly from your Dgraph Cloud Dashboard, simply go to Admin>Setting>Backups and click on "Create Backup" button on the top left.
 
-In case you would like to change your default Backup schedule please contact us and we will be happy to set you up. 
+In case you would like to change your default Backup schedule please contact us and we will be happy to set you up.
 
 ## List Backups
 
@@ -62,7 +62,7 @@ curl "https://${DEPLOYMENT_URL}/admin/slash" \
   --data-binary '{"query":"{\n listBackups {\n response {\n type\n backupNum\n folder\n timestamp\n }, errors {\n message\n }\n} \n}","variables":{}}' \
   --compressed
 ```
-{{< /tab >}} 
+{{< /tab >}}
 
 {{% tab "response" %}}
 ```json
@@ -127,7 +127,7 @@ curl "https://${DEPLOYMENT_URL}/admin/slash" \
   --data-binary '{"query":"mutation {\n export {\n signedUrls\n }\n }","variables":{}}' \
   --compressed
 ```
-{{< /tab >}} 
+{{< /tab >}}
 
 {{% tab "response" %}}
 ```json
@@ -147,7 +147,7 @@ curl "https://${DEPLOYMENT_URL}/admin/slash" \
 
 ## Import Data
 
-Import your data back using Dgraph [Live Loader]({{< relref "import-export.md#importing-data-with-live-loader" >}}) (requires Docker).
+Import your data back using Dgraph [Live Loader]({{< relref "dgraphcloud/admin/import-export.md#importing-data-with-live-loader" >}}) (requires Docker).
 
 ### Shell Command
 
@@ -170,7 +170,7 @@ DEPLOYMENT_JWT="<deployment-jwt>"
 docker run -it --rm -v /users/dgraph/downloads:/tmp dgraph/dgraph:v21.03-slash \
   dgraph live --slash_grpc_endpoint=${DEPLOYMENT_URL}:443 -f /tmp/1million.rdf.gz -t ${DEPLOYMENT_JWT}
 ```
-{{< /tab >}} 
+{{< /tab >}}
 
 {{% tab "response" %}}
 ```json
