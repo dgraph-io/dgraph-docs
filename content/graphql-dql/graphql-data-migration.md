@@ -41,7 +41,7 @@ Moreover if you delete the `TestDataMigration` object using its `id`, the GraphQ
 
 If you followed the [GraphQL - DQL Schema mapping]({{<relref "graphql-dql-schema">}}), you understand that Dgraph has used the list the known list of predicates (id, someInfo) and removed them. In fact, Dgraph also removed the `dgraph.type` predicate and so this `TestDataMigration` node is not visible anymore to the GraphQL API.
 
-The point is that a node with this `uid` exists and has a predicate `someOtherInfo`. This is because this data has been created initialy and nothing in the process of deploying a new version and then using a delete operation by ID instructed Dgraph to delete this predicate.
+The point is that a node with this `uid` exists and has a predicate `someOtherInfo`. This is because this data has been created initially and nothing in the process of deploying a new version and then using a delete operation by ID instructed Dgraph to delete this predicate.
 
 You end up with a node without type (i.e without a `dgraph.type` predicate) and with an old predicate value which is 'invisible' to your GraphQL API!
 
