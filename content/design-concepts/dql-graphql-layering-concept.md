@@ -1,6 +1,6 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "DQL and GraphQL (concept)"
+title = "DQL and GraphQL"
 weight = 50
 [menu.main]
     parent = "design-concepts"

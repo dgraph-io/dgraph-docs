@@ -1,7 +1,7 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "High Availability Replication (concept)"
-weight = 170
+title = "High Availability Replication"
+weight = 85
 [menu.main]
     parent = "design-concepts"
 +++

@@ -74,4 +74,4 @@ There is no way we are aware of that a node-based sharding database can avoid hi
 
 
 ----
-<sup>*</sup> _Throughout this note, we call entities in a graph "nodes" which is a standard terminology when talking about nodes and predicates. Elsewhere we call nodes "entities" to avoid confusion with K8s "nodes."_
+<sup>*</sup> _Throughout this note, we call entities in a graph "nodes" which is a standard terminology when talking about nodes and predicates. These may be confused with RAFT or Kubernetes nodes in some contexts, but generally we mean nodes in a graph_.

@@ -1,6 +1,6 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "Group (concept)"
+title = "Network Call Minimization"
 weight = 120
 [menu.main]
     parent = "design-concepts"

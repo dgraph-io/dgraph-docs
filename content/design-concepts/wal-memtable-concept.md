@@ -1,6 +1,6 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "WAL and Memtable (concept)"
+title = "WAL and Memtable"
 weight = 200
 [menu.main]
     parent = "design-concepts"

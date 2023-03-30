@@ -1,6 +1,6 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "Query Process (concept)"
+title = "Query Process"
 weight = 150
 [menu.main]
     parent = "design-concepts"

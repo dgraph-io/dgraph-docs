@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Consistency Model"
-weight = 2
+weight = 25
 [menu.main]
     parent = "design-concepts"
 +++

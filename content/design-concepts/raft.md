@@ -1,6 +1,6 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "RAFT (concept)"
+title = "RAFT"
 weight = 160
 [menu.main]
     parent = "design-concepts"

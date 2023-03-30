@@ -1,6 +1,6 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "ACID Transactions (concept)"
+title = "ACID Transactions"
 weight = 190
 [menu.main]
     parent = "design-concepts"

@@ -1,6 +1,6 @@
 +++
 date = "2017-03-27:12:00:00Z"
-title = "Index and Tokenizer (concept)"
+title = "Index and Tokenizer"
 weight = 90
 [menu.main]
     parent = "design-concepts"
