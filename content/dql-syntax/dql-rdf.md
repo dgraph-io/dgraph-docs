@@ -6,7 +6,7 @@ title = "RDF"
   parent = "dql-syntax"
   weight = 3
 +++
-Dgrpah supports Resource Description Framework (RDF) when creating, importing and exporting data. Queries always return JSON at this time.
+Dgrpah natively supports Resource Description Framework (RDF) when creating, importing and exporting data. Dgraph Client libraries can be used to query RDF as well.
 
 [RDF 1.1](https://www.w3.org/RDF/) is a Semantic Web Standard for data interchange defined by the W3C. It expresses statements about resources. The format of these statements is simple and in the form of triples.
 
