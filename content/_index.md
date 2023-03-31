@@ -15,7 +15,7 @@ aliases = ["/contribute"]
     <p>
       Designed from the ground up to be run in production, Dgraph is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
     </p>
-    <p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href="{{< relref "installation/_index.md">}}">download</a> Dgraph to deploy it yourself.</p>
+    <p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='{{< relref "deploy/installation/_index.md">}}'>download</a> Dgraph to deploy it yourself.</p>
     <img class="hero-deco" src="/images/hero-deco_403x160.png" />
   </div>
   <div class="item">
@@ -58,7 +58,7 @@ aliases = ["/contribute"]
 
   <div class="item">
     <div class="icon"><i class="fa fa-wrench" aria-hidden="true"></i></div>
-    <a href="{{< relref "deploy/overview.md">}}">
+    <a href="{{< relref "deploy/_index.md">}}">
       <h2>Self-hosted cluster</h2>
       <p>
         Install and manage a Dgraph cluster in a variety of self-managed deployment scenarios.
@@ -67,7 +67,7 @@ aliases = ["/contribute"]
   </div>
   <div class="item">
     <div class="icon"><i class="lni lni-play" aria-hidden="true"></i></div>
-    <a href="{{< relref "clients/_index.md">}}">
+    <a href="{{< relref "clients">}}">
       <h2>gRPC and HTTP Clients</h2>
       <p>
         Interact with a Dgraph cluster using libraries in various programming languages.

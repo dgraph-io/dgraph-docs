@@ -80,9 +80,9 @@ Please see the following topics to learn more about how to use Dgraph Cloud:
   - [Switching Schema Modes]({{< relref "admin/schema-modes" >}}) will guide you through changing Dgraph Cloud schema mode.
 - [Dgraph Cloud API]({{< relref "cloud-api/overview" >}}) Dgraph Cloud now includes a API so you can programmatically manage your backends
 - [Schema]({{< relref "cloud-api/schema" >}}) lists commands related to schema.
-- [Advanced Queries With DQL]({{< relref "advanced-queries" >}}) covers interacting with your database using the gRPC endpoint.
+
 
 You might also be interested in:
 
 - [Dgraph GraphQL Schema Reference]({{< relref "graphql/schema" >}}), which lists all the types and directives supported by Dgraph
-- [Dgraph GraphQL API Reference]({{< relref "graphql/api" >}}), which serves as a guide to using your new `/graphql` endpoint
+- [Dgraph GraphQL API Reference]({{< relref "graphql-clients" >}}), which serves as a guide to using your new `/graphql` endpoint

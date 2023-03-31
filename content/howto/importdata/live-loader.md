@@ -239,7 +239,7 @@ For example, to load an encrypted RDF/JSON file and schema via Live Loader:
 
 ```sh
 dgraph live \
- --files <path-containering-encrypted-data-files> \
+ --files <path-containerizing-encrypted-data-files> \
  --schema <path-to-encrypted-schema> \
  --encryption key-file=<path-to-keyfile-to-decrypt-files>
 ```

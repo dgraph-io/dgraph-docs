@@ -60,7 +60,7 @@ When the export is complete a response similar to this appears:
 
 ## Export data format
 
-By default, Dgraph exports data in RDF format. Replace `<FORMAT>`with `json` or `rdf` in this GraphQL mutaion:
+By default, Dgraph exports data in RDF format. Replace `<FORMAT>`with `json` or `rdf` in this GraphQL mutation:
 
 ```graphql
 mutation {
@@ -75,7 +75,7 @@ mutation {
 
 ## Export to NFS or a file path
 
-You can override the default folder path by adding the `destination` input field to the directory where you want to export data. Replace `<PATH>` in this GraphQL mutaion with the absolute path of the directory to export data.
+You can override the default folder path by adding the `destination` input field to the directory where you want to export data. Replace `<PATH>` in this GraphQL mutation with the absolute path of the directory to export data.
 
 ```graphql
 mutation {

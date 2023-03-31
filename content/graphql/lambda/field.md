@@ -3,7 +3,9 @@ title = "Lambda Fields"
 description = "Start with lambda resolvers by defining it in your GraphQL schema. Then define your JavaScript mutation function and add it as a resolver in your JS source code."
 weight = 2
 [menu.main]
-    parent = "lambda"
+    parent = "lambda-resolver"
+    identifier = "field"
+    name = "field"
 +++
 
 ### Schema

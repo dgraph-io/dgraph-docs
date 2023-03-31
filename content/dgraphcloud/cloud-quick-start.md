@@ -77,7 +77,7 @@ mutation AddTasks {
 
     {title: "Walking", completed: false, user: {username: "frodo@dgraph.io"}},
     {title: "More Walking", completed: false, user: {username: "frodo@dgraph.io"}},
-    {title: "Discard Jewelery", completed: false, user: {username: "frodo@dgraph.io"}},
+    {title: "Discard Jewelry", completed: false, user: {username: "frodo@dgraph.io"}},
 
     {title: "Meet Dad", completed: false, user: {username: "skywalker@dgraph.io"}},
     {title: "Dismantle Empire", completed: false, user: {username: "skywalker@dgraph.io"}}
@@ -158,7 +158,7 @@ The query's results are shown below. If you look carefully, you'll see that Dgra
             "title": "More Walking"
           },
           {
-            "title": "Discard Jewelery"
+            "title": "Discard Jewelry"
           },
           {
             "title": "Walking"
