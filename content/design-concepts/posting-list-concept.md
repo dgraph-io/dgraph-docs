@@ -5,7 +5,7 @@ weight = 130
 [menu.main]
     parent = "design-concepts"
 +++
-## Posting Lists and Tablets
+
 Posting lists and tablets are internal storage mechanisms and are generally hidden from users or developers, but logs, core product code, blog posts and discussions about Dgraph may use the terms "posting list" and "tablet."
 
 Posting lists are a form of inverted index. Posting lists correspond closely to the RDF concept of a graph, where the entire graph is a collection of triples, ``<subject> <predicate> <object>``. In this view, a posting list is a list of all triples that share a ``<subject>+<predicate>`` pair.

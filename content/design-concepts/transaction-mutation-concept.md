@@ -5,7 +5,7 @@ weight = 180
 [menu.main]
     parent = "design-concepts"
 +++
-## Transactions and Mutations
+
 
 Borrowing from GraphQL, Dgraph calls writes to the database `Mutations`. As noted elsewhere (MVCC, LSM Trees and Write Ahead Log sections) writes are written persistently to the Write Ahead Log, and ephemerally to a memtable.
 
