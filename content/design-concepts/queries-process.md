@@ -6,7 +6,6 @@ weight = 150
     parent = "design-concepts"
 +++
 
-## Query Processing
 
 To understand how query execution works, look at an example.
 

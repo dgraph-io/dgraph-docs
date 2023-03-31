@@ -1,4 +1,11 @@
-## Dgraph Clients
++++
+date = "2017-03-27:12:00:00Z"
+title = "Dgraph Clients"
+weight = 20
+[menu.main]
+    parent = "design-concepts"
++++
+
 A client is a program that calls dgraph. Broadly, there are stand alone clients such as Ratel, which is a graphical web-based application, and programmatic client libraries which are embedded in larger programs to efficiently and idomatically call Dgraph.
 
 GraphQL is an open standard with many clients (graphical and libraries) also, and GraphQL clients work with Dgraph.

@@ -1,7 +1,15 @@
 
-## Relationships
++++
+date = "2017-03-27:12:00:00Z"
+title = "Relationships"
+weight = 165
+[menu.main]
+    parent = "design-concepts"
+    identifier = "concept-relationships"
++++
 
-Dgraph stores `relationships` among `entities` to represent graph structures, and also stores literal properties of `entities`. 
+
+Dgraph stores `relationships` among `nodes` to represent graph structures, and also stores literal properties of `nodes`. 
 
 This makes it easy for Dgraph to ingest the RDF [N-Quad](https://www.w3.org/TR/n-quads/) format, where each line represents
 
@@ -12,21 +20,9 @@ The first represents relations among entities (nodes in graph terminology) and t
 
 Often, the optional `Label` is omitted, and therefore the N-Quad data is also referred to as "triples." When it is included, it represents which `Tenant` or `Namespace` the data lives in within Dgraph.
 
-In our product (the code or the GUI, and also in older documentation) you may see other terminology such as
-
-Edge instead of Relationship
-Predicate instead of Relationship
-Entity or Vertex instead of Node
-
-Similarly in the RDF spec you'll see 
-Subject and Object instead of Node
-Predicate instead of Relationship.
-
-This is unavoidable, since graph databases, RDF, and graph theory have separate origins that do not all share terminology.
-
 {{% notice "tip" %}}Dgraph can automatically generate a reverse relation. If the user wants to run
 queries in that direction, they would need to define the [reverse relationship]({{< relref "predicate-types.md#reverse-edges" >}})
-
+{{% /notice %}}
 
 For `Relationships`, the subject and object are represented as 64-bit numeric UIDs and the relationship name itself links them: <subjectUID> <relationshipName> <objectUID>.
 
