@@ -1,7 +1,7 @@
 +++
 title = "Search and Filtering"
 description = "What search can you build into your GraphQL API? Dgraph builds search into the fields of each type, so searching is available at deep levels in a query."
-weight = 5
+weight = 6
 [menu.main]
     parent = "directives"
     identifier = "schema-search"
