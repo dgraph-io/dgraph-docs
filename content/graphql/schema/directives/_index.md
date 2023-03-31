@@ -36,7 +36,7 @@ Reference: [Deprecation]({{< relref "deprecated.md" >}})
 
 `@dgraph` directive tells us how to map fields within a type to existing predicates inside Dgraph.
 
-Reference: [GraphQL on Existing Dgraph]({{< relref "graphql/dgraph/index.md" >}})
+Reference: [@dgraph directive]({{< relref "directive-dgraph" >}})
 
 ### @generate
 
