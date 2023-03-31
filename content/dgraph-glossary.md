@@ -47,7 +47,9 @@ Conceptually, a node is "a thing" or an object of the business domain. For every
 The term "node" is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. See [Aplha node](#alpha) and [Zero node](#zero).
 
 ### Predicate ###
-Predicate is the [RDF](#RDF) terminology for the name of a Dgraph [relationship](#relationship). Predicates are the second term in an RDF [triple](#triple). 
+In [RDF](#RDF) terminology, a predicate is the smallest piece of information about an object. A predicate can hold a literal value or can describe a relation to another entity :
+- when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice". It becomes a node property.
+- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](#uid) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
 
 ### RATEL ###
 Ratel is an open source GUI tool for data visualization and cluster management that’s designed to work with Dgraph and DQL. See also: [Ratel Overview]({{< relref "ratel/overview" >}}).

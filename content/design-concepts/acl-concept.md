@@ -1,3 +1,10 @@
++++
+date = "2017-03-27:12:00:00Z"
+title = "ACLs"
+weight = 10
+[menu.main]
+    parent = "design-concepts"
++++
 ## ACLs
 ACLs are a typical mechanism to list who can access what, specifying either users or roles and what they can access. ACLs help determine who is "authorized" to access what.
 
