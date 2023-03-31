@@ -1,11 +1,11 @@
 +++
-title = "UI client libraries"
+title = "Client libraries"
 description = "Dgraph"
 weight = 3
 [menu.main]
     parent = "graphql-clients"
     identifier = "graphql-clients-ui"
-    name = "UI client libraries"
+    name = "Client libraries"
 +++
 
 
