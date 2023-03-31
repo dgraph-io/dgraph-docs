@@ -17,8 +17,8 @@ As Dgraph serves a [spec-compliant GraphQL](https://graphql.github.io/graphql-sp
 
 ### General IDE setup
 - Copy Dgraph GraphQL endpoint. 
-- Set the security header if needed ( <TO DO explain>)
-- use IDE instrospection capability
+- Set the security header as required.
+- use IDE instrospection capability.
 
 You are ready to write GraphQL queries and mutation and to run them against Dgraph cluster.
 
