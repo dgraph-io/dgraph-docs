@@ -10,4 +10,4 @@ Dgraph allows a set of properties to be associated with any `Relationship`. E.g.
 
 Facets can always be replaced by adding a new Node representing the relationship and storing the facet data as attriubutes of the new Node.
 
-The term "facet" is also common in database and search engine technology, and indicates a dimension or classification of data. One way to use facets it to indicate a relationship type. 
+The term "facet" is also common in database and search engine technology, and indicates a dimension or classification of data. One way to use facets it to indicate a relationship type.

@@ -10,7 +10,7 @@ Posting lists and tablets are internal storage mechanisms and are generally hidd
 
 Posting lists are a form of inverted index. Posting lists correspond closely to the RDF concept of a graph, where the entire graph is a collection of triples, ``<subject> <predicate> <object>``. In this view, a posting list is a list of all triples that share a ``<subject>+<predicate>`` pair.
 
-(Note that in Dgraph docs, we typically use the term "relationship" rather than predicate, but here we will refer to predicates explicitly.) 
+(Note that in Dgraph docs, we typically use the term "relationship" rather than predicate, but here we will refer to predicates explicitly.)
 
 The posting lists are grouped by predicate into `tablets`. A tablet therefore has all data for a predicate, for all subject UIDs.
 
@@ -91,7 +91,7 @@ Note that person4 has no name attribute specified, so that posting list would no
 
 In these examples, two predicates (relations) are defined, and therefore two tablets will exist.
 
-The tablet for the `friend` predicate will hold all posting lists for all "friend" relationships in the entire graph. The tablet for the `name` property will hold all posting lists for `name` in the graph. 
+The tablet for the `friend` predicate will hold all posting lists for all "friend" relationships in the entire graph. The tablet for the `name` property will hold all posting lists for `name` in the graph.
 
 If other types such as Pets or Cities also have a name property, their data will be in the same tablet as the Person names.
 

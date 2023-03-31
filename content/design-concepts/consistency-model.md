@@ -7,14 +7,14 @@ weight = 25
 +++
 
 ### Dgraph supports MVCC, Read Snapshots and Distributed ACID transactions
-Multi-version concurrency control (MVCC) is a technique where many versions of data are written (but never modified) on disk, so many versions exist. This helps control concurrency because the database is queried at a particular "timestamp" for the duration of one query to provide snapshot isolation and ensure data is consistent for that transaction. (Note that MVCC is losely related to LSM trees - in LSM parlance, data is "logged" to write-only files, which are later merged via Log Compaction.) 
+Multi-version concurrency control (MVCC) is a technique where many versions of data are written (but never modified) on disk, so many versions exist. This helps control concurrency because the database is queried at a particular "timestamp" for the duration of one query to provide snapshot isolation and ensure data is consistent for that transaction. (Note that MVCC is losely related to LSM trees - in LSM parlance, data is "logged" to write-only files, which are later merged via Log Compaction.)
 
 Writes are faster with MVCC because data is always written by flushing a larger in-memory buffer (a memtable) to new, contiguous files (SST files), and newer data obscures or replaces older data. Consistent updates from each transaction share a logical commit timestamp (a 64 bit, increasing number loosely correlated to wall clock time), and all reads occur "at a point in time" meaning any read accesses a known, stable set of committed data using these same commit timestamps. New or in-process commits are associated with a later timestamp so they do not affect running queries at earlier timestamps. This allows pure queries (reads) to execute without any locks.
 
 One special set of structures are "memtables" which are also referred to as being Level 0 of the LSM tree. These are buffers for fast writes, which later are flushed to on-disk files called SSTs.
 
 ### Dgraph transactions are cluster-wide (not key-only, or any other non-ACID version of transactions)
-Dgraph uses the RAFT protocol to synchronize updates and ensure updates are durably written to a majority of alpha nodes in a cluster before the transaction is considered successful. RAFT ensures true, distributed, cluster wide transactions across multiple nodes, keys, edges, indexes and facets. Dgraph provides true ACID transactions, and does not impose limitations on what can be in a transaction: a transaction can involve multiple predicates, multiple nodes, multiple keys and even multiple shards. 
+Dgraph uses the RAFT protocol to synchronize updates and ensure updates are durably written to a majority of alpha nodes in a cluster before the transaction is considered successful. RAFT ensures true, distributed, cluster wide transactions across multiple nodes, keys, edges, indexes and facets. Dgraph provides true ACID transactions, and does not impose limitations on what can be in a transaction: a transaction can involve multiple predicates, multiple nodes, multiple keys and even multiple shards.
 
 ### Transactions are lockless
 Dgraph transactoins do not use locks, allowing fast, distributed transactions.
@@ -39,5 +39,5 @@ Dgraph also ensures proper read-after-write semantics. Any commit at timestamp T
 - **Log Compaction:** The process of combining SSTs into newer SSTs while eliminating obsolte data and reclaiming disk space.
 - **Timestamp:** Or point in time. A numeric counter representing the sequential order of all transactions, and indicating when a transaction became valid and query-able.
 - **Optimistic Lock:** a logical process whereby all transactions execute without blocking on other transactions, and are aborted if there is a conflict. Aborted transactions should typically be retried if they occur.
-- **Pessimistic Lock:** a process, not used in Dgraph, where all concurrent transactions mutating the same data except one block and wait for each other to complete. 
+- **Pessimistic Lock:** a process, not used in Dgraph, where all concurrent transactions mutating the same data except one block and wait for each other to complete.
 - **ACID** An acronym representing attributes of true transactions: Atomic, Consistent, Isolated, and Durable

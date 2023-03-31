@@ -8,7 +8,7 @@ weight = 100
 
 # Predicate-based storage and sharding
 
-Dgraph is unique in its use of predicate-based sharding, which allows complex and deep distributed queries to run without incurring high network overhead and associated delays. 
+Dgraph is unique in its use of predicate-based sharding, which allows complex and deep distributed queries to run without incurring high network overhead and associated delays.
 
 Rather than store and shard by putting different _nodes_ (aka entities<sup>*</sup>) on different servers, Dgraph stores predicates or triples of the form <node1> <predicateRelation> <node2>. The nodes are therefore implicit in the predicate storage, rather than vice versa.
 
@@ -44,10 +44,10 @@ application; would be slow to execute, and may require running an offline job.
 This is how it would run in Dgraph:
 
 Sharding assumptions (which predicates live where):
-* Assume Server X contains the predicate `friends` representing all friend relations. 
-* Assume Server Y contains the predicate `posts_liked` representing who likes each post. 
-* Assume Server Z contains the predicate `author` representing all who authored each post. 
-* Assume Server W contains the predicate `title` representing the uid->string title property of posts. 
+* Assume Server X contains the predicate `friends` representing all friend relations.
+* Assume Server Y contains the predicate `posts_liked` representing who likes each post.
+* Assume Server Z contains the predicate `author` representing all who authored each post.
+* Assume Server W contains the predicate `title` representing the uid->string title property of posts.
 
 Algorithm:
 * Server X
@@ -58,7 +58,7 @@ Algorithm:
     * Send result set myFOF to Server Y, which holds the posts_liked predicate **(1 RPC)**.
     * Retrieve all posts liked by my friends-of-friends. Call this `result set postsMyFOFLiked`.
 * Server Z
-    * Send postsMyFOFLiked result set to Server Z **(1 RPC)**. 
+    * Send postsMyFOFLiked result set to Server Z **(1 RPC)**.
     * Retrieve all posts authored by A. Call this `result set authoredByA`.
     * Still on Server Z, intersect the two sorted lists to get posts that are both liked and authored by A: `result set postsMyFOFLiked` intersect `result set authoredByA`. Call this `result set postsMyFOFLikedByA`
    * at this point we have done the hard work, but have the uids of the posts, instead of the post titles.
