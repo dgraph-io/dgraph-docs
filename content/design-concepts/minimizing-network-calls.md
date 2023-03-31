@@ -6,7 +6,7 @@ weight = 100
     parent = "design-concepts"
 +++
 
-# Predicate-based storage and sharding
+### Predicate-based storage and sharding
 
 Dgraph is unique in its use of predicate-based sharding, which allows complex and deep distributed queries to run without incurring high network overhead and associated delays.
 
@@ -14,12 +14,12 @@ Rather than store and shard by putting different _nodes_ (aka entities<sup>*</su
 
 This makes querying much different and particularly allows network optimizations in a distributed database.
 
-# Example
+### Example
 To explain how this works, let's use an example query:
 
   `Find all posts liked by friends of friends of mine over the last year, written by a popular author A.`
 
-## SQL/NoSQL
+### SQL/NoSQL
 In a distributed SQL database or (non-graph) NoSQL database, this query requires retrieval of a lot of data. Consider two approaches:
 
 Approach 1:
@@ -40,7 +40,7 @@ Approach 2:
 Both approaches wouild result in a lot of data moving back and forth between database and
 application; would be slow to execute, and may require running an offline job.
 
-## Dgraph Approach
+### Dgraph Approach
 This is how it would run in Dgraph:
 
 Sharding assumptions (which predicates live where):

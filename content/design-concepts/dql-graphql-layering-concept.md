@@ -9,24 +9,7 @@ weight = 50
 ## Dgraph Schemas
 Dgraph natively supports GraphQL, including `GraphQL Schema`s. GraphQL schemas "sit on top of" DQL schemas, in the sense that when a GraphQL schema is added to Dgraph, a corresponding `DQL Schema` is automatically created.
 
-For example, if you add GraphQL Schema fragment
-```
-type Task {
-  id: ID!
-  title: String! @search(by: [fulltext])
-  completed: Boolean! @search
-  user: User!
-}
-```
-to Dgraph, the following DQL schema relationships (predicates) will be auto generated:
-```
-Task.title
-Task.completed
-Task.user
-```
-and the DQL notion of a uid (which all entities in Dgraph have) will be mapped to the GraphQL ID! property.
-
-This provides an ability to query GraphQL data using DQL, by using the qualified relationship names of the form <Type>.<property> from DQL.
+Refer to [GraphQL-DQL interoperability]({{<relref "graphql-dql">}}) section for details.
 
 ## Dgraph Queries, Mutations and Upserts
 Similarly, GraphQL mutations are implemented on top of DQL in the sense that a GraphQL query is converted internally into a DQL query, which is then executed. This translation is not particularly complex, since DQL is based on GraphQL, with some syntax changes and some extensions.

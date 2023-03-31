@@ -5,7 +5,7 @@ weight = 10
 [menu.main]
     parent = "design-concepts"
 +++
-## ACLs
+
 ACLs are a typical mechanism to list who can access what, specifying either users or roles and what they can access. ACLs help determine who is "authorized" to access what.
 
 Dgraph Access Control Lists (ACLs) are sets of permissions for which `Relationships` a user may access. Recall that Dgraph is "predicate based" so all data is stored in and is implicit in relationships. This allows relationship-based controls to be very powerful in restricting a graph based on roles (RBAC).

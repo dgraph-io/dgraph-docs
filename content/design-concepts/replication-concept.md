@@ -5,7 +5,7 @@ weight = 85
 [menu.main]
     parent = "design-concepts"
 +++
-## High Availability and Replication
+
 Each Highly-Available (HA) group will be served by at least 3 instances (or two if one is temporarily unavailable). In the case of an alpha instance
 failure, other alpha instances in the same group still handle the load for data in that group. In case of a zero instance failure, the remaining two zeros in the zero group will continue to hand out timestamps and perform other zero functions.
 
