@@ -22,6 +22,7 @@ jobs:
           echo "One or more files in the content folder has changed."
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
       - name: Install Vale
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install curl
@@ -36,6 +37,5 @@ jobs:
             mv .vale.ini ~/.vale.ini
             mkdir ~/styles
             vale sync
-            bash ./scripts/checkgitdiff.sh
       - name: Run Vale
-        run: vale content/*
+        run: vale ${{ steps.changed-files-specific.outputs.all_changed_files }}"
