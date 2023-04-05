@@ -1,0 +1,23 @@
+name: Vale Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vale
+        run: |
+          sudo apt-get update
+          sudo apt-get install curl
+          curl -Ls https://api.github.com/repos/errata-ai/vale/releases/latest \
+            | grep "browser_download_url.*vale_[0-9.]*_Linux_64-bit.tar.gz" \
+            | cut -d : -f 2,3 \
+            | tr -d \" \
+            | xargs curl -Ls \
+            | tar xz
+      - name: Run Vale
+        run: ./vale --config=.vale.ini --glob=**/*.md
