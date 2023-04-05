@@ -22,5 +22,6 @@ jobs:
             ls -al
             sudo mv ./vale /usr/bin/vale
             mkdir ~/styles
+            vale sync
       - name: Run Vale
         run: vale --config=.vale.ini --glob=**/*.md
