@@ -15,7 +15,7 @@ jobs:
         id: changed-files-specific
         uses: tj-actions/changed-files@v35
         with:
-          files: ./content/  # Alternatively using: `docs/**` or `docs`
+          files: ./content/
       - name: Run step if any file(s) in the content folder change
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
@@ -38,4 +38,6 @@ jobs:
             mkdir ~/styles
             vale sync
       - name: Run Vale
-        run: vale "${{ steps.changed-files-specific.outputs.all_changed_files }}"
+        run: |
+         ${{ steps.changed-files-specific.outputs.all_changed_files }}"
+         vale "${{ steps.changed-files-specific.outputs.all_changed_files }}"
