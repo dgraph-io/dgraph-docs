@@ -11,6 +11,16 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
+      - name: Get changed files in the docs folder
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v35
+        with:
+          files: content/*.{js,html}  # Alternatively using: `docs/**` or `docs`
+      - name: Run step if any file(s) in the content folder change
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          echo "One or more files in the content folder has changed."
+          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
       - name: Install Vale
         run: |
           sudo apt-get update
@@ -27,16 +37,5 @@ jobs:
             mkdir ~/styles
             vale sync
             bash ./scripts/checkgitdiff.sh
-      - name: Get changed files in the docs folder
-        id: changed-files-specific
-        uses: tj-actions/changed-files@v35
-        with:
-          files: content/*.{js,html}  # Alternatively using: `docs/**` or `docs`
-      - name: Run step if any file(s) in the content folder change
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
-        run: |
-          echo "One or more files in the content folder has changed."
-          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-      
       - name: Run Vale
         run: vale content/*
