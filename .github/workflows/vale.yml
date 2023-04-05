@@ -19,6 +19,7 @@ jobs:
             | tr -d \" \
             | xargs curl -Ls \
             | tar xz \
+            | ls -al \
             | sudo mv ./vale /usr/local/bin/vale \
             | mkdir ~/styles
       - name: Run Vale
