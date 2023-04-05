@@ -18,9 +18,9 @@ jobs:
             | cut -d : -f 2,3 \
             | tr -d \" \
             | xargs curl -Ls \
-            | tar xz \
-            | ls -al \
-            | sudo mv ./vale /usr/bin/vale \
-            | mkdir ~/styles
+            | tar xz
+            ls -al
+            sudo mv ./vale /usr/bin/vale
+            mkdir ~/styles
       - name: Run Vale
         run: vale --config=.vale.ini --glob=**/*.md
