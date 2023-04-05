@@ -25,4 +25,4 @@ jobs:
             mkdir ~/styles
             vale sync
       - name: Run Vale
-        run: vale *
+        run: vale ./content/*
