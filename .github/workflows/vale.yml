@@ -24,5 +24,6 @@ jobs:
             mv .vale.ini ~/.vale.ini
             mkdir ~/styles
             vale sync
+            bash ./scripts/checkgitdiff.sh
       - name: Run Vale
         run: vale ./content/*
