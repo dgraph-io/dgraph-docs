@@ -15,7 +15,7 @@ jobs:
         id: changed-files-specific
         uses: tj-actions/changed-files@v35
         with:
-          files: ./content/*.{md}  # Alternatively using: `docs/**` or `docs`
+          files: ./content/  # Alternatively using: `docs/**` or `docs`
       - name: Run step if any file(s) in the content folder change
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
