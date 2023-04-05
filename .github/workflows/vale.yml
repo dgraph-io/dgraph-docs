@@ -39,6 +39,5 @@ jobs:
             vale sync
       - name: Run Vale
         if: steps.changed-files-specific.outputs.any_changed == 'true'
-        run: |
-         ${{ steps.changed-files-specific.outputs.all_changed_files }}
-         vale ${{ steps.changed-files-specific.outputs.all_changed_files }}
+        run: vale ${{ steps.changed-files-specific.outputs.all_changed_files }}
+         
