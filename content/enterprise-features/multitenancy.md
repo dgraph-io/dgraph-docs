@@ -7,7 +7,7 @@ weight = 9
 +++
 
 Multi-tenancy is an enterprise-only feature that allows various tenants to co-exist in the same Dgraph
-cluster using `uint64` namespaces. With multi-tenancy, each tenant can only log into their own
+Cluster using `uint64` namespaces. With multi-tenancy, each tenant can only log into their own
 namespace and operate in their own namespace.
 
 {{% notice "note" %}}
@@ -17,7 +17,7 @@ Multi-tenancy is an enterprise feature and needs [Access Control Lists]({{< relr
 ## Overview
 
 Multi-tenancy is built upon [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL),
-and enables multiple tenants to share a Dgraph cluster using unique namespaces.
+and enables multiple tenants to share a Dgraph Cluster using unique namespaces.
 The tenants are logically separated, and their data lies in the same `p` directory.
 Each namespace has a group guardian, which has root access to that namespace.
 
@@ -77,7 +77,7 @@ users of other namespaces.
 
 ## Access Control Lists
 
-Multi-tenancy defines certain ACL roles for the shared cluster:
+Multi-tenancy defines certain ACL roles for the shared Cluster:
 
 - [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins) 
 - Guardians of the namespace can perform the following operations:
@@ -110,8 +110,8 @@ As a super-admin, a _Guardian of the Galaxy_ can:
 - [Create](#create-a-namespace) and [delete](#delete-a-namespace) namespaces
 - Reset the passwords
 - Query and mutate the default namespace (`0x00`)
-- Trigger cluster-wide [backups](#backups) (no namespace-specific backup)
-- Trigger cluster-wide or namespace-specific [exports](#exports) (exports contain information about the namespace)
+- Trigger Cluster-wide [backups](#backups) (no namespace-specific backup)
+- Trigger Cluster-wide or namespace-specific [exports](#exports) (exports contain information about the namespace)
 
 For example, if the user `rocket` is part of the _Guardians of the Galaxy_ group (namespace `0x00`),
 he can only read/write on namespace `0x00`.
@@ -147,7 +147,7 @@ You can then use these credentials to login into the namespace and perform opera
 Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can list active namespaces.
 You can check available namespaces using the `/state` endpoint.
 
-For example, if you have a multi-tenant cluster with multiple namespaces, as a _Guardian of the Galaxy_ you can query `state` from GraphQL:
+For example, if you have a multi-tenant Cluster with multiple namespaces, as a _Guardian of the Galaxy_ you can query `state` from GraphQL:
 
 ```graphql
 query {
@@ -217,12 +217,12 @@ mutation {
 ## Drop Operations
 
 The `drop all` operations can be triggered only by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
-They're executed at cluster level and delete data across namespaces.
+They're executed at Cluster level and delete data across namespaces.
 All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database]({{< relref "raw-http.md#alter-the-database" >}}). 
 
 
 {{% notice "note:" %}}
-`drop all` operation is executed at cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only. 
+`drop all` operation is executed at Cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only. 
 {{% /notice %}}
 
 For example:
@@ -236,7 +236,7 @@ curl 'http://localhost:8080/alter' \
 
 ## Backups
 
-Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
+Backups are currently Cluster-wide only, but [exports](#exports) can be created by namespace.
 Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 ### Data import
@@ -246,10 +246,10 @@ Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 ## Exports
 
-Exports can be generated cluster-wide or at namespace level.
+Exports can be generated Cluster-wide or at namespace level.
 These exported sets of `.rdf` or `.json` files and schemas include the multi-tenancy namespace information.
 
-If a _Guardian of the Galaxy_ exports the whole cluster, a single folder containing the export data of all the namespaces in a single `.rdf` or `.json` file and a single schema will be generated.
+If a _Guardian of the Galaxy_ exports the whole Cluster, a single folder containing the export data of all the namespaces in a single `.rdf` or `.json` file and a single schema will be generated.
 
 {{% notice "note" %}}
 Guardians of a Namespace can trigger an Export for their namespace.
