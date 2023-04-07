@@ -93,7 +93,7 @@ holding from the operating system and how much is actively in use.
 ## Raft leadership metrics
 
 Raft leadership metrics let you track changes in Raft leadership for Dgraph
-Alpha and Dgraph Zero nodes in your cluster. These metrics include a group label
+Alpha and Dgraph Zero nodes in your Cluster. These metrics include a group label
 along with the node name, so that you can determine which metrics apply to which
 Raft groups. 
 
