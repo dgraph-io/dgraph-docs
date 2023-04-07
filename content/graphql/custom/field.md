@@ -61,7 +61,7 @@ type User {
 }
 ```
 
-Perhaps our app has some measure of their volocity that's calculated by a custom function that looks at both their GitHub commits and some other places where work is added.  Soon we'll have a schema where we can render a user's home page, the projects they work on, their open tickets, their GitHub details, etc. in a single request that queries across multiple sources and can mix Dgraph filtering with external calls.
+Perhaps our app has some measure of their velocity that's calculated by a custom function that looks at both their GitHub commits and some other places where work is added.  Soon we'll have a schema where we can render a user's home page, the projects they work on, their open tickets, their GitHub details, etc. in a single request that queries across multiple sources and can mix Dgraph filtering with external calls.
 
 ```graphql
 query {
