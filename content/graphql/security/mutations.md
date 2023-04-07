@@ -94,7 +94,7 @@ what matters is the the state before the delete occurs.
 
 Updates have both a before and after state that can be important for authorization.  
 
-For example, consider a rule stating that you can only update your own to-do list items. If evaluated in the database before the mutation (like the delete rules) it would prevent you from updating anyone else's to-do list items, but does it stop you from updating your own to-do items to have a different `owner`. If evaluated in the database after the mutation occurs, like for add rules, it would prevent setting the `owner` to another user, but would not prevent editing other's posts.
+For example, consider a rule stating that you can only update your own to-do list items. If evaluated in the database before the mutation (like the delete rules) it would prevent you from updating anyone else's to-do list items, but it does not stop you from updating your own to-do items to have a different `owner`. If evaluated in the database after the mutation occurs, like for add rules, it would prevent setting the `owner` to another user, but would not prevent editing other's posts.
 
 Currently, Dgraph evaluates `update` rules _before_ the mutation.
 
