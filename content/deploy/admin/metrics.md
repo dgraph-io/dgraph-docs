@@ -36,13 +36,16 @@ not interact directly with the filesystem. Instead it relies on
 
  Metric                          	 | Description
  -------                          	 | -----------
- `badger_v3_disk_reads_total`        | Total count of disk reads in Badger.
- `badger_v3_disk_writes_total`       | Total count of disk writes in Badger.
- `badger_v3_gets_total`              | Total count of calls to Badger's `get`.
- `badger_v3_memtable_gets_total`     | Total count of memtable accesses to Badger's `get`.
- `badger_v3_puts_total`              | Total count of calls to Badger's `put`.
- `badger_v3_read_bytes`              | Total bytes read from Badger.
- `badger_v3_written_bytes`           | Total bytes written to Badger.
+ `badger_disk_reads_total`        | Total count of disk reads in Badger.
+ `badger_disk_writes_total`       | Total count of disk writes in Badger.
+ `badger_gets_total`              | Total count of calls to Badger's `get`.
+ `badger_memtable_gets_total`     | Total count of memtable accesses to Badger's `get`.
+ `badger_puts_total`              | Total count of calls to Badger's `put`.
+ `badger_read_bytes`              | Total bytes read from Badger.
+ `badger_lsm_bloom_hits_total`    | Total number of LSM tree bloom hits.
+ `badger_written_bytes`           | Total bytes written to Badger.
+ `badger_lsm_size_bytes`          | Total size in bytes of the LSM tree.
+ `badger_vlog_size_bytes`         | Total size in bytes of the value log.
 
 ## Go Metrics
 
@@ -90,7 +93,7 @@ holding from the operating system and how much is actively in use.
 ## Raft leadership metrics
 
 Raft leadership metrics let you track changes in Raft leadership for Dgraph
-Alpha and Dgraph Zero nodes in your cluster. These metrics include a group label
+Alpha and Dgraph Zero nodes in your Cluster. These metrics include a group label
 along with the node name, so that you can determine which metrics apply to which
 Raft groups. 
 
