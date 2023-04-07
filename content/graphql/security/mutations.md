@@ -71,7 +71,7 @@ type User {
 }
 ```
 
-So with these types of rules, a mutation like the following performs differently
+When using these types of rules, a mutation such as the one shown below will behave differently.
 depending on which user is running it:
 * For most users, the following mutation deletes the posts that contain the
   term "graphql" and are owned by the user who runs the mutation, but doesn't
@@ -88,13 +88,13 @@ mutation {
 ```
 
 When adding data, what matters is the resulting state of the database, when deleting,
-what matters is the the state before the delete occurs.
+what matters is the state before the delete occurs.
 
 ## Update
 
 Updates have both a before and after state that can be important for authorization.  
 
-For example, consider a rule stating that you can only update your own to-do list items. If evaluated in the database before the mutation (like the delete rules) it would prevent you from updating anyone else's to-do list items, but it does not stop you from updating your own to-do items to have a different `owner`. If evaluated in the database after the mutation occurs, like for add rules, it would prevent setting the `owner` to another user, but would not prevent editing other's posts.
+For example, consider a rule stating that you can only update your own to-do list items. If evaluated in the database before the mutation (like the delete rules) it would prevent you from updating anyone elses to-do list items, but it does not stop you from updating your own to-do items to have a different `owner`. If evaluated in the database after the mutation occurs, like for add rules, it would prevent setting the `owner` to another user, but would not prevent editing other's posts.
 
 Currently, Dgraph evaluates `update` rules _before_ the mutation.
 
