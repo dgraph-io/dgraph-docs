@@ -957,7 +957,7 @@ type Person {
 
 would cause the following:
 
-* The `/graphql` endpoint would refresh and serve the GraphQL schema generated from type `type Person { name: String }`: that's Dgraph type `Person` and predicate `Person.name: string .` (see [this article](https://dgraph.io/docs/graphql/dgraph) on how to customize the generated schema)
+* The `/graphql` endpoint would refresh and serve the GraphQL schema generated from type `type Person { name: String }`.
 * The schema of the underlying Dgraph instance would be altered to allow for the new `Person` type and `name` predicate.
 * The `/admin` endpoint for `health` would return that a schema is being served.
 * The mutation would return `"schema": "type Person { name: String }"` and the generated GraphQL schema for `generatedSchema` (this is the schema served at `/graphql`).

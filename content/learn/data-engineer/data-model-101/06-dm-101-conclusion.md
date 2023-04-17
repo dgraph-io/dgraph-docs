@@ -12,19 +12,14 @@ weight = 6
 Congratulations on finishing the Dgraph learn course: **Graph Data Models 101**!
 
 Now that you have an overview and understanding of
-[what a graph is](/courses/datamodel/evolution/develop/graphs-data-modeling/),
-how a graph differs from a
-[relational model](/courses/datamodel/evolution/develop/graphs-data-modeling/relational-data-model/),
-[how to model a graph](/courses/datamodel/evolution/develop/graphs-data-modeling/graph-data-model/),
-and [how to query a graph](/courses/datamodel/evolution/develop/query-mod-app/graph-query/),
-you are ready to jump into using Dgraph, the only truly native graph database.
+- [what a graph is]({{<relref "01-dm-101-introduction">}}),
+- how a graph differs from a
+[relational model]({{<relref "02-relational-data-model">}}),
+- [how to model a graph]({{<relref "03-graph-data-model">}}),
+- and [how to query a graph]({{<relref "05-graph-query">}}),
 
-Download [Dgraph](https://dgraph.io/graph-db) - it’s open source and freely
-available. You can also check out [Dgraph Cloud](https://dgraph.io/cloud),
-a fully-managed GraphQL backend database service powered by Dgraph. Whether
-you’re frontend, backend, or full-stack focused; Dgraph has a product that’s
-right for you.
+you are ready to jump into using Dgraph, the only truly native distributed graph database.
 
-Want to learn more? Check out [another course](/courses/), or head over to our
-[docs site](https://dgraph.io/docs). Want to request a tutorial?
-[Drop us a comment](https://discuss.dgraph.io/t/dgraph-learn/11969)!
+Check out [Dgraph Cloud](https://dgraph.io/cloud).
+
+

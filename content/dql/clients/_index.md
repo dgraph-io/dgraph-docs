@@ -36,10 +36,7 @@ Mutations will be made in a round robin
 fashion, resulting in a semi-random initial predicate distribution.
 {{% /notice %}}
 
-### GraphQL Clients
-Dgraph does not force or insist on any particular GraphQL client. Any GraphQL client, GUI, tool, or library will work well with Dgraph, and it is the users' choice which to choose. Dgraph only provides clients for the proprietary DQL query language. GraphQL clients are available for free from many organizations.
 
-There is however, a basic GraphQL web-based tool included in the [Dgraph cloud GUI](https://cloud.dgraph.io) for convenience.
 ### Transactions
 
 Dgraph clients perform mutations and queries using transactions. A
