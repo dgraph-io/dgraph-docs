@@ -268,4 +268,4 @@ Congratulations! You have completed the Dgraph Cloud quick-start guide, and you 
 
 ## Next Steps
 
-To learn more about the Dgraph Cloud managed service, see [Administering your Backend](/admin/) and [Advanced Queries](/advanced-queries/).
+To learn more about the Dgraph Cloud managed service, see [Administering your Backend]({{<relref "admin">}}) and [Advanced Queries]({{<relref "advanced-queries">}}).

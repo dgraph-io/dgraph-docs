@@ -12,7 +12,7 @@ You can export your data from one Dgraph Cloud backend, and then import this dat
 You can export your data using JSON format. To do this, call the `export` mutation on `/admin/slash`. As an example, if your GraphQL endpoint is at `https://frozen-mango.us-west-2.aws.cloud.dgraph.io/graphql`, then the `/admin` endpoint for the schema is at `https://frozen-mango.us-west-2.aws.cloud.dgraph.io/admin/slash`.
 
 {{% notice "note" %}}
-The `/admin/slash` endpoint requires [Authentication](/admin/authentication).
+The `/admin/slash` endpoint requires [Authentication]({{<relref "authentication">}}).
 {{% /notice %}}
 
 The following is an example of a GraphQL mutation to export data to JSON.
@@ -55,7 +55,7 @@ With Multi-Tenancy feature enabled, for any GraphQL request you will need to pro
 {{% /notice %}}
 
 You can trigger two types of exports:
-* cluster-wide export: this is an export of the entire backend (including all namespaces). This request can be only triggered by the [*Guardian of Galaxy*](https://dgraph.io/docs/enterprise-features/multitenancy/#guardians-of-the-galaxy) users.
+* cluster-wide export: this is an export of the entire backend (including all namespaces). This request can be only triggered by the [*Guardian of Galaxy*]({{<relref "/enterprise-features/multitenancy.md#guardians-of-the-galaxy">}}) users.
 * namespace-specific export: this is an export of a specific namespace. This request can be triggered by the *Guardian of Galaxy* users and by the *Guardian of Namespace* users.
 
 ### Cluster-wide Exports
@@ -135,23 +135,4 @@ mutation {
 
 ## Importing data with Live Loader
 
-It is possible to import data into a Dgraph Cloud backend using [live loader](https://dgraph.io/docs/deploy/#live-loader). In order to import data, do the following steps:
-
-1. First import your schema into your Dgraph Cloud backend, using either the [Schema API](/admin/schema) or via [the Schema Page](https://cloud.dgraph.io/_/schema).
-2. Log into Dgraph Cloud, and find your backend's `gRPC Endpoint` on the Settings page. This will look like `frozen-mango.grpc.us-west-1.aws.cloud.dgraph.io:443`
-
-{{% notice "note" %}}
-The gRPC endpoint URL must have the string `.grpc.` added after the domain prefix. Without this change, Live Loader will not be able to find the endpoint.
-{{% /notice %}}
-
-
-3. Run the live loader as follows:
-
-    ```
-    docker run -it --rm -v /path/to/g01.json.gz:/tmp/g01.json.gz dgraph/dgraph:v21.03-slash \
-      dgraph live --slash_grpc_endpoint=<grpc-endpoint>:443 -f /tmp/g01.json.gz -t <api-token>
-    ```
-
-{{% notice "note" %}}
-Running this via Docker requires you to use an unreleased tag (either `master` or `v21.03-slash`).
-{{% /notice %}}
+It is possible to import data into a Dgraph Cloud backend using [live loader]({{<relref "live-loader.md">}}). 

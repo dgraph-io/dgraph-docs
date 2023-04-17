@@ -2,3 +2,4 @@
 .idea
 .DS_Store
 *.lock
+static/images/.DS_Store
