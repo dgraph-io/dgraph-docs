@@ -1,8 +1,10 @@
 +++
 title = "API keys"
-weight = 2   
+weight = 2 
+aliases = ["/cloud-admin-authentication"]  
 [menu.main]
     parent = "cloud-admin"
+    identifier = "cloud-admin-authentication"
 +++
 
 Client applications accessing the Dgraph Cloud cluster endpoints
