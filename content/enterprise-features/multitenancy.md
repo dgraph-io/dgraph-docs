@@ -46,10 +46,9 @@ The super admin is used only for database administration operations, such as exp
 
 - What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
 
-    The access controls are applied per tenant at a predicate level.
-    For example, the user `John Smith` belonging to the group `Data Approvers` may only have read-only access to predicates,
-    while user `Jane Doe`, who belongs to the group `Data Editors`, can be given access to modify predicates.
-    All of these ACL constraints have to be configured for each tenant.
+    The access controls are applied per tenant to either specific predicates or all predicates that exist for the tenant.
+    For example, the user `John Smith` belonging to the group `Data Approvers` for a tenant `Accounting` may only have read-only access over predicates while user `Jane Doe`, belonging to the group `Data Editors` within that same tenant, may have access to modify those predicates.
+    All the ACL rules need to be defined for each tenant in your backend. The level of granularity available allows for defining rules over specific predicates or all predicates belonging to that tenant.
 
 - Are tenants a physical separation or a logical one?
 
@@ -79,13 +78,13 @@ users of other namespaces.
 
 Multi-tenancy defines certain ACL roles for the shared Cluster:
 
-- [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins) 
+- [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins)
 - Guardians of the namespace can perform the following operations:
   - create users and groups within the namespace
   - assign users to groups within the namespace
   - assign predicates to groups within the namespace
   - add users to groups within the namespace
-  - export namespace 
+  - export namespace
   - drop data within the namespace
   - query and mutate within the namespace
 
@@ -218,11 +217,11 @@ mutation {
 
 The `drop all` operations can be triggered only by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
 They're executed at Cluster level and delete data across namespaces.
-All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database]({{< relref "raw-http.md#alter-the-database" >}}). 
+All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database]({{< relref "raw-http.md#alter-the-database" >}}).
 
 
 {{% notice "note:" %}}
-`drop all` operation is executed at Cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only. 
+`drop all` operation is executed at Cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only.
 {{% /notice %}}
 
 For example:
