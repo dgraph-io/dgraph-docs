@@ -6,9 +6,6 @@ weight = 3
     parent = "deploy"
 +++
 
-{{% notice "tip" %}}
-For a single server setup, recommended for new users, please see [Get Started]({{< relref "get-started/index.md" >}}) page.
-{{% /notice %}}
 
 You can see the list of available subcommands with `dgraph --help`.  You can view the full set of configuration options for a given subcommand with `dgraph <subcommand> --help` (for example, `dgraph zero --help`).
 
@@ -85,7 +82,7 @@ option-a=value;option-b=value`) as follows:
 {
   "<superflag-name>": {
     "option-a": "value",
-    "opton-b": "value"
+    "option-b": "value"
   }
 }
 ```
@@ -139,7 +136,7 @@ option-a=value;option-b=value`) as follows:
 ```yaml
 <superflag-name>:
  option-a: value
- opton-b: value
+ option-b: value
 ```
 
 The following example YAML config file (`config.yml`) uses *kebab-case*:

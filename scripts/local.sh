@@ -5,6 +5,8 @@ set -e
 GREEN='\033[32;1m'
 RESET='\033[0m'
 
+branch=$(git rev-parse --abbrev-ref HEAD)
+echo "branch => '$branch'"
 VERSIONS_ARRAY=(
   'preview'
 )
@@ -54,4 +56,3 @@ run() {
 }
 
 run "$1" "$2"
-

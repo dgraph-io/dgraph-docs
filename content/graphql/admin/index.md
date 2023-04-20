@@ -1,7 +1,7 @@
 +++
 title = "Administrative API"
 description = "This documentation presents the Admin API and explains how to run a Dgraph database with GraphQL."
-weight = 12
+weight = 10
 [menu.main]
   name = "Administrative API"
   identifier = "graphql-admin"
@@ -945,15 +945,6 @@ mutation {
 }
 ```
 
-### Adding CORS
-
-You can add CORS Origins by specifying `# Dgraph.Allow-Origin` at the end of the GraphQL schema using a schema update. For example:
-
-```graphql
-# Dgraph.Allow-Origin "https://example.com" 
-# Dgraph.Allow-Origin "https://www.exmaple.com"
-```
-
 ## Initial schema
 
 Regardless of the method used to upload the GraphQL schema, on a black database, adding this schema
@@ -966,7 +957,7 @@ type Person {
 
 would cause the following:
 
-* The `/graphql` endpoint would refresh and serve the GraphQL schema generated from type `type Person { name: String }`: that's Dgraph type `Person` and predicate `Person.name: string .` (see [this article](https://dgraph.io/docs/graphql/dgraph) on how to customize the generated schema)
+* The `/graphql` endpoint would refresh and serve the GraphQL schema generated from type `type Person { name: String }`.
 * The schema of the underlying Dgraph instance would be altered to allow for the new `Person` type and `name` predicate.
 * The `/admin` endpoint for `health` would return that a schema is being served.
 * The mutation would return `"schema": "type Person { name: String }"` and the generated GraphQL schema for `generatedSchema` (this is the schema served at `/graphql`).

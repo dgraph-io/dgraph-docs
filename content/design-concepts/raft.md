@@ -1,11 +1,12 @@
 +++
-date = "2017-03-20T22:25:17+11:00"
+date = "2017-03-27:12:00:00Z"
 title = "RAFT"
-weight = 5
+weight = 160
 [menu.main]
     parent = "design-concepts"
 +++
 
+Dgraph uses RAFT whenever consensus among a distribued set of servers is required, such as ensuring that a transaction has been properly committed, or determining the proper timestamp for a read or write. Each zero or alpha `group` uses raft to elect leaders.
 
 This section aims to explain the RAFT consensus algorithm in simple terms. The idea is to give you
 just enough to make you understand the basic concepts, without going into explanations about why it
@@ -42,36 +43,32 @@ A leader could revert to being a follower without an election, if it finds anoth
 cluster with a higher [Term]({{< relref "#term" >}})). This might happen in rare cases (network partitions).
 
 ## Communication
-There is unidirectional RPC communication, from leader to followers. The followers never ping the
+There is unidirectional RPC communication, from the leader to all/any followers. The followers never ping the
 leader. The leader sends `AppendEntries` messages to the followers with logs containing state
-updates. When the leader sends `AppendEntries` with zero logs, that's considered a
-<tt>Heartbeat</tt>. Leader sends all followers <tt>Heartbeats</tt> at regular intervals.
+updates. When the leader sends `AppendEntries` with zero logs (updates), that's considered a
+<tt>Heartbeat</tt>. The leader sends all followers <tt>Heartbeats</tt> at regular intervals.
 
-If a follower doesn't receive <tt>Heartbeat</tt> for `ElectionTimeout` duration (generally between
-150ms to 300ms), it converts it's state to candidate (as mentioned in [Server States]({{< relref "#server-states" >}})).
-It then requests for votes by sending a `RequestVote` call to other servers. Again, if it gets
-majority votes, candidate becomes a leader. At becoming leader, it then sends <tt>Heartbeats</tt>
-to all other servers to establish its authority *(Cartman style, "Respect my authoritah!")*.
+If a follower doesn't receive a <tt>Heartbeat</tt> for `ElectionTimeout` duration (generally between
+150ms to 300ms), the leader may be down, so it converts it's state to candidate (as mentioned in [Server States]({{< relref "#server-states" >}})).
+It then requests for votes by sending a `RequestVote` call to other servers. If it gets votes from the majority, the candidate becomes the leader. On becoming leader, it sends <tt>Heartbeats</tt>
+to all other servers to establish its authority.
 
 Every communication request contains a term number. If a server receives a request with a stale term
 number, it rejects the request.
 
-Raft believes in retrying RPCs indefinitely.
-
 ## Log Entries
-Log Entries are numbered sequentially and contain a term number. Entry is considered **committed** if
-it has been replicated to a majority of the servers.
+Dgraph uses LSM Trees, so we call commits or updates "Log Entries." Log Entries are numbered sequentially and contain a term number. An Entry is considered **committed** if it has been replicated (and stored) by a majority of the servers.
 
-On receiving a client request, the leader does four things (aka Log Replication):
+On being notified of the results of a client request (which is often processed on other servers), the leader does four things to coordinate RAFT consensus (this is also called Log Replication):
 
 * Appends and persists to its log.
 * Issue `AppendEntries` in parallel to other servers.
-* On majority replication, consider the entry committed and apply to its state machine.
-* Notify followers that entry is committed so that they can apply it to their state machines.
+* Monitors for the majority to report it is replicated, after which it considers the entry committed and applies it to the leader's state machine.
+* Notifies followers that the entry is committed so that they can apply it to their state machines.
 
-A leader never overwrites or deletes its entries. There is a guarantee that if an entry is committed,
+A leader never overwrites or deletes its entries. RAFT guarantees that if an entry is committed,
 all future leaders will have it. A leader can, however, force overwrite the followers' logs, so they
-match leader's logs *(elected democratically, but got a dictator)*.
+match leader's logs if necessary.
 
 ## Voting
 Each server persists its current term and vote, so it doesn't end up voting twice in the same term.
@@ -111,7 +108,7 @@ before citizenship is awarded providing voting rights)*.
 before the removal. To bootstrap a cluster, start with one server to allow it to become the leader,
 and then add servers to the cluster one-by-one.{{% /notice %}}
 
-## Log Compaction
+## Snapshots
 One of the ways to do this is snapshotting. As soon as the state machine is synced to disk, the
 logs can be discarded.
 

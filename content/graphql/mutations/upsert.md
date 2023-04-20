@@ -101,7 +101,7 @@ If a post with the ID `mm2` exists, it will update the post with the new details
 ```
 
 {{% notice "note" %}}
-* The default value of `uspert` will be `false`, for backward compatibility.
+* The default value of `upsert` will be `false`, for backward compatibility.
 * The current behavior of `Add` and `Update` mutations is such that they do not update deep level nodes. So Add mutations with `upsert` set to `true` will only update values at the root level. 
 {{% /notice %}}
 
