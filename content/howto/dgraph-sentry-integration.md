@@ -47,7 +47,7 @@ We strive to handle your data with care in a variety of ways when sending events
 2. **Data in Transit:** Events sent from the SDK to the Sentry server are encrypted on the wire with industry-standard TLS protocol with 256 bit AES Cipher.
 3. **Data at rest:** Events on the Sentry server are also encrypted with 256 bit AES cipher. Sentry is hosted on GCP and as such physical access is tightly controlled. Logical access is only available to sentry approved officials.
 4. **Data Retention:** Sentry stores events only for 90 days after which they are removed permanently.
-5. **Data Scrubbing**: The Data Scrcubber option (default: on) in Sentry’s settings ensures PII doesn’t get sent to or stored on Sentry’s servers, automatically removing any values that look like they contain sensitive information for values that contain various strings. The strings we currently monitor and scrub are:
+5. **Data Scrubbing**: The Data Scrubber option (default: on) in Sentry’s settings ensures PII doesn’t get sent to or stored on Sentry’s servers, automatically removing any values that look like they contain sensitive information for values that contain various strings. The strings we currently monitor and scrub are:
 
 - `password`
 - `secret`

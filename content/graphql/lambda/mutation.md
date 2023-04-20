@@ -3,7 +3,7 @@ title = "Lambda Mutations"
 description = "Ready to use lambdas for mutations? This documentation takes you through the schemas, resolvers, and examples."
 weight = 4
 [menu.main]
-    parent = "lambda"
+    parent = "lambda-resolver"
 +++
 
 ### Schema

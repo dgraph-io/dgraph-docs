@@ -1,22 +1,22 @@
 +++
-title = "Links in the Graph"
-description = "All the data in your app form a GraphQL data graph. That graph has nodes of particular types and links between the nodes to form the data graph."
-weight = 4
+title = "Relationships"
+description = "All the data in your app form a GraphQL data graph. That graph has nodes of particular types and relationships between the nodes to form the data graph."
+weight = 2
 [menu.main]
-    parent = "schema"
+    parent = "gqlschema"
 +++
 
-All the data in your app forms a GraphQL data graph.  That graph has nodes of particular types (the types you define in your schema) and links between the nodes to form the data graph.
+All the data in your app form a GraphQL data graph. That graph has nodes of particular types and relationships between the nodes to form the data graph.
 
 Dgraph uses the types and fields in the schema to work out how to link that graph, what to accept for mutations and what shape responses should take.  
 
-Edges in that graph are directed: either pointing in one direction or two.  You use the `@hasInverse` directive to tell Dgraph how to handle two-way edges.
+Relationships in that graph are directed: either pointing in one direction or two.  You use the `@hasInverse` directive to tell Dgraph how to handle two-way relationship.
 
-### One-way Edges
+### One-way relationship
 
-If you only ever need to traverse the graph between nodes in a particular direction, then your schema can simply contain the types and the link. 
+If you only ever need to traverse the graph between nodes in a particular direction, then your schema can simply contain the types and the relationship. 
 
-In this schema, posts have an author - each post in the graph is linked to its author - but that edge is one-way.  
+In this schema, posts have an author - each post in the graph is linked to its author - but that relationship is one-way.  
 
 ```graphql
 type Author {
@@ -29,29 +29,14 @@ type Post {
 }
 ```
 
-You'll be able to traverse the graph from a Post to its author, but not able to traverse from an author to all their posts.  Sometimes that's the right choice, but mostly, you'll want two way edges.  
+You'll be able to traverse the graph from a Post to its author, but not able to traverse from an author to all their posts.  Sometimes that's the right choice, but mostly, you'll want two way relationships.  
 
 Note: Dgraph won't store the reverse direction, so if you change your schema to include a `@hasInverse`, you'll need to migrate the data to add the reverse edges.
 
-### Two-way edges - edges with an inverse
+### Two-way relationship
 
-GraphQL schemas are always under-specified in that if we extended our schema to:
 
-```graphql
-type Author {
-    ...
-    posts: [Post]
-}
-
-type Post {
-    ...
-    author: Author
-}
-```
-
-Then, the schema says that an author has a list of posts and a post has an author.  But, that GraphQL schema doesn't say that every post in the list of posts for an author has the same author as their `author`.  For example, it's perfectly valid for author `a1` to have a `posts` edge to post `p1`, that has an `author` edge to author `a2`.  Here, we'd expect an author to be the author of all their posts, but that's not what GraphQL enforces.  In GraphQL, it's left up to the implementation to make two-way connections in cases that make sense.  That's just part of how GraphQL works.
-
-In Dgraph, the directive `@hasInverse` is used to create a two-way edge.  
+In Dgraph, the directive `@hasInverse` is used to create a two-way relationship.  
 
 ```graphql
 type Author {

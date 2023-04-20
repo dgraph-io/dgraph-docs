@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Retrieving Debug Information"
-weight = 1
+weight = 4
 [menu.main]
     parent = "howto"
 +++
@@ -16,7 +16,7 @@ If you are collecting these metrics from outside the Dgraph instance you need to
 curl http://<IP>:<HTTP_PORT>/debug/vars
 ```
 
-Metrics can also be retrieved in the Prometheus format at `/debug/prometheus_metrics`. See the [Metrics]({{< relref "deploy/metrics.md" >}}) section for the full list of metrics.
+Metrics can also be retrieved in the Prometheus format at `/debug/prometheus_metrics`. See the [Metrics]({{< relref "metrics.md" >}}) section for the full list of metrics.
 
 ## Profiling Information
 

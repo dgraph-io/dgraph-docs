@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T19:35:35+11:00"
 title = "Enterprise Features"
-weight = 9
+weight = 10
 [menu.main]
   identifier = "enterprise-features"
 +++
@@ -45,7 +45,7 @@ weight = 9
     <a  href="{{< relref "audit-logs.md">}}">
       <h2>Audit Logging</h2>
       <p>
-        All requests are tracked and available for use in security audits. 
+        All requests are tracked and available for use in security audits.
       </p>
     </a>
   </div>
@@ -54,7 +54,7 @@ weight = 9
     <a  href="{{< relref "multitenancy.md">}}">
       <h2>Multi-Tenancy</h2>
       <p>
-        Multiple tenants co-exist in the same Dgraph cluster. 
+        Multiple tenants co-exist in the same Dgraph cluster.
       </p>
     </a>
   </div>
@@ -63,7 +63,7 @@ weight = 9
     <a  href="{{< relref "learner-nodes.md">}}">
       <h2>Learner Nodes</h2>
       <p>
-        Spin-up a read-only replica instance across the world. 
+        Spin-up a read-only replica instance across the world.
       </p>
     </a>
   </div>
@@ -72,11 +72,11 @@ weight = 9
     <a  href="{{< relref "change-data-capture.md">}}">
       <h2>Change Data Capture</h2>
       <p>
-        Track data changes over time. 
+        Track data changes over time.
       </p>
     </a>
   </div>  
-  
+
 
 </div>
 
