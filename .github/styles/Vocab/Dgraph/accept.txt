@@ -26,6 +26,7 @@ xid
 lexing
 subgraph
 GraphQL
+graphql
 substring
 fulltext
 allofterms
@@ -198,3 +199,4 @@ aName
 bName
 
 addUser
+elses

@@ -50,6 +50,8 @@ You'll want a ensure that your CPU and memory resources are sufficient for your 
 
 You may find you'll need more CPU cores and memory for your specific use case.
 
+In addition, we highly recommend that your CPU clock rate is equal or above 3.4GHz.
+
 ### Disk
 
 Dgraph instances make heavy use of disks, so storage with high IOPS is highly recommended to ensure reliable performance. Specifically SSDs, not HDDs.

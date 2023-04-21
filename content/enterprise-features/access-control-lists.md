@@ -543,6 +543,35 @@ mutation {
 }
 ```
 
+
+In some cases, it may be desirable to manage permissions for all the predicates together rather than individual ones. This can be achieved using the `dgraph.all` keyword.
+
+The following example provides `read+write` access to the `dev` group over all the predicates of a given namespace using the `dgraph.all` keyword.
+
+```graphql
+mutation {
+  updateGroup(
+    input: {
+      filter: { name: { eq: "dev" } }
+      set: { rules: [{ predicate: "dgraph.all", permission: 6 }] }
+    }
+  ) {
+    group {
+      name
+      rules {
+        permission
+        predicate
+      }
+    }
+  }
+}
+```
+
+{{% notice "note" %}}
+The permissions assigned to a group `dev` is the union of permissions from `dgraph.all` and permissions for a specific predicate `name`. So if the group is assigned `READ` permission for `dgraph.all` and `WRITE` permission for predicate `name` it will have both, `READ` and `WRITE` permissions for the `name` predicate, as a result of the union. 
+{{% /notice %}}
+
+
 ### Remove a rule from a group
 
 To remove a rule or rules from the group `dev`, the mutation should be:
