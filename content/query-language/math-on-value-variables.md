@@ -51,7 +51,7 @@ Query Example:  Form a score for each of Steven Spielberg's movies as the sum of
 
 Value variables and aggregations of them can be used in filters.
 
-Query Example: Calculate a score for each Steven Spielberg movie with a condition on release date to penalize movies that are more than 10 years old, filtering on the resulting score.
+Query Example: Calculate a score for each Steven Spielberg movie with a condition on release date to penalize movies that are more than 20 years old, filtering on the resulting score.
 
 {{< runnable >}}
 {
@@ -61,7 +61,7 @@ Query Example: Calculate a score for each Steven Spielberg movie with a conditio
       q as count(genre)
       date as initial_release_date
       years as math(since(date)/(365*24*60*60))
-      score as math(cond(years > 10, 0, ln(p)+q-ln(years)))
+      score as math(cond(years > 20, 0, ln(p)+q-ln(years)))
     }
   }
 
