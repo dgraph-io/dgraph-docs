@@ -1,177 +1,163 @@
-+++
-date = "2017-03-20T22:25:17+11:00"
-title = "Go"
-weight = 1
-[menu.main]
-    parent = "clients"
-+++
+# dgo [![GoDoc](https://godoc.org/github.com/dgraph-io/dgo?status.svg)](https://godoc.org/github.com/dgraph-io/dgo)
 
-[![GoDoc](https://godoc.org/github.com/dgraph-io/dgo?status.svg)](https://godoc.org/github.com/dgraph-io/dgo)
+Official Dgraph Go client which communicates with the server using [gRPC](https://grpc.io/).
 
-The Go client communicates with the server on the gRPC port (default value 9080).
+Before using this client, we highly recommend that you go through [dgraph.io/tour] and
+[dgraph.io/docs] to understand how to run and work with Dgraph.
 
-The client can be obtained in the usual way via `go get`:
+[dgraph.io/docs]:https://dgraph.io/docs
+[dgraph.io/tour]:https://dgraph.io/tour
 
-```sh
- Requires at least Go 1.11
-export GO111MODULE=on
-go get -u -v github.com/dgraph-io/dgo/v210
-```
+**Use [Github Issues](https://github.com/dgraph-io/dgo/issues) for reporting issues about this repository.**
 
-The full [GoDoc](https://godoc.org/github.com/dgraph-io/dgo) contains
-documentation for the client API along with examples showing how to use it.
+## Table of contents
 
-More details on the supported versions can be found at [this link](https://github.com/dgraph-io/dgo#supported-versions).
+- [dgo ](#dgo-)
+  - [Table of contents](#table-of-contents)
+  - [Supported Versions](#supported-versions)
+  - [Using a client](#using-a-client)
+    - [Creating a client](#creating-a-client)
+    - [Login into a namespace](#login-into-a-namespace)
+    - [Connecting To Dgraph Cloud](#connecting-to-dgraph-cloud)
+    - [Altering the database](#altering-the-database)
+    - [Creating a transaction](#creating-a-transaction)
+    - [Running a mutation](#running-a-mutation)
+    - [Running a query](#running-a-query)
+    - [Query with RDF response](#query-with-rdf-response)
+    - [Running an Upsert: Query + Mutation](#running-an-upsert-query--mutation)
+    - [Running Conditional Upsert](#running-conditional-upsert)
+    - [Committing a transaction](#committing-a-transaction)
+    - [Setting Metadata Headers](#setting-metadata-headers)
+  - [Development](#development)
+    - [Running tests](#running-tests)
 
-## Create the client
+## Supported Versions
 
-To create a client, dial a connection to Dgraph's external gRPC port (typically `9080`).
-The following code snippet shows just one connection. You can connect to multiple Dgraph Alphas to distribute the workload evenly.
+Depending on the version of Dgraph that you are connecting to, you will have to
+use a different version of this client and their corresponding import paths.
+
+|   Dgraph version   | dgo version   |        dgo import path          |
+| -----------------  | -----------   | ------------------------------- |
+|  dgraph 1.0.X      |  dgo 1.X.Y    |   "github.com/dgraph-io/dgo"    |
+|  dgraph 1.1.X      |  dgo 2.X.Y    | "github.com/dgraph-io/dgo/v2"   |
+|  dgraph 20.03.0    |  dgo 200.03.0 | "github.com/dgraph-io/dgo/v200" |
+|  dgraph 20.07.0    |  dgo 200.03.0 | "github.com/dgraph-io/dgo/v200" |
+|  dgraph 20.11.0    |  dgo 200.03.0 | "github.com/dgraph-io/dgo/v200" |
+|  dgraph 21.X.Y     |  dgo 210.X.Y  | "github.com/dgraph-io/dgo/v210" |
+|  dgraph 22.X.Y     |  dgo 210.X.Y  | "github.com/dgraph-io/dgo/v210" |
+|  dgraph 23.X.Y     |  dgo 230.X.Y  | "github.com/dgraph-io/dgo/v230" |
+
+Note: One of the most important API breakages from dgo v1 to v2 is in
+the function `dgo.Txn.Mutate`. This function returns an `*api.Assigned`
+value in v1 but an `*api.Response` in v2.
+
+Note: We have removed functions `DialSlashEndpoint`, `DialSlashGraphQLEndpoint` from `v230.0.0`.
+Please use `DialCloud` instead.
+
+Note: There is no breaking API change from v2 to v200 but we have decided
+to follow the [CalVer Versioning Scheme](https://dgraph.io/blog/post/dgraph-calendar-versioning).
+
+## Using a client
+
+### Creating a client
+
+`dgraphClient` object can be initialized by passing it a list of `api.DgraphClient` clients as
+variadic arguments. Connecting to multiple Dgraph servers in the same cluster allows for better
+distribution of workload.
+
+The following code snippet shows just one connection.
 
 ```go
-func newClient() *dgo.Dgraph {
-	// Dial a gRPC connection. The address to dial to can be configured when
-	// setting up the dgraph cluster.
-	d, err := grpc.Dial("localhost:9080", grpc.WithInsecure())
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return dgo.NewDgraphClient(
-		api.NewDgraphClient(d),
-	)
-}
+conn, err := grpc.Dial("localhost:9080", grpc.WithInsecure())
+// Check error
+defer conn.Close()
+dgraphClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
 ```
 
 The client can be configured to use gRPC compression:
 
 ```go
-func newClient() *dgo.Dgraph {
-	// Dial a gRPC connection. The address to dial to can be configured when
-	// setting up the dgraph cluster.
-	dialOpts := append([]grpc.DialOption{},
-		grpc.WithInsecure(),
-		grpc.WithDefaultCallOptions(grpc.UseCompressor(gzip.Name)))
-	d, err := grpc.Dial("localhost:9080", dialOpts...)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return dgo.NewDgraphClient(
-		api.NewDgraphClient(d),
-	)
-}
-
+dialOpts := append([]grpc.DialOption{},
+	grpc.WithInsecure(),
+	grpc.WithDefaultCallOptions(grpc.UseCompressor(gzip.Name)))
+d, err := grpc.Dial("localhost:9080", dialOpts...)
 ```
 
-### Multi-tenancy
+### Login into a namespace
 
-In [multi-tenancy]({{< relref "multitenancy.md" >}}) environments, Dgraph provides a new method `LoginIntoNamespace()`,
-which will allow the users to login to a specific namespace.
+If your server has Access Control Lists enabled (Dgraph v1.1 or above), the client must be
+logged in for accessing data. Use `Login` endpoint:
 
-In order to create a dgo client, and make the client login into namespace `123`:
+Calling login will obtain and remember the access and refresh JWT tokens. All subsequent operations
+via the logged in client will send along the stored access token.
 
 ```go
-conn, err := grpc.Dial("127.0.0.1:9080", grpc.WithInsecure())
-if err != nil {
-	glog.Error("While trying to dial gRPC, got error", err)
-}
-dc := dgo.NewDgraphClient(api.NewDgraphClient(conn))
-ctx := context.Background()
-// Login to namespace 123
-if err := dc.LoginIntoNamespace(ctx, "groot", "password", 123); err != nil {
-	glog.Error("Failed to login: ",err)
-}
+err := dgraphClient.Login(ctx, "user", "passwd")
+// Check error
 ```
 
-In the example above, the client logs into namespace `123` using username `groot` and password `password`.
-Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
-
-### Creating a Client for Dgraph Cloud Endpoint
-
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
+If your server additionally has namespaces (Dgraph v21.03 or above), use the
+`LoginIntoNamespace` API.
 
 ```go
-// This example uses dgo
-conn, err := dgo.DialCloud("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
-if err != nil {
-  log.Fatal(err)
-}
+err := dgraphClient.LoginIntoNamespace(ctx, "user", "passwd", 0x10)
+// Check error
+```
+
+### Connecting To Dgraph Cloud
+
+Please use the following snippet to connect to a Dgraph Cloud backend.
+
+```go
+conn, err := dgo.DialCloud("https://your.endpoint.dgraph.io/graphql", "api-token")
+// Check error
 defer conn.Close()
 dgraphClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
 ```
 
-{{% notice "note" %}}
-The `dgo.DialSlashEndpoint()` method has been deprecated and will be removed in v21.07. Please use `dgo.DialCloud()` instead.
-{{% /notice %}}
+### Altering the database
 
-## Alter the database
-
-To set the schema, set it on a `api.Operation` object, and pass it down to
-the `Alter` method.
+To set the schema, create an instance of `api.Operation` and use the `Alter` endpoint.
 
 ```go
-func setup(c *dgo.Dgraph) {
-	// Install a schema into dgraph. Accounts have a `name` and a `balance`.
-	err := c.Alter(context.Background(), &api.Operation{
-		Schema: `
-			name: string @index(term) .
-			balance: int .
-		`,
-	})
+op := &api.Operation{
+  Schema: `name: string @index(exact) .`,
 }
+err := dgraphClient.Alter(ctx, op)
+// Check error
 ```
 
-`api.Operation` contains other fields as well, including drop predicate and drop
-all. Drop all is useful if you wish to discard all the data, and start from a
-clean slate, without bringing the instance down.
+`Operation` contains other fields as well, including `DropAttr` and `DropAll`.
+`DropAll` is useful if you wish to discard all the data, and start from a clean
+slate, without bringing the instance down. `DropAttr` is used to drop all the data
+related to a predicate.
+
+Starting Dgraph version 20.03.0, indexes can be computed in the background.
+You can set `RunInBackground` field of the `api.Operation` to `true`
+before passing it to the `Alter` function. You can find more details
+[here](https://docs.dgraph.io/master/query-language/#indexes-in-background).
 
 ```go
-	// Drop all data including schema from the dgraph instance. This is useful
-	// for small examples such as this, since it puts dgraph into a clean
-	// state.
-	err := c.Alter(context.Background(), &api.Operation{DropOp: api.Operation_ALL})
-```
-
-The old way to send a drop all operation is still supported but will be eventually
-deprecated. It's shown below for reference.
-
-```go
-	// Drop all data including schema from the dgraph instance. This is useful
-	// for small examples such as this, since it puts dgraph into a clean
-	// state.
-	err := c.Alter(context.Background(), &api.Operation{DropAll: true})
-```
-
-Starting with version 1.1, `api.Operation` also supports a drop data operation.
-This operation drops all the data but preserves the schema. This is useful when
-the schema is large and needs to be reused, such as in between unit tests.
-
-```go
-	// Drop all data including schema from the dgraph instance. This is useful
-	// for small examples such as this, since it puts dgraph into a clean
-	// state.
-	err := c.Alter(context.Background(), &api.Operation{DropOp: api.Operation_DATA})
-```
-
-## Create a transaction
-
-Dgraph supports running distributed ACID transactions. To create a
-transaction, just call `c.NewTxn()`. This operation doesn't incur in network calls.
-Typically, you'd also want to call a `defer txn.Discard(ctx)` to let it
-automatically rollback in case of errors. Calling `Discard` after `Commit` would
-be a no-op.
-
-```go
-func runTxn(c *dgo.Dgraph) {
-	txn := c.NewTxn()
-	defer txn.Discard(ctx)
-	...
+op := &api.Operation{
+  Schema:          `name: string @index(exact) .`,
+  RunInBackground: true
 }
+err := dgraphClient.Alter(ctx, op)
 ```
 
-### Read-Only Transactions
+### Creating a transaction
+
+To create a transaction, call `dgraphClient.NewTxn()`, which returns a `*dgo.Txn` object. This
+operation incurs no network overhead.
+
+It is a good practice to call `txn.Discard(ctx)` using a `defer` statement after it is initialized.
+Calling `txn.Discard(ctx)` after `txn.Commit(ctx)` is a no-op. Furthermore, `txn.Discard(ctx)`
+can be called multiple times with no additional side-effects.
+
+```go
+txn := dgraphClient.NewTxn()
+defer txn.Discard(ctx)
+```
 
 Read-only transactions can be created by calling `c.NewReadOnlyTxn()`. Read-only
 transactions are useful to increase read speed because they can circumvent the
@@ -179,339 +165,243 @@ usual consensus protocol. Read-only transactions cannot contain mutations and
 trying to call `txn.Commit()` will result in an error. Calling `txn.Discard()`
 will be a no-op.
 
-Read-only queries can optionally be set as best-effort. Using this flag will ask
-the Dgraph Alpha to try to get timestamps from memory on a best-effort basis to
-reduce the number of outbound requests to Zero. This may yield improved
-latencies in read-bound workloads where linearizable reads are not strictly
-needed.
+### Running a mutation
 
-## Run a query
+`txn.Mutate(ctx, mu)` runs a mutation. It takes in a `context.Context` and a
+`*api.Mutation` object. You can set the data using JSON or RDF N-Quad format.
 
-You can run a query by calling `txn.Query`. The response would contain a `JSON`
-field, which has the JSON encoded result. You can unmarshal it into Go struct
-via `json.Unmarshal`.
-
-```go
-	// Query the balance for Alice and Bob.
-	const q = `
-		{
-			all(func: anyofterms(name, "Alice Bob")) {
-				uid
-				balance
-			}
-		}
-	`
-	resp, err := txn.Query(context.Background(), q)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// After we get the balances, we have to decode them into structs so that
-	// we can manipulate the data.
-	var decode struct {
-		All []struct {
-			Uid     string
-			Balance int
-		}
-	}
-	if err := json.Unmarshal(resp.GetJson(), &decode); err != nil {
-		log.Fatal(err)
-	}
-```
-
-## Query with RDF response
-
-You can get query result as a RDF response by calling `txn.QueryRDF`. The response would contain
-a `Rdf` field, which has the RDF encoded result.
-
-{{% notice "note" %}}
-If you are querying only for `uid` values, use a JSON format response.
-{{% /notice %}}
-
-```go
-	// Query the balance for Alice and Bob.
-	const q = `
-		{
-			all(func: anyofterms(name, "Alice Bob")) {
-				name
-				balance
-			}
-		}
-	`
-	resp, err := txn.QueryRDF(context.Background(), q)
-	if err != nil {
-		log.Fatal(err)
-	}
- 
-	// <0x17> <name> "Alice" .
-	// <0x17> <balance> 100 .
-	fmt.Println(resp.Rdf)
-```
-
-## Run a mutation
-
-`txn.Mutate` would run the mutation. It takes in a `api.Mutation` object,
-which provides two main ways to set data: JSON and RDF N-Quad. You can choose
-whichever way is convenient.
-
-To use JSON, use the fields SetJson and DeleteJson, which accept a string
+To use JSON, use the fields `SetJson` and `DeleteJson`, which accept a string
 representing the nodes to be added or removed respectively (either as a JSON map
-or a list). To use RDF, use the fields SetNquads and DeleteNquads, which accept
+or a list). To use RDF, use the fields `SetNquads` and `DelNquads`, which accept
 a string representing the valid RDF triples (one per line) to added or removed
-respectively. This protobuf object also contains the Set and Del fields which
+respectively. This protobuf object also contains the `Set` and `Del` fields which
 accept a list of RDF triples that have already been parsed into our internal
 format. As such, these fields are mainly used internally and users should use
-the SetNquads and DeleteNquads instead if they are planning on using RDF.
+the `SetNquads` and `DelNquads` instead if they are planning on using RDF.
 
-We're going to continue using JSON. You could modify the Go structs parsed from
-the query, and marshal them back into JSON.
-
-```go
-	// Move $5 between the two accounts.
-	decode.All[0].Bal += 5
-	decode.All[1].Bal -= 5
-
-	out, err := json.Marshal(decode.All)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, err := txn.Mutate(context.Background(), &api.Mutation{SetJson: out})
-```
-
-Sometimes, you only want to commit mutation, without querying anything further.
-In such cases, you can use a `CommitNow` field in `api.Mutation` to
-indicate that the mutation must be immediately committed.
-
-## Commit the transaction
-
-Once all the queries and mutations are done, you can commit the transaction. It
-returns an error in case the transaction could not be committed.
+We define a Person struct to represent a Person and marshal an instance of it to
+use with `Mutation` object.
 
 ```go
-	// Finally, we can commit the transactions. An error will be returned if
-	// other transactions running concurrently modify the same data that was
-	// modified in this transaction. It is up to the library user to retry
-	// transactions when they fail.
-
-	err := txn.Commit(context.Background())
-```
-
-## Complete Example
-
-This is an example from the [GoDoc](https://godoc.org/github.com/dgraph-io/dgo). It shows how to to create a `Node` with name `Alice`, while also creating her relationships with other nodes. 
-
-{{% notice "note" %}}
-`loc` predicate is of type `geo` and can be easily marshaled and unmarshaled into a Go struct. More such examples are present as part of the GoDoc.
-{{% /notice %}}
-
-{{% notice "tip" %}}
-You can also download this complete example file from our [GitHub repository](https://github.com/dgraph-io/dgo/blob/master/example_set_object_test.go).
-{{% /notice %}}
-
-```go
-package dgo_test
-
-import (
-	"context"
-	"encoding/json"
-	"fmt"
-	"log"
-	"time"
-
-	"github.com/dgraph-io/dgo/v200/protos/api"
-)
-
-type School struct {
+type Person struct {
+	Uid   string   `json:"uid,omitempty"`
 	Name  string   `json:"name,omitempty"`
 	DType []string `json:"dgraph.type,omitempty"`
 }
 
-type loc struct {
-	Type   string    `json:"type,omitempty"`
-	Coords []float64 `json:"coordinates,omitempty"`
+p := Person{
+	Uid:   "_:alice",
+	Name:  "Alice",
+	DType: []string{"Person"},
 }
 
-// If omitempty is not set, then edges with empty values (0 for int/float, "" for string, false
-// for bool) would be created for values not specified explicitly.
+pb, err := json.Marshal(p)
+// Check error
 
-type Person struct {
-	Uid      string     `json:"uid,omitempty"`
-	Name     string     `json:"name,omitempty"`
-	Age      int        `json:"age,omitempty"`
-	Dob      *time.Time `json:"dob,omitempty"`
-	Married  bool       `json:"married,omitempty"`
-	Raw      []byte     `json:"raw_bytes,omitempty"`
-	Friends  []Person   `json:"friend,omitempty"`
-	Location loc        `json:"loc,omitempty"`
-	School   []School   `json:"school,omitempty"`
-	DType    []string   `json:"dgraph.type,omitempty"`
+mu := &api.Mutation{
+	SetJson: pb,
+}
+res, err := txn.Mutate(ctx, mu)
+// Check error
+```
+
+For a more complete example, see
+[Example](https://pkg.go.dev/github.com/dgraph-io/dgo#example-package-SetObject).
+
+Sometimes, you only want to commit a mutation, without querying anything
+further. In such cases, you can use `mu.CommitNow = true` to indicate that the
+mutation must be immediately committed.
+
+Mutation can be run using `txn.Do` as well.
+
+```go
+mu := &api.Mutation{
+  SetJson: pb,
+}
+req := &api.Request{CommitNow:true, Mutations: []*api.Mutation{mu}}
+res, err := txn.Do(ctx, req)
+// Check error
+```
+
+### Running a query
+
+You can run a query by calling `txn.Query(ctx, q)`. You will need to pass in a DQL query string. If
+you want to pass an additional map of any variables that you might want to set in the query, call
+`txn.QueryWithVars(ctx, q, vars)` with the variables map as third argument.
+
+Let's run the following query with a variable $a:
+
+```go
+q := `query all($a: string) {
+    all(func: eq(name, $a)) {
+      name
+    }
+  }`
+
+res, err := txn.QueryWithVars(ctx, q, map[string]string{"$a": "Alice"})
+fmt.Printf("%s\n", res.Json)
+```
+
+You can also use `txn.Do` function to run a query.
+
+```go
+req := &api.Request{
+  Query: q,
+  Vars: map[string]string{"$a": "Alice"},
+}
+res, err := txn.Do(ctx, req)
+// Check error
+fmt.Printf("%s\n", res.Json)
+```
+
+When running a schema query for predicate `name`, the schema response is found
+in the `Json` field of `api.Response` as shown below:
+
+```go
+q := `schema(pred: [name]) {
+  type
+  index
+  reverse
+  tokenizer
+  list
+  count
+  upsert
+  lang
+}`
+
+res, err := txn.Query(ctx, q)
+// Check error
+fmt.Printf("%s\n", res.Json)
+```
+
+### Query with RDF response
+
+You can get query result as a RDF response by calling `txn.QueryRDF`. The response would contain
+a `Rdf` field, which has the RDF encoded result.
+
+**Note:** If you are querying only for `uid` values, use a JSON format response.
+
+```go
+// Query the balance for Alice and Bob.
+const q = `
+{
+	all(func: anyofterms(name, "Alice Bob")) {
+		name
+		balance
+	}
+}
+`
+res, err := txn.QueryRDF(context.Background(), q)
+// check error
+
+// <0x17> <name> "Alice" .
+// <0x17> <balance> 100 .
+fmt.Println(res.Rdf)
+```
+
+`txn.QueryRDFWithVars` is also available when you need to pass values for variables
+used in the query.
+
+### Running an Upsert: Query + Mutation
+
+The `txn.Do` function allows you to run upserts consisting of one query and
+one mutation. Variables can be defined in the query and used in the mutation.
+You could also use `txn.Do` to perform a query followed by a mutation.
+
+To know more about upsert, we highly recommend going through the docs
+at [Upsert Block](https://dgraph.io/docs/dql/dql-syntax/dql-mutation/#upsert-block).
+
+```go
+query = `
+  query {
+      user as var(func: eq(email, "wrong_email@dgraph.io"))
+  }`
+mu := &api.Mutation{
+  SetNquads: []byte(`uid(user) <email> "correct_email@dgraph.io" .`),
+}
+req := &api.Request{
+  Query: query,
+  Mutations: []*api.Mutation{mu},
+  CommitNow:true,
 }
 
-func Example_setObject() {
-	dg, cancel := getDgraphClient()
-	defer cancel()
+// Update email only if matching uid found.
+_, err := dg.NewTxn().Do(ctx, req)
+// Check error
+```
 
-	dob := time.Date(1980, 01, 01, 23, 0, 0, 0, time.UTC)
-	// While setting an object if a struct has a Uid then its properties in the graph are updated
-	// else a new node is created.
-	// In the example below new nodes for Alice, Bob and Charlie and school are created (since they
-	// don't have a Uid).
-	p := Person{
-		Uid:     "_:alice",
-		Name:    "Alice",
-		Age:     26,
-		Married: true,
-		DType:   []string{"Person"},
-		Location: loc{
-			Type:   "Point",
-			Coords: []float64{1.1, 2},
-		},
-		Dob: &dob,
-		Raw: []byte("raw_bytes"),
-		Friends: []Person{{
-			Name:  "Bob",
-			Age:   24,
-			DType: []string{"Person"},
-		}, {
-			Name:  "Charlie",
-			Age:   29,
-			DType: []string{"Person"},
-		}},
-		School: []School{{
-			Name:  "Crown Public School",
-			DType: []string{"Institution"},
-		}},
-	}
+### Running Conditional Upsert
 
-	op := &api.Operation{}
-	op.Schema = `
-		name: string @index(exact) .
-		age: int .
-		married: bool .
-		loc: geo .
-		dob: datetime .
-		Friend: [uid] .
-		type: string .
-		coords: float .
-		type Person {
-			name: string
-			age: int
-			married: bool
-			Friend: [Person]
-			loc: Loc
-		}
-		type Institution {
-			name: string
-		}
-		type Loc {
-			type: string
-			coords: float
-		}
-	`
+The upsert block also allows specifying a conditional mutation block using an `@if` directive.
+The mutation is executed only when the specified condition is true. If the condition is false,
+the mutation is silently ignored.
 
-	ctx := context.Background()
-	if err := dg.Alter(ctx, op); err != nil {
-		log.Fatal(err)
-	}
+See more about Conditional Upsert [Here](https://dgraph.io/docs/dql/dql-syntax/dql-mutation/#conditional-upsert).
 
-	mu := &api.Mutation{
-		CommitNow: true,
-	}
-	pb, err := json.Marshal(p)
-	if err != nil {
-		log.Fatal(err)
-	}
+```go
+query = `
+  query {
+      user as var(func: eq(email, "wrong_email@dgraph.io"))
+  }`
+mu := &api.Mutation{
+  Cond: `@if(eq(len(user), 1))`, // Only mutate if "wrong_email@dgraph.io" belongs to single user.
+  SetNquads: []byte(`uid(user) <email> "correct_email@dgraph.io" .`),
+}
+req := &api.Request{
+  Query: query,
+  Mutations: []*api.Mutation{mu},
+  CommitNow:true,
+}
 
-	mu.SetJson = pb
-	response, err := dg.NewTxn().Mutate(ctx, mu)
-	if err != nil {
-		log.Fatal(err)
-	}
+// Update email only if exactly one matching uid is found.
+_, err := dg.NewTxn().Do(ctx, req)
+// Check error
+```
 
-	// Assigned uids for nodes which were created would be returned in the response.Uids map.
-	variables := map[string]string{"$id1": response.Uids["alice"]}
-	q := `query Me($id1: string){
-		me(func: uid($id1)) {
-			name
-			dob
-			age
-			loc
-			raw_bytes
-			married
-			dgraph.type
-			friend @filter(eq(name, "Bob")){
-				name
-				age
-				dgraph.type
-			}
-			school {
-				name
-				dgraph.type
-			}
-		}
-	}`
+### Committing a transaction
 
-	resp, err := dg.NewTxn().QueryWithVars(ctx, q, variables)
-	if err != nil {
-		log.Fatal(err)
-	}
+A transaction can be committed using the `txn.Commit(ctx)` method. If your transaction
+consisted solely of calls to `txn.Query` or `txn.QueryWithVars`, and no calls to
+`txn.Mutate`, then calling `txn.Commit` is not necessary.
 
-	type Root struct {
-		Me []Person `json:"me"`
-	}
+An error will be returned if other transactions running concurrently modify the same
+data that was modified in this transaction. It is up to the user to retry
+transactions when they fail.
 
-	var r Root
-	err = json.Unmarshal(resp.Json, &r)
-	if err != nil {
-		log.Fatal(err)
-	}
+```go
+txn := dgraphClient.NewTxn()
+// Perform some queries and mutations.
 
-	out, _ := json.MarshalIndent(r, "", "\t")
-	fmt.Printf("%s\n", out)
+err := txn.Commit(ctx)
+if err == y.ErrAborted {
+  // Retry or handle error
 }
 ```
 
-Example output result:
+### Setting Metadata Headers
+Metadata headers such as authentication tokens can be set through the context of gRPC methods.
+Below is an example of how to set a header named "auth-token".
 
-```json
- Output: {
- 	"me": [
- 		{
- 			"name": "Alice",
- 			"age": 26,
- 			"dob": "1980-01-01T23:00:00Z",
- 			"married": true,
- 			"raw_bytes": "cmF3X2J5dGVz",
- 			"friend": [
- 				{
- 					"name": "Bob",
- 					"age": 24,
- 					"loc": {},
- 					"dgraph.type": [
- 						"Person"
- 					]
- 				}
- 			],
- 			"loc": {
- 				"type": "Point",
- 				"coordinates": [
- 					1.1,
- 					2
- 				]
- 			},
- 			"school": [
- 				{
- 					"name": "Crown Public School",
- 					"dgraph.type": [
- 						"Institution"
- 					]
- 				}
- 			],
- 			"dgraph.type": [
- 				"Person"
- 			]
- 		}
- 	]
- }
+```go
+// The following piece of code shows how one can set metadata with
+// auth-token, to allow Alter operation, if the server requires it.
+md := metadata.New(nil)
+md.Append("auth-token", "the-auth-token-value")
+ctx := metadata.NewOutgoingContext(context.Background(), md)
+dg.Alter(ctx, &op)
+```
+
+## Development
+
+### Running tests
+
+Make sure you have `dgraph` installed in your GOPATH before you run the tests.
+The dgo test suite requires that a Dgraph cluster with ACL enabled be running locally.
+To start such a cluster, you may use the docker compose file located in the testing directory `t`.
+
+```sh
+docker compose -f t/docker-compose.yml up -d
+# wait for cluster to be healthy
+go test -v ./...
+docker compose -f t/docker-compose.yml down
 ```
