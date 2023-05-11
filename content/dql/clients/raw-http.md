@@ -45,6 +45,73 @@ for each transaction.
      merging.
 
 
+## Alter the DQL Schema
+
+You may need to alter the DQL schema to declare predicate types, to add predicate search indexes and to declare the predicates expected in entities of specific type.
+
+Update the DQL schema is done by posting schema data to the ``/alter`` endpoint:
+
+```sh
+curl "localhost:8080/alter" --silent --request POST \
+  --data $'
+name: string @index(term) .
+release_date: datetime @index(year) .
+revenue: float .
+running_time: int .
+starring: [uid] .
+director: [uid] .
+
+type Person {
+  name
+}
+
+type Film {
+  name
+  release_date
+  revenue
+  running_time
+  starring
+  director
+}
+' | python -m json.tool 
+```
+*Success response*
+```
+{
+    "data": {
+        "code": "Success",
+        "message": "Done"
+    }
+}
+```
+*Error response*
+
+In case of errors, the API will reply with an error message such as:
+```
+{
+    "errors": [
+        {
+            "extensions": {
+                "code": "Error"
+            },
+            "message": "line 5 column 18: Invalid ending"
+        }
+    ]
+}
+```
+{{% notice "note" %}}
+The request will update or create the predicates and types present in the request. It will not modify or delete other schema information that may be present.
+{{% /notice %}}
+
+## Query current DQL schema
+
+Obtain the DQL schema by issuing a DQL query on ``/query`` endpoint.
+
+```sh
+$ curl -X POST \
+  -H "Content-Type: application/dql" \
+  localhost:8080/query -d $'schema {}' | python -m json.tool
+```
 
 ## Start a transaction
 
