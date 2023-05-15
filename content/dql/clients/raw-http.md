@@ -217,7 +217,7 @@ We now send the mutations via the `/mutate` endpoint. We need to provide our
 transaction start timestamp as a path parameter, so that Dgraph knows which
 transaction the mutation should be part of. We also need to set `Content-Type`
 header to `application/rdf` in order to specify that mutation is written in
-rdf format.
+RDF format.
 
 ```sh
 $ curl -H "Content-Type: application/rdf" -X POST localhost:8080/mutate?startTs=4 -d $'
@@ -260,9 +260,8 @@ The result:
 }
 ```
 
-We get some `keys`. These should be added to the set of `keys` stored in the
-transaction state. We also get some `preds`, which should be added to the set of
-`preds` stored in the transaction state.
+The result contains `keys` and `predicates` which should be added to the
+transaction state.
 
 
 ## Committing the transaction
@@ -274,10 +273,10 @@ the parameter `commitNow` in the URL `/mutate?commitNow=true`.
 {{% /notice %}}
 
 Finally, we can commit the transaction using the `/commit` endpoint. We need the
-`start_ts` we've been using for the transaction along with the `keys` and the
-`preds`. If we had performed multiple mutations in the transaction instead of
-just one, then the keys and preds provided during the commit would be the union
-of all keys and preds returned in the responses from the `/mutate` endpoint.
+`start_ts` we've been using for the transaction along with the list of `keys` and the
+list of predicates. If we had performed multiple mutations in the transaction instead of
+just one, then the keys and predicates provided during the commit would be the union
+of all keys and predicates returned in the responses from the `/mutate` endpoint.
 
 The `preds` field is used to abort the transaction in cases where some of the
 predicates are moved. This field is not required and the `/commit` endpoint also
