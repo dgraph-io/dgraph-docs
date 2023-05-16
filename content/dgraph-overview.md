@@ -76,7 +76,7 @@ Database experts can focus on the data, schema and indexes, without maintaining 
 
 ### Dgraph Cloud Cluster Types
 
- - **Shared Instance**: Dgraph Cloud with [shared instances](https://dgraph.io/graphql) is a
+ - **Shared Instance**: Dgraph Cloud with [shared instances](https://cloud.dgraph.io/pricing?type=shared) is a
 fully-managed graph database service that lets you focus on building apps, not
 managing infrastructure. This is a fast and easy way to get started with GraphQL, and does not require any graph database knowledge to start and run.
 
