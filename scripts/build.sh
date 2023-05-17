@@ -35,6 +35,7 @@ THEME_BRANCH="${THEME_BRANCH:-master}"
 
 
 VERSIONS_ARRAY=(
+  'v23.0'
   'v22.0'
   'v21.03'
 )
