@@ -7,7 +7,7 @@ weight = 4
 
 ## Exporting and Importing Data in Dgraph Cloud
 
-You can export your data as an Administator from one Dgraph Cloud backend, and then import this data back into another Dgraph instance or Dgraph Cloud backend. For more information about how to export data in Dgraph Cloud, see [Export data]({{< relref "howto/exportdata/export-data-cloud.md" >}}). You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation]({{< relref "dgraphcloud/cloud-api/backup.md" >}}).
+You can export your data as an Administrator from one Dgraph Cloud backend, and then import this data back into another Dgraph instance or Dgraph Cloud backend. For more information about how to export data in Dgraph Cloud, see [Export data]({{< relref "howto/exportdata/export-data-cloud.md" >}}). You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation]({{< relref "dgraphcloud/cloud-api/backup.md" >}}).
 
 To import data to Dgraph Cloud, see [live loader]({{< relref "howto/importdata/live-loader.md" >}}).
 
@@ -18,8 +18,8 @@ With Multi-Tenancy feature enabled, for any GraphQL request you need to provide 
 {{% /notice %}}
 
 You can trigger two types of exports:
-* cluster-wide export: this is an export of the entire backend (including all namespaces). This request can be only triggered by the [*Guardian of Galaxy*](https://dgraph.io/docs/enterprise-features/multitenancy/#guardians-of-the-galaxy) users.
-* namespace-specific export: this is an export of a specific namespace. This request can be triggered by the *Guardian of Galaxy* users and by the *Guardian of Namespace* users.
+* Cluster-wide export: this is an export of the entire backend (including all namespaces). This request can be only triggered by the [*Guardian of Galaxy*](https://dgraph.io/docs/enterprise-features/multitenancy/#guardians-of-the-galaxy) users.
+* Namespace-specific export: this is an export of a specific namespace. This request can be triggered by the *Guardian of Galaxy* users and by the *Guardian of Namespace* users.
 
 ### Cluster-wide Exports
 
@@ -71,7 +71,7 @@ query {
 
 ### Namespace-specific Exports
 
-Namespace-specific exports can be triggered by the *Guardian of Galaxy* users. In this case you can follow the same steps for the cluster-wide exports and replace the namespace value from `-1` to the namespace you want to export. It's important that you get the `accessJWT` token for the *Guardian of Galaxy* user and pass it in the `X-Dgraph-AccessToken` header.
+Namespace-specific exports can be triggered by the *Guardian of Galaxy* users. In this case you can follow the same steps for the Cluster-wide exports and replace the namespace value from `-1` to the namespace you want to export. It's important that you get the `accessJWT` token for the *Guardian of Galaxy* user and pass it in the `X-Dgraph-AccessToken` header.
 
 E.g. if you want to export the namespace `0x123` your GraphQL request sent to the `/admin/slash` endpoint would look like:
 ```graphql
