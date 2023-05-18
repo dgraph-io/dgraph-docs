@@ -1,6 +1,6 @@
 +++
 title = "Quick Start"
-description = "Go from an empty Dgraph database to a running GraphQL API in just one step : just define the schema of your graph and how you’d like to search it; Dgraph does the rest."
+description = "Go from an empty Dgraph database to a running GraphQL API in just one step; just define the schema of your graph and how you’d like to search it; Dgraph does the rest."
 weight = 1
 [menu.main]
   name = "Quick Start"
@@ -22,7 +22,7 @@ You can log in to Dgraph cloud using **Sign in with Google**, **Sign in with Git
 1. Type a name for your Dgraph cloud instance.
 1. Click **Launch** 
 1. A new Dgraph cloud backend is created for you.
-   The URL listed in **GraphQL Endpoint**is the URL at which Dgraph Cloud serves data to your app. You can copy it at any time to use in a GraphQL client application. 
+   The URL listed in **GraphQL Endpoint** is the URL at which Dgraph cloud serves data to your app. You can copy it at any time to use in a GraphQL client application. 
 
 ## Step 2: Deploy a GraphQL Schema
 

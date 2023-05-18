@@ -23,6 +23,8 @@ backends for test and development environments as well.
 
 For this tutorial, you will just deploy one backend for development.
 
+- Follow the instructions to [provision a backend]({{< relref "provision-backend.md">}})
+
 {{< figure class="screenshot" src="/images/cloud/dgraph-cloud-backend-live.png" title="Dgraph Cloud console" >}}
 
 The URL listed in "GraphQL Endpoint" is the URL at which Dgraph Cloud will serve data to your app.  You'll need that for later, so note it down --- though you'll always be able to access it from the dashboard.  There's nothing at that URL yet, first you need to design the GraphQL schema for the app.
