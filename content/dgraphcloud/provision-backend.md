@@ -7,7 +7,7 @@ weight = 1
 +++
 
 ### Before you begin
-Signup to [Dgraph Cloud](https://cloud.dgraph.io) using **Sign in with Google**, **Sign in with GitHub** or any other email account that you prefer to use.
+Log in to [Dgraph Cloud](https://cloud.dgraph.io) using **Sign in with Google**, **Sign in with GitHub** or any other email account that you prefer to use.
 
 ### Provision a backend
 
