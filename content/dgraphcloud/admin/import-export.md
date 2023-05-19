@@ -5,58 +5,21 @@ weight = 4
     parent = "cloud-admin"
 +++
 
-You can export your data from one Dgraph Cloud backend, and then import this data back into another Dgraph instance or Dgraph Cloud Backend.
+## Exporting and Importing Data in Dgraph Cloud
 
-## Exporting Data
+You can export your data as an Administrator from one Dgraph Cloud backend, and then import this data back into another Dgraph instance or Dgraph Cloud backend. For more information about how to export data in Dgraph Cloud, see [Export data]({{< relref "howto/exportdata/export-data-cloud.md" >}}). You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation]({{< relref "dgraphcloud/cloud-api/backup.md" >}}).
 
-You can export your data using JSON format. To do this, call the `export` mutation on `/admin/slash`. As an example, if your GraphQL endpoint is at `https://frozen-mango.us-west-2.aws.cloud.dgraph.io/graphql`, then the `/admin` endpoint for the schema is at `https://frozen-mango.us-west-2.aws.cloud.dgraph.io/admin/slash`.
+To import data to Dgraph Cloud, see [live loader]({{< relref "howto/importdata/live-loader.md" >}}).
 
-{{% notice "note" %}}
-The `/admin/slash` endpoint requires [Authentication]({{<relref "authentication">}}).
-{{% /notice %}}
-
-The following is an example of a GraphQL mutation to export data to JSON.
-
-```graphql
-mutation {
-  export {
-    response { code message }
-    exportId
-    taskId
-  }
-}
-```
-Make sure to keep your `exportId` and `taskId` safe as you will need them for getting the signed URLs in order to download your export files. These URLs will be returned in the `signedUrls` output field and **they expire after 48 hours**.
-
-Export will usually return 3 files:
-* `g01.gql_schema.gz`: The GraphQL schema file. This file can be re-imported via the [Schema APIs](/admin/schema)
-* `g01.json.gz`: the data from your instance, which can be imported via live loader
-* `g01.schema.gz`: This file is the internal Dgraph schema. If you have set up your backend with a GraphQL schema, then you should be able to ignore this file.
-
-The following is an example of GraphQL query to check the status of the export and get the signed URLs for downloading your export files.
-
-```graphql
-query {
-  exportStatus (
-    exportId:"<paste-your-exportId>"
-    taskId: "<paste-your-taskId>"
-  ){
-    kind
-    lastUpdated
-    signedUrls
-    status
-  }
-}
-```
-## Exporting Data with Multi-Tenancy feature enabled
+## Exporting Data with Multi-Tenancy feature enabled in Dgraph Cloud
 
 {{% notice "note" %}}
-With Multi-Tenancy feature enabled, for any GraphQL request you will need to provide the `accessJWT` for the specific user in the `X-Dgraph-AccessToken` header.
+With Multi-Tenancy feature enabled, for any GraphQL request you need to provide the `accessJWT` for the specific user in the `X-Dgraph-AccessToken` header.
 {{% /notice %}}
 
 You can trigger two types of exports:
-* cluster-wide export: this is an export of the entire backend (including all namespaces). This request can be only triggered by the [*Guardian of Galaxy*]({{<relref "/enterprise-features/multitenancy.md#guardians-of-the-galaxy">}}) users.
-* namespace-specific export: this is an export of a specific namespace. This request can be triggered by the *Guardian of Galaxy* users and by the *Guardian of Namespace* users.
+* Cluster-wide export: this is an export of the entire backend (including all namespaces). This request can be only triggered by the [*Guardian of Galaxy*](https://dgraph.io/docs/enterprise-features/multitenancy/#guardians-of-the-galaxy) users.
+* Namespace-specific export: this is an export of a specific namespace. This request can be triggered by the *Guardian of Galaxy* users and by the *Guardian of Namespace* users.
 
 ### Cluster-wide Exports
 
@@ -91,7 +54,7 @@ mutation {
   }
 }
 ```
-3. Once done, you can now send the following GraphQL mutation to get the `signedUrls` from where you can download your export files:
+3. Once done, you can now send the following GraqhQL mutation to get the `signedUrls` from where you can download your export files:
 ```graphql
 query {
   exportStatus (
@@ -108,7 +71,7 @@ query {
 
 ### Namespace-specific Exports
 
-Namespace-specific exports can be triggered by the *Guardian of Galaxy* users. In this case you can follow the same steps for the cluster-wide exports and replace the namespace value from `-1` to the namespace you want to export. It's important that you get the `accessJWT` token for the *Guardian of Galaxy* user and pass it in the `X-Dgraph-AccessToken` header.
+Namespace-specific exports can be triggered by the *Guardian of Galaxy* users. In this case you can follow the same steps for the Cluster-wide exports and replace the namespace value from `-1` to the namespace you want to export. It's important that you get the `accessJWT` token for the *Guardian of Galaxy* user and pass it in the `X-Dgraph-AccessToken` header.
 
 E.g. if you want to export the namespace `0x123` your GraphQL request sent to the `/admin/slash` endpoint would look like:
 ```graphql
@@ -133,6 +96,3 @@ mutation {
 }
 ```
 
-## Importing data with Live Loader
-
-It is possible to import data into a Dgraph Cloud backend using [live loader]({{<relref "live-loader.md">}}). 
