@@ -16,11 +16,13 @@ Dgraph is different from other graph databases in a number of ways, including:
 
 - **GraphQL Support**: &emsp; *GraphQL is built in to make data access simple and standards-compliant. Unlike most GraphQL solutions, no resolvers are needed - Dgraph resolves queries automatically through graph navigation.*
 
-- **True Free Open Source Software (FOSS)**: &emsp; *Dgraph is free to use, and [available on github](https://github.com/dgraph-io/dgraph).*
-
 - **Fully Transactional and ACID Compliant**: &emsp; *Dgraph satisfies demanding OLTP workloads that require frequent inserts and updates.*
 
-- **Text Search**: &emsp; *Full-text searching is included.*
+- **Language support & Text Search**: &emsp; *Full-text searching is included and strings can be expressed in multiple languages*
+
+- **Geo data and geo queries**: &emsp; *Dgraph supports points and shapes data and queries can use near, within, contains, or intersects geo functions*
+
+- **True Free Open Source Software (FOSS)**: &emsp; *Dgraph is free to use, and [available on github](https://github.com/dgraph-io/dgraph).*
 
 ## Dgraph and GraphQL
 In Dgraph, GraphQL is not an afterthought or an add-on; it is core to the product. GraphQL developers can get started in minutes, and need not concern themselves with the powerful graph database running in the background.
