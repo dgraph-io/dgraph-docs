@@ -10,7 +10,7 @@ With a Dgraph [enterprise license]({{< relref "enterprise-features/license.md" >
 you can use change data capture (CDC) to track data changes over time; including
 mutations and drops in your database. Dgraph's CDC implementation lets you use
 Kafka or a local file as a *sink* to store CDC updates streamed by Dgraph Alpha
-leader nodes. 
+leader nodes.
 
 When CDC is enabled, Dgraph streams events for all `set` and `delete` mutations,
 except those that affect password fields; along with any drop  events. Live
@@ -24,21 +24,21 @@ Alpha nodes to avoid interruptions in the stream of CDC events.
 ## Enable CDC with Kafka sink
 
 Kafka records CDC events under the `dgraph-cdc` topic. The topic must be created before events
-are sent to the broker. To enable CDC and sink events to Kafka, start Dgraph Alpha with the `--cdc` 
+are sent to the broker. To enable CDC and sink events to Kafka, start Dgraph Alpha with the `--cdc`
 command and the sub-options shown below, as follows:
 
 ```bash
 dgraph alpha --cdc "kafka=kafka-hostname:port; sasl-user=tstark; sasl-password=m3Ta11ic"
 ```
 
-If you use Kafka on the localhost without SASL authentication, you can just 
+If you use Kafka on the localhost without SASL authentication, you can just
 specify the hostname and port used by Kafka, as follows:
 
 ```bash
 dgraph alpha --cdc "localhost:9092"
 ```
 
-If the Kafka cluster to which you are connecting requires TLS, the `ca-cert` option is required. 
+If the Kafka cluster to which you are connecting requires TLS, the `ca-cert` option is required.
 Note that this certificate can be self-signed.
 
 ## Enable CDC with file sink
@@ -57,7 +57,8 @@ CDC when running the `dgraph alpha` command:
 
 | Sub-option       | Example `dgraph alpha` command option     | Notes                                                                |
 |------------------|-------------------------------------------|----------------------------------------------------------------------|
-|  `ca-cert`       | `--cdc "ca-cert=/cert-dir/ca.crt"`        | Path and filename of the CA root certificate used for TLS encryption, required if Kafka endpoint requires TLS |
+|  `tls`           | `--tls=false`                             | boolean flag to enable/disable TLS while connecting to Kafka.        |
+|  `ca-cert`       | `--cdc "ca-cert=/cert-dir/ca.crt"`        | Path and filename of the CA root certificate used for TLS encryption, if not specified, Dgraph uses system certs if `tls=true` |
 |  `client-cert`   | `--cdc "client-cert=/c-certs/client.crt"` | Path and filename of the client certificate used for TLS encryption  |
 |  `client-key`    | `--cdc "client-cert=/c-certs/client.key"` | Path and filename of the client certificate private key              |
 |  `file`          | `--cdc "file=/sink-dir/cdc-file"`         | Path and filename of a local file sink (alternative to Kafka sink)   |
@@ -76,7 +77,7 @@ CDC events are in JSON format. Most CDC events look like the following example:
 ```
 
 The `Meta.Commit_Ts` value (shown above as `"meta":{"commit_ts":5}`) will increase
-with each CDC event, so you can use this value to find duplicate events if those 
+with each CDC event, so you can use this value to find duplicate events if those
 occur due to Raft leadership changes in your Dgraph Alpha group.
 
 ### Mutation event examples
