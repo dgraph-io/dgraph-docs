@@ -373,7 +373,8 @@ Flags:
                                        query-edge=1000000; The maximum number of edges that can be returned in a query. This applies to shortest path and recursive queries.
                                        query-timeout=0ms; Maximum time after which a query execution will fail. If set to 0, the timeout is infinite.
                                        txn-abort-after=5m; Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation.
-                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;")
+                                       shared-instance=false; When set to true, it disables ACLs for non-galaxy users. It expects the access JWT to be contructed outside dgraph for those users as even login is denied to them. Additionally, this disables access to environment variables for minio, aws, etc.
+                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m; shared-instance=false;")
       --my string                  addr:port of this server, so other Dgraph servers can talk to this.
   -o, --port_offset int            Value added to all listening port numbers. [Internal=7080, HTTP=8080, Grpc=9080]
   -p, --postings string            Directory to store posting lists. (default "p")
