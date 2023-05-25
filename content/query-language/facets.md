@@ -120,7 +120,7 @@ All facets on an edge are queried with `@facets`.
 
 ## Facets i18n
 
-Facets keys and values can use language-specific characters directly when mutating. But facet keys need to be enclosed in angle brackets `<>` when querying. This is similar to predicates. See [Predicates i18n]({{< relref "predicate-types.md#predicates-i18n" >}}) for more info.
+Facets keys and values can use language-specific characters directly when mutating. But facet keys need to be enclosed in angle brackets `<>` when querying. This is similar to predicates. See [Predicates i18n]({{< relref "dql-schema.md#predicates-i18n" >}}) for more info.
 
 {{% notice "note" %}}Dgraph supports [Internationalized Resource Identifiers](https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier) (IRIs) for facet keys when querying.{{% /notice  %}}
 
