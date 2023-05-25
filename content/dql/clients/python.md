@@ -87,7 +87,7 @@ client.alter(op)
 Starting with Dgraph version 20.03.0, indexes can be computed in the background.
 You can set the `run_in_background` field of `pydgraph.Operation` to `True`
 before passing it to the `Alter` function. You can find more details
-[here]({{< relref "/predicate-types.md#indexes-in-background" >}}).
+[here]({{< relref "dql-schema.md#indexes-in-background" >}}).
 
 ```python
 schema = 'name: string @index(exact) .'
