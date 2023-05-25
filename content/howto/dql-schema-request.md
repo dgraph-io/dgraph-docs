@@ -7,8 +7,14 @@ weight = 14
 +++
 
 
-The list of predicates and node types is retrieved using a query on the `/query` endpoint. 
+You can retrieve the Dgraph schema containing the list of predicates types and node types by:
+- issuing a query on /query endpoint using the [HTTP Client]({{< relref "raw-http#query-current-dql-schema">}})
+- issuing a query using any [DQL client library]({{< relref "dql/clients">}})
+- using [Ratel UI]({{< relref "ratel/schema">}})
+- using the Cloud console through the [DQL Schema](https://cloud.dgraph.io/_/schema?tab=dqlschema) tab of the Schema section.
 
+
+When using a query, the request body is 
 ```
 schema {}
 ```
