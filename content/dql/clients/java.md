@@ -154,7 +154,7 @@ dgraphClient.alter(operation);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can call the function `setRunInBackground(true)` as shown below before
 calling `alter`. You can find more details
-[here]({{< relref "/predicate-types.md#indexes-in-background" >}}).
+[here]({{< relref "dql-schema.md#indexes-in-background" >}}).
 
 ```java
 String schema = "name: string @index(exact) .";
