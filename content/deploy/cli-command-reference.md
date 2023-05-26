@@ -336,9 +336,9 @@ Flags:
                                        compression=snappy; [none, zstd:level, snappy] Specifies the compression algorithm and
                                    			compression level (if applicable) for the postings directory."none" would disable
                                    			compression, while "zstd:1" would set zstd compression at level 1.
-                                       goroutines=8; The number of goroutines to use in badger.Stream.
+                                       numgoroutines=8; The number of goroutines to use in badger.Stream.
                                        max-retries=-1; Commits to disk will give up after these number of retries to prevent locking the worker in a failed state. Use -1 to retry infinitely.
-                                    (default "compression=snappy; goroutines=8; max-retries=-1;")
+                                    (default "compression=snappy; numgoroutines=8; max-retries=-1;")
       --cache string               Cache options
                                        percentage=0,65,35; Cache percentages summing up to 100 for various caches (FORMAT: PostingListCache,PstoreBlockCache,PstoreIndexCache)
                                        size-mb=1024; Total size of cache (in MB) to be used in Dgraph.
