@@ -29,5 +29,8 @@ These third-party clients are contributed by the community and are not officiall
 - https://github.com/Swoorup/dgraph-rs
 - https://github.com/selmeci/dgraph-tonic
 
+## C#
+- https://github.com/schivei/dgraph4net - DQL Client with migration management
+
 
 
