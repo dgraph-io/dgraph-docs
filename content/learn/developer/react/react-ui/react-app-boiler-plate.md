@@ -59,6 +59,7 @@ After you have the boilerplate code on your machine, you can start the app
 using the following `yarn` command:
 
 ```sh
+yarn install
 yarn start
 ```
 
