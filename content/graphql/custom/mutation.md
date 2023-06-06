@@ -15,7 +15,7 @@ Let's say we have an application about authors and posts.  Logged in authors can
 type Author { ... }
 
 type Post {
-    id: ID:
+    id: ID!
     title: String
     text: String
     datePublished: DateTime
