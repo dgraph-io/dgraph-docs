@@ -36,11 +36,10 @@ The schema contains information about [predicate types](#predicate-types) and [n
 
 A [predicate]({{< relref "dgraph-glossary.md#Predicate">}}) is the smallest piece of information about an object. A predicate can hold a literal value or a relation to another entity :
 - when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice".
-- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid]({{<relref "dgraph-glossary.md#uid">}}) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
+- when we store that Alice knows Bob, we may use a predicate ``knows`` between the nodes representing Bob and Alice. Internally, the predicate value would be the [uid]({{<relref "dgraph-glossary.md#uid">}}) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
 
 
-Dgraph maintains a list of all predicates names and their type in the **Dgraph types schema**.
-
+It is a best practice to define all predicates you store in Dgraph, along with their types in the **Dgraph types schema**, but as noted below in Predicates Declaration, predicates without a schema are allowed if the mode is set to flexible.
 
 
 ## Predicates declaration
@@ -213,14 +212,13 @@ This is how you specify the `@noconflict` directive for a predicate.
 email: string @index(exact) @noconflict .
 ```
 
-### Predicate types from RDF Types
+### Coercing RDF input data types to Dgraph types
 
-As well as implying a schema type for a first mutation, an RDF type can override a schema type for storage.
-Dgraph supports a number of [RDF]({{< relref "dql-rdf.md" >}}) types.
+Dgraph accepts RDF input and will coerce RDF data types to Dgraph types where possible, and store data as Dgraph types only. When querying, all results are returned as Dgraph schema types.
 
-If a predicate has a schema type and a mutation has an RDF type with a different underlying Dgraph type, the convertibility to schema type is checked, and an error is thrown if they are incompatible, but the value is stored in the RDF type's corresponding Dgraph type.  Query results are always returned in schema type.
+See [RDF]({{< relref "dql-rdf.md" >}}) types for complete information on how Dgraph interprets RDF, particularly with respect to UIDs and blank nodes.
 
-For example, if no schema is set for the `age` predicate.  Given the mutation
+For example, if no schema is set for the `age` predicate and an RDF mutation is submitted:
 ```
 {
  set {
@@ -234,9 +232,9 @@ For example, if no schema is set for the `age` predicate.  Given the mutation
 ```
 Dgraph:
 
-* sets the schema type to `int`, as implied by the first triple,
-* converts `"13"` to `int` on storage,
-* checks `"14"` can be converted to `int`, but stores as `string`,
+* infers the Dgraph schema type as `int`, as implied by the first triple,
+* converts `"13"` to `int` on storage of the second triple,
+* checks if `"14"` can be converted to `int`, and stores as `string` since it cannot,
 * throws an error for the remaining two triples, because `"14.5"` can't be converted to `int`.
 
 ### Password type
@@ -392,8 +390,11 @@ When nodes have a type (i.e have a `dgraph.type` predicate), then you can use th
 `delete { <uid> * * . }` will only delete the predicates declared in the type. You may have added other predicates by running DQL mutation on this node: the node may still exist after the operation if it holds predicates not declared in the node type. `<>`
 {{% /notice  %}}
 
+## Relationship to GraphQL schemas
 
+GraphQL schemas are converted to DQL schemas, so if you add a GraphQL schema you will see a similar DQL schema as well. This is defined in more detail at  [GraphQL - DQL interoperability({{<relref "graphql-dql">}}).
 
+It is possible to query GraphQL-defined data in DQL, but the predicate names are slightly different, and uids or xids are used instead of ID! fields.
 
 
 
