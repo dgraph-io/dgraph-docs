@@ -351,7 +351,7 @@ The result:
 ## Running read-only queries
 
 You can set the query parameter `ro=true` to `/query` to set it as a
-[read-only]({{< relref "go.md#read-only-transactions" >}}) query.
+[read-only](https://github.com/dgraph-io/dgo#creating-a-transaction) query.
 
 
 ```sh
@@ -368,7 +368,7 @@ $ curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?ro=true"
 ## Running best-effort queries
 
 You can set the query parameter `be=true` to `/query` to set it as a
-[best-effort]({{< relref "go.md#read-only-transactions" >}}) query.
+[best-effort](https://github.com/dgraph-io/dgo#creating-a-transaction) query.
 
 
 ```sh

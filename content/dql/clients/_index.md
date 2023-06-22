@@ -58,5 +58,15 @@ transactions conflict when both transactions:
 
 When a transaction is aborted, all its changes are discarded.  Transactions can be manually aborted.
 
+Here's the list of all the Dgraph DQL clients:
 
-### In this section
+| Client  | Github Repository  |   
+|---|---|
+| Go  | https://github.com/dgraph-io/dgo#readme   |
+| Python  | https://github.com/dgraph-io/pydgraph#readme  |
+| JavaScript **gRPC Client**  | https://github.com/dgraph-io/dgraph-js/blob/master/README.md 
+| JavaScript **HTTP Client** | https://github.com/dgraph-io/dgraph-js-http/blob/master/README.md|
+| C# | https://github.com/dgraph-io/dgraph.net/blob/master/README.md |
+| Java | https://github.com/dgraph-io/dgraph4j/blob/master/README.md |
+
+### Other Clients
