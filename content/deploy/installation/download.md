@@ -35,7 +35,7 @@ You can obtain Dgraph binary for the latest version as well as previous releases
 
 {{< /tab >}}
 
-{{% tab "Automatic" %}}
+{{% tab "Installer" %}}
 On linux system, you can get the binary using the automatic script:
 1. Download the Dgraph installation script to install Dgraph automatically:
    ```sh
@@ -48,7 +48,7 @@ On linux system, you can get the binary using the automatic script:
     ```
    For more information about the various installation scripts that you can use, see [install scripts](https://github.com/dgraph-io/Install-Dgraph).   
 {{< /tab >}}
-{{% tab "Manual" %}}
+{{% tab "Binary" %}}
 On linux system, you can download a tar file and install manually.
 Download the appropriate tar for your platform from **[Dgraph releases](https://github.com/dgraph-io/dgraph/releases)**. After downloading the tar for your platform from Github, extract the binary to `/usr/local/bin` like so.
 
