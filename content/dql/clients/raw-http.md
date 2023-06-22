@@ -40,7 +40,7 @@ for each transaction.
 3. The set of predicates modified by the transaction (`preds`). This aids in
    predicate move detection.
 
-     Every mutation would send back a new set of preds. The client must merge them
+     Every mutation would send back a new set of `preds`. The client must merge them
      with the existing set. Optionally, a client can de-dup these keys while
      merging.
 

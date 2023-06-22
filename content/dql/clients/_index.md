@@ -17,7 +17,7 @@ If you are interested in clients for GraphQL endpoint, please refer to [GraphQL 
 Go, python, Java, C# and JavaScript clients are using **[gRPC](http://www.grpc.io/):** protocol and [Protocol
   Buffers](https://developers.google.com/protocol-buffers) (the proto file
 used by Dgraph is located at
-[api.proto](https://github.com/dgraph-io/dgo/blob/master/protos/api.proto)).
+[`api.proto`](https://github.com/dgraph-io/dgo/blob/master/protos/api.proto)).
 
 A JavaScript client  using **HTTP:** is also available.
 
