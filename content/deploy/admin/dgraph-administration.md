@@ -102,7 +102,7 @@ Before performing a mutation on a predicate that doesn't exist in the schema,
 you need to perform an alter operation with that predicate and its schema type.
 
 ```sh
-dgraph alpha --limit "mutation=strict; mutations-nquad=1000000"
+dgraph alpha --limit "mutations=strict; mutations-nquad=1000000"
 ```
 
 ## Secure Alter Operations
