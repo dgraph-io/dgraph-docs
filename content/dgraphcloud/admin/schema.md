@@ -36,3 +36,7 @@ mutation($sch: String!) {
   }
 }
 ```
+
+## Setting a DQL Schema
+Your DQL schema can be updated using ```dgraph live``` as documented at https://dgraph.io/docs/howto/importdata/live-loader/#importing-data-on-dgraph-cloud. Simply omit the -f <file> option to only upload the schema.
+    
