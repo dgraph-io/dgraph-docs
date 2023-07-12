@@ -11,14 +11,14 @@ When you deploy a GraphQL schema, Dgraph automatically generates the query and m
 
 
 Dgraph's GraphQL authorization features let you specify : 
-- if the client requires an API key or notif **anonymous access** is allowed to invoke a specific operation of the API.
+- if the client requires an API key or not. If **anonymous access** is allowed, read and write operations may be invoked without a key for specified types.
 - if a client must present an identity in the form of a **JWT token** to use the API.
 - **RBAC rules** (Role Based Access Control) at operation level based on the claims included in the client JWT token.
 - **ABAC rules** (Attribute Based Access COntrol) at data level using graph traversal queries.
 
 
 {{% notice "note" %}}
-By default all operations are accessible to anonymous clients, no JWT token is required and no authorization rules are applied.
+By default all operations are accessible to anonymous clients for on-premise (non-cloud); no JWT token is required and no authorization rules are applied. For cloud instances, anonymous access is off by default, and can be enabled via the cloud console.
 It is your responsibility to correctly configure the authorization for the ``/graphql`` endpoint.
 {{% /notice %}}
 
