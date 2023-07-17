@@ -18,7 +18,7 @@ A triple has the form
 
 In RDF terminology, each triple represents one fact about a node. 
 
-In Dgraph, the <subject> of a triple is always a node, and must be a numeric UID.  The <object> of a triple may be another node or a literal value:
+In Dgraph, the `<subject>` of a triple is always a node, and must be a numeric UID.  The `<object>` of a triple may be another node or a literal value:
 ```
 <0x01> <name> "Alice" .
 <0x01> <knows> <0x02> .
