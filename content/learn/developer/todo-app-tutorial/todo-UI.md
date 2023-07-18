@@ -33,7 +33,7 @@ npm start
 ```
 
 
-Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/bc235fda6e7557fc9204dd886c67f7eec7bdcadb).
+<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/bc235fda6e7557fc9204dd886c67f7eec7bdcadb). -->
 
 
 ## Install dependencies
@@ -47,7 +47,7 @@ npm install todomvc-app-css classnames graphql-tag history react-router-dom
 ```
 
 
-Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/fc7ed70fdde368179e9d7310202b1a0952d2c5c1).
+<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/fc7ed70fdde368179e9d7310202b1a0952d2c5c1). -->
 
 
 ## Setup Apollo Client
@@ -117,7 +117,7 @@ export default App
 Here we have created a simple instance of the Apollo client and passed the URL of our GraphQL API. Then we have passed the client to `ApolloProvider` and wrapped our `App` so that its accessible throughout the app.
 
 
-Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/f3fedc663e75d2f8ce933432b15db5d5d080ccc2).
+<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/f3fedc663e75d2f8ce933432b15db5d5d080ccc2). -->
 
 
 ## Queries and Mutations
@@ -160,7 +160,7 @@ completed
 ```
 
 
-Refer to the complete set of queries and mutations [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/GraphQLData.js).
+<!-- Refer to the complete set of queries and mutations [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/GraphQLData.js). -->
 
 
 Now, let's see how to use that to add a todo.
@@ -183,56 +183,54 @@ Let's now create the functions to add a todo and get todos.
 
 ```javascript
 function App() {
-const [add] = useMutation(ADD_TODO)
+  const [add] = useMutation(ADD_TODO)
 
 
-const { loading, error, data } = useQuery(GET_TODOS)
-if (loading) return <p>Loading</p>
-if (error) {
-return <p>`Error: ${error.message}`</p>
-}
+  const { loading, error, data } = useQuery(GET_TODOS)
+  if (loading) return <p>Loading</p>
+  if (error) {
+    return <p>`Error: ${error.message}`</p>
+  }
 
 
 const addNewTodo = (title) =>
-add({
-variables: { task: { title: title, completed: false, user: { username: user.email } } },
-update(cache, { data }) {
-const existing = cache.readQuery({ query: GET_TODOS })
-cache.writeQuery({
-query: GET_TODOS,
-data: {
-queryTask: [
-...(existing ? existing.queryTask : []),
-...data.addTask.task,
-],
-},
-})
-},
-})
+  add({
+    variables: { task: { title: title, completed: false, user: { username: user.email } } },
+    update(cache, { data }) {
+      const existing = cache.readQuery({ query: GET_TODOS })
+      cache.writeQuery({
+        query: GET_TODOS,
+        data: {
+          queryTask: [
+          ...(existing ? existing.queryTask : []),
+          ...data.addTask.task,
+          ],
+        },
+      })
+    },
+  })
 
 
-return (
-<div>
-<Todos
-todos={data.queryTodo}
-addNewTodo={addNewTodo}
-todosTitle="Todos"
-/>
-</div>
-)
+  return (
+    <div>
+    <Todos
+      todos={data.queryTodo}
+      addNewTodo={addNewTodo}
+      todosTitle="Todos"
+    />
+    </div>
+  )
 }
-
-
 ```
 
 
-Refer the complete set of functions [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/TodoApp.js).
+<!-- Refer the complete set of functions [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/TodoApp.js). -->
 
 
 Also, check the other files updated in this step and make those changes as well.
 
 
-Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/948e9a8626b1f0c1e40de02485a1110b45f53b89).
+<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/948e9a8626b1f0c1e40de02485a1110b45f53b89). -->
 
 
 ## Auth0 Integration
@@ -250,7 +248,7 @@ Now, let's integrate Auth0 in our application and use that to add the logged-in 
 - Add `http://localhost:3000` to "Allowed Callback URLs", "Allowed Web Origins" and "Allowed Logout URLs".
 
 
-Check the commit [here](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c) for verifying the Auth0 setup you did after following the above steps.
+<!-- Check the commit [here](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c) for verifying the Auth0 setup you did after following the above steps. -->
 
 
 Let's also add definitions for updating, deleting and clearing all tasks to `src/GraphQLData.js`.
@@ -264,128 +262,112 @@ import React from "react"
 import { useQuery, useMutation } from "@apollo/client"
 import { Todos } from "react-todomvc"
 
-
 import "react-todomvc/dist/todomvc.css"
 import { useAuth0 } from "@auth0/auth0-react"
 import { GET_TODOS, ADD_TODO, UPDATE_TODO, DELETE_TODO, CLEAR_COMPLETED_TODOS, TOGGLE_TODO } from "./GraphQLData"
 
-
 function App() {
-const [add] = useMutation(ADD_TODO)
-const [del] = useMutation(DELETE_TODO)
-const [upd] = useMutation(UPDATE_TODO)
-const [clear] = useMutation(CLEAR_COMPLETED_TODOS)
+  const [add] = useMutation(ADD_TODO)
+  const [del] = useMutation(DELETE_TODO)
+  const [upd] = useMutation(UPDATE_TODO)
+  const [clear] = useMutation(CLEAR_COMPLETED_TODOS)
 
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { loading, error, data } = useQuery(GET_TODOS)
+  if (loading) return <p>Loading</p>
+  if (error) {
+    return <p>`Error: ${error.message}`</p>
+  }
 
+  const addNewTodo = (title) =>
+    add({
+      variables: { task: { title: title, completed: false, user: { username: user.email } } },
+      update(cache, { data }) {
+        const existing = cache.readQuery({ query: GET_TODOS })
+        cache.writeQuery({
+          query: GET_TODOS,
+          data: {
+            queryTask: [
+              ...(existing ? existing.queryTask : []),
+              ...data.addTask.task,
+            ],
+          },
+        })
+      },
+    })
 
-const { loading, error, data } = useQuery(GET_TODOS)
-if (loading) return <p>Loading</p>
-if (error) {
-return <p>`Error: ${error.message}`</p>
+  const updateTodo = (modifiedTask) =>
+    upd({
+      variables: {
+        id: modifiedTask.id,
+        task: {
+          value: modifiedTask.title,
+          completed: modifiedTask.completed,
+        },
+      },
+      update(cache, { data }) {
+        data.updateTask.task.map((t) =>
+          cache.modify({
+            id: cache.identify(t),
+            fields: {
+              title: () => t.title,
+              completed: () => t.completed,
+            },
+          })
+        )
+      },
+    })
+
+  const deleteTodo = (id) =>
+    del({
+      variables: { id },
+      update(cache, { data }) {
+        data.deleteTask.task.map(t => cache.evict({ id: cache.identify(t) }))
+      },
+    })
+
+  const clearCompletedTodos = () =>
+    clear({
+      update(cache, { data }) {
+        data.deleteTask.task.map(t => cache.evict({ id: cache.identify(t) }))
+      },
+    })
+
+    const logInOut = !isAuthenticated ? (
+      <p>
+        <a href="#" onClick={loginWithRedirect}>Log in</a> to use the app.
+      </p>
+    ) : (
+      <p>
+        <a
+          href="#"
+          onClick={() => {
+            logout({ returnTo: window.location.origin })
+          }}
+        >
+          Log out
+        </a>{" "}
+        once you are finished, {user.email}.
+      </p>
+    );
+
+  return (
+    <div>
+      {logInOut}
+      <Todos
+        todos={data.queryTodo}
+        addNewTodo={addNewTodo}
+        updateTodo={updateTodo}
+        deleteTodo={deleteTodo}
+        clearCompletedTodos={clearCompletedTodos}
+        todosTitle="Todos"
+      />
+    </div>
+  )
 }
-
-
-const addNewTodo = (title) =>
-add({
-variables: { task: { title: title, completed: false, user: { username: user.email } } },
-update(cache, { data }) {
-const existing = cache.readQuery({ query: GET_TODOS })
-cache.writeQuery({
-query: GET_TODOS,
-data: {
-queryTask: [
-...(existing ? existing.queryTask : []),
-...data.addTask.task,
-],
-},
-})
-},
-})
-
-
-const updateTodo = (modifiedTask) =>
-upd({
-variables: {
-id: modifiedTask.id,
-task: {
-value: modifiedTask.title,
-completed: modifiedTask.completed,
-},
-},
-update(cache, { data }) {
-data.updateTask.task.map((t) =>
-cache.modify({
-id: cache.identify(t),
-fields: {
-title: () => t.title,
-completed: () => t.completed,
-},
-})
-)
-},
-})
-
-
-const deleteTodo = (id) =>
-del({
-variables: { id },
-update(cache, { data }) {
-data.deleteTask.task.map(t => cache.evict({ id: cache.identify(t) }))
-},
-})
-
-
-const clearCompletedTodos = () =>
-clear({
-update(cache, { data }) {
-data.deleteTask.task.map(t => cache.evict({ id: cache.identify(t) }))
-},
-})
-
-
-const logInOut = !isAuthenticated ? (
-<p>
-<a href="#" onClick={loginWithRedirect}>Log in</a> to use the app.
-</p>
-) : (
-<p>
-<a
-href="#"
-onClick={() => {
-logout({ returnTo: window.location.origin })
-}}
->
-Log out
-</a>{" "}
-once you are finished, {user.email}.
-</p>
-);
-
-
-
-
-
-
-return (
-<div>
-{logInOut}
-<Todos
-todos={data.queryTodo}
-addNewTodo={addNewTodo}
-updateTodo={updateTodo}
-deleteTodo={deleteTodo}
-clearCompletedTodos={clearCompletedTodos}
-todosTitle="Todos"
-/>
-</div>
-)
-}
-
 
 export default App
-`
 ```
 
 
