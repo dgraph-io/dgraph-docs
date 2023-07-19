@@ -57,7 +57,7 @@ Let's start with installing the Apollo dependencies and then create a setup.
 
 
 ```
-npm install @apollo/react-hooks apollo-cache-inmemory apollo-client apollo-link-http graphql apollo-link-context
+npm install @apollo/react-hooks apollo-cache-inmemory apollo-client apollo-link-http graphql apollo-link-context react-todomvc @auth0/auth0-react
 ```
 
 
@@ -75,35 +75,35 @@ import { createHttpLink } from "apollo-link-http"
 import "./App.css"
 
 const createApolloClient = () => {
-const httpLink = createHttpLink({
-uri: "http://localhost:8080/graphql",
-options: {
-reconnect: true,
-},
-})
+  const httpLink = createHttpLink({
+    uri: "http://localhost:8080/graphql",
+    options: {
+    reconnect: true,
+    },
+  })
 
 
-return new ApolloClient({
-link: httpLink,
-cache: new InMemoryCache(),
-})
+  return new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+    })
 }
 
 
 const App = () => {
-const client = createApolloClient()
-return (
-<ApolloProvider client={client}>
-<div>
-<h1>todos</h1>
-<input
-className="new-todo"
-placeholder="What needs to be done?"
-autoFocus={true}
-/>
-</div>
-</ApolloProvider>
-)
+  const client = createApolloClient()
+    return (
+    <ApolloProvider client={client}>
+      <div>
+        <h1>todos</h1>
+        <input
+        className="new-todo"
+        placeholder="What needs to be done?"
+        autoFocus={true}
+        />
+      </div>
+    </ApolloProvider>
+  )
 }
 
 
@@ -155,8 +155,9 @@ export const ADD_TODO = gql`
 <!-- Refer to the complete set of queries and mutations [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/GraphQLData.js). -->
 
 
-Now, let's see how to use that to add a todo.
-Let's import the dependencies first in `src/App.js`
+Now, let's see how to use this to add a todo.
+Let's import the dependencies first in `src/App.js` replacing all the code.
+Let's now create the functions to add a todo and get todos.
 
 
 ```javascript
@@ -166,24 +167,16 @@ import "react-todomvc/dist/todomvc.css"
 import { useAuth0 } from "@auth0/auth0-react"
 import { GET_TODOS, ADD_TODO } from "./GraphQLData"
 
-
-```
-
-
-Let's now create the functions to add a todo and get todos.
-
-
-```javascript
 function App() {
   const [add] = useMutation(ADD_TODO)
 
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   const { loading, error, data } = useQuery(GET_TODOS)
   if (loading) return <p>Loading</p>
   if (error) {
     return <p>`Error: ${error.message}`</p>
   }
-
 
   const addNewTodo = (title) =>
     add({
@@ -203,8 +196,9 @@ function App() {
     </div>
   )
 }
-```
 
+export default App
+```
 
 <!-- Refer the complete set of functions [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/TodoApp.js). -->
 
@@ -228,6 +222,75 @@ Now, let's integrate Auth0 in our application and use that to add the logged-in 
 - No need to do the sample app, scroll down to "Configure Auth0" and select "Application Settings".
 - Select your app and add the values of `domain` and `clientid` in the file `src/auth_template.json`. Check this [link](https://auth0.com/docs/quickstart/spa/react/01-login#configure-auth0) for more information.
 - Add `http://localhost:3000` to "Allowed Callback URLs", "Allowed Web Origins" and "Allowed Logout URLs".
+
+
+Now that we have prepared our `src/App.js` file let's update our `src/index.js` file with the following code.
+
+```javascript
+import React from "react"
+import ReactDOM from "react-dom"
+import App from "./App"
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client"
+import { setContext } from "@apollo/client/link/context"
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react"
+import config from "./auth_template.json"
+
+
+const GRAPHQL_ENDPOINT = "http://localhost:8080/graphql"
+
+const AuthorizedApolloProvider = ({ children }) => {
+  const { isAuthenticated, getIdTokenClaims } = useAuth0();
+  const httpLink = createHttpLink({
+    uri: GRAPHQL_ENDPOINT,
+  })
+
+  const authLink = setContext(async (_, { headers }) => {
+    if (!isAuthenticated) {
+      return headers;
+    }
+
+    const token = await getIdTokenClaims();
+
+    return {
+      headers: {
+        ...headers,
+        "X-Auth-Token": token? token.__raw : "",
+      },
+    }
+  })
+
+  const apolloClient = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  })
+
+  return <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
+}
+
+ReactDOM.render(
+  <Auth0Provider
+    domain={config.domain}
+    clientId={config.clientId}
+    redirectUri={window.location.origin}
+  >
+      <AuthorizedApolloProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </AuthorizedApolloProvider>
+  </Auth0Provider>,
+  document.getElementById("root")
+)
+```
+
+Note that for the application to work from this point on, the `src/auth_template.json` file must be configured with your auth0 credentials.
+
+Here is a reference [Here](https://github.com/dgraph-io/auth-webinar/blob/marcelo/fix-finished-app/src/auth_template.json)
 
 
 <!-- Check the commit [here](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c) for verifying the Auth0 setup you did after following the above steps. -->
@@ -343,6 +406,65 @@ function App() {
 export default App
 ```
 
+For our application to work correctly we need to update the `src/GraphQLData.js` file with the remaining queries.
+
+```javascript
+import gql from "graphql-tag"
+
+export const GET_TODOS = gql`
+  query {
+    queryTodo: queryTask {
+      id
+      value: title
+      completed
+    }
+  }
+`
+
+export const ADD_TODO = gql`
+  mutation addTask($task: AddTaskInput!) {
+    addTask(input: [$task]) {
+      task {
+        id
+        value: title
+        completed
+      }
+    }
+  }
+`
+
+export const UPDATE_TODO = gql`
+  mutation updateTask($id: ID!, $task: TaskPatch!) {
+    updateTask(input: { filter: { id: [$id] }, set: $task }) {
+      task {
+        id
+        value: title
+        completed
+      }
+    }
+  }
+`
+
+export const DELETE_TODO = gql`
+  mutation deleteTask($id: ID!) {
+    deleteTask(filter: { id: [$id] }) {
+      task {
+        id
+      }
+    }
+  }
+`
+
+export const CLEAR_COMPLETED_TODOS = gql`
+  mutation updateTask {
+    deleteTask(filter: { completed: true }) {
+      task {
+        id
+      }
+    }
+  }
+`
+```
 
 <!-- Check the updated file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/GraphQLData.js) -->
 
