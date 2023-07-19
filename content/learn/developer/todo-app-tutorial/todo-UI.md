@@ -67,15 +67,12 @@ Now, let's update our `src/App.js` with the below content to include the Apollo 
 ```javascript
 import React from "react"
 
-
 import ApolloClient from "apollo-client"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { ApolloProvider } from "@apollo/react-hooks"
 import { createHttpLink } from "apollo-link-http"
 
-
 import "./App.css"
-
 
 const createApolloClient = () => {
 const httpLink = createHttpLink({
@@ -132,33 +129,28 @@ First, let's see how we can add a todo and get todos. Create a file `src/GraphQL
 ```javascript
 import gql from "graphql-tag"
 
-
 export const GET_TODOS = gql`
-query {
-queryTodo: queryTask {
-id
-value: title
-completed
-}
+  query {
+    queryTodo: queryTask {
+      id
+      value: title
+      completed
+    }
 }
 `
-
 
 export const ADD_TODO = gql`
-mutation addTask($task: AddTaskInput!) {
-addTodo: addTask(input: [$task]) {
-task {
-id
-value: title
-completed
-}
-}
+  mutation addTask($task: AddTaskInput!) {
+    addTask(input: [$task]) {
+      task {
+        id
+        value: title
+        completed
+      }
+  }
 }
 `
-
-
 ```
-
 
 <!-- Refer to the complete set of queries and mutations [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/GraphQLData.js). -->
 
@@ -193,23 +185,13 @@ function App() {
   }
 
 
-const addNewTodo = (title) =>
-  add({
-    variables: { task: { title: title, completed: false, user: { username: user.email } } },
-    update(cache, { data }) {
-      const existing = cache.readQuery({ query: GET_TODOS })
-      cache.writeQuery({
-        query: GET_TODOS,
-        data: {
-          queryTask: [
-          ...(existing ? existing.queryTask : []),
-          ...data.addTask.task,
-          ],
-        },
-      })
-    },
-  })
-
+  const addNewTodo = (title) =>
+    add({
+      variables: { task: { title: title, completed: false, user: { username: user.email } } },
+      refetchQueries: [{
+        query: GET_TODOS
+      }]
+    })
 
   return (
     <div>
@@ -227,7 +209,7 @@ const addNewTodo = (title) =>
 <!-- Refer the complete set of functions [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/TodoApp.js). -->
 
 
-Also, check the other files updated in this step and make those changes as well.
+<!-- Also, check the other files updated in this step and make those changes as well. -->
 
 
 <!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/948e9a8626b1f0c1e40de02485a1110b45f53b89). -->
@@ -283,18 +265,9 @@ function App() {
   const addNewTodo = (title) =>
     add({
       variables: { task: { title: title, completed: false, user: { username: user.email } } },
-      update(cache, { data }) {
-        const existing = cache.readQuery({ query: GET_TODOS })
-        cache.writeQuery({
-          query: GET_TODOS,
-          data: {
-            queryTask: [
-              ...(existing ? existing.queryTask : []),
-              ...data.addTask.task,
-            ],
-          },
-        })
-      },
+      refetchQueries: [{
+        query: GET_TODOS
+      }]
     })
 
   const updateTodo = (modifiedTask) =>
@@ -371,10 +344,10 @@ export default App
 ```
 
 
-Check the updated file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/GraphQLData.js)
+<!-- Check the updated file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/GraphQLData.js) -->
 
 
-Now, let's also add functions for these in `src/TodoApp.js`.
+<!-- Now, let's also add functions for these in `src/TodoApp.js`.
 
 
 ```javascript
@@ -445,7 +418,7 @@ user: newUser
 ```
 
 
-Check all the changes for the file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/TodoApp.js)
+Check all the changes for the file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/TodoApp.js) -->
 
 
 Let's create a short profile page to display user details. Add files `src/Profile.js` and `src/Profile.css`.
@@ -492,10 +465,10 @@ border-radius: 50%;
 ```
 
 
-Also, check the other files updated in this step and make those changes as well.
+<!-- Also, check the other files updated in this step and make those changes as well.
 
 
-Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c).
+Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c). -->
 
 
 Let's now start the app.
