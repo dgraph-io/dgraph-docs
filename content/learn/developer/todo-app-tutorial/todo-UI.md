@@ -33,9 +33,6 @@ npm start
 ```
 
 
-<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/bc235fda6e7557fc9204dd886c67f7eec7bdcadb). -->
-
-
 ## Install dependencies
 
 
@@ -45,9 +42,6 @@ Now, let's install the various dependencies that we will need in the app.
 ```
 npm install todomvc-app-css classnames graphql-tag history react-router-dom
 ```
-
-
-<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/fc7ed70fdde368179e9d7310202b1a0952d2c5c1). -->
 
 
 ## Setup Apollo Client
@@ -114,9 +108,6 @@ export default App
 Here we have created a simple instance of the Apollo client and passed the URL of our GraphQL API. Then we have passed the client to `ApolloProvider` and wrapped our `App` so that its accessible throughout the app.
 
 
-<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/f3fedc663e75d2f8ce933432b15db5d5d080ccc2). -->
-
-
 ## Queries and Mutations
 
 
@@ -151,8 +142,6 @@ export const ADD_TODO = gql`
 }
 `
 ```
-
-<!-- Refer to the complete set of queries and mutations [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/GraphQLData.js). -->
 
 
 Now, let's see how to use this to add a todo.
@@ -199,14 +188,6 @@ function App() {
 
 export default App
 ```
-
-<!-- Refer the complete set of functions [here](https://github.com/dgraph-io/graphql-sample-apps/blob/948e9a8626b1f0c1e40de02485a1110b45f53b89/todo-app-react/src/TodoApp.js). -->
-
-
-<!-- Also, check the other files updated in this step and make those changes as well. -->
-
-
-<!-- Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/948e9a8626b1f0c1e40de02485a1110b45f53b89). -->
 
 
 ## Auth0 Integration
@@ -292,8 +273,6 @@ Note that for the application to work from this point on, the `src/auth_template
 
 Here is a reference [Here](https://github.com/dgraph-io/auth-webinar/blob/marcelo/fix-finished-app/src/auth_template.json)
 
-
-<!-- Check the commit [here](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c) for verifying the Auth0 setup you did after following the above steps. -->
 
 
 Let's also add definitions for updating, deleting and clearing all tasks to `src/GraphQLData.js`.
@@ -466,131 +445,6 @@ export const CLEAR_COMPLETED_TODOS = gql`
 `
 ```
 
-<!-- Check the updated file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/GraphQLData.js) -->
-
-
-<!-- Now, let's also add functions for these in `src/TodoApp.js`.
-
-
-```javascript
-...
-import { GET_USER, GET_TODOS, ADD_USER, ADD_TODO, DELETE_TODO, TOGGLE_TODO, UPDATE_TODO, CLEAR_COMPLETED_TODO, TOGGLE_ALL_TODO } from "./GraphQLData";
-import { useAuth0 } from "./react-auth0-spa";
-
-
-...
-
-
-const useImperativeQuery = (query) => {
-const { refetch } = useQuery(query, { skip: true });
-const imperativelyCallQuery = (variables) => {
-return refetch(variables);
-};
-return imperativelyCallQuery;
-};
-
-
-const TodoApp = () => {
-
-
-...
-const [newTodo, setNewTodo] = useState("");
-const [shownTodos, setShownTodos] = useState([]);
-
-
-const [addUser] = useMutation(ADD_USER);
-
-
-...
-
-
-const [updateTodo] = useMutation(UPDATE_TODO);
-const [clearCompletedTodo] = useMutation(CLEAR_COMPLETED_TODO);
-const getUsers = useImperativeQuery(GET_USER)
-
-
-const { user } = useAuth0();
-
-
-const createUser = () => {
-if (user === undefined) {
-return null;
-}
-const { data: getUser } = getUsers({
-username: user.email
-});
-if (getUser && getUser.getUser === null) {
-const newUser = {
-username: user.email,
-name: user.nickname,
-};
-addUser({
-variables: {
-user: newUser
-}
-})
-}
-}
-}
-
-
-...
-
-
-```
-
-
-Check all the changes for the file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/TodoApp.js) -->
-
-
-<!-- Let's create a short profile page to display user details. Add files `src/Profile.js` and `src/Profile.css`.
-
-
-```javascript
-import React from "react";
-import { useAuth0 } from "./react-auth0-spa";
-import './Profile.css';
-
-
-const Profile = () => {
-  const { loading, user } = useAuth0();
-
-
-  if (loading || !user) {
-  return <div>Loading...</div>;
-  }
-
-
-  return (
-    <div className="profile">
-      <img className="profile-img" src={user.picture} alt="Profile" />
-      <p>Name: <strong>{user.nickname}</strong></p>
-      <p>Email: <strong>{user.email}</strong></p>
-    </div>
-  );
-};
-
-
-export default Profile;
-```
-
-
-```css
-.profile {
-padding: 15px;
-}
-.profile-img {
-display: block;
-margin: 0 auto;
-border-radius: 50%;
-}
-``` -->
-
-
-<!-- Also, check the other files updated in this step and make those changes as well.
-
-
-Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c). -->
 
 Here is the complete code [Here](https://github.com/dgraph-io/auth-webinar/tree/marcelo/fix-finished-app/src)
 
