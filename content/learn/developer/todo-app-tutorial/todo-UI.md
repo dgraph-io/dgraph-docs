@@ -421,7 +421,7 @@ user: newUser
 Check all the changes for the file [here](https://github.com/dgraph-io/graphql-sample-apps/blob/4c9c42e1ae64545cb10a24922623a196288d061c/todo-app-react/src/TodoApp.js) -->
 
 
-Let's create a short profile page to display user details. Add files `src/Profile.js` and `src/Profile.css`.
+<!-- Let's create a short profile page to display user details. Add files `src/Profile.js` and `src/Profile.css`.
 
 
 ```javascript
@@ -431,21 +431,21 @@ import './Profile.css';
 
 
 const Profile = () => {
-const { loading, user } = useAuth0();
+  const { loading, user } = useAuth0();
 
 
-if (loading || !user) {
-return <div>Loading...</div>;
-}
+  if (loading || !user) {
+  return <div>Loading...</div>;
+  }
 
 
-return (
-<div className="profile">
-<img className="profile-img" src={user.picture} alt="Profile" />
-<p>Name: <strong>{user.nickname}</strong></p>
-<p>Email: <strong>{user.email}</strong></p>
-</div>
-);
+  return (
+    <div className="profile">
+      <img className="profile-img" src={user.picture} alt="Profile" />
+      <p>Name: <strong>{user.nickname}</strong></p>
+      <p>Email: <strong>{user.email}</strong></p>
+    </div>
+  );
 };
 
 
@@ -462,7 +462,7 @@ display: block;
 margin: 0 auto;
 border-radius: 50%;
 }
-```
+``` -->
 
 
 <!-- Also, check the other files updated in this step and make those changes as well.
@@ -470,6 +470,7 @@ border-radius: 50%;
 
 Refer this step in [GitHub](https://github.com/dgraph-io/graphql-sample-apps/commit/4c9c42e1ae64545cb10a24922623a196288d061c). -->
 
+Here is the complete code [Here](https://github.com/dgraph-io/auth-webinar/tree/marcelo/fix-finished-app/src)
 
 Let's now start the app.
 
