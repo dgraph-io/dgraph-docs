@@ -4,9 +4,9 @@ description = "Create a simple to-do app and integrate it with Auth0. This step 
 weight = 3
 type = "learn"
 [menu.learn]
-parent = "todo-app-tutorial"
+    parent = "todo-app-tutorial"
 [nav]
-nextpage = "todo-auth-rules.md"
+  nextpage = "todo-auth-rules.md"
 +++
 
 
@@ -72,7 +72,7 @@ const createApolloClient = () => {
   const httpLink = createHttpLink({
     uri: "http://localhost:8080/graphql",
     options: {
-    reconnect: true,
+      reconnect: true,
     },
   })
 
@@ -80,20 +80,20 @@ const createApolloClient = () => {
   return new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),
-    })
+  })
 }
 
 
 const App = () => {
   const client = createApolloClient()
-    return (
+  return (
     <ApolloProvider client={client}>
       <div>
         <h1>todos</h1>
         <input
-        className="new-todo"
-        placeholder="What needs to be done?"
-        autoFocus={true}
+          className="new-todo"
+          placeholder="What needs to be done?"
+          autoFocus={true}
         />
       </div>
     </ApolloProvider>
@@ -127,7 +127,7 @@ export const GET_TODOS = gql`
       value: title
       completed
     }
-}
+  }
 `
 
 export const ADD_TODO = gql`
@@ -138,8 +138,8 @@ export const ADD_TODO = gql`
         value: title
         completed
       }
+    }
   }
-}
 `
 ```
 
@@ -177,11 +177,11 @@ function App() {
 
   return (
     <div>
-    <Todos
-      todos={data.queryTodo}
-      addNewTodo={addNewTodo}
-      todosTitle="Todos"
-    />
+      <Todos
+        todos={data.queryTodo}
+        addNewTodo={addNewTodo}
+        todosTitle="Todos"
+      />
     </div>
   )
 }
@@ -259,11 +259,11 @@ ReactDOM.render(
     clientId={config.clientId}
     redirectUri={window.location.origin}
   >
-      <AuthorizedApolloProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </AuthorizedApolloProvider>
+    <AuthorizedApolloProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </AuthorizedApolloProvider>
   </Auth0Provider>,
   document.getElementById("root")
 )
@@ -288,7 +288,7 @@ import { Todos } from "react-todomvc"
 
 import "react-todomvc/dist/todomvc.css"
 import { useAuth0 } from "@auth0/auth0-react"
-import { GET_TODOS, ADD_TODO, UPDATE_TODO, DELETE_TODO, CLEAR_COMPLETED_TODOS, TOGGLE_TODO } from "./GraphQLData"
+import { GET_TODOS, ADD_TODO, UPDATE_TODO, DELETE_TODO, CLEAR_COMPLETED_TODOS } from "./GraphQLData"
 
 function App() {
   const [add] = useMutation(ADD_TODO)
@@ -349,23 +349,23 @@ function App() {
       },
     })
 
-    const logInOut = !isAuthenticated ? (
-      <p>
-        <a href="#" onClick={loginWithRedirect}>Log in</a> to use the app.
-      </p>
-    ) : (
-      <p>
-        <a
-          href="#"
-          onClick={() => {
-            logout({ returnTo: window.location.origin })
-          }}
-        >
-          Log out
-        </a>{" "}
-        once you are finished, {user.email}.
-      </p>
-    );
+  const logInOut = !isAuthenticated ? (
+    <p>
+      <a href="#" onClick={loginWithRedirect}>Log in</a> to use the app.
+    </p>
+  ) : (
+    <p>
+      <a
+        href="#"
+        onClick={() => {
+          logout({ returnTo: window.location.origin })
+        }}
+      >
+        Log out
+      </a>{" "}
+      once you are finished, {user.email}.
+    </p>
+  );
 
   return (
     <div>
