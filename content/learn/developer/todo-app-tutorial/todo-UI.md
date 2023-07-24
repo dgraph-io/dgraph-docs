@@ -277,7 +277,7 @@ Here is a reference [Here](https://github.com/dgraph-io/auth-webinar/blob/marcel
 
 Let's also add definitions for updating, deleting and clearing all tasks to `src/GraphQLData.js`.
 Let's also add the constants `user`, `isAuthenticated`, `loginWithRedirect` and `logout` which they receive from the variable `useAuth0`.
-We also create a const called `logInOut` that contains the logic to know if the user is logged in or not. This variable will show a button to login or logout depending on the status of logged in or logged out.
+We also create a constant called `logInOut` that contains the logic to know if the user is logged in or not. This variable will show a button to login or logout depending on the status of logged in or logged out.
 Note that before calling the component Todos we call our variable `{logInOut}` so that our login button appears above the application.
 
 
