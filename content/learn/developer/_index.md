@@ -12,7 +12,7 @@ weight = 2
 
 
 ### Recommended learning path
-- See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph cluster architecture.
+- See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph Cluster architecture.
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}}).
 - Follow the [GraphQL API Quickstart]({{< relref "graphql/quick-start" >}}) to create a first API.
 - Take the [GraphQL Tour](https://dgraph.io/tour/graphqlintro/).

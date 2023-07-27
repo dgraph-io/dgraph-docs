@@ -13,7 +13,7 @@ weight = 3
 
 
 ### Recommended learning path
-- See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph cluster architecture.
+- See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph Cluster architecture.
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}}).
 - Follow the [Dgraph Query Language(DQL)  Quickstart]({{< relref "dql/dql-get-started" >}}) to execute some queries.
 - Take the interactive [DQL Tour](https://dgraph.io/tour/intro/1/).
