@@ -1,7 +1,7 @@
 +++
 date = "2023-03-20T19:35:35+11:00"
 title = "Dgraph for application developers"
-description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph docs have the information you need."
+description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph documentation has the information you need."
 type = "learn"
 weight = 2
 [menu.learn]

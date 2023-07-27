@@ -17,7 +17,7 @@ title = "Introduction"
 link = "/courses/messageboardapp/react/overview/introduction/"
 +++
 
-In Dgraph Cloud, an app is served by a GraphQL backend powered by Dgraph
+In [Dgraph Cloud](https://cloud.dgraph.io/), an app is served by a GraphQL backend powered by Dgraph
 database. You should deploy a backend for each app you build, and potentially
 backends for test and development environments as well.
 
