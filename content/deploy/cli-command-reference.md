@@ -215,7 +215,7 @@ The commands in these groups are shown in the following table:
 
 |Group             | Command                        | Note                         |
 |------------------|--------------------------------|------------------------------|
-| (root)           | [`dgraph`](#dgraph-root-command) | Root command for Dgraph CLI  |          
+| (root)           | [`dgraph`](#dgraph-root-command) | Root command for Dgraph CLI  |
 | Dgraph core      | [`alpha`](#dgraph-alpha) | Dgraph Alpha database node commands |
 | Dgraph core      | [`zero`](#dgraph-zero) | Dgraph Zero management node commands |
 | Data loading     | [`bulk`](#dgraph-bulk) | Dgraph [Bulk Loader]({{< relref "bulk-loader.md" >}}) commands     |
@@ -245,40 +245,40 @@ the help listing for `dgraph --help` is shown below:
 Usage:
   dgraph [command]
 
-Generic:             
- help          Help about any command        
+Generic:
+ help          Help about any command
  version       Prints the dgraph version details
 
 Available Commands:
 
-Dgraph Core:   
-  alpha         Run Dgraph Alpha database server                   
+Dgraph Core:
+  alpha         Run Dgraph Alpha database server
   zero          Run Dgraph Zero management server
 
-Data Loading:     
-  bulk          Run Dgraph Bulk Loader          
-  live          Run Dgraph Live Loader    
-  restore       Restore backup from Dgraph Enterprise Edition   
+Data Loading:
+  bulk          Run Dgraph Bulk Loader
+  live          Run Dgraph Live Loader
+  restore       Restore backup from Dgraph Enterprise Edition
 
-Dgraph Security:  
-  acl           Run the Dgraph Enterprise Edition ACL tool  
-  audit         Dgraph audit tool  
-  cert          Dgraph TLS certificate management                
+Dgraph Security:
+  acl           Run the Dgraph Enterprise Edition ACL tool
+  audit         Dgraph audit tool
+  cert          Dgraph TLS certificate management
 
-Dgraph Debug:         
+Dgraph Debug:
   debug         Debug Dgraph instance
-  debuginfo     Generate debug information on the current node            
+  debuginfo     Generate debug information on the current node
 
-Dgraph Tools:       
+Dgraph Tools:
   completion    Generates shell completion scripts for bash or zsh
-  conv          Dgraph Geo file converter   
+  conv          Dgraph Geo file converter
   decrypt       Run the Dgraph decryption tool
-  export_backup Export data inside single full or incremental backup  
-  increment     Increment a counter transactionally  
+  export_backup Export data inside single full or incremental backup
+  increment     Increment a counter transactionally
   lsbackup      List info on backups in a given location
   migrate       Run the Dgraph migration tool from a MySQL database to Dgraph
-  raftmigrate   Run the Raft migration tool  
-  upgrade       Run the Dgraph upgrade tool  
+  raftmigrate   Run the Raft migration tool
+  upgrade       Run the Dgraph upgrade tool
 
 Flags:
       --alsologtostderr                  log to standard error as well as files
@@ -373,7 +373,8 @@ Flags:
                                        query-edge=1000000; The maximum number of edges that can be returned in a query. This applies to shortest path and recursive queries.
                                        query-timeout=0ms; Maximum time after which a query execution will fail. If set to 0, the timeout is infinite.
                                        txn-abort-after=5m; Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation.
-                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;")
+                                       max-pending-queries=10000; Number of maximum pending queries before we reject them as too many requests.
+                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m; max-pending-queries=10000")
       --my string                  addr:port of this server, so other Dgraph servers can talk to this.
   -o, --port_offset int            Value added to all listening port numbers. [Internal=7080, HTTP=8080, Grpc=9080]
   -p, --postings string            Directory to store posting lists. (default "p")
@@ -962,7 +963,7 @@ created using Dgraph Enterprise Edition into an exported folder. The following
 replicates key information from the help listing shown when you run `dgraph export_backup --help`:
 
 ```shell
- Export data inside single full or incremental backup
+Export data inside single full or incremental backup
 Usage:
   dgraph export_backup [flags]
 

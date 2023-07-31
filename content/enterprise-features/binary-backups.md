@@ -36,7 +36,7 @@ via environment variables:
  `AWS_SESSION_TOKEN`                         | AWS session token (if required).
 
 
-Starting with [v20.07.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.07.0) if the system has access to the S3 bucket, you no longer need to explicitly include these environment variables.  
+Starting with [v20.07.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.07.0) if the system has access to the S3 bucket, you no longer need to explicitly include these environment variables.
 
 In AWS, you can accomplish this by doing the following:
 1. Create an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) with an IAM Policy that grants access to the S3 bucket.
@@ -80,7 +80,7 @@ input BackupInput {
 
 		"""
 		Secret key credential for the destination.
-		"""		
+		"""
 		secretKey: String
 
 		"""
@@ -596,7 +596,7 @@ input RestoreInput {
 
 		"""
 		Secret key credential for the destination.
-		"""		
+		"""
 		secretKey: String
 
 		"""
