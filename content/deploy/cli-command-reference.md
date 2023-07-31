@@ -833,6 +833,7 @@ Flags:
       --jepsen string       Disect Jepsen output. Can be linear/binary.
   -l, --lookup string       Hex of key to lookup.
       --nokeys              Ignore key_. Only consider amount when calculating total.
+      --only-summary        If true, only show the summary of the p directory.
   -p, --postings string     Directory where posting lists are stored.
   -r, --pred string         Only output specified predicate.
       --prefix string       Uses a hex prefix.
