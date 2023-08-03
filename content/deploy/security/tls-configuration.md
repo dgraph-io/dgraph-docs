@@ -349,16 +349,17 @@ succeed.
 
 ## Using Curl with Client authentication
 
-When TLS is enabled, `curl` requests to Dgraph will need some specific options to work.  For instance (for an export request):
+When TLS is enabled, `curl` requests to Dgraph will need some specific options to work.
+For instance (for changing draining mode):
 
 ```
-curl --silent https://localhost:8080/admin/export
+curl --silent https://localhost:8080/admin/draining
 ```
 
 If you are using `curl` with [Client Authentication](#client-authentication-options) set to `REQUIREANY` or `REQUIREANDVERIFY`, you will need to provide the client certificate and private key.  For instance (for an export request):
 
 ```
-curl --silent --cacert ./tls/ca.crt --cert ./tls/client.dgraphuser.crt --key ./tls/client.dgraphuser.key https://localhost:8080/admin/export
+curl --silent --cacert ./tls/ca.crt --cert ./tls/client.dgraphuser.crt --key ./tls/client.dgraphuser.key https://localhost:8080/admin/draining
 ```
 
 Refer to the `curl` documentation for further information on its TLS options.

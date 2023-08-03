@@ -638,7 +638,7 @@ help listing shown when you run `dgraph restore --help`:
 ```shell
 Restore loads objects created with the backup feature in Dgraph Enterprise Edition (EE).
 
-Backups are originated from HTTP at /admin/backup, then can be restored using CLI restore
+Backups taken using the GraphQL API can be restored using CLI restore
 command. Restore is intended to be used with new Dgraph clusters in offline state.
 
 The --location flag indicates a source URI with Dgraph backup objects. This URI supports all
