@@ -88,7 +88,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 export function App() {
   return (
     <>
-      <div className="app-banner">
+      <div className="app-banner"></div>
         ...
       <div className="App">
         <div className="mt-4 mx-8">
