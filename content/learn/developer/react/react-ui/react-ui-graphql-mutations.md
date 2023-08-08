@@ -263,6 +263,27 @@ collects together the state and calls the `addPost` function, as follows:
   }
 ```
 
+Now, when we add a new post, we want to be able to add the category as well. So let's add this code to the `src/components/types/operations.ts` file.
+
+```ts
+  export type CategoriesQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+  export type CategoriesQuery = (
+    { __typename?: 'Query' }
+    & { queryCategory?: Types.Maybe<Array<Types.Maybe<(
+      { __typename?: 'Category' }
+      & Pick<Types.Category, 'id' | 'name'>
+    )>>> }
+  );
+```
+
+Run the following command again to tell the GraphQL Code Generator to generate a React
+hook, `useCategoriesQuery`.
+
+```sh
+yarn run generate-types
+```
+
 The modal is now set up with a list of possible categories for the post
 by first querying to find the existing categories and populating a dropdown from
 that. With all of these changes, the `src/component/header.tsx` file looks as
@@ -435,6 +456,19 @@ export function AppHeader() {
     </>
   )
 }
+```
+
+After this step go to the `src/App.jsx` file and import the `AppHeader` component as follows:
+
+```js
+  ...
+  import { AppHeader } from "./components/header";
+  ...
+
+  ...
+  <BrowserRouter>
+    <AppHeader />
+  ...
 ```
 
 All of this adds a **Create Post** button to the header, along with supporting
