@@ -34,7 +34,7 @@ Add dependencies to the project using the following commands:
 
 ```
 yarn add react-router-dom
-yarn add -D @types/react-router-dom
+yarn add -D @types/react-router-dom@5
 ```
 
 The `-D` option adds the TypeScript types `@types/react-router-dom` to the
