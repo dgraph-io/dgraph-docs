@@ -131,57 +131,6 @@ mutation {
 }
 ```
 
-### Backup using a MinIO Gateway
-
-#### Azure Blob Storage
-
-You can use [Azure Blob Storage](https://azure.microsoft.com/services/storage/blobs/) through the [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html).  You need to configure a [storage account](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and a[container](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers) to organize the blobs.
-
-For MinIO configuration, you will need to [retrieve storage accounts keys](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage). The [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) will use `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` to correspond to Azure Storage Account `AccountName` and `AccountKey`.
-
-Once you have the `AccountName` and `AccountKey`, you can access Azure Blob Storage locally using one of these methods:
-
-*  Run [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) using Docker
-   ```bash
-   docker run --publish 9000:9000 --name gateway \
-     --env "MINIO_ACCESS_KEY=<AccountName>" \
-     --env "MINIO_SECRET_KEY=<AccountKey>" \
-     minio/minio gateway azure
-   ```
-*  Run [MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) using the MinIO Binary
-   ```bash
-   export MINIO_ACCESS_KEY="<AccountName>"
-   export MINIO_SECRET_KEY="<AccountKey>"
-   minio gateway azure
-   ```
-
-#### Google Cloud Storage
-
-You can use [Google Cloud Storage](https://cloud.google.com/storage) through the [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html).  You will need to [create storage buckets](https://cloud.google.com/storage/docs/creating-buckets), create a Service Account key for GCS and get a credentials file.  See [Create a Service Account key](https://github.com/minio/minio/blob/master/docs/gateway/gcs.md#11-create-a-service-account-ey-for-gcs-and-get-the-credentials-file) for further information.
-
-Once you have a `credentials.json`, you can access GCS locally using one of these methods:
-
-*  Run [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) using Docker
-   ```bash
-   docker run --publish 9000:9000 --name gateway \
-     --volume /path/to/credentials.json:/credentials.json \
-     --env "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" \
-     --env "MINIO_ACCESS_KEY=minioaccountname" \
-     --env "MINIO_SECRET_KEY=minioaccountkey" \
-     minio/minio gateway gcs <project-id>
-   ```
-*  Run [MinIO GCS Gateway](https://docs.min.io/docs/minio-gateway-for-gcs.html) using the MinIO Binary
-   ```bash
-   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
-   export MINIO_ACCESS_KEY=minioaccesskey
-   export MINIO_SECRET_KEY=miniosecretkey
-   minio gateway gcs <project-id>
-   ```
-
-#### Test Using MinIO Browser
-
-MinIO Gateway comes with an embedded web-based object browser.  After using one of the aforementioned methods to run the MinIO Gateway, you can test that MinIO Gateway is running, open a web browser, navigate to http://127.0.0.1:9000, and ensure that the object browser is displayed and can access the remote object storage.
-
 ### Disabling HTTPS for S3 and Minio backups
 
 By default, Dgraph assumes the destination bucket is using HTTPS. If that is not
