@@ -40,8 +40,8 @@ The general syntax for superflags is as follows: `--<super-flag-name> option-a=v
 
 {{% notice "note" %}}
 You should encapsulate the options for a superflag in double-quotes (`"`) if any
-of those option values include spaces. You can also encapsulate options in
-double-quotes to improve readability. So, you can also use the following
+of those option values include spaces. You can encapsulate options in
+double-quotes to improve readability. You can also use the following
 syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`.
 {{% /notice %}}
 
@@ -228,7 +228,7 @@ The commands in these groups are shown in the following table:
 | Dgraph debug     | [`debuginfo`](#dgraph-debuginfo)    | Generates information about the current node for use in debugging issues with Dgraph clusters   |
 | Dgraph tools     | [`completion`](#dgraph-completion)    | Generates shell completion scripts for `bash` and `zsh`     |
 | Dgraph tools     | [`conv`](#dgraph-conv)    | Converts geographic files into RDF so that they can be consumed by Dgraph    |
-| Dgraph tools     | [`decrypt`](#dgraph-decrypt)    | Decrypts an export file created by an encrypted Dgraph cluster     |
+| Dgraph tools     | [`decrypt`](#dgraph-decrypt)    | Decrypts an export file created by an encrypted Dgraph Cluster     |
 | Dgraph tools     | [`export_backup`](#dgraph-export_backup)    | Converts a binary backup created using Dgraph Enterprise Edition into an exported folder.      |
 | Dgraph tools     | [`increment`](#dgraph-increment)    | Increments a counter transactionally to confirm that a Dgraph Alpha node can handle query and mutation requests |
 | Dgraph tools     | [`lsbackup`](#dgraph-lsbackup)    | Lists information on backups in a given location   |
@@ -928,7 +928,7 @@ Use "dgraph conv [command] --help" for more information about a command.
 #### `dgraph decrypt`
 
 This command lets you decrypt an export file created by an encrypted Dgraph
-cluster. The following replicates the help listing shown when you run
+Cluster. The following replicates the help listing shown when you run
 `dgraph decrypt --help`:
 
 ```shell
