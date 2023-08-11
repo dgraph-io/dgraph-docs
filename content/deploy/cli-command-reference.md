@@ -1079,33 +1079,6 @@ Flags:
 Use "dgraph migrate [command] --help" for more information about a command.
 ```
 
-#### `dgraph raftmigrate`
-
-This command runs the Dgraph Raft migration tool.<!-- TBD need to say more about this -->
-The following replicates the help listing shown when you run `dgraph raftmigrate --help`:
-
-```shell
-Run the Raft migration tool
-Usage:
- dgraph raftmigrate [flags]
-
-Flags:
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
- -h, --help                         help for raftmigrate
-     --new-dir string               Path to the new (z)w directory.
-     --old-dir string               Path to the old (z)w directory.
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
-
-Use "dgraph raftmigrate [command] --help" for more information about a command.
-```
-
 #### `dgraph upgrade`
 
 This command helps you to upgrade from an earlier Dgraph release to a newer release.
