@@ -40,7 +40,9 @@ This tutorial starts with the minimal boilerplate already complete. To read thro
 For this tutorial, you can start with the boilerplate React app and CSS by
 checking out the setup from GitHub. To do this, see the [tutorial-boilerplate tag](https://github.com/dgraph-io/discuss-tutorial/releases/tag/tutorial-boilerplate).
 
-Note: in case you don't use git you can download minimal boilerplate as indicated in the previous link or you can do this using the `git` CLI as shown below.
+**Non git user:** You can download the minimal boilerplate as indicated in the previous link and proceed to the section **Running the application boilerplate**. 
+
+**Git users** You can do this using the `git` CLI as shown below.
 
 ```sh
 git clone https://github.com/dgraph-io/discuss-tutorial
