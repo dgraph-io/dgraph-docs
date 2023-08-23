@@ -232,7 +232,7 @@ export function PostFeed() {
               <Image src={avatar(post?.author.avatarImg)} rounded size="mini" />
               <Header.Content>
                 {post?.title}
-                <Header.Subheader>{post?.author.displayName}</Header.Subheader>
+                <Header.Subheader>{post?.author.username}</Header.Subheader>
               </Header.Content>
             </Header>
           </Link>
