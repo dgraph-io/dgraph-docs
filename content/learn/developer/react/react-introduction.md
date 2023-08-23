@@ -19,7 +19,10 @@ to grasp the schema at a glance, but also extensible enough to add
 things like integrated authorization and real-time updates with
 subscriptions.
 
-**Note:** This tutorial is a starting point and not the full version as shown in the images below, to check the final version of this app, access this [link](https://github.com/dgraph-io/discuss-tutorial/tree/master) clone the app and follow the steps described in the readme.
+**Note:** This tutorial is a starting point and not the full version as 
+shown in the images below, to check the final version of this app, access 
+this [link](https://github.com/dgraph-io/discuss-tutorial/tree/master) 
+clone the app and follow the steps described in the readme.
 
 ## The App
 
