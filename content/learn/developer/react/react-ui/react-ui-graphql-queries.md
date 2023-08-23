@@ -35,7 +35,7 @@ Firstly, add all the GraphQL Code Generator dependencies as development dependen
 yarn add -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/add @graphql-codegen/near-operation-file-preset @graphql-codegen/named-operations-object
 ```
 
-You can then run the following command to to set up GraphQL Code Generator for
+You can then run the following command to set up GraphQL Code Generator for
 the project:
 
 ```sh
@@ -185,7 +185,7 @@ Because of the types, you really can't go wrong.
 
 ## Layout with GraphQL - post list
 
-Now that you have GraphQL to help write queries and get data and GraphQL Code Generator to turn that into typed Javascript, you can now layout your data and be sure you won't make a mistake because GraphQL and types will catch you.
+Now that you have GraphQL to help write queries and get data and GraphQL Code Generator to turn that into typed JavaScript, you can now layout your data and be sure you won't make a mistake because GraphQL and types will catch you.
 
 Let's make a `PostFeed` component that uses the `useAllPostsQuery` and renders the data into a Semantic React UI `Table`.
 

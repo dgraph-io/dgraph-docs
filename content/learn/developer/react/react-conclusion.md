@@ -41,7 +41,3 @@ Want to learn more? Check out [another course](/courses/), or head over to our
 And if you have been reading along but haven't tried it yet, 
 [try Dgraph Cloud](https://cloud.dgraph.io/) to launch your first hosted 
 GraphQL database.
-
-
-
-

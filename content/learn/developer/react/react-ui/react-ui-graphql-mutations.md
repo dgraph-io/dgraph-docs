@@ -189,7 +189,7 @@ and React re-renders that component.
 Again, this works, but it could be more efficient: The UI actually already has
 all of the data it needs to render the updated UI after the first round trip,
 because the new post on the server is only going to be the post that was added
-by the mutation. So, to avoid a trip to the server, you can manually update
+by the mutation. To avoid a trip to the server, you can manually update
 Apollo's view of the result of the `allPosts` query and force the re-render,
 without round-tripping to the server. That's done by editing the cached value,
 as follows:
@@ -215,7 +215,7 @@ const [addPost] = useAddPostMutation({
 ```
 
 
-That sets up the the `addPost` function to run the `addPost` mutation, and on
+That sets up the `addPost` function to run the `addPost` mutation, and on
 completion inserts the new post into the cache.
 
 ## Layout for the mutation
@@ -234,7 +234,7 @@ const [createPost, setCreatePost] = useState(false)
 </Button>
 ```
 
-The state for the the new post data is again controlled by React state. The
+The state for the new post data is again controlled by React state. The
 modal gives the user input options to update that data, as follows:
 
 ```js
@@ -263,7 +263,7 @@ collects together the state and calls the `addPost` function, as follows:
   }
 ```
 
-Now, when we add a new post, we want to be able to add the category as well. So let's add this code to the `src/components/types/operations.ts` file.
+Now, when we add a new post, we want to be able to add the category as well. Let's add this code to the `src/components/types/operations.ts` file.
 
 ```ts
   export type CategoriesQueryVariables = Types.Exact<{ [key: string]: never; }>;
