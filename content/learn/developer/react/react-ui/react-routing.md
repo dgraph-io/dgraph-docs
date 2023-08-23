@@ -88,20 +88,21 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 export function App() {
   return (
     <>
-      <div className="app-banner"></div>
+      <div className="app-banner">
         ...
+      </div>
       <div className="App">
         <div className="mt-4 mx-8">
           <p>
-            Learn about building GraphQL apps with Dgraph Cloud at https://dgraph.io/learn
+            Learn about building GraphQL apps with Dgraph Cloud at <a href="https://dgraph.io/docs/learn/developer/"><strong>https://dgraph.io/docs/learn/developer/</strong></a>
           </p>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/post/:id" component={Post} />
-              <Route exact path="/" component={Home} />
-            </Switch>
-          </BrowserRouter>
         </div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/post/:id" component={Post} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </BrowserRouter>
       </div>
     </>
   );
