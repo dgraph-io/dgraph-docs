@@ -145,7 +145,7 @@ boilerplate for a mutation is as follows:
 
 ```js
 const [addPost] = useAddPostMutation({
-    /* what happens after the mutation is executed */
+  /* what happens after the mutation is executed */
 })
 ```
 
@@ -170,7 +170,7 @@ option is to just force reloading of the `allPosts` query, as follows:
 
 ```js
 const [addPost] = useAddPostMutation({
-    refetchQueries: [ { query: /* ... allPosts ... */ } ],
+  refetchQueries: [ { query: /* ... allPosts ... */ } ],
 })
 ```
 
@@ -195,23 +195,23 @@ without round-tripping to the server. That's done by editing the cached value,
 as follows:
 
 ```js
-  const [addPost] = useAddPostMutation({
-    update(cache, { data }) {
-      const existing = cache.readQuery<AllPostsQuery>({
-        query: AllPostsDocument,
-      })
+const [addPost] = useAddPostMutation({
+  update(cache, { data }) {
+    const existing = cache.readQuery<AllPostsQuery>({
+      query: AllPostsDocument,
+    })
 
-      cache.writeQuery({
-        query: AllPostsDocument,
-        data: {
-          queryPost: [
-            ...(data?.addPost?.post ?? []),
-            ...(existing?.queryPost ?? []),
-          ],
-        },
-      })
-    },
-  })
+    cache.writeQuery({
+      query: AllPostsDocument,
+      data: {
+        queryPost: [
+          ...(data?.addPost?.post ?? []),
+          ...(existing?.queryPost ?? []),
+        ],
+      },
+    })
+  },
+})
 ```
 
 

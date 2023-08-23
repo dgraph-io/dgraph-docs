@@ -10,7 +10,7 @@ weight = 18
   parent = "react-app-using-auth0"
   identifier = "react-app-using-auth0"
 [nav]
-  nextpage = "react-auth0.md"
+	nextpage = "react-auth0.md"
 [nav.previous]
 title = "GraphQL Mutations"
 link = "/docs/learn/developer/react/react-ui/"
@@ -47,29 +47,29 @@ Next let's add the necessary constants along with the logic to show the `login` 
 const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
 const logInOut = !isAuthenticated ? (
-    <span>
-        <Button className="dgraph-btn mr-1">
-        <a href="#" onClick={(event) => {
-            event.preventDefault(); 
-            loginWithRedirect()}}>Log in</a>
-        </Button>
-    </span>
-    ) : (
-    <>
-    <span>{addPostButton()}</span>
-    <span>
-        <Button className="dgraph-btn mr-1">
-            <a
-                href="#"
-                onClick={() => {
-                    logout({ returnTo: window.location.origin } as LogoutOptions);
-                } }
-                >
-            Log out
-            </a>
-        </Button>
-    </span>
-    </>
+	<span>
+			<Button className="dgraph-btn mr-1">
+			<a href="#" onClick={(event) => {
+					event.preventDefault(); 
+					loginWithRedirect()}}>Log in</a>
+			</Button>
+	</span>
+	) : (
+	<>
+	<span>{addPostButton()}</span>
+	<span>
+			<Button className="dgraph-btn mr-1">
+					<a
+							href="#"
+							onClick={() => {
+									logout({ returnTo: window.location.origin } as LogoutOptions);
+							} }
+							>
+					Log out
+					</a>
+			</Button>
+	</span>
+	</>
 );
   ...
 ```
@@ -78,26 +78,26 @@ We're almost there, notice that we moved our `<span>{addPostButton()}</span>` in
 ...
 
 return (
-    <>
-      {showCreatePost}
-      <div className="ui clearing segment header-seg">
-        <h3 className="ui right floated header header-seg-right">{logInOut}
-        </h3>
-        <h3 className="ui left floated header header-seg-left">
-          <Link to="/">
-            <div className="flex">
-              <span>
-                <Image size="tiny" src="/diggy.png" className="mr-5" />{" "}
-              </span>
-              <div>
-                <p className="header-text">Dgraph</p>
-                <p className="t-size">DISCUSS</p>
-              </div>
-            </div>
-          </Link>
-        </h3>
-      </div>
-    </>
+	<>
+		{showCreatePost}
+		<div className="ui clearing segment header-seg">
+			<h3 className="ui right floated header header-seg-right">{logInOut}
+			</h3>
+			<h3 className="ui left floated header header-seg-left">
+				<Link to="/">
+					<div className="flex">
+						<span>
+							<Image size="tiny" src="/diggy.png" className="mr-5" />{" "}
+						</span>
+						<div>
+							<p className="header-text">Dgraph</p>
+							<p className="t-size">DISCUSS</p>
+						</div>
+					</div>
+				</Link>
+			</h3>
+		</div>
+	</>
   )
 }
 ```

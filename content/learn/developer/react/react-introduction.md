@@ -19,16 +19,14 @@ to grasp the schema at a glance, but also extensible enough to add
 things like integrated authorization and real-time updates with
 subscriptions.
 
-**Note:** This tutorial is a starting point and not the full version as shown in the images below, to check the final version of this app, access this [link](https://github.com/dgraph-io/discuss-tutorial/tree/master) clone the app and follow the steps described in the readme.
+**Note:** This tutorial is a starting point and not the full version as shown in the images below, to check the final version of this app access this [link](https://github.com/dgraph-io/discuss-tutorial/tree/master) clone the app and follow the steps described in the repo.
 
 ## The App
 
 This app is designed to manage lists of posts in in different categories. A home
 page lets each user view a feed of posts, as follows:
 
-
 {{<figure class="medium image" src="/images/message-board/main-screenshot.png" title="message board app main page">}}
-
 
 This app will use Dgraph Cloud's built-in authorization to allow public posts
 that anyone can see (even without logging in) but restrict posting messages to

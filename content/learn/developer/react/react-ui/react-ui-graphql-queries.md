@@ -118,7 +118,7 @@ src
 
 You'll write GraphQL queries and mutations in the `operations.graphql` file.  Then, run GraphQL Code Generator and it generates the `src/types/graphql.ts` file with global types for the things that make sense globally and `src/components/types/operations.ts` for things that are local to the components.
 
-Having `operations.graphql` file in the directory for the components that it applies to makes it really easy to find the GraphQL (rather than it being split as strings in a number of javascript files) while still making it clear what components the GraphQL applies to.  If your project gets larger, you might end up with more project structure and more operations files, but the general process still works.
+Having `operations.graphql` file in the directory for the components that it applies to makes it really easy to find the GraphQL (rather than it being split as strings in a number of JavaScript files) while still making it clear what components the GraphQL applies to.  If your project gets larger, you might end up with more project structure and more operations files, but the general process still works.
 
 Start by creating the `scr/components/operations.graphql` file and add a query to find the data for home page's list of posts.
 
