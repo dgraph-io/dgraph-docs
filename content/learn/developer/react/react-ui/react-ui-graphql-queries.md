@@ -176,7 +176,7 @@ The `data` result will have exactly the same structure as the `allPosts` operati
 ```
 data?.queryPost?.map((post) => {
   ...
-  post?.author.displayName
+  post?.author.username
   ...
 }
 ```
@@ -287,7 +287,7 @@ export function PostFeed() {
 }
 ```
 
-There's some layout and CSS styling in there, but the actual data layout is just indexing into the queried data with `post?.title`, `post?.author.displayName`, etc.
+There's some layout and CSS styling in there, but the actual data layout is just indexing into the queried data with `post?.title`, `post?.author.username`, etc.
 Note that the title of the post is made into a link with the following:
 
 ```js
@@ -460,7 +460,7 @@ export function Post() {
               />
               <Comment.Content>
                 <Comment.Author as="a">
-                  {comment.author.displayName}
+                  {comment.author.username}
                 </Comment.Author>
                 <Comment.Text>{comment.text}</Comment.Text>
               </Comment.Content>
@@ -497,7 +497,7 @@ export function Post() {
           size="mini"
         />
         <Header.Content>
-          {data.getPost?.author.displayName}
+          {data.getPost?.author.username}
           <Header.Subheader>{dateStr}</Header.Subheader>
         </Header.Content>
       </Header>
