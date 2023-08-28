@@ -187,6 +187,9 @@ Query:
 }
 ```
 
+### Unique Directive
+[TODO]
+
 
 
 ### Upsert directive
