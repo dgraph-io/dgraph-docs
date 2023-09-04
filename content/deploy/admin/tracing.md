@@ -43,15 +43,25 @@ Filter traces by tags matching `env=qa`:
 
 {{% load-img "/images/jaeger-server-query-2.png" "Jaeger Query Result" %}}
 
-### Setting up jaeger locally
+### Setting up Jaeger locally
 Requirements:
-* Docker: Make sure you have Docker installed on your system. You can download and install Docker (here)[docker.com].
+* Docker: Make sure you have Docker installed on your system. You can download and install Docker [here](docker.com).
+
 **Step 1:** Start Jaeger with Docker
-Jaeger provides a ready-to-use "all-in-one" Docker image. Use the following command to start Jaeger locally:
+Jaeger provides a ready-to-use `all-in-one` Docker image. Use the following command to start Jaeger locally:
 bash
 
 ```sh
-docker run -d --name jaeger \ -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \ -p 5775:5775/udp \ -p 6831:6831/udp \ -p 6832:6832/udp \ -p 5778:5778 \ -p 16686:16686 \ -p 14268:14268 \ -p 9411:9411 \ jaegertracing/all-in-one:latest
+docker run -d --name jaeger \ 
+-e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \ 
+-p 5775:5775/udp \ 
+-p 6831:6831/udp \ 
+-p 6832:6832/udp \ 
+-p 5778:5778 \ 
+-p 16686:16686 \ 
+-p 14268:14268 \ 
+-p 9411:9411 \ 
+jaegertracing/all-in-one:latest
 ```
 
 This command starts a Docker container named `jaeger` and exposes the necessary ports for the Jaeger web interface and communication with services.
