@@ -45,7 +45,7 @@ Filter traces by tags matching `env=qa`:
 
 ### Setting up Jaeger locally
 Requirements:
-* Docker: Make sure you have Docker installed on your system. You can download and install Docker [here](docker.com).
+* Docker: Make sure you have Docker installed on your system. You can download and install Docker [here](https://www.docker.com/).
 
 **Step 1:** Start Jaeger with Docker
 Jaeger provides a ready-to-use `all-in-one` Docker image. Use the following command to start Jaeger locally:
