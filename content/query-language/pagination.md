@@ -74,6 +74,8 @@ Syntax Examples:
 
 With `offset: N` the first `N` results are not returned.  Used in combination with first, `first: M, offset: N` skips over `N` results and returns the following `M`.
 
+{{% notice "note" %}}Skipping over `N` results takes time proportional to `N` (complexity `O(N)`). In other words, the larger `N`, the longer it takes to compute the result set. Prefer [after]({{< relref "#after">}}) over `offset`.{{% /notice  %}}
+
 Query Example: Order Hark Tsui's films by English title, skip over the first 4 and return the following 6.
 
 {{< runnable >}}
@@ -102,6 +104,7 @@ Syntax Examples:
 
 Another way to get results after skipping over some results is to use the default UID ordering and skip directly past a node specified by UID.  For example, a first query could be of the form `predicate (after: 0x0, first: N)`, or just `predicate (first: N)`, with subsequent queries of the form `predicate(after: <uid of last entity in last result>, first: N)`.
 
+{{% notice "note" %}}Skipping over results with `after` takes constant time (complexity `O(1)`). In other words, no matter how many results are skipped, no extra time adds to computing the result set. This should be preferred over [offset]({{< relref "#offset">}}).{{% /notice  %}}
 
 Query Example: The first five of Baz Luhrmann's films, sorted by UID order.
 
