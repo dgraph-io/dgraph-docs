@@ -45,7 +45,7 @@ You can dynamically turn request logging on or off. To toggle request logging on
 
 ```graphql
 mutation {
-  config(input: {logRequest: true}) {
+  config(input: {logDQLRequest: true}) {
     response {
       code
       message
@@ -53,6 +53,8 @@ mutation {
   }
 }
 ```
+Note this input flag was named logRequest until Dgraph version v23.
+
 The response should look like the following:
 
 ```json
