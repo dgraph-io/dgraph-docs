@@ -30,7 +30,7 @@ A facet represents a property of a [relationship](#relationship).
 A graph is a simple structure that maps relations between objects. In Dgraph terminology, the objects are [nodes](#node) and the connections between them are [relationships](#relationship).
 
 ### GraphQL ###
-GraphQL](https://graphql.org/) is a declarative language for querying data used by application developers to get the data they need using GraphQL APIs. GraphQL is an open standard with a robust ecosystem.  Dgraph supports the deployment of a GraphQL data model (GraphQL schema) and automatically exposes a GraphQL API endpoint accepting GraphQL queries.
+[GraphQL](https://graphql.org/) is a declarative language for querying data used by application developers to get the data they need using GraphQL APIs. GraphQL is an open standard with a robust ecosystem.  Dgraph supports the deployment of a GraphQL data model (GraphQL schema) and automatically exposes a GraphQL API endpoint accepting GraphQL queries.
 
 ### gRPC ###
 [gRPC](https://grpc.io/) is a high performance Remote Procedure Call (RPC) framework used by Dgraph to interface with clients. Dgraph has official gRPC clients for go, C#, Java, JavaScript and Python. Applications written in those language can perform mutations and queries inside transactions using Dgraph clients.
