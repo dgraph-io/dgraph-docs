@@ -187,7 +187,27 @@ Query:
 }
 ```
 
+### Unique Directive
 
+
+The unique constraint enables us to guarantee that all values of a predicate are distinct. To implement the @unique
+directive for a predicate, you should define it in the schema and create an index on the predicate based on its type.
+If a user does not add the proper index to the predicate, then Dgraph will return an error. 
+
+Dgraph will automatically include the @upsert directive for the predicate. To enforce this uniqueness constraint,
+a predicate must have an index, as explained below. Currently, we only support the @unique directive on newly created
+predicates with the data types string and integer.
+
+| Data Type    | Index |
+| -------- | ------- |
+| string  | hash, exact    |
+| int | int     |
+
+This is how you define the unique directive for a predicate.
+
+```
+email: string @unique @index(exact)  .
+```
 
 ### Upsert directive
 
