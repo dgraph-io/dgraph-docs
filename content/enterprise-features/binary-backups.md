@@ -659,15 +659,17 @@ and it will contain the data from namespace 2. Namespace aware restore supports 
 To restore from a backup to a live cluster, execute a mutation on the `/admin` endpoint with the following format:
 
 ```graphql
-mutation{
-  restoreTenant(input:{
-   restoreInput:{
-    incrementalFrom:"incremental_backup_from",
-    location: "/path/to/backup/directory",
-    backupId: "id_of_backup_to_restore"
-	},
-   fromNamespace:namespaceToBeRestored
-  }){
+mutation {
+  restoreTenant(
+    input: {
+      restoreInput: {
+        incrementalFrom: "incremental_backup_from"
+        location: "/path/to/backup/directory"
+        backupId: "id_of_backup_to_restore"
+      }
+      fromNamespace: namespaceToBeRestored
+    }
+  ) {
     message
     code
   }
