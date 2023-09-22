@@ -26,16 +26,51 @@ type User @auth(
     delete: ...
 )
 ```
+RBAC rule supports ``eq`` or ``in`` functions to test the value of a [JWT claim]({{< relref "graphql/security/_index.md#jwt-claims" >}}) from the JWT token payload.
 
-Where `<claim>` is a [JWT claim]({{< relref "graphql/security/_index.md#jwt-claims" >}}) from the JWT token payload.
+The claim value may be a string or array of strings. 
 
-You can use ``eq`` or ``in`` function to test the value of any claim.
-
-
-For example the following schema has a @auth directive specifying that a delete operation on a User object can only be done in the connected user has a 'ROLE' claim in the JWT token with the value "ADMIN" :
+For example the following schema has a @auth directive specifying that a delete operation on a User object can only be done if the connected user has a 'ROLE' claim in the JWT token with the value "admin" :
 ```graphql
 type User @auth( 
-     delete: { rule: "{$ROLE: { eq: \"ADMIN\" } }"} 
+     delete: { rule: "{$ROLE: { eq: \"admin\" } }"} 
+    ) { 
+    username: String! 
+    @id todos: [Todo] 
+}
+```
+The following JWT token payload will pass the test (provided that Dgraph.Authorization is configured correctly with the right namespace)
+```json
+{
+  "aud": "dgraph",
+  "exp": 1695359621,
+  "https://dgraph.io/jwt/claims": {
+    "ROLE": "admin",
+    "USERID": "testuser@dgraph.io"
+  },
+  "iat": 1695359591,
+  ...
+}
+```
+The rule is also working with an array of roles in the JWT token:
+```json
+{
+  "aud": "dgraph",
+  "exp": 1695359621,
+  "https://dgraph.io/jwt/claims": {
+    "ROLE": ["admin","user"]
+    "USERID": "testuser@dgraph.io"
+  },
+  "iat": 1695359591,
+  ...
+}
+```
+In the case of an array used with the "in" function, the rule is valid is at least one of the claim value is "in" the provided list.
+
+For example, with the following rule, the previous token will be valid because one of the ROLE is in the authorized roles.
+```graphql
+type User @auth( 
+     delete: { rule: "{$ROLE: { in: [\"admin\",\"superadmin\"] } }"} 
     ) { 
     username: String! 
     @id todos: [Todo] 
@@ -70,12 +105,11 @@ For example, given the following JWT payload
    "https://xyz.io/jwt/claims": [
       "ROLE": "ADMIN"
    ],
-  "USERROLE": "user1",
   "email": "random@example.com"
 }
 ```
 
-The authorization rules can use ``$ROLE`` (if `https://xyz.io/jwt/claims` is declared as the namespace to use ) and also ``$USERROLE`` or ``$email``.
+If `https://xyz.io/jwt/claims` is declared as the namespace to use, the authorization rules can use ``$ROLE`` but also ``$email``.
 
 In cases where the same claim is present in the namespace and at the root level, the claim value in the namespace takes precedence.
 
