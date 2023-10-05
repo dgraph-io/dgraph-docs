@@ -67,19 +67,21 @@ You may want to use the introspection capability of the client to explore the sc
 To populate the database,
 1. Open the [API Explorer](https://cloud.dgraph.io/_/explorer) tab
 2. Paste the following code into the text area:
-   ```graphql
-   mutation {
-      addProduct(input: [
-        { name: "GraphQL on Dgraph"},
-        { name: "Dgraph: The GraphQL Database"}
-      ]) {
-        product {
-          productID
-          name
-        }
+  ```graphql
+  mutation {
+    addProduct(
+      input: [
+        { name: "GraphQL on Dgraph" }
+        { name: "Dgraph: The GraphQL Database" }
+      ]
+    ) {
+      product {
+        productID
+        name
       }
-      addCustomer(input: [{ username: "Michael"}]) {
-        customer {
+    }
+    addCustomer(input: [{ username: "Michael" }]) {
+      customer {
         username
       }
     }
