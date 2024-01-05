@@ -648,6 +648,51 @@ mutation{
   }
 }
 ```
+
+## Namespace Aware Restore
+
+You can use namespace-aware restore to restore a single namespace from a backup that contains multiple namespaces.
+The created restore will be available in the default namespace. For example, if you restore namespace 2 using the 
+restoreTenant API, then after the restore operation is completed, the cluster will have only the default namespace,
+and it will contain the data from namespace 2. Namespace aware restore supports incremental restore.
+
+To restore from a backup to a live cluster, execute a mutation on the `/admin` endpoint with the following format:
+
+```graphql
+mutation {
+  restoreTenant(
+    input: {
+      restoreInput: {
+        incrementalFrom: "incremental_backup_from"
+        location: "/path/to/backup/directory"
+        backupId: "id_of_backup_to_restore"
+      }
+      fromNamespace: namespaceToBeRestored
+    }
+  ) {
+    message
+    code
+  }
+}
+```
+
+Documentation of restoreTenant inputs
+
+```
+input RestoreTenantInput {
+	"""
+	restoreInput contains fields that are required for the restore operation,
+	i.e., location, backupId, and backupNum
+	"""
+	restoreInput: RestoreInput
+
+	"""
+	fromNamespace is the namespace of the tenant that needs to be restored into namespace 0 of the new cluster.
+	"""
+	fromNamespace: Int!
+}
+```
+
 ## Offline restore
 
 The restore utility is now a standalone tool. A new flag, `--encryption key-file=value`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
