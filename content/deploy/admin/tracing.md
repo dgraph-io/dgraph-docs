@@ -43,4 +43,88 @@ Filter traces by tags matching `env=qa`:
 
 {{% load-img "/images/jaeger-server-query-2.png" "Jaeger Query Result" %}}
 
+### Setting up Jaeger locally
+Requirements:
+
+To set up Jaeger locally install [Docker](https://www.docker.com/) on your system.
+
+* Example with Python and Flask:
+
+**Step 1:** Install OpenTelemetry Packages
+
+Install the necessary OpenTelemetry packages using pip:
+
+```sh
+pip install opentelemetry-api opentelemetry-sdk opentelemetry-instrumentation-flask opentelemetry-exporter-jaeger
+```
+
+These packages include the OpenTelemetry API, SDK, Flask instrumentation, and Jaeger exporter.
+
+**Step 2:** Instrument Your Flask Application
+
+In your Flask application, import and configure OpenTelemetry. Create a Python file (e.g., app.py) and add the following code:
+
+```python
+from flask import Flask
+from opentelemetry import trace
+from opentelemetry.instrumentation.flask import FlaskInstrumentor
+from opentelemetry.exporter.jaeger.thrift import JaegerExporter
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+app = Flask(__name__)
+
+# Configure OpenTelemetry
+resource = Resource.create({"service.name": "your-flask-app"})
+trace.set_tracer_provider(TracerProvider(resource=resource))
+jaeger_exporter = JaegerExporter(agent_host_name="localhost", agent_port=6831)
+span_processor = BatchSpanProcessor(jaeger_exporter)
+trace.get_tracer_provider().add_span_processor(span_processor)
+
+# Instrument Flask
+FlaskInstrumentor().instrument_app(app)
+
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+
+if __name__ == '__main__':
+    app.run()
+```
+
+This code initializes `OpenTelemetry`, configures a Jaeger exporter to send traces to a locally running Jaeger instance, and instruments your Flask application.
+
+**Step 3:** Start a Local Jaeger Instance
+
+Start a local Jaeger instance using Docker with the following command:
+
+```sh
+docker run -d --name jaeger \ 
+-e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \ 
+-p 5775:5775/udp \ 
+-p 6831:6831/udp \ 
+-p 6832:6832/udp \ 
+-p 5778:5778 \ 
+-p 16686:16686 \ 
+-p 14268:14268 \ 
+-p 9411:9411 \ 
+jaegertracing/all-in-one:latest
+```
+
+This command starts a Docker container named `jaeger` and exposes the necessary ports for the Jaeger web interface and communication with services.
+
+**Step 4:** Run Your Flask Application
+
+Run your Flask application:
+
+```sh
+python app.py
+```
+
+**Step 5:** Access the Jaeger Web Interface
+
+Visit http://localhost:16686 in your web browser to access the Jaeger web interface. You should see traces from your Flask application.
+
+
 To learn more about Jaeger, see [Jaeger's Deployment Guide](https://www.jaegertracing.io/docs/deployment/).
