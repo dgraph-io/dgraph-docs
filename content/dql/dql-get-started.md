@@ -135,7 +135,7 @@ Alter the schema to add indexes on some of the data so queries can use term matc
 
 Set the index for the `release_date`:
 1.    Select `release_date` predicate.
-2.    Change the type to **date**
+2.    Change the type to **datetime**
 3.    Select **index** and choose **year** for the index type.
 4.    Click **Update** to apply the index on the `release-date` predicate.
 
