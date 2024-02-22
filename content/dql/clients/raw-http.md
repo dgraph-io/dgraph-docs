@@ -40,7 +40,7 @@ for each transaction.
 3. The set of predicates modified by the transaction (`preds`). This aids in
    predicate move detection.
 
-     Every mutation would send back a new set of preds. The client must merge them
+     Every mutation would send back a new set of `preds`. The client must merge them
      with the existing set. Optionally, a client can de-dup these keys while
      merging.
 
@@ -351,7 +351,7 @@ The result:
 ## Running read-only queries
 
 You can set the query parameter `ro=true` to `/query` to set it as a
-[read-only]({{< relref "go.md#read-only-transactions" >}}) query.
+[read-only](https://github.com/dgraph-io/dgo#creating-a-transaction) query.
 
 
 ```sh
@@ -368,7 +368,7 @@ $ curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?ro=true"
 ## Running best-effort queries
 
 You can set the query parameter `be=true` to `/query` to set it as a
-[best-effort]({{< relref "go.md#read-only-transactions" >}}) query.
+[best-effort](https://github.com/dgraph-io/dgo#creating-a-transaction) query.
 
 
 ```sh
