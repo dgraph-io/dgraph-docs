@@ -17,6 +17,8 @@ Types `int`, `float`, `bool` and `geo` have only a default index each: with toke
 
 Types `string` and `dateTime` have a number of indices.
 
+If required, [custom tokenizers](/query-language/indexing-custom-tokenizers/) (which turn a value into one or more indexable values) can be implmented.
+
 ## String Indices
 The indices available for strings are as follows.
 
@@ -24,7 +26,7 @@ The indices available for strings are as follows.
 | :-----------------------   | :------------                          | :---  |
 | `eq`                       | `hash`, `exact`, `term`, or `fulltext` | The most performant index for `eq` is `hash`. Only use `term` or `fulltext` if you also require term or full-text search. If you're already using `term`, there is no need to use `hash` or `exact` as well. |
 | `le`, `ge`, `lt`, `gt`     | `exact`                                | Allows faster sorting.                                   |
-| `allofterms`, `anyofterms` | `term`                                 | Allows searching by a term in a sentence.                |
+| `allofterms`, `anyofterms` | `term`                                 | Allows searching by a term in a sentence. A term is a word separated by certain characters as listed in the Unicode Specification [here](https://www.unicode.org/reports/tr29/#Default_Word_Boundaries). |
 | `alloftext`, `anyoftext`   | `fulltext`                             | Matching with language specific stemming and stopwords.  |
 | `regexp`                   | `trigram`                              | Regular expression matching. Can also be used for equality checking. |
 
