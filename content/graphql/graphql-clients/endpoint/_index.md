@@ -30,7 +30,7 @@ For a local install the graphql endpoint would be
 http://localhost:8080/graphql
 ```
 The URL depends on your configuration and specifically 
-- the port offest defined by ``--port_offset`` option of the dgraph alpha command.
+- the port offset defined by ``--port_offset`` option of the dgraph alpha command.
 - the configuration of TLS for https.
 - the usage of a load balancer.
 
