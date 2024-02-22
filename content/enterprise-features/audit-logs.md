@@ -31,6 +31,7 @@ Specifically, the following are logged:
 
 * HTTP requests sent over Dgraph Zero's 6080 port and Dgraph Alpha's 8080 port (except as noted below)
 * GRPC requests sent over Dgraph Zero's 5080 port and Dgraph Alpha's 9080 port (except the Raft, health and Dgraph Zero stream endpoints noted below)
+* GraphQL subscriptions sent over Dgraph Alpha's 8080 port
 
 The following are not logged:
 
