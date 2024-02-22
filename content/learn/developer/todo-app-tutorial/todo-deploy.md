@@ -8,27 +8,18 @@ type = "learn"
     identifier = "todo-app-deploy"
 +++
 
-Let's now deploy our fully functional app on Dgraph Cloud [cloud.dgraph.io](https://cloud.dgraph.io).
 
-### Create a deployment
+In [Dgraph Cloud](https://cloud.dgraph.io/), an app is served by a GraphQL backend powered by Dgraph
+database. You should deploy a backend for each app you build, and potentially
+backends for test and development environments as well.
 
-After successfully logging into the site for the first time, your dashboard should look something like this.
+For this tutorial, you will just deploy one backend for development.
 
-![Dgraph Cloud: Get Started](/images/graphql/tutorial/todo/cloud-1.png)
+- Follow the instructions to [provision a backend]({{< relref "provision-backend.md">}})
 
-Let's go ahead and launch a new deployment.
+{{< figure class="screenshot" src="/images/cloud/dgraph-cloud-backend-live.png" title="Dgraph Cloud console" >}}
 
-![Dgraph Cloud: Create deployment](/images/graphql/tutorial/todo/cloud-2.png)
-
-We named our deployment `todo-app-deployment` and set the optional subdomain as
-`todo-app`, using which the deployment will be accessible. We can choose any
-subdomain here as long as it is available.
-
-Let's set it up in AWS, in the US region, and click on the *Launch* button.
-
-![Dgraph Cloud: Deployment created](/images/graphql/tutorial/todo/cloud-3.png)
-
-Now the backend is ready.
+The URL listed in "GraphQL Endpoint" is the URL at which Dgraph Cloud will serve data to your app.  You'll need that for later, so note it down --- though you'll always be able to access it from the dashboard.  There's nothing at that URL yet, first you need to design the GraphQL schema for the app.
 
 Once the deployment is ready, let's add our schema there (insert your public key) by going to the schema tab.
 

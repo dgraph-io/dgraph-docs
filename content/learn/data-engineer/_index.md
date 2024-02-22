@@ -1,7 +1,7 @@
 +++
 date = "2023-03-20T19:35:35+11:00"
 title = "Dgraph for data engineers"
-description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph docs have the information you need."
+description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph documentation has the information you need."
 type = "learn"
 weight = 3
 
@@ -13,7 +13,7 @@ weight = 3
 
 
 ### Recommended learning path
-- See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph cluster architecture.
+- See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph Cluster architecture.
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}}).
 - Follow the [Dgraph Query Language(DQL)  Quickstart]({{< relref "dql/dql-get-started" >}}) to execute some queries.
 - Take the interactive [DQL Tour](https://dgraph.io/tour/intro/1/).
