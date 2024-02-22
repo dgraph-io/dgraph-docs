@@ -28,8 +28,9 @@ For the purpose of this app, Apollo client provides a connection to a GraphQL en
 
 Add Apollo client to the project with the following command:
 
-```
+```sh
 yarn add graphql @apollo/client
+yarn global add typescript
 ```
 
 ## Create an Apollo client

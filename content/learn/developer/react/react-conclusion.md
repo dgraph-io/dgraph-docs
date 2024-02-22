@@ -3,15 +3,15 @@ title = "Conclusion"
 type = "learn"
 tutorial = "courses/messageboardapp/react"
 description = "This is the end of the Dgraph Learn course - Build a Message Board App in React. But there's still more to learn."
-weight = 18
+weight = 19
 [menu.learn]
   name = "Conclusion"
   parent = "react-app"
   identifier = "react-app-conclusion"
   
 [nav.previous]
-title = "GraphQL Mutations"
-link = "/docs/learn/developer/react/react-ui/"
+title = "Using Auth0"
+link = "/docs/learn/developer/react/using-auth0/"
 
 +++
 
@@ -41,7 +41,3 @@ Want to learn more? Check out [another course](/courses/), or head over to our
 And if you have been reading along but haven't tried it yet, 
 [try Dgraph Cloud](https://cloud.dgraph.io/) to launch your first hosted 
 GraphQL database.
-
-
-
-

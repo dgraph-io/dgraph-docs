@@ -35,7 +35,7 @@ Firstly, add all the GraphQL Code Generator dependencies as development dependen
 yarn add -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/add @graphql-codegen/near-operation-file-preset @graphql-codegen/named-operations-object
 ```
 
-You can then run the following command to to set up GraphQL Code Generator for
+You can then run the following command to set up GraphQL Code Generator for
 the project:
 
 ```sh
@@ -118,7 +118,7 @@ src
 
 You'll write GraphQL queries and mutations in the `operations.graphql` file.  Then, run GraphQL Code Generator and it generates the `src/types/graphql.ts` file with global types for the things that make sense globally and `src/components/types/operations.ts` for things that are local to the components.
 
-Having `operations.graphql` file in the directory for the components that it applies to makes it really easy to find the GraphQL (rather than it being split as strings in a number of javascript files) while still making it clear what components the GraphQL applies to.  If your project gets larger, you might end up with more project structure and more operations files, but the general process still works.
+Having `operations.graphql` file in the directory for the components that it applies to makes it really easy to find the GraphQL (rather than it being split as strings in a number of JavaScript files) while still making it clear what components the GraphQL applies to.  If your project gets larger, you might end up with more project structure and more operations files, but the general process still works.
 
 Start by creating the `scr/components/operations.graphql` file and add a query to find the data for home page's list of posts.
 
@@ -176,7 +176,7 @@ The `data` result will have exactly the same structure as the `allPosts` operati
 ```
 data?.queryPost?.map((post) => {
   ...
-  post?.author.displayName
+  post?.author.username
   ...
 }
 ```
@@ -185,7 +185,7 @@ Because of the types, you really can't go wrong.
 
 ## Layout with GraphQL - post list
 
-Now that you have GraphQL to help write queries and get data and GraphQL Code Generator to turn that into typed Javascript, you can now layout your data and be sure you won't make a mistake because GraphQL and types will catch you.
+Now that you have GraphQL to help write queries and get data and GraphQL Code Generator to turn that into typed JavaScript, you can now layout your data and be sure you won't make a mistake because GraphQL and types will catch you.
 
 Let's make a `PostFeed` component that uses the `useAllPostsQuery` and renders the data into a Semantic React UI `Table`.
 
@@ -232,7 +232,7 @@ export function PostFeed() {
               <Image src={avatar(post?.author.avatarImg)} rounded size="mini" />
               <Header.Content>
                 {post?.title}
-                <Header.Subheader>{post?.author.displayName}</Header.Subheader>
+                <Header.Subheader>{post?.author.username}</Header.Subheader>
               </Header.Content>
             </Header>
           </Link>
@@ -287,7 +287,7 @@ export function PostFeed() {
 }
 ```
 
-There's some layout and CSS styling in there, but the actual data layout is just indexing into the queried data with `post?.title`, `post?.author.displayName`, etc.
+There's some layout and CSS styling in there, but the actual data layout is just indexing into the queried data with `post?.title`, `post?.author.username`, etc.
 Note that the title of the post is made into a link with the following:
 
 ```js
@@ -460,7 +460,7 @@ export function Post() {
               />
               <Comment.Content>
                 <Comment.Author as="a">
-                  {comment.author.displayName}
+                  {comment.author.username}
                 </Comment.Author>
                 <Comment.Text>{comment.text}</Comment.Text>
               </Comment.Content>
@@ -497,7 +497,7 @@ export function Post() {
           size="mini"
         />
         <Header.Content>
-          {data.getPost?.author.displayName}
+          {data.getPost?.author.username}
           <Header.Subheader>{dateStr}</Header.Subheader>
         </Header.Content>
       </Header>

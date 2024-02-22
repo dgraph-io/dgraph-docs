@@ -34,7 +34,7 @@ Add dependencies to the project using the following commands:
 
 ```
 yarn add react-router-dom
-yarn add -D @types/react-router-dom
+yarn add -D @types/react-router-dom@5
 ```
 
 The `-D` option adds the TypeScript types `@types/react-router-dom` to the
@@ -90,18 +90,19 @@ export function App() {
     <>
       <div className="app-banner">
         ...
+      </div>
       <div className="App">
         <div className="mt-4 mx-8">
           <p>
-            Learn about building GraphQL apps with Dgraph Cloud at https://dgraph.io/learn
+            Learn about building GraphQL apps with Dgraph Cloud at <a href="https://dgraph.io/docs/learn/developer/"><strong>https://dgraph.io/docs/learn/developer/</strong></a>
           </p>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/post/:id" component={Post} />
-              <Route exact path="/" component={Home} />
-            </Switch>
-          </BrowserRouter>
         </div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/post/:id" component={Post} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </BrowserRouter>
       </div>
     </>
   );
