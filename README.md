@@ -111,3 +111,6 @@ Pass custom Go-GRPC example to the runnable by passing a `customExampleGoGRPC` t
 ```
 
 **Note:** Runnable doesn't support passing a multiline string as an argument to a shortcode. Therefore, you have to create the whole custom example in a single line string by replacing newlines with `\n`.
+
+## History
+add Hypermode banner by updating the hugo-docs repository with topbat template.
