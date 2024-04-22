@@ -107,3 +107,4 @@ Pass custom Go-GRPC example to the runnable by passing a `customExampleGoGRPC` t
 
 ## History
 add Hypermode banner by updating the hugo-docs repository with topbat template.
+v24.0:
