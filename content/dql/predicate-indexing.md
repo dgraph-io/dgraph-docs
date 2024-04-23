@@ -34,6 +34,12 @@ transaction conflict rate. Use only the minimum number of and simplest indexes
 that your application needs.
 {{% /notice %}}
 
+## Vector Indices
+
+For fast semantic search `hsnw` (**Hierarchical Navigable Small World**) index is available on `float32vector`. The index is created based on one of the following distance metrics: `cosine`, `euclidean`, and `dotproduct`.
+
+Note that vector index must be defined using `@index` directive: `description_vector: float32vector @index(hnsw(metric:"cosine")) .`
+
 ## DateTime Indices
 
 The indices available for `dateTime` are as follows.
