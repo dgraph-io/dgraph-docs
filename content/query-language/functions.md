@@ -177,19 +177,20 @@ Same query with a Levenshtein distance of 3.
 }
 {{< /runnable >}}
 
-## Similarity (aka Sematic) Search
+## Vector Similarity Search
 
-Syntax Examples: `similar_to(description_vector, 3, "[0.9, 0.8, 0, 0]")`
+Syntax Examples: `similar_to(predicate, 3, "[0.9, 0.8, 0, 0]")`
 
-Alternatively the vector can be passed as a variable: `similar_to(description_vector, 3, $vec)`
+Alternatively the vector can be passed as a variable: `similar_to(predicate, 3, $vec)`
 
-This function finds the objects that have description_vector similar to the input vector. The second parameter, `3` specifies that top 3 matches be returned.
+This function finds the nodes that have  `predicate` close to the provided vector. The search is based on the distance metric specified in the index (`cosine`, `euclidean`, or `dotproduct`). The shorter distance indicates more similarity.
+The second parameter, `3` specifies that top 3 matches be returned.
 
 Schema Types: `float32vector`
 
 Index Required: `hnsw`
 
-Similarity search results are based on distance metrics used to create index (`cosine`, `euclidean`, and `dotproduct`). The shorter distance indicates more similarity.
+
 
 ## Full-Text Search
 

@@ -119,7 +119,12 @@ convert your values to RFC 3339 format before sending them to Dgraph.{{% /notice
 
 ### Vector Type
 
-The `float32vector` type denotes a vector of floating point numbers used to store embeddings of one or more predicates or node embeddings. A schema type can contain more than one vector.
+The `float32vector` type denotes a vector of floating point numbers, i.e an ordered array of float32.  A node type can contain more than one vector predicate.
+
+Vectors are normaly used to store embeddings obtained from other information through an ML model. When a `float32vector` is [indexed]({{<relref "dql/predicate-indexing.md">}}), the DQL [similar_to]({{<relref "query-language/functions#vector-similarity-search">}}) function can be used for similarity search.
+
+
+
 
 ### UID Type
 
