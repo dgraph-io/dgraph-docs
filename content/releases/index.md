@@ -20,6 +20,7 @@ To learn about the latest releases and other important announcements, watch the
 
  Release               | First Release Date | End of Life
 -----------------------|--------------------|--------------
+ [v23.1.1][]           | April 2024         | October 2025
  [v23.1][]             | October 2023       | April 2025
  [v23.0][]             | May 2023           | November 2024
  [v22.0][]             | October 2022       | April 2024
@@ -32,6 +33,7 @@ To learn about the latest releases and other important announcements, watch the
  [v1.1][]              | January 2020       | January 2021
  [v1.0][]              | December 2017      | March 2020
 
+[v23.1.1] https://discuss.dgraph.io/t/dgraph-release-v23-1-1-is-now-generally-available/19301
 [v23.1]: https://discuss.dgraph.io/t/dgraph-23-1-0-is-generally-available-on-dgraph-cloud-dockerhub-and-github/18980
 [v23.0]: https://discuss.dgraph.io/t/dgraph-release-v23-0-0-is-now-generally-available/18634
 [v22.0]: https://discuss.dgraph.io/t/dgraph-release-v22-0-2-is-now-generally-available/18117
