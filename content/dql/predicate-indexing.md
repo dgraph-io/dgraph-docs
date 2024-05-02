@@ -51,7 +51,7 @@ The indices available for `float32vector` are as follows.
 
 | Dgraph function            | Required index / tokenizer             | Notes |
 | :-----------------------   | :------------                          | :---  |
-| `similar_to`                       | `hnsw` | HSNW index supports parameters `metric` and `exponent`. |
+| `similar_to`                       | `hnsw` | HNSW index supports parameters `metric` and `exponent`. |
 
 
 #
@@ -59,7 +59,7 @@ The indices available for `float32vector` are as follows.
 `hnsw` (**Hierarchical Navigable Small World**) index supports the following parameters
 - metric : indicate the metric to use to compute vector similarity. One of `cosine`, `euclidean`, and `dotproduct`. Default is `euclidean`.
 
-- exponent : An integer, represented as a string, roughly representing the number of vectors expected in the index in power of 10. The exponent value,is used to set "reasonable defaults" for HSNW internal tuning parameters. Default is "4" (10^4 vectors).
+- exponent : An integer, represented as a string, roughly representing the number of vectors expected in the index in power of 10. The exponent value,is used to set "reasonable defaults" for HNSW internal tuning parameters. Default is "4" (10^4 vectors).
 
 
 Here are some examples:
