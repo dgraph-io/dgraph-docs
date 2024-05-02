@@ -26,7 +26,7 @@ Types `int`, `float`, `bool` and `geo` have only a default index each: with toke
 
 Types `string` and `dateTime` have a number of indices.
 
-Type `float32vector` supports `hsnw` index.
+Type `float32vector` supports `hnsw` index.
 
 ## String Indices
 The indices available for strings are as follows.
@@ -51,12 +51,12 @@ The indices available for `float32vector` are as follows.
 
 | Dgraph function            | Required index / tokenizer             | Notes |
 | :-----------------------   | :------------                          | :---  |
-| `similar_to`                       | `hsnw` | HSNW index supports parameters `metric` and `exponent`. |
+| `similar_to`                       | `hnsw` | HSNW index supports parameters `metric` and `exponent`. |
 
 
 #
 
-`hsnw` (**Hierarchical Navigable Small World**) index supports the following parameters
+`hnsw` (**Hierarchical Navigable Small World**) index supports the following parameters
 - metric : indicate the metric to use to compute vector similarity. One of `cosine`, `euclidean`, and `dotproduct`. Default is `euclidean`.
 
 - exponent : An integer, represented as a string, roughly representing the number of vectors expected in the index in power of 10. The exponent value,is used to set "reasonable defaults" for HSNW internal tuning parameters. Default is "4" (10^4 vectors).
