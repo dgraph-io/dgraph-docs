@@ -179,8 +179,8 @@ export const AuthProvider = ({ children }) => {
       setLoading(false)
       setCurrentUser(user)
       if (user) {
-        addUserClaim({email: user.email})
-        const token = await user.getIdToken(); 
+        await addUserClaim({email: user.email})
+        const token = await user.getIdToken(true); 
         setIdToken(token);
       }
     });
