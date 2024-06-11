@@ -221,6 +221,35 @@ mutation {
 }
 ```
 
+## Vector Embedding mutations
+
+For types with vector embeddings Dgraph automatically generates the add mutation. For this example of add mutation we use the following schema.
+
+```graphql
+type User {
+    userID: ID!
+    name: String!
+    name_v: [Float!] @embedding @search(by: ["hnsw(metric: euclidean, exponent: 4)"])
+}
+
+mutation {
+addUser(input: [
+{ name: "iCreate with a Mini iPad", name_v: [0.12, 0.53, 0.9, 0.11, 0.32] },
+{ name: "Resistive Touchscreen", name_v: [0.72, 0.89, 0.54, 0.15, 0.26] },
+{ name: "Fitness Band", name_v: [0.56, 0.91, 0.93, 0.71, 0.24] },
+{ name: "Smart Ring", name_v: [0.38, 0.62, 0.99, 0.44, 0.25] }]) 
+  {
+    project {
+      id
+      name
+      name_v
+    }
+  }
+}
+```
+
+Note: The embeddings are generated outside of Dgraph using any suitable machine learning model.
+
 ## Examples
 
 You can refer to the following [link](https://github.com/dgraph-io/dgraph/tree/main/graphql/schema/testdata/schemagen) for more examples.
