@@ -51,6 +51,26 @@ type User {
 
 Scalar lists in Dgraph act more like sets, so `tags: [String]` would always contain unique tags.  Similarly, `recentScores: [Float]` could never contain duplicate scores.
 
+### Vectors
+
+A Float array can be used as a vector using `@embedding` directive. It denotes a vector of floating point numbers, i.e an ordered array of float32. A type can contain more than one vector predicate.
+
+Vectors are normaly used to store embeddings obtained from an ML model. 
+
+When a Float vector is indexed, the GraphQL `querySimilar<type name>ByEmbedding` and `querySimilar<type name>ById` functions can be used for similarity search.
+
+A simple example of adding a vector embedding on `name`  to `User` type is shown below. 
+
+```graphql
+type User {
+    userID: ID!
+    name: String!
+    name_v: [Float!] @embedding @search(by: ["hnsw(metric: euclidean, exponent: 4)"])
+}
+```
+
+In this schema, the field `name_v` is an embedding on which the HNSW algorithm is used to create a vector search index. For more information on this please refer to: [@search]({{< relref "search.md" >}}).
+
 ### The `ID` type
 
 In Dgraph, every node has a unique 64-bit identifier that you can expose in GraphQL using the `ID` type. An `ID` is auto-generated, immutable and never reused. Each type can have at most one `ID` field.

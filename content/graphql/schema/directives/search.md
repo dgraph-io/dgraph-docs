@@ -624,3 +624,23 @@ query {
   }
 }
 ```
+
+### Vector
+
+The `@search` directive is used in conjunction with `@embeding` directive to define the HNSW index on vector embeddings. These vector embeddings are obtained from external Machine Learning models.
+
+```graphql
+type User {
+    userID: ID!
+    name: String!
+    name_v: [Float!] @embedding @search(by: ["hnsw(metric: euclidean, exponent: 4)"])
+}
+```
+
+In this schema, the field `name_v` is an embedding on which the HNSW algorithm is used to create a vector search index. 
+
+The metric used to compute the distance between vectors (in this example) is Euclidean distance. Other possible metrics are `cosine` and `dotproduct`.
+
+The directive, `@embedding`, designates one or more fields as vector embeddings.
+
+The `exponent` value is used to set reasonable defaults for HNSW internal tuning parameters. It is an integer representing an approximate number for the vectors expected in the index, in terms of power of 10. Default is “4” (10^4 vectors).
