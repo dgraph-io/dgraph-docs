@@ -625,7 +625,7 @@ query {
 }
 ```
 
-### Vector
+### Vector embedding
 
 The `@search` directive is used in conjunction with `@embeding` directive to define the HNSW index on vector embeddings. These vector embeddings are obtained from external Machine Learning models.
 
