@@ -18,6 +18,10 @@ In order to drop all data while retaining the schema :
 
 *![Drop Data](/images/drop-data.png)*
 
+### Dropping data in multi-tenant mode
+In order to drop data in multi-tenant mode for a given namespace, you can use the [Admin API](/admin/admin-api).
+TODO
+
 
 ### Dropping Data Programmatically
 
@@ -45,6 +49,9 @@ curl 'https://<your-backend>/admin/slash' \
   --data-binary 'mutation { dropData(allDataAndSchema: true) { response { code message } } }'
 ```
 
+#### Dropping Data Programmatically in multi-tenant mode
+TODO
+
 ## On-Premise
 ### Drop data and schema
 
@@ -71,3 +78,6 @@ To drop the type `Film`:
 ```sh
 $ curl -X POST localhost:8080/alter -d '{"drop_op": "TYPE", "drop_value": "Film"}'
 ```
+
+### Drop data and schema in multi-tenant mode
+
