@@ -85,9 +85,13 @@ I1207 14:53:28.240516   20143 config.go:39] Got config update through GraphQL ad
 When enabling request logging this prints the requests that Dgraph Alpha receives from Ratel or other clients. In this case, the Alpha log will print something similar to:
 
 ```
-I1201 13:06:26.686466   10905 server.go:908] Got a query: query:"{\n  query(func: allofterms(name@en, \"Marc Caro\")) {\n  uid\n  name@en\n  director.film\n  }\n}"  
+I0505 11:33:44.686466   10905 server.go:1246] Got a query, DQL form: "{\n  query(func: allofterms(name@en, \"Marc Caro\")) {\n  uid\n  name@en\n  director.film\n  }\n}  at 11:33:44.686222
+[... more logs...]
+I0505 11:33:44.686466   10905 server.go:1435] Finished a query that started at: 11:33:44.686222
 ```
-As you can see, we got the query that Alpha received. To read it in the original DQL format just replace every `\n` with a new line, any `\t` with a tab character and `\"` with `"`:
+This shows all queries that the Alpha received. Note the timestamp correlates start and finish lines and allows query duration to be computed from log timestamps. Also note that the DQL version is logged, so GraphQL queries will cause the DQL equivalent to be logged.
+
+To read the query with original formatting replace every `\n` with a new line, any `\t` with a tab character and `\"` with `"`:
 
 ```
 {
