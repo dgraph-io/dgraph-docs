@@ -17,7 +17,7 @@ aliases = ["/contribute"]
       <p>
         Designed from the ground up to be run in production, Dgraph is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
       </p>
-      <p><b>Tip</b>: New to Dgraph? Take the <a href="/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='{{< relref "deploy/installation/_index.md">}}'>download</a> Dgraph to deploy it yourself.</p>
+      <p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='{{< relref "deploy/installation/_index.md">}}'>download</a> Dgraph to deploy it yourself.</p>
     </div>
     <div class="item">
       <a href="{{< relref "dgraph-overview.md">}}">
