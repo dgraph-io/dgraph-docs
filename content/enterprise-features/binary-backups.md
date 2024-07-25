@@ -693,7 +693,7 @@ input RestoreTenantInput {
 }
 ```
 
-## Offline restore
+## Offline restore (DEPRECATED)
 
 The restore utility is now a standalone tool. A new flag, `--encryption key-file=value`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
 

@@ -40,8 +40,8 @@ The general syntax for superflags is as follows: `--<super-flag-name> option-a=v
 
 {{% notice "note" %}}
 You should encapsulate the options for a superflag in double-quotes (`"`) if any
-of those option values include spaces. You can also encapsulate options in
-double-quotes to improve readability. So, you can also use the following
+of those option values include spaces. You can encapsulate options in
+double-quotes to improve readability. You can also use the following
 syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`.
 {{% /notice %}}
 
@@ -229,7 +229,7 @@ The commands in these groups are shown in the following table:
 | Dgraph debug     | [`debuginfo`](#dgraph-debuginfo)    | Generates information about the current node for use in debugging issues with Dgraph clusters   |
 | Dgraph tools     | [`completion`](#dgraph-completion)    | Generates shell completion scripts for `bash` and `zsh`     |
 | Dgraph tools     | [`conv`](#dgraph-conv)    | Converts geographic files into RDF so that they can be consumed by Dgraph    |
-| Dgraph tools     | [`decrypt`](#dgraph-decrypt)    | Decrypts an export file created by an encrypted Dgraph cluster     |
+| Dgraph tools     | [`decrypt`](#dgraph-decrypt)    | Decrypts an export file created by an encrypted Dgraph Cluster     |
 | Dgraph tools     | [`export_backup`](#dgraph-export_backup)    | Converts a binary backup created using Dgraph Enterprise Edition into an exported folder.      |
 | Dgraph tools     | [`increment`](#dgraph-increment)    | Increments a counter transactionally to confirm that a Dgraph Alpha node can handle query and mutation requests |
 | Dgraph tools     | [`lsbackup`](#dgraph-lsbackup)    | Lists information on backups in a given location   |
@@ -929,7 +929,7 @@ Use "dgraph conv [command] --help" for more information about a command.
 #### `dgraph decrypt`
 
 This command lets you decrypt an export file created by an encrypted Dgraph
-cluster. The following replicates the help listing shown when you run
+Cluster. The following replicates the help listing shown when you run
 `dgraph decrypt --help`:
 
 ```shell
@@ -1078,33 +1078,6 @@ Flags:
      --user string            The user for logging in
 
 Use "dgraph migrate [command] --help" for more information about a command.
-```
-
-#### `dgraph raftmigrate`
-
-This command runs the Dgraph Raft migration tool.<!-- TBD need to say more about this -->
-The following replicates the help listing shown when you run `dgraph raftmigrate --help`:
-
-```shell
-Run the Raft migration tool
-Usage:
- dgraph raftmigrate [flags]
-
-Flags:
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
- -h, --help                         help for raftmigrate
-     --new-dir string               Path to the new (z)w directory.
-     --old-dir string               Path to the old (z)w directory.
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
-
-Use "dgraph raftmigrate [command] --help" for more information about a command.
 ```
 
 #### `dgraph upgrade`
