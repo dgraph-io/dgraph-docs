@@ -24,10 +24,8 @@ Admin endpoints usually start with the `/admin` path. The current list of admin
 endpoints includes the following:
 
 * `/admin`
-* `/admin/backup`
 * `/admin/config/cache_mb`
 * `/admin/draining`
-* `/admin/export`
 * `/admin/shutdown`
 * `/admin/schema`
 * `/admin/schema/validate`
@@ -87,7 +85,7 @@ This would allow admin operations from hosts with hostnames `admin-bastion` and 
 By default, you can perform mutation operations for any predicate.
 If the predicate in mutation doesn't exist in the schema,
 the predicate gets added to the schema with an appropriate
-[Dgraph Type]({{< relref "predicate-types.md" >}}).
+[Dgraph Type]({{< relref "dql-schema.md" >}}).
 
 You can use `--limit "mutations=disallow"` to disable all mutations,
 which is set to `allow` by default.
@@ -102,7 +100,7 @@ Before performing a mutation on a predicate that doesn't exist in the schema,
 you need to perform an alter operation with that predicate and its schema type.
 
 ```sh
-dgraph alpha --limit "mutation=strict; mutations-nquad=1000000"
+dgraph alpha --limit "mutations=strict; mutations-nquad=1000000"
 ```
 
 ## Secure Alter Operations

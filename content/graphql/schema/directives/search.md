@@ -1,7 +1,7 @@
 +++
 title = "Search and Filtering"
 description = "What search can you build into your GraphQL API? Dgraph builds search into the fields of each type, so searching is available at deep levels in a query."
-weight = 5
+weight = 6
 [menu.main]
     parent = "directives"
     identifier = "schema-search"
@@ -355,7 +355,7 @@ queryHotel(filter: {
     location: { 
         near: {
             coordinate: {
-                latitute: 37.771935, 
+                latitude: 37.771935, 
                 longitude: -122.469829
             }, 
             distance: 1000

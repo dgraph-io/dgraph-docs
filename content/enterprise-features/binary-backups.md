@@ -36,7 +36,7 @@ via environment variables:
  `AWS_SESSION_TOKEN`                         | AWS session token (if required).
 
 
-Starting with [v20.07.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.07.0) if the system has access to the S3 bucket, you no longer need to explicitly include these environment variables.  
+Starting with [v20.07.0](https://github.com/dgraph-io/dgraph/releases/tag/v20.07.0) if the system has access to the S3 bucket, you no longer need to explicitly include these environment variables.
 
 In AWS, you can accomplish this by doing the following:
 1. Create an [IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) with an IAM Policy that grants access to the S3 bucket.
@@ -80,7 +80,7 @@ input BackupInput {
 
 		"""
 		Secret key credential for the destination.
-		"""		
+		"""
 		secretKey: String
 
 		"""
@@ -507,7 +507,7 @@ endpoint with the following format:
 mutation{
   restore(input:{
     location: "/path/to/backup/directory",
-    backupId: "id_of_backup_to_restore"'
+    backupId: "id_of_backup_to_restore"
   }){
     message
     code
@@ -596,7 +596,7 @@ input RestoreInput {
 
 		"""
 		Secret key credential for the destination.
-		"""		
+		"""
 		secretKey: String
 
 		"""
@@ -648,7 +648,52 @@ mutation{
   }
 }
 ```
-## Offline restore
+
+## Namespace Aware Restore
+
+You can use namespace-aware restore to restore a single namespace from a backup that contains multiple namespaces.
+The created restore will be available in the default namespace. For example, if you restore namespace 2 using the 
+restoreTenant API, then after the restore operation is completed, the cluster will have only the default namespace,
+and it will contain the data from namespace 2. Namespace aware restore supports incremental restore.
+
+To restore from a backup to a live cluster, execute a mutation on the `/admin` endpoint with the following format:
+
+```graphql
+mutation {
+  restoreTenant(
+    input: {
+      restoreInput: {
+        incrementalFrom: "incremental_backup_from"
+        location: "/path/to/backup/directory"
+        backupId: "id_of_backup_to_restore"
+      }
+      fromNamespace: namespaceToBeRestored
+    }
+  ) {
+    message
+    code
+  }
+}
+```
+
+Documentation of restoreTenant inputs
+
+```
+input RestoreTenantInput {
+	"""
+	restoreInput contains fields that are required for the restore operation,
+	i.e., location, backupId, and backupNum
+	"""
+	restoreInput: RestoreInput
+
+	"""
+	fromNamespace is the namespace of the tenant that needs to be restored into namespace 0 of the new cluster.
+	"""
+	fromNamespace: Int!
+}
+```
+
+## Offline restore (DEPRECATED)
 
 The restore utility is now a standalone tool. A new flag, `--encryption key-file=value`, is now part of the restore utility, so you can use it to decrypt the backup. The file specified using this flag must contain the same key that was used for encryption during backup. Alternatively, starting with `v20.07.0`, the `vault` superflag can be used to restore a backup.
 

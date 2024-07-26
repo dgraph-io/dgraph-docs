@@ -10,8 +10,6 @@ Dgraph Alpha provides several HTTP endpoints for administrators, as follows:
 
 * `/health?all` returns information about the health of all the servers in the cluster.
 * `/admin/shutdown` initiates a proper [shutdown]({{< relref "dgraph-administration.md#shutting-down-database" >}}) of the Alpha.
-* `/admin/export` initiates a data [export]({{< relref "dgraph-administration.md#exporting-database" >}}). The exported data will be
-encrypted if the alpha instance was configured with an encryption key file.
 
 By default the Alpha listens on `localhost` for admin actions (the loopback address only accessible from the same machine). The `--bindall=true` option binds to `0.0.0.0` and thus allows external connections.
 
@@ -76,6 +74,6 @@ Here’s an example of JSON returned from the above query:
 - `group`: Group assigned based on the replication factor. Read more [here]({{< relref "/deploy/cluster-setup.md" >}}).
 - `lastEcho`: Last time, in Unix epoch, when the instance was contacted by another Alpha or Zero server.
 - `ongoing`: List of ongoing operations in the background.
-- `indexing`: List of predicates for which indexes are built in the background. Read more [here]({{< relref "/predicate-types.md#indexes-in-background" >}}).
+- `indexing`: List of predicates for which indexes are built in the background. Read more [here]({{< relref "dql-schema.md#indexes-in-background" >}}).
 
 The same information (except `ongoing` and `indexing`) is available from the `/health` and `/health?all` endpoints of Alpha server.

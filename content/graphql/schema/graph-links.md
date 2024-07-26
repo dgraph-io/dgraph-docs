@@ -62,7 +62,7 @@ mutation {
 }
 ```
 
-will automatically add it to Diggy's list of `posts`.  Deleting the post will remove it from Diggy's `posts`.  Similarly, using an update mutation on an author to insert a new post will automatically add Diggy as the author the author
+will automatically add it to Diggy's list of `posts`.  Deleting the post will remove it from Diggy's `posts`.  Similarly, using an update mutation on an author to insert a new post will automatically add Diggy as the author
 
 ```graphql
 mutation {

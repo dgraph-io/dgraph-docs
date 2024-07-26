@@ -36,13 +36,38 @@ not interact directly with the filesystem. Instead it relies on
 
  Metric                          	 | Description
  -------                          	 | -----------
- `badger_v3_disk_reads_total`        | Total count of disk reads in Badger.
- `badger_v3_disk_writes_total`       | Total count of disk writes in Badger.
- `badger_v3_gets_total`              | Total count of calls to Badger's `get`.
- `badger_v3_memtable_gets_total`     | Total count of memtable accesses to Badger's `get`.
- `badger_v3_puts_total`              | Total count of calls to Badger's `put`.
- `badger_v3_read_bytes`              | Total bytes read from Badger.
- `badger_v3_written_bytes`           | Total bytes written to Badger.
+ `badger_read_num_vlog` | Total count of reads by badger in vlog,
+ `badger_write_num_vlog` | Total count of writes by Badger in vlog,
+ `badger_read_bytes_vlog` |  Total bytes read by Badger,
+ `badger_write_bytes_vlog` |  Total bytes written by Badger,
+ `badger_read_bytes_lsm` |  Total bytes read by Badger,
+ `badger_write_bytes_l0` |  Total bytes written by Badger,
+ `badger_write_bytes_compaction` |  Total bytes written by Badger,
+ `badger_get_num_lsm` | Total count of LSM gets,
+ `badger_get_num_memtable` | Total count of LSM gets from memtable,
+ `badger_hit_num_lsm_bloom_filter` | Total count of LSM bloom hits,
+ `badger_get_num_user` | Total count of calls to Badger's `get`,
+ `badger_put_num_user` | Total count of calls to Badger's `put`,
+ `badger_write_bytes_user` |  Total bytes written by user,
+ `badger_get_with_result_num_user` | Total count of calls to Badger's `get` that returned value,
+ `badger_iterator_num_user` | Total count of iterators made in badger,
+ `badger_size_bytes_lsm` | Size of the LSM in bytes,
+ `badger_size_bytes_vlog` | Size of the value log in bytes,
+ `badger_write_pending_num_memtable` | Total count of pending writes,
+ `badger_compaction_current_num_lsm` | Number of tables being actively compacted,
+
+ Old Metrics (Pre 23.1.0)
+
+ `badger_disk_reads_total`        | Total count of disk reads in Badger.
+ `badger_disk_writes_total`       | Total count of disk writes in Badger.
+ `badger_gets_total`              | Total count of calls to Badger's `get`.
+ `badger_memtable_gets_total`     | Total count of memtable accesses to Badger's `get`.
+ `badger_puts_total`              | Total count of calls to Badger's `put`.
+ `badger_read_bytes`              | Total bytes read from Badger.
+ `badger_lsm_bloom_hits_total`    | Total number of LSM tree bloom hits.
+ `badger_written_bytes`           | Total bytes written to Badger.
+ `badger_lsm_size_bytes`          | Total size in bytes of the LSM tree.
+ `badger_vlog_size_bytes`         | Total size in bytes of the value log.
 
 ## Go Metrics
 
@@ -90,7 +115,7 @@ holding from the operating system and how much is actively in use.
 ## Raft leadership metrics
 
 Raft leadership metrics let you track changes in Raft leadership for Dgraph
-Alpha and Dgraph Zero nodes in your cluster. These metrics include a group label
+Alpha and Dgraph Zero nodes in your Cluster. These metrics include a group label
 along with the node name, so that you can determine which metrics apply to which
 Raft groups. 
 

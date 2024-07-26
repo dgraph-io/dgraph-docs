@@ -1,7 +1,7 @@
 +++
 title = "Quick Start"
 weight = 1
-aliases = ["/get-started-old"]
+aliases = ["/get-started"]
 [menu.main]
   name = "Quick Start"
   identifier = "get-started"
@@ -135,7 +135,7 @@ Alter the schema to add indexes on some of the data so queries can use term matc
 
 Set the index for the `release_date`:
 1.    Select `release_date` predicate.
-2.    Change the type to **date**
+2.    Change the type to **datetime**
 3.    Select **index** and choose **year** for the index type.
 4.    Click **Update** to apply the index on the `release-date` predicate.
 
@@ -175,7 +175,7 @@ In these five steps, you set up Dgraph, added some data, visualized it as a grap
 - Take the [Tour](https://dgraph.io/tour/) for a guided tour of how to write queries in Dgraph.
 - A wider range of queries can also be found in the
 [Query Language]({{< relref "query-language/_index.md" >}}) reference.
-- Go to [Clients]({{< relref "clients/_index.md" >}}) to see how to
+- Go to [Clients]({{< relref "clients" >}}) to see how to
 communicate with Dgraph from your application.
 
 ## Need Help

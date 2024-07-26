@@ -7,7 +7,7 @@ weight = 9
 +++
 
 Multi-tenancy is an enterprise-only feature that allows various tenants to co-exist in the same Dgraph
-cluster using `uint64` namespaces. With multi-tenancy, each tenant can only log into their own
+Cluster using `uint64` namespaces. With multi-tenancy, each tenant can only log into their own
 namespace and operate in their own namespace.
 
 {{% notice "note" %}}
@@ -17,7 +17,7 @@ Multi-tenancy is an enterprise feature and needs [Access Control Lists]({{< relr
 ## Overview
 
 Multi-tenancy is built upon [Access Control Lists]({{< relref "access-control-lists.md" >}}) (ACL),
-and enables multiple tenants to share a Dgraph cluster using unique namespaces.
+and enables multiple tenants to share a Dgraph Cluster using unique namespaces.
 The tenants are logically separated, and their data lies in the same `p` directory.
 Each namespace has a group guardian, which has root access to that namespace.
 
@@ -46,10 +46,9 @@ The super admin is used only for database administration operations, such as exp
 
 - What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
 
-    The access controls are applied per tenant at a predicate level.
-    For example, the user `John Smith` belonging to the group `Data Approvers` may only have read-only access to predicates,
-    while user `Jane Doe`, who belongs to the group `Data Editors`, can be given access to modify predicates.
-    All of these ACL constraints have to be configured for each tenant.
+    The access controls are applied per tenant to either specific predicates or all predicates that exist for the tenant.
+    For example, the user `John Smith` belonging to the group `Data Approvers` for a tenant `Accounting` may only have read-only access over predicates while user `Jane Doe`, belonging to the group `Data Editors` within that same tenant, may have access to modify those predicates.
+    All the ACL rules need to be defined for each tenant in your backend. The level of granularity available allows for defining rules over specific predicates or all predicates belonging to that tenant.
 
 - Are tenants a physical separation or a logical one?
 
@@ -77,22 +76,30 @@ users of other namespaces.
 
 ## Access Control Lists
 
-Multi-tenancy defines certain ACL roles for the shared cluster:
+Multi-tenancy defines certain ACL roles for the shared Cluster:
 
 - [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins)
-- Guardians of the Namespace
-  - They can create users and groups inside their own namespace
-  - They can assign users to groups inside their own namespace
-  - They can assign predicates to groups inside their own namespace
-  - They can add users to groups inside the namespace
-  - They can export their namespace
-  - They can query and mutate in their namespace
-  - They can't query or mutate across namespaces
-- Normal users
-  - They can login into a namespace
-  - They can query in their namespace
-  - They can mutate in their namespace
-  - They can't query or mutate across namespaces
+- Guardians of the namespace can perform the following operations:
+  - create users and groups within the namespace
+  - assign users to groups within the namespace
+  - assign predicates to groups within the namespace
+  - add users to groups within the namespace
+  - export namespace
+  - drop data within the namespace
+  - query and mutate within the namespace
+
+  {{% notice "note" %}}
+ Guardians of the namespace cannot query or mutate across namespaces.
+{{% /notice %}}
+
+- Normal users can perform the following operations:
+  - login into a namespace
+  - query within the namespace
+  - mutate within the namespace
+
+  {{% notice "note" %}}
+Normal users cannot query or mutate across namespaces.
+{{% /notice %}}
 
 ### Guardians of the Galaxy
 
@@ -102,8 +109,8 @@ As a super-admin, a _Guardian of the Galaxy_ can:
 - [Create](#create-a-namespace) and [delete](#delete-a-namespace) namespaces
 - Reset the passwords
 - Query and mutate the default namespace (`0x00`)
-- Trigger cluster-wide [backups](#backups) (no namespace-specific backup)
-- Trigger cluster-wide or namespace-specific [exports](#exports) (exports contain information about the namespace)
+- Trigger Cluster-wide [backups](#backups) (no namespace-specific backup)
+- Trigger Cluster-wide or namespace-specific [exports](#exports) (exports contain information about the namespace)
 
 For example, if the user `rocket` is part of the _Guardians of the Galaxy_ group (namespace `0x00`),
 he can only read/write on namespace `0x00`.
@@ -139,7 +146,7 @@ You can then use these credentials to login into the namespace and perform opera
 Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can list active namespaces.
 You can check available namespaces using the `/state` endpoint.
 
-For example, if you have a multi-tenant cluster with multiple namespaces, as a _Guardian of the Galaxy_ you can query `state` from GraphQL:
+For example, if you have a multi-tenant Cluster with multiple namespaces, as a _Guardian of the Galaxy_ you can query `state` from GraphQL:
 
 ```graphql
 query {
@@ -206,19 +213,29 @@ mutation {
 }
 ```
 
-## Drop operations
+## Drop Operations
 
-The `drop all` and `drop data` operations can only be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
-They're executed at cluster level and delete data across namespaces.
-All other `drop` operations run at namespace level and are namespace specific.
+The `drop all` operations can be triggered only by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
+They're executed at Cluster level and delete data across namespaces.
+All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database]({{< relref "raw-http.md#alter-the-database" >}}).
 
-{{% notice "note" %}}
-`drop all` and `drop data` operations are executed at cluster level and will delete across namespaces. The `drop data` operation will delete all the data but will keep the schema only.
+
+{{% notice "note:" %}}
+`drop all` operation is executed at Cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only.
 {{% /notice %}}
+
+For example:
+
+```
+curl 'http://localhost:8080/alter' \
+  -H 'X-Dgraph-AccessToken: <your-access-token>' \
+  --data-raw '{"drop_op":"DATA"}' \
+  --compressed
+```
 
 ## Backups
 
-Backups are currently cluster-wide only, but [exports](#exports) can be created by namespace.
+Backups are currently Cluster-wide only, but [exports](#exports) can be created by namespace.
 Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 ### Data import
@@ -228,10 +245,10 @@ Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 ## Exports
 
-Exports can be generated cluster-wide or at namespace level.
+Exports can be generated Cluster-wide or at namespace level.
 These exported sets of `.rdf` or `.json` files and schemas include the multi-tenancy namespace information.
 
-If a _Guardian of the Galaxy_ exports the whole cluster, a single folder containing the export data of all the namespaces in a single `.rdf` or `.json` file and a single schema will be generated.
+If a _Guardian of the Galaxy_ exports the whole Cluster, a single folder containing the export data of all the namespaces in a single `.rdf` or `.json` file and a single schema will be generated.
 
 {{% notice "note" %}}
 Guardians of a Namespace can trigger an Export for their namespace.

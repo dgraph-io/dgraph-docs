@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Learning Environment"
-weight = 3
+weight = 2
 [menu.main]
     parent = "installation"
 +++
@@ -28,7 +28,7 @@ Ensure that you have installed:
     ```sh
        docker run --name <CONTAINER_NAME> -d -p "8080:8080" -p "9080:9080" -v <DGRAPH_DATA_PATH>:/dgraph dgraph/standalone:latest
     ```
-1. Optionaly launch [Ratel UI]({{< relref "ratel/overview.md" >}}) using the dgraph/ratel docker image :
+1. Optionally launch [Ratel UI]({{< relref "ratel/overview.md" >}}) using the dgraph/ratel docker image :
     ``` sh
     docker run --name ratel  -d -p "8000:8000"  dgraph/ratel:latest
     ```
@@ -101,7 +101,7 @@ You can start Dgraph on a single host using the dgraph command line.
       dgraph alpha --my=<IP_ADDRESS>:7080 --zero=localhost:5080
       dgraph alpha --my=<IP_ADDRESS>:7081 --zero=localhost:5080 -o=1
    ```
-   Dgraph alpha nodes use two directories to persist data and [WAL logs]({{< relref "design-concepts/concepts#write-ahead-logs" >}}), and these directories must be different for each alpha if they are running on the same host. You can use `-p` and `-w` to change the location of the data and WAL directories.To learn more about other flags, run `dgraph alpha --help`.
+   Dgraph alpha nodes use two directories to persist data and [WAL logs]({{< relref "consistency-model.md" >}}), and these directories must be different for each alpha if they are running on the same host. You can use `-p` and `-w` to change the location of the data and WAL directories.To learn more about other flags, run `dgraph alpha --help`.
 
 1. Connect the Dgraph cluster that are running using https://play.dgraph.io/. For information about connecting, see [Ratel UI]({{< relref "ratel/connection.md" >}}).
 
@@ -126,7 +126,7 @@ You can install Dgraph using the Docker Compose on a system hosted on any of the
 
 1. Add a list of IPs allowed for Dgraph so that you can create the schema. Use an     editor of your choice and add the `<IP_ADDRESS>` of the local host in `docker-compose.yml` file:
     ```txt
-    # This Docker Compose file can be used to quickly bootup Dgraph Zero
+    # This Docker Compose file can be used to quickly boot up Dgraph Zero
     # and Alpha in different Docker containers.
     # It mounts /tmp/data on the host machine to /dgraph within the
     # container. You will need to change /tmp/data to a more appropriate location.

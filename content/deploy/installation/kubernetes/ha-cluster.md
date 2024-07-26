@@ -10,13 +10,13 @@ You can run three Dgraph Alpha servers and three Dgraph Zero servers in a highly
 *  [dgraph-ha.yaml](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/kubernetes/dgraph-ha/dgraph-ha.yaml) file
 *  Helm charts.
 
-### Install a highly avaiable Dgraph cluster using YAML or Helm
+### Install a highly available Dgraph cluster using YAML or Helm
 
 {{% tabs %}} {{< tab "YAML" >}}
 #### Before you begin:
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-* Ensure that you have a production-ready Kubernetes cluster with atleast three worker nodes running in a cloud provider of your choice.
+* Ensure that you have a production-ready Kubernetes cluster with at least three worker nodes running in a cloud provider of your choice.
 * (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "tls-configuration.md" >}}).
 
 #### Installing a highly available Dgraph cluster
@@ -118,7 +118,7 @@ kubectl delete persistentvolumeclaims --selector app=dgraph-alpha
       <aws-ip-hostname>.<region>.compute.internal   Ready    <none>   1m   v1.15.11-eks-af3caf
       <aws-ip-hostname>.<region>.compute.internal   Ready    <none>   1m   v1.15.11-eks-af3caf
       ```
-     After your Kubernetes cluster is up and running, you can use of the [Dgraph Helm chart](https://github.com/dgraph-io/charts/) to install a highly avaiable Dgraph cluster
+     After your Kubernetes cluster is up and running, you can use of the [Dgraph Helm chart](https://github.com/dgraph-io/charts/) to install a highly available Dgraph cluster
 
 1.  Add the Dgraph helm repository::
     
@@ -182,7 +182,7 @@ kubectl delete persistentvolumeclaims --selector app=dgraph-alpha
    ```sh
      helm delete my-release
    ```
-2. Delete associated Persistent Volume Claimss:
+2. Delete associated Persistent Volume Claims:
 
    ```sh
    kubectl delete pvc --selector release=my-release

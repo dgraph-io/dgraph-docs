@@ -206,7 +206,7 @@ For example, to remove the predicate `name` from node  `0xfffd8d72745f0691` :
 
 ## Deleting relationship
 
-A relationhsip can be defined with a cardinality of 1 or many (list).
+A relationship can be defined with a cardinality of 1 or many (list).
 Setting a relationship to `null` removes all the relationships.
 
 ```JSON
@@ -217,7 +217,7 @@ Setting a relationship to `null` removes all the relationships.
 ```
 
 
-To delete a single relationhsip in a list, you must specify the target node of the relationship.
+To delete a single relationship in a list, you must specify the target node of the relationship.
 
 ```dql
 {
@@ -237,8 +237,8 @@ deletes only one `food` relationship.
 
 
 To delete all predicates of a given node:
-- make sure the node has a `dgraph.type` predicate 
-- the type is defined by the [Dgraph type system]({{< relref "type-system.md" >}})
+- make sure the node has a `dgraph.type` predicate
+- the type is defined in the [Dgraph types schema]({{< relref "dql-schema.md" >}})
 - run a delete mutation specifying only the uid field
 
 

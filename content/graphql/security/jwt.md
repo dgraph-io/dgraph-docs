@@ -11,7 +11,7 @@ When deploying a GraphQL schema, the admin user can set a  ``# Dgraph.Authorizat
 This line must start with the exact string ``# Dgraph.Authorization`` and be at the bottom of the schema file.
 
 
-### Configure JWT token handling
+## Configure JWT token handling
 
 To configure how Dgraph should handle JWT token for ``/graphql`` endpoint : 
 1. Add a line starting with ``# Dgraph.Authorization`` and with the following parameters at the very end of your GraphQL schema.  
@@ -51,8 +51,51 @@ See the [RBAC rules]({{< relref "RBAC-rules.md">}}) and [Graph traversal rules](
 ### Require JWT token
 To not only accept but to require the JWT token regardless of @auth directives in your GraphQL schema, set option "ClosedByDefault" to true in the `# Dgraph.Authorization` line.
 
-### Examples
+## Working with Authentication providers
+Dgraph.Authorization is fully configurable to work with various authentication providers.
+Authentication providers have options to configure how to generate JWT tokens.
 
+Here are some configuration examples.  
+
+### Clerk.com 
+
+In your clerk dashboard, Access `JWT Templates` and create a template for Dgraph.
+
+Your template must have an `aud` (audience), this is mandatory for Dgraph when the token is verified using JWKURL.
+
+Decide on a claim namespace and add the information you want to use in your RBAC rules. 
+
+We are using 'https://dgraph.io/jwt/claims' namespace in this example and have decided to get the user current organization, role ( clerk has currently two roles 'admin' and 'basic_member') and email.
+
+This is our JWT Template in Clerk:
+```json
+{
+	"aud": "dgraph",
+	"https://dgraph.io/jwt/claims": {
+		"org": "{{org.name}}",
+		"role": "{{org.role}}",
+		"userid": "{{user.primary_email_address}}"
+	}
+}
+```
+
+In the same configuration panel 
+- set the **token lifetime** 
+- copy the **JWKS Endpoint**
+
+Configure your Dgraph GraphQL schema with the following authorization
+```
+# Dgraph.Authorization {"header":"X-Dgraph-AuthToken","namespace":"https://dgraph.io/jwt/claims","jwkurl":"https://<>.clerk.accounts.dev/.well-known/jwks.json","audience":["dgraph"],"closedbydefault":true}
+```
+Note that 
+- **namespace** matches the namespace used in the JWT Template
+- **audience** is an array and contains the **aud** used in the JWT token
+- **jwkurl** is the **JWKS Endpoint** from Clerk
+
+You can select the header to receive the JWT token from your client app, `X-Dgraph-AuthToken` is a header authorized by default by Dgraph GraphQL API to pass CORS requirements.
+
+
+## Other Dgraph.Authorization Examples
 
 To use a single JWK URL: 
 
@@ -82,7 +125,7 @@ Using HMAC-SHA256 token in `X-My-App-Auth` header and authorization claims in `h
 ### JWT format
 
 The value of the JWT ``header`` is expected to be in one of the following forms:
-* Just the JWT token.  
+* Bare token.  
   For example:
     ```
     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJodHRwczovL215LmFwcC5pby9qd3QvY2xhaW1zIjp7fX0.Pjlxpf-3FhH61EtHBRo2g1amQPRi0pNwoLUooGbxIho
@@ -96,7 +139,7 @@ The value of the JWT ``header`` is expected to be in one of the following forms:
 
 ### Error handling
 
-If ClosedByDefault is set to true, and the JWT is not present or if the JWT token does not include the proper audience information, or is not properly encoded, Dgraph replies to requests on `/graphql` endpoint with an error message rejecting the operation similar to:
+If ClosedByDefault is set to true, and the JWT is not present or if the JWT token does not include the proper audience information, or is not properly encoded, or is expired, Dgraph replies to requests on `/graphql` endpoint with an error message rejecting the operation similar to:
 ```
 {
    "errors": [
@@ -111,4 +154,8 @@ If ClosedByDefault is set to true, and the JWT is not present or if the JWT toke
        "queryContact": []
    },...
 ```
-
+**Error messages**
+- "couldn't rewrite query queryContact because a valid JWT is required but was not provided"
+- "couldn't rewrite query queryMessage because unable to parse jwt token:token is expired by 5h49m46.236018623s"
+- "couldn't rewrite query queryMessage because JWT `aud` value doesn't match with the audience"
+- "couldn't rewrite query queryMessage because unable to parse jwt token:token signature is invalid"

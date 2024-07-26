@@ -36,7 +36,7 @@ Reference: [Deprecation]({{< relref "deprecated.md" >}})
 
 `@dgraph` directive tells us how to map fields within a type to existing predicates inside Dgraph.
 
-Reference: [GraphQL on Existing Dgraph]({{< relref "graphql/dgraph/index.md" >}})
+Reference: [@dgraph directive]({{< relref "directive-dgraph" >}})
 
 ### @generate
 
@@ -47,7 +47,7 @@ Reference: [Generate directive]({{< relref "generate.md" >}})
 ### @hasInverse
 
 `@hasInverse` is used to setup up two way edges such that adding a edge in
-one direction automically adds the one in the inverse direction.
+one direction automatically adds the one in the inverse direction.
 
 Reference: [Linking nodes in the graph]({{< relref "graph-links.md" >}})
 
@@ -103,7 +103,7 @@ Reference: [Skip directive]({{< relref "skip-include.md" >}})
 
 ### @withSubscription
 
-`@withSubscription` directive when applied on a type, generates subsciption queries for it.
+`@withSubscription` directive when applied on a type, generates subscription queries for it.
 
 Reference: [Subscriptions]({{< relref "subscriptions.md" >}})
 

@@ -2,7 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Production checklist"
 description = "Requirements to install Dgraph in a production environment"
-weight = 2
+weight = 4
 [menu.main]
     parent = "installation"
 +++
@@ -17,7 +17,7 @@ A **Dgraph cluster** is comprised of multiple **Dgraph instances** or nodes conn
 
 Once installed you may also install or use a **Dgraph client** to communicate with the database and perform queries, mutations, alter schema operations and so on. Pure HTTP calls from curl, Postman, or another program are also possible without a specific client, but there are a range of clients that provide higher-level language bindings, and which use optimized gRPC for communications to the database. Any standards-compliant GraphQL client will work with Dgraph to run GraphQL operations. To run DQL and other Dgraph-specific operations, use a Dgraph client.
 
-Dgraph provides official clients for Go, Java, Python, and JavaScript, and C#, and the JavaScript client supports both gRPC and HTTP to run more easily in a browser. Community-developed Dgraph clients for other languages are also available. The full list of clients can be found in [Clients]({{< relref "clients/_index.md" >}}) page. One particular client, Dgraph Ratel, is a more sophisticated UI tool used to visualize queries, run mutations, and manage schemas in both GraphQL and DQL. Note that clients are not part of a database cluster, and simply connect to one or more Dgraph Alpha instances.
+Dgraph provides official clients for Go, Java, Python, and JavaScript, and C#, and the JavaScript client supports both gRPC and HTTP to run more easily in a browser. Community-developed Dgraph clients for other languages are also available. The full list of clients can be found in [Clients]({{< relref "clients" >}}) page. One particular client, Dgraph Ratel, is a more sophisticated UI tool used to visualize queries, run mutations, and manage schemas in both GraphQL and DQL. Note that clients are not part of a database cluster, and simply connect to one or more Dgraph Alpha instances.
 
 ### Cluster Requirements
 
@@ -50,6 +50,8 @@ You'll want a ensure that your CPU and memory resources are sufficient for your 
 
 You may find you'll need more CPU cores and memory for your specific use case.
 
+In addition, we highly recommend that your CPU clock rate is equal or above 3.4GHz.
+
 ### Disk
 
 Dgraph instances make heavy use of disks, so storage with high IOPS is highly recommended to ensure reliable performance. Specifically SSDs, not HDDs.
@@ -64,7 +66,7 @@ Recommended disk sizes for Dgraph Zero and Dgraph Alpha:
 
 * Dgraph Zero: 200 GB to 300 GB. Dgraph Zero stores cluster metadata information and maintains a write-ahead log for cluster operations.
 * Dgraph Alpha: 250 GB to 750 GB. Dgraph Alpha stores database data, including the schema, indices, and the data values. It maintains a write-ahead log of changes to the database. Your cloud provider may provide better disk performance based on the volume size.
-* If you plan to store over 1.1TB per Dgraph Alpah instance, you must increase either the MaxLevels or TableSizeMultiplier. 
+* If you plan to store over 1.1TB per Dgraph Alpha instance, you must increase either the MaxLevels or TableSizeMultiplier. 
 
 Additional recommendations:
 

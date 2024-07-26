@@ -40,8 +40,8 @@ The general syntax for superflags is as follows: `--<super-flag-name> option-a=v
 
 {{% notice "note" %}}
 You should encapsulate the options for a superflag in double-quotes (`"`) if any
-of those option values include spaces. You can also encapsulate options in
-double-quotes to improve readability. So, you can also use the following
+of those option values include spaces. You can encapsulate options in
+double-quotes to improve readability. You can also use the following
 syntax for superflags: `--<super-flag-name> "option-a=value; option-b=value"`.
 {{% /notice %}}
 
@@ -215,7 +215,7 @@ The commands in these groups are shown in the following table:
 
 |Group             | Command                        | Note                         |
 |------------------|--------------------------------|------------------------------|
-| (root)           | [`dgraph`](#dgraph-root-command) | Root command for Dgraph CLI  |          
+| (root)           | [`dgraph`](#dgraph-root-command) | Root command for Dgraph CLI  |
 | Dgraph core      | [`alpha`](#dgraph-alpha) | Dgraph Alpha database node commands |
 | Dgraph core      | [`zero`](#dgraph-zero) | Dgraph Zero management node commands |
 | Data loading     | [`bulk`](#dgraph-bulk) | Dgraph [Bulk Loader]({{< relref "bulk-loader.md" >}}) commands     |
@@ -228,7 +228,7 @@ The commands in these groups are shown in the following table:
 | Dgraph debug     | [`debuginfo`](#dgraph-debuginfo)    | Generates information about the current node for use in debugging issues with Dgraph clusters   |
 | Dgraph tools     | [`completion`](#dgraph-completion)    | Generates shell completion scripts for `bash` and `zsh`     |
 | Dgraph tools     | [`conv`](#dgraph-conv)    | Converts geographic files into RDF so that they can be consumed by Dgraph    |
-| Dgraph tools     | [`decrypt`](#dgraph-decrypt)    | Decrypts an export file created by an encrypted Dgraph cluster     |
+| Dgraph tools     | [`decrypt`](#dgraph-decrypt)    | Decrypts an export file created by an encrypted Dgraph Cluster     |
 | Dgraph tools     | [`export_backup`](#dgraph-export_backup)    | Converts a binary backup created using Dgraph Enterprise Edition into an exported folder.      |
 | Dgraph tools     | [`increment`](#dgraph-increment)    | Increments a counter transactionally to confirm that a Dgraph Alpha node can handle query and mutation requests |
 | Dgraph tools     | [`lsbackup`](#dgraph-lsbackup)    | Lists information on backups in a given location   |
@@ -245,40 +245,40 @@ the help listing for `dgraph --help` is shown below:
 Usage:
   dgraph [command]
 
-Generic:             
- help          Help about any command        
+Generic:
+ help          Help about any command
  version       Prints the dgraph version details
 
 Available Commands:
 
-Dgraph Core:   
-  alpha         Run Dgraph Alpha database server                   
+Dgraph Core:
+  alpha         Run Dgraph Alpha database server
   zero          Run Dgraph Zero management server
 
-Data Loading:     
-  bulk          Run Dgraph Bulk Loader          
-  live          Run Dgraph Live Loader    
-  restore       Restore backup from Dgraph Enterprise Edition   
+Data Loading:
+  bulk          Run Dgraph Bulk Loader
+  live          Run Dgraph Live Loader
+  restore       Restore backup from Dgraph Enterprise Edition
 
-Dgraph Security:  
-  acl           Run the Dgraph Enterprise Edition ACL tool  
-  audit         Dgraph audit tool  
-  cert          Dgraph TLS certificate management                
+Dgraph Security:
+  acl           Run the Dgraph Enterprise Edition ACL tool
+  audit         Dgraph audit tool
+  cert          Dgraph TLS certificate management
 
-Dgraph Debug:         
+Dgraph Debug:
   debug         Debug Dgraph instance
-  debuginfo     Generate debug information on the current node            
+  debuginfo     Generate debug information on the current node
 
-Dgraph Tools:       
+Dgraph Tools:
   completion    Generates shell completion scripts for bash or zsh
-  conv          Dgraph Geo file converter   
+  conv          Dgraph Geo file converter
   decrypt       Run the Dgraph decryption tool
-  export_backup Export data inside single full or incremental backup  
-  increment     Increment a counter transactionally  
+  export_backup Export data inside single full or incremental backup
+  increment     Increment a counter transactionally
   lsbackup      List info on backups in a given location
   migrate       Run the Dgraph migration tool from a MySQL database to Dgraph
-  raftmigrate   Run the Raft migration tool  
-  upgrade       Run the Dgraph upgrade tool  
+  raftmigrate   Run the Raft migration tool
+  upgrade       Run the Dgraph upgrade tool
 
 Flags:
       --alsologtostderr                  log to standard error as well as files
@@ -336,9 +336,9 @@ Flags:
                                        compression=snappy; [none, zstd:level, snappy] Specifies the compression algorithm and
                                    			compression level (if applicable) for the postings directory."none" would disable
                                    			compression, while "zstd:1" would set zstd compression at level 1.
-                                       goroutines=8; The number of goroutines to use in badger.Stream.
+                                       numgoroutines=8; The number of goroutines to use in badger.Stream.
                                        max-retries=-1; Commits to disk will give up after these number of retries to prevent locking the worker in a failed state. Use -1 to retry infinitely.
-                                    (default "compression=snappy; goroutines=8; max-retries=-1;")
+                                    (default "compression=snappy; numgoroutines=8; max-retries=-1;")
       --cache string               Cache options
                                        percentage=0,65,35; Cache percentages summing up to 100 for various caches (FORMAT: PostingListCache,PstoreBlockCache,PstoreIndexCache)
                                        size-mb=1024; Total size of cache (in MB) to be used in Dgraph.
@@ -373,7 +373,8 @@ Flags:
                                        query-edge=1000000; The maximum number of edges that can be returned in a query. This applies to shortest path and recursive queries.
                                        query-timeout=0ms; Maximum time after which a query execution will fail. If set to 0, the timeout is infinite.
                                        txn-abort-after=5m; Abort any pending transactions older than this duration. The liveness of a transaction is determined by its last mutation.
-                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m;")
+                                       max-pending-queries=10000; Number of maximum pending queries before we reject them as too many requests.
+                                    (default "mutations=allow; query-edge=1000000; normalize-node=10000; mutations-nquad=1000000; disallow-drop=false; query-timeout=0ms; txn-abort-after=5m; max-pending-queries=10000")
       --my string                  addr:port of this server, so other Dgraph servers can talk to this.
   -o, --port_offset int            Value added to all listening port numbers. [Internal=7080, HTTP=8080, Grpc=9080]
   -p, --postings string            Directory to store posting lists. (default "p")
@@ -390,7 +391,7 @@ Flags:
                                        whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames you wish to whitelist for performing admin actions (i.e., --security "whitelist=144.142.126.254,127.0.0.1:127.0.0.3,192.168.0.0/16,host.docker.internal").
                                     (default "token=; whitelist=;")
       --survive string             Choose between "process" or "filesystem".
-                                       If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                       If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                        If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
                                        Most users should be OK with choosing "process". (default "process")
       --telemetry string           Telemetry (diagnostic) options
@@ -471,7 +472,7 @@ Flags:
       --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
       --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
       --survive string                Choose between "process" or "filesystem".
-                                          If set to "process", there would be no data loss in case of process crash, but the behavior would be indeterministic in case of filesystem crash.
+                                          If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                           If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
                                           Most users should be OK with choosing "process". (default "process")
       --telemetry string              Telemetry (diagnostic) options
@@ -637,7 +638,7 @@ help listing shown when you run `dgraph restore --help`:
 ```shell
 Restore loads objects created with the backup feature in Dgraph Enterprise Edition (EE).
 
-Backups are originated from HTTP at /admin/backup, then can be restored using CLI restore
+Backups taken using the GraphQL API can be restored using CLI restore
 command. Restore is intended to be used with new Dgraph clusters in offline state.
 
 The --location flag indicates a source URI with Dgraph backup objects. This URI supports all
@@ -833,6 +834,7 @@ Flags:
       --jepsen string       Disect Jepsen output. Can be linear/binary.
   -l, --lookup string       Hex of key to lookup.
       --nokeys              Ignore key_. Only consider amount when calculating total.
+      --only-summary        If true, only show the summary of the p directory.
   -p, --postings string     Directory where posting lists are stored.
   -r, --pred string         Only output specified predicate.
       --prefix string       Uses a hex prefix.
@@ -926,7 +928,7 @@ Use "dgraph conv [command] --help" for more information about a command.
 #### `dgraph decrypt`
 
 This command lets you decrypt an export file created by an encrypted Dgraph
-cluster. The following replicates the help listing shown when you run
+Cluster. The following replicates the help listing shown when you run
 `dgraph decrypt --help`:
 
 ```shell
@@ -962,7 +964,7 @@ created using Dgraph Enterprise Edition into an exported folder. The following
 replicates key information from the help listing shown when you run `dgraph export_backup --help`:
 
 ```shell
- Export data inside single full or incremental backup
+Export data inside single full or incremental backup
 Usage:
   dgraph export_backup [flags]
 
@@ -1075,33 +1077,6 @@ Flags:
      --user string            The user for logging in
 
 Use "dgraph migrate [command] --help" for more information about a command.
-```
-
-#### `dgraph raftmigrate`
-
-This command runs the Dgraph Raft migration tool.<!-- TBD need to say more about this -->
-The following replicates the help listing shown when you run `dgraph raftmigrate --help`:
-
-```shell
-Run the Raft migration tool
-Usage:
- dgraph raftmigrate [flags]
-
-Flags:
-     --encryption_key_file string   The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively). Enterprise feature.
- -h, --help                         help for raftmigrate
-     --new-dir string               Path to the new (z)w directory.
-     --old-dir string               Path to the old (z)w directory.
-     --vault string                 Vault options
-                                        addr=http://localhost:8200; Vault server address in the form of http://ip:port
-                                        field=enc_key; Vault kv store field whose value is the base64 encoded encryption key.
-                                        format=base64; Vault field format: raw or base64.
-                                        path=secret/data/dgraph; Vault kv store path. e.g. secret/data/dgraph for kv-v2, kv/dgraph for kv-v1.
-                                        role-id-file=; File containing Vault role-id used for approle auth.
-                                        secret-id-file=; File containing Vault secret-id used for approle auth.
-                                     (default "addr=http://localhost:8200; path=secret/data/dgraph; field=enc_key; format=base64; role-id-file=; secret-id-file=;")
-
-Use "dgraph raftmigrate [command] --help" for more information about a command.
 ```
 
 #### `dgraph upgrade`

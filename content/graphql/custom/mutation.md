@@ -15,7 +15,7 @@ Let's say we have an application about authors and posts.  Logged in authors can
 type Author { ... }
 
 type Post {
-    id: ID:
+    id: ID!
     title: String
     text: String
     datePublished: DateTime
@@ -45,7 +45,7 @@ type Mutation {
 
 Find out more about how to turn off generated mutations and protecting mutations with authorization rules at:
 
-* [Remote Types - Turning off Generated Mutations with `@remote` Directive](/graphql/custom/directive)
-* [Securing Mutations with the `@auth` Directive](/graphql/authorization/mutations)
+* [Remote Types - Turning off Generated Mutations with `@remote` Directive]({{<relref "directive/#remote-types">}})
+* [Securing Mutations with the `@auth` Directive]({{<relref "graphql/security/mutations.md">}})
 
 ---

@@ -44,24 +44,8 @@ Example, to reference a term, use a relref to the glossary :
 
 We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to locally stage doc updates before or after creating a PR.
 
-1. Download and install the latest patch of hugo version v0.79.x from [here](https://github.com/gohugoio/hugo/releases/).
-   ```bash
-   pushd ~/Downloads
-   VERSION=v0.79
-   TAG=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases | jq '.[].tag_name' -r | grep $VERSION | head -1)
-   OS=$(uname -s)
-   if [[ ${OS,,} == "darwin" ]]; then
-     PKG=hugo_${TAG##v}_macOS-64bit.tar.gz
-     curl -sLO https://github.com/gohugoio/hugo/releases/download/${TAG}/${PKG}
-     tar xvzf $PKG hugo
-     sudo mv hugo /usr/local/bin/
-   else
-     PKG=hugo_${TAG##v}_Linux-64bit.deb
-     curl -sLO https://github.com/gohugoio/hugo/releases/download/${TAG}/${PKG}
-     sudo apt install $PKG
-   fi
-   popd
-   ```
+1. Download and install  hugo version v0.91 from [here](https://github.com/gohugoio/hugo/releases/tag/v0.91.0).
+
 2. Run the command below to get the theme.
    ```bash
    pushd themes && git clone https://github.com/dgraph-io/hugo-docs && popd
@@ -118,3 +102,6 @@ Pass custom Go-GRPC example to the runnable by passing a `customExampleGoGRPC` t
 ```
 
 **Note:** Runnable doesn't support passing a multiline string as an argument to a shortcode. Therefore, you have to create the whole custom example in a single line string by replacing newlines with `\n`.
+
+## History
+add Hypermode banner by updating the hugo-docs repository with topbat template.
