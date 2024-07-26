@@ -13,7 +13,7 @@ Dgraph provides two types of built-in identifiers: the `ID` scalar type and the 
 * The `@id` directive is used for external identifiers, such as email addresses.
 
 
-### The `@id` directive
+## The `@id` directive
 
 For some types, you'll need a unique identifier set from outside Dgraph.  A common example is a username.
 
@@ -62,6 +62,32 @@ query {
 ```
 
 This will yield a positive response if both the `name` **and** `isbn` match any data in the database.
+
+### `@id` and interfaces
+
+By default, if used in an interface, the `@id` directive will ensure field uniqueness for each implementing type separately.
+In this case, the `@id` field in the interface won't be unique for the interface but for each of its implementing types.
+This allows two different types implementing the same interface to have the same value for the inherited `@id` field.
+
+There are scenarios where this behavior might not be desired, and you may want to constrain the `@id` field to be unique across all the implementing types. In that case, you can set the `interface` argument of the `@id` directive to `true`, and Dgraph will ensure that the field has unique values across all the implementing types of an interface.
+
+For example:
+
+```graphql
+interface Item {
+  refID: Int! @id(interface: true) # if there is a Book with refID = 1, then there can't be a chair with that refID.
+  itemID: Int! @id # If there is a Book with itemID = 1, there can still be a Chair with the same itemID.
+}
+
+type Book implements Item { ... }
+type Chair implements Item { ... }
+```
+
+In the above example, `itemID` won't be present as an argument to the `getItem` query as it might return more than one `Item`.
+
+{{% notice "note" %}}
+`get` queries generated for an interface will have only the `@id(interface: true)` fields as arguments.
+{{% /notice %}}
 
 
 ### Combining `ID` and `@id`
