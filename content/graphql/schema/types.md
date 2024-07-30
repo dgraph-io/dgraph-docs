@@ -147,7 +147,7 @@ GraphQL interfaces allow you to define a generic pattern that multiple types fol
 
 According to GraphQL specifications, you can have the same fields in implementing types as the interface. In such cases, the GraphQL layer will generate the correct Dgraph schema without duplicate fields.
 
-If you repeat a field name in a type, it must be of the same type (including list or scalar types), and it must have the same nullable condition as the interface's field. Note that if the interface's field has a directory like `@search` then it will be inherited by the implementing type's field.
+If you repeat a field name in a type, it must be of the same type (including list or scalar types), and it must have the same nullable condition as the interface's field. Note that if the interface's field has a directive like `@search` then it will be inherited by the implementing type's field.
 
 For example:
 

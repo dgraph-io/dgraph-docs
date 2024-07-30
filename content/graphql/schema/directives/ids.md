@@ -89,8 +89,7 @@ In the above example, `itemID` won't be present as an argument to the `getItem` 
 `get` queries generated for an interface will have only the `@id(interface: true)` fields as arguments.
 {{% /notice %}}
 
-
-### Combining `ID` and `@id`
+## Combining `ID` and `@id`
 
 You can use both the `ID` type and the `@id` directive on another field definition to have both a unique identifier and a generated identifier.
 
@@ -110,7 +109,7 @@ With this schema, Dgraph requires a unique `username` when creating a new user. 
 If in a type there are multiple `@id` fields, then in a `get` query these arguments will be optional. If in a type there's only one field defined with either `@id` or `ID`, then that will be a required field in the `get` query's arguments.
 {{% /notice %}}
 
-<!-- 
+<!--
 ### More to come
 
 We are currently considering allowing types other than `String` with `@id`, see [here](https://discuss.dgraph.io/t/id-with-type-int/10402)
