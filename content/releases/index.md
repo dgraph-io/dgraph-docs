@@ -6,7 +6,7 @@ title = "Dgraph Releases"
   weight = 14
 +++
 
-The latest Dgraph release is the v23.1 series.
+The latest Dgraph release is the v24 series.
 
 Dgraph releases starting v22.0.0 is following semver
 [See the post here](https://discuss.dgraph.io/t/dgraph-v22-0-0-rc1-20221003-release-candidate/).
