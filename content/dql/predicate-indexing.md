@@ -9,6 +9,15 @@ weight = 4
 
 Filtering on a predicate by applying a [function]({{< relref "query-language/functions.md" >}}) requires an index.
 
+Indices are defined in the [Dgraph types schema]({{<relref "dql/dql-schema.md" >}}) using `@index` directive.
+
+Here are some examples:
+```
+name: string @index(term) .
+release_date: datetime @index(year) .
+description_vector: float32vector @index(hnsw(metric:"cosine")) .
+```
+
 When filtering by applying a function, Dgraph uses the index to make the search through a potentially large dataset efficient.
 
 All scalar types can be indexed.
@@ -16,6 +25,8 @@ All scalar types can be indexed.
 Types `int`, `float`, `bool` and `geo` have only a default index each: with tokenizers named `int`, `float`, `bool` and `geo`.
 
 Types `string` and `dateTime` have a number of indices.
+
+Type `float32vector` supports `hnsw` index.
 
 ## String Indices
 The indices available for strings are as follows.
@@ -33,6 +44,30 @@ Incorrect index choice can impose performance penalties and an increased
 transaction conflict rate. Use only the minimum number of and simplest indexes
 that your application needs.
 {{% /notice %}}
+
+## Vector Indices
+
+The indices available for `float32vector` are as follows.
+
+| Dgraph function            | Required index / tokenizer             | Notes |
+| :-----------------------   | :------------                          | :---  |
+| `similar_to`                       | `hnsw` | HNSW index supports parameters `metric` and `exponent`. |
+
+
+#
+
+`hnsw` (**Hierarchical Navigable Small World**) index supports the following parameters
+- metric : indicate the metric to use to compute vector similarity. One of `cosine`, `euclidean`, and `dotproduct`. Default is `euclidean`.
+
+- exponent : An integer, represented as a string, roughly representing the number of vectors expected in the index in power of 10. The exponent value,is used to set "reasonable defaults" for HNSW internal tuning parameters. Default is "4" (10^4 vectors).
+
+
+Here are some examples:
+```
+simple_vector: float32vector @index(hnsw) .
+description_vector: float32vector @index(hnsw(metric:"cosine")) .
+large_vector: float32vector @index(hnsw(metric:"euclidean",exponent:"6")) .
+```
 
 ## DateTime Indices
 

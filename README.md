@@ -38,7 +38,9 @@ Making our documentation easy to understand includes optimizing it for client-si
 Use hugo shortcode for relref.
 
 Example, to reference a term, use a relref to the glossary :
+```
 >  [entity]({{< relref "dgraph-glossary.md#entity" >}})
+```
 
 ### Staging doc updates locally
 
