@@ -25,7 +25,7 @@ You can drop data by invoking the `dropData` mutation on `/admin/slash` endpoint
 
 As an example, if your GraphQL endpoint is `https://frozen-mango.us-west-2.aws.cloud.dgraph.io/graphql`, then the admin endpoint for schema will be at `https://frozen-mango.us-west-2.aws.cloud.dgraph.io/admin/slash`.
 
-This endpoint requires [Authentication]({{<relref "dgraphcloud/admin/authentication">}}).
+This endpoint requires [Authentication]({{<relref "cloud/admin/authentication">}}).
 
 Here is curl example.
 
