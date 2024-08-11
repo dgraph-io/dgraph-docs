@@ -147,7 +147,7 @@ curl "https://${DEPLOYMENT_URL}/admin/slash" \
 
 ## Import Data
 
-Import your data back using Dgraph [Live Loader]({{< relref "dgraphcloud/admin/import-export.md#importing-data-with-live-loader" >}}) (requires Docker).
+Import your data back using Dgraph [Live Loader]({{< relref "cloud/admin/import-export.md#importing-data-with-live-loader" >}}) (requires Docker).
 
 ### Shell Command
 

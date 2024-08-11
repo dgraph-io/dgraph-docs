@@ -7,7 +7,7 @@ weight = 4
 
 ## Exporting and Importing Data in Dgraph Cloud
 
-You can export your data as an Administrator from one Dgraph Cloud backend, and then import this data back into another Dgraph instance or Dgraph Cloud backend. For more information about how to export data in Dgraph Cloud, see [Export data]({{< relref "howto/exportdata/export-data-cloud.md" >}}). You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation]({{< relref "dgraphcloud/cloud-api/backup.md" >}}).
+You can export your data as an Administrator from one Dgraph Cloud backend, and then import this data back into another Dgraph instance or Dgraph Cloud backend. For more information about how to export data in Dgraph Cloud, see [Export data]({{< relref "howto/exportdata/export-data-cloud.md" >}}). You can also export data from Dgraph Cloud programatically using the Dgraph Cloud API. For more information, see [Cloud API documentation]({{< relref "cloud/cloud-api/backup.md" >}}).
 
 To import data to Dgraph Cloud, see [live loader]({{< relref "howto/importdata/live-loader.md" >}}).
 

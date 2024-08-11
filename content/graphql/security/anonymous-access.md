@@ -17,7 +17,7 @@ To turn ``/graphql`` endpoint anonymous access off
 2. Open the  [Access](https://cloud.dgraph.io/_/schema?tab=anon-access) tab.
 3. Set ``Anonymous Access`` toggle to ``On`` or ``Off``
 
-With **Anonymous Access** turned ``off``, any client accessing the ``/graphql`` endpoint must pass  a valid client or admin [API Key]({{< relref "dgraphcloud/admin/authentication.md" >}}) in ``DG-Auth`` or ``X-Auth-Token`` header.
+With **Anonymous Access** turned ``off``, any client accessing the ``/graphql`` endpoint must pass  a valid client or admin [API Key]({{< relref "cloud/admin/authentication.md" >}}) in ``DG-Auth`` or ``X-Auth-Token`` header.
 
 With **Anonymous Access** turned ``on`` (Default configuration), you need to further define the permission per ``type`` defined in your GraphQL Schema. 
  
