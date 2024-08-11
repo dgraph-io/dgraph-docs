@@ -15,12 +15,15 @@
   HUGO_VERSION = "0.91.0"
   LOOP = "false"
   HOST = "/"
+
 [context.branch-deploy]
   command = "./scripts/branchdeploy.sh $DEPLOY_PRIME_URL $HEAD"
+
 [context.branch-deploy.environment]
   HUGO_VERSION = "0.91.0"
   LOOP = "false"
   HOST = "/"
+
 [[plugins]]
   package = "@algolia/netlify-plugin-crawler"
     [plugins.inputs]
@@ -28,3 +31,8 @@
     disabled = false
     renderJavaScript = false
     template = "hierarchical"
+
+[[redirects]]
+  from = "/docs/dgraphcloud/*"
+  to = "/docs/cloud:splat"
+  status = 301
