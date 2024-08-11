@@ -9,7 +9,7 @@ description = "Dgraph terms"
 
 <div class="glossary">
 
-### Alpha ###
+### Alpha2 ###
 A Dgraph cluster consists of [Zero](#zero) and Alpha nodes. Alpha nodes host relationships (also known as predicates) and indexes. Dgraph scales horizontally by adding more Alphas.
 
 ### Badger ###
