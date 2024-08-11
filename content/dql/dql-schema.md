@@ -16,6 +16,9 @@ revenue: float .
 running_time: int .
 starring: [uid] .
 director: [uid] .
+description: string .
+
+description_vector: float32vector @index(hnsw(metric:"cosine")) .
 
 type Person {
   name
@@ -28,6 +31,8 @@ type Film {
   running_time
   starring
   director
+  description
+  description_vector
 }
 ```
 
@@ -111,6 +116,15 @@ For all triples with a predicate of scalar types the object is a literal.
 {{% notice "note" %}}Dgraph supports date and time formats for `dateTime` scalar type only if they
 are RFC 3339 compatible which is different from ISO 8601(as defined in the RDF spec). You should
 convert your values to RFC 3339 format before sending them to Dgraph.{{% /notice  %}}
+
+### Vector Type
+
+The `float32vector` type denotes a vector of floating point numbers, i.e an ordered array of float32.  A node type can contain more than one vector predicate.
+
+Vectors are normaly used to store embeddings obtained from other information through an ML model. When a `float32vector` is [indexed]({{<relref "dql/predicate-indexing.md">}}), the DQL [similar_to]({{<relref "query-language/functions#vector-similarity-search">}}) function can be used for similarity search.
+
+
+
 
 ### UID Type
 

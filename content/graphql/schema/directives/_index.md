@@ -38,6 +38,12 @@ Reference: [Deprecation]({{< relref "deprecated.md" >}})
 
 Reference: [@dgraph directive]({{< relref "directive-dgraph" >}})
 
+### @embedding
+
+`@embedding` directive designates one or more fields as vector embeddings.
+
+Reference: [@embedding directive]({{< relref "embedding" >}})
+
 ### @generate
 
 The `@generate` directive is used to specify which GraphQL APIs are generated for a type.

@@ -1,7 +1,7 @@
 +++
 title = "Aggregate Queries"
 description = "Dgraph automatically generates aggregate queries for GraphQL schemas. These are compatible with the @auth directive."
-weight = 3
+weight = 4
 [menu.main]
     parent = "graphql-queries"
     name = "Aggregate Queries"

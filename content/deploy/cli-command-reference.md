@@ -128,6 +128,7 @@ The `--badger` superflag allows you to set many advanced [Badger options](https:
 | `--query_edge_limit` | uint64 | `query-edge` | uint64 |`alpha`| Maximum number of edges that can be returned in a query |
 | `--normalize_node_limit` | int | `normalize-node` | int |`alpha`| Maximum number of nodes that can be returned in a query that uses the normalize directive |
 | `--mutations_nquad_limit` | int | `mutations-nquad` | int |`alpha`| Maximum number of nquads that can be inserted in a mutation request |
+| `--max-pending-queries` | int | `max-pending-queries` | int |`alpha`| Maximum number of concurrently processing requests allowed before requests are rejected with 429 Too Many Requests |
 
 ### Raft superflag
 
