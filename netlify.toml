@@ -31,8 +31,3 @@
     disabled = false
     renderJavaScript = false
     template = "hierarchical"
-
-[[redirects]]
-  from = "/docs/dgraphcloud/*"
-  to = "/docs/cloud:splat"
-  status = 301
