@@ -2,3 +2,4 @@
 /docs/badger/*         https://badger-docs.netlify.app/:splat 200!
 
 /docs/dgraphcloud/*    /docs/cloud/:splat 301!
+/v*                    /docs/v:splat 200!
