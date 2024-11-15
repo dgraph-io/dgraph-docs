@@ -57,9 +57,24 @@ Ensure that you download these files as soon as possible because the links to do
       }
    }
    ```
+1. For running a namespace-specific export from a multi-tenant Dgraph cluster, an additional input parameter of `namespace: <NAMESPACE-ID>` must be provided to the `export` mutation. The "Namespaces" view in the Cloud console lists all of the Namespaces created along with their IDs.
+
+    ```graphql
+    mutation {
+      export(format:"<FORMAT>", namespace:<NAMESPACE-ID>) {
+        response {
+          message
+          code
+        }
+        exportId
+        taskId
+     }
+    }
+   ```
+
 1. Make a note of the `<EXPORT_ID>` and the `<TASK_ID>`.
 
-1. To get the status of export and the signed URLs to download the exported files, use this mutation:
+1. To get the status of export and the signed URLs to download the exported files, run the following GraphQL query:
    ```graphql
    query {
      exportStatus (
@@ -73,11 +88,11 @@ Ensure that you download these files as soon as possible because the links to do
      }
    }
    ```
-
-   Depending on the format that you chose to create an export, three files are generated.
+1. Use the `signedUrls` to download the exported files. 
+   Depending on the format that you chose to create an export, three files are generated viz., one each for the data RDF/JSON file, the GraphQL schema and the DQL schema.
    
 {{% notice "note" %}}
-Ensure that you download these files as soon as possible because the signed URLs to download these files expire after 48 hours from the time they were generated. You can use `curl -O <SIGNED_URL>` to download the files to the current directory.
+Ensure that you download these files as soon as possible because the signed URLs to download these files expire after 48 hours from the time they were generated. You can use `curl -O <SIGNED_URL>` to download the files to the current directory or access the links using a browser.
 {{% /notice %}}   
 
 ### Exporting data from Dgraph Cloud programmatically
