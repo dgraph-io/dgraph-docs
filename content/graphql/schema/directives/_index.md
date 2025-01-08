@@ -62,7 +62,7 @@ Reference: [Linking nodes in the graph]({{< relref "graph-links.md" >}})
 `@id` directive is used to annotate a field which represents a unique identifier coming from outside
  of Dgraph.
 
-Reference: [Identity](({{< relref "ids.md" >}})
+Reference: [Identity]({{< relref "ids.md" >}})
 
 ### @include
 
