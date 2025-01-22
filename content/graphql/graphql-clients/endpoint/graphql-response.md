@@ -123,6 +123,7 @@ The "extensions" field contains extra metadata for the request with metrics and 
 
 - `"touched_uids"`: The number of nodes that were touched to satisfy the request. This is a good metric to gauge the complexity of the query.
 - `"tracing"`: Displays performance tracing data in [Apollo Tracing][apollo-tracing] format. This includes the duration of the whole query and the duration of each operation.
+- `"dql_query"`: Optional, displays the translated DQL query Dgraph composed. This is only output when the GraphQL debug superflag `(--graphql "debug=true;")` is set.
 
 [apollo-tracing]: https://github.com/apollographql/apollo-tracing
 
