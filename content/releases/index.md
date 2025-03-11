@@ -20,6 +20,7 @@ To learn about the latest releases and other important announcements, watch the
 
  Release               | First Release Date | End of Life
 -----------------------|--------------------|--------------
+ [v24.1][]             | March 2025         | 
  [v24.0][]             | June 2024          | December 2025
  [v23.1][]             | October 2023       | April 2025
  [v23.0][]             | May 2023           | November 2024
@@ -33,6 +34,7 @@ To learn about the latest releases and other important announcements, watch the
  [v1.1][]              | January 2020       | January 2021
  [v1.0][]              | December 2017      | March 2020
 
+[v24.1]: https://hypermode.com/blog/dgraph-v241-knowledge-graphs-faster
 [v24.0]: https://discuss.dgraph.io/t/dgraph-release-v24-0-0-is-now-available/19346
 [v23.1]: https://discuss.dgraph.io/t/dgraph-23-1-0-is-generally-available-on-dgraph-cloud-dockerhub-and-github/18980
 [v23.0]: https://discuss.dgraph.io/t/dgraph-release-v23-0-0-is-now-generally-available/18634
