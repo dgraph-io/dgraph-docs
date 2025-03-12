@@ -40,11 +40,7 @@ MAJOR_VERSIONS=(
 )
 
 VERSIONS_ARRAY=(
-  'v22.0'
-  ${MAJOR_VERSIONS:0}
-  ${MAJOR_VERSIONS[@]:1}
   'main'
-  'v21.12'
 )
 
 joinVersions() {
