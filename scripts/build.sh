@@ -35,11 +35,7 @@ THEME_BRANCH="${THEME_BRANCH:-master}"
 
 
 VERSIONS_ARRAY=(
-  'v24.0'
-  'v23.1'
-  'v23.0'
-  'v22.0'
-  'v21.03'
+  'main'
 )
 VERSION_STRING=$(printf ",%s" "${VERSIONS_ARRAY[@]}")
 VERSION_STRING=${VERSION_STRING:1} # remove first comma
