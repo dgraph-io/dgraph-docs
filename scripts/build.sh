@@ -31,14 +31,6 @@ THEME_BRANCH="${THEME_BRANCH:-main}"
 # and then the older versions in descending order, such that the
 # build script can place the artifact in an appropriate location.
 
-getMajorVersions=$(curl -s https://get.dgraph.io/latest \
-| grep -o '"majorReleases":.*]' | grep -o '".*"' |  grep -o '"[^[]*$' \
-| sed  "s/\"//g"  | sed  "s/\,/ /g" | sed  "s/v20.03/ /g" | sed  "s/v21.12/ /g" | sed "s/v20.07/ /g")
-
-MAJOR_VERSIONS=(
-  $getMajorVersions
-)
-
 VERSIONS_ARRAY=(
   'main'
 )
