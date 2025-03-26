@@ -67,7 +67,7 @@ For example, you can run the following mutation (using the [RDF]({{< relref "dql
   set {
     <_:jedi1> <character_name> "Luke Skywalker" .
     <_:leia> <character_name> "Leia" .
-    <_:sith1> <character_name> "Anakin" (aka="Darth Vador",villain=true).
+    <_:sith1> <character_name> "Anakin" (aka="Darth Vader",villain=true).
     <_:sith1> <has_for_child> <_:jedi1> .
     <_:sith1> <has_for_child> <_:leia> .
   } 
