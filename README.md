@@ -48,11 +48,7 @@ We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to loc
 
 1. Download and install  hugo version v0.91 from [here](https://github.com/gohugoio/hugo/releases/tag/v0.91.0).
 
-2. Run the command below to get the theme.
-   ```bash
-   pushd themes && git clone https://github.com/dgraph-io/hugo-docs && popd
-   ```
-3. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the documentation site running on your local machine.
+2. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the documentation site running on your local machine.
 
 (Optional) To run queries _within_ the documentation using a different Dgraph instance, set the `DGRAPH_ENDPOINT` environment variable before starting the local web server:
 
