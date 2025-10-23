@@ -1,0 +1,18 @@
+[build]
+  base = "/"
+  command = "./scripts/local.sh --preview $URL"
+  publish = "./public"
+
+[context.production.environment]
+  HUGO_VERSION = "0.79.0"
+
+[context.deploy-preview]
+  command = "./scripts/local.sh --preview $DEPLOY_PRIME_URL"
+
+[context.deploy-preview.environment]
+  HUGO_VERSION = "0.79.0"
+  HOST = "/"
+
+[context.branch-deploy.environment]
+  HUGO_VERSION = "0.79.0"
+  HOST = "/"

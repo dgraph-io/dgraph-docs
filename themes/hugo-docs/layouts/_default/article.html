@@ -1,0 +1,14 @@
+{{ $currentVersion := getenv "CURRENT_VERSION" }}
+{{ $versionString := getenv "VERSIONS" }}
+{{ $versions := split $versionString "," }}
+{{ $latestVersion := index $versions 0 }}
+
+<article id="{{ .Slug }}">
+  {{ partial "ask-question.html" . }}
+
+  <h1 class="post-title">{{ .Title }}</h1>
+
+  <div>{{ .Content }}</div>
+</article>
+
+{{ .TableOfContents }}

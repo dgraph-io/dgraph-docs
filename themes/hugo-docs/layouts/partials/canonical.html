@@ -1,0 +1,5 @@
+{{- $canonicalUrl := string .Permalink -}}
+{{- if (ne (getenv "CANONICAL_PATH") "") -}}
+{{- $canonicalUrl = (replace $canonicalUrl (trim .Site.BaseURL "/") (trim (getenv "CANONICAL_PATH") "/")) -}}
+{{- end -}}
+{{- $canonicalUrl -}}

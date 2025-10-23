@@ -1,0 +1,23 @@
+{{ partial "header.html" . }}
+
+<main class="content-wrapper">
+  <div class="content">
+    <article id="{{ .Slug }}">
+      {{if (ne .Title "Get started with Dgraph") }}
+      {{ partial "ask-question.html" . }}
+      {{ partial "suggest-edit.html" . }}
+      {{ end }}
+
+      <div class="page-not-found">
+        <h4>Our documentation is being updated!</h4>
+
+        <h4>This page may have moved.</h4>
+        <h4>Please use the search bar to find the new location.</h4>
+
+        <p><a href="{{.Site.BaseURL}}">Go to homepage</a></p>
+      </div>
+    </article>
+  </div>
+</main>
+
+{{ partial "footer.html" . }}
