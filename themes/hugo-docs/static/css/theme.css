@@ -1276,7 +1276,7 @@ footer .logo {
 @media screen and (min-width: 768px) {
   .content-wrapper {
     margin-left: 380px;
-    padding-top: 200px;
+    padding-top: 120px;
   }
   .menu-header .heading {
     margin-bottom: 5px;
@@ -1285,7 +1285,7 @@ footer .logo {
     display: none;
   }
   #sidebar {
-    top: 190px;
+    top: 100px;
     padding-left: 45px;
   }
   #sidebar .sidebar-menu {
@@ -1304,7 +1304,7 @@ footer .logo {
   }
 
   .content-wrapper {
-    padding-top: 220px;
+    padding-top: 120px;
   }
 }
 
@@ -2820,7 +2820,7 @@ body:not(.dark-blog) .single-footer .legal-notices-wrap:hover .legal-notices {
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
   #sidebar {
-    width: calc(100% - 320px);
+    width: calc(100% - 120px);
   }
 }
 

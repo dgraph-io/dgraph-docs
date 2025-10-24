@@ -17,7 +17,7 @@ aliases = ["/contribute"]
       <p>
         Designed from the ground up to be run in production, Dgraph is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
       </p>
-      <p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='{{< relref "deploy/installation/_index.md">}}'>download</a> Dgraph to deploy it yourself.</p>
+      <!--p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='{{< relref "deploy/installation/_index.md">}}'>download</a> Dgraph to deploy it yourself.</p-->
     </div>
     <div class="item">
       <a href="{{< relref "dgraph-overview.md">}}">
@@ -109,10 +109,10 @@ aliases = ["/contribute"]
   <!-- Join the Community -->
 
   <div class="join-the-community">
-    <div class="community-heading">
+    <!--div class="community-heading">
       <h3>Join the Community</h3>
       <p>Our mission is to help developers and organizations leverage the power of graph and GraphQL to build applications better, faster, and more easily.</p>
-    </div>
+    </div-->
     <div class="community-buttons">
       <div class="community-item big-card black-card">
         <svg class="community-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
