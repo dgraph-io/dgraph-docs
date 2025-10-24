@@ -2,21 +2,289 @@
 <html lang="en" class="js csstransforms3d">
   <head>
     <style>
-      /* Dark blog */
+      /* Dark blog - Comprehensive page-wide dark mode */
       .dark-blog {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog body {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog html {
         background-color: #100c19;
       }
 
+      /* Header and navigation */
+      .dark-blog .dgraph-header {
+        background-color: #100c19;
+      }
+
+      .dark-blog .blog-header {
+        background-color: #100c19;
+      }
+
+      .dark-blog .dgraph-menu a {
+        color: #ffffff;
+      }
+
+      .dark-blog .dgraph-menu a:hover {
+        color: #ef265a;
+      }
+
+      .dark-blog .navigation-link {
+        color: #ffffff;
+      }
+
+      .dark-blog .navigation-link:hover {
+        color: #ef265a;
+      }
+
+      /* Sidebar */
       .dark-blog .topics {
+        background-color: #100c19;
         border-color: #646169;
       }
 
-      .dark-blog .content-wrapper {
-        background: #100c19;
+      .dark-blog #sidebar a {
+        color: #ffffff;
       }
 
+      .dark-blog #sidebar a:hover {
+        color: #ef265a;
+      }
+
+      .dark-blog #sidebar .active a {
+        color: #ef265a;
+      }
+
+      /* Content area */
+      .dark-blog .content-wrapper {
+        background: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog article {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog .content-wrapper p {
+        color: #ffffff;
+      }
+
+      .dark-blog h1,
+      .dark-blog h2,
+      .dark-blog h3,
+      .dark-blog h4,
+      .dark-blog h5,
+      .dark-blog h6 {
+        color: #ffffff;
+      }
+
+      /* Table of Contents */
       .dark-blog div.right-toc {
         background: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog #TableOfContents ul li a {
+        color: #ffffff;
+      }
+
+      .dark-blog #TableOfContents ul li a:hover {
+        color: #ef265a;
+      }
+
+      /* Code blocks */
+      .dark-blog pre {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border: 1px solid #333;
+      }
+
+      .dark-blog code {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      /* Links */
+      .dark-blog a {
+        color: #ef265a;
+      }
+
+      .dark-blog a:hover {
+        color: #ffffff;
+      }
+
+      /* Buttons */
+      .dark-blog .nav-next-btn,
+      .dark-blog .question-btn,
+      .dark-blog .edit-btn {
+        color: #ffffff;
+        background-color: #333;
+        border-color: #555;
+      }
+
+      .dark-blog .nav-next-btn:hover,
+      .dark-blog .question-btn:hover,
+      .dark-blog .edit-btn:hover {
+        background-color: #ef265a;
+        color: #ffffff;
+      }
+
+      /* Lists */
+      .dark-blog dl,
+      .dark-blog ol,
+      .dark-blog ul {
+        color: #ffffff;
+      }
+
+      /* Footer */
+      .dark-blog .single-footer {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog .single-footer h6 {
+        color: #ffffff;
+      }
+
+      .dark-blog .single-footer a {
+        color: #ef265a;
+      }
+
+      .dark-blog .single-footer a:hover {
+        color: #ffffff;
+      }
+
+      /* Form elements */
+      .dark-blog input,
+      .dark-blog textarea,
+      .dark-blog select {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border-color: #555;
+      }
+
+      .dark-blog input:focus,
+      .dark-blog textarea:focus,
+      .dark-blog select:focus {
+        border-color: #ef265a;
+        outline-color: #ef265a;
+      }
+
+      /* Tables */
+      .dark-blog table {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      .dark-blog th,
+      .dark-blog td {
+        border-color: #555;
+        color: #ffffff;
+      }
+
+      .dark-blog th {
+        background-color: #333;
+      }
+
+      /* Blockquotes */
+      .dark-blog blockquote {
+        background-color: #1a1a1a;
+        border-left-color: #ef265a;
+        color: #ffffff;
+      }
+
+      /* Search box */
+      .dark-blog .menu-search input {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border-color: #555;
+      }
+
+      /* Dropdown menus */
+      .dark-blog .nav-submenu {
+        background-color: #1a1a1a;
+        border-color: #555;
+      }
+
+      .dark-blog .nav-submenu a {
+        color: #ffffff;
+      }
+
+      .dark-blog .nav-submenu a:hover {
+        color: #ef265a;
+      }
+
+      /* Additional elements for complete coverage */
+      .dark-blog .button {
+        background-color: #ef265a;
+        color: #ffffff;
+        border-color: #ef265a;
+      }
+
+      .dark-blog .button:hover {
+        background-color: #ffffff;
+        color: #ef265a;
+      }
+
+      .dark-blog .button-ghost {
+        background-color: transparent;
+        color: #ffffff;
+        border-color: #ffffff;
+      }
+
+      .dark-blog .button-ghost:hover {
+        background-color: #ffffff;
+        color: #100c19;
+      }
+
+      /* Scrollbars */
+      .dark-blog ::-webkit-scrollbar {
+        background-color: #1a1a1a;
+      }
+
+      .dark-blog ::-webkit-scrollbar-thumb {
+        background-color: #555;
+      }
+
+      .dark-blog ::-webkit-scrollbar-thumb:hover {
+        background-color: #777;
+      }
+
+      /* Selection */
+      .dark-blog ::selection {
+        background-color: #ef265a;
+        color: #ffffff;
+      }
+
+      /* Focus indicators */
+      .dark-blog *:focus {
+        outline-color: #ef265a;
+      }
+
+      /* Loading states */
+      .dark-blog .loading {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      /* Error states */
+      .dark-blog .error {
+        background-color: #2d1b1b;
+        color: #ff6b6b;
+        border-color: #ff6b6b;
+      }
+
+      /* Success states */
+      .dark-blog .success {
+        background-color: #1b2d1b;
+        color: #6bff6b;
+        border-color: #6bff6b;
       }
     </style>
 
