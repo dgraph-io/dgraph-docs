@@ -22,11 +22,14 @@ aliases = ["/contribute"]
     <div class="item">
       <a href="{{< relref "dgraph-overview.md">}}">
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <circle cx="10.5" cy="10.5" r="6.5" stroke="#EF265A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M17 17L20 20" stroke="#100C19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h2>Overview</h2>
+        <path d="M21.9995 14.6L21.9995 20.4C21.9995 20.7314 21.7309 21 21.3995 21L17.5995 21C17.2681 21 16.9995 20.7314 16.9995 20.4L16.9995 14.6C16.9995 14.2686 17.2681 14 17.5995 14L21.3995 14C21.7309 14 21.9995 14.2686 21.9995 14.6Z" stroke="#100C19" stroke-width="1.33333"/>
+        <path d="M6.99951 9.1L6.99951 14.9C6.99951 15.2314 6.73088 15.5 6.39951 15.5L2.59951 15.5C2.26814 15.5 1.99951 15.2314 1.99951 14.9L1.99951 9.1C1.99951 8.76863 2.26814 8.5 2.59951 8.5L6.39951 8.5C6.73088 8.5 6.99951 8.76863 6.99951 9.1Z" stroke="#EF265A" stroke-width="1.33333"/>
+        <path d="M21.9995 3.6L21.9995 9.4C21.9995 9.73137 21.7309 10 21.3995 10L17.5995 10C17.2681 10 16.9995 9.73137 16.9995 9.4L16.9995 3.6C16.9995 3.26863 17.2681 3 17.5995 3L21.3995 3C21.7309 3 21.9995 3.26863 21.9995 3.6Z" stroke="#100C19" stroke-width="1.33333"/>
+        <path d="M16.9995 17.5L13.4995 17.5C12.3949 17.5 11.4995 16.6046 11.4995 15.5L11.4995 8.5C11.4995 7.3954 12.3949 6.5 13.4995 6.5L16.9995 6.5" stroke="#100C19" stroke-width="1.33333"/>
+        <path d="M11.4995 12L6.99951 12" stroke="#100C19" stroke-width="1.33333"/></svg>
+        <h2>Dgraph DB</h2>
         <p>
-        Understand Dgraph core concepts and hosting options.
+        Get started, use and operate Dgraph database.
         </p>
       </a>
     </div>
@@ -54,65 +57,12 @@ aliases = ["/contribute"]
         </p>
       </a>
     </div>
-    <div class="item">
-      <a href="{{< relref "dql/_index.md">}}">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M21.9995 14.6L21.9995 20.4C21.9995 20.7314 21.7309 21 21.3995 21L17.5995 21C17.2681 21 16.9995 20.7314 16.9995 20.4L16.9995 14.6C16.9995 14.2686 17.2681 14 17.5995 14L21.3995 14C21.7309 14 21.9995 14.2686 21.9995 14.6Z" stroke="#100C19" stroke-width="1.33333"/>
-        <path d="M6.99951 9.1L6.99951 14.9C6.99951 15.2314 6.73088 15.5 6.39951 15.5L2.59951 15.5C2.26814 15.5 1.99951 15.2314 1.99951 14.9L1.99951 9.1C1.99951 8.76863 2.26814 8.5 2.59951 8.5L6.39951 8.5C6.73088 8.5 6.99951 8.76863 6.99951 9.1Z" stroke="#EF265A" stroke-width="1.33333"/>
-        <path d="M21.9995 3.6L21.9995 9.4C21.9995 9.73137 21.7309 10 21.3995 10L17.5995 10C17.2681 10 16.9995 9.73137 16.9995 9.4L16.9995 3.6C16.9995 3.26863 17.2681 3 17.5995 3L21.3995 3C21.7309 3 21.9995 3.26863 21.9995 3.6Z" stroke="#100C19" stroke-width="1.33333"/>
-        <path d="M16.9995 17.5L13.4995 17.5C12.3949 17.5 11.4995 16.6046 11.4995 15.5L11.4995 8.5C11.4995 7.3954 12.3949 6.5 13.4995 6.5L16.9995 6.5" stroke="#100C19" stroke-width="1.33333"/>
-        <path d="M11.4995 12L6.99951 12" stroke="#100C19" stroke-width="1.33333"/></svg>
-        <h2>Dgraph Query Language (DQL)</h2>
-        <p>
-          Learn Dgraph Query Language (DQL), Dgraph’s proprietary language to add, modify, delete and fetch data.
-        </p>
-      </a>
-    </div>
-    <div class="item">
-      <a href="{{< relref "/cloud">}}">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="#100C19" stroke-width="1.71429" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="#EF265A" stroke-width="1.71429" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h2>Dgraph Cloud</h2>
-        <p>
-          Run Dgraph in the Cloud.
-          Work with your data in a fully-managed cloud service.
-        </p>
-      </a>
-    </div>
-    <div class="item">
-      <a href="{{< relref "deploy/_index.md">}}">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#EF265A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M19.6224 10.3954L18.5247 7.7448L20 6L18 4L16.2647 5.48295L13.5578 4.36974L12.9353 2H10.981L10.3491 4.40113L7.70441 5.51596L6 4L4 6L5.45337 7.78885L4.3725 10.4463L2 11V13L4.40111 13.6555L5.51575 16.2997L4 18L6 20L7.79116 18.5403L10.397 19.6123L11 22H13L13.6045 19.6132L16.2551 18.5155C16.6969 18.8313 18 20 18 20L20 18L18.5159 16.2494L19.6139 13.598L21.9999 12.9772L22 11L19.6224 10.3954Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h2>Self-hosted cluster</h2>
-        <p>
-          Install and manage a Dgraph cluster in a variety of self-managed deployment scenarios.
-        </p>
-      </a>
-    </div>
-    <div class="item">
-      <a href="{{< relref "clients">}}">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M14 4L10 20" stroke="#EF265A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M5 8L1 12L5 16" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M19 8L23 12L19 16" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h2>gRPC and HTTP Clients</h2>
-        <p>
-          Interact with a Dgraph cluster using libraries in various programming languages.
-        </p>
-      </a>
-    </div>
-
   </div>
 
   <!-- Join the Community -->
 
-  <div class="join-the-community">
-    <!--div class="community-heading">
-      <h3>Join the Community</h3>
-      <p>Our mission is to help developers and organizations leverage the power of graph and GraphQL to build applications better, faster, and more easily.</p>
-    </div-->
+  <!--div class="join-the-community">
+
     <div class="community-buttons">
       <div class="community-item big-card black-card">
         <svg class="community-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
@@ -137,7 +87,7 @@ aliases = ["/contribute"]
     </div>
 
   </div>
-</div>
+</div-->
 
 <style>
   .content-wrapper {
