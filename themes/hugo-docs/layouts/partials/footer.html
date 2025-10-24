@@ -149,19 +149,19 @@ function checkScreenWidth() {
     x.classList.remove("sidebar-closed");
     arrow.classList.remove("up-arrow");
     btn.classList.add("open");
-    $(".theme-toggle").prependTo(".right-toc");
+    //$(".theme-toggle").prependTo(".right-toc");
   } else if (window.matchMedia("(min-width: 769px) and (max-width: 1024px)").matches) {
     x.classList.remove("sidebar-opened");
     x.classList.add("sidebar-closed");
     arrow.classList.add("up-arrow");
     btn.classList.remove("open");
-    $(".theme-toggle").prependTo(".right-toc");
+    //$(".theme-toggle").prependTo(".right-toc");
   } else if (window.matchMedia("(max-width: 768px)").matches) {
     x.classList.remove("sidebar-opened");
     x.classList.add("sidebar-closed");
     arrow.classList.add("up-arrow");
     btn.classList.remove("open");
-    $(".theme-toggle").insertAfter("#dropdown-btn");
+    //$(".theme-toggle").insertAfter("#dropdown-btn");
   }
 }
 
