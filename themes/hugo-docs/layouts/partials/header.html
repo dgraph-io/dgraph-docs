@@ -71,10 +71,6 @@
         color: #ffffff;
       }
 
-      .dark-blog .content-wrapper p {
-        color: #ffffff;
-      }
-
       .dark-blog h1,
       .dark-blog h2,
       .dark-blog h3,
@@ -286,6 +282,65 @@
         color: #6bff6b;
         border-color: #6bff6b;
       }
+
+      /* Logo theme switching */
+      .logo-light {
+        display: block;
+      }
+
+      .logo-dark {
+        display: none;
+      }
+
+      .dark-blog .logo-light {
+        display: none;
+      }
+
+      .dark-blog .logo-dark {
+        display: block;
+      }
+
+      /* Set colors directly on logo classes */
+      .logo-light {
+        color: #000000;
+      }
+
+      .logo-dark {
+        color: #ffffff;
+      }
+
+      /* Ensure theme toggle is visible */
+      .nav_buttons-inside .theme-toggle {
+        display: block !important;
+      }
+
+      @media all and (min-width: 768px) {
+        .nav_buttons-inside {
+          display: flex !important;
+          align-items: center;
+          justify-content: flex-end;
+        }
+      }
+
+      /* Theme toggle positioning and styling */
+      .nav_buttons-inside .theme-toggle {
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav_buttons-inside .light-dark-toggle {
+        margin: 0;
+      }
+
+      /* Mobile responsive */
+      @media all and (max-width: 767px) {
+        .nav_buttons-inside {
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+          margin-top: 10px;
+        }
+      }
     </style>
 
     <!-- Google Tag Manager - 08/2023: removed as we are now using Segment -->
@@ -420,11 +475,21 @@
     {{ if .IsHome }} {{ else }}
     <script>
       const theme = localStorage.getItem("theme");
+      const logoLight = document.querySelector(".logo-light");
+      const logoDark = document.querySelector(".logo-dark");
 
       if (theme === "dark-blog") {
         document.body.classList.add("dark-blog");
+        
+        // Show dark logo
+        if (logoLight) logoLight.style.display = "none";
+        if (logoDark) logoDark.style.display = "block";
       } else {
         document.body.classList.add("light-blog");
+        
+        // Show light logo
+        if (logoLight) logoLight.style.display = "block";
+        if (logoDark) logoDark.style.display = "none";
       }
     </script>
     {{ end }}

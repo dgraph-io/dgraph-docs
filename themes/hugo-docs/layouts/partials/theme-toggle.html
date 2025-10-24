@@ -42,29 +42,59 @@
       if (toggleCheckbox) {
         toggleCheckbox.addEventListener("change", function () {
           const toggleSlot = document.querySelector(".toggle-slot");
+          const logoLight = document.querySelector(".logo-light");
+          const logoDark = document.querySelector(".logo-dark");
+          
           if (toggleCheckbox.checked) {
             toggleSlot.classList.add("toggle-slot--light");
             document.body.classList.remove("light-blog");
             document.body.classList.add("dark-blog");
             localStorage.setItem("theme", "dark-blog");
+            
+            // Switch to dark logo
+            if (logoLight) logoLight.style.display = "none";
+            if (logoDark) logoDark.style.display = "block";
+            
+            console.log("Dark mode activated, body classes:", document.body.className);
           } else {
             toggleSlot.classList.remove("toggle-slot--light");
             document.body.classList.remove("dark-blog");
             document.body.classList.add("light-blog");
             localStorage.setItem("theme", "light-blog");
+            
+            // Switch to light logo
+            if (logoLight) logoLight.style.display = "block";
+            if (logoDark) logoDark.style.display = "none";
+            
+            console.log("Light mode activated, body classes:", document.body.className);
           }
         });
 
         // Initialize theme from localStorage
         const theme = localStorage.getItem("theme");
+        const logoLight = document.querySelector(".logo-light");
+        const logoDark = document.querySelector(".logo-dark");
+        
         if (theme === "dark-blog") {
           document.body.classList.add("dark-blog");
           document.querySelector(".toggle-slot").classList.add("toggle-slot--light");
           toggleCheckbox.checked = true;
+          
+          // Show dark logo
+          if (logoLight) logoLight.style.display = "none";
+          if (logoDark) logoDark.style.display = "block";
+          
+          console.log("Initialized dark mode, body classes:", document.body.className);
         } else {
           document.body.classList.add("light-blog");
           document.querySelector(".toggle-slot").classList.remove("toggle-slot--light");
           toggleCheckbox.checked = false;
+          
+          // Show light logo
+          if (logoLight) logoLight.style.display = "block";
+          if (logoDark) logoDark.style.display = "none";
+          
+          console.log("Initialized light mode, body classes:", document.body.className);
         }
       }
     });

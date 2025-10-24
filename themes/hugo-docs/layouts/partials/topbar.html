@@ -7,14 +7,16 @@
   <div class="header-container">
     <a href="https://dgraph.io" aria-current="page" class="dgraph_logo">
       <div class="nav_logo-embed w-embed">
-        <img src="/images/dgraph-light.svg" alt="Dgraph" height="38" width="123" />
+        <img src="/images/dgraph-light.svg" alt="Dgraph" height="38" width="123" class="logo-light" />
+        <img src="/images/dgraph-dark.svg" alt="Dgraph" height="38" width="123" class="logo-dark" style="display: none;" />
       </div>
     </a>
     <nav role="navigation" class="dgraph-menu">
-      {{ partial "theme-toggle.html" (dict "showLabel" false) }}
       
-      <!--div class="nav_buttons-inside">
-        <div class="nav_button_wrapper">
+      
+      <div class="nav_buttons-inside">
+      {{ partial "theme-toggle.html" (dict "showLabel" false) }}
+        <!--div class="nav_button_wrapper">
           <a href="https://cloud.dgraph.io/?__hstc=17958374.33a8f2bf90fb365fa4bbcd78710030ca.1680885624716.1680885624716.1680888099029.2&amp;__hssc=17958374.1.1680888099029&amp;__hsfp=179051687" target="_blank" class="button-ghost nav w-button"
             >Sign In</a
           >
