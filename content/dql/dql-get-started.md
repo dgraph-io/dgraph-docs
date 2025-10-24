@@ -8,7 +8,8 @@ aliases = ["/get-started"]
   parent = "dql"
 +++
 
-This is a quick start guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
+This is a quick start guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. 
+For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
 
 
 This guide helps you:

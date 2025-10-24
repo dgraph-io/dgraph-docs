@@ -50,8 +50,8 @@ Dgraph maintains a list of all predicates names and their type in the **Dgraph t
 
 ## Predicates declaration
 
-The Dgraph Cluster [schema mode]({{<relref "schema-modes">}}) defines if the Dgraph types must be declared before allowing mutations or not:
-- In ``strict`` mode, you must declare the predicates ([Update Dgraph types]({{<relref "update-dgraph-types.md">}}) ) before you can run a mutation using those predicates.
+The Dgraph Cluster **schema mode** defines if the Dgraph types must be declared before allowing mutations or not:
+- In ``strict`` mode, you must declare the predicates before you can run a mutation using those predicates.
 - In ``flexible`` mode (which is the default behavior), you can run a mutation without declaring the predicate in the DQL Schema.
 
 
@@ -87,7 +87,7 @@ The Dgraph types schema is the way to specify predicates types and cardinality (
 A predicate type is either created
 - by altering the Dgraph types schema (See [Update Dgraph types]({{<relref "update-dgraph-types.md">}}) )
 or
-- during a mutation, if the Dgraph Cluster [schema mode]({{<relref "schema-modes">}}) is ``flexible`` and the predicate used is not yet declared.
+- during a mutation, if the Dgraph Cluster **schema mode** is ``flexible`` and the predicate used is not yet declared.
 
   If a predicate type isn't declared in the schema, then the type is inferred from the first mutation and added to the schema.
 

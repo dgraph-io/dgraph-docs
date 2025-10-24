@@ -23,7 +23,6 @@ It is your responsibility to correctly configure the authorization for the ``/gr
 {{% /notice %}}
 
 Refer to the following documentation to set your ``/graphql`` endpoint security :
-- [Configure anonymous access]({{< relref "anonymous-access.md" >}})
 
 - [Handle JWT token]({{< relref "jwt.md" >}})
 

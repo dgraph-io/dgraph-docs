@@ -1,7 +1,8 @@
 +++
 title = "GraphQL API"
 description = "Generate a GraphQL API and a graph backend from a single GraphQL schema."
-weight = 3
+weight = 10
+
 [menu.main]
   identifier = "graphql"
 
