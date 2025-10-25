@@ -2,6 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Highly Available Cluster Setup"
 weight = 4
+type = "docs"
 [menu.main]
     parent = "kubernetes"
 +++

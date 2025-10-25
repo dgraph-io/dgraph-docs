@@ -1,6 +1,7 @@
 +++
 title = "Dgraph CLI Reference"
 weight = 20
+type = "docs"
 [menu.main]
     parent = "deploy"
 +++

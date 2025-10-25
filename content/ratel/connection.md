@@ -1,7 +1,8 @@
 +++
 date = "2020-31-08T19:35:35+11:00"
 title = "Connection"
-[menu.main]
+type = "ratel"
+[menu.ratel]
     parent = "ratel"
     weight = 2
 +++
@@ -31,7 +32,7 @@ Under the input box you have tree icons which gives you the status of the connec
 - Logging in: a "lock" icon.
 
 {{% notice "tip" %}}
-To connect to a standard Dgraph instance, you only need to click on `Connect`. There's a specific section to [login using ACL](#acl-account) ([Enterprise feature]({{< relref "access-control-lists.md" >}})).
+To connect to a standard Dgraph instance, you only need to click on `Connect`. There's a specific section to [login using ACL](#acl-account) ([Enterprise feature](/enterprise-features/access-control-lists/)).
 {{% /notice %}}
 
 ## Cluster Settings

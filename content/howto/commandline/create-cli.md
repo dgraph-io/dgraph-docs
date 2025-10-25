@@ -1,5 +1,6 @@
 +++
 title = "Create a completion script"
+type = "docs"
 keywords = "command line,bash, zsh"
 [menu.main]
     parent = "commandline"

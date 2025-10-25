@@ -1,14 +1,15 @@
 +++
 title = "GraphQL on Existing Dgraph"
 weight = 6
-[menu.main]
+type = "graphql"
+[menu.graphql]
   identifier = "graphql-dgraph"
   parent = "graphql-dql"
 +++
 
 ### How to use GraphQL on an existing Dgraph instance
 
-In the case where you have an existing Dgraph instance which has been created using a DQL Schema (and populated with Dgraph import tools) and you want to expose some or all of the data using a GraphQL API, you can use the [@dgraph directive]({{< relref "directive-dgraph" >}}) to customize how Dgraph maps GraphQL type names and fields names to DQL types and predicates.
+In the case where you have an existing Dgraph instance which has been created using a DQL Schema (and populated with Dgraph import tools) and you want to expose some or all of the data using a GraphQL API, you can use the [@dgraph directive](/graphql/schema/directives/directive-dgraph/) to customize how Dgraph maps GraphQL type names and fields names to DQL types and predicates.
 
 
 

@@ -1,5 +1,6 @@
 +++
 title = "Changelog"
+type = "docs"
 [menu.main]
   name = "Changelog"
   identifier = "changelog"

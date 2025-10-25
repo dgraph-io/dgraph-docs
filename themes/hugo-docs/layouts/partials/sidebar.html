@@ -52,6 +52,14 @@
       {{ $menu = .Site.Menus.learn }}
     {{ end }}
     
+    {{ if eq $menuType "graphql" }}
+      {{ $menu = .Site.Menus.graphql }}
+    {{ end }}
+    
+    {{ if eq $menuType "ratel" }}
+      {{ $menu = .Site.Menus.ratel }}
+    {{ end }}
+    
     {{ if $menu }}
       {{ range $menu }}
       {{ if .HasChildren }}

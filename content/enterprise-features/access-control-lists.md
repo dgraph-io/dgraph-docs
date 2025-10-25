@@ -2,6 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Access Control Lists"
 weight = 1
+type = "docs"
 [menu.main]
     parent = "enterprise-features"
 +++

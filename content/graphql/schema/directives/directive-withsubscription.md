@@ -1,7 +1,8 @@
 +++
 title = "@withSubscription"
 weight = 7
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "directives"
     identifier = "directive-withsubscription"
 +++

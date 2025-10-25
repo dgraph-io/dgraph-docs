@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Unofficial Dgraph Clients"
+type = "docs"
 weight = 8
 [menu.main]
     parent = "clients"

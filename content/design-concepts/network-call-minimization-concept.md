@@ -1,6 +1,7 @@
 +++
 date = "2017-03-27:12:00:00Z"
 title = "Network Call Minimization"
+type = "docs"
 weight = 120
 [menu.main]
     parent = "design-concepts"

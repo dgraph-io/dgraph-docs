@@ -1,7 +1,8 @@
 +++
 date = "2020-31-08T19:35:35+11:00"
 title = "Schema"
-[menu.main]
+type = "ratel"
+[menu.ratel]
 	identifier = "schema-management"
     parent = "ratel"
     weight = 4

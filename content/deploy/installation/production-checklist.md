@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Production checklist"
 description = "Requirements to install Dgraph in a production environment"
 weight = 4
+type = "docs"
 [menu.main]
     parent = "installation"
 +++

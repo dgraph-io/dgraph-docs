@@ -2,7 +2,8 @@
 title = "@cascade Directive"
 description = "The @cascade directive can be applied to fields. With the @cascade directive, nodes that don’t have all fields specified in the query are removed."
 weight = 8
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-queries"
     name = "@cascade Directive"
 +++

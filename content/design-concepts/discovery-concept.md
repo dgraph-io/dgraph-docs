@@ -1,6 +1,7 @@
 +++
 date = "2017-03-27:12:00:00Z"
 title = "Discovery"
+type = "docs"
 weight = 30
 [menu.main]
     parent = "design-concepts"

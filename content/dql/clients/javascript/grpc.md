@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "gRPC Client"
+type = "docs"
 weight = 5
 [menu.main]
     parent = "javascript"

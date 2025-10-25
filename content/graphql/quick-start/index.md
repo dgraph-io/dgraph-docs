@@ -2,7 +2,8 @@
 title = "Quick Start"
 description = "Go from an empty Dgraph database to a running GraphQL API in just one step; just define the schema of your graph and how you’d like to search it; Dgraph does the rest."
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
   name = "Quick Start"
   identifier = "graphql-quick-start"
   parent = "graphql"
@@ -255,5 +256,5 @@ Dgraph allows you to have a fully functional GraphQL API in minutes with a highl
 
 
 ## What's Next
-- Learn more about [GraphQL schema]({{< relref "graphql/schema/_index.md" >}}) and Dgraph directives.
+- Learn more about [GraphQL schema](/graphql/schema/) and Dgraph directives.
 - Follow our [GraphQL tutorials](https://dgraph.io/learn/) to experience rapid application development by building more advanced apps.

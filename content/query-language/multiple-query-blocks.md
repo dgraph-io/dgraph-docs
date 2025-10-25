@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Multiple Query Blocks with DQL"
+type = "docs"
 description = "With Dgraph Query Language (DQL), you can include multiple query blocks in a single query, and have those query blocks execute in parallel."
 weight = 8
 [menu.main]

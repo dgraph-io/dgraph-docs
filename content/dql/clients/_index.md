@@ -4,6 +4,7 @@ title = "Client Libraries"
 description = "Dgraph client libraries in various programming languages."
 weight = 7
 aliases = ["/clients"]
+type = "docs"
 [menu.main]
   identifier = "clients"
   parent = "dql"

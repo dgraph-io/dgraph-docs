@@ -1,6 +1,7 @@
 +++
 date = "2017-03-27:12:00:00Z"
 title = "Query Process"
+type = "docs"
 weight = 150
 [menu.main]
     parent = "design-concepts"

@@ -3,6 +3,7 @@ title = "Lambda Server"
 description = "Setup a Dgraph database with a lambda server. Dgraph Lambda is a serverless platform for running JavaScript on Dgraph and Dgraph Cloud"
 aliases =['/graphql/lambda/server']
 weight = 3
+type = "docs"
 [menu.main]
     
     parent = "installation"

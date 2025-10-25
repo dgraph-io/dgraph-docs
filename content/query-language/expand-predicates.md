@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Expand Predicates"
+type = "docs"
 weight = 14
 [menu.main]
     parent = "query-language"

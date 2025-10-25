@@ -2,7 +2,8 @@
 title = "RBAC rules"
 description = "Dgraph support Role Based Access Control (RBAC) on GraphQL API operations."
 weight = 4
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "gql-auth"
 +++
 
@@ -13,7 +14,7 @@ To implement Role Based Access Control on GraphQL API operations  :
 1. Ensure your have configured the GraphQL schema to [Handle JWT tokens]({{< relref "jwt.md">}}) using ``# Dgraph.Authorization``   
   This step is important to be able to use the [JWT claims]({{< relref "graphql/security/_index.md#jwt-claims" >}})
 2. Annotate the Types in the GraphQL schema with the `@auth` directive and specify conditions to be met for `query`, `add`, `update` or `delete` operations.
-3. Deploy the GraphQL schema either with a [schema update]({{< relref "graphql/admin.md#using-updategqlschema-to-add-or-modify-a-schema" >}}) or via the Cloud console's [Schema](https://cloud.dgraph.io/_/schema) page.
+3. Deploy the GraphQL schema either with a [schema update](/graphql/admin/#using-updategqlschema-to-add-or-modify-a-schema) or via the Cloud console's [Schema](https://cloud.dgraph.io/_/schema) page.
 
 
 

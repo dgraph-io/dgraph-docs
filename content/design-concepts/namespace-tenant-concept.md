@@ -1,6 +1,7 @@
 +++
 date = "2017-03-27:12:00:00Z"
 title = "Namespace and Tenant"
+type = "docs"
 weight = 110
 [menu.main]
     parent = "design-concepts"

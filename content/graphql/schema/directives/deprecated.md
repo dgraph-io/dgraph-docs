@@ -1,7 +1,8 @@
 +++
 title = "@deprecated"
 weight = 2
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "directives"
 +++
 

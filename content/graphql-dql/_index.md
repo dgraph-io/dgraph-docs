@@ -1,8 +1,9 @@
 +++
 title = "GraphQL - DQL interoperability"
-description = "Dgraph Query Language (DQL) is Dgraph’s proprietary language to add, modify, delete and fetch data."
+description = "Dgraph Query Language (DQL) is Dgraph's proprietary language to add, modify, delete and fetch data."
+type = "graphql"
 weight = 11
-[menu.main]
+[menu.graphql]
   identifier = "graphql-dql"
 
 +++

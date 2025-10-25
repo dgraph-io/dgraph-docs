@@ -1,5 +1,6 @@
 +++
 title = "Export data"
+type = "docs"
 keywords = "export data,"
 [menu.main]
     parent = "exportdata"

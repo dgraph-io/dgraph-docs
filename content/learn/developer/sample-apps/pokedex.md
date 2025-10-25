@@ -1,5 +1,6 @@
 +++
 title = "Pokedex"
+type = "docs"
 pageType = "sample-apps"
 image = "/images/sample-apps/pokedex.svg"
 weight = 4

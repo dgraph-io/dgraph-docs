@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "A Simple Login System"
+type = "docs"
 weight = 7
 [menu.main]
     parent = "howto"

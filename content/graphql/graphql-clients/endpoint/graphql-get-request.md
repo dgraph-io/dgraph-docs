@@ -2,7 +2,8 @@
 title = "GET Request"
 description = "Get the structure for GraphQL requests and responses, how to enable compression for them, and configuration options for extensions."
 weight = 2
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-endpoint"
     identifier = "graphql-get"
     name = "GET Request"

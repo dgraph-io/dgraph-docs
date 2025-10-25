@@ -1,5 +1,6 @@
 +++
 title = "Export data from Dgraph"
+type = "docs"
 keywords = "export, data, self hosted"
 [menu.main]
     parent = "exportdata"

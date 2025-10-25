@@ -67,20 +67,15 @@
 
     <div class="dgraph-header-search">
       {{ $currentPage := . }}
-      {{ if eq $currentPage.Type "learn" }}
-        <a href="/dgraph-overview/" class="title-tag">Docs</a>
-        <!--a href="/graphql/" class="title-tag">GraphQL</a-->
-        <a href="/learn/" class="title-tag active">Tutorials</a>
-        {{else}}
-        {{ if eq $currentPage.Type "graphql" }}
-          <a href="/dgraph-overview/" class="title-tag">Docs</a>
-          <!--a href="/graphql/" class="title-tag active">GraphQL</a-->
-          <a href="/learn/" class="title-tag">Tutorials</a>
-          {{else}}
-          <a href="/dgraph-overview/" class="title-tag active">Docs</a>
-          <!--a href="/graphql/" class="title-tag">GraphQL</a-->
-          <a href="/learn/" class="title-tag">Tutorials</a>
-        {{ end }}
+      {{ $tabs := slice 
+        (dict "type" "docs" "url" "/dgraph-overview/" "label" "Dgraph DB")
+        (dict "type" "graphql" "url" "/graphql/" "label" "GraphQL") 
+        (dict "type" "ratel" "url" "/ratel/overview/" "label" "Ratel UI")
+        (dict "type" "learn" "url" "/learn/" "label" "Tutorials")
+        
+      }}
+      {{ range $tab := $tabs }}
+        <a href="{{ $tab.url }}" class="title-tag{{ if eq $currentPage.Type $tab.type }} active{{ end }}">{{ $tab.label }}</a>
       {{ end }}
       <!--div class="menu-search align-middle">
         <div class="menu-search-inner" id="searchbox">

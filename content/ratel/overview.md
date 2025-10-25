@@ -1,13 +1,14 @@
 +++
 title = "Ratel Overview"
+type = "ratel"
 description = "Ratel is a tool for data visualization and cluster management that's designed from the ground-up to work with Dgraph. Clone and build Ratel to get started."
-[menu.main]
+[menu.ratel]
     parent = "ratel"
     weight = 1
 +++
 
 Ratel is a tool for data visualization and cluster management that's designed
-from the ground-up to work with Dgraph and [DQL]({{< relref "/query-language" >}}). You can use it for the following types of tasks:
+from the ground-up to work with Dgraph and [DQL](/dql/). You can use it for the following types of tasks:
 
 * Connect to a backend and manage cluster settings (see [Connection]({{< relref "/ratel/connection" >}}))
 * Run DQL queries and mutations, and see results (see [Console]({{< relref "/ratel/console" >}}))

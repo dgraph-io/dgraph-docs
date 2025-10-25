@@ -1,7 +1,8 @@
 +++
 title = "@dgraph"
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "directives"
     identifier = "directive-dgraph"
 +++

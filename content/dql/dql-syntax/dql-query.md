@@ -1,5 +1,6 @@
 +++
 title = "DQL query"
+type = "docs"
 [menu.main]
   name = "DQL query"
   identifier = "dql-query"

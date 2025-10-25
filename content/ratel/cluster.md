@@ -1,7 +1,8 @@
 +++
 date = "2020-31-08T19:35:35+11:00"
 title = "Cluster"
-[menu.main]
+type = "ratel"
+[menu.ratel]
     parent = "ratel"
     weight = 5
 +++

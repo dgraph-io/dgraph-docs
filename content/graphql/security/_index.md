@@ -2,7 +2,8 @@
 title = "Security"
 description = "Dgraph's GraphQL implementation comes with built-in authorization, and supports various authentication methods, so you can annotate your schema with rules that determine who can access or mutate the data."
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
   identifier = "gql-auth"
   parent = "graphql"
 +++
@@ -50,7 +51,7 @@ You can use any authentication method that is capable of generating such JWT tok
 
 
 ### ACL
-Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs]({{< relref "access-control-lists.md">}}) section for details. The ACLs are a separate security mechanism.
+Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs](/enterprise-features/access-control-lists/) section for details. The ACLs are a separate security mechanism.
 
 ### JWT Claims
 

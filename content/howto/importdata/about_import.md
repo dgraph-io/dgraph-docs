@@ -1,5 +1,6 @@
 +++
 title = "Import data"
+type = "docs"
 keywords = "import data, howto, task"
 [menu.main]
     parent = "importdata"

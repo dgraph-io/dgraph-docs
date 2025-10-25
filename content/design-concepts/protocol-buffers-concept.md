@@ -1,6 +1,7 @@
 +++
 date = "2017-03-27:12:00:00Z"
 title = "Protocol Buffers"
+type = "docs"
 weight = 140
 [menu.main]
     parent = "design-concepts"

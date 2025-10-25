@@ -1,7 +1,8 @@
 +++
 title = "Directives"
 weight = 4
-[menu.main]
+type = "graphql"
+[menu.graphql]
   identifier = "directives"
   parent = "gqlschema"
 +++

@@ -1,6 +1,7 @@
 +++
 title = "Troubleshooting"
 weight = 21
+type = "docs"
 [menu.main]
     parent = "deploy"
 +++

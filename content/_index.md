@@ -2,6 +2,7 @@
 date = "2017-03-20T19:35:35+11:00"
 title = "Get started with Dgraph"
 description = "From learning the basics of graph databases to advanced functions and capabilities, Dgraph docs have the information you need."
+type = "docs"
 aliases = ["/contribute"]
 [menu.main]
   name = "Home"
@@ -12,12 +13,10 @@ aliases = ["/contribute"]
 <div class="container">
   <div class="landing">
     <div class="hero">
-      <p class="title-tag">Docs</p>
-      <h1>Get started with Dgraph</h1>
       <p>
-        Designed from the ground up to be run in production, Dgraph is the native GraphQL database with a graph backend. It is open-source, scalable, distributed, highly available and lightning fast.
+         Dgraph is the only open, complete graph database used at terabyte-scale to power real-time use cases. It is open-source, scalable, distributed, highly available and lightning fast.
       </p>
-      <!--p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='{{< relref "deploy/installation/_index.md">}}'>download</a> Dgraph to deploy it yourself.</p-->
+      <!--p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='/deploy/installation/'>download</a> Dgraph to deploy it yourself.</p-->
     </div>
     <div class="item">
       <a href="{{< relref "dgraph-overview.md">}}">
@@ -53,7 +52,7 @@ aliases = ["/contribute"]
           <path d="M11.7487 4.43995C10.6153 4.43995 9.69922 3.50395 9.69922 2.34595C9.69922 1.18795 10.6153 0.251953 11.7487 0.251953C12.882 0.251953 13.7981 1.18795 13.7981 2.34595C13.7981 3.50395 12.882 4.43995 11.7487 4.43995Z" fill="#EF265A"/></svg>
         <h2>GraphQL API</h2>
         <p>
-          Generate a GraphQL API and a graph backend from a simple GraphQL schema.
+          Generate a GraphQL API and a graph backend from your GraphQL schema.
         </p>
       </a>
     </div>

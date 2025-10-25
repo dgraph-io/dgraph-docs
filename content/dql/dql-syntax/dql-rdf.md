@@ -1,5 +1,6 @@
 +++
 title = "RDF"
+type = "docs"
 [menu.main]
   name = "RDF"
   identifier = "dql-rdf"

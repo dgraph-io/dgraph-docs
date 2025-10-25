@@ -2,6 +2,7 @@
 date = "2023-02-23T22:25:17+11:00"
 title = "JSON Mutation Format"
 weight = 10
+type = "docs"
 [menu.main]
   parent = "dql-syntax"
   weight = 4

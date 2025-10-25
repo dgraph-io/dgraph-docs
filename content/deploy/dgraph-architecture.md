@@ -1,5 +1,6 @@
 +++
 title = "Dgraph Architecture"
+type = "docs"
 description = "Learn about Dgraph's distributed architecture, cluster components, scaling strategies, and how it achieves high performance and availability for graph databases."
 [menu.main]
     name = "Architecture"

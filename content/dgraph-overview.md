@@ -1,5 +1,6 @@
 +++
 title = "Overview"
+type = "docs"
 description = "Introduction to Dgraph Database. Dgraph is a horizontally scalable and distributed graph database that supports GraphQL natively. You can run Dgraph on-premise, in your cloud infrastructure, or as a service fully-managed by Dgraph."
 [menu.main]
     name = "Overview"
@@ -51,7 +52,7 @@ Dgraph is built from the ground up as a distributed system. Data is automaticall
 
 Each Dgraph cluster consists of multiple server groups (shards) that work together to store and query your data. Queries are automatically distributed across the relevant shards and results are aggregated, making the distributed nature transparent to your application. This architecture provides both horizontal scalability and high availability.
 
-For detailed information about Dgraph's distributed architecture, clustering, and replication, see the [Architecture documentation]({{< relref "dgraph-architecture.md" >}}).
+For detailed information about Dgraph's distributed architecture, clustering, and replication, see the [Architecture documentation]("/deploy/archiveture").
 
 ## Enterprise-Grade Features
 
@@ -118,9 +119,8 @@ The graph model naturally represents connected data, making it straightforward t
 
 ## What's Next
 
-- **Get Started** with a [free database instance](https://cloud.dgraph.io)
 - Get familiar with some terms in our [Glossary](/dgraph-glossary)
-- Go through some [tutorials]({{< relref "learn" >}})
+- Go through some [tutorials]("/learn")
 
 
 

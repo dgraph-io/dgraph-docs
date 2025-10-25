@@ -1,6 +1,7 @@
 +++
 title = "Handle JWT Token"
-[menu.main]
+type = "docs"
+[menu.graphql]
   identifier = "authorization-header"
   parent = "gql-auth"
   weight = 3
@@ -35,7 +36,7 @@ Dgraph.Authorization object contains the following parameters:
 * `Audience` is used to verify the `aud` field of a JWT, which is used by certain providers to indicate the intended audience for the JWT. When doing authentication with `JWKURL`, this field is mandatory.
 * `ClosedByDefault`, if set to `true`, requires authorization for all requests even if the GraphQL type does not specify rules. If omitted, the default setting is `false`.
 
-2. Deploy the GraphQL schema either with a [schema update]({{< relref "graphql/admin.md#using-updategqlschema-to-add-or-modify-a-schema" >}}) or via the Cloud console's [Schema](https://cloud.dgraph.io/_/schema) page.
+2. Deploy the GraphQL schema either with a [schema update](/graphql/admin/#using-updategqlschema-to-add-or-modify-a-schema) or via the Cloud console's [Schema](https://cloud.dgraph.io/_/schema) page.
 
 
 When the `# Dgraph.Authorization` line is present in the GraphQL schema, Dgraph will use the settings in that line to

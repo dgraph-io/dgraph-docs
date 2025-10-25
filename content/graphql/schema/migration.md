@@ -2,7 +2,8 @@
 title = "Schema Migration"
 description = "This document describes all the things that you need to take care while doing a schema update or migration."
 weight = 5
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "gqlschema"
     identifier = "schema-migration"
 +++

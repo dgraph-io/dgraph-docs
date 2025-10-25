@@ -1,5 +1,6 @@
 +++
 title = "Export data from Dgraph Cloud"
+type = "docs"
 keywords = "export, data, cloud"
 [menu.main]
     parent = "exportdata"

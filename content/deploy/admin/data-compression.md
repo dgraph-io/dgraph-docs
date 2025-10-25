@@ -2,6 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Data compression on Disk"
 weight = 7
+type = "docs"
 [menu.main]
     parent = "admin"
 +++

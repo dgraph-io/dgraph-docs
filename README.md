@@ -3,6 +3,45 @@
 To read the official Dgraph documentation that is published from this repository,
 please see https://dgraph.io/docs/.
 
+## Adding New Tabs and Sidebar Menus
+
+To add a new tab and configure its sidebar menu:
+
+### 1. Add Tab to Navigation
+Edit `themes/hugo-docs/layouts/partials/topbar.html` and add your tab to the `$tabs` slice:
+
+```go
+{{ $tabs := slice 
+  (dict "type" "docs" "url" "/dgraph-overview/" "label" "Docs")
+  (dict "type" "graphql" "url" "/graphql/" "label" "GraphQL") 
+  (dict "type" "learn" "url" "/learn/" "label" "Tutorials")
+  (dict "type" "ratel" "url" "/ratel/overview/" "label" "Ratel UI")
+  (dict "type" "yourtype" "url" "/your-section/" "label" "Your Tab")
+}}
+```
+
+### 2. Set Page Type and Menu
+For each page in your section, add to the frontmatter:
+
+```yaml
++++
+title = "Your Page Title"
+type = "yourtype"  # Must match the type in the tab definition
+[menu.yourtype]   # Must match the type
+  parent = "your-section"
+  weight = 1
++++
+```
+
+### 3. Update Sidebar
+Edit `themes/hugo-docs/layouts/partials/sidebar.html` and add:
+
+```go
+{{ if eq $menuType "yourtype" }}
+  {{ $menu = .Site.Menus.yourtype }}
+{{ end }}
+```
+
 ## Contribution guidelines
 
 As a contributor to Dgraph documentation, we ask that you do the following:
