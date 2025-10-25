@@ -9,23 +9,9 @@ type = "graphql"
   parent = "graphql"
 +++
 
-This article presents the Admin API and explains how to run a Dgraph database with GraphQL.
 
-## Running Dgraph with GraphQL
 
-The simplest way to start with Dgraph GraphQL is to run the all-in-one Docker image.
-
-```
-docker run -it -p 8080:8080 dgraph/standalone:%VERSION_HERE
-```
-
-That brings up GraphQL at `localhost:8080/graphql` and `localhost:8080/admin`, but is intended for quickstart and doesn't persist data.
-
-## Advanced options
-
-Once you've tried out Dgraph GraphQL, you'll need to move past the `dgraph/standalone` and run and deploy Dgraph instances.
-
-Dgraph is a distributed graph database.  It can scale to huge data and shard that data across a cluster of Dgraph instances.  GraphQL is built into Dgraph in its Alpha nodes. To learn how to manage and deploy a Dgraph cluster, check our [deployment guide](https://dgraph.io/docs/deploy/).
+## GraphQL schema introspection 
 
 GraphQL schema introspection is enabled by default, but you can disable it by
 setting the `--graphql` superflag's `introspection` option to false (`--graphql introspection=false`) when
@@ -41,7 +27,7 @@ this means that if you have a Dgraph instance and change its GraphQL schema, the
 
 ## Endpoints
 
-When you start Dgraph with GraphQL, two GraphQL endpoints are served.
+When you start Dgraph, two GraphQL endpoints are served.
 
 ### /graphql
 
