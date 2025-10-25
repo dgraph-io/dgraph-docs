@@ -9,8 +9,7 @@ aliases = ["/get-started"]
   parent = "dql"
 +++
 
-This is a quick start guide to run [DQL]({{<relref "dgraph-glossary.md#RDF">}}) queries and mutations. 
-For an interactive walkthrough, take the [tour](https://dgraph.io/tour/).
+This is a quick start guide to run [DQL]({{< relref "dgraph-glossary.md#RDF" >}}) queries and mutations. 
 
 
 This guide helps you:
@@ -22,20 +21,14 @@ This guide helps you:
 
 ## Step 1: Run Dgraph
 
-The easiest way to get Dgraph up and running is using the [Dgraph Cloud](https://cloud.dgraph.io).  
-You can Login to Dgraph cloud using **Sign in with Google**, **Sign in with GitHub** or any other email account that you prefer to use.
+The easiest way to get Dgraph up and running is to install a [Learning Environment]({{<relref "/deploy/installation/single-host-setup.md" >}}).  
 
-1. In the Dgraph cloud console, click **Launch new backend**.
-1. Select a plan, cloud provider, and region that meets your requirements.
-1. Type a name for your Dgraph cloud instance.
-1. Click **Launch**  
-1. Click **Ratel** to access the UI that provides browser-based queries, mutations and visualizations.
 
 ## Step 2: Run Mutation
 
 The create, update, and delete operations in Dgraph are called mutations.
 
-Ratel makes it easier to run queries and mutations.
+Ratel UI makes it easier to run queries and mutations.
 
 1. In the **Console** page, select **Mutate** tab.
 2. Paste the following:
@@ -174,7 +167,7 @@ In these five steps, you set up Dgraph, added some data, visualized it as a grap
 
 ## Where to go from here
 
-- Take the [Tour](https://dgraph.io/tour/) for a guided tour of how to write queries in Dgraph.
+
 - A wider range of queries can also be found in the
 [Query Language](/dql/dql-syntax/) reference.
 - Go to [Clients](/dql/clients/) to see how to

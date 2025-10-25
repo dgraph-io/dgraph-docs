@@ -5,6 +5,7 @@ weight = 2
 type = "docs"
 [menu.main]
     parent = "installation"
+    identifier = "learning-environment"
 +++
 
 To learn about Dgraph and the components, you can install and run Dgraph cluster on a single host using Docker, Docker Compose, or Dgraph command line.

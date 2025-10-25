@@ -16,7 +16,6 @@ weight = 3
 - See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph cluster architecture.
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}}).
 - Follow the [Dgraph Query Language(DQL)  Quickstart]({{< relref "dql/dql-get-started" >}}) to execute some queries.
-- Take the interactive [DQL Tour](https://dgraph.io/tour/intro/1/).
 - Follow the [Get Started with Dgraph]({{< relref "learn/data-engineer/get-started-with-dgraph" >}}) tutorial.
 - Use [DQL Syntax]({{< relref "dql/dql-syntax">}}) and [Query Language]({{< relref "query-language/_index.md" >}}) as references.
 - Go to [Clients]({{< relref "clients" >}}) to see how to communicate
