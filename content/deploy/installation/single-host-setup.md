@@ -30,7 +30,7 @@ Ensure that you have installed:
     ```sh
        docker run --name <CONTAINER_NAME> -d -p "8080:8080" -p "9080:9080" -v <DGRAPH_DATA_PATH>:/dgraph dgraph/standalone:latest
     ```
-1. Optionally launch [Ratel UI]({{< relref "ratel/overview.md" >}}) using the dgraph/ratel docker image :
+1. Optionally launch [Ratel UI]({{< relref "/ratel" >}}) using the dgraph/ratel docker image :
     ``` sh
     docker run --name ratel  -d -p "8000:8000"  dgraph/ratel:latest
     ```

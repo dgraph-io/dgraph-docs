@@ -16,6 +16,7 @@ aliases = ["/contribute"]
       <p>
          Dgraph is the only open, complete graph database used at terabyte-scale to power real-time use cases. It is open-source, scalable, distributed, highly available and lightning fast.
       </p>
+      <p>Choose your path: <br><strong>Dgraph DB</strong> for direct database operations and administration,<br> or <strong>GraphQL API</strong> for application development with auto-generated APIs.</p>
       <!--p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='/deploy/installation/'>download</a> Dgraph to deploy it yourself.</p-->
     </div>
     <div class="item">

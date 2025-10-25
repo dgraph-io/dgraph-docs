@@ -53,7 +53,7 @@ In [RDF](#RDF) terminology, a predicate is the smallest piece of information abo
 - when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](#uid) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
 
 ### RATEL ###
-Ratel is an open source GUI tool for data visualization and cluster management that’s designed to work with Dgraph and DQL. See also: [Ratel Overview]({{< relref "ratel/overview" >}}).
+Ratel is an open source GUI tool for data visualization and cluster management that’s designed to work with Dgraph and DQL. See also: [Ratel Overview]({{< relref "/ratel" >}}).
 
 ### RDF ###
 RDF 1.1 is a Semantic Web Standard for data interchange. It allows us to make statements about resources. The format of these statements is simple and in the form of `<subject>> <predicate> <object>`.
