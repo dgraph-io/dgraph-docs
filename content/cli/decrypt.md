@@ -1,9 +1,9 @@
 +++
-title = "Data Decryption"
+title = "dgraph decrypt"
 type = "docs"
-weight = 18
+weight = 3
 [menu.main]
-    parent = "deploy"
+    parent = "cli"
 +++
 
 You might need to decrypt data from an encrypted Dgraph cluster for a variety of reasons, including:
@@ -47,8 +47,7 @@ The following decryption options (or *flags*) are available for the `decrypt` co
 |                         | `role-id-file`   | File containing the [Vault](https://www.vaultproject.io/) `role_id` used for AppRole authentication                             |
 |                         | `secret-id-file` | File containing the [Vault](https://www.vaultproject.io/) `secret_id` used for AppRole authentication                           |
 
-To learn more about the `--vault` superflag and its options that have replaced the `--vault_*` options in release v20.11 and earlier, see
-[Dgraph CLI Command Reference]({{< relref "deploy/cli-command-reference.md" >}}).
+
 
 ## Data decryption examples 
 

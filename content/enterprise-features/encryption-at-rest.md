@@ -41,7 +41,7 @@ tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
 {{% notice "note" %}}
 On a macOS you may have to use `LC_CTYPE=C; tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file`. To view the key use `cat enc_key_file`.
 {{% /notice %}}
-Alternatively, you can use the `--vault` [superflag's]({{< relref "deploy/cli-command-reference.md" >}}) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
+Alternatively, you can use the `--vault` [superflag's]({{< relref "cli/superflags.md" >}}) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
 
 ## Turn on Encryption
 

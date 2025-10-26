@@ -5,10 +5,6 @@ description = "Ratel is a web-based tool for data visualization and cluster mana
 type = "ratel"
 weight = 1
 
-[menu.main]
-  identifier = "ratel"
-  weight = 30
-
 [menu.ratel]
   url = "/ratel/"
   identifier = "ratel"

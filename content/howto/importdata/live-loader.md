@@ -7,7 +7,7 @@ weight = 2
     parent = "importdata"
 +++
 
-You can import data on a running Dgraph instance (which may have prior data) using Dgraph CLI command [dgraph live]({{< relref "cli-command-reference.md#dgraph-live" >}}) referred to as **Live Loader**.
+You can import data on a running Dgraph instance (which may have prior data) using Dgraph CLI command [dgraph live]({{< relref "cli/live.md" >}}) referred to as **Live Loader**.
 Live Loader sends mutations to a Dgraph cluster and has options to handle unique IDs assignment and to update existing data.
 
 {{% notice "note" %}} Live Loader accepts [RDF N-Quad/Triple
@@ -280,5 +280,5 @@ Alpha server.
 
 
 
-`--vault` [superflag's]({{< relref "deploy/cli-command-reference" >}}) options specify the Vault server address, role id, secret id, and
+`--vault` [superflag's]({{< relref "cli/superflags.md" >}}) options specify the Vault server address, role id, secret id, and
 field that contains the encryption key required to decrypt the encrypted export.

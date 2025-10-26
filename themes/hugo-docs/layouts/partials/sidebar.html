@@ -62,6 +62,7 @@
     
     {{ if $menu }}
       {{ range $menu }}
+      {{ if and .URL (ne .URL "") }}
       {{ if .HasChildren }}
         <li id="{{ .Name | urlize }}" class="topic main-topic children {{if or ($currentPage.IsMenuCurrent $menuType .) ($currentPage.HasMenuCurrent $menuType .) }} active{{end}}">
           <a href="{{ .URL }}">
@@ -120,6 +121,7 @@
             {{ .Name }}
           </a>
         </li>
+      {{ end }}
       {{ end }}
     {{ end }}
     {{ end }}

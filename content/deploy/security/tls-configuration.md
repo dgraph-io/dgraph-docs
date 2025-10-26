@@ -153,7 +153,7 @@ Important points:
 ## TLS options
 
 Starting in release v21.03, pre-existing TLS configuration options have been
-replaced by the `--tls` [superflag]({{< relref "deploy/cli-command-reference.md" >}}) 
+replaced by the `--tls` [superflag]({{< relref "cli/superflags.md" >}}) 
 and its options. The following `--tls` configuration options are available for
 Dgraph Alpha and Dgraph Zero nodes:
 

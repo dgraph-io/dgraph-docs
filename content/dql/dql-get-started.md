@@ -1,12 +1,12 @@
 +++
 title = "Quick Start"
 type = "docs"
-weight = 1
+weight = 2
 aliases = ["/get-started"]
 [menu.main]
   name = "Quick Start"
   identifier = "get-started"
-  parent = "dql"
+  parent = ""
 +++
 
 This is a quick start guide to run [DQL]({{< relref "dgraph-glossary.md#RDF" >}}) queries and mutations. 

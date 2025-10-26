@@ -5,6 +5,7 @@ type = "docs"
 weight = 3
 [menu.main]
     parent = "importdata"
+	identifier="bulkloading"
 +++
 
 Dgraph Bulk Loader serves a similar purpose to the Dgraph Live Loader, but can

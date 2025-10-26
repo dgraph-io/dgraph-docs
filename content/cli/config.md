@@ -1,14 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Config"
+title = "Flag configuration"
 type = "docs"
-weight = 3
+weight = 2
 [menu.main]
-    parent = "deploy"
+    parent = "cli"
+    identifier = "cli-config"
 +++
 
-
-You can see the list of available subcommands with `dgraph --help`.  You can view the full set of configuration options for a given subcommand with `dgraph <subcommand> --help` (for example, `dgraph zero --help`).
+You can see the list of available subcommands with `dgraph --help`. You can view the full set of configuration options for a given subcommand with `dgraph <subcommand> --help` (for example, `dgraph zero --help`).
 
 You can configure options in multiple ways, which are listed below from highest precedence to lowest precedence:
 
@@ -23,13 +23,13 @@ You can use multiple configuration methods at the same time, so a core
 set of options could be set in a config file, and instance specific options
 could be set using environment vars or flags.
 
-## Command line flags
+## Command Line Flags
 
 Dgraph has *global flags* that apply to all subcommands and flags specific to a subcommand.
 
-Some flags have been deprecated and replaced in release `v21.03`, and flags for several commands (`alpha`, `backup`, `bulk`,`debug`, `live`, and `zero`) now have superflags. Superflags are compound flags that contain
+Several commands (`alpha`, `backup`, `bulk`,`debug`, `live`, and `zero`) use [superflags]({{< relref "superflags.md" >}}). Superflags are compound flags that contain
 one or more options that let you define multiple settings in a semicolon-delimited
-list. The general syntax for superflags is as follows: `--<flagname> option-a=value-a; option-b=value-b`.
+list. The general syntax for superflags is: `--<flagname> option-a=value-a; option-b=value-b`.
 
 The following example shows how to use superflags when running the `dgraph alpha` command.
 
@@ -42,7 +42,7 @@ dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
   --security "whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
-## Environment variables
+## Environment Variables
 
 The environment variable names for Dgraph mirror the flag names shown in the Dgraph CLI `--help` output. These environment variable names are formed the concatenation of `DGRAPH`, the subcommand invoked (`ALPHA`, `ZERO`, `LIVE`, or `BULK`), and then the name of the flag (in uppercase). For example, instead running a command like `dgraph alpha --block_rate 10`, you could set the following environment variable: `DGRAPH_ALPHA_BLOCK_RATE=10 dgraph alpha`.
 
@@ -58,23 +58,18 @@ DGRAPH_ALPHA_TLS="ca-cert=/dgraph/tls/ca.crt;client-auth-type=REQUIREANDVERIFY;s
 DGRAPH_ALPHA_SECURITY="whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
 
-## Configuration file
+## Configuration File
 
 You can specify a configuration file using the Dgraph CLI with the `--config` flag (for example,
 `dgraph alpha --config my_config.json`), or using an environment variable, (for example, `DGRAPH_ALPHA_CONFIG=my_config.json dgraph alpha`).
 
-Dgraph supports configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/)).  In these files, the name of the superflag is used as a key that points to a hash. The hash consists of `key: value` pairs that correspond to the superflag's list of `option=value` pairs.
-
-
-{{% notice "note" %}}
-The formats [`.toml`](https://toml.io/en/), [`.hcl`](https://github.com/hashicorp/hcl), and [`.properties`](https://en.wikipedia.org/wiki/.properties) are not supported in release `v21.03.0`.
-{{% /notice %}}
+Dgraph supports configuration file formats that it detects based on file extensions ([`.json`](https://www.json.org/json-en.html), [`.yml`](https://yaml.org/) or [`.yaml`](https://yaml.org/)). In these files, the name of the superflag is used as a key that points to a hash. The hash consists of `key: value` pairs that correspond to the superflag's list of `option=value` pairs.
 
 {{% notice "tip" %}}
 When representing the superflag options in the hash, you can use either *kebab-case* or *snake_case* for names of the keys.
 {{% /notice %}}
 
-### JSON config file
+### JSON Config File
 
 In JSON, you can represent a superflag and its options (`--<superflag-name>
 option-a=value;option-b=value`) as follows:
@@ -129,7 +124,7 @@ The following example JSON config file (`config.json`) using *snake_case*:
 ```
 
 
-### YAML config file
+### YAML Config File
 
 In YAML, you can represent a superflag and its options (`--<superflag-name>
 option-a=value;option-b=value`) as follows:

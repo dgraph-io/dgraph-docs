@@ -4,7 +4,7 @@ type = "docs"
 [menu.main]
   name = "Changelog"
   identifier = "changelog"
-  weight = 14
+  weight = 15
 +++
 
 The latest Dgraph release is the v24 series.

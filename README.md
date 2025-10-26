@@ -3,44 +3,7 @@
 To read the official Dgraph documentation that is published from this repository,
 please see https://dgraph.io/docs/.
 
-## Adding New Tabs and Sidebar Menus
 
-To add a new tab and configure its sidebar menu:
-
-### 1. Add Tab to Navigation
-Edit `themes/hugo-docs/layouts/partials/topbar.html` and add your tab to the `$tabs` slice:
-
-```go
-{{ $tabs := slice 
-  (dict "type" "docs" "url" "/dgraph-overview/" "label" "Docs")
-  (dict "type" "graphql" "url" "/graphql/" "label" "GraphQL") 
-  (dict "type" "learn" "url" "/learn/" "label" "Tutorials")
-  (dict "type" "ratel" "url" "/ratel/overview/" "label" "Ratel UI")
-  (dict "type" "yourtype" "url" "/your-section/" "label" "Your Tab")
-}}
-```
-
-### 2. Set Page Type and Menu
-For each page in your section, add to the frontmatter:
-
-```yaml
-+++
-title = "Your Page Title"
-type = "yourtype"  # Must match the type in the tab definition
-[menu.yourtype]   # Must match the type
-  parent = "your-section"
-  weight = 1
-+++
-```
-
-### 3. Update Sidebar
-Edit `themes/hugo-docs/layouts/partials/sidebar.html` and add:
-
-```go
-{{ if eq $menuType "yourtype" }}
-  {{ $menu = .Site.Menus.yourtype }}
-{{ end }}
-```
 
 ## Contribution guidelines
 
@@ -86,6 +49,11 @@ Example, to reference a term, use a relref to the glossary :
 We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to locally stage doc updates before or after creating a PR.
 
 1. Download and install  hugo version v0.91 from [here](https://github.com/gohugoio/hugo/releases/tag/v0.91.0).
+
+On mac you may have to remove the quarantine attribute to be able to execute hugo
+'''
+sudo xattr -d com.apple.quarantine path/to/hugo
+'''
 
 2. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the documentation site running on your local machine.
 
@@ -140,5 +108,42 @@ Pass custom Go-GRPC example to the runnable by passing a `customExampleGoGRPC` t
 
 **Note:** Runnable doesn't support passing a multiline string as an argument to a shortcode. Therefore, you have to create the whole custom example in a single line string by replacing newlines with `\n`.
 
-## History
-add Hypermode banner by updating the hugo-docs repository with topbat template.
+## Hints
+## Adding New Tabs and Sidebar Menus
+
+To add a new tab and configure its sidebar menu:
+
+### 1. Add Tab to Navigation
+Edit `themes/hugo-docs/layouts/partials/topbar.html` and add your tab to the `$tabs` slice:
+
+```go
+{{ $tabs := slice 
+  (dict "type" "docs" "url" "/dgraph-overview/" "label" "Docs")
+  (dict "type" "graphql" "url" "/graphql/" "label" "GraphQL") 
+  (dict "type" "learn" "url" "/learn/" "label" "Tutorials")
+  (dict "type" "ratel" "url" "/ratel/overview/" "label" "Ratel UI")
+  (dict "type" "yourtype" "url" "/your-section/" "label" "Your Tab")
+}}
+```
+
+### 2. Set Page Type and Menu
+For each page in your section, add to the frontmatter:
+
+```yaml
++++
+title = "Your Page Title"
+type = "yourtype"  # Must match the type in the tab definition
+[menu.yourtype]   # Must match the type
+  parent = "your-section"
+  weight = 1
++++
+```
+
+### 3. Update Sidebar
+Edit `themes/hugo-docs/layouts/partials/sidebar.html` and add:
+
+```go
+{{ if eq $menuType "yourtype" }}
+  {{ $menu = .Site.Menus.yourtype }}
+{{ end }}
+```

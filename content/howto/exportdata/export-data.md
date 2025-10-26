@@ -17,7 +17,7 @@ You can export the entire data by executing a GraphQL mutation on the `/admin` e
 
 *  Ensure that there is sufficient space on disk to store the export. Each Dgraph Alpha leader for a group writes output as a gzipped file to the export directory specified through the `--export` flag (defaults to an **export** directory). If any of the groups fail because of insufficient space on the disk, the entire export process is considered failed and an error is returned.
 
-* Make a note of the export directories of the Alpha server nodes. For more information about configuring the Dgraph Alpha server, see [Config]({{< relref "config" >}}).
+* Make a note of the export directories of the Alpha server nodes. For more information about configuring the Dgraph Alpha server, see [Config]({{< relref "cli/config.md" >}}).
 
 This mutation triggers the export from each of the Alpha leader for a group. Depending on the Dgraph configuration several files are exported. It is recommended that you copy the files from the Alpha server nodes to a safe place when the export is complete.
 

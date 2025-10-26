@@ -194,7 +194,7 @@ kubectl delete persistentvolumeclaims --selector app=dgraph-alpha
 
 ### Dgraph configuration files
 
-You can create a Dgraph [Config]({{< relref "deploy/config.md" >}}) files for Alpha server and Zero server with Helm chart configuration values, `<MY-CONFIG-VALUES>`. For more information about the values, see the latest [configuration settings](https://github.com/dgraph-io/charts/blob/master/charts/dgraph/README.md#configuration).
+You can create a Dgraph [Config]({{< relref "cli/config" >}}) files for Alpha server and Zero server with Helm chart configuration values, `<MY-CONFIG-VALUES>`. For more information about the values, see the latest [configuration settings](https://github.com/dgraph-io/charts/blob/master/charts/dgraph/README.md#configuration).
 
 1. Open an editor of your choice and create a config file named `<MY-CONFIG-VALUES>.yaml`:
 

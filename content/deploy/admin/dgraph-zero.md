@@ -1,15 +1,17 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "More about Dgraph Zero"
+title = "Dgraph Zero API Reference"
 type = "docs"
-weight = 4
+weight = 8
 [menu.main]
-    parent = "deploy"
+    parent = "admin"
 +++
 
-Dgraph Zero controls the Dgraph cluster, and stores information about it. It
-automatically moves data between different Dgraph Alpha instances based on the
-size of the data served by each Alpha instance.
+Dgraph Zero is the control plane that manages cluster coordination, membership, and data distribution. This reference documents Zero's HTTP API endpoints and administrative operations.
+
+For architectural overview, see [Architecture]({{< relref "dgraph-architecture.md" >}}).
+
+## Configuration
 
 Before you can run `dgraph alpha`, you must run at least one `dgraph zero` node.
 You can see the options available for `dgraph zero` by using the following command:
@@ -17,6 +19,8 @@ You can see the options available for `dgraph zero` by using the following comma
 ```bash
 dgraph zero --help
 ```
+
+### Replication Factor
 
 The `--replicas` option controls the replication factor: the number
 of replicas per data shard, including the original shard. For consensus, the

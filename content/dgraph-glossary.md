@@ -5,7 +5,7 @@ type = "docs"
 [menu.main]
     name = "Dgraph Glossary"
     identifier = "glossary"
-    weight = 15
+    weight = 16
 +++
 
 <div class="glossary">
