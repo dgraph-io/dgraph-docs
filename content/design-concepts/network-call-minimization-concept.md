@@ -1,5 +1,5 @@
 +++
-date = "2017-03-27:12:00:00Z"
+date = "2017-03-27T12:00:00Z"
 title = "Network Call Minimization"
 type = "docs"
 weight = 120

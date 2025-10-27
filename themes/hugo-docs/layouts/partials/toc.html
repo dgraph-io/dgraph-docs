@@ -16,7 +16,7 @@
         <span>Ask a Question</span>
       </a>
       <a target="_blank"
-        href='https://github.com/dgraph-io/{{ .Site.Params.site }}/edit/{{ with getenv "CURRENT_BRANCH" }}{{ . }}{{ else }}main{{ end }}/content/{{with .File }}{{ replace ( replace .File.Path "\\" "/") "%5C" "/" }}{{ end }}'>
+        href='https://github.com/dgraph-io/{{ .Site.Params.site }}/edit/{{ with getenv "CURRENT_BRANCH" }}{{ . }}{{ else }}main{{ end }}/content/{{ replace .Path "\\" "/" }}'>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
           <rect width="18" height="18" rx="9" fill="#100C19"/>
           <path d="M8.47177 6.74431L10.0628 5.15332L12.847 7.93755L11.256 9.52852M8.47177 6.74431L5.31807 9.89803C5.21259 10.0035 5.15332 10.1466 5.15332 10.2958V12.847H7.70458C7.85375 12.847 7.9968 12.7878 8.10232 12.6822L11.256 9.52852" stroke="white" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>

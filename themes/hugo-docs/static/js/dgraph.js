@@ -437,6 +437,7 @@ function getPathAfterVersionName(location, versionName) {
   // if (activeTopic) {
   //   activeTopic.scrollIntoView();
   // }
+
 })();
 
 function setAlgolia(latestVersion) {

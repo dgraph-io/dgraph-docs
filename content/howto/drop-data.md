@@ -1,5 +1,4 @@
 +++
-date = ""
 title = "Drop all data"
 type = "docs"
 [menu.main]

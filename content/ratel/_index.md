@@ -1,5 +1,5 @@
 +++
-date = "2020-31-08T19:35:35+11:00"
+date = "2020-08-31T19:35:35+11:00"
 title = "Ratel UI"
 description = "Ratel is a web-based tool for data visualization and cluster management designed to work with Dgraph and DQL."
 type = "ratel"

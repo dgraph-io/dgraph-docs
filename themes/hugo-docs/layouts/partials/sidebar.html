@@ -45,18 +45,21 @@
   
   <ul id="topics" class="topics sidebar-opened">
     {{ $currentPage := . }}
-    {{ $menuType := default "main" $currentPage.Type }}
+    {{ $menuType := "main" }}
     {{ $menu := .Site.Menus.main }}
     
-    {{ if eq $menuType "learn" }}
+    {{ if eq $currentPage.Type "learn" }}
+      {{ $menuType = "learn" }}
       {{ $menu = .Site.Menus.learn }}
     {{ end }}
     
-    {{ if eq $menuType "graphql" }}
+    {{ if eq $currentPage.Type "graphql" }}
+      {{ $menuType = "graphql" }}
       {{ $menu = .Site.Menus.graphql }}
     {{ end }}
     
-    {{ if eq $menuType "ratel" }}
+    {{ if eq $currentPage.Type "ratel" }}
+      {{ $menuType = "ratel" }}
       {{ $menu = .Site.Menus.ratel }}
     {{ end }}
     

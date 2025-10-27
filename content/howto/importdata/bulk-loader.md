@@ -243,7 +243,7 @@ In case your dataset is small (a few GBs) it would be convenient to start by ini
 3. Wait for 1 minute to ensure that a snapshot has been taken by the first Alpha node replica. You can confirm that a snapshot has been taken by looking for the following message":
 
 ```txt
-I1227 13:12:24.202196   14691 draft.go:571] Creating snapshot at index: 30. ReadTs: 4.
+I1227 13T12:24.202196   14691 draft.go:571] Creating snapshot at index: 30. ReadTs: 4.
 ```
 4. After confirming that the snapshot has been taken, you can start the other Alpha node replicas (number of Alpha nodes must be equal to the `--replicas` flag value set in the zero nodes). Now the Alpha node (the one started in point 2) will be printing similar messages:
 

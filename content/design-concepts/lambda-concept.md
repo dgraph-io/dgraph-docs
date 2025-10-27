@@ -1,5 +1,5 @@
 +++
-date = "2013-03-27:12:00:00Z"
+date = "2013-03-27T12:00:00Z"
 title = "Lambdas"
 type = "docs"
 weight = 95
