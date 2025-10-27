@@ -1,14 +1,15 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Tracing"
-weight = 6
+weight = 4
+type = "docs"
 [menu.main]
     parent = "admin"
 +++
 
 Dgraph is integrated with [OpenCensus](https://opencensus.io/zpages/) to collect distributed traces from the Dgraph cluster.
 
-Trace data is always collected within Dgraph. You can adjust the trace sampling rate for Dgraph queries using the `--trace` [superflag's]({{< relref "deploy/cli-command-reference.md" >}}) `ratio` option when running Dgraph Alpha nodes. By default, `--trace ratio`  is set to 0.01 to trace 1% of queries.
+Trace data is always collected within Dgraph. You can adjust the trace sampling rate for Dgraph queries using the `--trace` [superflag's]({{< relref "cli/superflags.md" >}}) `ratio` option when running Dgraph Alpha nodes. By default, `--trace ratio`  is set to 0.01 to trace 1% of queries.
 
 ## Examining Traces with zPages
 

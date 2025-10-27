@@ -2,7 +2,8 @@
 title = "And, Or and Not Operators in GraphQL"
 description = "Every GraphQL search filter can use AND, OR and NOT operators."
 weight = 5
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-queries"
     name = "And, Or and Not"
 +++

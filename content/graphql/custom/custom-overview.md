@@ -2,7 +2,8 @@
 title = "Custom Resolvers Overview"
 description = "Dgraph creates a GraphQL API from nothing more than GraphQL types. To customize the behavior of your schema, you can implement custom resolvers."
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "custom"
     identifier = "custom-resolvers-overview"
     name = "Overview"

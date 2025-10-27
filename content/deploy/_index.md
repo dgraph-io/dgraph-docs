@@ -2,6 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Self-managed cluster"
 weight = 9
+type = "docs"
 aliases = ["/deploy/overview"]
 [menu.main]
   identifier = "deploy"

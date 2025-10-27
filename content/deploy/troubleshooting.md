@@ -1,13 +1,26 @@
 +++
 title = "Troubleshooting"
 weight = 21
+type = "docs"
 [menu.main]
     parent = "deploy"
 +++
 
 This page provides tips on how to troubleshoot issues with running Dgraph.
 
-### Running out of memory (OOM)
+## Cluster Setup Checklist
+
+When setting up a cluster, verify the following requirements are met:
+
+* Is at least one Dgraph Zero node running?
+* Is each Dgraph Alpha instance in the cluster set up correctly?
+* Will each Dgraph Alpha instance be accessible to all peers on 7080 (+ any port offset)?
+* Does each instance have a unique ID on startup?
+* Has `--bindall=true` been set for networked communication?
+
+See the [Production Checklist]({{< relref "installation/production-checklist.md" >}}) for comprehensive deployment requirements.
+
+## Running out of memory (OOM)
 
 When you [bulk load]({{< relref "bulk-loader.md" >}})
 or [backup]({{< relref "/enterprise-features/binary-backups.md" >}}) your data,
@@ -28,8 +41,7 @@ by calling the `dgraph alpha` command with the following option:
 
   `--badger "goroutines=4"`
 
-
-### "Too many open files" errors
+## "Too many open files" errors
 
 If Dgraph logs "too many open files" errors, you should increase the per-process
 open file descriptor limit to permit more open files. During normal operations,

@@ -1,5 +1,6 @@
 +++
 title = "Surveyo"
+type = "docs"
 description = "A sample app for Dgraph database and Dgraph Cloud that lets create surveys."
 pageType = "sample-apps"
 image = "/images/sample-apps/surveyo.svg"

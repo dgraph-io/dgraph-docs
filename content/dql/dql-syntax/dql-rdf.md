@@ -1,5 +1,6 @@
 +++
 title = "RDF"
+type = "docs"
 [menu.main]
   name = "RDF"
   identifier = "dql-rdf"
@@ -119,10 +120,13 @@ Result:
   }
 }
 ```
-{{% notice "tip" %}}Dgraph can automatically generate a reverse relation. If the user wants to run
-queries in that direction, they would define the [reverse relationship]({{< relref "dql-schema.md#reverse-edges" >}})
+{{% notice "tip" %}}
+Dgraph can automatically generate a reverse relation. If the user wants to run
+queries in that direction, they would define the [reverse relationship]({{< relref "dql-schema.md#reverse-edges" >}}).
+{{% /notice %}}
+
 ## N-quads format
-While most RDF data uses only triples (with three parts) an optional fourth part is allowed. This fourth component in RDF is called a graph label, and in Dgraph it must be the UID of the namespace that the data should go into as described in [Multi-tenancy]({{< relref "cloud-multitenancy" >}}).  
+While most RDF data uses only triples (with three parts) an optional fourth part is allowed. This fourth component in RDF is called a graph label, and in Dgraph it must be the UID of the namespace that the data should go into.  
 
 ## Processing RDF to comply with Dgraph syntax for subjects
 

@@ -1,0 +1,102 @@
+{{/* Theme Toggle Shortcode - Reusable dark/light mode toggle component */}}
+<div class="theme-toggle">
+  <label class="light-dark-toggle">
+    <input class='toggle-checkbox' type='checkbox'></input>
+    <div class='toggle-slot'>
+      <div class='sun-icon-wrapper'>
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="11" fill="#EF265A"/>
+          <path d="M11.0587 14.908C13.185 14.908 14.9087 13.1843 14.9087 11.058C14.9087 8.93171 13.185 7.20801 11.0587 7.20801C8.93244 7.20801 7.20874 8.93171 7.20874 11.058C7.20874 13.1843 8.93244 14.908 11.0587 14.908Z" fill="white"/>
+          <path d="M17.475 11.0586H18.1166" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.0587 4.64167V4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.0587 18.1163V17.4746" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.1917 16.1915L15.55 15.5498" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.1917 5.9248L15.55 6.56647" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5.92505 16.1915L6.56672 15.5498" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5.92505 5.9248L6.56672 6.56647" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 11.0586H4.64167" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class='toggle-button'></div>
+      <div class='moon-icon-wrapper'>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="11" fill="#100C19"/>
+          <path d="M5.75 10.7122C5.75 13.7707 8.22936 16.25 11.2878 16.25C13.4622 16.25 15.3438 14.9969 16.25 13.1734C11.2878 13.1734 8.82656 10.7122 8.82656 5.75C7.00312 6.65617 5.75 8.53784 5.75 10.7122Z" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </label>
+  {{ if .showLabel | default true }}
+    <p class="turn-on-the-lights">Turn on the lights</p>
+  {{ end }}
+</div>
+
+{{/* Theme Toggle JavaScript - Only load once per page */}}
+{{ if not (.Page.Scratch.Get "theme-toggle-script-loaded") }}
+  {{ .Page.Scratch.Set "theme-toggle-script-loaded" true }}
+  <script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      // Toggle dark mode switch
+      const toggleCheckbox = document.querySelector(".toggle-checkbox");
+
+      if (toggleCheckbox) {
+        toggleCheckbox.addEventListener("change", function () {
+          const toggleSlot = document.querySelector(".toggle-slot");
+          const logoLight = document.querySelector(".logo-light");
+          const logoDark = document.querySelector(".logo-dark");
+          
+          if (toggleCheckbox.checked) {
+            toggleSlot.classList.add("toggle-slot--light");
+            document.body.classList.remove("light-blog");
+            document.body.classList.add("dark-blog");
+            localStorage.setItem("theme", "dark-blog");
+            
+            // Switch to dark logo
+            if (logoLight) logoLight.style.display = "none";
+            if (logoDark) logoDark.style.display = "block";
+            
+            console.log("Dark mode activated, body classes:", document.body.className);
+          } else {
+            toggleSlot.classList.remove("toggle-slot--light");
+            document.body.classList.remove("dark-blog");
+            document.body.classList.add("light-blog");
+            localStorage.setItem("theme", "light-blog");
+            
+            // Switch to light logo
+            if (logoLight) logoLight.style.display = "block";
+            if (logoDark) logoDark.style.display = "none";
+            
+            console.log("Light mode activated, body classes:", document.body.className);
+          }
+        });
+
+        // Initialize theme from localStorage
+        const theme = localStorage.getItem("theme");
+        const logoLight = document.querySelector(".logo-light");
+        const logoDark = document.querySelector(".logo-dark");
+        
+        if (theme === "dark-blog") {
+          document.body.classList.add("dark-blog");
+          document.querySelector(".toggle-slot").classList.add("toggle-slot--light");
+          toggleCheckbox.checked = true;
+          
+          // Show dark logo
+          if (logoLight) logoLight.style.display = "none";
+          if (logoDark) logoDark.style.display = "block";
+          
+          console.log("Initialized dark mode, body classes:", document.body.className);
+        } else {
+          document.body.classList.add("light-blog");
+          document.querySelector(".toggle-slot").classList.remove("toggle-slot--light");
+          toggleCheckbox.checked = false;
+          
+          // Show light logo
+          if (logoLight) logoLight.style.display = "block";
+          if (logoDark) logoDark.style.display = "none";
+          
+          console.log("Initialized light mode, body classes:", document.body.className);
+        }
+      }
+    });
+  </script>
+{{ end }}

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <style>
+      /* Dark blog - Comprehensive page-wide dark mode */
+      .dark-blog {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog body {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog html {
+        background-color: #100c19;
+      }
+
+      /* Header and navigation */
+      .dark-blog .dgraph-header {
+        background-color: #100c19;
+      }
+
+      .dark-blog .blog-header {
+        background-color: #100c19;
+      }
+
+      .dark-blog .dgraph-menu a {
+        color: #ffffff;
+      }
+
+      .dark-blog .dgraph-menu a:hover {
+        color: #ef265a;
+      }
+
+      .dark-blog .navigation-link {
+        color: #ffffff;
+      }
+
+      .dark-blog .navigation-link:hover {
+        color: #ef265a;
+      }
+
+      /* Sidebar */
+      .dark-blog .topics {
+        background-color: #100c19;
+        border-color: #646169;
+      }
+
+      .dark-blog #sidebar a {
+        color: #ffffff;
+      }
+
+      .dark-blog #sidebar a:hover {
+        color: #ef265a;
+      }
+
+      .dark-blog #sidebar .active a {
+        color: #ef265a;
+      }
+
+      /* Content area */
+      .dark-blog .content-wrapper {
+        background: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog article {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog h1,
+      .dark-blog h2,
+      .dark-blog h3,
+      .dark-blog h4,
+      .dark-blog h5,
+      .dark-blog h6 {
+        color: #ffffff;
+      }
+
+      /* Table of Contents */
+      .dark-blog div.right-toc {
+        background: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog #TableOfContents ul li a {
+        color: #ffffff;
+      }
+
+      .dark-blog #TableOfContents ul li a:hover {
+        color: #ef265a;
+      }
+
+      /* Code blocks */
+      .dark-blog pre {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border: 1px solid #333;
+      }
+
+      .dark-blog code {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      /* Links */
+      .dark-blog a {
+        color: #ef265a;
+      }
+
+      .dark-blog a:hover {
+        color: #ffffff;
+      }
+
+      /* Buttons */
+      .dark-blog .nav-next-btn,
+      .dark-blog .question-btn,
+      .dark-blog .edit-btn {
+        color: #ffffff;
+        background-color: #333;
+        border-color: #555;
+      }
+
+      .dark-blog .nav-next-btn:hover,
+      .dark-blog .question-btn:hover,
+      .dark-blog .edit-btn:hover {
+        background-color: #ef265a;
+        color: #ffffff;
+      }
+
+      /* Lists */
+      .dark-blog dl,
+      .dark-blog ol,
+      .dark-blog ul {
+        color: #ffffff;
+      }
+
+      /* Footer */
+      .dark-blog .single-footer {
+        background-color: #100c19;
+        color: #ffffff;
+      }
+
+      .dark-blog .single-footer h6 {
+        color: #ffffff;
+      }
+
+      .dark-blog .single-footer a {
+        color: #ef265a;
+      }
+
+      .dark-blog .single-footer a:hover {
+        color: #ffffff;
+      }
+
+      /* Form elements */
+      .dark-blog input,
+      .dark-blog textarea,
+      .dark-blog select {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border-color: #555;
+      }
+
+      .dark-blog input:focus,
+      .dark-blog textarea:focus,
+      .dark-blog select:focus {
+        border-color: #ef265a;
+        outline-color: #ef265a;
+      }
+
+      /* Tables */
+      .dark-blog table {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      .dark-blog th,
+      .dark-blog td {
+        border-color: #555;
+        color: #ffffff;
+      }
+
+      .dark-blog th {
+        background-color: #333;
+      }
+
+      /* Blockquotes */
+      .dark-blog blockquote {
+        background-color: #1a1a1a;
+        border-left-color: #ef265a;
+        color: #ffffff;
+      }
+
+      /* Search box styling */
+      .menu-search input {
+        background-color: #f5f5f5;
+        color: #333333;
+        border-color: #ddd;
+      }
+
+      .menu-search input:focus {
+        background-color: #ffffff;
+        border-color: #ef265a;
+        outline-color: #ef265a;
+      }
+
+      .dark-blog .menu-search input {
+        background-color: #2a2a2a;
+        color: #ffffff;
+        border-color: #555;
+      }
+
+      .dark-blog .menu-search input:focus {
+        background-color: #1a1a1a;
+        border-color: #ef265a;
+        outline-color: #ef265a;
+      }
+
+      /* Algolia search styling */
+      .menu-search-inner {
+        background-color: #f5f5f5;
+        border-color: #ddd;
+      }
+
+      .dark-blog .menu-search-inner {
+        background-color: #2a2a2a;
+        border-color: #555;
+      }
+
+      /* Homepage specific dark mode styling */
+      .dark-blog .landing .hero h1 {
+        color: #ffffff;
+      }
+
+      .dark-blog .landing .hero .title-tag {
+        color: #ffffff;
+      }
+
+      .dark-blog .landing .hero p {
+        color: #ffffff;
+      }
+
+      /* Card styling for dark mode */
+      .dark-blog .landing .item {
+        background-color: #2a2a2a;
+        border-color: #444;
+      }
+
+      .dark-blog .landing .item:hover {
+        background-color: #3a3a3a;
+      }
+
+      .dark-blog .landing .item h2 {
+        color: #ffffff;
+      }
+
+      .dark-blog .landing .item p {
+        color: #ffffff;
+      }
+
+      /* SVG icon styling for dark mode */
+      .dark-blog .landing .item .icon {
+        color: #ef265a;
+      }
+
+      /* Override only the black parts, not the red parts */
+      .dark-blog .landing .item .icon path[fill="#100C19"] {
+        fill: #ffffff !important;
+      }
+
+      .dark-blog .landing .item .icon path[stroke="#100C19"] {
+        stroke: #ffffff !important;
+      }
+
+      /* Ensure red parts stay red */
+      .dark-blog .landing .item .icon path[fill="#EF265A"] {
+        fill: #ef265a !important;
+      }
+
+      .dark-blog .landing .item .icon path[stroke="#EF265A"] {
+        stroke: #ef265a !important;
+      }
+
+      /* Community item dark mode styling */
+      .dark-blog .community-item {
+        background-color: #2a2a2a;
+        border-color: #444;
+        color: #ffffff;
+      }
+
+      .dark-blog .community-item:hover {
+        background-color: #3a3a3a;
+      }
+
+      .dark-blog .community-info h6 {
+        color: #ffffff;
+      }
+
+      .dark-blog .community-info p {
+        color: #ffffff;
+      }
+
+      .dark-blog .community-item .button {
+        background-color: #ef265a;
+        color: #ffffff;
+        border-color: #ef265a;
+      }
+
+      .dark-blog .community-item .button:hover {
+        background-color: #ffffff;
+        color: #ef265a;
+      }
+
+      /* Dropdown menus */
+      .dark-blog .nav-submenu {
+        background-color: #1a1a1a;
+        border-color: #555;
+      }
+
+      .dark-blog .nav-submenu a {
+        color: #ffffff;
+      }
+
+      .dark-blog .nav-submenu a:hover {
+        color: #ef265a;
+      }
+
+      /* Additional elements for complete coverage */
+      .dark-blog .button {
+        background-color: #ef265a;
+        color: #ffffff;
+        border-color: #ef265a;
+      }
+
+      .dark-blog .button:hover {
+        background-color: #ffffff;
+        color: #ef265a;
+      }
+
+      .dark-blog .button-ghost {
+        background-color: transparent;
+        color: #ffffff;
+        border-color: #ffffff;
+      }
+
+      .dark-blog .button-ghost:hover {
+        background-color: #ffffff;
+        color: #100c19;
+      }
+
+      /* Scrollbars */
+      .dark-blog ::-webkit-scrollbar {
+        background-color: #1a1a1a;
+      }
+
+      .dark-blog ::-webkit-scrollbar-thumb {
+        background-color: #555;
+      }
+
+      .dark-blog ::-webkit-scrollbar-thumb:hover {
+        background-color: #777;
+      }
+
+      /* Selection */
+      .dark-blog ::selection {
+        background-color: #ef265a;
+        color: #ffffff;
+      }
+
+      /* Focus indicators */
+      .dark-blog *:focus {
+        outline-color: #ef265a;
+      }
+
+      /* Loading states */
+      .dark-blog .loading {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      /* Error states */
+      .dark-blog .error {
+        background-color: #2d1b1b;
+        color: #ff6b6b;
+        border-color: #ff6b6b;
+      }
+
+      /* Success states */
+      .dark-blog .success {
+        background-color: #1b2d1b;
+        color: #6bff6b;
+        border-color: #6bff6b;
+      }
+
+      /* Logo theme switching */
+      .logo-light {
+        display: block;
+      }
+
+      .logo-dark {
+        display: none;
+      }
+
+      .dark-blog .logo-light {
+        display: none;
+      }
+
+      .dark-blog .logo-dark {
+        display: block;
+      }
+
+      /* Set colors directly on logo classes */
+      .logo-light {
+        color: #000000;
+      }
+
+      .logo-dark {
+        color: #ffffff;
+      }
+
+      /* Ensure theme toggle is visible */
+      .nav_buttons-inside .theme-toggle {
+        display: block !important;
+      }
+
+      @media all and (min-width: 768px) {
+        .nav_buttons-inside {
+          display: flex !important;
+          align-items: center;
+          justify-content: flex-end;
+        }
+      }
+
+      /* Theme toggle positioning and styling */
+      .nav_buttons-inside .theme-toggle {
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav_buttons-inside .light-dark-toggle {
+        margin: 0;
+      }
+
+      /* Mobile responsive */
+      @media all and (max-width: 767px) {
+        .nav_buttons-inside {
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+          margin-top: 10px;
+        }
+      }
+    </style>
+
+    <!-- Google Tag Manager - 08/2023: removed as we are now using Segment -->
+    <!--script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-58V4RXS");
+    </script-->
+    <!-- End Google Tag Manager -->
+
+    <script>
+      // -1 urls seem to have an issue, why?
+      var subPaths = {
+        "/deploy/production-checklist/": "/installation/production-checklist",
+        "/graphql/authorization/directive/": "/graphql/schema/directives/auth",
+      };
+
+      var redirectPaths = ["clients", "query-language", "mutations", "deploy", "enterprise-features", "howto", "design-concepts"];
+      var pathSplit = document.URL.split("/");
+      try {
+        var docs = "";
+        var origPath = window.location.pathname;
+        if (origPath.startsWith("/docs")) {
+          origPath = origPath.substr(5);
+          docs = "/docs";
+        }
+        if (origPath in subPaths) {
+          loc = "{{ .Site.BaseURL }}" + docs + subPaths[origPath];
+          window.location.replace(loc);
+        }
+        origPath = origPath + "/";
+        if (origPath in subPaths) {
+          loc = "{{ .Site.BaseURL }}" + docs + subPaths[origPath];
+          window.location.replace(loc);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    {{ hugo.Generator }} {{ partial "meta.html" . }} <link rel="canonical" href="{{ partial "canonical.html" . }}" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png" />
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194" />
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16" />
+    <link rel="manifest" href="/images/favicons/manifest.json" />
+    <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#fe2c06" />
+    <link rel="shortcut icon" href="/images/favicons/favicon.ico" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/default.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+    <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/go.min.js"></script>
+    <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/java.min.js" integrity="sha256-RyOs5MjQ+Ef9DQrPHp4QGr2tcNjxLh6mCkkW+sS4doU=" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <!-- START: Required by runnable -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.js" integrity="sha256-x3BtPVERvw1ozPlwivuFLZoViFCeAAs1Gt6SxEedmo8=" crossorigin="anonymous"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.css" rel="stylesheet" integrity="sha256-7sZe9dsqyNZC9Mk+WPRB7nVvPPPXyorzm2QKqlgXC4k=" crossorigin="anonymous" />
+    <script async src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/addon/edit/closebrackets.min.js" integrity="sha256-qhu2a7DSpQaammMaLw1iruxBpxmgdw8mdQaQWQUokcY=" crossorigin="anonymous"></script>
+    <script async src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/javascript/javascript.min.js" integrity="sha256-7Bdg/UdDMmHDPafpQDYZNPCEbnRP7eAvu+2hEoqRCXs=" crossorigin="anonymous"></script>
+    <!-- END: Required by runnable -->
+
+    <script>
+      {{ $currentBranch:= getenv "CURRENT_BRANCH" }}
+      {{ $dgraphEndpoint:= getenv "DGRAPH_ENDPOINT" }}
+
+      window.DGRAPH_ENDPOINT = {{ if (eq $dgraphEndpoint "" ) }}"https://play.dgraph.io/query?latency=true"{{ else }} {{ $dgraphEndpoint }} {{ end }};
+    </script>
+
+    <title>
+      {{ with .Params.seoTitle }}{{ . }}{{ else }}{{ .Page.Title | default "Dgraph Documentation" }}{{ with .Section }} - {{ $pairs := (dict "Graphql" "GraphQL" "Dql" "DQL" " api" " API") }}{{ $.Scratch.Set "sectionTitle" (. | humanize) }}{{ range
+      $key, $val := $pairs }}{{ $.Scratch.Set "sectionTitle" (replace ($.Scratch.Get "sectionTitle") $key $val) }}{{ end }}{{ $.Scratch.Get "sectionTitle" }}{{ end }}{{ end }}
+    </title>
+
+    <link href='{{ relURL "css/theme.css"}}?{{ md5 (readFile "themes/hugo-docs/static/css/theme.css") }}' rel="stylesheet" />
+    <link href='{{ relURL "css/runnable.css"}}?{{ md5 (readFile "themes/hugo-docs/static/css/runnable.css") }}' rel="stylesheet" />
+    <link href='{{ relURL "css/tabs.css"}}?{{ md5 (readFile "themes/hugo-docs/static/css/tabs.css") }}' rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet" crossorigin="anonymous" />
+
+    <!-- DocSearch -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+    <!-- Segment -->
+
+
+    <script>
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){if(window.analytics.initialized)return window.analytics[e].apply(window.analytics,arguments);var i=Array.prototype.slice.call(arguments);i.unshift(e);analytics.push(i);return analytics}};for(var i=0;i<analytics.methods.length;i++){var key=analytics.methods[i];analytics[key]=analytics.factory(key)}analytics.load=function(key,i){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=i};analytics._writeKey="aQlf725vSBKhpQnINiGBc6rCtFyVCiAP";;analytics.SNIPPET_VERSION="4.16.1";
+      analytics.load("aQlf725vSBKhpQnINiGBc6rCtFyVCiAP");
+      analytics.page();
+      // Track clicks
+      document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('a');
+        links.forEach((link) =>
+          analytics.trackLink(link, 'Click', {
+            id: link.id,
+            to: link.href,
+            text: link.innerText
+          })
+        );
+      });
+    }}();
+  </script>
+    <meta name="google-site-verification" content="BL0nvRL7rgrDNejIenHatMkYhg0foQpblDpCSTBlrRM" />
+  </head>
+
+  <body>
+    {{ if .IsHome }} {{ else }}
+    <script>
+      const theme = localStorage.getItem("theme");
+      const logoLight = document.querySelector(".logo-light");
+      const logoDark = document.querySelector(".logo-dark");
+
+      if (theme === "dark-blog") {
+        document.body.classList.add("dark-blog");
+        
+        // Show dark logo
+        if (logoLight) logoLight.style.display = "none";
+        if (logoDark) logoDark.style.display = "block";
+      } else {
+        document.body.classList.add("light-blog");
+        
+        // Show light logo
+        if (logoLight) logoLight.style.display = "block";
+        if (logoDark) logoDark.style.display = "none";
+      }
+    </script>
+    {{ end }}
+    <!-- Google Tag Manager (noscript)  08/2023: removed as we are now using Segment-->
+    <!--noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58V4RXS" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript-->
+    <!-- End Google Tag Manager (noscript) -->
+    {{ if .IsHome }}
+    <header>{{ partial "topbar.html" . }}</header>
+    {{ else }}
+    <header class="blog-header">{{ partial "topbar.html" . }}</header>
+    {{ end }} {{ partial "sidebar.html" . }}
+  </body>
+</html>

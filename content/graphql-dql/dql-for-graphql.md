@@ -1,7 +1,8 @@
 +++
 title = "Use DQL in GraphQL"
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
   name = "Use DQL in GraphQL"
   identifier = "graphql-dql-use"
   parent = "graphql-dql"
@@ -9,10 +10,10 @@ weight = 3
 
 
 
-Dgraph Query Language ([DQL]({{<relref "dql">}})) can be used to extend GraphQL API capabilities when writing:
+Dgraph Query Language ([DQL](/dql/)) can be used to extend GraphQL API capabilities when writing:
 
 - [custom DQL resolvers]({{<relref "custom-dql">}})
-- [subscriptions on DQL queries]({{<relref "subscriptions#subscriptions-to-custom-dql">}})
+- [subscriptions on DQL queries](/graphql/schema/directives/directive-withsubscription/#subscriptions-to-custom-dql)
 
 
 

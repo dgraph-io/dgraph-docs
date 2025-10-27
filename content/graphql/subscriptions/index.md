@@ -2,7 +2,8 @@
 title = "GraphQL Subscriptions"
 description = "Subscriptions allow clients to listen to real-time messages from the server. In GraphQL, it’s straightforward to enable subscriptions on any type."
 weight = 6
-[menu.main]
+type = "graphql"
+[menu.graphql]
   name = "Subscriptions"
   identifier = "subscriptions"
   parent = "graphql"

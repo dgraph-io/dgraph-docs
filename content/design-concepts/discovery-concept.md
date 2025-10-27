@@ -1,11 +1,12 @@
 +++
-date = "2017-03-27:12:00:00Z"
+date = "2017-03-27T12:00:00Z"
 title = "Discovery"
+type = "docs"
 weight = 30
 [menu.main]
     parent = "design-concepts"
 +++
 
 ### New Servers and Discovery
-Dgraph clusters will detect new machines allocated to the [cluster]({{< relref "deploy/cluster-setup.md" >}}),
+Dgraph clusters will detect new machines allocated to the [cluster]({{< relref "deploy/dgraph-architecture.md" >}}),
 establish connections, and transfer data to the new server based on the group the new machine is in.

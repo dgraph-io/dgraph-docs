@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Ports Usage"
+type = "docs"
 weight = 1
 [menu.main]
     parent = "security"
@@ -40,7 +41,7 @@ follows:
  tools: Dgraph Live Loader and Dgraph Bulk Loader.
 
 <sup>2</sup>: Dgraph Zero uses port 6080 for
-[administrative]({{< relref "deploy/dgraph-zero.md" >}}) operations. Dgraph
+[administrative]({{< relref "deploy/admin/dgraph-zero.md" >}}) operations. Dgraph
 clients cannot access this port.
 
 Users must modify security rules or open firewall ports depending upon their

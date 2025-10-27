@@ -1,6 +1,7 @@
 +++
 date = "2017-09-10T22:25:17+11:00"
 title = "Concurrent mutations and conflicts"
+type = "docs"
 weight = 12
 [menu.main]
     parent = "howto"

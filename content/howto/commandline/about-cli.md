@@ -1,5 +1,6 @@
 +++
 title = "Command-line completion"
+type = "docs"
 keywords = "command line, bash, zsh"
 [menu.main]
     parent = "commandline"

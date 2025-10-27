@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Metrics"
 description = "Dgraph database helps administrators by providing metrics on Dgraph instance activity, disk activity, server node health, memory, and Raft leadership."
 weight = 5
+type = "docs"
 [menu.main]
     parent = "admin"
 +++

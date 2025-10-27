@@ -1,0 +1,16 @@
+    <div class="navigation-buttons">
+      {{if .Params.nav.previouspage}}
+      {{ with .Site.GetPage .Params.nav.previouspage }}
+          <div><a class="nav-prev-btn" href="{{.RelPermalink}}">← {{ .Title }}</a></div>
+      {{end}}
+      {{end}}
+      {{if .Params.nav.nextpage}}
+      <div>
+        {{ with .Site.GetPage .Params.nav.nextpage }}
+        <div><a class="nav-next-btn" href="{{.RelPermalink}}">{{ .Title }} →</a></div>
+        {{ end }}
+      </div>
+      {{end}}
+
+ 
+    </div>

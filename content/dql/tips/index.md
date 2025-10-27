@@ -1,5 +1,6 @@
 +++
 title = "DQL: Tips and Tricks"
+type = "docs"
 weight = 7
 [menu.main]
   identifier = "tips"

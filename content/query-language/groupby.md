@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "GroupBy"
+type = "docs"
 weight = 13
 [menu.main]
     parent = "query-language"

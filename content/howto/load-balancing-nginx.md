@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Load Balancing Queries with NGINX"
+type = "docs"
 weight = 8
 [menu.main]
     parent = "howto"
@@ -124,12 +125,12 @@ With gRPC load balancing, each request can hit a different Alpha node. This can 
 {{% /notice %}}
 
 ```sh
-nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.7:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.008 msec 1579057922.135 request_time 0.009
-nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.2:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.012 msec 1579057922.149 request_time 0.013
-nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.5:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.008 msec 1579057922.162 request_time 0.012
-nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.7:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.012 msec 1579057922.176 request_time 0.013
-nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.2:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.012 msec 1579057922.188 request_time 0.011
-nginx_1   | [15/Jan/2020:03:12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.5:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.016 msec 1579057922.202 request_time 0.013
+nginx_1   | [15/Jan/2020:03T12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.7:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.008 msec 1579057922.135 request_time 0.009
+nginx_1   | [15/Jan/2020:03T12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.2:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.012 msec 1579057922.149 request_time 0.013
+nginx_1   | [15/Jan/2020:03T12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.5:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.008 msec 1579057922.162 request_time 0.012
+nginx_1   | [15/Jan/2020:03T12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.7:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.012 msec 1579057922.176 request_time 0.013
+nginx_1   | [15/Jan/2020:03T12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.2:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.012 msec 1579057922.188 request_time 0.011
+nginx_1   | [15/Jan/2020:03T12:02 +0000] 172.20.0.9 - - -  nginx to: 172.20.0.5:9080: POST /api.Dgraph/Query HTTP/2.0 200 upstream_response_time 0.016 msec 1579057922.202 request_time 0.013
 ```
 These logs show that traffic is being load balanced to the following upstream addresses defined in alpha_grpc in nginx.conf:
 

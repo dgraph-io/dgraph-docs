@@ -1,0 +1,40 @@
+.tabs .nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs > li {
+  margin: 0;
+  padding: 0.3em 1em 0.2em;
+  font-size: 1em;
+  font-weight: bold;
+  margin-left: 1em;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.0625);
+  background: #fff;
+}
+
+.nav-tabs li a {
+  text-decoration: none !important;
+}
+
+.tabs .tab-content {
+  width: 100%;
+  padding: 0.5em 0.75em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.0625);
+  background: #fff;
+}
+
+.nav-tabs li a {
+  /* position: relative; */
+  color: #232323;
+}
+
+.nav-tabs li.active a {
+  /* position: relative; */
+  color: #bd4147;
+}

@@ -129,19 +129,11 @@ while true; do
 
 	if [ "$firstRun" = 1 ];
 	then
-		# clone the hugo-docs theme if not already there
-		[ ! -d 'themes/hugo-docs' ] && git clone https://github.com/dgraph-io/hugo-docs themes/hugo-docs
+		# Theme is now included in the repository
+		echo -e "$(date) $GREEN Using theme from repository.$RESET"
 	fi
 
-	# Lets check if the theme was updated.
-	pushd themes/hugo-docs > /dev/null
-	git remote update > /dev/null
-	themeUpdated=1
-	if branchUpdated "${THEME_BRANCH}" ; then
-		echo -e "$(date) $GREEN Theme has been updated. Now will update the docs.$RESET"
-		themeUpdated=0
-	fi
-	popd > /dev/null
+	# Theme is now included in the repository, no need to check for updates
 
 	echo -e "$(date)  Starting to check branches."
 	git remote update > /dev/null

@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Learner Nodes"
+type = "docs"
 description = "Learner nodes let you spin-up read-only replica instance to serve best-effort queries faster"
 weight = 7
 [menu.main]

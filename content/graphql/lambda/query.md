@@ -2,7 +2,8 @@
 title = "Lambda Queries"
 description = "Get started with the @lambda directive for queries. This documentation takes you through the schemas, resolvers, and examples."
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "lambda-resolver"
 +++
 

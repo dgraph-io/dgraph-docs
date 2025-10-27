@@ -1,6 +1,7 @@
 +++
 title = "DQL syntax"
 weight = 2
+type = "docs"
 [menu.main]
   name = "DQL Syntax"
   identifier = "dql-syntax"

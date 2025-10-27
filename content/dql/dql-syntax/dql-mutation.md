@@ -1,5 +1,6 @@
 +++
 title = "DQL mutation"
+type = "docs"
 [menu.main]
   name = "DQL mutation"
   identifier = "dql-mutation"

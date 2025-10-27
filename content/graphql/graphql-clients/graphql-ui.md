@@ -2,7 +2,8 @@
 title = "Client libraries"
 description = "Dgraph"
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-clients"
     identifier = "graphql-clients-ui"
     name = "Client libraries"

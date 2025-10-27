@@ -1,10 +1,11 @@
 +++
 title = "Dgraph Glossary"
 description = "Dgraph terms"
+type = "docs"
 [menu.main]
     name = "Dgraph Glossary"
     identifier = "glossary"
-    weight = 15
+    weight = 16
 +++
 
 <div class="glossary">
@@ -52,7 +53,7 @@ In [RDF](#RDF) terminology, a predicate is the smallest piece of information abo
 - when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](#uid) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
 
 ### RATEL ###
-Ratel is an open source GUI tool for data visualization and cluster management that’s designed to work with Dgraph and DQL. See also: [Ratel Overview]({{< relref "ratel/overview" >}}).
+Ratel is an open source GUI tool for data visualization and cluster management that’s designed to work with Dgraph and DQL. See also: [Ratel Overview]({{< relref "/ratel" >}}).
 
 ### RDF ###
 RDF 1.1 is a Semantic Web Standard for data interchange. It allows us to make statements about resources. The format of these statements is simple and in the form of `<subject>> <predicate> <object>`.
@@ -66,7 +67,7 @@ A relationship is  a named, directed link relating one [node](#node) to another.
 Sharding is a database architecture pattern to achieve horizontal scale by distributing data among many servers. Dgraph shards data per relationship, so all data for one relationship form a single shard, and are stored on one (group of) servers, an approach referred to as 'predicate-based sharding'.
 
 ### Triple ###
-Because RDF statements consist of three elements: <subject> <predicate> <object>, they are called triples. A triple represents a single atomic statement about a node. The object in an RDF triple can be a literal value or can point to another node. See [DQL RDF Syntax]({{< relref "dql-rdf" >}}) for more details.
+Because RDF statements consist of three elements: <subject> <predicate> <object>, they are called triples. A triple represents a single atomic statement about a node. The object in an RDF triple can be a literal value or can point to another node. See [DQL RDF Syntax]("/dql/dql-syntax/dql-rdf") for more details.
 - when we store that a node name is "Alice". The predicate is ``name`` and predicate value is the string "Alice". The string becomes a node property.
 - when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](#uid) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
 

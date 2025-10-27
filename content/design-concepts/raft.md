@@ -1,6 +1,7 @@
 +++
-date = "2017-03-27:12:00:00Z"
+date = "2017-03-27T12:00:00Z"
 title = "RAFT"
+type = "docs"
 weight = 160
 [menu.main]
     parent = "design-concepts"
@@ -112,7 +113,7 @@ and then add servers to the cluster one-by-one.{{% /notice %}}
 One of the ways to do this is snapshotting. As soon as the state machine is synced to disk, the
 logs can be discarded.
 
-Snapshots are taken by default after 10000 Raft entries, with a frequency of 30 minutes. The frequency indicates the time between two subsequent snapshots. These numbers can be adjusted using the `--raft` [superflag]({{< relref "deploy/cli-command-reference.md" >}})'s `snapshot-after-entries` and `snapshot-after-duration` options respectively. Snapshots are created only when conditions set by both of these options have been met.
+Snapshots are taken by default after 10000 Raft entries, with a frequency of 30 minutes. The frequency indicates the time between two subsequent snapshots. These numbers can be adjusted using the `--raft` [superflag]({{< relref "cli/superflags.md" >}})'s `snapshot-after-entries` and `snapshot-after-duration` options respectively. Snapshots are created only when conditions set by both of these options have been met.
 
 ## Clients
 Clients must locate the cluster to interact with it. Various approaches can be used for discovery.

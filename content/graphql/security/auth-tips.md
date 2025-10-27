@@ -2,7 +2,8 @@
 title = "Authorization tips"
 description = "Given an authentication mechanism and a signed JSON Web Token (JWT), the @auth directive tells Dgraph how to apply authorization."
 weight = 7
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "gql-auth"
 +++
 

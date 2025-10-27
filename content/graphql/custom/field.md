@@ -2,7 +2,8 @@
 title = "Custom Fields"
 description = "Custom fields allow you to extend your types with custom logic as well as make joins between your local data and remote data."
 weight = 5
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "custom"
 +++
 

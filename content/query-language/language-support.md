@@ -1,6 +1,7 @@
 +++
 date = "2022-12-26T22:25:17+11:00"
 title = " Language Support"
+type = "docs"
 weight = 28   
 [menu.main]
     parent = "query-language"

@@ -2,7 +2,8 @@
 title = "Dgraph Schema Fragment"
 description = "While editing your schema, this GraphQL schema fragment can be useful. It sets up the definitions of the directives that you’ll use in your schema."
 weight = 9
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "gqlschema"
 +++
 

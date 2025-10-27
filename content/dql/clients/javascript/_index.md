@@ -1,5 +1,6 @@
 +++
 title = "JavaScript"
+type = "docs"
 weight = 3
 [menu.main]
   identifier = "javascript"

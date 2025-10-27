@@ -1,7 +1,8 @@
 +++
-date = "2020-31-08T19:35:35+11:00"
+date = "2020-08-31T19:35:35+11:00"
 title = "Backups"
-[menu.main]
+type = "ratel"
+[menu.ratel]
     parent = "ratel"
     weight = 6
 +++
@@ -11,7 +12,7 @@ title = "Backups"
 Here you will find options to backup your server. 
 
 {{% notice "note" %}}
-This backup option is an [Enterprise feature]({{< relref "binary-backups.md" >}}).
+This backup option is an [Enterprise feature](/enterprise-features/binary-backups/).
 {{% /notice %}}
 
 ![Ratel Backup](/images/ratel/ratel_backup.png)

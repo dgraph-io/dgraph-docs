@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Sorting"
+type = "docs"
 weight = 7
 [menu.main]
     parent = "query-language"

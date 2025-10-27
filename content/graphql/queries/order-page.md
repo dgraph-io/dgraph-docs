@@ -2,7 +2,8 @@
 title = "Order and Pagination"
 description = "Every type with fields whose types can be ordered gets ordering built into the query and any list fields of that type."
 weight = 7
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-queries"
     name = "Order and Pagination"
 +++

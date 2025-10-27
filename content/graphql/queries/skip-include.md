@@ -2,7 +2,8 @@
 title = "@skip and @include Directives"
 description = "@skip and @include directives can be applied to query fields. They let you skip or include a field based on the value of the if argument."
 weight = 9
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-queries"
     name = "@skip and @include Directives"
 +++

@@ -1,6 +1,7 @@
 +++
 title = "Installation"
-weight = 1
+weight = 3
+type = "docs"
 [menu.main]
   parent = "deploy"
   identifier = "installation"

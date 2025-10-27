@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "GraphQL Variables"
+type = "docs"
 weight = 26
 [menu.main]
     parent = "query-language"

@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Logging"
 description = "Dgraph logs requests for queries and mutations, and also provides audit logging capabilities with a Dgraph Enterprise license."
 weight = 2
+type = "docs"
 [menu.main]
     parent = "admin"
 +++

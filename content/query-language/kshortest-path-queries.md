@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Shortest Path Queries"
+type = "docs"
 weight = 23
 [menu.main]
     parent = "query-language"

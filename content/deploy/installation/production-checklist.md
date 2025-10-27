@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Production checklist"
 description = "Requirements to install Dgraph in a production environment"
 weight = 4
+type = "docs"
 [menu.main]
     parent = "installation"
 +++
@@ -79,7 +80,7 @@ Dgraph instances communicate over several ports. Firewall rules should be config
 
 Internal ports must be accessible by all Zero and Alpha peers for proper cluster-internal communication. Database clients must be able to connect to Dgraph Alpha external ports either directly or through a load balancer.
 
-Dgraph Zeros can be set up in a private network where communication is only with Dgraph Alphas, database administrators, internal services (such as Prometheus or Jaeger), and possibly developers (see note below). Dgraph Zero's 6080 external port is only necessary for database administrators. For example, it can be used to inspect the cluster metadata (/state), allocate UIDs or set txn timestamps (/assign), move data shards (/moveTablet), or remove cluster nodes (/removeNode). The full docs about Zero's administrative tasks are in [More About Dgraph Zero]({{< relref "deploy/dgraph-zero.md" >}}).
+Dgraph Zeros can be set up in a private network where communication is only with Dgraph Alphas, database administrators, internal services (such as Prometheus or Jaeger), and possibly developers (see note below). Dgraph Zero's 6080 external port is only necessary for database administrators. For example, it can be used to inspect the cluster metadata (/state), allocate UIDs or set txn timestamps (/assign), move data shards (/moveTablet), or remove cluster nodes (/removeNode). The full docs about Zero's administrative tasks are in [More About Dgraph Zero]({{< relref "deploy/admin/dgraph-zero.md" >}}).
 
 {{% notice "note" %}}
 Developers using Dgraph Live Loader or Dgraph Bulk Loader require access to both Dgraph Zero port 5080 and Dgraph Alpha port 9080. When using those tools, consider using them within your environment that has network access to both ports of the cluster.
@@ -119,5 +120,5 @@ These services are not required for a Dgraph cluster to function but are recomme
 - [Distributed tracing][] with Jaeger.
 
 [Metrics]: {{< relref "metrics.md" >}}
-[Monitoring]: {{< relref "deploy/monitoring.md" >}}
+[Monitoring]: {{< relref "deploy/admin/monitoring.md" >}}
 [Distributed tracing]: {{< relref "tracing.md" >}}

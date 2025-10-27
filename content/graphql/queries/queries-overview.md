@@ -2,7 +2,8 @@
 title = "Overview"
 description = "Dgraph automatically generates GraphQL queries for each type that you define in your schema. There are three types of queries generated for each type."
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-queries"
     identifier = "queries-overview"
 +++

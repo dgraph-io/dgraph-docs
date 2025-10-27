@@ -2,7 +2,8 @@
 title = "Similarity Search"
 description = "Dgraph automatically generates GraphQL queries for each vector index that you define in your schema. There are two types of queries generated for each index."
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-queries"
     identifier = "vector-queries"
 +++
