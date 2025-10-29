@@ -55,7 +55,6 @@ The indices available for `float32vector` are as follows.
 | `similar_to`                       | `hnsw` | HNSW index supports parameters `metric` and `exponent`. |
 
 
-#
 
 `hnsw` (**Hierarchical Navigable Small World**) index supports the following parameters
 - metric : indicate the metric to use to compute vector similarity. One of `cosine`, `euclidean`, and `dotproduct`. Default is `euclidean`.

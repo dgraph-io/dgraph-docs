@@ -1,0 +1,14 @@
+DirectoryPath: "public/"
+CheckDoctype: true
+CheckExternal: true
+CheckInternalHash: true
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreAltMissing: true
+IgnoreURLs:
+  - "https://fonts.googleapis.com"
+  - "https://cdnjs.cloudflare.com"
+ExternalTimeout: 15
+HTTPHeaders:
+  - url: ".*"
+    headers:
+      User-Agent: "Mozilla/5.0 (compatible; htmltest)"
