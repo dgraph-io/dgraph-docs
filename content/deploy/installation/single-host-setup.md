@@ -63,7 +63,7 @@ The command should return basic cluster information:
 ```
 
 ### Connect Ratel
-Ratel is a web-based UI dashboard for interacting with Dgraph using Dgraph's query language,[DQL](./glossary#DQL).
+Ratel is a web-based UI dashboard for interacting with Dgraph using Dgraph's query language, [DQL]({{<relref "/dgraph-glossary#DQ">}}).
 
 Optionnaly, launch Ratel using the dgraph/ratel docker image :
 

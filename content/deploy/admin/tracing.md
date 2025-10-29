@@ -32,16 +32,16 @@ You can run multiple Jaeger collector components for the same single Jaeger back
 
 Once you have this configured, you can filter by tags in the Jaeger UI. Filter traces by tags matching `env=dev`:
 
-{{% load-img "/images/jaeger-ui.png" "Jaeger UI" %}}
+{{% load-img "images/jaeger-ui.png" "Jaeger UI" %}}
 
 Every trace has your custom tags set under the “Process” section of each span:
 
-{{% load-img "/images/jaeger-server-query.png" "Jaeger Query" %}}
+{{% load-img "images/jaeger-server-query.png" "Jaeger Query" %}}
 
 Filter traces by tags matching `env=qa`:
 
-{{% load-img "/images/jaeger-json.png" "Jaeger JSON" %}}
+{{% load-img "images/jaeger-json.png" "Jaeger JSON" %}}
 
-{{% load-img "/images/jaeger-server-query-2.png" "Jaeger Query Result" %}}
+{{% load-img "images/jaeger-server-query-2.png" "Jaeger Query Result" %}}
 
 To learn more about Jaeger, see [Jaeger's Deployment Guide](https://www.jaegertracing.io/docs/deployment/).

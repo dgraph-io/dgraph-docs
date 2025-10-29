@@ -201,11 +201,11 @@ When the new cluster (that uses the upgraded version of Dgraph) is up and runnin
 ### Upgrade from v1.2.2 to v20.03.0 for Enterprise customers
 
 <!-- TODO: Redirect(s) -->
-1. Use [binary backup]({{< relref "enterprise-features/binary-backups.md">}}) to export data from old cluster
+1. Use [binary backup]({{< relref "binary-backups.md">}}) to export data from old cluster
 2. Ensure it is successful
 3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Upgrade `dgraph` binary to `v20.03.0`
-5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using upgraded `dgraph` binary
+5. Restore from the backups using upgraded `dgraph` binary
 6. Start a new Dgraph cluster using the restored data directories
 7. Upgrade ACL data using the following command:
 
@@ -219,7 +219,7 @@ dgraph upgrade --acl -a localhost:9080 -u groot -p password
 2. Ensure it is successful
 3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Upgrade `dgraph` binary to `v20.07.0`
-5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using upgraded `dgraph` binary
+5. Restore from the backups using upgraded `dgraph` binary
 6. Start a new Dgraph cluster using the restored data directories
 7. Upgrade ACL data using the following command:
     ```sh
@@ -244,7 +244,7 @@ are affected. Then, you can drop the old types and predicates from DB.
 2. Ensure it is successful
 3. [Shutdown Dgraph]({{< relref "#shut-down-database" >}}) and wait for all writes to complete
 4. Upgrade `dgraph` binary to `v21.03.0`
-5. [Restore]({{< relref "enterprise-features/binary-backups.md#restore-from-backup">}}) from the backups using the upgraded `dgraph` binary
+5. Restore from the backups using the upgraded `dgraph` binary
 6. Start a new Dgraph cluster using the restored data directories
 7. Upgrade the CORS and persisted queries. To upgrade an ACL cluster use:
     ```sh
@@ -268,4 +268,4 @@ as backup and restore are cluster-wide operations and a single namespace cannot 
 
 ## Post Installation
 
-Now that Dgraph is up and running, to understand how to add and query data to Dgraph, follow [Query Language Spec](/query-language). Also, have a look at [Frequently asked questions](/faq).
+Now that Dgraph is up and running, to understand how to add and query data to Dgraph, follow [Query Language Spec](/query-language). 

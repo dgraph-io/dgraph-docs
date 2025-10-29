@@ -92,7 +92,7 @@ query {
 - **`group`**: Group assigned based on the replication factor.
 - **`lastEcho`**: Last time, in Unix epoch, when the instance was contacted by another Alpha or Zero server.
 - **`ongoing`**: List of ongoing operations in the background.
-- **`indexing`**: List of predicates for which indexes are built in the background. Read more [here]({{< relref "/dql/dql-schema.md#indexes-in-background" >}}).
+- **`indexing`**: List of predicates for which indexes are built in the background.
 
 {{% notice "note" %}}
 The same information (except `ongoing` and `indexing`) is available from the `/health` and `/health?all` HTTP endpoints.

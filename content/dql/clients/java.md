@@ -81,18 +81,6 @@ dgraphClient.loginIntoNamespace(USER_ID, USER_PASSWORD, NAMESPACE);
 
 Once logged-in, the `dgraphClient` object can be used to do any further operations.
 
-### Creating a Client for Dgraph Cloud Endpoint
-
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows :
-
-```java
-DgraphStub stub = DgraphClient.clientStubFromCloudEndpoint("https://civic-wine.us-west-2.aws.cloud.dgraph.io/graphql", "your-api-key");
-DgraphClient dgraphClient = new DgraphClient(stub);
-```
-
-{{% notice "note" %}}
-The `DgraphClient.clientStubFromSlashEndpoint()` method has been deprecated and will be removed in v21.07. Please use `DgraphClient.clientStubFromCloudEndpoint()` instead.
-{{% /notice %}}
 
 ### Creating a Secure Client using TLS
 
@@ -155,7 +143,7 @@ dgraphClient.alter(operation);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can call the function `setRunInBackground(true)` as shown below before
 calling `alter`. You can find more details
-[here]({{< relref "dql-schema.md#indexes-in-background" >}}).
+[here]({{< relref "update-dgraph-types.md#indexes-in-background" >}}).
 
 ```java
 String schema = "name: string @index(exact) .";

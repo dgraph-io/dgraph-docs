@@ -30,7 +30,7 @@ Let's learn more about them!
 Let's start with building a simple food review Graph.
 Here's the Graph model.
 
-{{% load-img "/images/tutorials/4/a-graph-model.jpg" "model" %}}
+{{% load-img "images/tutorials/4/a-graph-model.jpg" "model" %}}
 
 The above Graph has three entities: Food, Comment, and Country.
 
@@ -127,7 +127,7 @@ _Note: If this mutation syntax is new to you, refer to the [first tutorial]({{< 
 
 Here's our Graph!
 
-{{% load-img "/images/tutorials/4/a-full-graph.png" "full graph" %}}
+{{% load-img "images/tutorials/4/a-full-graph.png" "full graph" %}}
 
 Our Graph has:
 
@@ -138,7 +138,7 @@ Our Graph has:
 You can also see that Dgraph has auto-detected the data types of the predicates.
 You can check that out from the schema tab.
 
-{{% load-img "/images/tutorials/4/c-schema.png" "full graph" %}}
+{{% load-img "images/tutorials/4/c-schema.png" "full graph" %}}
 
 _Note: Check out the [previous tutorial]({{< relref "tutorial-3/index.md">}}) to know more about data types in Dgraph._
 
@@ -177,7 +177,7 @@ Now, Let's fetch only the food items and their reviews,
 
 As expected, these comments are in different languages.
 
-{{% load-img "/images/tutorials/4/b-comments.png" "full graph" %}}
+{{% load-img "images/tutorials/4/b-comments.png" "full graph" %}}
 
 But can we fetch the reviews based on their language?
 Can we write a query which says: _Hey Dgraph, can you give me only the reviews written in Chinese?_
@@ -235,7 +235,7 @@ Let's run the above mutation.
 
 Go to the mutate tab, paste the mutation, and click Run.
 
-{{% load-img "/images/tutorials/4/d-lang-error.png" "lang error" %}}
+{{% load-img "images/tutorials/4/d-lang-error.png" "lang error" %}}
 
 We got an error! Using the language tag requires you to add the `@lang` directive to the schema.
 
@@ -246,11 +246,11 @@ Follow the instructions below to add the `@lang` directive to the `comment` pred
 - Tick mark the `lang` directive.
 - Click on the `Update` button.
 
-{{% load-img "/images/tutorials/4/e-update-lang.png" "lang error" %}}
+{{% load-img "images/tutorials/4/e-update-lang.png" "lang error" %}}
 
 Let's re-run the mutation.
 
-{{% load-img "/images/tutorials/4/f-mutation-success.png" "lang error" %}}
+{{% load-img "images/tutorials/4/f-mutation-success.png" "lang error" %}}
 
 Success!
 
@@ -291,7 +291,7 @@ In the [previous article]({{< relref "tutorial-3/index.md">}}), we learned about
 
 Using that knowledge, let's first add the `hash` index for the `food_name` predicate.
 
-{{% load-img "/images/tutorials/4/g-hash.png" "hash index" %}}
+{{% load-img "images/tutorials/4/g-hash.png" "hash index" %}}
 
 Now, go to the query tab, paste the query in the text area, and click Run.
 
@@ -306,7 +306,7 @@ Now, go to the query tab, paste the query in the text area, and click Run.
 }
 ```
 
-{{% load-img "/images/tutorials/4/h-comment.png" "hash index" %}}
+{{% load-img "images/tutorials/4/h-comment.png" "hash index" %}}
 
 By default, the query only returns the untagged comment.
 
@@ -324,7 +324,7 @@ Let's query for a review for `Sushi` in Japanese.
 }
 ```
 
-{{% load-img "/images/tutorials/4/i-japanese.png" "Japanese" %}}
+{{% load-img "images/tutorials/4/i-japanese.png" "Japanese" %}}
 
 Now, let's query for a review for `Sushi` in Russian.
 
@@ -339,7 +339,7 @@ Now, let's query for a review for `Sushi` in Russian.
 }
 ```
 
-{{% load-img "/images/tutorials/4/j-russian.png" "Russian" %}}
+{{% load-img "images/tutorials/4/j-russian.png" "Russian" %}}
 
 You can also fetch all the comments for `Sushi` written in any language.
 
@@ -354,7 +354,7 @@ You can also fetch all the comments for `Sushi` written in any language.
 }
 ```
 
-{{% load-img "/images/tutorials/4/k-star.png" "Russian" %}}
+{{% load-img "images/tutorials/4/k-star.png" "Russian" %}}
 
 Here is the table with the syntax for various ways of making use of language tags while querying.
 
@@ -371,7 +371,7 @@ Here is the table with the syntax for various ways of making use of language tag
 
 If you remember, we had initially added a Russian dish `Borscht` with its review in `Russian`.
 
-{{% load-img "/images/tutorials/4/l-russian.png" "Russian" %}}
+{{% load-img "images/tutorials/4/l-russian.png" "Russian" %}}
 
 If you notice, we haven't used the language tag `@ru` for the review written in Russian.
 
@@ -379,7 +379,7 @@ Hence, if we query for all the reviews written in `Russian`, the review for `Bor
 
 Only the review for `Sushi,` written in `Russian`, makes it to the list.
 
-{{% load-img "/images/tutorials/4/m-sushi.png" "Russian" %}}
+{{% load-img "images/tutorials/4/m-sushi.png" "Russian" %}}
 
 So, here's the lesson of the day!
 

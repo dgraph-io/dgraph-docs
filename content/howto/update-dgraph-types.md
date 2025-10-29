@@ -3,8 +3,10 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Update Dgraph types"
 type = "docs"
 weight = 15
+identifier = "update-types"
 [menu.main]
     parent = "howto"
+    
 +++
 
 You modify Dgraph types (node types and predicates types) by 

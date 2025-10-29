@@ -80,23 +80,6 @@ await dgraphClientStub.loginIntoNamespace("groot", "password", 123); // where 12
 In the example above, the client logs into namespace `123` using username `groot` and password `password`.
 Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
 
-### Creating a Client for Dgraph Cloud Endpoint
-
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
-
-```js
-const dgraph = require("dgraph-js");
-
-const clientStub = dgraph.clientStubFromSlashGraphQLEndpoint(
-  "https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql",
-  "<api-key>"
-);
-const dgraphClient = new dgraph.DgraphClient(clientStub);
-```
-
-{{% notice "note" %}}
-The `dgraph.clientStubFromSlashGraphQLEndpoint()` method has been deprecated and will be removed in v21.07.
-{{% /notice %}}
 
 ### Altering the Database
 
@@ -113,7 +96,7 @@ await dgraphClient.alter(op);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can set `setRunInBackground` field of the `Operation` object to `true`
 before passing it to the `DgraphClient#alter(Operation)` method. You can find more details
-[here]({{< relref "dql-schema.md#indexes-in-background" >}}).
+[here]({{< relref "update-dgraph-types.md#indexes-in-background" >}}).
 
 ```js
 const schema = "name: string @index(exact) .";

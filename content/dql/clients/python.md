@@ -59,20 +59,7 @@ client.login_into_namespace("groot", "password", "123")
 In the example above, the client logs into namespace `123` using username `groot` and password `password`.
 Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
 
-### Creating a Client for Dgraph Cloud Endpoint
 
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
-
-```python
-import pydgraph
-
-client_stub = pydgraph.DgraphClientStub.from_cloud("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
-client = pydgraph.DgraphClient(client_stub)
-```
-
-{{% notice "note" %}}
-The `DgraphClientStub.from_slash_endpoint()` method has been deprecated and will be removed in v21.07. Please use `DgraphClientStub.from_cloud()` instead.
-{{% /notice %}}
 
 ### Altering the Database
 
@@ -88,7 +75,7 @@ client.alter(op)
 Starting with Dgraph version 20.03.0, indexes can be computed in the background.
 You can set the `run_in_background` field of `pydgraph.Operation` to `True`
 before passing it to the `Alter` function. You can find more details
-[here]({{< relref "dql-schema.md#indexes-in-background" >}}).
+[here]({{< relref "update-dgraph-types.md#indexes-in-background" >}}).
 
 ```python
 schema = 'name: string @index(exact) .'

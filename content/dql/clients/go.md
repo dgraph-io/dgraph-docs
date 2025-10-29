@@ -89,23 +89,7 @@ if err := dc.LoginIntoNamespace(ctx, "groot", "password", 123); err != nil {
 In the example above, the client logs into namespace `123` using username `groot` and password `password`.
 Once logged in, the client can perform all the operations allowed to the `groot` user of namespace `123`.
 
-### Creating a Client for Dgraph Cloud Endpoint
 
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
-
-```go
-// This example uses dgo
-conn, err := dgo.DialCloud("https://frozen-mango.eu-central-1.aws.cloud.dgraph.io/graphql", "<api-key>")
-if err != nil {
-  log.Fatal(err)
-}
-defer conn.Close()
-dgraphClient := dgo.NewDgraphClient(api.NewDgraphClient(conn))
-```
-
-{{% notice "note" %}}
-The `dgo.DialSlashEndpoint()` method has been deprecated and will be removed in v21.07. Please use `dgo.DialCloud()` instead.
-{{% /notice %}}
 
 ## Alter the database
 

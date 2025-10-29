@@ -29,7 +29,7 @@ The accompanying video of the tutorial will be out shortly, so stay tuned to
 Before we dive in, let's review of how we modeled the tweets in
 the previous two tutorials:
 
-{{% load-img "/images/tutorials/5/a-graph-model.jpg" "tweet model" %}}
+{{% load-img "images/tutorials/5/a-graph-model.jpg" "tweet model" %}}
 
 We used three real-life example tweets as a sample dataset and stored
 them in Dgraph using the above graph as a model.
@@ -140,7 +140,7 @@ _Note: If you're new to Dgraph, and this is the first time you're running a muta
 Now you should have a graph with tweets, users, and hashtags,
 and it is ready for us to explore.
 
-{{% load-img "/images/tutorials/5/x-all-tweets.png" "tweet graph" %}}
+{{% load-img "images/tutorials/5/x-all-tweets.png" "tweet graph" %}}
 
 _Note: If you're curious to know how we modeled the tweets in Dgraph, refer to [the fifth tutorial]({{< relref "tutorial-5/index.md" >}})._
 
@@ -196,7 +196,7 @@ Before we use the `match` function, let's first get the list of user names store
 }
 ```
 
-{{% load-img "/images/tutorials/7/e-names.png" "tweet graph" %}}
+{{% load-img "images/tutorials/7/e-names.png" "tweet graph" %}}
 
 As you can see from the result, we have four user names: `Gopherpalooza`,
 `Karthic Rao`, `Francesc Campoy`, and `Dgraph Labs`.
@@ -216,7 +216,7 @@ Go to the query tab, paste the query below and click Run.
 }
 ```
 
-{{% load-img "/images/tutorials/7/h-one.png" "first query" %}}
+{{% load-img "images/tutorials/7/h-one.png" "first query" %}}
 
 We got a positive match!
 Because the search string `graphLabs` is at a distance of two from the predicate
@@ -236,7 +236,7 @@ Go to the query tab, paste the query below and click Run.
 }
 ```
 
-{{% load-img "/images/tutorials/7/i-two.png" "first query" %}}
+{{% load-img "images/tutorials/7/i-two.png" "first query" %}}
 
 We still got a positive match with the `user_name` predicate with the value `Dgraph Labs`!
 That's because the search string `graphLab` is at a distance of three from the predicate
@@ -256,7 +256,7 @@ Levenshtein Distance at 3.
 }
 ```
 
-{{% load-img "/images/tutorials/7/j-three.png" "first query" %}}
+{{% load-img "images/tutorials/7/j-three.png" "first query" %}}
 
 Now you no longer see Dgraph Labs appears in the search result because the distance
 between the word `Dgraph` and `Dgraph Labs` is larger than 3. But based on normal

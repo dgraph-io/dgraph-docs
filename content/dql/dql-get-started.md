@@ -9,7 +9,7 @@ aliases = ["/get-started"]
   parent = ""
 +++
 
-This is a quick start guide to run [DQL]({{< relref "dgraph-glossary.md#RDF" >}}) queries and mutations. 
+This is a quick start guide to run [DQL]({{< relref "dgraph-glossary.md#rdf" >}}) queries and mutations. 
 
 
 This guide helps you:
@@ -64,14 +64,14 @@ Ratel UI makes it easier to run queries and mutations.
  }  
 ```
 
-The input data is in JSON Format. Dgraph also supports [RDF]({{<relref "dgraph-glossary.md#RDF">}}) notation.
+The input data is in JSON Format. Dgraph also supports [RDF]({{<relref "dgraph-glossary.md#rdf">}}) notation.
 
 The sample JSON data is an array of two movies with some attributes. These are stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
 There will be stored as [Nodes]({{<relref "dgraph-glossary.md#node">}}) in Dgraph.
 
 The "Star Wars" movie has a `director` field which is an JSON object and a `starring` field which is an array of JSON objects.
-Each object is also stored as a Node in Dgraph . The `director` and `starring` are stored as [relations]({{<relref "dgraph-glossary.md#relation">}}).
+Each object is also stored as a Node in Dgraph . The `director` and `starring` are stored as [relationship]({{<relref "dgraph-glossary.md#relationship">}}).
 
 
 3. Click **Run** to execute the mutation.

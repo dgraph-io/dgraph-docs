@@ -57,27 +57,6 @@ const dgraphClient = new dgraph.DgraphClient(clientStub);
 
 To facilitate debugging, [debug mode](#debug-mode) can be enabled for a client.
 
-### Create a Client for Dgraph Cloud Endpoint
-
-If you want to connect to Dgraph running on your [Dgraph Cloud](https://cloud.dgraph.io) instance, then all you need is the URL of your Dgraph Cloud endpoint and the API key. You can get a client using them as follows:
-
-```js
-const dgraph = require("dgraph-js-http");
-
-//here we pass the cloud endpoint
-const clientStub = new dgraph.DgraphClientStub(
-    "https://super-pail.us-west-2.aws.cloud.dgraph.io",
-);
-
-const dgraphClient = new dgraph.DgraphClient(clientStub);
-
-//here we pass the API key
-dgraphClient.setSlashApiKey("<api-key>");
-```
-
-{{% notice "note" %}}
-You need to remove the `/graphql` path when copying the endpoint URL from the Dgraph Cloud dashboard. 
-{{% /notice %}}
 
 ### Login into Dgraph
 
@@ -105,18 +84,15 @@ await clientStub.login();
 
 Some Dgraph configurations require extra access tokens.
 
-1. Alpha servers can be configured with [Secure Alter Operations]({{< relref "dgraph-administration.md" >}}).
+
+Alpha servers can be configured with [Secure Alter Operations]({{< relref "dgraph-administration.md" >}}).
    In this case the token needs to be set on the client instance:
 
 ```js
 dgraphClient.setAlphaAuthToken("My secret token value");
 ```
 
-2. [Dgraph Cloud](https://cloud.dgraph.io/) requires API key for HTTP access:
 
-```js
-dgraphClient.setSlashApiKey("Copy the Api Key from Dgraph Cloud admin page");
-```
 
 ### Create https connection
 
