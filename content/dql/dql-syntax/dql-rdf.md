@@ -39,7 +39,7 @@ Languages are written using `@lang`. For example
 <0x01> <name> "Adélaïde"@fr .
 <0x01> <dgraph.type> "Person" .
 ```
-See also [how language strings are handled in queries]({{< relref "query-language/graphql-fundamentals.md#language-support" >}}).
+See also [how language strings are handled in queries]({{< relref "language-support.md" >}}).
 
 ### Types
 Dgraph understands standard RDF types specified in RDF using the `^^` separator.  For example
@@ -122,7 +122,7 @@ Result:
 ```
 {{% notice "tip" %}}
 Dgraph can automatically generate a reverse relation. If the user wants to run
-queries in that direction, they would define the [reverse relationship]({{< relref "dql-schema.md#reverse-edges" >}}).
+queries in that direction, they would define the [reverse relationship]({{< relref "dql-schema.md#reverse-predicates" >}}).
 {{% /notice %}}
 
 ## N-quads format

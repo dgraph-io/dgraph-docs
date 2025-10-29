@@ -40,9 +40,9 @@ type Film {
 The schema contains information about [predicate types](#predicate-types) and [node types](#node-types).
 
 
-A [predicate]({{< relref "dgraph-glossary.md#Predicate">}}) is the smallest piece of information about an object. A predicate can hold a literal value or a relation to another entity :
+A [predicate]({{< relref "dgraph-glossary.md#predicate">}}) is the smallest piece of information about an object. A predicate can hold a literal value or a relation to another entity :
 - when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice".
-- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid]({{<relref "dgraph-glossary.md#uid">}}) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
+- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid]({{<relref "dgraph-glossary.md#uid">}}) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationships).
 
 
 Dgraph maintains a list of all predicates names and their type in the **Dgraph types schema**.
@@ -92,7 +92,7 @@ or
 
   If a predicate type isn't declared in the schema, then the type is inferred from the first mutation and added to the schema.
 
-  If the mutation is using [RDF format]({{<relref "#rdf-types" >}}) with an RDF type, Dgraph uses this information to infer the predicate type.
+  If the mutation is using [RDF format]({{<relref "dql-rdf.md" >}}) with an RDF type, Dgraph uses this information to infer the predicate type.
 
   If no type can be inferred, the predicate type is set to  `default`.
 
@@ -122,7 +122,7 @@ convert your values to RFC 3339 format before sending them to Dgraph.{{% /notice
 
 The `float32vector` type denotes a vector of floating point numbers, i.e an ordered array of float32.  A node type can contain more than one vector predicate.
 
-Vectors are normaly used to store embeddings obtained from other information through an ML model. When a `float32vector` is [indexed](/dql/predicate-indexing/), the DQL [similar_to](/dql/dql-syntax/functions/#vector-similarity-search) function can be used for similarity search.
+Vectors are normaly used to store embeddings obtained from other information through an ML model. When a `float32vector` is [indexed](/dql/predicate-indexing/), the DQL [similar_to]({{< relref "functions.md#vector-similarity-search">}}) function can be used for similarity search.
 
 
 
@@ -343,7 +343,7 @@ output:
 ```
 ## Predicate indexing
 
-The schema is also used to set [predicates indexes](/dql/predicate-indexing/) which are required to apply [filtering functions](/dql/dql-syntax/functions/) in DQL queries.
+The schema is also used to set [predicates indexes](/dql/predicate-indexing/) which are required to apply [filtering functions]({{< relref "functions.md">}}) in DQL queries.
 
 ## Node types
 Node types are declared along with [predicate types](#predicate-types) in the Dgraph types schema.
@@ -417,7 +417,7 @@ Here's an example of mutation to set the types of a node:
 
 Node types are optional, but there are two use cases where actually knowing the list of potential predicates of a node is necessary:
 - deleting all the information about a node: this is the `delete { <uid> * * . }` mutation.
-- retrieving all the predicates of a given node: this is done using the [expand(_all_)](/dql/dql-syntax/expand-predicates/) feature of DQL.
+- retrieving all the predicates of a given node: this is done using the [expand(_all_)]({{< relref "expand-predicates.md">}}) feature of DQL.
 
 The Dgraph node types are used in those 2 use cases: when executing the `delete all predicates` mutation or the `expand all` query, Dgraph will check if the node has a ``dgraph.type`` predicate. If so, the engine is using the declared type to find the list of predicates and apply the delete or the expand on all of them.
 

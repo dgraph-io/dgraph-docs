@@ -52,7 +52,7 @@ Dgraph is built from the ground up as a distributed system. Data is automaticall
 
 Each Dgraph cluster consists of multiple server groups (shards) that work together to store and query your data. Queries are automatically distributed across the relevant shards and results are aggregated, making the distributed nature transparent to your application. This architecture provides both horizontal scalability and high availability.
 
-For detailed information about Dgraph's distributed architecture, clustering, and replication, see the [Architecture documentation]("/deploy/archiveture").
+For detailed information about Dgraph's distributed architecture, clustering, and replication, see the [Architecture documentation](/deploy/dgraph-architecture).
 
 ## Enterprise-Grade Features
 
@@ -120,7 +120,7 @@ The graph model naturally represents connected data, making it straightforward t
 ## What's Next
 
 - Get familiar with some terms in our [Glossary](/dgraph-glossary)
-- Go through some [tutorials]("/learn")
+- Go through some [tutorials]({{<relref "learn">}})
 
 
 

@@ -13,7 +13,7 @@ type = "graphql"
 Dgraph Query Language ([DQL](/dql/)) can be used to extend GraphQL API capabilities when writing:
 
 - [custom DQL resolvers]({{<relref "custom-dql">}})
-- [subscriptions on DQL queries](/graphql/schema/directives/directive-withsubscription/#subscriptions-to-custom-dql)
+- [subscriptions on DQL queries]({{<relref "directive-withsubscription" >}})
 
 
 

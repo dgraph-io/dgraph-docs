@@ -51,7 +51,7 @@ The following image has the point location with the latitude and longitude for t
 Paris. Point locations are useful for representing a precise location; for instance, your location
 when booking a cab or your delivery address.
 
-{{% load-img "/images/tutorials/8/b-paris.png" "model" %}}
+{{% load-img "images/tutorials/8/b-paris.png" "model" %}}
 
 - **Polygonal location**
 
@@ -61,7 +61,7 @@ lake, or a national park, you should use a polygonal location.
 
 Here is an example:
 
-{{% load-img "/images/tutorials/8/c-delhi.jpg" "model" %}}
+{{% load-img "images/tutorials/8/c-delhi.jpg" "model" %}}
 
 The polygonal fence above represents the city of Delhi, India. This polygonal fence
 or the geo-fence is formed by connecting multiple straight-line boundaries, and
@@ -72,7 +72,7 @@ and a polygonal fence can contain any number of lines.
 
 Let's start with building a simple San Francisco tourist graph, here's the graph model.
 
-{{% load-img "/images/tutorials/8/a-graph.jpg" "model" %}}
+{{% load-img "images/tutorials/8/a-graph.jpg" "model" %}}
 
 The above graph has three entities represented by the nodes:
 
@@ -1489,7 +1489,7 @@ if you want to learn more about traversal queries like the above one._
 
 Here's our graph!
 
-{{% load-img "/images/tutorials/8/d-full-graph.png" "full graph" %}}
+{{% load-img "images/tutorials/8/d-full-graph.png" "full graph" %}}
 
 Our graph has:
 
@@ -1503,7 +1503,7 @@ We have four kinds of locations in our dataset: `museum`, `zoo`, `hotel`, and `t
 You can also see that Dgraph has auto-detected the data types of the predicates from
 the schema tab, and the location predicate has been auto-assigned `geo` type.
 
-{{% load-img "/images/tutorials/8/e-schema.png" "type detection" %}}
+{{% load-img "images/tutorials/8/e-schema.png" "type detection" %}}
 
 _Note: Check out the [previous tutorial]({{< relref "tutorial-3/index.md">}})
 to know more about data types in Dgraph._
@@ -1533,7 +1533,7 @@ To use them, you have to set the `geo` index first.
 
 Go to the Schema tab and set the index on the `location` predicate.
 
-{{% load-img "/images/tutorials/8/f-index.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/f-index.png" "geo-index" %}}
 
 After setting the `geo` index on the `location` predicate, you can use Dgraph's
 built-in function `near` to find the hotels near the Golden gate bridge.
@@ -1560,7 +1560,7 @@ Go to the query tab, paste the query below and click Run.
 }
 ```
 
-{{% load-img "/images/tutorials/8/g-near-1.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/g-near-1.png" "geo-index" %}}
 
 Wait! The search returns not just the hotels, but also all other locations
 within 7 Km from the point coordinate on the `Golden Gate Bridge`.
@@ -1582,13 +1582,13 @@ to refresh our previous discussions around using the `@filter` directive.
 
 Oops, we forgot to add an index while using the `eq` comparator in the filter.
 
-{{% load-img "/images/tutorials/8/h-near-2.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/h-near-2.png" "geo-index" %}}
 
 Let's add a `hash` index to the `loc_type` and re-run the query.
 
-{{% load-img "/images/tutorials/8/i-near-3.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/i-near-3.png" "geo-index" %}}
 
-{{% load-img "/images/tutorials/8/j-near-4.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/j-near-4.png" "geo-index" %}}
 
 _Note: Refer to the [third tutorial]({{< relref "tutorial-3/index.md">}}) of
 the series to learn more about hash index and comparator functions in Dgraph._
@@ -1624,7 +1624,7 @@ so, we get only the locations of `hotels` in our result.
 }
 ```
 
-{{% load-img "/images/tutorials/8/k-near-5.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/k-near-5.png" "geo-index" %}}
 
 Voila! You can see in the result that, after adding the `@cascade` directive
 in the query, only the locations with type `hotel` appear in the result.
@@ -1638,7 +1638,7 @@ the query, not at the level we traverse the location type nodes.
 
 Before you jump onto run the query, don't forget to add an index on the `price_per_night` predicate.
 
-{{% load-img "/images/tutorials/8/l-float-index.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/l-float-index.png" "geo-index" %}}
 
 ```graphql
 {
@@ -1653,7 +1653,7 @@ Before you jump onto run the query, don't forget to add an index on the `price_p
 
 ```
 
-{{% load-img "/images/tutorials/8/m-final-result.png" "geo-index" %}}
+{{% load-img "images/tutorials/8/m-final-result.png" "geo-index" %}}
 
 Now we have a hotel well within the budget, and also close to the Golden Gate Bridge!
 

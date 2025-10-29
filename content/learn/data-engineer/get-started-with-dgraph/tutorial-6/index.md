@@ -25,7 +25,7 @@ The accompanying video of the tutorial will be out shortly, so stay tuned to [ou
 
 Before we dive in, let's do a quick recap of how to model the tweets in Dgraph.
 
-{{% load-img "/images/tutorials/5/a-graph-model.jpg" "tweet model" %}}
+{{% load-img "images/tutorials/5/a-graph-model.jpg" "tweet model" %}}
 
 In the previous tutorial, we took three real tweets as a sample dataset and stored them in Dgraph using the above graph as a model.
 
@@ -135,7 +135,7 @@ _Note: If you're new to Dgraph, and this is the first time you're running a muta
 
 Voilà! Now you have a graph with `tweets`, `users`, and `hashtags`. It is ready for us to explore.
 
-{{% load-img "/images/tutorials/5/x-all-tweets.png" "tweet graph" %}}
+{{% load-img "images/tutorials/5/x-all-tweets.png" "tweet graph" %}}
 
 _Note: If you're curious to know how we modeled the tweets in Dgraph, refer to [the previous tutorial.]({{< relref "tutorial-5/index.md" >}})_
 
@@ -175,7 +175,7 @@ To be able to do a Full-text search, you need to first set a `fulltext` index on
 
 Creating a `fulltext` index on any string predicate is similar to creating any other string indices.
 
-{{% load-img "/images/tutorials/6/a-set-index.png" "full text" %}}
+{{% load-img "images/tutorials/6/a-set-index.png" "full text" %}}
 
 _Note: Refer to the [previous tutorial]({{< relref "tutorial-5/index.md" >}}) if you're not sure about creating an index on a string predicate._
 
@@ -204,7 +204,7 @@ Here is our search string: `graph data and analyze it in graphdb`.
 }
 ```
 
-{{% load-img "/images/tutorials/6/b-full-text-query-1.png" "tweet graph" %}}
+{{% load-img "images/tutorials/6/b-full-text-query-1.png" "tweet graph" %}}
 
 Here's the matched tweet, which made it to the result.
 
@@ -314,7 +314,7 @@ Let's first find all the hashtags in the database using the `has()` function.
 }
 ```
 
-{{% load-img "/images/tutorials/6/has-hashtag.png" "The hashtags" %}}
+{{% load-img "images/tutorials/6/has-hashtag.png" "The hashtags" %}}
 
 _If you're not familiar with using the `has()` function, refer to [the first tutorial]({{< relref "tutorial-1/index.md" >}}) of the series._
 
@@ -341,17 +341,17 @@ Go to the query tab, type in the query, and click Run.
 Oops! We have an error!
 It looks like we forgot to set the `trigram` index on the `hashtag` predicate.
 
-{{% load-img "/images/tutorials/6/trigram-error.png" "The hashtags" %}}
+{{% load-img "images/tutorials/6/trigram-error.png" "The hashtags" %}}
 
 Again, setting a `trigram` index is similar to setting any other string index, let's do that for the `hashtag` predicate.
 
-{{% load-img "/images/tutorials/6/set-trigram.png" "The hashtags" %}}
+{{% load-img "images/tutorials/6/set-trigram.png" "The hashtags" %}}
 
 _Note: Refer to the [previous tutorial]({{< relref "tutorial-5/index.md" >}}) if you're not sure about creating an index on a string predicate._
 
 Now, let's re-run the `regexp` query.
 
-{{% load-img "/images/tutorials/6/regex-query-1.png" "regex-1" %}}
+{{% load-img "images/tutorials/6/regex-query-1.png" "regex-1" %}}
 
 _Note: Refer to [the first tutorial]({{< relref "tutorial-1/index.md" >}}) if you're not familiar with the query structure in general_
 Success!
@@ -362,7 +362,7 @@ That's because `regexp` function is case-sensitive by default.
 
 Add the character `i` at the the end of the second argument of the `regexp` function to make it case insensitive: `regexp(predicate, /regular-expression/i)`
 
-{{% load-img "/images/tutorials/6/regex-query-2.png" "regex-2" %}}
+{{% load-img "images/tutorials/6/regex-query-2.png" "regex-2" %}}
 
 Now we have the four hashtags with substring `graph` in them.
 
@@ -376,7 +376,7 @@ Let's modify the regular expression to match only the `hashtags` which have a pr
 }
 ```
 
-{{% load-img "/images/tutorials/6/regex-query-3.png" "regex-3" %}}
+{{% load-img "images/tutorials/6/regex-query-3.png" "regex-3" %}}
 
 ## Summary
 

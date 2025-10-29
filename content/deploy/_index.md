@@ -8,16 +8,8 @@ aliases = ["/deploy/overview"]
   identifier = "deploy"
 +++
 
-You can deploy and manage Dgraph database in a variety of self-managed deployment scenarios, including:
+You can deploy and manage Dgraph database in a variety of self-managed deployment scenarios.
 
-* Running Dgraph on your on-premises infrastructure (bare-metal physical servers)
-* Running Dgraph on your cloud infrastructure (AWS, GCP and Azure)
-
-This section focuses exclusively on deployment and management for these self-managed
-scenarios. To learn about fully-managed options that let you focus on
-building apps and websites, rather than managing infrastructure, see the 
-[Dgraph cloud services docs](https://dgraph.io/docs/cloud/), or 
-[Try Dgraph Cloud](https://cloud.dgraph.io/).
 
 A Dgraph cluster consists of the following:
 
