@@ -67,6 +67,27 @@ Now you can make changes to the docs and see them being updated instantly, thank
 
 **Note**: While running locally, the version selector does not work because you need to build the documentation and serve it behind a reverse proxy to have multiple versions. Also, formatting of lists is less fussy when running locally; so please precede lists with a blank line in your PR.
 
+### Testing for broken links
+
+We use [htmltest](https://github.com/wjdp/htmltest) to check for broken links in the generated documentation. To test for broken links after building the site:
+
+1. Build the Hugo site:
+   ```bash
+   hugo --destination=public --baseURL=http://example.com
+   ```
+
+2. Run htmltest:
+   ```bash
+   htmltest
+   ```
+
+   Or combine both steps:
+   ```bash
+   hugo --destination=public --baseURL=http://example.com && htmltest  2>&1
+   ```
+
+The htmltest configuration is in `.htmltest.yml` at the root of the repository. It automatically ignores development-only files like `livereload.js` and empty hash links used for JavaScript interactions.
+
 ### Running docs locally with Docker
 
 Make sure you have docker-compose installed.

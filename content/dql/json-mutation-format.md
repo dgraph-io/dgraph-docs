@@ -10,9 +10,49 @@ weight = 2
 Dgraph supports [Mutations]({{< relref "dql-mutation.md" >}}) in JSON or [RDF]({{< relref "dql-rdf.md" >}}) format.
 When using JSON format Dgraph creates nodes and relationships from the JSON structure and assigns UIDs to nodes.
 
+## Quick Start Example
+
+If you followed the [Quick Start guide]({{< relref "../quick-start.md" >}}), you added data to your graph using RDF format. The same data can also be added using JSON format. Here's an example of how to create the movie data from the quick start using JSON:
+
+```dql
+{
+  "set": [
+    {
+      "name": "Star Wars: Episode IV - A New Hope",
+      "release_date": "1977-05-25",
+      "director": {
+        "name": "George Lucas",
+        "dgraph.type": "Person"
+      },
+      "starring": [
+        {
+          "name": "Luke Skywalker"
+        },
+        {
+          "name": "Princess Leia"
+        },
+        {
+          "name": "Han Solo"
+        }
+      ]
+    },
+    {
+      "name": "Star Trek: The Motion Picture",
+      "release_date": "1979-12-07"
+    }
+  ]
+}
+```
+
+The sample JSON data is an array of two movies with some attributes. These are stored as [nodes]({{< relref "../dgraph-glossary.md#node" >}}) in Dgraph.
+
+The "Star Wars" movie has a `director` field which is a JSON object and a `starring` field which is an array of JSON objects. Each object is also stored as a node in Dgraph. The `director` and `starring` are stored as [relationships]({{< relref "../dgraph-glossary.md#relationship" >}}).
+
 ## Specifying node UIDs
 
-For example, if you run this mutation:
+When you create nodes using JSON mutations, Dgraph automatically assigns a [UID]({{< relref "../dgraph-glossary.md#uid" >}}) to each new node. Dgraph also generates an internal identifier during the transaction, which is then converted to the final UID.
+
+For example, this mutation creates a single node:
 
 ```dql
  {
@@ -24,7 +64,8 @@ For example, if you run this mutation:
    ]
  }  
 ```
-You will see that Dgraph responds with
+
+Dgraph responds with:
 {{< highlight json "linenos=false,hl_lines=7 " >}}
 {
   "data": {
