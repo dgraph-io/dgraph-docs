@@ -1,7 +1,7 @@
 +++
 title = "DQL: Tips and Tricks"
 type = "docs"
-weight = 7
+weight = 9
 [menu.main]
   identifier = "tips"
   parent = "dql"
@@ -63,9 +63,9 @@ Use the `has` function among the value variables to search on non-indexed predic
 
 ## Sort edge by nested node values
 
-Dgraph [sorting]({{< relref "query-language/sorting.md" >}}) is based on a single
+Dgraph [sorting]({{< relref "sorting.md" >}}) is based on a single
 level of the subgraph. To sort a level by the values of a deeper level, use
-[query variables]({{< relref "query-language/query-variables.md" >}}) to bring
+[query variables]({{< relref "variables.md#query-variables" >}}) to bring
 nested values up to the level of the edge to be sorted.
 
 Example: Get all actors from a Steven Spielberg movie sorted alphabetically.

@@ -11,7 +11,7 @@ identifier = "update-types"
 
 You modify Dgraph types (node types and predicates types) by 
 - issuing a request to the ``/alter`` endpoint using the [HTTP Client]({{< relref "raw-http#alter-the-dql-schema">}})
-- using an ``alter`` operation of any [DQL client library]({{< relref "dql/clients">}}).
+- using an ``alter`` operation of any [DQL client library]({{< relref "clients">}}).
 - using [Ratel UI]({{< relref "ratel/schema">}})
 - using the Cloud console through the [DQL Schema](https://cloud.dgraph.io/_/schema?tab=dqlschema) tab of the Schema section.
 

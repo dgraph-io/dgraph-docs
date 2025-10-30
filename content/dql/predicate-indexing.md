@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Predicate indexes"
+title = "Indexes"
 type = "docs"
 weight = 4
 [menu.main]

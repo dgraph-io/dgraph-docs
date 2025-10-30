@@ -1,6 +1,6 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Dgraph types schema"
+title = "Schema"
 type = "docs"
 weight = 3
 aliases = ["/dql/type-system","dql/predicate-types"]

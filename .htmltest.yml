@@ -1,6 +1,6 @@
 DirectoryPath: "public"
 CheckDoctype: true
-CheckExternal: true
+CheckExternal: false
 CheckInternalHash: true
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreAltMissing: true

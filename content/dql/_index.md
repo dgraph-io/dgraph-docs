@@ -1,9 +1,9 @@
 +++
-title = "Dgraph Query Language"
+title = "Query Language"
 description = "Dgraph Query Language (DQL) is Dgraph's proprietary language to add, modify, delete and fetch data."
 type = "docs"
 [menu.main]
-  name = "Dgraph Query Language"
+  name = "Query Language"
   identifier = "dql"
   weight = 4
 +++
