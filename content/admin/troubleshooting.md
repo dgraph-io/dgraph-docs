@@ -3,7 +3,7 @@ title = "Troubleshooting"
 weight = 21
 type = "docs"
 [menu.main]
-    parent = "deploy"
+    parent = "admin"
 +++
 
 This page provides tips on how to troubleshoot issues with running Dgraph.

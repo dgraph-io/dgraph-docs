@@ -177,7 +177,7 @@ This JSON file can be loaded into Dgraph using the programmatic clients.
     }
     ```
 {{% notice "note" %}}
-To reuse existing integer IDs from a CSV file as UIDs in Dgraph, use Dgraph Zero's [assign endpoint]({{< relref "deploy/admin/dgraph-zero" >}}) before loading data to allocate a range of UIDs that can be safely assigned.
+To reuse existing integer IDs from a CSV file as UIDs in Dgraph, use Dgraph Zero's [assign endpoint]({{< relref "dgraph-zero" >}}) before loading data to allocate a range of UIDs that can be safely assigned.
 {{% /notice %}}
 
 4. Paste the output in the **Mutate** tab of **Console** in Ratel, and click **Run** to import data.

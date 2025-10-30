@@ -2,11 +2,11 @@
 date = "2023-03-23T22:25:17+11:00"
 title = "Client Libraries"
 description = "Dgraph client libraries in various programming languages."
-weight = 7
 aliases = ["/clients"]
 type = "docs"
 [menu.main]
   identifier = "clients"
+  weight = 5
 +++
 
 Dgraph client libraries allow you to run DQL transactions, queries and mutations in various programming languages.

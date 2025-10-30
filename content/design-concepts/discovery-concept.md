@@ -8,5 +8,5 @@ weight = 30
 +++
 
 ### New Servers and Discovery
-Dgraph clusters will detect new machines allocated to the [cluster]({{< relref "deploy/dgraph-architecture.md" >}}),
+Dgraph clusters will detect new machines allocated to the [cluster]({{< relref "dgraph-architecture.md" >}}),
 establish connections, and transfer data to the new server based on the group the new machine is in.

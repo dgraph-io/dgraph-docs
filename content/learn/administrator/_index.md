@@ -17,7 +17,7 @@ weight = 4
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}})
 
 - **Dgraph Community and Dgraph Enterprise** (self-managed)
-  - Refer to [Self-managed cluster]({{< relref "deploy" >}}) to learn how to deploy and manage Dgraph database in a variety of self-managed deployment scenarios.
-  - [Dgraph Administration]({{< relref "deploy/admin" >}}) describes the admin operations.
+  - Refer to [Installation]({{< relref "installation" >}}) to learn how to deploy and manage Dgraph database in a variety of self-managed deployment scenarios.
+  - [Dgraph Administration]({{< relref "admin" >}}) describes the admin operations.
 
 

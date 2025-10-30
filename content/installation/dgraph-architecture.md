@@ -4,7 +4,7 @@ weight = 1
 type = "docs"
 [menu.main]
   identifier = "dgraph-architecture"
-  parent = "deploy"
+  parent = "installation"
 +++
 
 Dgraph is a distributed graph database built for horizontal scalability, high availability, and high performance.
@@ -153,7 +153,13 @@ Zero continuously monitors disk usage across groups and automatically rebalances
 
 ### Replication and Consistency
 
-- Each Alpha group uses **Raft consensus** for replication
+Dgraph uses **Raft consensus** for replication. Both Zero and Alpha nodes form Raft consensus groups:
+
+- **Raft Groups**: Nodes of the same type (all Zeros or all Alphas in a group) form a Raft group
+- **Leader Election**: Each Raft group elects a single leader among its peers
+- **Followers**: Non-leader nodes in a group are called followers
+- **Automatic Failover**: If the leader becomes unavailable (network partition, machine shutdown), the group automatically elects a new leader to continue operations
+- **Replication**: Each Alpha group uses Raft consensus for replication
 - The `--replicas` flag on Zero controls replication factor per group
 - Writes require majority (quorum) acknowledgment
 - Linearizable reads and writes
