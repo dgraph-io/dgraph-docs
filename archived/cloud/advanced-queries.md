@@ -14,10 +14,10 @@ database operations. Advanced users can use DQL to send queries and mutations
 to Dgraph Cloud's HTTP or gRPC endpoints using the Dgraph client libraries.
 To learn more about the Dgraph client libraries, see the 
 [client library documentation](https://dgraph.io/docs/clients/). To learn more
-about DQL, see [DQL Fundamentals](https://dgraph.io/docs/query-language/graphql-fundamentals/)..
+about DQL, see [DQL Fundamentals]({{< relref "graphql-fundamentals.md">}})..
 
 If you are getting started with Dgraph Cloud, you should probably start out by
-using Dgraph's [GraphQL API](https://dgraph.io/docs/graphql/overview) instead.
+using Dgraph's [GraphQL API]({{< relref "graphql/_index.md">}) instead.
 Dgraph's GraphQL API lets you quickly use Dgraph Cloud before moving on to the
 advanced features available using DQL.
 

@@ -11,7 +11,7 @@ type = "learn"
 
 In the [previous tutorial]({{< relref "tutorial-7/index.md">}}),
 we learned about building a twitter-like user-search feature using
-[Dgraph's fuzzy search]({{< relref "query-language/functions.md#fuzzy-matching">}}).
+[Dgraph's fuzzy search]({{< relref "functions.md#fuzzy-matching">}}).
 
 In this tutorial, we'll build a graph of tourist locations around San Francisco and
 help our Zoologist friend, Mary, and her team in their mission to conserve birds
@@ -114,7 +114,7 @@ via the `has_type` edge.
 _Note: Dgraph allows you to associate one or more types for the nodes
 using its type system feature, for now, we are using nodes without types,
 we'll learn about type system for nodes in a future tutorial. Check
-[this page from the documentation site](https://dgraph.io/docs/query-language/#type-system),
+[this page from the documentation site](https://dgraph.io/docs/#type-system),
 if you want to explore type system feature for nodes._
 
 Here is our sample dataset.
@@ -1540,7 +1540,7 @@ built-in function `near` to find the hotels near the Golden gate bridge.
 
 Here is the syntax of the `near` function: `near(geo-predicate, [long, lat], distance)`.
 
-The [`near` function](https://dgraph.io/docs/query-language/#near) matches and
+The [`near` function](https://dgraph.io/docs/#near) matches and
 returns all the geo-predicates stored in the database which are within `distance meters`
 of geojson coordinate `[long, lat]` provided by the user.
 
@@ -1674,7 +1674,7 @@ our newsletter to get the latest tutorial right into your inbox.
 
 - Go to [Clients]({{< relref "clients" >}}) to see how to communicate
 with Dgraph from your application.
-- A wider range of queries can also be found in the [Query Language]({{< relref "query-language/_index.md" >}}) reference.
+- A wider range of queries can also be found in the [Query Language]({{< relref "_index.md" >}}) reference.
 - See [Deploy]({{< relref "deploy/_index.md" >}}) if you wish to run Dgraph
   in a cluster.
 

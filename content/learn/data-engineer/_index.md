@@ -17,7 +17,7 @@ weight = 3
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}}).
 - Follow the [Dgraph Query Language(DQL)  Quickstart]({{< relref "dql/dql-get-started" >}}) to execute some queries.
 - Follow the [Get Started with Dgraph]({{< relref "learn/data-engineer/get-started-with-dgraph" >}}) tutorial.
-- Use [DQL Syntax]({{< relref "dql/dql-syntax">}}) and [Query Language]({{< relref "query-language/_index.md" >}}) as references.
+- Use [DQL Syntax]({{< relref "dql-query.md">}}) and [Query Language]({{< relref "_index.md" >}}) as references.
 - Go to [Clients]({{< relref "clients" >}}) to see how to communicate
 with Dgraph from your application.
 

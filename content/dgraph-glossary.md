@@ -3,7 +3,7 @@ title = "Dgraph Glossary"
 description = "Dgraph terms"
 type = "docs"
 [menu.main]
-    name = "Dgraph Glossary"
+    name = "Glossary"
     identifier = "glossary"
     weight = 16
 +++
