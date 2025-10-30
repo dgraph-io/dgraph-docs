@@ -142,7 +142,7 @@ To fully secure alter operations in the cluster, the authentication token must b
 As an `Administrator` you might want to export data from Dgraph to:
 
 * backup your data
-* move the data from Dgraph Cloud instance to another Dgraph instance, or Dgraph Cloud instance
+* move the data to another Dgraph instance
 * share your data
 
 For more information about exporting your database, see [Export data]({{< relref "export-data.md" >}})
@@ -268,4 +268,4 @@ as backup and restore are cluster-wide operations and a single namespace cannot 
 
 ## Post Installation
 
-Now that Dgraph is up and running, to understand how to add and query data to Dgraph, follow [Query Language Spec](/query-language). 
+Now that Dgraph is up and running, to understand how to add and query data to Dgraph, follow [Query Language Spec]({{< relref "dql-query">}}). 

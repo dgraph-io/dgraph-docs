@@ -523,7 +523,7 @@ mutation {
 }
 ```
 
-In case you have [reverse edges]({{< relref "dql-schema.md#reverse-edges" >}}), they have to be given the permission to the group as well
+In case you have [reverse edges]({{< relref "dql-schema.md#reverse-predicates" >}}), they have to be given the permission to the group as well
 
 ```graphql
 mutation {

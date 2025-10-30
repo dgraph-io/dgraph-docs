@@ -329,7 +329,7 @@ upgrade the configuration in multiple steps.
 
 [helm-upgrade]: https://helm.sh/docs/helm/helm_upgrade/
 
-To upgrade to an [HA cluster setup]({{< relref "#ha-cluster-setup-using-kubernetes" >}}): 
+To upgrade to an HA cluster setup: 
 
 1. Ensure that the shard replication setting is more than one and `zero.shardReplicaCount`. For example, set the shard replica flag on the Zero node group to 3,`zero.shardReplicaCount=3`.
 2. Run the Helm upgrade command to restart the Zero node group:

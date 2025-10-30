@@ -15,7 +15,7 @@ Binary backups are full backups of Dgraph that are backed up directly to cloud
 storage such as Amazon S3 or any Minio storage backend. Backups can also be
 saved to an on-premise network file system shared by all Alpha servers. These
 backups can be used to restore a new Dgraph cluster to the previous state from
-the backup. Unlike [exports]({{< relref "dgraph-administration.md#exporting-database" >}}),
+the backup. Unlike [exports]({{< relref "dgraph-administration.md#export-database" >}}),
 binary backups are Dgraph-specific and can be used to restore a cluster quickly.
 
 

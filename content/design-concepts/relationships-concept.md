@@ -22,7 +22,7 @@ The first represents relations among entities (nodes in graph terminology) and t
 Often, the optional `Label` is omitted, and therefore the N-Quad data is also referred to as "triples." When it is included, it represents which `Tenant` or `Namespace` the data lives in within Dgraph.
 
 {{% notice "tip" %}}Dgraph can automatically generate a reverse relation. If the user wants to run
-queries in that direction, they would need to define the [reverse relationship]({{< relref "dql-schema.md#reverse-edges" >}})
+queries in that direction, they would need to define the [reverse relationship]({{< relref "dql-schema.md#reverse-predicates" >}})
 {{% /notice %}}
 
 For `Relationships`, the subject and object are represented as 64-bit numeric UIDs and the relationship name itself links them: <subjectUID> <relationshipName> <objectUID>.

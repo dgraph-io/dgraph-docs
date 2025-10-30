@@ -83,7 +83,7 @@ and now you figured that it would be better to call `phone` as `tel`. You need m
 
 You have the same two choices as before:
 1. Migrate all the data for the field `phone` to use the new name `tel`. OR,
-2. Just use the [`@dgraph(pred: ...)`](/graphql/dgraph) directive to maintain backward compatibility
+2. Just use the [`@dgraph(pred: ...)`]({{< relref "directive-dgraph">}}) directive to maintain backward compatibility
    with the existing data.
    
 Here's an example if you want to go with option #2:

@@ -62,7 +62,7 @@ When you deploy a [GraphQL API schema]({{< relref "graphql">}}), Dgraph generate
 Refer to [GraphQL and DQL schemas]({{< relref "graphql-dql-schema">}}) in the [GraphQL - DQL interoperability]({{< relref "graphql-dql">}}) section for use cases using both approaches.
 {{% /notice %}}
 
-For example, you can run the following mutation (using the [RDF](/dql/dql-syntax/dql-rdf/) notation):
+For example, you can run the following mutation (using the [RDF]({{< relref "dql-rdf">}}) notation):
 ```graphql
 {
   set {
@@ -227,7 +227,7 @@ email: string @unique @index(exact)  .
 ### Upsert directive
 
 
-To use [upsert operations](/howto/upserts/) on a predicate, specify the `@upsert` directive in the schema.
+To use [upsert operations]({{< relref "upserts" >}}) on a predicate, specify the `@upsert` directive in the schema.
 
 When committing transactions involving predicates with the `@upsert` directive, Dgraph checks index keys for conflicts, helping to enforce uniqueness constraints when running concurrent upserts.
 
@@ -251,7 +251,7 @@ email: string @index(exact) @noconflict .
 ### Predicate types from RDF Types
 
 As well as implying a schema type for a first mutation, an RDF type can override a schema type for storage.
-Dgraph supports a number of [RDF](/dql/dql-syntax/dql-rdf/) types.
+Dgraph supports a number of [RDF]({{< relref "dql-rdf">}}) types.
 
 If a predicate has a schema type and a mutation has an RDF type with a different underlying Dgraph type, the convertibility to schema type is checked, and an error is thrown if they are incompatible, but the value is stored in the RDF type's corresponding Dgraph type.  Query results are always returned in schema type.
 
@@ -421,7 +421,7 @@ Node types are optional, but there are two use cases where actually knowing the 
 
 The Dgraph node types are used in those 2 use cases: when executing the `delete all predicates` mutation or the `expand all` query, Dgraph will check if the node has a ``dgraph.type`` predicate. If so, the engine is using the declared type to find the list of predicates and apply the delete or the expand on all of them.
 
-When nodes have a type (i.e have a `dgraph.type` predicate), then you can use the function [type()](/dql/dql-syntax/dql-query/#node-criteria-used-by-root-function-or-by-filter) in queries.
+When nodes have a type (i.e have a `dgraph.type` predicate), then you can use the function [type()]({{< relref "functions.md#type" >}}) in queries.
 
 {{% notice "warning" %}}
 `delete { <uid> * * . }` will only delete the predicates declared in the type. You may have added other predicates by running DQL mutation on this node: the node may still exist after the operation if it holds predicates not declared in the node type. `<>`
