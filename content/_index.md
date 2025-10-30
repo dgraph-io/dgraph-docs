@@ -10,14 +10,25 @@ aliases = ["/contribute"]
   weight = 1
 +++
 
+
+
+
+
+
+
 <div class="container">
   <div class="landing">
     <div class="hero">
       <p>
          Dgraph is the only open, complete graph database used at terabyte-scale to power real-time use cases. It is open-source, scalable, distributed, highly available and lightning fast.
       </p>
-      <p>Choose your path: <br><strong>Dgraph DB</strong> for direct database operations and administration,<br> or <strong>GraphQL API</strong> for application development with auto-generated APIs.</p>
-      <!--p><b>Tip</b>: New to Dgraph? Take the <a href="https://dgraph.io/tour">Dgraph Tour</a> to run live queries in your browser. Then, try Dgraph as a <a href="https://cloud.dgraph.io">cloud service</a>, or <a href='/deploy/installation/'>download</a> Dgraph to deploy it yourself.</p-->
+      <p>
+      Dgraph is designed for real-time workloads, horizontal scalability, and data
+      flexibility. Implemented as a distributed system, Dgraph processes queries in
+      parallel to deliver the fastest results, even for the most complex workloads.
+      </p>
+      <h3>Choose your path</h3>
+      <p>Use Dgraph as a <strong>property graph database</strong> for direct database operations and administration,<br> or leverage the <strong>GraphQL API</strong> for rapid application development with schema-driven APIs.</p>
     </div>
     <div class="item">
       <a href="{{< relref "dgraph-overview.md">}}">
