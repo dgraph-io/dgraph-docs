@@ -1,7 +1,8 @@
 +++
 title = "GraphQL data migration"
 weight = 4
-[menu.main]
+type = "graphql"
+[menu.graphql]
   name = "GraphQL data migration"
   identifier = "graphql-dql-data-migration"
   parent = "graphql-dql"

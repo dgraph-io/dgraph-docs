@@ -16,7 +16,6 @@ In this tutorial, you will start by looking at the app you are going to build
 and how such an app works in Dgraph Cloud. Then, the tutorial moves on to
 schema design with GraphQL, implementing a UI.
 
-You can complete this tutorial using [Dgraph Cloud](https://cloud.dgraph.io/).
 
 ### Learning Goals
 

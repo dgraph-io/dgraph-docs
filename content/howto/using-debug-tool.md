@@ -1,7 +1,8 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Using the Debug Tool"
-weight = 2
+type = "docs"
+weight = 4
 [menu.main]
     parent = "howto"
 +++

@@ -1,7 +1,8 @@
 +++
 title = "GraphQL and DQL schemas"
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
   name = "GraphQL and DQL schemas"
   identifier = "graphql-dql-schema"
   parent = "graphql-dql"
@@ -13,7 +14,7 @@ The first step in mastering DQL in the context of GraphQL API is probably to und
 GraphQL is a strongly typed language. Contrary to REST which is organized in terms of endpoints, GraphQL APIs are organized in terms of types and fields. The type system is used to define the schema, which is a contract between client and server.
 GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.
 
-In the [GraphQL Quick start]({{<relref "quick-start" >}}), we have used a schema to generate a GraphQL API:
+In the [GraphQL Quick start]({{<relref "/graphql/quick-start" >}}), we have used a schema to generate a GraphQL API:
  ```graphql
 type Product {
     productID: ID!
@@ -40,7 +41,7 @@ The API and the engine logic are generated from the schema defining the types of
 
 ### In DQL, the schema described the predicates
 
-Dgraph maintains a list of all predicates names with their type and indexes in the [Dgraph types schema]({{< relref "dql-schema">}}).
+Dgraph maintains a list of all predicates names with their type and indexes in the [Dgraph types schema](/dql/dql-schema/).
 
 
 ### Schema mapping
@@ -73,7 +74,7 @@ type Person {
 
 Once again, the DQL type is just a declaration of the list of predicates that one can expect to be present in a node of having ``dgraph.type`` equal ``Person``.
 
-The default mapping can be customized by using the [@dgraph directive]({{< relref "directive-dgraph" >}}).
+The default mapping can be customized by using the [@dgraph directive](/graphql/schema/directives/directive-dgraph/).
 
 
 #### GraphQL ID type and Dgraph `uid`
@@ -158,10 +159,10 @@ type Property {
 The fact that the GraphQL API backend is a graph in Dgraph, implies that you can use Dgraph DQL on the data that is also served by the GraphQL API operations.
 
 In particular, you can 
-- use Dgraph DQL mutations but also Dgraph's [import tools]({{< relref "importdata">}}) to populate the graph after you have deployed a GraphQL Schema. See [GraphQL data loading]({{<relref "graphql-data-loading.md">}})
+- use Dgraph DQL mutations but also Dgraph's [import tools](/howto/importdata/) to populate the graph after you have deployed a GraphQL Schema. See [GraphQL data loading]({{<relref "graphql-data-loading.md">}})
 - use DQL to query the graph in the context of authorization rules and custom resolvers.
 - add knowledge to your graph such as meta-data, score, annotations, ...,  but also relationships or relationships attributes (facets) that could be the result of similarity computation, threat detection a.s.o. The added data could be hidden from your GraphQL API clients but be available to logic written with DQL clients.
-- break things using DQL: DQL is powerful and is bypassing constraints expressed in the GraphQL schema. You can for example delete a node predicate that is mandatory in the GraphQL API! Hopefully there are ways to secure who can read/write/delete predicates. ( see the [ACL]({{<relref "access-control-lists">}})) section.
+- break things using DQL: DQL is powerful and is bypassing constraints expressed in the GraphQL schema. You can for example delete a node predicate that is mandatory in the GraphQL API! Hopefully there are ways to secure who can read/write/delete predicates. ( see the [ACL](/enterprise-features/access-control-lists/)) section.
 - fix things using DQL: this is especially useful when doing GraphQL Schema updates which require some [data migrations]({{<relref "graphql-data-migration.md">}}). 
 
 

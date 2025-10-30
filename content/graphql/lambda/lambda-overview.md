@@ -2,7 +2,8 @@
 title = "Dgraph Lambda Overview"
 description = "Lambda provides a way to write custom logic in JavaScript, integrate it with your GraphQL schema, and execute it using the GraphQL API in a few easy steps."
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "lambda-resolver"
     identifier = "lambda-resolvers-overview"
     name = "Overview"

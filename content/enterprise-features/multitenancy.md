@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Multi-Tenancy"
+type = "docs"
 weight = 9
 [menu.main]
     parent = "enterprise-features"
@@ -217,7 +218,7 @@ mutation {
 
 The `drop all` operations can be triggered only by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
 They're executed at Cluster level and delete data across namespaces.
-All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database]({{< relref "raw-http.md#alter-the-database" >}}).
+All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database]({{< relref "raw-http.md#alter-the-dql-schema" >}}).
 
 
 {{% notice "note:" %}}

@@ -41,10 +41,3 @@ used by your app. Any data model that tracks lots of different relationships (or
 Whether this is the first time you are learning about graphs or 
 looking to deepen your understanding of graphs with some concrete examples, this
 tutorial will help you along your journey.
-
-If you are already familiar with graphs, you can jump right into our coding
-example for [React](/courses/messageboardapp/react/overview/introduction/).
-
-If you are a SQL user and you'd like to learn how common SQL syntax maps to
-similar GraphQL syntax so you can use your SQL knowledge to jump-start your
-GraphQL learning journey, see [Introduction to Dgraph for SQL Users](/courses/datamodel/sql-to-dgraph/overview/introduction).

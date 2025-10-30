@@ -2,7 +2,8 @@
 title = "POST Request"
 description = "Get the structure for GraphQL requests and responses, how to enable compression for them, and configuration options for extensions."
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-endpoint"
     identifier = "graphql-request"
     name = "POST Request"
@@ -115,11 +116,11 @@ If a request only has a single query operation, then you can use the short-hand 
 }
 ```
 
-This simplifies queries when a query doesn't require an operation name or [variables](/graphql/api/variables).
+This simplifies queries when a query doesn't require an operation name or variables.
 
 ## Multiple Operations
 
-If a request has two or more operations, then each operation must have a name. A request can only execute one operation, so you must also include the operation name to execute in the request (see the "operations" field for [requests](/graphql/api/requests)). Every operation name in a request must be unique.
+If a request has two or more operations, then each operation must have a name. A request can only execute one operation, so you must also include the operation name to execute in the request. Every operation name in a request must be unique.
 
 For example, in the following request has the operation names "getTaskAndUser" and "completedTasks".
 

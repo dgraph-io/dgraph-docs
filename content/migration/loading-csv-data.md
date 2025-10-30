@@ -2,6 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "CSV data"
 weight = 6
+type = "docs"
 [menu.main]
     parent = "migration"
 +++
@@ -53,9 +54,7 @@ There are many tools available to convert CSV to JSON. You can import large data
     This JSON file follows
     the [JSON Mutation Format]({{< relref "json-mutation-format.md" >}}), it can be loaded into Dgraph using [Dgraph Live Loader]({{< relref "live-loader.md" >}}) , [Dgraph Bulk Loader]({{< relref "bulk-loader.md" >}}) or the programmatic clients.
 
-4. To load the data to Ratel and HTTP clients. The JSON data has to be stored within the `"set"`
-[key]({{< relref "json-mutation-format.md#json-syntax-using-raw-http-or-ratel-ui"
->}}). You can use `jq` to transform the JSON into the correct format:
+4. To load the data to Ratel and HTTP clients. The JSON data has to be stored within the `"set"` key. You can use `jq` to transform the JSON into the correct format:
 
     ```sh
     $ cat names.json | jq '{ set: . }'
@@ -178,7 +177,7 @@ This JSON file can be loaded into Dgraph using the programmatic clients.
     }
     ```
 {{% notice "note" %}}
-To reuse existing integer IDs from a CSV file as UIDs in Dgraph, use Dgraph Zero's [assign endpoint]({{< relref "deploy/dgraph-zero" >}}) before loading data to allocate a range of UIDs that can be safely assigned.
+To reuse existing integer IDs from a CSV file as UIDs in Dgraph, use Dgraph Zero's [assign endpoint]({{< relref "dgraph-zero" >}}) before loading data to allocate a range of UIDs that can be safely assigned.
 {{% /notice %}}
 
 4. Paste the output in the **Mutate** tab of **Console** in Ratel, and click **Run** to import data.

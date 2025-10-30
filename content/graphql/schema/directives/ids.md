@@ -2,7 +2,8 @@
 title = "@id"
 description = "Dgraph database provides two types of identifiers: the ID scalar type and the @id directive."
 weight = 4
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "directives"
     identifier = "id-directive"
 +++

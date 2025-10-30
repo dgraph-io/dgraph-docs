@@ -2,7 +2,8 @@
 title = "Apollo Federation"
 description = "Dgraph now supports Apollo federation so that you can create a gateway GraphQL service that includes the Dgraph GraphQL API and other GraphQL services."
 weight = 11
-[menu.main]
+type = "graphql"
+[menu.graphql]
   name = "Apollo Federation"
   identifier = "federation"
   parent = "graphql"

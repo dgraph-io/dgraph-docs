@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Query Dgraph types"
+type = "docs"
 weight = 14
 [menu.main]
     parent = "howto"
@@ -9,7 +10,7 @@ weight = 14
 
 You can retrieve the Dgraph schema containing the list of predicates types and node types by:
 - issuing a query on /query endpoint using the [HTTP Client]({{< relref "raw-http#query-current-dql-schema">}})
-- issuing a query using any [DQL client library]({{< relref "dql/clients">}})
+- issuing a query using any [DQL client library]({{< relref "clients">}})
 - using [Ratel UI]({{< relref "ratel/schema">}})
 - using the Cloud console through the [DQL Schema](https://cloud.dgraph.io/_/schema?tab=dqlschema) tab of the Schema section.
 

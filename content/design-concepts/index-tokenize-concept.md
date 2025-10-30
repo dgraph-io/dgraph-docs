@@ -1,6 +1,7 @@
 +++
-date = "2017-03-27:12:00:00Z"
+date = "2017-03-27T12:00:00Z"
 title = "Index and Tokenizer"
+type = "docs"
 weight = 90
 [menu.main]
     parent = "design-concepts"

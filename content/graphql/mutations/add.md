@@ -2,7 +2,8 @@
 title = "Add Mutations"
 description = "Add mutations allows you to add new objects of a particular type. Dgraph automatically generates input and return types in the schema for the add mutation"
 weight = 2
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-mutations"
     name = "Add"
 +++

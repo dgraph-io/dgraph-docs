@@ -1,6 +1,7 @@
 +++
-date = "2017-03-27:12:00:00Z"
+date = "2017-03-27T12:00:00Z"
 title = "Transaction and Mutation"
+type = "docs"
 weight = 180
 [menu.main]
     parent = "design-concepts"

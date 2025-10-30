@@ -13,7 +13,7 @@ In the [previous tutorial]({{< relref "tutorial-1/index.md" >}}) of getting star
 we learned some of the basics of Dgraph. 
 Including how to run the database, add new nodes and predicates, and query them back.
 
-{{% load-img "/images/tutorials/2/graph-1.jpg" "Graph" %}}
+{{% load-img "images/tutorials/2/graph-1.jpg" "Graph" %}}
 
 In this tutorial, we'll build the above Graph and learn more about operations using the UID (Universal Identifier) of the nodes.
 Specifically, we'll learn about:
@@ -53,7 +53,7 @@ Go to Ratel's mutate tab, paste the mutation below in the text area, and click R
 }
 ```
 
-{{% load-img "/images/tutorials/2/a-add-data.gif" "mutation-1" %}}
+{{% load-img "images/tutorials/2/a-add-data.gif" "mutation-1" %}}
 
 ## Query using UIDs
 
@@ -80,7 +80,7 @@ Go to the query tab, type in the query below, and click Run.
 
 Now, from the result, copy the UID of Michael's node. 
 
-{{% load-img "/images/tutorials/2/b-get-uid-1.png" "get-uid" %}}
+{{% load-img "images/tutorials/2/b-get-uid-1.png" "get-uid" %}}
 
 In the query below, replace the placeholder `MICHAELS_UID` with the UID you just copied, and run the query.
 
@@ -94,7 +94,7 @@ In the query below, replace the placeholder `MICHAELS_UID` with the UID you just
 }
 ```
 
-{{% load-img "/images/tutorials/2/c-query-uid.png" "get_node_from_uid" %}}
+{{% load-img "images/tutorials/2/c-query-uid.png" "get_node_from_uid" %}}
 
 *Note: `MICHAELS_UID` appears as `0x8` in the images. The UID you get on your machine might have a different value.*
 
@@ -136,7 +136,7 @@ You can see that Michael's age is updated to 41.
 }
 ```
 
-{{% load-img "/images/tutorials/2/d-update-check.png" "update check" %}}
+{{% load-img "images/tutorials/2/d-update-check.png" "update check" %}}
 
 Similarly, you can also add new predicates to an existing node.
 Since the predicate `country` doesn't exist for the node for `Michael`, it creates a new one.
@@ -160,7 +160,7 @@ Let's say, `Leyla` starts to follow `Michael`.
 
 We know that this relationship between them has to represented by creating the `follows` edge between them.
 
-{{% load-img "/images/tutorials/2/graph-2.jpg" "Graph" %}}
+{{% load-img "images/tutorials/2/graph-2.jpg" "Graph" %}}
 
 First, let's copy the UIDs of nodes for `Leyla` and `Michael` from Ratel.
 
@@ -205,7 +205,7 @@ Let's run a traversal query and then understand it in detail.
 
 Here's the result. 
 
-{{% load-img "/images/tutorials/2/e-traversal.png" "traversal-result" %}}
+{{% load-img "images/tutorials/2/e-traversal.png" "traversal-result" %}}
 
 
 The query has three parts:
@@ -232,7 +232,7 @@ Since Michael follows only one person, the traversal returns just one node.
 These are `level-2` nodes. The root nodes constitute the nodes for `level-1`.
 Again, we need to specify which predicates you want to get back from `level-2` nodes.
 
-{{% load-img "/images/tutorials/2/j-explain.JPG" "get_node_from_uid" %}}
+{{% load-img "images/tutorials/2/j-explain.JPG" "get_node_from_uid" %}}
 
 You can extend the query to make use of `level-2` nodes and traverse the Graph further and deeper.
 Let's explore that in the next section.
@@ -264,7 +264,7 @@ That's when we say that the query is deep!
 }
 ```
 
-{{% load-img "/images/tutorials/2/f-level-3-traverse.png" "level-3-query" %}}
+{{% load-img "images/tutorials/2/f-level-3-traverse.png" "level-3-query" %}}
 
 Here is one more example from the extension of the last query.
 
@@ -289,7 +289,7 @@ Here is one more example from the extension of the last query.
 }
 ```
 
-{{% load-img "/images/tutorials/2/g-level-4-traversal.png" "level 3" %}}
+{{% load-img "images/tutorials/2/g-level-4-traversal.png" "level 3" %}}
 
 This query is really long! The query is four levels deep.
 In other words, the depth of the query is four.
@@ -324,7 +324,7 @@ The depth parameter specifies the maximum depth the traversal query should consi
 
 Let's run the recursive traversal query after replacing the placeholder with the UID of node for Michael.
 
-{{% load-img "/images/tutorials/2/h-recursive-traversal.png" "recurse" %}}
+{{% load-img "images/tutorials/2/h-recursive-traversal.png" "recurse" %}}
 
 
 [Check out the docs](https://dgraph.io/docs/query-language/#recurse-query) for detailed instructions on using the `recurse` directive.
@@ -363,7 +363,7 @@ Let's delete the `age` predicate of the node for `Michael`.
 }
 ```
 
-{{% load-img "/images/tutorials/2/i-delete.png" "recurse" %}}
+{{% load-img "images/tutorials/2/i-delete.png" "recurse" %}}
 
 ## Wrapping up
 

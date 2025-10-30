@@ -1,0 +1,18 @@
+DirectoryPath: "public"
+CheckDoctype: true
+CheckExternal: false
+CheckInternalHash: true
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreAltMissing: true
+IgnoreEmptyHref: true
+IgnoreInternalEmptyHash: true
+IgnoreURLs:
+  - "https://fonts.googleapis.com"
+  - "https://cdnjs.cloudflare.com"
+  - "https://www.npmjs.com/package/@grpc/grpc-js"
+  - "https://www.npmjs.com/package/apollo-client"
+  - "http://localhost:*"
+  - "/livereload.js"
+  - ".*livereload.*"
+  - "^#$"
+ExternalTimeout: 15

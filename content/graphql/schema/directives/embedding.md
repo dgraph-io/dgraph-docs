@@ -1,7 +1,8 @@
 +++
 title = "@embedding"
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "directives"
 +++
 

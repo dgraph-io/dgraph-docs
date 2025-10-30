@@ -2,7 +2,8 @@
 title = "Schema Migration"
 description = "This document describes all the things that you need to take care while doing a schema update or migration."
 weight = 5
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "gqlschema"
     identifier = "schema-migration"
 +++
@@ -41,7 +42,7 @@ situation where you need migration.
 
 This can be handled in a couple of ways:
 1. Migrate all the data for type `User` to use the new name `AppUser`. OR,
-2. Just use the [`@dgraph(type: ...)`](/graphql/dgraph) directive to maintain backward compatibility 
+2. Just use the [`@dgraph(type: ...)`]({{< relref "directive-dgraph.md">}}) directive to maintain backward compatibility 
    with the existing data.
 
 Depending on your use-case, you might find option 1 or 2 better for you. For example, if you 
@@ -82,7 +83,7 @@ and now you figured that it would be better to call `phone` as `tel`. You need m
 
 You have the same two choices as before:
 1. Migrate all the data for the field `phone` to use the new name `tel`. OR,
-2. Just use the [`@dgraph(pred: ...)`](/graphql/dgraph) directive to maintain backward compatibility
+2. Just use the [`@dgraph(pred: ...)`]({{< relref "directive-dgraph">}}) directive to maintain backward compatibility
    with the existing data.
    
 Here's an example if you want to go with option #2:

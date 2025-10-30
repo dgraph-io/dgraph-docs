@@ -2,7 +2,8 @@
 title = "Custom Mutations"
 description = "With custom mutations, you can use custom logic to define values for one or more fields in a mutation."
 weight = 4
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "custom"
 +++
 
@@ -46,6 +47,6 @@ type Mutation {
 Find out more about how to turn off generated mutations and protecting mutations with authorization rules at:
 
 * [Remote Types - Turning off Generated Mutations with `@remote` Directive]({{<relref "directive/#remote-types">}})
-* [Securing Mutations with the `@auth` Directive]({{<relref "graphql/security/mutations.md">}})
+* [Securing Mutations with the `@auth` Directive](/graphql/security/mutations)
 
 ---

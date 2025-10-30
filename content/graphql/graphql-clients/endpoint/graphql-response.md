@@ -2,7 +2,8 @@
 title = "HTTP Response"
 description = "Get the structure for GraphQL requests and responses, how to enable compression for them, and configuration options for extensions."
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-endpoint"
     identifier = "graphql-response"
     name = "HTTP Response"

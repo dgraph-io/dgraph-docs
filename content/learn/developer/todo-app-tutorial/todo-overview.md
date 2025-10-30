@@ -19,6 +19,6 @@ This is a simple tutorial that will take you through making a basic to-do list a
 - [Add Auth Rules]({{< relref "todo-auth-rules">}})
 - [Use Auth0's JWT]({{< relref "todo-auth0-jwt">}})
 - [Use Firebase's JWT]({{< relref "todo-firebase-jwt">}})
-- [Deploy on Dgraph Cloud]({{< relref "todo-deploy">}})
+- Deploy
 
 ---

@@ -2,7 +2,8 @@
 title = "Lambda Webhooks"
 description = "Ready to use lambdas for webhooks? This documentation takes you through the schemas, resolvers, and examples."
 weight = 5
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "lambda-resolver"
 +++
 

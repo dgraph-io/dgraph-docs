@@ -2,7 +2,8 @@
 title = "Deep Mutations"
 description = "You can perform deep mutations at multiple levels. Deep mutations do not alter linked objects, but they can add deeply-nested new objects or link to existing objects."
 weight = 5
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-mutations"
     name = "Deep"
 +++

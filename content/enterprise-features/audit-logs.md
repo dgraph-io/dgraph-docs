@@ -3,6 +3,7 @@ date = "2017-03-20T22:25:17+11:00"
 title = "Audit Logging"
 description = "With an Enterprise license, Dgraph can generate audit logs that let you track and audit all requests (queries and mutations)."
 weight = 2
+type = "docs"
 [menu.main]
     parent = "enterprise-features"
 +++

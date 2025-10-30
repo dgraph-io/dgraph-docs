@@ -1,13 +1,14 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Predicate indexes"
+title = "Indexes"
+type = "docs"
 weight = 4
 [menu.main]
     identifier = "dql-predicate-indexing"
     parent = "dql"
 +++
 
-Filtering on a predicate by applying a [function]({{< relref "query-language/functions.md" >}}) requires an index.
+Filtering on a predicate by applying a [function]({{< relref "functions.md" >}}) requires an index.
 
 Indices are defined in the [Dgraph types schema]({{<relref "dql/dql-schema.md" >}}) using `@index` directive.
 
@@ -54,7 +55,6 @@ The indices available for `float32vector` are as follows.
 | `similar_to`                       | `hnsw` | HNSW index supports parameters `metric` and `exponent`. |
 
 
-#
 
 `hnsw` (**Hierarchical Navigable Small World**) index supports the following parameters
 - metric : indicate the metric to use to compute vector similarity. One of `cosine`, `euclidean`, and `dotproduct`. Default is `euclidean`.
@@ -131,7 +131,7 @@ score: [int] .
 * A set operation adds to the list of values. The order of the stored values is non-deterministic.
 * A delete operation deletes the value from the list.
 * Querying for these predicates would return the list in an array.
-* Indexes can be applied on predicates which have a list type and you can use [Functions]({{<relref "query-language/functions.md">}}) on them.
+* Indexes can be applied on predicates which have a list type and you can use [Functions]({{< relref "functions.md" >}}) on them.
 * Sorting is not allowed using these predicates.
 * These lists are like an unordered set. For example: `["e1", "e1", "e2"]` may get stored as `["e2", "e1"]`, i.e., duplicate values will not be stored and order may not be preserved.
 

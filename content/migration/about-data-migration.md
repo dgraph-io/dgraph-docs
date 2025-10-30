@@ -1,5 +1,6 @@
 +++
 title = "Data migration"
+type = "docs"
 keywords = "Data, migration, csv, sql,"
 [menu.main]
     parent = "migration"

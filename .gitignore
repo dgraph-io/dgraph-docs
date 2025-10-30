@@ -3,3 +3,5 @@
 .DS_Store
 *.lock
 static/images/.DS_Store
+tmp/.htmltest/htmltest.log
+tmp/.htmltest/refcache.json

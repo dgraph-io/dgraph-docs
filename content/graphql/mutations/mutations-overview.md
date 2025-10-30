@@ -2,7 +2,8 @@
 title = "Mutations Overview"
 description = "Mutations can be used to insert, update, or delete data. Dgraph automatically generates GraphQL mutation for each type that you define in your schema."
 weight = 1
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-mutations"
     identifier = "mutations-overview"
     name = "Overview"

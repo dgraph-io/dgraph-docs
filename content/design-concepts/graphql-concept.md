@@ -1,7 +1,8 @@
 
 +++
-date = "2017-03-27:12:00:00Z"
+date = "2017-03-27T12:00:00Z"
 title = "GraphQL"
+type = "docs"
 weight = 70
 [menu.main]
     parent = "design-concepts"

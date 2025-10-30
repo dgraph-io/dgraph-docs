@@ -2,7 +2,8 @@
 title = "Custom Queries"
 description = "A custom query takes any number of scalar arguments and constructs the path, parameters, and body of the request that's sent to the remote endpoint."
 weight = 3
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "custom"
 +++
 

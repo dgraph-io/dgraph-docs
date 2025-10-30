@@ -1,5 +1,6 @@
 +++
 title = "Create a completion script"
+type = "docs"
 keywords = "command line,bash, zsh"
 [menu.main]
     parent = "commandline"
@@ -11,7 +12,7 @@ The completion script is code that uses the builtin bash command complete to def
 
 ## Before you begin
 
-*  [Install Dgraph]({{< relref "download" >}}#build-and-install).
+*  [Install Dgraph]({{< relref "download" >}}).
 *  Determine the shell you are running:
    ```bash
    echo $0

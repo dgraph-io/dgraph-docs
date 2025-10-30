@@ -1,5 +1,6 @@
 +++
 title = "Todo App"
+type = "docs"
 description = "A sample app for Dgraph database and Dgraph Cloud that lets you manage the tasks on your personal to-do list."
 pageType = "sample-apps"
 image = "/images/sample-apps/todos.svg"

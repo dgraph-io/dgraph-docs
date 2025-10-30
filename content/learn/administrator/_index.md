@@ -15,11 +15,9 @@ weight = 4
 
 - See [Dgraph Overview]({{< relref "dgraph-overview.md" >}}) for an introduction to Dgraph database and a presentation of Dgraph cluster architecture.
 - Get familiar with some terms in the [Glossary]({{< relref "dgraph-glossary.md" >}})
-- **Dgraph Cloud**
-  - Learn from [Dgraph Cloud]({{< relref "cloud" >}}) section of our documentation.
-  - Refer to [Administering Tasks]({{< relref "cloud/admin" >}}).
+
 - **Dgraph Community and Dgraph Enterprise** (self-managed)
-  - Refer to [Self-managed cluster]({{< relref "deploy" >}}) to learn how to deploy and manage Dgraph database in a variety of self-managed deployment scenarios.
-  - [Dgraph Administration]({{< relref "deploy/admin" >}}) describes the admin operations.
+  - Refer to [Installation]({{< relref "installation" >}}) to learn how to deploy and manage Dgraph database in a variety of self-managed deployment scenarios.
+  - [Dgraph Administration]({{< relref "admin" >}}) describes the admin operations.
 
 

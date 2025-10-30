@@ -1,0 +1,12 @@
+<div class="post__comments">
+
+    {{if .Site.Params.discourse}}
+
+<footer class="clearfix">
+  <a target="_blank" href="https://discuss.dgraph.io"><img class="logo" src="https://discuss-dgraph-io.s3.dualstack.us-west-1.amazonaws.com/original/2X/4/4167dff901e0bed240f529edd1d9f318462968f8.png"></a>
+  {{ partial "ask-question.html" . }}
+  {{ partial "suggest-edit.html" . }}
+</footer>
+    {{end}}
+
+</div>

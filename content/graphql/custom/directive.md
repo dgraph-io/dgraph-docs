@@ -2,7 +2,8 @@
 title = "The @custom Directive"
 description = "The @custom directive is used to define custom queries, mutations, and fields. The result types can be local or remote."
 weight = 2
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "custom"
 +++
 

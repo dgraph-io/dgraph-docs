@@ -1,6 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Minimal Network Calls"
+type = "docs"
 weight = 100
 [menu.main]
     parent = "design-concepts"

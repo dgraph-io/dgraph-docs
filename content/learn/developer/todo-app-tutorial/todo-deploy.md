@@ -1,5 +1,6 @@
 +++
 title = "Deploying on Dgraph Cloud"
+draft =  true
 description = "In just two steps on Dgraph Cloud (deployment & schema), you get a GraphQL API that you can easily use in any application."
 weight = 7
 type = "learn"

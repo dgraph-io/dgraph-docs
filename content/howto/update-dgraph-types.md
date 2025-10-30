@@ -1,16 +1,19 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Update Dgraph types"
+type = "docs"
 weight = 15
+identifier = "update-types"
 [menu.main]
     parent = "howto"
+    
 +++
 
 You modify Dgraph types (node types and predicates types) by 
 - issuing a request to the ``/alter`` endpoint using the [HTTP Client]({{< relref "raw-http#alter-the-dql-schema">}})
-- using an ``alter`` operation of any [DQL client library]({{< relref "dql/clients">}}).
+- using an ``alter`` operation of any [DQL client library]({{< relref "clients">}}).
 - using [Ratel UI]({{< relref "ratel/schema">}})
-- using the Cloud console through the [DQL Schema](https://cloud.dgraph.io/_/schema?tab=dqlschema) tab of the Schema section.
+
 
 
 ### Notes about predicate type change
@@ -58,7 +61,7 @@ notifying that a given predicate is not indexed or doesn't have reverse edges.
 
 In a multi-node cluster, it is possible that the alphas will finish computing indexes at different times. Alphas may return different schema in such a case until all the indexes are done computing on all the Alphas.
 
-You can check the background indexing status using the [Health]({{< relref "dgraph-alpha#querying-health">}}) query on the `/admin` endpoint.
+You can check the background indexing status using the [Health]({{< relref "dgraph-alpha#health-check">}}) query on the `/admin` endpoint.
 
 
 An alter operation will fail if one is already in progress with an error

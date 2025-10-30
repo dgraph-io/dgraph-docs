@@ -1,8 +1,0 @@
-/badger/*              /docs/badger/:splat 301!
-/docs/badger/*         https://badger-docs.netlify.app/:splat 200!
-
-/docs/dgraphcloud/*    /docs/cloud/:splat 301!
-/docs/v21.03/*         https://release-v21-03--dgraph-docs-repo.netlify.app/docs/v21.03/:splat 200!
-/docs/v22.0/*          https://release-v22-0--dgraph-docs-repo.netlify.app/docs/v22.0/:splat 200!
-/docs/v23.0/*          https://release-v23-0--dgraph-docs-repo.netlify.app/docs/v23.0/:splat 200!
-/docs/v23.1/*          https://release-v23-1--dgraph-docs-repo.netlify.app/docs/v23.1/:splat 200!

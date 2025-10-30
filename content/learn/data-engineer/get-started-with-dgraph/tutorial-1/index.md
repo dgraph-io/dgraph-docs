@@ -66,11 +66,11 @@ docker run --rm -d -p 8000:8000 - dgraph/ratel:latest
 
 Just visit [http://localhost:8000](http://localhost:8000) from your browser, and you will be able to access it.
 
-{{% load-img "/images/tutorials/1/gs-2.png" "ratel-1" %}}
+{{% load-img "images/tutorials/1/gs-2.png" "ratel-1" %}}
 
 We'll be using the Console tab of Ratel.
 
-{{% load-img "/images/tutorials/1/gs-3.png" "ratel-2" %}}
+{{% load-img "images/tutorials/1/gs-3.png" "ratel-2" %}}
 
 ### Mutations using Ratel
 
@@ -103,7 +103,7 @@ So Dgraph also creates a second entity that is the object of this predicate. Thi
 
 Let's execute this mutation. Click Run!
 
-{{% load-img "/images/tutorials/1/mutate-example.gif" "Query-gif" %}}
+{{% load-img "images/tutorials/1/mutate-example.gif" "Query-gif" %}}
 
 You can see in the response that two UIDs (Universal IDentifiers) have been created.
 The two values in the `"uids"` field of the response correspond
@@ -127,7 +127,7 @@ The expression `has(name)` returns all the entities with a predicate `name` asso
 Go to the `Query` tab this time and type in the query above.
 Then, click `Run` on the top right of the screen.
 
-{{% load-img "/images/tutorials/1/query-1.png" "query-1" %}}
+{{% load-img "images/tutorials/1/query-1.png" "query-1" %}}
 
 Ratel renders a graph visualization of the result.
 
@@ -136,11 +136,11 @@ matching the ones, we saw in the mutation's response.
 
 You can also view the JSON results in the JSON tab on the right.
 
-{{% load-img "/images/tutorials/1/query-2.png" "query-2" %}}
+{{% load-img "images/tutorials/1/query-2.png" "query-2" %}}
 
 #### Understanding the query
 
-{{% load-img "/images/tutorials/1/explain-query-2.JPG" "Illustration with explanation" %}}
+{{% load-img "images/tutorials/1/explain-query-2.JPG" "Illustration with explanation" %}}
 
 The first part of the query is the user-defined function name.
 In our query, we have named it as `people`. However, you could use any other name.

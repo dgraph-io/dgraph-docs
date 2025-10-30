@@ -2,6 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "MySQL data"
 weight = 6
+type = "docs"
 [menu.main]
     parent = "migration"
 +++

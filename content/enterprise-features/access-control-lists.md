@@ -2,6 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Access Control Lists"
 weight = 1
+type = "docs"
 [menu.main]
     parent = "enterprise-features"
 +++
@@ -44,7 +45,7 @@ is only allowed to access the data permitted by the ACL rules.
    ```
 
 {{% notice "tip" %}}
-In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security "whitelist=<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=</path/to/secret>"` and `DGRAPH_ALPHA_SECURITY="whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "deploy/config.md" >}}) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security "whitelist=<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=</path/to/secret>"` and `DGRAPH_ALPHA_SECURITY="whitelist=<permitted-ip-addresses>"`. See [Config]({{< relref "cli/config.md" >}}) for more information in general about configuring Dgraph.
 {{% /notice %}}
 
 ### Example using Dgraph CLI
@@ -522,7 +523,7 @@ mutation {
 }
 ```
 
-In case you have [reverse edges]({{< relref "dql-schema.md#reverse-edges" >}}), they have to be given the permission to the group as well
+In case you have [reverse edges]({{< relref "dql-schema.md#reverse-predicates" >}}), they have to be given the permission to the group as well
 
 ```graphql
 mutation {

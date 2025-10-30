@@ -3,6 +3,8 @@
 To read the official Dgraph documentation that is published from this repository,
 please see https://dgraph.io/docs/.
 
+
+
 ## Contribution guidelines
 
 As a contributor to Dgraph documentation, we ask that you do the following:
@@ -48,11 +50,12 @@ We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to loc
 
 1. Download and install  hugo version v0.91 from [here](https://github.com/gohugoio/hugo/releases/tag/v0.91.0).
 
-2. Run the command below to get the theme.
-   ```bash
-   pushd themes && git clone https://github.com/dgraph-io/hugo-docs && popd
-   ```
-3. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the documentation site running on your local machine.
+On mac you may have to remove the quarantine attribute to be able to execute hugo
+'''
+sudo xattr -d com.apple.quarantine path/to/hugo
+'''
+
+2. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the documentation site running on your local machine.
 
 (Optional) To run queries _within_ the documentation using a different Dgraph instance, set the `DGRAPH_ENDPOINT` environment variable before starting the local web server:
 
@@ -63,6 +66,27 @@ DGRAPH_ENDPOINT="http://localhost:8080/query?latency=true" ./scripts/local.sh
 Now you can make changes to the docs and see them being updated instantly, thanks to Hugo.
 
 **Note**: While running locally, the version selector does not work because you need to build the documentation and serve it behind a reverse proxy to have multiple versions. Also, formatting of lists is less fussy when running locally; so please precede lists with a blank line in your PR.
+
+### Testing for broken links
+
+We use [htmltest](https://github.com/wjdp/htmltest) to check for broken links in the generated documentation. To test for broken links after building the site:
+
+1. Build the Hugo site:
+   ```bash
+   hugo --destination=public --baseURL=http://example.com
+   ```
+
+2. Run htmltest:
+   ```bash
+   htmltest
+   ```
+
+   Or combine both steps:
+   ```bash
+   hugo --destination=public --baseURL=http://example.com && htmltest  2>&1
+   ```
+
+The htmltest configuration is in `.htmltest.yml` at the root of the repository. It automatically ignores development-only files like `livereload.js` and empty hash links used for JavaScript interactions.
 
 ### Running docs locally with Docker
 
@@ -105,5 +129,42 @@ Pass custom Go-GRPC example to the runnable by passing a `customExampleGoGRPC` t
 
 **Note:** Runnable doesn't support passing a multiline string as an argument to a shortcode. Therefore, you have to create the whole custom example in a single line string by replacing newlines with `\n`.
 
-## History
-add Hypermode banner by updating the hugo-docs repository with topbat template.
+## Hints
+## Adding New Tabs and Sidebar Menus
+
+To add a new tab and configure its sidebar menu:
+
+### 1. Add Tab to Navigation
+Edit `themes/hugo-docs/layouts/partials/topbar.html` and add your tab to the `$tabs` slice:
+
+```go
+{{ $tabs := slice 
+  (dict "type" "docs" "url" "/dgraph-overview/" "label" "Docs")
+  (dict "type" "graphql" "url" "/graphql/" "label" "GraphQL") 
+  (dict "type" "learn" "url" "/learn/" "label" "Tutorials")
+  (dict "type" "ratel" "url" "/ratel/overview/" "label" "Ratel UI")
+  (dict "type" "yourtype" "url" "/your-section/" "label" "Your Tab")
+}}
+```
+
+### 2. Set Page Type and Menu
+For each page in your section, add to the frontmatter:
+
+```yaml
++++
+title = "Your Page Title"
+type = "yourtype"  # Must match the type in the tab definition
+[menu.yourtype]   # Must match the type
+  parent = "your-section"
+  weight = 1
++++
+```
+
+### 3. Update Sidebar
+Edit `themes/hugo-docs/layouts/partials/sidebar.html` and add:
+
+```go
+{{ if eq $menuType "yourtype" }}
+  {{ $menu = .Site.Menus.yourtype }}
+{{ end }}
+```

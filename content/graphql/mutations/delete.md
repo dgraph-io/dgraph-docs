@@ -1,7 +1,8 @@
 +++
 title = "Delete Mutations"
 weight = 4
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-mutations"
     name = "Delete"
     identifier = "graphql-delete"

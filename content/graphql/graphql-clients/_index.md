@@ -1,7 +1,8 @@
 +++
 title = "GraphQL Client"
 weight = 2
-[menu.main]
+type = "graphql"
+[menu.graphql]
   identifier = "graphql-clients"
   parent = "graphql"
 

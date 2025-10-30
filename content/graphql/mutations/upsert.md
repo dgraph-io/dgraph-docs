@@ -2,7 +2,8 @@
 title = "Upsert Mutations"
 description = "Upsert mutations allow you to perform `add` or `update` operations based on whether a particular ID exists in the database"
 weight = 2
-[menu.main]
+type = "graphql"
+[menu.graphql]
     parent = "graphql-mutations"
     name = "Upsert"
 +++

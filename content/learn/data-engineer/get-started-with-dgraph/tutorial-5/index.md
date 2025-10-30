@@ -98,7 +98,7 @@ Therefore, we represent a mention as an edge between a tweet and the users menti
 
 We have three types of nodes: `User`, `Tweet,` and `Hashtag`.
 
-{{% load-img "/images/tutorials/5/a-nodes.jpg" "graph nodes" %}}
+{{% load-img "images/tutorials/5/a-nodes.jpg" "graph nodes" %}}
 
 Let's look at how these nodes might be related to each other and model their relationship as an edge between them.
 
@@ -119,7 +119,7 @@ Let's name the edge which represents this relationship as `mentioned`.
 A `mentioned` edge points from a `Tweet` node to a `User` node.
 These users are the ones who are mentioned in the tweet.
 
-{{% load-img "/images/tutorials/5/a-tweet-user.jpg" "graph nodes" %}}
+{{% load-img "images/tutorials/5/a-tweet-user.jpg" "graph nodes" %}}
 
 **The tweet and the hashtag nodes**
 
@@ -130,7 +130,7 @@ Let's name the edge, which represents this relationship as `tagged_with`.
 A `tagged_with` edge points from a `Tweet` node to a `Hashtag` node.
 These hashtag nodes correspond to the hashtags in the tweets.
 
-{{% load-img "/images/tutorials/5/a-tagged.jpg" "graph nodes" %}}
+{{% load-img "images/tutorials/5/a-tagged.jpg" "graph nodes" %}}
 
 **The Author and hashtag nodes**
 
@@ -139,11 +139,11 @@ Hence, we don't need a direct edge between them.
 
 Our graph model of a tweet is ready! Here's it is.
 
-{{% load-img "/images/tutorials/5/a-graph-model.jpg" "tweet model" %}}
+{{% load-img "images/tutorials/5/a-graph-model.jpg" "tweet model" %}}
 
 Here is the graph of our sample tweet.
 
-{{% load-img "/images/tutorials/5/c-tweet-model.jpg" "tweet model" %}}
+{{% load-img "images/tutorials/5/c-tweet-model.jpg" "tweet model" %}}
 
 Let's add a couple of tweets to the list.
 
@@ -267,7 +267,7 @@ _Note: If you're new to Dgraph, and yet to figure out how to run the database an
 
 Here is the graph we built.
 
-{{% load-img "/images/tutorials/5/x-all-tweets.png" "tweet graph" %}}
+{{% load-img "images/tutorials/5/x-all-tweets.png" "tweet graph" %}}
 
 Our graph has:
 
@@ -285,7 +285,7 @@ Let's start our tweet exploration by querying for the twitter users in the datab
 }
 ```
 
-{{% load-img "/images/tutorials/5/j-users.png" "tweet model" %}}
+{{% load-img "images/tutorials/5/j-users.png" "tweet model" %}}
 
 _Note: If the query syntax above looks not so familiar to you, check out the [first tutorial]({{< relref "tutorial-1/index.md" >}})._
 
@@ -307,7 +307,7 @@ Now, let's find their tweets and hashtags too.
 }
 ```
 
-{{% load-img "/images/tutorials/5/y-author-tweet.png" "tweet model" %}}
+{{% load-img "images/tutorials/5/y-author-tweet.png" "tweet model" %}}
 
 _Note: If the traversal query syntax in the above query is not familiar to you, [check out the third tutorial]({{< relref "tutorial-3/index.md" >}}) of the series._
 
@@ -346,7 +346,7 @@ For a use case like this one, the `hash` index is recommended.
 
 Let's first add the `hash` index to the `user_handle` predicate.
 
-{{% load-img "/images/tutorials/5/k-hash.png" "tweet model" %}}
+{{% load-img "images/tutorials/5/k-hash.png" "tweet model" %}}
 
 Now, let's use the `eq` comparator to find all the tweets of `hackintoshrao`.
 
@@ -363,7 +363,7 @@ Go to the query tab, type in the query, and click Run.
 }
 ```
 
-{{% load-img "/images/tutorials/5/z-exact.png" "tweet model" %}}
+{{% load-img "images/tutorials/5/z-exact.png" "tweet model" %}}
 
 _Note: Refer to [the third tutorial]({{< relref "tutorial-3/index.md" >}}), if you want to know about comparator functions like `eq` in detail._
 
@@ -386,7 +386,7 @@ Let's extend the last query also to fetch the hashtags and the mentions.
 }
 ```
 
-{{% load-img "/images/tutorials/5/l-hash-query.png" "tweet model" %}}
+{{% load-img "images/tutorials/5/l-hash-query.png" "tweet model" %}}
 
 _Note: If the traversal query syntax in the above query is not familiar to you, [check out the third tutorial]({{< relref "tutorial-3/index.md" >}}) of the series._
 
@@ -425,7 +425,7 @@ Let's find the twitter accounts which come after `dgraphlabs` in alphabetically 
 }
 ```
 
-{{% load-img "/images/tutorials/5/n-exact-error.png" "tweet model" %}}
+{{% load-img "images/tutorials/5/n-exact-error.png" "tweet model" %}}
 
 Oops, we have an error!
 
@@ -441,7 +441,7 @@ The `hash` index would be a better option, as it is, in general, much more space
 
 Let's see the `exact` index in action.
 
-{{% load-img "/images/tutorials/5/o-exact-conflict.png" "set exact" %}}
+{{% load-img "images/tutorials/5/o-exact-conflict.png" "set exact" %}}
 
 We again have an error!
 
@@ -452,7 +452,7 @@ The `user_handle` predicate already has the `hash` index, so trying to set the `
 
 Let's uncheck the `hash` index for the `user_handle` predicate, select the `exact` index, and click update.
 
-{{% load-img "/images/tutorials/5/p-set-exact.png" "set exact" %}}
+{{% load-img "images/tutorials/5/p-set-exact.png" "set exact" %}}
 
 Though Dgraph allows you to change the index type of a predicate, do it only if it's necessary.
 When the indices are changed, the data needs to be re-indexed, and this takes some computing, so it could take a bit of time.
@@ -460,7 +460,7 @@ While the re-indexing operation is running, all mutations will be put on hold.
 
 Now, let's re-run the query.
 
-{{% load-img "/images/tutorials/5/q-exact-gt.png" "tweet model" %}}
+{{% load-img "images/tutorials/5/q-exact-gt.png" "tweet model" %}}
 
 The result contains three twitter handles: `francesc`, `gopherpalooza`, and `hackintoshrao`.
 
@@ -484,7 +484,7 @@ To be able to search tweets with specific keywords or terms, we need to first se
 
 Adding the `term` index is similar to adding any other string index.
 
-{{% load-img "/images/tutorials/5/r-term-set.png" "term set" %}}
+{{% load-img "images/tutorials/5/r-term-set.png" "term set" %}}
 
 Dgraph provides two built-in functions specifically to search for terms: `allofterms` and `anyofterms`.
 
@@ -513,7 +513,7 @@ Here's the matched tweet from the query response:
 }
 ```
 
-{{% load-img "/images/tutorials/5/s-go-graph.png" "go graph set" %}}
+{{% load-img "images/tutorials/5/s-go-graph.png" "go graph set" %}}
 
 _Note: Check out [the first tutorial]({{< relref "tutorial-1/index.md" >}}) if the query syntax, in general, is not familiar to you_
 
@@ -539,7 +539,7 @@ Now, let's find tweets that have either of the terms `Go` or `GraphQL` in them.
 }
 ```
 
-{{% load-img "/images/tutorials/5/t-go-graphql-all.png" "Go Graphql" %}}
+{{% load-img "images/tutorials/5/t-go-graphql-all.png" "Go Graphql" %}}
 
 Oh wow, we have all the three tweets in the result.
 This means, all of the three tweets have either of the terms `Go` or `GraphQL`.
@@ -555,7 +555,7 @@ We can do it by using the `allofterms` function.
 }
 ```
 
-{{% load-img "/images/tutorials/5/u-allofterms.png" "Go Graphql" %}}
+{{% load-img "images/tutorials/5/u-allofterms.png" "Go Graphql" %}}
 
 We have an empty result.
 None of the tweets have both the terms `Go` and `GraphQL` in them.
@@ -564,7 +564,7 @@ Besides `Go` and `Graph`, I'm also a big fan of `GraphQL` and `GraphDB`.
 
 Let's find out tweets that contain both the keywords `GraphQL` and `GraphDB` in them.
 
-{{% load-img "/images/tutorials/5/v-graphdb-graphql.png" "Graphdb-GraphQL" %}}
+{{% load-img "images/tutorials/5/v-graphdb-graphql.png" "Graphdb-GraphQL" %}}
 
 We have two tweets in a result which has both the terms `GraphQL` and `GraphDB`.
 
