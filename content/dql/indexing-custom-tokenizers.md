@@ -1,10 +1,10 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Indexing with Custom Tokenizers"
+title = "Custom Tokenizers"
 type = "docs"
-weight = 27
+weight = 5
 [menu.main]
-    parent = "query-language"
+    parent = "dql"
 +++
 
 Dgraph comes with a large toolkit of builtin indexes, but sometimes for niche

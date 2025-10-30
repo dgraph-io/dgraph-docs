@@ -186,7 +186,7 @@ you  might want to use `var` blocks or `has` filters, as described below.
 ### Cascade with `var` blocks
 
 The performance impact of using `var` blocks is that it reduces the graph that is touched to generate the final query results.
-For example, many of the previous examples could be replaced entirely using [`var` blocks]({{< relref "multiple-query-blocks.md#var-blocks" >}}) instead of utilizing `@cascade`.
+For example, many of the previous examples could be replaced entirely using [`var` blocks]({{< relref "dql-query.md#var-blocks" >}}) instead of utilizing `@cascade`.
 
 The following query provides an alternative way to structure the query shown above,
 _"Find the Indiana Jones movie that was written by the same person who wrote a

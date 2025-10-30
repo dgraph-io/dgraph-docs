@@ -2,6 +2,7 @@
 date = "2023-02-23T22:25:17+11:00"
 title = "JSON Data Format"
 type = "docs"
+weight = 2
 [menu.main]
   parent = "dql"
   weight = 1

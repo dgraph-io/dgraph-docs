@@ -67,7 +67,7 @@ A query block
 - may have a combination of filters (to apply to the root nodes)
 - must provide the list of attributes and relationships to fetch for each node matching the root nodes.
 
-Refer to [pagination]({{< relref "pagination.md" >}}), [ordering]({{< relref "sorting.md" >}}), [connecting filters]({{< relref "connecting-filters.md" >}}) for more information.
+Refer to [pagination]({{< relref "pagination.md" >}}), [ordering]({{< relref "sorting.md" >}}), [connecting filters]({{< relref "filter.md#connecting-filters" >}}) for more information.
 
 For each relationships to fetch, the query is using a nested block.
 
@@ -78,8 +78,76 @@ A nested block
 - provides the list of attributes and relationships to fetch for the related nodes.
 
 A nested block may contain another nested block, and such at any level.
- 
- ### Escape characters in predicate names
+
+### Multiple query blocks
+Inside a single query, multiple query blocks are allowed, and each block can 
+have a name. Multiple query blocks are executed in parallel, and they don't
+need to be related in any way.
+
+Query Example: _"All of Angelina Jolie's films, with genres, and Peter Jackson's films since 2008"_
+
+{{< runnable >}}
+{
+ AngelinaInfo(func:allofterms(name@en, "angelina jolie")) {
+  name@en
+   actor.film {
+    performance.film {
+      genre {
+        name@en
+      }
+    }
+   }
+  }
+
+ DirectorInfo(func: eq(name@en, "Peter Jackson")) {
+    name@en
+    director.film @filter(ge(initial_release_date, "2008"))  {
+        Release_date: initial_release_date
+        Name: name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+
+If queries contain some overlap in answers, the result sets are still independent.
+
+Query Example: _"The movies Mackenzie Crook has acted in and the movies Jack Davenport has acted in"_
+
+The results sets overlap because both have acted in the _Pirates of the Caribbean_
+movies, but the results are independent and both contain the full answers sets.
+
+{{< runnable >}}
+{
+  Mackenzie(func:allofterms(name@en, "Mackenzie Crook")) {
+    name@en
+    actor.film {
+      performance.film {
+        uid
+        name@en
+      }
+      performance.character {
+        name@en
+      }
+    }
+  }
+
+  Jack(func:allofterms(name@en, "Jack Davenport")) {
+    name@en
+    actor.film {
+      performance.film {
+        uid
+        name@en
+      }
+      performance.character {
+        name@en
+      }
+    }
+  }
+}
+{{< /runnable >}}
+
+### Escape characters in predicate names
  If your predicate has special characters, wrap it with angular brackets `< >` in the query. 
  
  E.g.
@@ -126,17 +194,95 @@ Dgraph offers functions for
 
   Variable blocks (`var` blocks) start with the keyword `var` instead of a block name.
 
-  var blocks are not reflected in the query result. They are used to compute [query-variables]({{< relref "query-variables.md" >}}) which are lists of node UIDs, or [value-variables]({{< relref "value-variables.md" >}}) which are maps from node UIDs to the corresponding scalar values.
+  var blocks are not reflected in the query result. They are used to compute [query-variables]({{< relref "variables.md#query-variables" >}}) which are lists of node UIDs, or [value-variables]({{< relref "variables.md#value-variables" >}}) which are maps from node UIDs to the corresponding scalar values.
 
   Note that query-variables and value-variables can also be computed in query blocks. In that case, the query block is used to fetch and return data, and to define some variables which must be used in other blocks of the same query.
 
   Variables may be used as functions parameters in filters or root criteria in other blocks.
 
+  Query Example: _"Angelina Jolie's movies ordered by genre"_
+
+{{< runnable >}}
+{
+  var(func:allofterms(name@en, "angelina jolie")) {
+    name@en
+    actor.film {
+      A AS performance.film {
+        B AS genre
+      }
+    }
+  }
+
+  films(func: uid(B), orderasc: name@en) {
+    name@en
+    ~genre @filter(uid(A)) {
+      name@en
+    }
+  }
+}
+{{< /runnable >}}
+
+## Multiple `var` blocks
+
+You can also use multiple `var` blocks within a single query operation. You can
+use variables from one `var` block in any of the subsequent blocks, but not
+within the same block.
+
+Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman sorted by name"_
+
+{{< runnable >}}
+{
+  var(func:allofterms(name@en, "angelina jolie")) {
+    name@en
+    actor.film {
+      A AS performance.film
+    }
+  }
+  var(func:allofterms(name@en, "morgan freeman")) {
+    name@en
+    actor.film {
+      B as performance.film @filter(uid(A))
+    }
+  }
+  
+  films(func: uid(B), orderasc: name@en) {
+    name@en
+  }
+}
+{{< /runnable >}}
+
+
+### Combining multiple `var` blocks
+
+You could get the same query results by logically combining both both `var` blocks
+in the films block, as follows:
+```
+{
+  var(func:allofterms(name@en, "angelina jolie")) {
+    name@en
+    actor.film {
+      A AS performance.film
+    }
+  }
+  var(func:allofterms(name@en, "morgan freeman")) {
+    name@en
+    actor.film {
+      B as performance.film
+    }
+  }
+  films(func: uid(A,B), orderasc: name@en) @filter(uid(A) AND uid(B)) {
+    name@en
+  }
+}
+```
+The root `uid` function unions the `uid`s from `var` `A` and `B`, so you need a
+filter to intersect the `uid`s from `var` `A` and `B`.
+
 ### Summarizing functions
 
 When dealing with array attributes or with relationships to many node, the query may use summary functions [count]({{< relref "count.md" >}}) , [min]({{< relref "aggregation.md#min" >}}), [max]({{< relref "aggregation.md#max" >}}), [avg]({{< relref "aggregation.md#sum-and-avg" >}}) or [sum]({{< relref "aggregation.md#sum-and-avg" >}}).
 
-The query may also contain [mathematical functions]({{< relref "math-on-value-variables.md" >}}) on value variables.
+The query may also contain [mathematical functions]({{< relref "variables.md#math-on-value-variables" >}}) on value variables.
 
 Summary functions can be used in conjunction with [@grouby]({{< relref "groupby.md" >}}) directive to create aggregated value variables.
 

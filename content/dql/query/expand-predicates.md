@@ -67,7 +67,7 @@ veterinarian
 
 {{% notice "note" %}}
 For `string` predicates, `expand` only returns values not tagged with a language
-(see [language preference]({{< relref "graphql-fundamentals.md#language-support" >}})).  So it's often
+(see [language preference]({{< relref "language-support.md" >}})).  So it's often
 required to add `name@fr` or `name@.` as well to an expand query.
 {{% /notice  %}}
 

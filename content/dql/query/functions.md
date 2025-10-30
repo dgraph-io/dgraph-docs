@@ -2,20 +2,17 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Functions"
 type = "docs"
-weight = 2
+weight = 3
 [menu.main]
     parent = "query-language"
 +++
 
-Functions allow filtering based on properties of nodes or [variables]({{<relref "value-variables.md">}}).  Functions can be applied in the query root or in filters.
+Functions allow filtering based on properties of nodes or [variables]({{<relref "variables.md#value-variables">}}).  Functions can be applied in the query root or in filters.
 
-{{% notice "note" %}}Support for filters on non-indexed predicates was added with Dgraph `v1.2.0`.
-{{% /notice %}}
 
 Comparison functions (`eq`, `ge`, `gt`, `le`, `lt`) in the query root (aka `func:`) can only
-be applied on [indexed predicates]({{< relref "dql-schema.md#indexing" >}}). Since v1.2, comparison functions
-can now be used on [@filter]({{<relref "graphql-fundamentals.md#applying-filters" >}}) directives even on predicates
-that have not been indexed.
+be applied on [indexed predicates]({{< relref "dql-schema.md#indexing" >}}). 
+Comparison functions can be used on [@filter]({{<relref "filter.md" >}}) directives even on predicates that have not been indexed.
 Filtering on non-indexed predicates can be slow for large datasets, as they require
 iterating over all of the possible values at the level where the filter is being used.
 

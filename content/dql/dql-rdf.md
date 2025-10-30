@@ -1,6 +1,7 @@
 +++
 title = "RDF Data Format"
 type = "docs"
+weight = 3
 [menu.main]
   name = "RDF"
   identifier = "dql-rdf"

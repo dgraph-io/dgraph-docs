@@ -289,7 +289,7 @@ Charlie by their `rating` which is a facet.
 
 ## Assigning Facet values to a variable
 
-Facets on UID edges can be stored in [value variables]({{< relref "value-variables.md" >}}).  The variable is a map from the edge target to the facet value.
+Facets on UID edges can be stored in [value variables]({{< relref "variables.md#value-variables" >}}).  The variable is a map from the edge target to the facet value.
 
 Alice's friends reported by variables for `close` and `relative`.
 {{< runnable >}}
@@ -313,7 +313,7 @@ Alice's friends reported by variables for `close` and `relative`.
 
 ## Facets and Variable Propagation
 
-Facet values of `int` and `float` can be assigned to variables and thus the [values propagate]({{< relref "value-variables.md#variable-propagation" >}}).
+Facet values of `int` and `float` can be assigned to variables and thus the [values propagate]({{< relref "variables.md#variable-propagation" >}}).
 
 
 Alice, Bob and Charlie each rated every movie.  A value variable on facet `rating` maps movies to ratings.  A query that reaches a movie through multiple paths sums the ratings on each path.  The following sums Alice, Bob and Charlie's ratings for the three movies.

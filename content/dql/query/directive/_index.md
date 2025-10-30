@@ -12,12 +12,15 @@ Directives in Dgraph Query Language (DQL) are special annotations that modify ho
 
 Directives provide powerful control over:
 
+- **Filtering**: Apply conditions to filter nodes in query results
 - **Response structure**: Format and organize query results
 - **Graph traversal**: Control how the graph is explored
 - **Pattern matching**: Filter results based on complete query structure
 - **Aggregation**: Group and aggregate data
 
 ## Available Directives
+
+- **[@filter]({{< relref "filter.md" >}})**: Applies additional filtering conditions to nodes in query blocks using functions and boolean operators.
 
 - **[@normalize]({{< relref "normalize-directive.md" >}})**: Flattens the response structure by removing nesting and returning only aliased predicates.
 

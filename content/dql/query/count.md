@@ -40,7 +40,7 @@ Query Example: Count of directors who have directed more than five films.  When 
 {{< /runnable >}}
 
 
-Count can be assigned to a [value variable]({{< relref "value-variables.md">}}).
+Count can be assigned to a [value variable]({{< relref "variables.md#value-variables">}}).
 
 Query Example: The actors of Ang Lee's "Eat Drink Man Woman" ordered by the number of movies acted in.
 
