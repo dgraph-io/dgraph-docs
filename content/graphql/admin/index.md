@@ -39,7 +39,7 @@ At `/admin` you'll find an admin API for administering your GraphQL instance.  T
 
 
 * The `health` query lets you know if everything is connected and if there's a schema currently being served at `/graphql`.
-* The `state`  query returns the current state of the cluster and group membership information. For more information about `state` see [here]({{< relref "deploy/admin/dgraph-zero.md#more-about-the-state-endpoint" >}}).
+* The `state`  query returns the current state of the cluster and group membership information. For more information about `state` see [here]({{< relref "dgraph-zero.md#more-about-the-state-endpoint" >}}).
 * The `config` query returns the configuration options of the cluster set at the time of starting it.
 * The `getGQLSchema` query gets the current GraphQL schema served at `/graphql`, or returns null if there's no such schema.
 * The `updateGQLSchema` mutation allows you to change the schema currently served at `/graphql`.

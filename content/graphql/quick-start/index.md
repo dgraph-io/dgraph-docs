@@ -18,7 +18,7 @@ Dgraph simplifies this workflow by providing a schema-first approach. By deployi
 
 ## Step 1: Run Dgraph
 
-The easiest way to get Dgraph up and running is to install a [Learning Environment]({{<relref "/deploy/installation/single-host-setup.md" >}}).   
+The easiest way to get Dgraph up and running is to install a [Learning Environment]({{<relref "single-host-setup.md" >}}).   
 
 
 ## Step 2: Deploy a GraphQL Schema

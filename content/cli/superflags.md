@@ -144,7 +144,7 @@ The `--telemetry` superflag configures telemetry settings:
 
 ## TLS Superflag
 
-The `--tls` superflag configures [TLS]({{< relref "deploy/security/tls-configuration.md" >}}) settings:
+The `--tls` superflag configures [TLS]({{< relref "tls-configuration.md" >}}) settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|
@@ -160,7 +160,7 @@ The `--tls` superflag configures [TLS]({{< relref "deploy/security/tls-configura
 
 ## Trace Superflag
 
-The `--trace` superflag configures [tracing]({{< relref "deploy/admin/tracing.md" >}}) settings:
+The `--trace` superflag configures [tracing]({{< relref "tracing.md" >}}) settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|

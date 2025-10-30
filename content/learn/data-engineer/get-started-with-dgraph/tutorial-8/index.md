@@ -1675,8 +1675,7 @@ our newsletter to get the latest tutorial right into your inbox.
 - Go to [Clients]({{< relref "clients" >}}) to see how to communicate
 with Dgraph from your application.
 - A wider range of queries can also be found in the [Query Language]({{< relref "_index.md" >}}) reference.
-- See [Deploy]({{< relref "deploy/_index.md" >}}) if you wish to run Dgraph
-  in a cluster.
+
 
 ## Need Help
 

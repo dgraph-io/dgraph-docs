@@ -4,24 +4,23 @@ weight = 3
 type = "docs"
 [menu.main]
   identifier = "deployment-patterns"
-  parent = "deploy"
+  parent = "installation"
 +++
 
 This guide covers different Dgraph deployment patterns, from simple development setups to production-grade highly available clusters.
 
 ## Pattern Selection Guide
 
-| Pattern | Use Case | Nodes | HA | Sharding | Data Loss Risk |
-|---------|----------|-------|----|---------|----|
-| Standalone | Local dev, learning | 1 Alpha | ❌ | ❌ | High |
-| Single Group Basic | Dev/Test environments | 1 Zero, 1 Alpha | ❌ | ❌ | High |
-| Single Group HA | Small production, <1TB | 3 Zeros, 3 Alphas | ✅ | ❌ | Low |
-| Multi-Group Basic | Large datasets, no HA | 1 Zero, 3+ Alphas | ❌ | ✅ | Medium |
-| Multi-Group HA | Large production, >1TB | 3 Zeros, 6+ Alphas | ✅ | ✅ | Low |
+| Pattern | Use Case | Nodes | HA | Sharding |
+|---------|----------|-------|----|---------|
+| Basic | Dev/Test environments, non critical production | 1 Zero, 1 Alpha | ❌ | ❌ |
+| HA | Production, <1TB | 3 Zeros, 3 Alphas | ✅ | ❌ |
+| Distributed | Dev/Test environments for large dataset| 1 Zero, 2+ Alphas | ❌ | ✅  |
+| Distributed HA | Large production, >10TB | 3 Zeros, 6+ Alphas | ✅ | ✅ |
 
 ---
 
-## 1. Standalone (Learning Environment)
+## Learning Environment
 
 **Best for:** First-time users, tutorials, local experimentation
 
@@ -47,12 +46,19 @@ dgraph zero --my=localhost:5080
 dgraph alpha --my=localhost:7080 --zero=localhost:5080
 ```
 
+**Key Flags:**
+- `--my`: Address and port that other nodes will connect to (default: `localhost:5080` for Zero, `localhost:7080` for Alpha)
+- `--zero`: Alpha connects to Zero using this address
+- `--wal`: Directory for write-ahead log entries (default: `zw` for Zero, `w` for Alpha)
+- `--postings`: Directory for Alpha data storage (default: `p`)
+- `--bindall`: Set to `true` for machine-to-machine communication (default: `true`)
+
 **Pros:** Quick to start, minimal resources
 **Cons:** No HA, no persistence guarantees, not for production
 
 ---
 
-## 2. Single Group - Basic (Development)
+## Basic cluster
 
 **Best for:** Development teams, staging environments, CI/CD
 
@@ -108,14 +114,20 @@ dgraph zero --my=<IP>:5080 -w data/zero
 dgraph alpha --my=<IP>:7080 --zero=<ZERO_IP>:5080 -p data/alpha/p -w data/alpha/w
 ```
 
+**Flag Reference:**
+- `-w` / `--wal`: Directory for write-ahead log entries
+- `-p` / `--postings`: Directory for Alpha data storage
+- `--bindall`: Set to `true` for network communication (default: `true`)
+- `--v=2`: Recommended log verbosity level for better diagnostics
+
 **Pros:** Realistic setup, persistent storage
 **Cons:** No HA, single point of failure
 
 ---
 
-## 3. Single Group - HA (Small Production)
+## HA cluster
 
-**Best for:** Production workloads up to 1TB, small to medium traffic
+**Best for:** Production workloads up to 10TB
 
 ### Architecture
 
@@ -136,15 +148,20 @@ Alpha Group 1 (3 replicas) - Raft Group 1
 **1. Start Zero Cluster:**
 
 ```sh
-# Zero 1 (on host1)
+# Zero 1 (on host1) - First Zero initializes the cluster
 dgraph zero --my=host1:5080 --raft "idx=1" --replicas=3
 
-# Zero 2 (on host2)
+# Zero 2 (on host2) - Uses --peer to join existing cluster
 dgraph zero --my=host2:5080 --raft "idx=2" --peer=host1:5080
 
-# Zero 3 (on host3)
+# Zero 3 (on host3) - Uses --peer to join existing cluster
 dgraph zero --my=host3:5080 --raft "idx=3" --peer=host1:5080
 ```
+
+**Important Notes:**
+- **Raft IDs**: Each Zero node must have a unique Raft ID set via `--raft "idx=N"`. Dgraph does not auto-assign Raft IDs to Zero nodes.
+- **Cluster Initialization**: The first Zero node starts the cluster. All subsequent Zero nodes must use `--peer=<first-zero-address>` to join the existing cluster. If `--peer` is omitted, a new independent cluster will be created.
+- **Replication**: The `--replicas=3` flag on Zero controls how many Alpha replicas will be in each Alpha group.
 
 **2. Start Alpha Cluster:**
 
@@ -158,6 +175,11 @@ dgraph alpha --my=host2:7080 --zero=host1:5080,host2:5080,host3:5080
 # Alpha 3 (on host3)
 dgraph alpha --my=host3:7080 --zero=host1:5080,host2:5080,host3:5080
 ```
+
+**Important Notes:**
+- **Zero Connection**: Alphas can connect to any Zero in the cluster; list all Zeros for redundancy.
+- **Group Assignment**: Zero automatically assigns Alphas to groups based on the `--replicas` setting. With `--replicas=3`, the first 3 Alphas join Group 1.
+- **Alpha Raft IDs**: Unlike Zero nodes, Alpha nodes receive their Raft IDs automatically from Zero.
 
 ### Kubernetes (Helm)
 
@@ -179,9 +201,10 @@ helm install my-dgraph dgraph/dgraph \
 
 ---
 
-## 4. Multi-Group - Basic (Sharding, No HA)
+## Distributed (Multi-Group) - Basic
+Sharding, No HA
 
-**Best for:** Development with large datasets (>1TB)
+**Best for:** Development with large datasets (>10TB)
 
 ### Architecture
 
@@ -218,9 +241,9 @@ dgraph alpha --my=localhost:7082 --zero=localhost:5080 -p data/p3 -w data/w3 -o 
 
 ---
 
-## 5. Multi-Group - HA (Production Large-Scale)
+## Distributed - HA (Production Large-Scale)
 
-**Best for:** Production workloads >1TB, high traffic, mission-critical
+**Best for:** Production workloads >10TB, high traffic, mission-critical
 
 ### Architecture
 
@@ -287,6 +310,25 @@ dgraph alpha --my=host3:7082 --zero=host1:5080,host2:5080,host3:5080 -p p9 -w w9
 
 ---
 
+## Configuration Flags Reference
+
+### Common Flags
+
+| Flag | Component | Description | Default |
+|------|-----------|-------------|---------|
+| `--my` | Zero/Alpha | Address:port that other nodes connect to | `localhost:5080` (Zero)<br>`localhost:7080` (Alpha) |
+| `--zero` | Alpha | Address(es) of Zero node(s) to connect to | Required |
+| `--peer` | Zero | Address of existing Zero to join cluster | None (creates new cluster if omitted) |
+| `--raft "idx=N"` | Zero | Unique Raft ID for Zero node (required for HA) | `1` |
+| `--replicas` | Zero | Number of Alpha replicas per group | `1` |
+| `-w` / `--wal` | Zero/Alpha | Directory for write-ahead log entries | `zw` (Zero)<br>`w` (Alpha) |
+| `-p` / `--postings` | Alpha | Directory for data storage | `p` |
+| `--bindall` | Zero/Alpha | Bind to `0.0.0.0` for network access | `true` |
+| `--v=2` | Zero/Alpha | Log verbosity level (recommended: 2) | `0` |
+
+**Configuration Methods:**
+Flags can be set via command-line arguments, environment variables, or configuration files. See [Config]({{< relref "cli/config.md" >}}) for details.
+
 ## Best Practices
 
 ### Node Placement
@@ -336,7 +378,7 @@ Before production deployment:
 
 ## Next Steps
 
-- [Configure Security]({{< relref "security" >}})
+- [Configure Security]({{< relref identifer="security" >}})
 - [Set Up Monitoring]({{< relref "monitoring.md" >}})
 - [Production Checklist]({{< relref "production-checklist.md" >}})
 - [Administration Guide]({{< relref "admin" >}})

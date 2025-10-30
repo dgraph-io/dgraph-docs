@@ -203,7 +203,7 @@ Dgraph's flexible graph model and powerful DQL capabilities make it a great choi
 ## Related Topics
 
 - [DQL Query Language]({{< relref "/dql/_index.md" >}})
-- [Aggregation Functions]({{< relref "/dql/query/functions.md#aggregation-functions" >}})
+- [Aggregation Functions]({{< relref "aggregation.md" >}})
 - [@groupby Directive]({{< relref "/dql/query/directive/groupby.md" >}})
 - [Query Variables]({{< relref "/dql/query/variables.md" >}})
 - [Dgraph Overview]({{< relref "/dgraph-overview.md" >}})
