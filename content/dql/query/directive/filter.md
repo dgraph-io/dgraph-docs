@@ -64,9 +64,9 @@ Variables may be used as function parameters in filters. See [query variables]({
 
 Filters can also be combined with directives like [@cascade]({{< relref "cascade-directive.md" >}}) to create pattern matching queries where only nodes matching the complete query structure are returned.
 
-## Connecting Filters with Boolean Operators
+## Connecting Filters
 
-Within `@filter` multiple functions can be used with boolean connectives AND, OR, and NOT.
+Within `@filter` multiple functions can be used with boolean operators AND, OR, and NOT.
 
 ### AND, OR and NOT
 

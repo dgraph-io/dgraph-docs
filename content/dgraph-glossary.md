@@ -18,7 +18,7 @@ Badger is a fast, open-source key-value database written in pure Go that provide
 More at [Badger documentation](https://dgraph.io/docs/badger)
 
 ### DQL ###
-Dgraph Query Language is Dgraph's proprietary language to insert, update, delete and query data. It is based on GraphQL, but is more expressive. (See also: [GraphQL](#GraphQL))
+Dgraph Query Language is Dgraph's proprietary language to insert, update, delete and query data. It is based on GraphQL, but is more expressive. (See also: [GraphQL](#graphql))
 
 ### Edge ###
 In the mental picture of a graph: bubbles connected by lines ; the bubbles are nodes, the lines are edges.
@@ -48,7 +48,7 @@ Conceptually, a node is "a thing" or an object of the business domain. For every
 The term "node" is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. See [Aplha node](#alpha) and [Zero node](#zero).
 
 ### Predicate ###
-In [RDF](#RDF) terminology, a predicate is the smallest piece of information about an object. A predicate can hold a literal value or can describe a relation to another entity :
+In [RDF](#rdf) terminology, a predicate is the smallest piece of information about an object. A predicate can hold a literal value or can describe a relation to another entity :
 - when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice". It becomes a node property.
 - when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](#uid) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationship).
 

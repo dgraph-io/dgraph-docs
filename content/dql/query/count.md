@@ -29,7 +29,7 @@ Query Example: The number of films acted in by each actor with `Orlando` in thei
 
 Count can be used at root and [aliased]({{< relref "alias.md" >}}).
 
-Query Example: Count of directors who have directed more than five films.  When used at the query root, the [count index]({{< relref "dql-schema.md#count-index" >}}) is required.
+Query Example: Count of directors who have directed more than five films.  When used at the query root, the [count index]({{< relref "predicate-indexing.md#count-index" >}}) is required.
 
 {{< runnable >}}
 {

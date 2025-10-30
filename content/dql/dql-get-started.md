@@ -169,7 +169,7 @@ In these five steps, you set up Dgraph, added some data, visualized it as a grap
 
 
 - A wider range of queries can also be found in the
-[Query Language](/dql/dql-syntax/) reference.
+[Query Language]({{< relref "dql-query.md" >}}) reference.
 - Go to [Clients](/dql/clients/) to see how to
 communicate with Dgraph from your application.
 

@@ -42,7 +42,7 @@ situation where you need migration.
 
 This can be handled in a couple of ways:
 1. Migrate all the data for type `User` to use the new name `AppUser`. OR,
-2. Just use the [`@dgraph(type: ...)`](/graphql/dgraph) directive to maintain backward compatibility 
+2. Just use the [`@dgraph(type: ...)`]({{< relref "directive-dgraph.md">}}) directive to maintain backward compatibility 
    with the existing data.
 
 Depending on your use-case, you might find option 1 or 2 better for you. For example, if you 
