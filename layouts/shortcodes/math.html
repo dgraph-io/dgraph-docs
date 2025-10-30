@@ -1,0 +1,29 @@
+{{ $inner := trim .Inner "\n\r " }}
+{{ if and (hasPrefix $inner "$$") (hasSuffix $inner "$$") }}
+<div class="math-block">
+  {{ $inner | markdownify }}
+</div>
+{{ else }}
+<span class="math-inline">{{ $inner | markdownify }}</span>
+{{ end }}
+
+<style>
+.math-block {
+  text-align: center;
+  margin: 1.5em 0;
+  padding: 1em;
+  background-color: #f8f9fa;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+  font-family: 'Times New Roman', serif;
+  font-size: 1.1em;
+}
+
+.math-inline {
+  font-family: 'Times New Roman', serif;
+  font-style: italic;
+  background-color: #f8f9fa;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+</style>

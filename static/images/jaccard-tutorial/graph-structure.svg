@@ -1,0 +1,57 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="300" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Graph Structure: Movies, Genres, and Users</text>
+  
+  <!-- Movie nodes -->
+  <circle cx="100" cy="100" r="40" fill="#e1f5fe" stroke="#01579b" stroke-width="2"/>
+  <text x="100" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Star Wars</text>
+  
+  <circle cx="300" cy="100" r="40" fill="#e1f5fe" stroke="#01579b" stroke-width="2"/>
+  <text x="300" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">The Matrix</text>
+  
+  <circle cx="500" cy="100" r="40" fill="#e1f5fe" stroke="#01579b" stroke-width="2"/>
+  <text x="500" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Titanic</text>
+  
+  <!-- Genre nodes -->
+  <circle cx="100" cy="250" r="30" fill="#f3e5f5" stroke="#4a148c" stroke-width="2"/>
+  <text x="100" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Action</text>
+  
+  <circle cx="200" cy="250" r="30" fill="#f3e5f5" stroke="#4a148c" stroke-width="2"/>
+  <text x="200" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Sci-Fi</text>
+  
+  <circle cx="300" cy="250" r="30" fill="#f3e5f5" stroke="#4a148c" stroke-width="2"/>
+  <text x="300" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Romance</text>
+  
+  <circle cx="400" cy="250" r="30" fill="#f3e5f5" stroke="#4a148c" stroke-width="2"/>
+  <text x="400" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Drama</text>
+  
+  <!-- User nodes -->
+  <circle cx="100" cy="350" r="25" fill="#e8f5e8" stroke="#2e7d32" stroke-width="2"/>
+  <text x="100" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Alice</text>
+  
+  <circle cx="300" cy="350" r="25" fill="#e8f5e8" stroke="#2e7d32" stroke-width="2"/>
+  <text x="300" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Bob</text>
+  
+  <!-- Movie to Genre connections -->
+  <line x1="100" y1="140" x2="100" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="100" y1="140" x2="200" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="300" y1="140" x2="100" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="300" y1="140" x2="200" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="500" y1="140" x2="300" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="500" y1="140" x2="400" y2="220" stroke="#666" stroke-width="2"/>
+  
+  <!-- User to Movie connections (ratings) -->
+  <line x1="100" y1="60" x2="100" y2="80" stroke="#2e7d32" stroke-width="2"/>
+  <line x1="100" y1="60" x2="300" y2="80" stroke="#2e7d32" stroke-width="2"/>
+  <line x1="300" y1="60" x2="500" y2="80" stroke="#2e7d32" stroke-width="2"/>
+  
+  <!-- Labels -->
+  <text x="50" y="180" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Movies</text>
+  <text x="50" y="270" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Genres</text>
+  <text x="50" y="370" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Users</text>
+  
+  <!-- Rating labels -->
+  <text x="150" y="70" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">rating: 5</text>
+  <text x="200" y="70" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">rating: 4</text>
+  <text x="400" y="70" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">rating: 3</text>
+</svg>

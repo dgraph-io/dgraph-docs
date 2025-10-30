@@ -1,0 +1,71 @@
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="250" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Variable Propagation in DQL Queries</text>
+  
+  <!-- Level 1: Start node -->
+  <circle cx="250" cy="80" r="30" fill="#ffeb3b" stroke="#f57f17" stroke-width="3"/>
+  <text x="250" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold">P</text>
+  <text x="250" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="10">myscore = 1</text>
+  
+  <!-- Level 2: Friends -->
+  <circle cx="150" cy="160" r="25" fill="#81c784" stroke="#388e3c" stroke-width="2"/>
+  <text x="150" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="9">F1</text>
+  
+  <circle cx="250" cy="160" r="25" fill="#81c784" stroke="#388e3c" stroke-width="2"/>
+  <text x="250" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="9">F2</text>
+  
+  <circle cx="350" cy="160" r="25" fill="#81c784" stroke="#388e3c" stroke-width="2"/>
+  <text x="350" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="9">F3</text>
+  
+  <!-- Level 3: Friends of friends -->
+  <circle cx="100" cy="240" r="20" fill="#ffab91" stroke="#d84315" stroke-width="2"/>
+  <text x="100" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="8">FF1</text>
+  
+  <circle cx="200" cy="240" r="20" fill="#ffab91" stroke="#d84315" stroke-width="2"/>
+  <text x="200" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="8">FF2</text>
+  
+  <circle cx="300" cy="240" r="20" fill="#ffab91" stroke="#d84315" stroke-width="2"/>
+  <text x="300" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="8">FF3</text>
+  
+  <circle cx="400" cy="240" r="20" fill="#ffab91" stroke="#d84315" stroke-width="2"/>
+  <text x="400" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="8">FF4</text>
+  
+  <!-- Connections -->
+  <line x1="250" y1="110" x2="150" y2="135" stroke="#666" stroke-width="2"/>
+  <line x1="250" y1="110" x2="250" y2="135" stroke="#666" stroke-width="2"/>
+  <line x1="250" y1="110" x2="350" y2="135" stroke="#666" stroke-width="2"/>
+  
+  <line x1="150" y1="185" x2="100" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="150" y1="185" x2="200" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="250" y1="185" x2="200" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="250" y1="185" x2="300" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="350" y1="185" x2="300" y2="220" stroke="#666" stroke-width="2"/>
+  <line x1="350" y1="185" x2="400" y2="220" stroke="#666" stroke-width="2"/>
+  
+  <!-- Value propagation arrows -->
+  <path d="M 250 80 Q 200 100 150 160" stroke="#ff5722" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 250 80 Q 250 100 250 160" stroke="#ff5722" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 250 80 Q 300 100 350 160" stroke="#ff5722" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff5722"/>
+    </marker>
+  </defs>
+  
+  <!-- Value labels -->
+  <text x="200" y="140" font-family="Arial, sans-serif" font-size="9" fill="#ff5722">value = 1</text>
+  <text x="250" y="140" font-family="Arial, sans-serif" font-size="9" fill="#ff5722">value = 1</text>
+  <text x="300" y="140" font-family="Arial, sans-serif" font-size="9" fill="#ff5722">value = 1</text>
+  
+  <text x="100" y="220" font-family="Arial, sans-serif" font-size="8" fill="#ff5722">sum = 1</text>
+  <text x="200" y="220" font-family="Arial, sans-serif" font-size="8" fill="#ff5722">sum = 2</text>
+  <text x="300" y="220" font-family="Arial, sans-serif" font-size="8" fill="#ff5722">sum = 2</text>
+  <text x="400" y="220" font-family="Arial, sans-serif" font-size="8" fill="#ff5722">sum = 1</text>
+  
+  <!-- Level labels -->
+  <text x="20" y="90" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Level 1</text>
+  <text x="20" y="170" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Level 2</text>
+  <text x="20" y="250" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Level 3</text>
+</svg>

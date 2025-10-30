@@ -25,3 +25,4 @@ with Dgraph from your application.
 ### In this section
 
 - [Unlocking Analytical Power with Dgraph]({{< relref "analytical-power-dgraph.md" >}}) - A technical guide on using Dgraph for OLAP use cases and analytical solutions
+- [Jaccard Distance Tutorial]({{< relref "jaccard-distance-tutorial" >}}) - Learn how to implement Jaccard distance for content-based filtering in Dgraph
