@@ -145,7 +145,7 @@ As an `Administrator` you might want to export data from Dgraph to:
 * move the data from Dgraph Cloud instance to another Dgraph instance, or Dgraph Cloud instance
 * share your data
 
-For more information about exporting your database, see [Export data]({{< relref "howto/exportdata/about-export.md" >}})
+For more information about exporting your database, see [Export data]({{< relref "export-data.md" >}})
 
 ## Shut down database
 

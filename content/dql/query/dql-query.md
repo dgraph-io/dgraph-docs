@@ -190,7 +190,7 @@ Dgraph offers functions for
   - if geo area intersects a given are : [intersects]({{< relref "functions.md#intersects" >}})
 
 
-### Variable (`var`) block
+### Var block
 
   Variable blocks (`var` blocks) start with the keyword `var` instead of a block name.
 

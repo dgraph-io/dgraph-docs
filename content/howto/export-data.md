@@ -1,13 +1,20 @@
 +++
-title = "Export data from Dgraph"
+title = "Export data"
 type = "docs"
 keywords = "export, data, self hosted"
+weight = 3
 [menu.main]
-    parent = "exportdata"
-    weight = 3
+    identifier = "exportdata"
+    parent = "howto"
 +++
 
-As an `Administrator` you can export data on all nodes, configure the Alpha server, specify the export format, export to an object store, disable HTTPS for exports, and encrypt exports
+As an `Administrator` you can export data from Dgraph to an an object store, NFS, or a file path.
+
+When you export data, three files are generated:
+
+* `g01.gql_schema.gz`: The GraphQL schema file. This file can be imported using the Schema APIs
+* `g01.json.gz` or `g01.rdf.gz`: the data from your instance in JSON format or RDF format. By default, Dgraph exports data in RDF format.
+* `g01.schema.gz`: This file is the internal Dgraph schema. If you have set up the Dgraph Cloud instance with a GraphQL schema, then you can ignore this file.
 
 ## Export data using  the GraphQL admin endpoint
 
@@ -171,7 +178,7 @@ You can access Azure Blob Storage locally using one of these methods:
      --set accessKey="<AccountName>",secretKey="<AccountKey>" \
      --set azuregateway.enabled=true
    ```
-You can use the [MinIO GraphQL mutation]({{< relref "/howto/exportdata/export-data.md#example-mutation-to-export-to-minio" >}}) with MinIO configured as a gateway.
+You can use the [MinIO GraphQL mutation]({{< relref "export-data.md#example-mutation-to-export-to-minio" >}}) with MinIO configured as a gateway.
 
 ### Google Cloud Storage
 
@@ -219,7 +226,7 @@ When you have a `credentials.json`, you can access GCS locally using one of thes
    helm install my-gateway minio/minio \
      --values myvalues.yaml
    ```
-You can use the [MinIO GraphQL mutation]({{< relref "/howto/exportdata/export-data.md#example-mutation-to-export-to-minio" >}}) with MinIO configured as a gateway.
+You can use the [MinIO GraphQL mutation]({{< relref "export-data.md#example-mutation-to-export-to-minio" >}}) with MinIO configured as a gateway.
 
 ## Disable HTTPS for exports to S3 and Minio
 
