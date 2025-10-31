@@ -931,7 +931,7 @@ pre.collapsed .showmore:hover {
 #sidebar {
   padding-bottom: 3rem;
   position: fixed;
-  width: 380px;
+  width: 300px;
   bottom: 0;
   left: 0;
   font-weight: 400;
@@ -979,6 +979,7 @@ body:not(.dark-blog) #sidebar a {
 #sidebar a:hover {
   font-weight: 500;
   color: #ef265a;
+  background-color: #f8f8f8;
 }
 
 #sidebar .sidebar-menu {
@@ -999,32 +1000,26 @@ body:not(.dark-blog) #sidebar a {
 }
 #sidebar .sidebar-menu a:hover {
   color: #464646;
+  background-color: #f5f5f5;
 }
 
-.topics {
-  list-style: none;
-  padding: 14px;
-  margin-bottom: 0;
-  border: 1px solid #B8B7BA;
-  border-radius: 8px;
-  margin: 38px;
-  
-}
 
-body:not(.dark-blog) .topics {
-  background: #f5f5f5;
-}
+
 
 .topics .main-topic {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  border-radius: 10px;
 }
 
 .topics .main-topic a {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 1em;
+  border-radius: 10px;
+  
 }
 
 .topics .main-topic:hover > a {
@@ -1056,6 +1051,21 @@ body:not(.dark-blog) .topics {
 .topics .main-topic > a:hover {
   font-weight: 500 !important;
   color: #ef265a !important;
+  background-color: #fef7f9 !important;
+  outline: none;
+}
+.dark-blog .topics .main-topic.active,
+.dark-blog .topics .main-topic.active > a,
+.dark-blog .topics .main-topic > a:hover {
+  font-weight: 500 !important;
+  color: rgb(166, 158, 165) !important;
+  background-color: #383838 !important;
+  outline: none;
+}
+.topics .main-topic > a:hover {
+  font-weight: 500 !important;
+  color: #ef265a !important;
+  background-color: #fef7f9 !important;
   outline: none;
 }
 
@@ -1083,11 +1093,11 @@ body:not(.dark-blog) .topics {
 }
 
 .topics .main-topic > .arrow-down {
-  top: 12px;
+  top: 6px;
 }
 
 .topics .sub-topic > .arrow-down {
-  top: 8px;
+  top: 6px;
 }
 
 /*.topics .sub-topics > .sub-topic > .sub-topics > .sub-topic > .arrow-down {
@@ -1275,7 +1285,7 @@ footer .logo {
 
 @media screen and (min-width: 768px) {
   .content-wrapper {
-    margin-left: 380px;
+    margin-left: 300px;
     padding-top: 120px;
   }
   .menu-header .heading {
@@ -1292,9 +1302,6 @@ footer .logo {
     display: none;
   }
 
-  .topics .main-topic:not(:first-child) {
-    border-top: 1px solid #B8B7BA;
-  }
 }
 
 @media screen and (max-width: 768px) {
