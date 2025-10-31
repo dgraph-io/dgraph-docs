@@ -275,7 +275,7 @@ Ensure adequate disk space:
 ## See Also
 
 - [Live Loader]({{< relref "live.md" >}}) - For incremental updates
-- [Data Migration]({{< relref "../../migration/about-data-migration.md" >}}) - Migration strategies
+- [Data Migration]({{< relref "../../migration/import-data.md" >}}) - Migration strategies
 - [Schema]({{< relref "../../dql/dql-schema.md" >}}) - Schema definition
-- [Bulk Loader Guide]({{< relref "howto/importdata/bulk-loader.md" >}}) - Detailed bulk loading guide
+- [Bulk Loader Guide]({{< relref "bulk-loader.md" >}}) - Detailed bulk loading guide
 

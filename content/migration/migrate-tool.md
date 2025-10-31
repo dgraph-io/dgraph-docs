@@ -50,7 +50,7 @@ dgraph migrate [flags]
 
 {{% notice "note" %}}
 If you are connecting to a remote DB hosted on AWS, GCP, and others, you need to pass the flags `--host`, and `--port`.
-For description of the various flags in the migration tool, see [command line options]({{< relref "about-data-migration.md" >}}).
+For description of the various flags in the migration tool, see [command line options]({{< relref "import-data.md" >}}).
 {{% /notice %}}
 
 After the migration is complete, two new files are available:

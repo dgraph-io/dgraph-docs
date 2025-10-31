@@ -10,7 +10,7 @@ type = "docs"
 {{% notice "note" %}}
 This feature was introduced in [v1.1.1](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.1).
 For migrating unencrypted data to a new Dgraph cluster with encryption enabled, you need to
-[export the database]({{< relref "dgraph-administration.md#export-database" >}}) and [import data]({{< relref "about_import.md" >}}),
+[export the database]({{< relref "dgraph-administration.md#export-database" >}}) and [import data]({{< relref "import-data.md" >}}),
 preferably using the [bulk loader]({{< relref "bulk-loader.md" >}}).
 {{% /notice %}}
 

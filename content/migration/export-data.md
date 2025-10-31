@@ -2,10 +2,10 @@
 title = "Export data"
 type = "docs"
 keywords = "export, data, self hosted"
-weight = 3
+weight = 7
 [menu.main]
     identifier = "exportdata"
-    parent = "howto"
+    parent = "migration"
 +++
 
 As an `Administrator` you can export data from Dgraph to an an object store, NFS, or a file path.

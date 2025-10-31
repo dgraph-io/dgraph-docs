@@ -4,7 +4,7 @@ title = "Initial import (Bulk Loader)"
 type = "docs"
 weight = 3
 [menu.main]
-    parent = "importdata"
+    parent = "migration"
 	identifier="bulkloading"
 +++
 

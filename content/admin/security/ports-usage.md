@@ -37,7 +37,7 @@ follows:
 
 
 <sup>1</sup>: Dgraph Zero uses port 5080 for internal communication within the
- cluster, and to support the [data import]({{< relref "about_import.md" >}})
+ cluster, and to support the [data import]({{< relref "import-data.md" >}})
  tools: Dgraph Live Loader and Dgraph Bulk Loader.
 
 <sup>2</sup>: Dgraph Zero uses port 6080 for
