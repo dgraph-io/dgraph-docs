@@ -12,8 +12,10 @@ set -e
 OUTPUT_DIR="public"
 TEMP_DIR=".hugo-versions-temp"
 VERSION_BRANCHES=("main" "release/v24.1")  # Add your version branches here
-# CURRENT_BRANCH is the first one
-CURRENT_BRANCH=${VERSION_BRANCHES[0]}
+# The first branch in the list builds to root public/
+ROOT_BRANCH=${VERSION_BRANCHES[0]}
+# Get current working branch
+WORKING_BRANCH=$(git branch --show-current)
 
 # Parse baseURL parameter (default: http://localhost:1313)
 BASE_URL_PARAM=${1:-"http://localhost:1313"}
@@ -31,9 +33,6 @@ echo -e "${BLUE}Starting multi-version Hugo build...${NC}"
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
-# Get current branch
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-
 # Build all versions in a loop
 for branch in "${VERSION_BRANCHES[@]}"; do
     # Determine version: if branch doesn't have version prefix, use the branch name
@@ -45,8 +44,8 @@ for branch in "${VERSION_BRANCHES[@]}"; do
     
     echo -e "${GREEN}Building version $VERSION from branch $branch...${NC}"
     
-    # Determine output directory and baseURL: main branch goes to public, others to public/VERSION
-    if [ "$branch" = "$CURRENT_BRANCH" ]; then
+    # Determine output directory and baseURL: first branch goes to public, others to public/VERSION
+    if [ "$branch" = "$ROOT_BRANCH" ]; then
         BUILD_OUTPUT_DIR="$OUTPUT_DIR"
         BASE_URL="$BASE_URL_PARAM/"
     else
@@ -54,9 +53,9 @@ for branch in "${VERSION_BRANCHES[@]}"; do
         BASE_URL="$BASE_URL_PARAM/$VERSION/"
     fi
     
-    # If building the current branch, use current directory; otherwise use worktree
-    if [ "$branch" = "$CURRENT_BRANCH" ]; then
-        echo "Building from current branch, using current directory..."
+    # If this is the root branch AND we're currently on it, use current directory; otherwise use worktree
+    if [ "$branch" = "$ROOT_BRANCH" ] && [ "$branch" = "$WORKING_BRANCH" ]; then
+        echo "Building from current branch (root branch), using current directory..."
         hugo --minify -d "$BUILD_OUTPUT_DIR" --baseURL "$BASE_URL"
     else
         # Create temporary directory for this version
