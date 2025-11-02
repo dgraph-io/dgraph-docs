@@ -11,9 +11,8 @@ You might need to decrypt data from an encrypted Dgraph cluster for a variety of
 * Migration of data from an encrypted cluster to a non-encrypted cluster
 * Changing your data or schema by directly editing an RDF file or schema file
 
-To support these scenarios, Dgraph includes a `decrypt` command that decrypts encrypted RDF and schema files. To learn how to export RDF
-and schema files from Dgraph, see:
-[Dgraph Administration: Export database](/deploy/admin/dgraph-administration/#export-database).
+To support these scenarios, Dgraph includes a `decrypt` command that decrypts encrypted RDF and schema files. To learn how to export RDF and schema files from Dgraph, see:
+[Dgraph Administration: Export database]({{< relref "export-data">}}).
 
 The `decrypt` command supports a variety of symmetric key lengths, which
 determine the AES cypher used for encryption and decryption, as follows:

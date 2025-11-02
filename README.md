@@ -168,3 +168,55 @@ Edit `themes/hugo-docs/layouts/partials/sidebar.html` and add:
   {{ $menu = .Site.Menus.yourtype }}
 {{ end }}
 ```
+
+## Multi-Version Documentation
+
+This repository uses a build script to generate documentation for multiple versions from different Git branches.
+
+
+```bash
+./scripts/build.sh
+```
+
+This builds:
+- **Latest docs** from `main` branch → `/`
+- **Version docs** from release branches → `/v24.1/`, etc.
+
+## How It Works
+
+1. **Build Script** (`build.sh`) uses Git worktrees to temporarily check out each release branch
+2. **Hugo builds** each version into its own subdirectory with the appropriate base URL
+3. **Version selector** loads available versions from `versions.json` and displays a dropdown
+
+## Configuration
+
+Edit `build.sh` to add/remove versions:
+```bash
+VERSION_BRANCHES=("main" "release/v24.1")
+```
+
+```bash
+VERSION_BRANCHES=("release/v25.0" "release/v24.1")
+```
+
+## File Structure
+
+```
+layouts/partials/
+  └── version-selector.html    # Dropdown component
+scripts/
+  └── build.sh         # Build script
+public/                         # Generated output
+  ├── index.html               # Latest docs (main)
+  ├── versions.json            # Version metadata
+  ├── v24.1/                   # Version 24.1 docs
+  └── v24.2/                   # Version 24.2 docs
+```
+
+### Version Selector
+
+In  layout 
+
+```html
+{{ partial "version-selector.html" . }}
+```

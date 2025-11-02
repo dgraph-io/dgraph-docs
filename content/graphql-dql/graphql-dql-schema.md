@@ -41,7 +41,7 @@ The API and the engine logic are generated from the schema defining the types of
 
 ### In DQL, the schema described the predicates
 
-Dgraph maintains a list of all predicates names with their type and indexes in the [Dgraph types schema](/dql/dql-schema/).
+Dgraph maintains a list of all predicates names with their type and indexes in the [Dgraph types schema]({{< relref "dql-schema">}}).
 
 
 ### Schema mapping
@@ -159,7 +159,7 @@ type Property {
 The fact that the GraphQL API backend is a graph in Dgraph, implies that you can use Dgraph DQL on the data that is also served by the GraphQL API operations.
 
 In particular, you can 
-- use Dgraph DQL mutations but also Dgraph's [import tools](/howto/importdata/) to populate the graph after you have deployed a GraphQL Schema. See [GraphQL data loading]({{<relref "graphql-data-loading.md">}})
+- use Dgraph DQL mutations but also Dgraph's [import tools]({{< relref "import-data">}}) to populate the graph after you have deployed a GraphQL Schema. See [GraphQL data loading]({{<relref "graphql-data-loading.md">}})
 - use DQL to query the graph in the context of authorization rules and custom resolvers.
 - add knowledge to your graph such as meta-data, score, annotations, ...,  but also relationships or relationships attributes (facets) that could be the result of similarity computation, threat detection a.s.o. The added data could be hidden from your GraphQL API clients but be available to logic written with DQL clients.
 - break things using DQL: DQL is powerful and is bypassing constraints expressed in the GraphQL schema. You can for example delete a node predicate that is mandatory in the GraphQL API! Hopefully there are ways to secure who can read/write/delete predicates. ( see the [ACL](/enterprise-features/access-control-lists/)) section.
