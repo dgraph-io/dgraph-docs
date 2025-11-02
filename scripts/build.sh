@@ -1,161 +1,148 @@
 #!/bin/bash
-# This script runs in a loop (configurable with LOOP), checks for updates to the
-# Hugo docs theme or to the docs on certain branches and rebuilds the public
-# folder for them. It has be made more generalized, so that we don't have to
-# hardcode versions.
 
-# Warning - Changes should not be made on the server on which this script is running
-# becauses this script does git checkout and merge.
+# Hugo Multi-Version Documentation Build Script
+# This script builds documentation from multiple branches
+# Usage: ./build.sh [baseURL]
+# Example: ./build.sh http://localhost:1313
+#          ./build.sh https://docs.dgraph.io
 
 set -e
 
-# Important for clean builds on Netlify
-if ! git remote | grep -q origin ; then
-    git remote add origin https://github.com/dgraph-io/dgraph-docs.git
-    git fetch --all
-fi
+# Configuration
+OUTPUT_DIR="public"
+TEMP_DIR=".hugo-versions-temp"
+VERSION_BRANCHES=("main" "release/v24.1")  # Add your version branches here
+# CURRENT_BRANCH is the first one
+CURRENT_BRANCH=${VERSION_BRANCHES[0]}
 
-GREEN='\033[32;1m'
-RESET='\033[0m'
-HOST="${HOST:-https://dgraph.io/docs}"
-# Name of output public directory
-PUBLIC="${PUBLIC:-public}"
-# LOOP true makes this script run in a loop to check for updates
-LOOP="${LOOP:-true}"
-# Binary of hugo command to run.
-HUGO="${HUGO:-hugo}"
-THEME_BRANCH="${THEME_BRANCH:-main}"
+# Parse baseURL parameter (default: http://localhost:1313)
+BASE_URL_PARAM=${1:-"http://localhost:1313"}
 
-# Place the latest version at the beginning so that version selector can
-# append '(latest)' to the version string, followed by the main version,
-# and then the older versions in descending order, such that the
-# build script can place the artifact in an appropriate location.
+DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
+HUGO_TITLE="Dgraph documentation"
+# Colors for output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
-VERSIONS_ARRAY=(
-  'main'
-)
+echo -e "${BLUE}Starting multi-version Hugo build...${NC}"
 
-joinVersions() {
-	versions=$(printf ",%s" "${VERSIONS_ARRAY[@]}")
-	echo "${versions:1}"
-}
+# Clean up previous builds
+rm -rf "$OUTPUT_DIR"
+mkdir -p "$OUTPUT_DIR"
 
-function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }'; }
+# Get current branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-rebuild() {
-	echo -e "$(date) $GREEN Updating docs for branch: $1.$RESET"
+# Build all versions in a loop
+for branch in "${VERSION_BRANCHES[@]}"; do
+    # Determine version: if branch doesn't have version prefix, use the branch name
+    if [[ "$branch" =~ ^release/ ]]; then
+        VERSION=$(echo "$branch" | sed 's|release/||')
+    else
+        VERSION=$branch
+    fi
+    
+    echo -e "${GREEN}Building version $VERSION from branch $branch...${NC}"
+    
+    # Determine output directory and baseURL: main branch goes to public, others to public/VERSION
+    if [ "$branch" = "$CURRENT_BRANCH" ]; then
+        BUILD_OUTPUT_DIR="$OUTPUT_DIR"
+        BASE_URL="$BASE_URL_PARAM/"
+    else
+        BUILD_OUTPUT_DIR="$OUTPUT_DIR/$VERSION"
+        BASE_URL="$BASE_URL_PARAM/$VERSION/"
+    fi
+    
+    # If building the current branch, use current directory; otherwise use worktree
+    if [ "$branch" = "$CURRENT_BRANCH" ]; then
+        echo "Building from current branch, using current directory..."
+        hugo --minify -d "$BUILD_OUTPUT_DIR" --baseURL "$BASE_URL"
+    else
+        # Create temporary directory for this version
+        BRANCH_DIR="$TEMP_DIR/$VERSION"
+        
+        # Remove worktree if it already exists
+        if [ -d "$BRANCH_DIR" ]; then
+            git worktree remove "$BRANCH_DIR" --force 2>/dev/null || rm -rf "$BRANCH_DIR"
+        fi
+        
+        # Clone the specific branch into temp directory
+        git worktree add "$BRANCH_DIR" "$branch"
+        
+        # Build Hugo site for this version
+        pushd "$BRANCH_DIR"
+        hugo --minify -d "../../$BUILD_OUTPUT_DIR" --baseURL "$BASE_URL"
+        popd
+        
+        # Clean up worktree
+        git worktree remove "$BRANCH_DIR"
+    fi
+    
+    echo -e "${GREEN}Version $VERSION built successfully${NC}"
+done
 
-	# The latest documentation is generated in the root of /public dir
-	# Older documentations are generated in their respective `/public/vx.x.x` dirs
-	dir=''
-	if [[ $2 != "${VERSIONS_ARRAY[0]}" ]]; then
-		dir=$2
-	fi
+# Clean up temp directory
+rm -rf "$TEMP_DIR"
 
-	VERSION_STRING=$(joinVersions)
-	# In Unix environments, env variables should also be exported to be seen by Hugo
-	export CURRENT_BRANCH=${1}
-	export CURRENT_VERSION=${2}
-	export CURRENT_LATEST_TAG=${3}
-	export VERSIONS=${VERSION_STRING}
-	export DGRAPH_ENDPOINT=${DGRAPH_ENDPOINT:-"https://play.dgraph.io/query?latency=true"}
-	export CANONICAL_PATH="$HOST"
-
-	HUGO_TITLE="Dgraph Doc ${2}"\
-		CANONICAL_PATH=${HOST}\
-		VERSIONS=${VERSION_STRING}\
-		CURRENT_BRANCH=${1}\
-		CURRENT_LATEST_TAG=${3}\
-		CURRENT_VERSION=${2} ${HUGO} \
-		--destination="${PUBLIC}"/"$dir"\
-		--baseURL="$HOST"/"$dir" 1> /dev/null
-}
-
-branchUpdated()
+# Create versions.json for the version selector
+echo -e "${BLUE}Creating versions.json...${NC}"
+cat > "$OUTPUT_DIR/versions.json" << EOF
 {
-	local branch="$1"
-	git checkout -q "$1"
-	UPSTREAM=$(git rev-parse "@{u}")
-	LOCAL=$(git rev-parse "@")
+  "versions": [
+EOF
 
-	if [ "$LOCAL" != "$UPSTREAM" ] ; then
-		git merge -q origin/"$branch"
-		return 0
-	else
-		return 1
-	fi
+# Add version entries
+FIRST=true
+for branch in "${VERSION_BRANCHES[@]}"; do
+    # Determine version: if branch doesn't have version prefix, use "main"
+    if [[ "$branch" =~ ^release/ ]]; then
+        VERSION=$(echo "$branch" | sed 's|release/||')
+        VERSION_TITLE="$VERSION"
+        VERSION_URL="/$VERSION/"
+    else
+        VERSION="main"
+        VERSION_TITLE="Latest (main)"
+        VERSION_URL="/"
+    fi
+    
+    if [ "$FIRST" = true ]; then
+        FIRST=false
+        cat >> "$OUTPUT_DIR/versions.json" << EOF
+    {
+      "version": "$VERSION",
+      "title": "$VERSION_TITLE",
+      "url": "$VERSION_URL"
+    }
+EOF
+    else
+        cat >> "$OUTPUT_DIR/versions.json" << EOF
+,
+    {
+      "version": "$VERSION",
+      "title": "$VERSION_TITLE",
+      "url": "$VERSION_URL"
+    }
+EOF
+    fi
+done
+
+cat >> "$OUTPUT_DIR/versions.json" << EOF
+
+  ]
 }
+EOF
 
-publicFolder()
-{
-	dir=''
-	if [[ $1 == "${VERSIONS_ARRAY[0]}" ]]; then
-		echo "${PUBLIC}"
-	else
-		echo "${PUBLIC}/$1"
-	fi
-}
-
-checkAndUpdate()
-{
-	local version="$1"
-	local branch=""
-	local tag="$2"
-
-	if [[ $version == "main" ]]; then
-		branch="main"
-	else
-		branch="release/$version"
-	fi
-
-	if branchUpdated "$branch" ; then
-		git merge -q origin/"$branch"
-		rebuild "$branch" $version "$tag"
-	fi
-
-	folder=$(publicFolder "$version")
-	if [ "$firstRun" = 1 ] || [ "$themeUpdated" = 0 ] || [ ! -d "$folder" ] ; then
-		rebuild "$branch" $version "$tag"
-	fi
-}
-
-
-firstRun=1
-while true; do
-	# Lets move to the docs directory.
-	pushd "$(dirname "$0")/.." > /dev/null
-
-	currentBranch=$(git rev-parse --abbrev-ref HEAD)
-
-	if [ "$firstRun" = 1 ];
-	then
-		# Theme is now included in the repository
-		echo -e "$(date) $GREEN Using theme from repository.$RESET"
-	fi
-
-	# Theme is now included in the repository, no need to check for updates
-
-	echo -e "$(date)  Starting to check branches."
-	git remote update > /dev/null
-
-	for version in "${VERSIONS_ARRAY[@]}"
-	do
-	  latest_version=$(curl -s https://get.dgraph.io/latest | grep -o '"latest": *"[^"]*' | grep -o '[^"]*$' | sed  "/^v21.12/d" | sed  "/^v20.03/d" | sed  "/^v20.07/d" | grep  "$version" | sort | uniq | head -n1)
-		SETO="${latest_version:-main}" 
-		checkAndUpdate "$version" "$SETO"
-		echo "version => '$version'"
-		echo "latest_version => '$SETO'"
-		latest_version=''
-	done
-
-	echo -e "$(date)  Done checking branches.\n"
-
-	git checkout -q "$currentBranch"
-	popd > /dev/null
-
-	firstRun=0
-  if ! $LOOP; then
-    exit
-  fi
-	sleep 60
+echo -e "${GREEN}Build complete! Documentation available in $OUTPUT_DIR/${NC}"
+echo -e "${BLUE}Versions built:${NC}"
+for branch in "${VERSION_BRANCHES[@]}"; do
+    # Determine version: if branch doesn't have version prefix, use "main"
+    if [[ "$branch" =~ ^release/ ]]; then
+        VERSION=$(echo "$branch" | sed 's|release/||')
+        VERSION_URL="/$VERSION/"
+    else
+        VERSION="main"
+        VERSION_URL="/"
+    fi
+    echo "  - $VERSION -> $VERSION_URL"
 done
