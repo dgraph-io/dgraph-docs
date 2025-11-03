@@ -2,6 +2,7 @@
 title = "Overview"
 type = "docs"
 description = "Introduction to Dgraph Database. Dgraph is a horizontally scalable and distributed graph database that supports GraphQL natively. You can run Dgraph on-premise, in your cloud infrastructure, or as a service fully-managed by Dgraph."
+aliases = ["/about"]
 [menu.main]
     name = "Overview"
     identifier = "overview"
