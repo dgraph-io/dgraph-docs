@@ -12,8 +12,6 @@
       </div>
     </a>
     <nav role="navigation" class="dgraph-menu">
-      
-      
       <div class="nav_buttons-inside">
       {{ partial "theme-toggle.html" (dict "showLabel" false) }}
         <!--div class="nav_button_wrapper">
@@ -89,23 +87,6 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const menuButton = document.querySelector(".menu_button");
-    const dgraphMenu = document.querySelector(".dgraph-menu");
-    const header = document.querySelector("header");
-
-    menuButton.addEventListener("click", function () {
-      if (dgraphMenu.classList.contains("active-menu")) {
-        menuButton.classList.remove("active-menu-btn");
-        dgraphMenu.classList.remove("active-menu");
-        header.classList.remove("menu-opened");
-      } else {
-        menuButton.classList.add("active-menu-btn");
-        dgraphMenu.classList.add("active-menu");
-        header.classList.add("menu-opened");
-      }
-    });
-  });
 
   // Submenu
   function toggleSubmenu(event) {

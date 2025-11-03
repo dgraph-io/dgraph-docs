@@ -338,18 +338,7 @@ function getPathAfterVersionName(location, versionName) {
   // Scrollspy for sidebar
   // window.addEventListener("scroll", debounce(updateSidebar, 15));
 
-  // Sidebar toggle
-  document
-    .getElementById("sidebar-toggle")
-    .addEventListener("click", function (e) {
-      e.preventDefault();
-      var klass = document.body.className;
-      if (klass === "sidebar-visible") {
-        document.body.className = "";
-      } else {
-        document.body.className = "sidebar-visible";
-      }
-    });
+
 
   // Anchor tags for headings
   function appendAnchor(heading) {
@@ -379,47 +368,7 @@ function getPathAfterVersionName(location, versionName) {
     appendAnchor(h2s[i]);
   }
 
-  // version selector
-  function switchVersion(targetVersion) {
-    // change the path only if it does not include the right version
-    if (targetVersion != getCurrentVersion(location.pathname)) {
-      targetPath = location.origin + "/docs/" + targetVersion;
-      location.assign(targetPath);
-    }
-  }
-  var currentVersion = getCurrentVersion(location.pathname);
-  var latestVersion;
-
-  const versionSelectors = document.getElementsByClassName("version-selector");
-  if (versionSelectors.length) {
-
-    versionSelectors[0].addEventListener("change", function (e) {
-      // targetVersion: '', 'main', 'v0.7.7', 'v0.7.6', etc.
-      var targetVersion = e.target.value;
-
-      if (currentVersion !== targetVersion) {
-        switchVersion(targetVersion);
-      }
-    });
-
-    var versionSelector = versionSelectors[0],
-      options = versionSelector.options;
-
-    for (var i = 0; i < options.length; i++) {
-      if (options[i].value.indexOf("latest") != -1) {
-        options[i].value = options[i].value.replace(/\s\(latest\)/, "");
-      }
-    }
-
-    for (var i = 0; i < options.length; i++) {
-      if (options[i].value === currentVersion) {
-        options[i].selected = true;
-        break;
-      }
-    }
-    latestVersion = options[0].value;
-
-  }
+  
 
   // Add target = _blank to all external links.
   var links = document.links;

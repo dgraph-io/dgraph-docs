@@ -42,36 +42,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
 
-    <script type="text/javascript">
-      adroll_adv_id = "L42C3U2UXBBPVAMISVXVLC";
-      adroll_pix_id = "MOR4VUNPK5B2LHEZ2NNTDX";
-      adroll_version = "2.0";
-      (function(w, d, e, o, a) {
-          w.__adroll_loaded = true;
-          w.adroll = w.adroll || [];
-          w.adroll.f = [ 'setProperties', 'identify', 'track' ];
-          var roundtripUrl = "https://s.adroll.com/j/" + adroll_adv_id
-                  + "/roundtrip.js";
-          for (a = 0; a < w.adroll.f.length; a++) {
-              w.adroll[w.adroll.f[a]] = w.adroll[w.adroll.f[a]] || (function(n) {
-                  return function() {
-                      w.adroll.push([ n, arguments ])
-                  }
-              })(w.adroll.f[a])
-          }
-          e = d.createElement('script');
-          o = d.getElementsByTagName('script')[0];
-          e.async = 1;
-          e.src = roundtripUrl;
-          o.parentNode.insertBefore(e, o);
-      })(window, document);
-      adroll.track("pageView");
-  </script>
+    
 
   <script src='{{ relURL "/js/clipboard.min.js"}}'></script>
   <script src='{{ relURL "/js/dgraph.js"}}?{{ md5 (readFile "themes/hugo-docs/static/js/dgraph.js") }}'></script>
   <script src='{{ relURL "/js/runnable.js"}}?{{ md5 (readFile "themes/hugo-docs/static/js/runnable.js") }}'></script>
-  <script type="text/javascript">
+  <!--script type="text/javascript">
 
     var version = 'latest';
     var path = window.location.pathname;
@@ -84,7 +60,7 @@
      setAlgolia({{ getenv "CURRENT_VERSION"}})
      
 
-  </script>
+  </script-->
   <script>
     hljs.initHighlightingOnLoad();
   </script>

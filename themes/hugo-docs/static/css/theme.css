@@ -1524,7 +1524,7 @@ section.toc .section-item {
   min-height: 160px;
   margin-top: 45px;
   margin-bottom: 32px;
-  background-image: url(/images/hero-landing-bg.svg);
+  /*background-image: url(/images/hero-landing-bg.svg);*/
   background-repeat: no-repeat;
   background-position: center right;
   background-size: contain;
