@@ -1,3 +1,0 @@
-# Redirects from what the browser requests to what we serve
-# to avoid 404 when moving doc pages referenced by other websites
-/docs/deploy/production-checklist       /docs/installation/production-checklist 
