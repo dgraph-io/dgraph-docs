@@ -21,7 +21,7 @@ To test the build locally from the master branch:
  Then
  ```
  cd public
- npx serve
+ python3 -m http.server 3000
  ```
  to serve the static pages locally.
 
