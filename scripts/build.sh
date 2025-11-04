@@ -98,7 +98,12 @@ for branch in "${VERSION_BRANCHES[@]}"; do
     if [[ "$branch" =~ ^release/ ]]; then
         VERSION=$(echo "$branch" | sed 's|release/||')
         VERSION_TITLE="$VERSION"
-        VERSION_URL="/$VERSION/"
+        # First entry always has URL "/" regardless of version
+        if [ "$FIRST" = true ]; then
+            VERSION_URL="/"
+        else
+            VERSION_URL="/$VERSION/"
+        fi
     else
         VERSION="main"
         VERSION_TITLE="Latest (main)"
