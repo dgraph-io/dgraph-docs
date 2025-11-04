@@ -1,5 +1,6 @@
 .tabs .nav-tabs {
   border-bottom: none;
+  padding: 0;
 }
 
 .nav-tabs > li {
@@ -12,7 +13,6 @@
   border-bottom: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.0625);
   background: #fff;
 }
 
@@ -25,8 +25,15 @@
   padding: 0.5em 0.75em;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.0625);
   background: #fff;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .tab-pane.active {
+  display: block;
 }
 
 .nav-tabs li a {
@@ -37,4 +44,23 @@
 .nav-tabs li.active a {
   /* position: relative; */
   color: #bd4147;
+}
+
+/* Dark mode support */
+.dark-blog .tabs .nav-tabs > li {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.dark-blog .tabs .tab-content {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.dark-blog .nav-tabs li a {
+  color: #e0e0e0;
+}
+
+.dark-blog .nav-tabs li.active a {
+  color: #ef265a;
 }

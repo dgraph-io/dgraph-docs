@@ -2734,7 +2734,11 @@ body:not(.dark-blog) .single-footer .legal-notices-wrap:hover .legal-notices {
 }
 
 .tab-content>.tab-pane {
-  display: block !important;
+  display: none;
+}
+
+.tab-content>.tab-pane.active {
+  display: block;
 }
 
 @media all and (max-width: 1024px) {
