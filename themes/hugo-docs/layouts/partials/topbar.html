@@ -12,6 +12,9 @@
       </div>
     </a>
     <nav role="navigation" class="dgraph-menu">
+
+      {{ partial "version-selector.html" . }}
+
       <div class="nav_buttons-inside">
       {{ partial "theme-toggle.html" (dict "showLabel" false) }}
         <!--div class="nav_button_wrapper">
