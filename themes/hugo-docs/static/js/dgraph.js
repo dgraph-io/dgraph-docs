@@ -405,30 +405,48 @@ function setAlgolia(latestVersion) {
   });
 }
 $(document).ready(function () {
+  // Initialize tabs: create nav items from tab panes
   $(".tab-content")
     .find(".tab-pane")
     .each(function (idx, item) {
       const navTabs = $(this).closest(".tabs").find(".nav-tabs");
       const title = $(this).attr("title");
-      navTabs.append(`<li><a href="#">${title}</a></li>`);
+      navTabs.append(`<li><a href="#" role="button" tabindex="0">${title}</a></li>`);
     });
 
+  // Set first tab as active in each tab group
   $(".tabs ul.nav-tabs").each(function () {
     $(this).find("li:first").addClass("active");
   });
 
+  // Set first pane as active in each tab group
   $(".tabs .tab-content").each(function () {
     $(this).find("div:first").addClass("active");
   });
 
-  $(".nav-tabs a").click(function (e) {
+  // Use event delegation for tab switching (works even if tabs are added dynamically)
+  $(document).on("click", ".nav-tabs a", function (e) {
     e.preventDefault();
-    const tab = $(this).parent();
+    e.stopPropagation();
+    const tab = $(this).parent("li");
     const tabIndex = tab.index();
     const tabPanel = $(this).closest(".tabs");
     const tabPane = tabPanel.find(".tab-pane").eq(tabIndex);
-    tabPanel.find(".active").removeClass("active");
+    
+    // Remove active class from all tabs and panes in this group
+    tabPanel.find(".nav-tabs li").removeClass("active");
+    tabPanel.find(".tab-pane").removeClass("active");
+    
+    // Add active class to clicked tab and corresponding pane
     tab.addClass("active");
     tabPane.addClass("active");
+  });
+
+  // Also support keyboard navigation (Enter/Space)
+  $(document).on("keydown", ".nav-tabs a", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      $(this).click();
+    }
   });
 });
