@@ -48,6 +48,11 @@
     {{ $menuType := "main" }}
     {{ $menu := .Site.Menus.main }}
     
+    {{ if eq $currentPage.Type "mcp" }}
+      {{ $menuType = "mcp" }}
+      {{ $menu = .Site.Menus.mcp }}
+    {{ end }}
+
     {{ if eq $currentPage.Type "learn" }}
       {{ $menuType = "learn" }}
       {{ $menu = .Site.Menus.learn }}
