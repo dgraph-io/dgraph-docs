@@ -11,7 +11,7 @@ set -e
 # Configuration
 OUTPUT_DIR="public"
 TEMP_DIR=".hugo-versions-temp"
-VERSION_BRANCHES=("release/v24.1")  # Add your version branches here
+VERSION_BRANCHES=("release/v25.0" "release/v24.1")  # Add your version branches here
 # The first branch in the list builds to root public/
 ROOT_BRANCH=${VERSION_BRANCHES[0]}
 # Get current working branch
@@ -98,7 +98,12 @@ for branch in "${VERSION_BRANCHES[@]}"; do
     if [[ "$branch" =~ ^release/ ]]; then
         VERSION=$(echo "$branch" | sed 's|release/||')
         VERSION_TITLE="$VERSION"
-        VERSION_URL="/$VERSION/"
+        # First entry always has URL "/" regardless of version
+        if [ "$FIRST" = true ]; then
+            VERSION_URL="/"
+        else
+            VERSION_URL="/$VERSION/"
+        fi
     else
         VERSION="main"
         VERSION_TITLE="Latest (main)"
