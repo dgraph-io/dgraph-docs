@@ -67,7 +67,8 @@ for branch in "${VERSION_BRANCHES[@]}"; do
         fi
         
         # Clone the specific branch into temp directory
-        git worktree add "$BRANCH_DIR" "origin/$branch"
+        git fetch origin "$branch"
+        git worktree add "$BRANCH_DIR" "$branch"
         
         # Build Hugo site for this version
         pushd "$BRANCH_DIR"
