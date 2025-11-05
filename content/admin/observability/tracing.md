@@ -4,7 +4,7 @@ title = "Tracing"
 weight = 4
 type = "docs"
 [menu.main]
-    parent = "admin"
+    parent = "observability"
 +++
 
 Dgraph is integrated with [OpenCensus](https://opencensus.io/zpages/) to collect distributed traces from the Dgraph cluster.

@@ -5,7 +5,7 @@ description = "Dgraph logs requests for queries and mutations, and also provides
 weight = 2
 type = "docs"
 [menu.main]
-    parent = "admin"
+    parent = "observability"
 +++
 
 Dgraph logs requests for queries and mutations, and also provides audit logging

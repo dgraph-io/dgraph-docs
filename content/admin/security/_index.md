@@ -1,6 +1,6 @@
 +++
 title = "Security"
-weight = 14
+weight = 4
 type = "docs"
 [menu.main]
   identifier = "security"

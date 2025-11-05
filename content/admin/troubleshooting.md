@@ -1,6 +1,6 @@
 +++
 title = "Troubleshooting"
-weight = 21
+weight = 6
 type = "docs"
 [menu.main]
     parent = "admin"

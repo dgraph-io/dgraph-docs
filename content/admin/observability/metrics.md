@@ -5,7 +5,7 @@ description = "Dgraph database helps administrators by providing metrics on Dgra
 weight = 5
 type = "docs"
 [menu.main]
-    parent = "admin"
+    parent = "observability"
 +++
 
 
