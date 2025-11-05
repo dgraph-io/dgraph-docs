@@ -524,7 +524,7 @@ is being restored.
 {{% notice "note" %}}
 When using backups made from a Dgraph cluster that uses encryption (so backups are encrypted),
 you need to use the same key from that original cluster when doing a restore process.
-Dgraph's [Encryption at Rest]({{< relref "enterprise-features/encryption-at-rest.md" >}}) uses a symmetric-key
+Dgraph's [Encryption at Rest]({{< relref "encryption-at-rest.md" >}}) uses a symmetric-key
 algorithm where the same key is used for both encryption and decryption, so the encryption key from that
 cluster is needed for the restore process.
 {{% /notice %}}

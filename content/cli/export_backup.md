@@ -8,7 +8,7 @@ type = "docs"
 
 #### `dgraph export_backup`
 
-This command is used to convert a [binary backup]({{< relref "enterprise-features/binary-backups.md" >}})
+This command is used to convert a [binary backup]({{< relref "binary-backups.md" >}})
 created using Dgraph Enterprise Edition into an exported folder. The following
 replicates key information from the help listing shown when you run `dgraph export_backup --help`:
 

@@ -255,8 +255,8 @@ If the upgrade fails:
 
 ## See Also
 
-- [Access Control Lists]({{< relref "../../enterprise-features/access-control-lists.md" >}}) - ACL documentation
-- [Binary Backups]({{< relref "../../enterprise-features/binary-backups.md" >}}) - Backup before upgrading
+- [Access Control Lists]({{< relref "access-control-lists.md" >}}) - ACL documentation
+- [Binary Backups]({{< relref "binary-backups.md" >}}) - Backup before upgrading
 - [Release Notes]({{< relref "../../releases" >}}) - Version-specific changes
 - [Migration Guide]({{< relref "../../migration" >}}) - Data migration strategies
 

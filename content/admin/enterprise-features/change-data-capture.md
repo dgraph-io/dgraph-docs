@@ -7,7 +7,7 @@ type = "docs"
     parent = "enterprise-features"
 +++
 
-With a Dgraph [enterprise license]({{< relref "enterprise-features/license.md" >}}),
+With a Dgraph [enterprise license]({{< relref "license.md" >}}),
 you can use change data capture (CDC) to track data changes over time; including
 mutations and drops in your database. Dgraph's CDC implementation lets you use
 Kafka or a local file as a *sink* to store CDC updates streamed by Dgraph Alpha

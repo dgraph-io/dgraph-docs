@@ -40,7 +40,7 @@ You should encapsulate the options for a superflag in double-quotes (`"`) if any
 
 ## ACL Superflag
 
-The `--acl` superflag configures [Access Control List]({{< relref "../../enterprise-features/access-control-lists.md" >}}) settings:
+The `--acl` superflag configures [Access Control List]({{< relref "access-control-lists.md" >}}) settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|

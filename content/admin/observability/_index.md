@@ -1,6 +1,6 @@
 +++
 title = "Observability"
-weight = 5
+weight = 3
 type = "docs"
 [menu.main]
   identifier = "observability"

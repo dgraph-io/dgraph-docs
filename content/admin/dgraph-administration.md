@@ -40,7 +40,7 @@ Alter operations allow clients to apply schema updates and drop predicates from 
 
 You can secure alter operations using token authentication. See [Admin Endpoint Security]({{< relref "security/admin-endpoint-security.md#securing-alter-operations" >}}) for detailed configuration instructions.
 
-For enterprise-grade access control, see [Access Control Lists]({{< relref "enterprise-features/access-control-lists.md" >}}).
+For enterprise-grade access control, see [Access Control Lists]({{< relref "access-control-lists.md" >}}).
 
 ## Export database
 
@@ -105,7 +105,7 @@ When the new cluster (that uses the upgraded version of Dgraph) is up and runnin
 
 ### Enterprise Upgrade Notes
 
-For enterprise customers, specific upgrade procedures may be required depending on your Dgraph version. The general upgrade process uses [binary backups]({{< relref "enterprise-features/binary-backups.md">}}) for data migration:
+For enterprise customers, specific upgrade procedures may be required depending on your Dgraph version. The general upgrade process uses [binary backups]({{< relref "binary-backups.md">}}) for data migration:
 
 1. Use binary backup to export data from the old cluster
 2. Ensure the backup is successful
