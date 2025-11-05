@@ -106,5 +106,5 @@ You can configure Dgraph to only allow alter operations when the client provides
 
 See the [Token Authentication](#token-authentication) section above for setup instructions. Once configured, all alter operations require the `X-Dgraph-AuthToken` header.
 
-For enterprise-grade access control, see [Access Control Lists]({{< relref "../../enterprise-features/access-control-lists.md" >}}).
+For enterprise-grade access control, see [Access Control Lists]({{< relref "access-control-lists.md" >}}).
 

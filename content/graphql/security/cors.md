@@ -1,6 +1,6 @@
 +++
 title = "Restrict origins"
-type = "docs"
+type = "graphql"
 [menu.graphql]
   identifier = "authorization-cors"
   parent = "gql-auth"

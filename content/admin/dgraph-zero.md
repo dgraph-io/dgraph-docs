@@ -2,7 +2,7 @@
 date = "2017-03-20T22:25:17+11:00"
 title = "Dgraph Zero API Reference"
 type = "docs"
-weight = 8
+weight = 5
 [menu.main]
     parent = "admin"
 +++

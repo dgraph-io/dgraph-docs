@@ -1,7 +1,7 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
 title = "Dgraph Alpha API Reference"
-weight = 7
+weight = 6
 type = "docs"
 [menu.main]
     parent = "admin"

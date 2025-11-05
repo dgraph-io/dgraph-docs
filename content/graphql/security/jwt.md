@@ -1,6 +1,6 @@
 +++
 title = "Handle JWT Token"
-type = "docs"
+type = "graphql"
 [menu.graphql]
   identifier = "authorization-header"
   parent = "gql-auth"

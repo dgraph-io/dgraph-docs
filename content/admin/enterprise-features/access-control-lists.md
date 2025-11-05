@@ -7,10 +7,6 @@ type = "docs"
     parent = "enterprise-features"
 +++
 
-{{% notice "note" %}}
-This feature was introduced in [v1.1.0](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.0).
-The `dgraph acl` command is deprecated and will be removed in a future release. ACL changes can be made by using the `/admin` GraphQL endpoint on any Alpha node.
-{{% /notice %}}
 
 Access Control List (ACL) provides access protection to your data stored in
 Dgraph. When the ACL feature is enabled, a client, e.g. [dgo](https://github.com/dgraph-io/dgo) or [dgraph4j](https://github.com/dgraph-io/dgraph4j), must

@@ -48,9 +48,9 @@ At `/admin` you'll find an admin API for administering your GraphQL instance.  T
 
 Enterprise Features like ACL, Backups and Restore are also available using the GraphQL API at `/admin` endpoint.
 
-* [ACL]({{< relref "enterprise-features/access-control-lists.md#accessing-secured-dgraph" >}})
-* [Backups]({{< relref "enterprise-features/binary-backups.md#create-a-backup" >}})
-* [Restore]({{< relref "enterprise-features/binary-backups.md#online-restore" >}})
+* [ACL]({{< relref "access-control-lists.md#accessing-secured-dgraph" >}})
+* [Backups]({{< relref "binary-backups.md#create-a-backup" >}})
+* [Restore]({{< relref "binary-backups.md#online-restore" >}})
 
 ## First start
 
