@@ -1,100 +1,13 @@
 +++
 date = "2017-03-20T22:25:17+11:00"
-title = "Highly Available Cluster Setup"
-weight = 4
+title = "HA Cluster Setup"
+weight = 5
 type = "docs"
 [menu.main]
-    parent = "kubernetes"
+    parent = "installation"
 +++
 
-You can run three Dgraph Alpha servers and three Dgraph Zero servers in a highly available cluster setup. For a highly available setup, start the Dgraph Zero server  with `--replicas 3` flag, so that all data is replicated on three Alpha servers and forms one Alpha group. You can install a highly available cluster using:
-*  [dgraph-ha.yaml](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/kubernetes/dgraph-ha/dgraph-ha.yaml) file
-*  Helm charts.
-
-### Install a highly available Dgraph cluster using YAML or Helm
-
-{{% tabs %}} {{< tab "YAML" >}}
-#### Before you begin:
-
-* Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-* Ensure that you have a production-ready Kubernetes cluster with at least three worker nodes running in a cloud provider of your choice.
-* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration]({{< relref "tls-configuration.md" >}}).
-
-#### Installing a highly available Dgraph cluster
-
-1.  Verify that you are able to access the nodes in the Kubernetes cluster:
-
-    ```bash
-    kubectl get nodes
-    ```
-
-    An output similar to this appears:
-
-     ```bash
-       NAME                                          STATUS   ROLES    AGE   VERSION
-      <aws-ip-hostname>.<region>.compute.internal   Ready    <none>   1m   v1.15.11-eks-af3caf
-      <aws-ip-hostname>.<region>.compute.internal   Ready    <none>   1m   v1.15.11-eks-af3caf
-      <aws-ip-hostname>.<region>.compute.internal   Ready    <none>   1m   v1.15.11-eks-af3caf
-      ```
-    After your Kubernetes cluster is up, you can use [dgraph-ha.yaml](https://github.com/dgraph-io/dgraph/blob/main/contrib/config/kubernetes/dgraph-ha/dgraph-ha.yaml) to start the cluster. 
-
-1.  Start a StatefulSet that creates Pods with `Zero`, `Alpha`, and `Ratel UI`:
-    
-     ```bash
-     kubectl create --filename https://raw.githubusercontent.com/dgraph-io/dgraph/main/contrib/config/kubernetes/dgraph-ha/dgraph-ha.yaml
-     ```
-    An output similar to this appears:
-
-      ```bash
-      service/dgraph-zero-public created
-      service/dgraph-alpha-public created
-      service/dgraph-ratel-public created
-      service/dgraph-zero created
-      service/dgraph-alpha created
-      statefulset.apps/dgraph-zero created
-      statefulset.apps/dgraph-alpha created
-      deployment.apps/dgraph-ratel created
-      ```
-1. Confirm that the Pods were created successfully.
-
-    ```bash
-    kubectl get pods
-    ```
-    An output similar to this appears:
-   
-     ```bash
-      NAME                  READY   STATUS    RESTARTS   AGE
-     dgraph-alpha-0        1/1     Running   0          6m24s
-     dgraph-alpha-1        1/1     Running   0          5m42s
-     dgraph-alpha-2        1/1     Running   0          5m2s
-     dgraph-ratel-<pod-id> 1/1     Running   0          6m23s
-     dgraph-zero-0         1/1     Running   0          6m24s
-     dgraph-zero-1         1/1     Running   0          5m41s
-     dgraph-zero-2         1/1     Running   0          5m6s
-     ```
-    You can check the logs for the Pod using `kubectl logs --follow <POD_NAME>`.. 
-
-1. Port forward from your local machine to the Pod:
-
-    ```bash
-       kubectl port-forward service/dgraph-alpha-public 8080:8080
-       kubectl port-forward service/dgraph-ratel-public 8000:8000
-    ```
-1.  Go to `http://localhost:8000` to access Dgraph using the Ratel UI.
-
-{{% notice "note" %}} You can also access the service on its External IP address.{{% /notice %}}
-
-#### Deleting highly available Dgraph resources
-
-Delete all the resources using:
-
-```sh
-kubectl delete --filename https://raw.githubusercontent.com/dgraph-io/dgraph/main/contrib/config/kubernetes/dgraph-ha/dgraph-ha.yaml
-kubectl delete persistentvolumeclaims --selector app=dgraph-zero
-kubectl delete persistentvolumeclaims --selector app=dgraph-alpha
-```
-{{< /tab >}} 
-{{< tab "Helm" >}}
+You can run three Dgraph Alpha servers and three Dgraph Zero servers in a highly available cluster setup. For a highly available setup, start the Dgraph Zero server  with `--replicas 3` flag, so that all data is replicated on three Alpha servers and forms one Alpha group. You can install a highly available cluster using Helm charts.
 
 #### Before you begin
 
@@ -188,8 +101,6 @@ kubectl delete persistentvolumeclaims --selector app=dgraph-alpha
    ```sh
    kubectl delete pvc --selector release=my-release
    ```
-{{< /tab >}}    
-{{% /tabs %}}
 
 
 ### Dgraph configuration files

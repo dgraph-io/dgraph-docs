@@ -2,20 +2,19 @@
 title = "Lambda Server"
 description = "Setup a Dgraph database with a lambda server. Dgraph Lambda is a serverless platform for running JavaScript on Dgraph and Dgraph Cloud"
 aliases =['/graphql/lambda/server']
-weight = 3
+weight = 8
 type = "docs"
 [menu.main]
     
     parent = "installation"
 +++
 
-In this article you'll learn how to setup a Dgraph database with a lambda server.
 
-## Dgraph Lambda
 
-[Dgraph Lambda](https://github.com/dgraph-io/dgraph-lambda) is a serverless platform for running JavaScript on Dgraph and [Dgraph Cloud](https://dgraph.io/cloud).
-
-You can [download the latest version](https://github.com/dgraph-io/dgraph-lambda/releases/latest) or review the implementation in our [open-source repository](https://github.com/dgraph-io/dgraph-lambda).
+[Dgraph Lambda](https://github.com/dgraph-io/dgraph-lambda) is a component that allows you to execute custom business logic using JavaScript/TypeScript functions within your GraphQL API. It's part of Dgraph's GraphQL implementation and enables you to extend the auto-generated GraphQL API with custom resolvers.
+{{%notice "note"%}}
+Dgraph lambda is an optional server, only used for GraphQL API.
+{{% /notice %}}
 
 ### Running with Docker
 
