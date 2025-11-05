@@ -11,7 +11,7 @@ set -e
 # Configuration
 OUTPUT_DIR="public"
 TEMP_DIR=".hugo-versions-temp"
-VERSION_BRANCHES=("main" "release/v24.1")  # Add your version branches here
+VERSION_BRANCHES=("main" "release/v25.0" "release/v24.1")  # Add your version branches here
 # The first branch in the list builds to root public/
 ROOT_BRANCH=${VERSION_BRANCHES[0]}
 # Get current working branch

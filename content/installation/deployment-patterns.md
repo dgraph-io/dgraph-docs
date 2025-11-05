@@ -20,41 +20,7 @@ This guide covers different Dgraph deployment patterns, from simple development 
 
 ---
 
-## Learning Environment
-
-**Best for:** First-time users, tutorials, local experimentation
-
-### Docker
-
-```sh
-docker run -d -p 8080:8080 -p 9080:9080 \
-  -v ~/dgraph:/dgraph \
-  --name dgraph \
-  dgraph/standalone:latest
-```
-
-**Includes:** Zero + Alpha in one container
-**Access:** Ratel UI at `http://localhost:8080`
-
-### Command Line (Linux)
-
-```sh
-# Terminal 1: Start Zero
-dgraph zero --my=localhost:5080
-
-# Terminal 2: Start Alpha
-dgraph alpha --my=localhost:7080 --zero=localhost:5080
-```
-
-**Key Flags:**
-- `--my`: Address and port that other nodes will connect to (default: `localhost:5080` for Zero, `localhost:7080` for Alpha)
-- `--zero`: Alpha connects to Zero using this address
-- `--wal`: Directory for write-ahead log entries (default: `zw` for Zero, `w` for Alpha)
-- `--postings`: Directory for Alpha data storage (default: `p`)
-- `--bindall`: Set to `true` for machine-to-machine communication (default: `true`)
-
-**Pros:** Quick to start, minimal resources
-**Cons:** No HA, no persistence guarantees, not for production
+> **Getting Started?** For first-time users and local development, see the [Learning Environment]({{< relref "single-host-setup.md" >}}) guide, which covers Docker standalone and Docker Compose setups with Ratel UI.
 
 ---
 
@@ -74,54 +40,9 @@ dgraph alpha --my=localhost:7080 --zero=localhost:5080
 └──────────────┘
 ```
 
-### Docker Compose
 
-```yaml
-version: "3.8"
-services:
-  zero:
-    image: dgraph/dgraph:latest
-    volumes:
-      - dgraph-zero:/dgraph
-    ports:
-      - 5080:5080
-      - 6080:6080
-    command: dgraph zero --my=zero:5080
-    
-  alpha:
-    image: dgraph/dgraph:latest
-    volumes:
-      - dgraph-alpha:/dgraph
-    ports:
-      - 8080:8080
-      - 9080:9080
-    command: dgraph alpha --my=alpha:7080 --zero=zero:5080
 
-volumes:
-  dgraph-zero:
-  dgraph-alpha:
-```
-
-Start with: `docker-compose up -d`
-
-### Command Line
-
-```sh
-# Start Zero
-dgraph zero --my=<IP>:5080 -w data/zero
-
-# Start Alpha
-dgraph alpha --my=<IP>:7080 --zero=<ZERO_IP>:5080 -p data/alpha/p -w data/alpha/w
-```
-
-**Flag Reference:**
-- `-w` / `--wal`: Directory for write-ahead log entries
-- `-p` / `--postings`: Directory for Alpha data storage
-- `--bindall`: Set to `true` for network communication (default: `true`)
-- `--v=2`: Recommended log verbosity level for better diagnostics
-
-**Pros:** Realistic setup, persistent storage
-**Cons:** No HA, single point of failure
+Refer to [Basic Cluster]({{< relref "single-host-setup.md" >}}) instructions.
 
 ---
 
