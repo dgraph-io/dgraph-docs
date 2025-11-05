@@ -9,7 +9,7 @@ weight = 8
 
 Dgraph Zero is the control plane that manages cluster coordination, membership, and data distribution. This reference documents Zero's HTTP API endpoints and administrative operations.
 
-For architectural overview, see [Architecture]({{< relref "dgraph-architecture.md" >}}).
+For architectural overview, see [Architecture]({{< relref "dgraph-architecture.md" >}}). For comprehensive administrative operations like backup, export, and shutdown, see [Dgraph Administration]({{< relref "dgraph-administration.md" >}}).
 
 ## Configuration
 
