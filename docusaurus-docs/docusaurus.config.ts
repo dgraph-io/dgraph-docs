@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Dgraph Documentation',
   tagline: 'The only open, complete graph database used at terabyte-scale to power real-time use cases',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon-16x16.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -147,46 +147,8 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Documentation',
-          items: [
-            {
-              label: 'Overview',
-              to: '/dgraph-overview/overview',
-            },
-            {
-              label: 'Ratel UI',
-              to: '/ratel/',
-            },
-            {
-              label: 'Tutorials',
-              to: '/learn/',
-            },
-            {
-              label: 'GraphQL',
-              to: '/graphql/',
-            },
-            {
-              label: 'DQL',
-              to: '/dql/',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Discourse',
-              href: 'https://discuss.dgraph.io/',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/dgraph-io/dgraph',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Dgraph Labs, Inc. Built with Docusaurus.`,
+        
+      ]
     },
     prism: {
       theme: prismThemes.github,

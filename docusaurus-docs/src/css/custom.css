@@ -1,30 +1,76 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Custom CSS for Dgraph Documentation
+ * Styling based on istari-documentation with Dgraph red/pink colors
  */
 
-/* You can override the default Infima variables here. */
+/* Dgraph brand colors from Hugo theme */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Primary Dgraph red/pink */
+  --ifm-color-primary: #ef265a;
+  --ifm-color-primary-dark: #d91e4f;
+  --ifm-color-primary-darker: #cc1c4a;
+  --ifm-color-primary-darkest: #a8173d;
+  --ifm-color-primary-light: #f23d6b;
+  --ifm-color-primary-lighter: #f44a75;
+  --ifm-color-primary-lightest: #f96d8f;
+  
+  /* Dark background */
+  --dgraph-dark: #100c19;
+  
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark mode - Dgraph colors */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #ef265a;
+  --ifm-color-primary-dark: #d91e4f;
+  --ifm-color-primary-darker: #cc1c4a;
+  --ifm-color-primary-darkest: #a8173d;
+  --ifm-color-primary-light: #f23d6b;
+  --ifm-color-primary-lighter: #f44a75;
+  --ifm-color-primary-lightest: #f96d8f;
+  
+  --ifm-background-color: var(--dgraph-dark);
+  --ifm-background-surface-color: #1a1a1a;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Typography - istari-documentation style (smaller fonts) */
+.markdown h1 {
+  font-size: 2rem;
+}
+
+#footnote-label {
+  font-size: 1rem;
+}
+
+.footnotes {
+  font-size: 0.8rem;
+}
+
+/* Sidebar - istari-documentation style */
+.menu__link {
+  color: var(--ifm-color-primary-darkest);
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+a.menu__link:not([href]) {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--ifm-color-primary-light);
+}
+
+a[href].menu__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  background-color: transparent;
+}
+
+.menu__link--active:not(.menu__link--sublist):hover {
+  background-color: transparent;
 }

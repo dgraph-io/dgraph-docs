@@ -4,10 +4,9 @@ const sidebars: SidebarsConfig = {
   docsSidebar: [
     'overview',
     'quick-start',
-    'dgraph-glossary',
     {
       type: 'category',
-      label: 'DQL',
+      label: 'Query Language',
       items: [
         'dql/index',
         'dql/dql-schema',
@@ -54,6 +53,42 @@ const sidebars: SidebarsConfig = {
           ],
         },
         'dql/tips/index',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Clients',
+      items: [
+        'clients/index',
+        'clients/go',
+        'clients/python',
+        'clients/java',
+        'clients/csharp',
+        'clients/raw-http',
+        'clients/unofficial-clients',
+        {
+          type: 'category',
+          label: 'JavaScript',
+          items: [
+            'clients/javascript/index',
+            'clients/javascript/grpc',
+            'clients/javascript/http',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Installation',
+      items: [
+        'installation/index',
+        'installation/download',
+        'installation/dgraph-architecture',
+        'installation/deployment-patterns',
+        'installation/single-host-setup',
+        'installation/ha-cluster',
+        'installation/lambda-server',
+        'installation/production-checklist',
       ],
     },
     {
@@ -105,70 +140,11 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+   
+    
     {
       type: 'category',
-      label: 'CLI',
-      items: [
-        'cli/index',
-        'cli/alpha',
-        'cli/zero',
-        'cli/bulk',
-        'cli/live',
-        'cli/restore',
-        'cli/acl',
-        'cli/audit',
-        'cli/cert',
-        'cli/completion',
-        'cli/config',
-        'cli/conv',
-        'cli/debuginfo',
-        'cli/decrypt',
-        'cli/export_backup',
-        'cli/increment',
-        'cli/migrate',
-        'cli/superflags',
-        'cli/upgrade',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Clients',
-      items: [
-        'clients/index',
-        'clients/go',
-        'clients/python',
-        'clients/java',
-        'clients/csharp',
-        'clients/raw-http',
-        'clients/unofficial-clients',
-        {
-          type: 'category',
-          label: 'JavaScript',
-          items: [
-            'clients/javascript/index',
-            'clients/javascript/grpc',
-            'clients/javascript/http',
-          ],
-        },
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Installation',
-      items: [
-        'installation/index',
-        'installation/download',
-        'installation/dgraph-architecture',
-        'installation/deployment-patterns',
-        'installation/single-host-setup',
-        'installation/ha-cluster',
-        'installation/lambda-server',
-        'installation/production-checklist',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Migration',
+      label: 'Data Migration',
       items: [
         'migration/index',
         'migration/bulk-loader',
@@ -239,6 +215,7 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    'dgraph-glossary',
     'releases/index',
   ],
 };
