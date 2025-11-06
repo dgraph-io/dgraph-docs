@@ -98,10 +98,11 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Dgraph',
+      title: '',
       logo: {
         alt: 'Dgraph Logo',
-        src: 'img/logo.svg',
+        src: 'img/dgraph-light.svg',
+        srcDark: 'img/dgraph-dark.svg',
       },
       items: [
         {
