@@ -1,0 +1,156 @@
+import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+
+const sidebars: SidebarsConfig = {
+  graphqlSidebar: [
+    'index',
+    {
+      type: 'category',
+      label: 'GraphQL',
+      items: [
+        'quick-start/index',
+        {
+          type: 'category',
+          label: 'Schema',
+          items: [
+            'schema/index',
+            'schema/dgraph-schema',
+            'schema/types',
+            'schema/graph-links',
+            'schema/documentation',
+            'schema/migration',
+            'schema/reserved',
+            {
+              type: 'category',
+              label: 'Directives',
+              items: [
+                'schema/directives/index',
+                'schema/directives/auth',
+                'schema/directives/deprecated',
+                'schema/directives/directive-dgraph',
+                'schema/directives/directive-withsubscription',
+                'schema/directives/embedding',
+                'schema/directives/generate',
+                'schema/directives/ids',
+                'schema/directives/search',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Queries',
+          items: [
+            'queries/index',
+            'queries/queries-overview',
+            'queries/search-filtering',
+            'queries/and-or-not',
+            'queries/order-page',
+            'queries/aggregate',
+            'queries/cascade',
+            'queries/skip-include',
+            'queries/cached-results',
+            'queries/persistent-queries',
+            'queries/vector-similarity',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Mutations',
+          items: [
+            'mutations/index',
+            'mutations/mutations-overview',
+            'mutations/add',
+            'mutations/update',
+            'mutations/delete',
+            'mutations/upsert',
+            'mutations/deep',
+          ],
+        },
+        'subscriptions/index',
+        {
+          type: 'category',
+          label: 'Lambda',
+          items: [
+            'lambda/index',
+            'lambda/lambda-overview',
+            'lambda/query',
+            'lambda/mutation',
+            'lambda/field',
+            'lambda/webhook',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Custom',
+          items: [
+            'custom/index',
+            'custom/custom-overview',
+            'custom/query',
+            'custom/mutation',
+            'custom/field',
+            'custom/directive',
+            'custom/custom-dql',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'GraphQL Clients',
+          items: [
+            'graphql-clients/index',
+            'graphql-clients/graphql-ui',
+            'graphql-clients/graphql-ide',
+            {
+              type: 'category',
+              label: 'Endpoint',
+              link: {
+                type: 'doc',
+                id: 'graphql-clients/endpoint/index',
+              },
+              items: [
+                'graphql-clients/endpoint/graphql-request',
+                'graphql-clients/endpoint/graphql-response',
+                'graphql-clients/endpoint/graphql-get-request',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Security',
+          items: [
+            'security/index',
+            'security/jwt',
+            'security/auth-tips',
+            'security/cors',
+            'security/mutations',
+            'security/graphtraversal-rules',
+            'security/RBAC-rules',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Admin',
+          items: [
+            'admin/index',
+            'admin/admin-api',
+          ],
+        },
+        'federation/index',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'GraphQL-DQL',
+      items: [
+        'graphql-dql/index',
+        'graphql-dql/dql-for-graphql',
+        'graphql-dql/graphql-dql-schema',
+        'graphql-dql/graphql-dgraph',
+        'graphql-dql/graphql-data-loading',
+        'graphql-dql/graphql-data-migration',
+      ],
+    },
+  ],
+};
+
+export default sidebars;

@@ -1,0 +1,16 @@
+.runnable {
+  margin: 1.5rem 0;
+}
+
+.runnable :global(.tabs) {
+  margin-top: 0;
+}
+
+.runnable :global(.tabs__item) {
+  padding: 0.5rem 1rem;
+}
+
+.runnable :global(.tabs__content) {
+  padding-top: 1rem;
+}
+
