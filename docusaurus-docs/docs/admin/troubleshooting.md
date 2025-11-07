@@ -14,12 +14,12 @@ When setting up a cluster, verify the following requirements are met:
 * Does each instance have a unique ID on startup?
 * Has `--bindall=true` been set for networked communication?
 
-See the [Production Checklist](installation/production-checklist) for comprehensive deployment requirements.
+See the [Production Checklist](../installation/production-checklist) for comprehensive deployment requirements.
 
 ## Running out of memory (OOM)
 
-When you [bulk load](/dgraph-overview/migration/bulk-loader)
-or [backup](/dgraph-overview/admin/enterprise-features/binary-backups) your data,
+When you [bulk load](../migration/bulk-loader)
+or [backup](enterprise-features/binary-backups) your data,
 Dgraph can consume more memory than usual due to a high volume of writes. This
 can cause OOM crashes.
 

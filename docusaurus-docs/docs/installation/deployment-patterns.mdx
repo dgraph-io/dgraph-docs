@@ -14,7 +14,7 @@ This guide covers different Dgraph deployment patterns, from simple development 
 | Distributed HA | Large production, &gt;10TB | 3 Zeros, 6+ Alphas | ✅ | ✅ |
 
 ---
-> **Getting Started?** For first-time users and local development, see the [Learning Environment](/dgraph-overview/installation/single-host-setup) guide, which covers Docker standalone and Docker Compose setups with Ratel UI.
+> **Getting Started?** For first-time users and local development, see the [Learning Environment](/installation/single-host-setup) guide, which covers Docker standalone and Docker Compose setups with Ratel UI.
 ---
 
 ## Basic cluster
@@ -35,7 +35,7 @@ This guide covers different Dgraph deployment patterns, from simple development 
 
 
 
-Refer to [Basic Cluster](/dgraph-overview/installation/single-host-setup) instructions.
+Refer to [Basic Cluster](/installation/single-host-setup) instructions.
 
 ---
 ## HA cluster
@@ -205,7 +205,7 @@ dgraph alpha --my=host3:7082 --zero=host1:5080,host2:5080,host3:5080 -p p9 -w w9
 | `--v=2` | Zero/Alpha | Log verbosity level (recommended: 2) | `0` |
 
 **Configuration Methods:**
-Flags can be set via command-line arguments, environment variables, or configuration files. See [Config](/dgraph-overview/cli/config) for details.
+Flags can be set via command-line arguments, environment variables, or configuration files. See [Config](/cli/config) for details.
 
 ## Best Practices
 
@@ -252,7 +252,7 @@ Before production deployment:
 
 ## Next Steps
 
-- [Configure Security](/dgraph-overview/admin/security/)
-- [Set Up Monitoring](/dgraph-overview/admin/observability/monitoring)
-- [Production Checklist](/dgraph-overview/installation/production-checklist)
-- [Administration Guide](/dgraph-overview/admin/)
+- [Configure Security](/admin/security/)
+- [Set Up Monitoring](/admin/observability/monitoring)
+- [Production Checklist](/installation/production-checklist)
+- [Administration Guide](/admin/)

@@ -4,7 +4,7 @@ title: JavaScript
 
 ## gRPC JS Client
 
-The official JavaScript gRPC client documentation [can be found here](/dgraph-overview/clients/javascript/grpc).
+The official JavaScript gRPC client documentation [can be found here](grpc).
 
 More details on the supported versions can be found at [this link](https://github.com/dgraph-io/dgraph-js#supported-versions).
 

@@ -4,7 +4,7 @@ title: Dgraph Alpha API Reference
 
 Dgraph Alpha is the data plane that stores graph data and serves queries. This reference documents Alpha's HTTP and GraphQL endpoints for health monitoring and basic operations.
 
-For architectural overview, see [Architecture](/dgraph-overview/installation/dgraph-architecture). For comprehensive admin operations like backup, export, and shutdown, see [Dgraph Administration](/dgraph-overview/admin/dgraph-administration).
+For architectural overview, see [Architecture](../installation/dgraph-architecture). For comprehensive admin operations like backup, export, and shutdown, see [Dgraph Administration](dgraph-administration).
 
 ## Configuration
 
@@ -102,4 +102,4 @@ For comprehensive administrative operations including:
 - Schema management
 - Security and authentication
 
-See [Dgraph Administration](/dgraph-overview/admin/dgraph-administration).
+See [Dgraph Administration](dgraph-administration).

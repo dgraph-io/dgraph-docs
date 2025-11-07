@@ -3,7 +3,7 @@ title: C#
 ---
 
 An implementation for a Dgraph client in C#, using [gRPC](https://grpc.io/).
-This client follows the [Dgraph Go client](/dgraph-overview/clients/go) closely.
+This client follows the [Dgraph Go client](go) closely.
 
 :::tip
 The official C# client [can be found here](https://github.com/dgraph-io/dgraph.net).
@@ -28,7 +28,7 @@ var client = new DgraphClient(new Channel("127.0.0.1:9080", ChannelCredentials.I
 
 ### Multi-tenancy
 
-In [multi-tenancy](/dgraph-overview/admin/enterprise-features/multitenancy) environments, Dgraph provides a new method `LoginRequest()`,
+In [multi-tenancy](../admin/enterprise-features/multitenancy) environments, Dgraph provides a new method `LoginRequest()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a Dgraph client, and make the client login into namespace `123`:

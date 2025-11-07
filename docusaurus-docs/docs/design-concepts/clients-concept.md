@@ -6,7 +6,7 @@ A client is a program that calls dgraph. Broadly, there are stand alone clients 
 
 GraphQL is an open standard with many clients (graphical and libraries) also, and GraphQL clients work with Dgraph.
 
-Dgraph provides [client libraries](/dgraph-overview/clients/) for many languages. These clients send DQL queries, and perform useful functions such as logging in, in idomatic ways in each language.
+Dgraph provides [client libraries](../clients) for many languages. These clients send DQL queries, and perform useful functions such as logging in, in idomatic ways in each language.
 
 Note that Dgraph does not force or insist on any particular GraphQL client. Any GraphQL client, GUI, tool, or library will work well with Dgraph, and it is the users' choice which to choose. Dgraph only provides clients for the proprietary DQL query language. GraphQL clients are available for free from many organizations.
 

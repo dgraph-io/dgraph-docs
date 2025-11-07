@@ -17,14 +17,14 @@ Sortable Types: `int`, `float`, `String`, `dateTime`, `default`
 
 Results can be sorted in ascending order (`orderasc`) or descending order (`orderdesc`) by a predicate or variable.
 
-For sorting on predicates with [sortable indices](/dgraph-overview/predicate-indexing#sortable-indices), Dgraph sorts on the values and with the index in parallel and returns whichever result is computed first.
+For sorting on predicates with [sortable indices](/dql/predicate-indexing#sortable-indices), Dgraph sorts on the values and with the index in parallel and returns whichever result is computed first.
 
 :::note
 Dgraph returns `null` values at the end of the results, irrespective of their sort. This behavior is consistent across indexed and non-indexed sorts.
 :::
 
 :::tip
-Sorted queries retrieve up to 1000 results by default. This can be changed with [first](/dgraph-overview/pagination#first).
+Sorted queries retrieve up to 1000 results by default. This can be changed with [first](/dql/query/pagination#first).
 :::
 
 

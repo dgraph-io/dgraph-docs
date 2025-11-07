@@ -63,7 +63,7 @@ func newClient() *dgo.Dgraph {
 
 ### Multi-tenancy
 
-In [multi-tenancy](/dgraph-overview/admin/enterprise-features/multitenancy) environments, Dgraph provides a new method `LoginIntoNamespace()`,
+In [multi-tenancy](../admin/enterprise-features/multitenancy) environments, Dgraph provides a new method `LoginIntoNamespace()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a dgo client, and make the client login into namespace `123`:

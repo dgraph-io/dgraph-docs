@@ -161,7 +161,7 @@ You can further configure Bulk Loader using the following options:
 - `--badger` superflag's `compression` option: Configure the compression of data
 on disk. By default, the Snappy compression format is used, but you can also use
 Zstandard compression. Or, you can choose no compression to minimize CPU usage.
-To learn more, see [Data Compression on Disk](/dgraph-overview/admin/data-compression).
+To learn more, see [Data Compression on Disk](/admin/data-compression).
 
 - `--new_uids`: (default: false): Assign new UIDs instead of using the existing
 UIDs in data files. This is useful to avoid overriding the data in a DB already

@@ -12,7 +12,7 @@ The Bulk Loader is designed for initial data import of large datasets (millions 
 - Shards data across multiple output directories for distributed deployment
 
 :::note
-The Bulk Loader should be used for initial import only. For incremental updates on a running cluster, use the [Live Loader](/dgraph-overview/cli/live).
+The Bulk Loader should be used for initial import only. For incremental updates on a running cluster, use the [Live Loader](live).
 :::
 
 ## Usage
@@ -39,7 +39,7 @@ dgraph bulk [flags]
 
 ## Superflags
 
-Bulk uses several [superflags](/dgraph-overview/cli/superflags):
+Bulk uses several [superflags](superflags):
 
 - `--badger` - Badger database options (compression, numgoroutines)
 - `--encryption` - Encryption at rest
@@ -270,8 +270,8 @@ Ensure adequate disk space:
 
 ## See Also
 
-- [Live Loader](/dgraph-overview/cli/live) - For incremental updates
-- [Data Migration](../../migration/import-data) - Migration strategies
-- [Schema](../../dql/dql-schema) - Schema definition
-- [Bulk Loader Guide](/dgraph-overview/migration/bulk-loader) - Detailed bulk loading guide
+- [Live Loader](live) - For incremental updates
+- [Data Migration](../migration/import-data) - Migration strategies
+- [Schema](../dql/dql-schema) - Schema definition
+- [Bulk Loader Guide](../migration/bulk-loader) - Detailed bulk loading guide
 

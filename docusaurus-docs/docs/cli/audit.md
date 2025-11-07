@@ -24,7 +24,7 @@ Use "dgraph audit [command] --help" for more information about a command.
 
 #### `dgraph cert`
 
-This command lets you manage [TLS certificates](/dgraph-overview/admin/security/tls-configuration).
+This command lets you manage [TLS certificates](../admin/security/tls-configuration).
 The following replicates the help listing shown when you run `dgraph cert --help`:
 
 ```shell

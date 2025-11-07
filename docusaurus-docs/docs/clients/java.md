@@ -3,7 +3,7 @@ title: Java
 ---
 
 A minimal implementation for a Dgraph client for Java 1.8 and above, using [gRPC](https://grpc.io/).
-This client follows the [Dgraph Go client](/dgraph-overview/clients/go) closely.
+This client follows the [Dgraph Go client](go) closely.
 
 :::tip
 The official Java client [can be found here](https://github.com/dgraph-io/dgraph4j).
@@ -59,7 +59,7 @@ DgraphClient dgraphClient = new DgraphClient(stub1, stub2, stub3);
 ```
 ### Login using ACL
 
-If [ACL](/dgraph-overview/admin/enterprise-features/access-control-lists) is enabled then you can log-in to the default namespace (`0`) with the following method:
+If [ACL](../admin/enterprise-features/access-control-lists) is enabled then you can log-in to the default namespace (`0`) with the following method:
 
 ```java
 dgraphClient.login(USER_ID, USER_PASSWORD);
@@ -67,7 +67,7 @@ dgraphClient.login(USER_ID, USER_PASSWORD);
 
 ### Multi-tenancy
 
-If [multi-tenancy](/dgraph-overview/admin/enterprise-features/multitenancy) is enabled, by default the login method on client will login into the namespace `0`.
+If [multi-tenancy](../admin/enterprise-features/multitenancy) is enabled, by default the login method on client will login into the namespace `0`.
 In order to login into some other namespace, use the `loginIntoNamespace` method on the client:
 
 ```java
@@ -80,7 +80,7 @@ Once logged-in, the `dgraphClient` object can be used to do any further operatio
 ### Creating a Secure Client using TLS
 
 To setup a client using TLS, you could use the following code snippet. The server needs to be
-setup using the instructions provided [here](/dgraph-overview/admin/security/tls-configuration).
+setup using the instructions provided [here](../admin/security/tls-configuration).
 
 If you are doing client verification, you need to convert the client key from PKCS#1 format to
 PKCS#8 format. By default, grpc doesn't support reading PKCS#1 format keys. To convert the
@@ -138,7 +138,7 @@ dgraphClient.alter(operation);
 Starting Dgraph version 20.03.0, indexes can be computed in the background.
 You can call the function `setRunInBackground(true)` as shown below before
 calling `alter`. You can find more details
-[here](/dgraph-overview/update-dgraph-types#indexes-in-background).
+[here](../howto/update-dgraph-types#indexes-in-background).
 
 ```java
 String schema = "name: string @index(exact) .";
@@ -390,7 +390,7 @@ txn.doRequest(request);
 The upsert block also allows specifying a conditional mutation block using an `@if` directive. The mutation is executed
 only when the specified condition is true. If the condition is false, the mutation is silently ignored.
 
-See more about Conditional Upsert [Here](/dgraph-overview/dql-mutation#conditional-upsert).
+See more about Conditional Upsert [Here](dql/dql-mutation#conditional-upsert).
 
 ```java
 String query = "query {\n" +

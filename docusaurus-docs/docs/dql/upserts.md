@@ -46,9 +46,9 @@ whichever way you wish.
 
 You can also use the `Upsert Block` in DQL to achieve the upsert procedure in a single
  mutation. The request will contain both the query and the mutation as explained
-[here](/dgraph-overview/dql-mutation#upsert-block).
+[here](dql-mutation#upsert-block).
 
-In GraphQL, you can use the `upsert` input variable in an `add` mutation, as explained [here](graphql/mutations/upsert).
+In GraphQL, you can use the `upsert` input variable in an `add` mutation, as explained [here](/graphql/mutations/upsert).
 
 ## Conflicts
 
@@ -235,7 +235,7 @@ curl -H "Content-Type: application/json" -X POST localhost:8080/mutate?commitNow
 ```
 
 If we want to execute the mutation only when the user exists, we could use
-[Conditional Upsert](/dgraph-overview/dql-mutation#conditional-upsert).
+[Conditional Upsert](dql-mutation#conditional-upsert).
 
 
 

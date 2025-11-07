@@ -2,7 +2,7 @@
 title: Concurrent mutations and conflicts
 ---
 
-This how-to guide provides an example on how to handle concurrent modifications using a multi-threaded Java Program. The example demonstrates [transaction](/dgraph-overview/clients#transactions) conflicts in Dgraph.
+This how-to guide provides an example on how to handle concurrent modifications using a multi-threaded Java Program.
 
 Steps to run this example are as follows.
 

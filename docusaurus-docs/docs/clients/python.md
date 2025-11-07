@@ -3,7 +3,7 @@ title: Python
 ---
 
 Official Dgraph client implementation for Python (Python >= v2.7 and >= v3.5), using [gRPC](https://grpc.io/).
-This client follows the [Dgraph Go client](/dgraph-overview/clients/go) closely.
+This client follows the [Dgraph Go client](go) closely.
 
 :::tip
 The official Python client [can be found here](https://github.com/dgraph-io/pydgraph). 
@@ -39,7 +39,7 @@ client = pydgraph.DgraphClient(client_stub)
 
 ### Multi-tenancy
 
-In [multi-tenancy](/dgraph-overview/admin/enterprise-features/multitenancy) environments, PyDgraph provides a new method `login_into_namespace()`,
+In [multi-tenancy](../admin/enterprise-features/multitenancy) environments, PyDgraph provides a new method `login_into_namespace()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a python client, and make the client login into namespace `123`:
@@ -70,7 +70,7 @@ client.alter(op)
 Starting with Dgraph version 20.03.0, indexes can be computed in the background.
 You can set the `run_in_background` field of `pydgraph.Operation` to `True`
 before passing it to the `Alter` function. You can find more details
-[here](/dgraph-overview/update-dgraph-types#indexes-in-background).
+[here](../howto/update-dgraph-types#indexes-in-background).
 
 ```python
 schema = 'name: string @index(exact) .'
@@ -296,7 +296,7 @@ txn.do_request(request)
 The upsert block also allows specifying a conditional mutation block using an `@if` directive. The mutation is executed
 only when the specified condition is true. If the condition is false, the mutation is silently ignored.
 
-See more about Conditional Upserts [here](/dgraph-overview/dql-mutation#conditional-upsert).
+See more about Conditional Upserts [here](dql/dql-mutation#conditional-upsert).
 
 ```python
 query = """

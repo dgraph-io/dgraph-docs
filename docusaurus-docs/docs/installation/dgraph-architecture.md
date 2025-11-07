@@ -26,7 +26,7 @@ Zero nodes manage cluster coordination and metadata. Each cluster requires at le
 **High Availability:**
 Deploy 3 Zero nodes for fault tolerance. They form a Raft group (group 0) for consensus.
 
-See [Zero API Reference](admin/dgraph-zero) for HTTP endpoints and administrative operations.
+See [Zero API Reference](/admin/dgraph-zero) for HTTP endpoints and administrative operations.
 
 ### Dgraph Alpha (Data Plane)
 
@@ -47,7 +47,7 @@ Alpha nodes store data and serve queries. Clusters need at least one Alpha node.
 **High Availability:**
 Deploy 3 Alphas per group for data replication. Each group forms a Raft quorum.
 
-See [Alpha API Reference](/dgraph-overview/admin/dgraph-alpha) for health monitoring and [Admin API](admin/dgraph-administration) for backup, export, and other operations.
+See [Alpha API Reference](/admin/dgraph-alpha) for health monitoring and [Admin API](/admin/dgraph-administration) for backup, export, and other operations.
 
 ## Cluster Architecture
 
@@ -233,7 +233,7 @@ Key metrics to monitor:
 - Transaction throughput
 - Pending proposals (write backpressure)
 
-See [Monitoring](/dgraph-overview/admin/observability/monitoring) for Prometheus/Grafana setup.
+See [Monitoring](/admin/observability/monitoring) for Prometheus/Grafana setup.
 
 ## Security Considerations
 
@@ -244,5 +244,5 @@ See [Monitoring](/dgraph-overview/admin/observability/monitoring) for Prometheus
 
 ## Next Steps
 
-- [Choose a Deployment Pattern](/dgraph-overview/installation/deployment-patterns)
+- [Choose a Deployment Pattern](deployment-patterns)
 

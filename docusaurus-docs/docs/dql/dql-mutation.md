@@ -8,12 +8,12 @@ import TabItem from '@theme/TabItem';
 
 Dgraph Query Language (DQL) is Dgraph's proprietary language to add, modify, delete and fetch data.
 
-Fetching data is done through [DQL Queries](/dgraph-overview/dql/query/dql-query). Adding, modifying or deleting data is done through ***DQL Mutations***.
+Fetching data is done through [DQL Queries](query/dql-query). Adding, modifying or deleting data is done through ***DQL Mutations***.
 
 This overview explains the structure of DQL Mutations and provides links to the appropriate DQL reference documentation.
 
 
-DQL mutations support JSON or [RDF](/dgraph-overview/dql/dql-rdf) format.
+DQL mutations support JSON or [RDF](dql-rdf) format.
 
 ## set block
 In DQL, you add data using a set mutation, identified by the `set` keyword.
@@ -63,7 +63,7 @@ In DQL, you add data using a set mutation, identified by the `set` keyword.
 }
 ```
 
-triples are in [RDF](/dgraph-overview/dql/dql-rdf) format.
+triples are in [RDF](dql-rdf) format.
 
 ###  Node reference
 A mutation can include a blank nodes as an identifier for the subject or object, or a known UID.
@@ -93,7 +93,7 @@ will add the `release_date` information to the node identified by UID `0x632ea2`
 
 ## delete block
 A delete mutation, identified by the `delete` keyword, removes
-[triples](/dgraph-overview/dql/dql-rdf) from the store.
+[triples](dql-rdf) from the store.
 
 For example, if the store contained the following:
 ```RDF
@@ -202,7 +202,7 @@ Execution of an upsert block also returns the response of the query executed on 
 of the database *before mutation was executed*.
 To get the latest result, you have to execute another query after the transaction is committed.
 
-Variables defined in the query block can be used in the mutation blocks using the [uid](/dgraph-overview/upserts#val-function) and [val](/dgraph-overview/upserts#val-function) functions.
+Variables defined in the query block can be used in the mutation blocks using the [uid](upserts#val-function) and [val](upserts#val-function) functions.
 
 ## conditional upsert
 The upsert block also allows specifying conditional mutation blocks using an `@if`

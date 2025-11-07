@@ -13,7 +13,7 @@ You can run three Dgraph Alpha servers and three Dgraph Zero servers in a highly
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 * Ensure that you have a production-ready Kubernetes cluster with atleast three worker nodes running in a cloud provider of your choice.
 * Install [Helm](https://helm.sh/docs/intro/install/).
-* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration](/dgraph-overview/admin/security/tls-configuration).
+* (Optional) To run Dgraph Alpha with TLS, see [TLS Configuration](/admin/security/tls-configuration).
 
 #### Installing a highly available Dgraph cluster using Helm
 
@@ -104,7 +104,7 @@ You can run three Dgraph Alpha servers and three Dgraph Zero servers in a highly
 
 ### Dgraph configuration files
 
-You can create a Dgraph [Config](/dgraph-overview/cli/config) files for Alpha server and Zero server with Helm chart configuration values, `<MY-CONFIG-VALUES>`. For more information about the values, see the latest [configuration settings](https://github.com/dgraph-io/charts/blob/master/charts/dgraph/README.md#configuration).
+You can create a Dgraph [Config](/cli/config) files for Alpha server and Zero server with Helm chart configuration values, `<MY-CONFIG-VALUES>`. For more information about the values, see the latest [configuration settings](https://github.com/dgraph-io/charts/blob/master/charts/dgraph/README.md#configuration).
 
 1. Open an editor of your choice and create a config file named `<MY-CONFIG-VALUES>.yaml`:
 

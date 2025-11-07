@@ -2,13 +2,16 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
   docsSidebar: [
-    'overview',
+    'dgraph-overview',
     'quick-start',
     {
       type: 'category',
       label: 'Query Language',
+      link: {
+        type: 'doc',
+        id: 'dql/index',
+      },
       items: [
-        'dql/index',
         'dql/dql-schema',
         'dql/dql-mutation',
         'dql/dql-rdf',
@@ -58,8 +61,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Clients',
+      link: {
+        type: 'doc',
+        id: 'clients/index',
+      },
       items: [
-        'clients/index',
         'clients/go',
         'clients/python',
         'clients/java',
@@ -80,8 +86,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Installation',
+      link: {
+        type: 'doc',
+        id: 'installation/index',
+      },
       items: [
-        'installation/index',
         'installation/download',
         'installation/dgraph-architecture',
         'installation/deployment-patterns',
@@ -94,8 +103,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Administration',
+      link: {
+        type: 'doc',
+        id: 'admin/index',
+      },
       items: [
-        'admin/index',
         'admin/dgraph-administration',
         'admin/dgraph-alpha',
         'admin/dgraph-zero',
@@ -103,9 +115,12 @@ const sidebars: SidebarsConfig = {
         'admin/troubleshooting',
         {
           type: 'category',
-          label: 'Enterprise Features',
+          label: 'Advanced Features',
+          link: {
+            type: 'doc',
+            id: 'admin/enterprise-features/index',
+          },
           items: [
-            'admin/enterprise-features/index',
             'admin/enterprise-features/access-control-lists',
             'admin/enterprise-features/binary-backups',
             'admin/enterprise-features/change-data-capture',
@@ -119,8 +134,11 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Observability',
+          link: {
+            type: 'doc',
+            id: 'admin/observability/index',
+          },
           items: [
-            'admin/observability/index',
             'admin/observability/monitoring',
             'admin/observability/metrics',
             'admin/observability/tracing',
@@ -131,8 +149,11 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Security',
+          link: {
+            type: 'doc',
+            id: 'admin/security/index',
+          },
           items: [
-            'admin/security/index',
             'admin/security/admin-endpoint-security',
             'admin/security/tls-configuration',
             'admin/security/ports-usage',
@@ -141,12 +162,14 @@ const sidebars: SidebarsConfig = {
       ],
     },
    
-    
     {
       type: 'category',
-      label: 'Data Migration',
+      label: 'Data Migration',  
+      link: {
+        type: 'doc',
+        id: 'migration/index',
+      },
       items: [
-        'migration/index',
         'migration/bulk-loader',
         'migration/live-loader',
         'migration/import-data',
@@ -158,8 +181,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Design Concepts',
+      link: {
+        type: 'doc',
+        id: 'design-concepts/index',
+      },
       items: [
-        'design-concepts/index',
         'design-concepts/dql-concept',
         'design-concepts/graphql-concept',
         'design-concepts/dql-graphql-layering-concept',
@@ -191,7 +217,6 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'How To',
       items: [
-        'howto/index',
         'howto/completion',
         'howto/concurrent-modification-java-multithreaded',
         'howto/dgraph-sentry-integration',
@@ -207,8 +232,11 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Command Line',
+          link: {
+            type: 'doc',
+            id: 'howto/commandline/index',
+          },
           items: [
-            'howto/commandline/index',
             'howto/commandline/about-cli',
             'howto/commandline/create-cli',
           ],
@@ -218,8 +246,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'CLI',
+      link: {
+        type: 'doc',
+        id: 'cli/index',
+      },
       items: [
-        'cli/index',
         'cli/acl',
         'cli/alpha',
         'cli/audit',

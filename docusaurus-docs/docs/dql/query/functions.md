@@ -5,12 +5,12 @@ import RunnableCodeBlock from '@site/src/components/RunnableCodeBlock';
 
 
 
-Functions allow filtering based on properties of nodes or [variables](/dgraph-overview/variables#value-variables).  Functions can be applied in the query root or in filters.
+Functions allow filtering based on properties of nodes or [variables](variables#value-variables).  Functions can be applied in the query root or in filters.
 
 
 Comparison functions (`eq`, `ge`, `gt`, `le`, `lt`) in the query root (aka `func:`) can only
-be applied on [indexed predicates](/dgraph-overview/dql/predicate-indexing). 
-Comparison functions can be used on [@filter](/dgraph-overview/dql/query/directive/filter) directives even on predicates that have not been indexed.
+be applied on [indexed predicates](/dql/predicate-indexing). 
+Comparison functions can be used on [@filter](/dql/query/directive/filter) directives even on predicates that have not been indexed.
 Filtering on non-indexed predicates can be slow for large datasets, as they require
 iterating over all of the possible values at the level where the filter is being used.
 
@@ -80,7 +80,7 @@ Index Required: `term`
 Matches strings that have any of the specified terms in any order; case insensitive.
 #### Usage at root
 
-Query Example: All nodes that have a `name` containing either `poison` or `peacock`.  Many of the returned nodes are movies, but people like Joan Peacock also meet the search terms because without a [cascade directive](/dgraph-overview/dql/query/directive/cascade-directive) the query doesn't require a genre.
+Query Example: All nodes that have a `name` containing either `poison` or `peacock`.  Many of the returned nodes are movies, but people like Joan Peacock also meet the search terms because without a [cascade directive](/dql/query/directive/cascade-directive) the query doesn't require a genre.
 
 <RunnableCodeBlock>
 
@@ -423,7 +423,7 @@ Query Example: Movies with directors with `Steven` in `name` and have directed m
 
 
 
-Query Example: A movie in each genre that has over 30000 movies.  Because there is no order specified on genres, the order will be by UID.  The [count index](/dgraph-overview/predicate-indexing#count-index) records the number of edges out of nodes and makes such queries more .
+Query Example: A movie in each genre that has over 30000 movies.  Because there is no order specified on genres, the order will be by UID.  The [count index](/dql/predicate-indexing#count-index) records the number of edges out of nodes and makes such queries more .
 
 <RunnableCodeBlock>
 

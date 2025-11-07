@@ -28,7 +28,7 @@ dgraph zero [flags]
 
 ## Superflags
 
-Zero uses several [superflags](/dgraph-overview/cli/superflags) for advanced configuration:
+Zero uses several [superflags](superflags) for advanced configuration:
 
 - `--audit` - Audit logging configuration
 - `--limit` - UID lease and admin endpoint settings

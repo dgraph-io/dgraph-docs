@@ -24,7 +24,7 @@ The second triple specifies that Alice knows Bob. The subject is again the UID o
 Each triple representation in RDF ends with a period.  
 
 ### Blank nodes in mutations
-When creating nodes in Dgraph, you often let Dgraph assign the node [UID](/dgraph-overview/dgraph-glossary#uid) by specifing a blank node starting with "_:". All references to the same blank node, such as `_:identifier123`, will identify the same node within a mutation. Dgraph creates a UID identifying each blank node.
+When creating nodes in Dgraph, you often let Dgraph assign the node [UID](../dgraph-glossary#uid) by specifing a blank node starting with "_:". All references to the same blank node, such as `_:identifier123`, will identify the same node within a mutation. Dgraph creates a UID identifying each blank node.
 ### Language for string values
 Languages are written using `@lang`. For example
 ```
@@ -33,7 +33,7 @@ Languages are written using `@lang`. For example
 <0x01> <name> "Adélaïde"@fr .
 <0x01> <dgraph.type> "Person" .
 ```
-See also [how language strings are handled in queries](/dgraph-overview/dql/query/language-support).
+See also [how language strings are handled in queries](query/language-support).
 
 ### Types
 Dgraph understands standard RDF types specified in RDF using the `^^` separator.  For example
@@ -116,7 +116,7 @@ Result:
 ```
 :::tip
 Dgraph can automatically generate a reverse relation. If the user wants to run
-queries in that direction, they would define the [reverse relationship](/dgraph-overview/dql-schema#reverse-predicates).
+queries in that direction, they would define the [reverse relationship](dql-schema#reverse-predicates).
 :::
 
 ## N-quads format
@@ -124,7 +124,7 @@ While most RDF data uses only triples (with three parts) an optional fourth part
 
 ## Processing RDF to comply with Dgraph syntax for subjects
 
-While it is valid RDF to specify subjects that are IRI strings, Dgraph requires a numeric UID or a blank node as the subject. If a string IRI is required, Dgraph support them via [xid properties](/dgraph-overview/upserts#external-ids). When importing RDF from another source that does not use numeric UID subjects, it will be required to replace arbitrary subject IRIs with blank node IRIs.
+While it is valid RDF to specify subjects that are IRI strings, Dgraph requires a numeric UID or a blank node as the subject. If a string IRI is required, Dgraph support them via [xid properties](upserts#external-ids). When importing RDF from another source that does not use numeric UID subjects, it will be required to replace arbitrary subject IRIs with blank node IRIs.
 
 Typically this is done simply by prepending "_:" to the start of the original IRI. So a triple such as:
 
@@ -134,5 +134,5 @@ may be rewritten as
 
 ```<_:http://abc.org/schema/foo#item1> <http://abc.org/hasRelation> "somevalue"^^xs:string```
 
-Dgraph will create a consistent UID for all references to the uniquely-named blank node. To maintain this uniqueness over multiple data loads, use the [dgraph live](/dgraph-overview/dgraph-glossary#uid) utility with the xid option, or use specific UIDs such as the hash of the IRI in the source RDF directly.
+Dgraph will create a consistent UID for all references to the uniquely-named blank node. To maintain this uniqueness over multiple data loads, use the [dgraph live](../dgraph-glossary#uid) utility with the xid option, or use specific UIDs such as the hash of the IRI in the source RDF directly.
 

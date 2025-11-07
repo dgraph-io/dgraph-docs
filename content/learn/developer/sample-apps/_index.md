@@ -6,7 +6,7 @@ type = "learn"
 weight = 3
 [menu.learn]
   name = "More Sample Apps"
-  parent = "developer"
+
   identifier = "sample-apps"
 
 +++

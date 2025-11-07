@@ -5,8 +5,8 @@ title: Encryption at Rest
 :::note
 This feature was introduced in [v1.1.1](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.1).
 For migrating unencrypted data to a new Dgraph cluster with encryption enabled, you need to
-[export the database](/dgraph-overview/dgraph-administration#export-database) and [import data](/dgraph-overview/migration/import-data),
-preferably using the [bulk loader](/dgraph-overview/migration/bulk-loader).
+[export the database](../dgraph-administration#export-database) and [import data](../../migration/import-data),
+preferably using the [bulk loader](../../migration/bulk-loader).
 :::
 
 Encryption at rest refers to the encryption of data that is stored physically in any
@@ -36,7 +36,7 @@ tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file
 :::note
 On a macOS you may have to use `LC_CTYPE=C; tr -dc 'a-zA-Z0-9' < /dev/urandom | dd bs=1 count=32 of=enc_key_file`. To view the key use `cat enc_key_file`.
 :::
-Alternatively, you can use the `--vault` [superflag's](/dgraph-overview/cli/superflags) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
+Alternatively, you can use the `--vault` [superflag's](../../cli/superflags) options to enable encryption, as [explained below](#example-using-dgraph-cli-with-hashicorp-vault-configuration).
 
 ## Turn on Encryption
 
@@ -110,7 +110,7 @@ If the Alpha server restarts, the `--encryption key-file` or the `--vault` super
 
 ## Turn off Encryption
 
-You can use [live loader](/dgraph-overview/migration/live-loader) or [bulk loader](/dgraph-overview/migration/bulk-loader) to decrypt the data while importing.
+You can use [live loader](../../migration/live-loader) or [bulk loader](../../migration/bulk-loader) to decrypt the data while importing.
 
 
 ## Change Encryption Key

@@ -7,7 +7,7 @@ The completion script is code that uses the builtin bash command complete to def
 
 ## Before you begin
 
-*  [Install Dgraph](/dgraph-overview/installation/download).
+*  [Install Dgraph](/installation/download).
 *  Determine the shell you are running:
    ```bash
    echo $0

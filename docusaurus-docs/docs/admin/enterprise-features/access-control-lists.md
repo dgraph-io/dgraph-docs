@@ -36,7 +36,7 @@ is only allowed to access the data permitted by the ACL rules.
    ```
 
 :::tip
-In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security "whitelist=<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=</path/to/secret>"` and `DGRAPH_ALPHA_SECURITY="whitelist=<permitted-ip-addresses>"`. See [Config](/dgraph-overview/cli/config) for more information in general about configuring Dgraph.
+In addition to command line flags `--acl secret-file="/path/to/secret"` and `--security "whitelist=<permitted-ip-addresses>"`, you can also configure Dgraph using a configuration file (`config.yaml`, `config.json`).  You can also use environment variables, i.e. `DGRAPH_ALPHA_ACL="secret-file=</path/to/secret>"` and `DGRAPH_ALPHA_SECURITY="whitelist=<permitted-ip-addresses>"`. See [Config](../../cli/config) for more information in general about configuring Dgraph.
 :::
 
 ### Example using Dgraph CLI
@@ -514,7 +514,7 @@ mutation {
 }
 ```
 
-In case you have [reverse edges](/dgraph-overview/dql-schema#reverse-predicates), they have to be given the permission to the group as well
+In case you have [reverse edges](../../dql/dql-schema#reverse-predicates), they have to be given the permission to the group as well
 
 ```graphql
 mutation {

@@ -32,11 +32,11 @@ follows:
 
 
 <sup>1</sup>: Dgraph Zero uses port 5080 for internal communication within the
- cluster, and to support the [data import](/dgraph-overview/migration/import-data)
+ cluster, and to support the [data import](../../migration/import-data)
  tools: Dgraph Live Loader and Dgraph Bulk Loader.
 
 <sup>2</sup>: Dgraph Zero uses port 6080 for
-[administrative](/dgraph-overview/admin/dgraph-zero) operations. Dgraph
+[administrative](../dgraph-zero) operations. Dgraph
 clients cannot access this port.
 
 Users must modify security rules or open firewall ports depending upon their

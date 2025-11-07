@@ -4,9 +4,9 @@ title: Query Dgraph types
 
 
 You can retrieve the Dgraph schema containing the list of predicates types and node types by:
-- issuing a query on /query endpoint using the [HTTP Client](/dgraph-overview/raw-http#query-current-dql-schema)
-- issuing a query using any [DQL client library](/dgraph-overview/clients/)
-- using [Ratel UI](ratel/schema)
+- issuing a query on /query endpoint using the [HTTP Client](/clients/raw-http#query-current-dql-schema)
+- issuing a query using any [DQL client library](/clients)
+- using [Ratel UI](/ratel/schema)
 - using the Cloud console through the [DQL Schema](https://cloud.dgraph.io/_/schema?tab=dqlschema) tab of the Schema section.
 
 

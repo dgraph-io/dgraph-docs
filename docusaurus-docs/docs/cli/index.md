@@ -13,39 +13,39 @@ The Dgraph CLI is built around the root `dgraph` command and its subcommands. Ma
 The Dgraph CLI includes the following command groups:
 
 ### Core Commands
-- [**`dgraph alpha`**](/dgraph-overview/cli/alpha) - Run Dgraph Alpha database nodes
-- [**`dgraph zero`**](/dgraph-overview/cli/zero) - Run Dgraph Zero management nodes
+- [**`dgraph alpha`**](alpha) - Run Dgraph Alpha database nodes
+- [**`dgraph zero`**](zero) - Run Dgraph Zero management nodes
 
 ### Data Loading Commands
-- [**`dgraph bulk`**](/dgraph-overview/cli/bulk) - Bulk load data with the Bulk Loader
-- [**`dgraph live`**](/dgraph-overview/cli/live) - Load data with the Live Loader
-- [**`dgraph restore`**](/dgraph-overview/cli/restore) - Restore backups from Enterprise Edition
+- [**`dgraph bulk`**](bulk) - Bulk load data with the Bulk Loader
+- [**`dgraph live`**](live) - Load data with the Live Loader
+- [**`dgraph restore`**](restore) - Restore backups from Enterprise Edition
 
 ### Security Commands
-- [**`dgraph acl`**](/dgraph-overview/cli/acl) - Manage Access Control Lists (ACL)
-- [**`dgraph audit`**](/dgraph-overview/cli/audit) - Decrypt audit files
-- [**`dgraph cert`**](/dgraph-overview/cli/cert) - Manage TLS certificates
+- [**`dgraph acl`**](acl) - Manage Access Control Lists (ACL)
+- [**`dgraph audit`**](audit) - Decrypt audit files
+- [**`dgraph cert`**](cert) - Manage TLS certificates
 
 ### Debug Commands
-- [**`dgraph debug`**](/dgraph-overview/dql/query/debug) - Debug Dgraph instances
-- [**`dgraph debuginfo`**](/dgraph-overview/cli/debuginfo) - Generate debug information
+- [**`dgraph debug`**](../dql/query/debug) - Debug Dgraph instances
+- [**`dgraph debuginfo`**](debuginfo) - Generate debug information
 
 ### Utility Commands
-- [**`dgraph completion`**](/dgraph-overview/cli/completion) - Generate shell completion scripts
-- [**`dgraph conv`**](/dgraph-overview/cli/conv) - Convert geographic files to RDF
-- [**`dgraph decrypt`**](/dgraph-overview/cli/decrypt) - Decrypt exported files
-- [**`dgraph export_backup`**](/dgraph-overview/cli/export_backup) - Export binary backups
-- [**`dgraph increment`**](/dgraph-overview/cli/increment) - Test with transactional counter
-- [**`dgraph lsbackup`**](/dgraph-overview/admin/enterprise-features/lsbackup) - List backup information
-- [**`dgraph migrate`**](/dgraph-overview/cli/migrate) - Migrate from MySQL to Dgraph
-- [**`dgraph upgrade`**](/dgraph-overview/cli/upgrade) - Upgrade Dgraph versions
+- [**`dgraph completion`**](completion) - Generate shell completion scripts
+- [**`dgraph conv`**](conv) - Convert geographic files to RDF
+- [**`dgraph decrypt`**](decrypt) - Decrypt exported files
+- [**`dgraph export_backup`**](export_backup) - Export binary backups
+- [**`dgraph increment`**](increment) - Test with transactional counter
+- [**`dgraph lsbackup`**](../admin/enterprise-features/lsbackup) - List backup information
+- [**`dgraph migrate`**](migrate) - Migrate from MySQL to Dgraph
+- [**`dgraph upgrade`**](upgrade) - Upgrade Dgraph versions
 
 ## Configuration
 
 Dgraph provides flexible configuration options:
 
-- **[Superflags](/dgraph-overview/cli/superflags)** - Learn about compound flags for complex commands
-- **[Configuration Guide](/dgraph-overview/cli/config)** - Configure using flags, environment variables, or config files
+- **[Superflags](superflags)** - Learn about compound flags for complex commands
+- **[Configuration Guide](config)** - Configure using flags, environment variables, or config files
 
 ## Getting Help
 

@@ -4,7 +4,7 @@ title: CSV data
 
 ## Convert CSV to JSON
 
-There are many tools available to convert CSV to JSON. You can import large data sets to Dgraph using [Dgraph Live Loader](/dgraph-overview/migration/live-loader) or [Dgraph Bulk Loader](/dgraph-overview/migration/bulk-loader). In these examples, the `csv2json` tool is used, and the data is imported using the **Mutate** tab in Ratel.
+There are many tools available to convert CSV to JSON. You can import large data sets to Dgraph using [Dgraph Live Loader](live-loader) or [Dgraph Bulk Loader](bulk-loader). In these examples, the `csv2json` tool is used, and the data is imported using the **Mutate** tab in Ratel.
 
 ### Before you begin
 
@@ -47,7 +47,7 @@ There are many tools available to convert CSV to JSON. You can import large data
     ```
 
     This JSON file follows
-    the [JSON Mutation Format](/dgraph-overview/dql/json-mutation-format), it can be loaded into Dgraph using [Dgraph Live Loader](/dgraph-overview/migration/live-loader) , [Dgraph Bulk Loader](/dgraph-overview/migration/bulk-loader) or the programmatic clients.
+    the [JSON Mutation Format](/dql/json-mutation-format), it can be loaded into Dgraph using [Dgraph Live Loader](live-loader) , [Dgraph Bulk Loader](bulk-loader) or the programmatic clients.
 
 4. To load the data to Ratel and HTTP clients. The JSON data has to be stored within the `"set"` key. You can use `jq` to transform the JSON into the correct format:
 
@@ -172,7 +172,7 @@ This JSON file can be loaded into Dgraph using the programmatic clients.
     }
     ```
 :::note
-To reuse existing integer IDs from a CSV file as UIDs in Dgraph, use Dgraph Zero's [assign endpoint](/dgraph-overview/admin/dgraph-zero) before loading data to allocate a range of UIDs that can be safely assigned.
+To reuse existing integer IDs from a CSV file as UIDs in Dgraph, use Dgraph Zero's [assign endpoint](/admin/dgraph-zero) before loading data to allocate a range of UIDs that can be safely assigned.
 :::
 
 4. Paste the output in the **Mutate** tab of **Console** in Ratel, and click **Run** to import data.

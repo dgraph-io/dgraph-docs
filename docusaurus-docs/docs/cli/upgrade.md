@@ -251,8 +251,8 @@ If the upgrade fails:
 
 ## See Also
 
-- [Access Control Lists](/dgraph-overview/admin/enterprise-features/access-control-lists) - ACL documentation
-- [Binary Backups](/dgraph-overview/admin/enterprise-features/binary-backups) - Backup before upgrading
-- [Release Notes](../../releases) - Version-specific changes
-- [Migration Guide](../../migration) - Data migration strategies
+- [Access Control Lists](../admin/enterprise-features/access-control-lists) - ACL documentation
+- [Binary Backups](../admin/enterprise-features/binary-backups) - Backup before upgrading
+- [Release Notes](../releases/index) - Version-specific changes
+- [Migration Guide](../migration/index) - Data migration strategies
 

@@ -5,7 +5,7 @@ import RunnableCodeBlock from '@site/src/components/RunnableCodeBlock';
 
 
 
-Fetching data with Dgraph Query Language (DQL), is done through **DQL Queries**. Adding, modifying or deleting data is done through [DQL Mutations](/dgraph-overview/dql/dql-mutation).
+Fetching data with Dgraph Query Language (DQL), is done through **DQL Queries**. Adding, modifying or deleting data is done through [DQL Mutations](/dql/dql-mutation).
 
 This overview explains the structure of DQL Queries and provides links to the appropriate DQL reference documentation.
 
@@ -50,7 +50,7 @@ The query parameterization is optional. If you don't use parameters you can omit
 ![DQL Query without parameters](/images/dql-syntax/query-syntax-2.png)
 :::noteThe current documentation is usually using example of queries without parameters. :::
 
-If you execute this query in our [Movies demo database](/dgraph-overview/dql/query/running-examples) you can see that Dgraph will return a JSON structure similar to the request :
+If you execute this query in our [Movies demo database](/dql/query/running-examples) you can see that Dgraph will return a JSON structure similar to the request :
 ![DQL response structure](/images/dql-syntax/query-syntax-3.png)
 
 ### Query block
@@ -64,14 +64,14 @@ A query block
 - may have a combination of filters (to apply to the root nodes)
 - must provide the list of attributes and relationships to fetch for each node matching the root nodes.
 
-Refer to [pagination](/dgraph-overview/dql/query/pagination), [ordering](/dgraph-overview/dql/query/sorting), [connecting filters](/dgraph-overview/filter#connecting-filters) for more information.
+Refer to [pagination](pagination), [ordering](sorting), [connecting filters](directive/filter#connecting-filters) for more information.
 
 For each relationships to fetch, the query is using a nested block.
 
 A nested block
 - may specify filters to apply on the related nodes
-- may specify criteria on the relationships attributes using [filtering on facets](/dgraph-overview/facets#filtering-on-facets))
-- provides the list of relationship attributes ([facets](/dgraph-overview/dql/query/facets))) to fetch.
+- may specify criteria on the relationships attributes using [filtering on facets](facets#filtering-on-facets))
+- provides the list of relationship attributes ([facets](facets))) to fetch.
 - provides the list of attributes and relationships to fetch for the related nodes.
 
 A nested block may contain another nested block, and such at any level.
@@ -160,46 +160,46 @@ movies, but the results are independent and both contain the full answers sets.
  `
 
 ### Formatting options
-Dgraph returns the attributes and relationships that you specified in the query. You can specify an alternate name for the result by using [aliases](/dgraph-overview/dql/query/alias).
+Dgraph returns the attributes and relationships that you specified in the query. You can specify an alternate name for the result by using [aliases](alias).
 
-You can flatten the response structure at any level using [@normalize](/dgraph-overview/dql/query/directive/normalize-directive) directive.
+You can flatten the response structure at any level using [@normalize](directive/normalize-directive) directive.
 
-Entering the list of all the attributes you want to fetch could be fastidious for large queries or repeating blocks : you may take advantage of [fragments](/dgraph-overview/dql/query/fragments) and the [expand function](/dgraph-overview/dql/query/expand-predicates).
+Entering the list of all the attributes you want to fetch could be fastidious for large queries or repeating blocks : you may take advantage of [fragments](fragments) and the [expand function](expand-predicates).
 
 ### Node criteria (used by root function or by filter)
 
-Root criteria and filters are using [functions](/dgraph-overview/dql/query/functions) applied to nodes attributes or variables.
+Root criteria and filters are using [functions](functions) applied to nodes attributes or variables.
 
 Dgraph offers functions for
 - testing string attributes
-  - term matching : [allofterms](/dgraph-overview/functions#allofterms), [anyofterms](/dgraph-overview/functions#anyofterms)
-  - regular Expression : [regexp](/dgraph-overview/functions#regular-expressions)
-  - fuzzy match : [match](/dgraph-overview/functions#fuzzy-matching)
-  - full-text search : [alloftext](/dgraph-overview/functions#full-text-search)
+  - term matching : [allofterms](functions#allofterms), [anyofterms](functions#anyofterms)
+  - regular Expression : [regexp](functions#regular-expressions)
+  - fuzzy match : [match](functions#fuzzy-matching)
+  - full-text search : [alloftext](functions#full-text-search)
 - testing attribute value
-  - equality : [eq](/dgraph-overview/functions#equal-to)
-  - inequalities : [le,lt,ge,gt](/dgraph-overview/functions#less-than-less-than-or-equal-to-greater-than-and-greater-than-or-equal-to)
-  - range : [between](/dgraph-overview/functions#between)
+  - equality : [eq](functions#equal-to)
+  - inequalities : [le,lt,ge,gt](functions#less-than-less-than-or-equal-to-greater-than-and-greater-than-or-equal-to)
+  - range : [between](functions#between)
 - testing if a node
-  - has a particular predicate (an attribute or a relation) : [has](/dgraph-overview/functions#has)
-  - has a given UID : [uid](/dgraph-overview/functions#uid)
-  - has a relationship to a given node : [uid_in](/dgraph-overview/functions#uid_in)
+  - has a particular predicate (an attribute or a relation) : [has](functions#has)
+  - has a given UID : [uid](functions#uid)
+  - has a relationship to a given node : [uid_in](functions#uid_in)
   - is of a given type : type()
 - testing the number of node relationships
-  - equality : [eq](/dgraph-overview/functions#equal-to)
-  - inequalities : [le,lt,ge,gt](/dgraph-overview/functions#less-than-less-than-or-equal-to-greater-than-and-greater-than-or-equal-to)
+  - equality : [eq](functions#equal-to)
+  - inequalities : [le,lt,ge,gt](functions#less-than-less-than-or-equal-to-greater-than-and-greater-than-or-equal-to)
 - testing geolocation attributes
-  - if geo location is within distance : [near](/dgraph-overview/functions#near)
-  - if geo location lies within a given area : [within](/dgraph-overview/functions#within)
-  - if geo area contains a given location : [contains](/dgraph-overview/functions#contains)
-  - if geo area intersects a given are : [intersects](/dgraph-overview/functions#intersects)
+  - if geo location is within distance : [near](functions#near)
+  - if geo location lies within a given area : [within](functions#within)
+  - if geo area contains a given location : [contains](functions#contains)
+  - if geo area intersects a given are : [intersects](functions#intersects)
 
 
 ### Var block
 
   Variable blocks (`var` blocks) start with the keyword `var` instead of a block name.
 
-  var blocks are not reflected in the query result. They are used to compute [query-variables](/dgraph-overview/variables#query-variables) which are lists of node UIDs, or [value-variables](/dgraph-overview/variables#value-variables) which are maps from node UIDs to the corresponding scalar values.
+  var blocks are not reflected in the query result. They are used to compute [query-variables](variables#query-variables) which are lists of node UIDs, or [value-variables](variables#value-variables) which are maps from node UIDs to the corresponding scalar values.
 
   Note that query-variables and value-variables can also be computed in query blocks. In that case, the query block is used to fetch and return data, and to define some variables which must be used in other blocks of the same query.
 
@@ -293,11 +293,11 @@ filter to intersect the `uid`s from `var` `A` and `B`.
 
 ### Summarizing functions
 
-When dealing with array attributes or with relationships to many node, the query may use summary functions [count](/dgraph-overview/dql/query/count) , [min](/dgraph-overview/aggregation#min), [max](/dgraph-overview/aggregation#max), [avg](/dgraph-overview/aggregation#sum-and-avg) or [sum](/dgraph-overview/aggregation#sum-and-avg).
+When dealing with array attributes or with relationships to many node, the query may use summary functions [count](count) , [min](aggregation#min), [max](aggregation#max), [avg](aggregation#sum-and-avg) or [sum](aggregation#sum-and-avg).
 
-The query may also contain [mathematical functions](/dgraph-overview/variables#math-on-value-variables) on value variables.
+The query may also contain [mathematical functions](variables#math-on-value-variables) on value variables.
 
-Summary functions can be used in conjunction with [@grouby](/dgraph-overview/dql/query/directive/groupby) directive to create aggregated value variables.
+Summary functions can be used in conjunction with [@grouby](directive/groupby) directive to create aggregated value variables.
 
 The query may contain **anonymous block** to return computed values. **Anonymous block** don't have a root criteria as they are not used to search for nodes but only to returned computed values.
 
@@ -305,13 +305,13 @@ The query may contain **anonymous block** to return computed values. **Anonymous
 
 When you specify nested blocks and filters you basically describe a way to traverse the graph.
 
-[@recurse](/dgraph-overview/dql/query/directive/recurse-query) and [@ignorereflex](/dgraph-overview/dql/query/directive/ignorereflex-directive) are  directives used to optionally configure the graph traversal.
+[@recurse](directive/recurse-query) and [@ignorereflex](directive/ignorereflex-directive) are  directives used to optionally configure the graph traversal.
 
 ### Pattern matching
-Queries with nested blocks with filters may be turned into pattern matching using [@cascade](/dgraph-overview/dql/query/directive/cascade-directive) directive : nodes that don’t have all attributes and all relationships specified in the query at any sub level are not considered in the result. So only nodes "matching" the complete query structure are returned.
+Queries with nested blocks with filters may be turned into pattern matching using [@cascade](directive/cascade-directive) directive : nodes that don’t have all attributes and all relationships specified in the query at any sub level are not considered in the result. So only nodes "matching" the complete query structure are returned.
 
 ### Graph algorithms
-The query can ask for the shortest path between a source (from) node and destination (to) node using the [shortest](/dgraph-overview/dql/query/kshortest-path-queries) query block.
+The query can ask for the shortest path between a source (from) node and destination (to) node using the [shortest](kshortest-path-queries) query block.
 
 ### Comments
 Anything on a line following a `#` is a comment

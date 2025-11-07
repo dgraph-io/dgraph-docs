@@ -38,5 +38,5 @@ More complex queries may do filtering operations, or intersections and unions of
 
 If the query was run via HTTP interface `/query`, the resulting subgraph then gets converted into JSON for
 replying back to the client. If the query was run via [gRPC](https://www.grpc.io/) interface using
-the language [clients](/dgraph-overview/clients/), the subgraph gets converted to
+the language [clients](../clients), the subgraph gets converted to
 [protocol buffer](https://developers.google.com/protocol-buffers/) format and similarly returned to the client.

@@ -3,7 +3,7 @@ title: Change Data Capture
 description: With a Dgraph enterprise license, you can use Dgraph's change data capture (CDC) capabilities to track data changes over time.
 ---
 
-With a Dgraph [enterprise license](/dgraph-overview/admin/enterprise-features/license),
+With a Dgraph [enterprise license](license),
 you can use change data capture (CDC) to track data changes over time; including
 mutations and drops in your database. Dgraph's CDC implementation lets you use
 Kafka or a local file as a *sink* to store CDC updates streamed by Dgraph Alpha
@@ -105,7 +105,7 @@ specified `data`, or `all` data) is tracked by the CDC event.
 
 ## CDC and multi-tenancy
 
-When you enable CDC in a [multi-tenant environment](/dgraph-overview/admin/enterprise-features/multitenancy),
+When you enable CDC in a [multi-tenant environment](multitenancy),
 CDC events streamed to Kafka are distributed by the Kafka client. It distributes
 events between the available Kafka partitions based on their multi-tenancy
 namespace.

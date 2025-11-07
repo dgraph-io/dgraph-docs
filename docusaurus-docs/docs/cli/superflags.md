@@ -36,7 +36,7 @@ You should encapsulate the options for a superflag in double-quotes (`"`) if any
 
 ## ACL Superflag
 
-The `--acl` superflag configures [Access Control List](/dgraph-overview/admin/enterprise-features/access-control-lists) settings:
+The `--acl` superflag configures [Access Control List](../admin/enterprise-features/access-control-lists) settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|
@@ -109,7 +109,7 @@ The `--limit` superflag configures limit settings for Dgraph Alpha:
 
 ## Raft Superflag
 
-The `--raft` superflag configures [Raft](../../design-concepts/raft) consensus settings:
+The `--raft` superflag configures [Raft](../design-concepts/raft) consensus settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|
@@ -140,7 +140,7 @@ The `--telemetry` superflag configures telemetry settings:
 
 ## TLS Superflag
 
-The `--tls` superflag configures [TLS](/dgraph-overview/admin/security/tls-configuration) settings:
+The `--tls` superflag configures [TLS](../admin/security/tls-configuration) settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|
@@ -156,7 +156,7 @@ The `--tls` superflag configures [TLS](/dgraph-overview/admin/security/tls-confi
 
 ## Trace Superflag
 
-The `--trace` superflag configures [tracing](/dgraph-overview/admin/observability/tracing) settings:
+The `--trace` superflag configures [tracing](admin/observability/tracing) settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|

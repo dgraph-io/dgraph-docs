@@ -3,7 +3,7 @@ title: Quick Start
 ---
 
 In this Dgraph quick start guide we walk through creating a graph, inserting
-data, and querying the graph using [DQL](/dgraph-overview/dgraph-glossary#dql).
+data, and querying the graph using [DQL](dgraph-glossary#dql).
 
 This guide helps you to understand how to:
 
@@ -19,7 +19,7 @@ The recommended way to get started with Dgraph for local development is by using
 the official Dgraph Docker image.
 
 In this section we'll create a new graph, then we'll connect our new graph to
-[Ratel](/dgraph-overview/dgraph-glossary#ratel), the web-based UI for Dgraph.
+[Ratel](dgraph-glossary#ratel), the web-based UI for Dgraph.
 
 ### Run Dgraph with Docker
 
@@ -42,7 +42,7 @@ This will create a local Dgraph instance and expose the ports necessary to conne
 
 ### Connect Ratel
 
-Ratel is a web-based UI dashboard for interacting with Dgraph using Dgraph's query language, [DQL](/dgraph-overview/dgraph-glossary#dql)
+Ratel is a web-based UI dashboard for interacting with Dgraph using Dgraph's query language, [DQL](dgraph-glossary#dql)
 
 Run Ratel locally by running the `dgraph/ratel` container with the following command:
 
@@ -63,8 +63,8 @@ Now we're ready to add data to our graph.
 ## Add data to the graph with a mutation
 
 Graph databases like Dgraph use a data model called the **property graph**,
-which consists of [**nodes**](/dgraph-overview/dgraph-glossary#node),
-[**relationships**](/dgraph-overview/dgraph-glossary#relationship) that connect nodes, and key-value
+which consists of [**nodes**](dgraph-glossary#node),
+[**relationships**](dgraph-glossary#relationship) that connect nodes, and key-value
 pair **properties** that describe nodes and relationships.
 
 With Dgraph, we use **triples** to describe each piece of our graph, which when
@@ -75,10 +75,10 @@ predicate, and object.
 <subject> <predicate> <object> .
 ```
 
-The subject always refers to a [node](/dgraph-overview/dgraph-glossary#node),
-[predicates](/dgraph-overview/dgraph-glossary#predicate) can be a relationship or property, and the
+The subject always refers to a [node](dgraph-glossary#node),
+[predicates](dgraph-glossary#predicate) can be a relationship or property, and the
 object can be a node or property value. You can read more about triples in the
-[RDF section of the docs](/dgraph-overview/dql/dql-rdf), but for now let's move on to
+[RDF section of the docs](/dql/dql-rdf), but for now let's move on to
 creating data in Dgraph using triples.
 
 Let's create data about movies, characters, and their genres. Here's the
@@ -135,7 +135,7 @@ following mutation:
 ```
 
 The preceding DQL mutation uses
-[N-Quad RDF format](/dgraph-overview/dql-rdf#n-quads-format) to define the triples that
+[N-Quad RDF format](/dql/dql-rdf#n-quads-format) to define the triples that
 make up the property graph we want to create.
 
 ### View mutation results
@@ -162,7 +162,7 @@ this mutation.
       }
 ```
 
-Dgraph displays the universal identifiers ([UID](/dgraph-overview/dgraph-glossary#uid)) of the
+Dgraph displays the universal identifiers ([UID](dgraph-glossary#uid)) of the
 nodes that were created.
 
 ## Query the graph
@@ -250,7 +250,7 @@ comparison operator, and others, however to use these functions we must first
 update the graph schema to create an index on the predicates we want to use in
 these functions.
 
-The [function documentation](/dgraph-overview/dql/query/functions) specifies which kind of
+The [function documentation](/dql/query/functions) specifies which kind of
 index is needed for each function.
 
 We'll use Ratel to alter the schema to add indexes on some of the data so
@@ -259,7 +259,7 @@ queries can use term matching, filtering, and sorting.
 ### Create an index for movie title
 
 In Ratel's **Schema** page, select **Predicates**. Here we can see all the
-predicates used in the graph. A [predicate](/dgraph-overview/dgraph-glossary#predicate) is
+predicates used in the graph. A [predicate](dgraph-glossary#predicate) is
 Dgraph's internal representation of a node, property, or relationship.
 
 Select the `Movie.title` predicate. Ratel displays details about the predicate
@@ -401,6 +401,6 @@ queried the graph, visualized the results, and updated the schema of our graph.
 
 ## Where to go from here
 
-- Learn more about using [DQL](/dgraph-overview/dql/query/dql-query) to query your graph.
-- Go to [Clients](/clients) to see how to communicate with Dgraph
+- Learn more about using [DQL](/dql/query/dql-query) to query your graph.
+- Go to [Clients](clients) to see how to communicate with Dgraph
   from your app.

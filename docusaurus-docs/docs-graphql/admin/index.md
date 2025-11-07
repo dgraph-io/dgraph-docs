@@ -34,7 +34,7 @@ At `/admin` you'll find an admin API for administering your GraphQL instance.  T
 
 
 * The `health` query lets you know if everything is connected and if there's a schema currently being served at `/graphql`.
-* The `state`  query returns the current state of the cluster and group membership information. For more information about `state` see [here](/graphql/[dgraph-zero#more-about-the-state-endpoint](dgraph-zero#more-about-the-state-endpoint)).
+* The `state`  query returns the current state of the cluster and group membership information. For more information about `state` see [here](/admin/dgraph-zero#more-about-the-state-endpoint).
 * The `config` query returns the configuration options of the cluster set at the time of starting it.
 * The `getGQLSchema` query gets the current GraphQL schema served at `/graphql`, or returns null if there's no such schema.
 * The `updateGQLSchema` mutation allows you to change the schema currently served at `/graphql`.
@@ -43,9 +43,9 @@ At `/admin` you'll find an admin API for administering your GraphQL instance.  T
 
 Enterprise Features like ACL, Backups and Restore are also available using the GraphQL API at `/admin` endpoint.
 
-* [ACL](/graphql/[access-control-lists#accessing-secured-dgraph](access-control-lists#accessing-secured-dgraph))
-* [Backups](/graphql/[binary-backups#create-a-backup](binary-backups#create-a-backup))
-* [Restore](/graphql/[binary-backups#online-restore](binary-backups#online-restore))
+* [ACL](/admin/enterprise-features/access-control-lists#accessing-secured-dgraph)
+* [Backups](/admin/enterprise-features/binary-backups#create-a-backup)
+* [Restore](/admin/enterprise-features/binary-backups#online-restore)
 
 ## First start
 

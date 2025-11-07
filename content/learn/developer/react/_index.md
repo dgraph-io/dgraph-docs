@@ -6,7 +6,7 @@ type = "learn"
 weight = 2
 [menu.learn]
   name = "Message Board in React"
-  parent = "developer"
+
   identifier = "react-app"
 
 +++

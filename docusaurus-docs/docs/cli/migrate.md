@@ -5,7 +5,7 @@ title: dgraph migrate
 
 #### `dgraph migrate`
 
-This command runs the Dgraph [migration tool](migration/migrate-tool)
+This command runs the Dgraph [migration tool](../migration/migrate-tool)
 to move data from a MySQL database to Dgraph. The following replicates the help
 listing shown when you run `dgraph migrate --help`:
 

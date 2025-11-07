@@ -6,16 +6,16 @@ Dgraph security configuration covers authentication, network security, and acces
 
 ## Security Configuration
 
-**[Admin Endpoint Security](/dgraph-overview/admin/security/admin-endpoint-security)** - Authentication layers for admin endpoints, IP whitelisting, and token-based authentication.
+**[Admin Endpoint Security](admin-endpoint-security)** - Authentication layers for admin endpoints, IP whitelisting, and token-based authentication.
 
-**[Ports Usage](/dgraph-overview/admin/security/ports-usage)** - Understanding Dgraph's port configuration and network security requirements.
+**[Ports Usage](ports-usage)** - Understanding Dgraph's port configuration and network security requirements.
 
-**[TLS Configuration](/dgraph-overview/admin/security/tls-configuration)** - Encrypting communications between Dgraph nodes and clients using TLS/mTLS.
+**[TLS Configuration](tls-configuration)** - Encrypting communications between Dgraph nodes and clients using TLS/mTLS.
 
 ## Enterprise Security Features
 
-For advanced security features, see [Enterprise Features](/dgraph-overview/admin/enterprise-features):
+For advanced security features, see [Enterprise Features](../enterprise-features/index):
 
-- [Access Control Lists (ACL)](/dgraph-overview/admin/enterprise-features/access-control-lists) - Fine-grained access control
-- [Audit Logging](/dgraph-overview/admin/observability/audit-logs) - Track and audit all requests
-- [Encryption at Rest](/dgraph-overview/admin/enterprise-features/encryption-at-rest) - Encrypt data on disk
+- [Access Control Lists (ACL)](enterprise-features/access-control-lists) - Fine-grained access control
+- [Audit Logging](../observability/audit-logs) - Track and audit all requests
+- [Encryption at Rest](enterprise-features/encryption-at-rest) - Encrypt data on disk

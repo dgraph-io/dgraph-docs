@@ -11,7 +11,7 @@ For security configuration including authentication, IP whitelisting, and token-
 By default, you can perform mutation operations for any predicate.
 If the predicate in mutation doesn't exist in the schema,
 the predicate gets added to the schema with an appropriate
-[Dgraph Type](/dgraph-overview/dql/dql-schema).
+[Dgraph Type](../dql/dql-schema).
 
 You can use `--limit "mutations=disallow"` to disable all mutations,
 which is set to `allow` by default.
@@ -35,7 +35,7 @@ Alter operations allow clients to apply schema updates and drop predicates from 
 
 You can secure alter operations using token authentication. See [Admin Endpoint Security](security/admin-endpoint-security#securing-alter-operations) for detailed configuration instructions.
 
-For enterprise-grade access control, see [Access Control Lists](/dgraph-overview/admin/enterprise-features/access-control-lists).
+For enterprise-grade access control, see [Access Control Lists](enterprise-features/access-control-lists).
 
 ## Export database
 
@@ -45,7 +45,7 @@ As an `Administrator` you might want to export data from Dgraph to:
 * move the data to another Dgraph instance
 * share your data
 
-For more information about exporting your database, see [Export data](/dgraph-overview/migration/export-data)
+For more information about exporting your database, see [Export data](../migration/export-data)
 
 ## Shut down database
 
@@ -86,7 +86,7 @@ Doing periodic exports is always a good idea. This is particularly useful if you
 2. Ensure it is successful
 3. [Shutdown Dgraph](#shut-down-database) and wait for all writes to complete
 4. Start a new Dgraph cluster using new data directories (this can be done by passing empty directories to the options `-p` and `-w` for Alphas and `-w` for Zeros)
-5. Reload the data via [bulk loader](/dgraph-overview/migration/bulk-loader)
+5. Reload the data via [bulk loader](../migration/bulk-loader)
 6. Verify the correctness of the new Dgraph cluster. If all looks good, you can delete the old directories (export serves as an insurance)
 
 These steps are necessary because Dgraph's underlying data format could have changed, and reloading the export avoids encoding incompatibilities.
@@ -100,7 +100,7 @@ When the new cluster (that uses the upgraded version of Dgraph) is up and runnin
 
 ### Enterprise Upgrade Notes
 
-For enterprise customers, specific upgrade procedures may be required depending on your Dgraph version. The general upgrade process uses [binary backups](/dgraph-overview/admin/enterprise-features/binary-backups) for data migration:
+For enterprise customers, specific upgrade procedures may be required depending on your Dgraph version. The general upgrade process uses [binary backups](enterprise-features/binary-backups) for data migration:
 
 1. Use binary backup to export data from the old cluster
 2. Ensure the backup is successful

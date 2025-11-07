@@ -4,7 +4,7 @@ description: Track and audit all requests (queries and mutations) with Dgraph au
 ---
 
 :::note
-**Enterprise Feature**: Audit logging requires a Dgraph Enterprise license. See [License](/dgraph-overview/admin/enterprise-features/license) for details.
+**Enterprise Feature**: Audit logging requires a Dgraph Enterprise license. See [License](../enterprise-features/license) for details.
 :::
 
 Audit logging tracks all requests (queries and mutations) sent to your Dgraph cluster. When enabled, audit logs record the following information for each request:
@@ -142,4 +142,4 @@ dgraph audit decrypt \
 
 ## Related Documentation
 
-For general logging and log format information, see [Log Format](/dgraph-overview/admin/observability/log-format).
+For general logging and log format information, see [Log Format](log-format).

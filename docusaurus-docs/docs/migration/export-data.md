@@ -18,7 +18,7 @@ You can export the entire data by executing a GraphQL mutation on the `/admin` e
 
 *  Ensure that there is sufficient space on disk to store the export. Each Dgraph Alpha leader for a group writes output as a gzipped file to the export directory specified through the `--export` flag (defaults to an **export** directory). If any of the groups fail because of insufficient space on the disk, the entire export process is considered failed and an error is returned.
 
-* Make a note of the export directories of the Alpha server nodes. For more information about configuring the Dgraph Alpha server, see [Config](/dgraph-overview/cli/config).
+* Make a note of the export directories of the Alpha server nodes. For more information about configuring the Dgraph Alpha server, see [Config](/cli/config).
 
 This mutation triggers the export from each of the Alpha leader for a group. Depending on the Dgraph configuration several files are exported. It is recommended that you copy the files from the Alpha server nodes to a safe place when the export is complete.
 
@@ -172,7 +172,7 @@ You can access Azure Blob Storage locally using one of these methods:
      --set accessKey="<AccountName>",secretKey="<AccountKey>" \
      --set azuregateway.enabled=true
    ```
-You can use the [MinIO GraphQL mutation](/dgraph-overview/export-data#example-mutation-to-export-to-minio) with MinIO configured as a gateway.
+You can use the [MinIO GraphQL mutation](export-data#example-mutation-to-export-to-minio) with MinIO configured as a gateway.
 
 ### Google Cloud Storage
 
@@ -220,7 +220,7 @@ When you have a `credentials.json`, you can access GCS locally using one of thes
    helm install my-gateway minio/minio \
      --values myvalues.yaml
    ```
-You can use the [MinIO GraphQL mutation](/dgraph-overview/export-data#example-mutation-to-export-to-minio) with MinIO configured as a gateway.
+You can use the [MinIO GraphQL mutation](export-data#example-mutation-to-export-to-minio) with MinIO configured as a gateway.
 
 ## Disable HTTPS for exports to S3 and Minio
 
@@ -264,7 +264,7 @@ mutation {
 Export is available wherever an Alpha is running. To encrypt an export, the Alpha must be configured with the `--encryption key-file=value`.
 
 :::note
-The `--encryption key-file` was used for [Encryption at Rest](/dgraph-overview/admin/enterprise-features/encryption-at-rest) and will now also be used for encrypted exports.
+The `--encryption key-file` was used for [Encryption at Rest](/admin/enterprise-features/encryption-at-rest) and will now also be used for encrypted exports.
 :::
 
 ## Use `curl` to trigger an export

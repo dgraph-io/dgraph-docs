@@ -7,7 +7,7 @@ addition, Dgraph can now secure gRPC communications between Dgraph Alpha and
 Dgraph Zero server nodes using mutual TLS (mTLS). Dgraph can now also secure
 communications over the Dgraph Zero `gRPC-external-private` port used by
 Dgraph's Live Loader and Bulk Loader clients. To learn more about the HTTP and
-gRPC ports used by Dgraph Alpha and Dgraph Zero, see [Ports Usage](/dgraph-overview/admin/security/ports-usage).
+gRPC ports used by Dgraph Alpha and Dgraph Zero, see [Ports Usage](ports-usage).
 Password-protected private keys are **not supported**.
 
 To further improve TLS security, only TLS v1.2 cypher suites that use 128-bit or
@@ -148,7 +148,7 @@ Important points:
 ## TLS options
 
 Starting in release v21.03, pre-existing TLS configuration options have been
-replaced by the `--tls` [superflag](/dgraph-overview/cli/superflags) 
+replaced by the `--tls` [superflag](../../cli/superflags) 
 and its options. The following `--tls` configuration options are available for
 Dgraph Alpha and Dgraph Zero nodes:
 
@@ -362,7 +362,7 @@ Refer to the `curl` documentation for further information on its TLS options.
 
 ## Access Data Using a Client
 
-Some examples of connecting via a [Client](/clients) when TLS is in use can be found below:
+Some examples of connecting via a [Client](../../clients/index) when TLS is in use can be found below:
 
 - [dgraph4j](https://github.com/dgraph-io/dgraph4j#creating-a-secure-client-using-tls)
 - [dgraph-js](https://github.com/dgraph-io/dgraph-js/tree/master/examples/tls)

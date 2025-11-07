@@ -41,7 +41,7 @@ const config: Config = {
       {
         id: 'docs',
         path: 'docs',
-        routeBasePath: 'dgraph-overview',
+        routeBasePath: '',
         sidebarPath: './sidebars.ts',
         editUrl: 'https://github.com/dgraph-io/dgraph-docs/tree/main/',
       },

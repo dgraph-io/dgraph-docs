@@ -4,7 +4,7 @@ title: dgraph live
 
 #### `dgraph live`
 
-This command is used to load live data with the Dgraph [Live Loader](/dgraph-overview/migration/live-loader) tool.
+This command is used to load live data with the Dgraph [Live Loader](../migration/live-loader) tool.
 The following replicates the help listing shown when you run `dgraph live --help`:
 
 ```shell

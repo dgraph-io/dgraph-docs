@@ -7,12 +7,12 @@ Cluster using `uint64` namespaces. With multi-tenancy, each tenant can only log 
 namespace and operate in their own namespace.
 
 :::note
-Multi-tenancy is an enterprise feature and needs [Access Control Lists](/dgraph-overview/admin/enterprise-features/access-control-lists) (ACL) enabled to work.
+Multi-tenancy is an enterprise feature and needs [Access Control Lists](access-control-lists) (ACL) enabled to work.
 :::
 
 ## Overview
 
-Multi-tenancy is built upon [Access Control Lists](/dgraph-overview/admin/enterprise-features/access-control-lists) (ACL),
+Multi-tenancy is built upon [Access Control Lists](access-control-lists) (ACL),
 and enables multiple tenants to share a Dgraph Cluster using unique namespaces.
 The tenants are logically separated, and their data lies in the same `p` directory.
 Each namespace has a group guardian, which has root access to that namespace.
@@ -31,7 +31,7 @@ For multi-tenant environments a suggested `query-limit` value is 500ms.
 
 - How access controls and policies are handled among different tenants?
 
-    In previous versions of Dgraph, the [Access Control Lists](/dgraph-overview/admin/enterprise-features/access-control-lists) (ACL) feature
+    In previous versions of Dgraph, the [Access Control Lists](access-control-lists) (ACL) feature
     offered a unified control solution across the entire database.
     With the new multi-tenancy feature, the ACL policies are now scoped down to individual tenants in the database.
 
@@ -135,7 +135,7 @@ mutation {
 
 By sending the mutation above, a namespace is created. A _Guardian group_ is also automatically created for that namespace.
 A `groot` user with password `mypass` (default is `password`) is created in the guardian group.
-You can then use these credentials to login into the namespace and perform operations like [`addUser`](/dgraph-overview/access-control-lists#create-a-regular-user).
+You can then use these credentials to login into the namespace and perform operations like [`addUser`](access-control-lists#create-a-regular-user).
 
 ## List Namespaces
 
@@ -213,7 +213,7 @@ mutation {
 
 The `drop all` operations can be triggered only by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
 They're executed at Cluster level and delete data across namespaces.
-All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database](/dgraph-overview/raw-http#alter-the-dql-schema).
+All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database](../../clients/raw-http#alter-the-dql-schema).
 
 
 :::note
@@ -236,7 +236,7 @@ Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
 
 ### Data import
 
-[Initial import](/dgraph-overview/migration/bulk-loader) and [Live import](/dgraph-overview/migration/live-loader) tools support multi-tenancy.
+[Initial import](../../migration/bulk-loader) and [Live import](../../migration/live-loader) tools support multi-tenancy.
 
 
 ## Exports

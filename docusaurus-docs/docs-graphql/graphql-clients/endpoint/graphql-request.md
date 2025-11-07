@@ -23,7 +23,7 @@ description: "Get the structure for GraphQL requests and responses, how to enabl
 
 
 :::note
-Refer to GraphQL [security](/graphql/[graphql/security](graphql/security)) settings for explanations about ``anonymous access`` and ``Dgraph.Authorization``.
+Refer to GraphQL [security](/graphql/security) settings for explanations about ``anonymous access`` and ``Dgraph.Authorization``.
 :::
 
 

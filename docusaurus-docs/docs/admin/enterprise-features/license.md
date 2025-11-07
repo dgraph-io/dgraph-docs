@@ -5,7 +5,7 @@ title: License
 Dgraph enterprise features are proprietary licensed under the [Dgraph Community
 License][dcl]. All Dgraph releases contain proprietary code for enterprise features.
 Enabling these features requires an enterprise contract from
-[contact@dgraph.io](/dgraph-overview/mailto:contact@dgraph.io) or the [discuss
+[contact@dgraph.io](mailto:contact@dgraph.io) or the [discuss
 forum](https://discuss.dgraph.io).
 
 **Dgraph enterprise features are enabled by default for 30 days in a new cluster**.

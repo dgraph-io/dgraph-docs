@@ -57,7 +57,7 @@ dgraph alpha --security whitelist=admin-bastion,host.docker.internal ...
 dgraph alpha --security whitelist=0.0.0.0/0 ...
 ```
 
-For detailed network security configuration including TLS and port usage, see [Ports Usage](/dgraph-overview/admin/security/ports-usage) and [TLS Configuration](/dgraph-overview/admin/security/tls-configuration).
+For detailed network security configuration including TLS and port usage, see [Ports Usage](ports-usage) and [TLS Configuration](tls-configuration).
 
 ## Token Authentication
 
@@ -101,5 +101,5 @@ You can configure Dgraph to only allow alter operations when the client provides
 
 See the [Token Authentication](#token-authentication) section above for setup instructions. Once configured, all alter operations require the `X-Dgraph-AuthToken` header.
 
-For enterprise-grade access control, see [Access Control Lists](/dgraph-overview/admin/enterprise-features/access-control-lists).
+For enterprise-grade access control, see [Access Control Lists](../enterprise-features/access-control-lists).
 

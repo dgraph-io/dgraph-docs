@@ -2,9 +2,9 @@
 title: Indexes
 ---
 
-Filtering on a predicate by applying a [function](/dgraph-overview/dql/query/functions) requires an index.
+Filtering on a predicate by applying a [function](query/functions) requires an index.
 
-Indices are defined in the [Dgraph types schema](dql/dql-schema) using `@index` directive.
+Indices are defined in the [Dgraph types schema](dql-schema) using `@index` directive.
 
 Here are some examples:
 ```
@@ -125,7 +125,7 @@ score: [int] .
 * A set operation adds to the list of values. The order of the stored values is non-deterministic.
 * A delete operation deletes the value from the list.
 * Querying for these predicates would return the list in an array.
-* Indexes can be applied on predicates which have a list type and you can use [Functions](/dgraph-overview/dql/query/functions) on them.
+* Indexes can be applied on predicates which have a list type and you can use [Functions](query/functions) on them.
 * Sorting is not allowed using these predicates.
 * These lists are like an unordered set. For example: `["e1", "e1", "e2"]` may get stored as `["e2", "e1"]`, i.e., duplicate values will not be stored and order may not be preserved.
 

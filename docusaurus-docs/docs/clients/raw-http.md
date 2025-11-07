@@ -347,7 +347,7 @@ The result:
 ## Running read-only queries
 
 You can set the query parameter `ro=true` to `/query` to set it as a
-[read-only](/dgraph-overview/go#read-only-transactions) query.
+[read-only](go#read-only-transactions) query.
 
 
 ```sh
@@ -364,7 +364,7 @@ $ curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?ro=true"
 ## Running best-effort queries
 
 You can set the query parameter `be=true` to `/query` to set it as a
-[best-effort](/dgraph-overview/go#read-only-transactions) query.
+[best-effort](go#read-only-transactions) query.
 
 
 ```sh
@@ -437,7 +437,7 @@ $ curl -X POST --compressed -H "Content-Type: application/dql" localhost:8080/qu
 
 ## Run a query in JSON format
 
-The HTTP API also accepts requests in JSON format. For queries you have the keys "query" and "variables". The JSON format is required to set [GraphQL Variables](/dgraph-overview/dql/query/graphql-variables) with the HTTP API.
+The HTTP API also accepts requests in JSON format. For queries you have the keys "query" and "variables". The JSON format is required to set [GraphQL Variables](../dql/query/graphql-variables) with the HTTP API.
 
 This query:
 

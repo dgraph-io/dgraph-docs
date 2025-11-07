@@ -4,7 +4,7 @@ title: HTTP Client
 
 A Dgraph client implementation for JavaScript using HTTP. It supports both
 browser and Node.js environments.
-This client follows the [Dgraph JavaScript gRPC client](/dgraph-overview/clients/javascript/grpc) closely.
+This client follows the [Dgraph JavaScript gRPC client](grpc) closely.
 
 :::tip
 The official JavaScript HTTP client [can be found here](https://github.com/dgraph-io/dgraph-js-http).
@@ -79,7 +79,7 @@ await clientStub.login();
 Some Dgraph configurations require extra access tokens.
 
 
-Alpha servers can be configured with [Secure Alter Operations](/dgraph-overview/admin/dgraph-administration).
+Alpha servers can be configured with [Secure Alter Operations](../../admin/dgraph-administration).
    In this case the token needs to be set on the client instance:
 
 ```js

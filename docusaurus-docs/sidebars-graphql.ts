@@ -102,8 +102,11 @@ const sidebars: SidebarsConfig = {
             {
               type: 'category',
               label: 'Endpoint',
+              link: {
+                type: 'doc',
+                id: 'graphql-clients/endpoint/index',
+              },
               items: [
-                'graphql-clients/endpoint/index',
                 'graphql-clients/endpoint/graphql-request',
                 'graphql-clients/endpoint/graphql-response',
                 'graphql-clients/endpoint/graphql-get-request',

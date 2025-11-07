@@ -4,7 +4,7 @@ title: dgraph export_backup
 
 #### `dgraph export_backup`
 
-This command is used to convert a [binary backup](/dgraph-overview/admin/enterprise-features/binary-backups)
+This command is used to convert a [binary backup](../admin/enterprise-features/binary-backups)
 created using Dgraph Enterprise Edition into an exported folder. The following
 replicates key information from the help listing shown when you run `dgraph export_backup --help`:
 

@@ -4,7 +4,7 @@ title: Dgraph Zero API Reference
 
 Dgraph Zero is the control plane that manages cluster coordination, membership, and data distribution. This reference documents Zero's HTTP API endpoints and administrative operations.
 
-For architectural overview, see [Architecture](/dgraph-overview/installation/dgraph-architecture). For comprehensive administrative operations like backup, export, and shutdown, see [Dgraph Administration](/dgraph-overview/admin/dgraph-administration).
+For architectural overview, see [Architecture](../installation/dgraph-architecture). For comprehensive administrative operations like backup, export, and shutdown, see [Dgraph Administration](dgraph-administration).
 
 ## Configuration
 
@@ -265,7 +265,7 @@ shown with their node name and HTTP port number:
       create a fresh cluster to be able to query the latest data in the DB.
 - `maxRaftId`
     - The number of Zeros available to serve as a leader node. Used by the
-      [RAFT](/design-concepts/raft/) consensus algorithm.
+      [RAFT](../design-concepts/raft) consensus algorithm.
 - `CID`
     - This is a unique UUID representing the *cluster-ID* for this cluster. It
       is generated during the initial DB startup and is retained across

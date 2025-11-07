@@ -21,7 +21,7 @@ could be set using environment vars or flags.
 
 Dgraph has *global flags* that apply to all subcommands and flags specific to a subcommand.
 
-Several commands (`alpha`, `backup`, `bulk`,`debug`, `live`, and `zero`) use [superflags](/dgraph-overview/cli/superflags). Superflags are compound flags that contain
+Several commands (`alpha`, `backup`, `bulk`,`debug`, `live`, and `zero`) use [superflags](superflags). Superflags are compound flags that contain
 one or more options that let you define multiple settings in a semicolon-delimited
 list. The general syntax for superflags is: `--<flagname> option-a=value-a; option-b=value-b`.
 

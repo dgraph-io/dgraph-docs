@@ -29,7 +29,7 @@ dgraph alpha [flags]
 
 ## Superflags
 
-Alpha uses several [superflags](/dgraph-overview/cli/superflags) for advanced configuration:
+Alpha uses several [superflags](superflags) for advanced configuration:
 
 - `--acl` - Access Control List settings (Enterprise)
 - `--audit` - Audit logging configuration

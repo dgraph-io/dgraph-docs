@@ -97,7 +97,7 @@ systemctl restart nginx
 
 ## Use the increment tool to start a gRPC LB
 
-In a different shell, run the `dgraph increment` ([docs](howto/using-increment-tool)) tool against the NGINX gRPC load balancer (`nginx:9080`):
+In a different shell, run the `dgraph increment` ([docs](using-increment-tool)) tool against the NGINX gRPC load balancer (`nginx:9080`):
 
 ```sh
 docker-compose exec alpha1 dgraph increment --alpha nginx:9080 --num=10

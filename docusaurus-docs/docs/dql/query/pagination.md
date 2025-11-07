@@ -7,7 +7,7 @@ import RunnableCodeBlock from '@site/src/components/RunnableCodeBlock';
 
 Pagination allows returning only a portion, rather than the whole, result set.  This can be useful for top-k style queries as well as to reduce the size of the result set for client side processing or to allow paged access to results.
 
-Pagination is often used with [sorting](/dgraph-overview/dql/query/sorting).
+Pagination is often used with [sorting](/dql/query/sorting).
 
 :::noteWithout a sort order specified, the results are sorted by `uid`, which is assigned randomly. So the ordering, while deterministic, might not be what you expected.:::
 ## First
