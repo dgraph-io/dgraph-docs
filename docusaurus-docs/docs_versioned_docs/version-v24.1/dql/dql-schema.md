@@ -35,7 +35,7 @@ The schema contains information about [predicate types](#predicate-types) and [n
 
 A [predicate](/dgraph-glossary#predicate) is the smallest piece of information about an object. A predicate can hold a literal value or a relation to another entity :
 - when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice".
-- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](../dgraph-glossary#uid) of the node representing Bob. In that case, ``knows`` is a [relationship](#relationships).
+- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](../dgraph-glossary#uid) of the node representing Bob. In that case, ``knows`` is a relationship.
 
 
 Dgraph maintains a list of all predicates names and their type in the **Dgraph types schema**.

@@ -1,9 +1,12 @@
 {
   "graphqlSidebar": [
-    "index",
     {
       "type": "category",
       "label": "GraphQL",
+      "link": {
+        "type": "doc",
+        "id": "index"
+      },
       "items": [
         "quick-start/index",
         {
@@ -139,8 +142,11 @@
     {
       "type": "category",
       "label": "GraphQL-DQL",
+      "link": {
+        "type": "doc",
+        "id": "graphql-dql/index"
+      },
       "items": [
-        "graphql-dql/index",
         "graphql-dql/dql-for-graphql",
         "graphql-dql/graphql-dql-schema",
         "graphql-dql/graphql-dgraph",
