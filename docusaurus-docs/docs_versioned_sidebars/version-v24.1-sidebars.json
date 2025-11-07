@@ -1,0 +1,280 @@
+{
+  "docsSidebar": [
+    "dgraph-overview",
+    "quick-start",
+    {
+      "type": "category",
+      "label": "Query Language",
+      "link": {
+        "type": "doc",
+        "id": "dql/index"
+      },
+      "items": [
+        "dql/json-mutation-format",
+        "dql/dql-rdf",
+        "dql/dql-schema",
+        "dql/predicate-indexing",
+        "dql/indexing-custom-tokenizers",
+        {
+          "type": "category",
+          "label": "Query",
+          "link": {
+            "type": "doc",
+            "id": "dql/query/index"
+          },
+          "items": [
+            "dql/query/running-examples",
+            "dql/query/dql-query",
+            "dql/query/facets",
+            "dql/query/functions",
+            "dql/query/graphql-variables",
+            "dql/query/alias",
+            "dql/query/pagination",
+            "dql/query/count",
+            "dql/query/sorting",
+            "dql/query/variables",
+            "dql/query/aggregation",
+            "dql/query/expand-predicates",
+            "dql/query/kshortest-path-queries",
+            "dql/query/debug",
+            "dql/query/fragments",
+            "dql/query/language-support",
+            {
+              "type": "category",
+              "label": "Directives",
+              "link": {
+                "type": "doc",
+                "id": "dql/query/directive/index"
+              },
+              "items": [
+                "dql/query/directive/cascade-directive",
+                "dql/query/directive/filter",
+                "dql/query/directive/groupby",
+                "dql/query/directive/ignorereflex-directive",
+                "dql/query/directive/normalize-directive",
+                "dql/query/directive/recurse-query"
+              ]
+            }
+          ]
+        },
+        "dql/dql-mutation",
+        "dql/upserts",
+        "dql/tips/index"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Clients",
+      "link": {
+        "type": "doc",
+        "id": "clients/index"
+      },
+      "items": [
+        "clients/raw-http",
+        "clients/python",
+        "clients/go",
+        "clients/java",
+        "clients/csharp",
+        "clients/unofficial-clients",
+        {
+          "type": "category",
+          "label": "JavaScript",
+          "items": [
+            "clients/javascript/index",
+            "clients/javascript/grpc",
+            "clients/javascript/http"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Installation",
+      "link": {
+        "type": "doc",
+        "id": "installation/index"
+      },
+      "items": [
+        "installation/download",
+        "installation/dgraph-architecture",
+        "installation/deployment-patterns",
+        "installation/single-host-setup",
+        "installation/ha-cluster",
+        "installation/lambda-server",
+        "installation/production-checklist"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Administration",
+      "link": {
+        "type": "doc",
+        "id": "admin/index"
+      },
+      "items": [
+        "admin/dgraph-administration",
+        {
+          "type": "category",
+          "label": "Observability",
+          "link": {
+            "type": "doc",
+            "id": "admin/observability/index"
+          },
+          "items": [
+            "admin/observability/monitoring",
+            "admin/observability/metrics",
+            "admin/observability/tracing",
+            "admin/observability/audit-logs",
+            "admin/observability/log-format"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Security",
+          "link": {
+            "type": "doc",
+            "id": "admin/security/index"
+          },
+          "items": [
+            "admin/security/admin-endpoint-security",
+            "admin/security/tls-configuration",
+            "admin/security/ports-usage"
+          ]
+        },
+        "admin/dgraph-alpha",
+        "admin/dgraph-zero",
+        "admin/data-compression",
+        "admin/troubleshooting",
+        {
+          "type": "category",
+          "label": "Advanced Features",
+          "link": {
+            "type": "doc",
+            "id": "admin/enterprise-features/index"
+          },
+          "items": [
+            "admin/enterprise-features/access-control-lists",
+            "admin/enterprise-features/binary-backups",
+            "admin/enterprise-features/change-data-capture",
+            "admin/enterprise-features/encryption-at-rest",
+            "admin/enterprise-features/learner-nodes",
+            "admin/enterprise-features/license",
+            "admin/enterprise-features/lsbackup",
+            "admin/enterprise-features/multitenancy"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Data Migration",
+      "link": {
+        "type": "doc",
+        "id": "migration/index"
+      },
+      "items": [
+        "migration/bulk-loader",
+        "migration/live-loader",
+        "migration/import-data",
+        "migration/export-data",
+        "migration/loading-csv-data",
+        "migration/migrate-tool"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Design Concepts",
+      "link": {
+        "type": "doc",
+        "id": "design-concepts/index"
+      },
+      "items": [
+        "design-concepts/acl-concept",
+        "design-concepts/badger-concept",
+        "design-concepts/clients-concept",
+        "design-concepts/consistency-model",
+        "design-concepts/discovery-concept",
+        "design-concepts/dql-concept",
+        "design-concepts/dql-graphql-layering-concept",
+        "design-concepts/facets-concept",
+        "design-concepts/graphql-concept",
+        "design-concepts/group-concept",
+        "design-concepts/index-tokenize-concept",
+        "design-concepts/lambda-concept",
+        "design-concepts/minimizing-network-calls",
+        "design-concepts/namespace-tenant-concept",
+        "design-concepts/network-call-minimization-concept",
+        "design-concepts/posting-list-concept",
+        "design-concepts/protocol-buffers-concept",
+        "design-concepts/queries-process",
+        "design-concepts/raft",
+        "design-concepts/relationships-concept",
+        "design-concepts/replication-concept",
+        "design-concepts/transaction-mutation-concept",
+        "design-concepts/transactions-concept",
+        "design-concepts/wal-memtable-concept",
+        "design-concepts/workers-concept"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "How To",
+      "items": [
+        "howto/completion",
+        "howto/concurrent-modification-java-multithreaded",
+        "howto/dgraph-sentry-integration",
+        "howto/dql-schema-request",
+        "howto/drop-data",
+        "howto/jepsen-tests",
+        "howto/load-balancing-nginx",
+        "howto/login-system",
+        "howto/retrieving-debug-information",
+        "howto/update-dgraph-types",
+        "howto/using-debug-tool",
+        "howto/using-increment-tool",
+        {
+          "type": "category",
+          "label": "Command Line",
+          "link": {
+            "type": "doc",
+            "id": "howto/commandline/index"
+          },
+          "items": [
+            "howto/commandline/about-cli",
+            "howto/commandline/create-cli"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "CLI",
+      "link": {
+        "type": "doc",
+        "id": "cli/index"
+      },
+      "items": [
+        "cli/acl",
+        "cli/alpha",
+        "cli/audit",
+        "cli/bulk",
+        "cli/cert",
+        "cli/completion",
+        "cli/config",
+        "cli/conv",
+        "cli/debuginfo",
+        "cli/decrypt",
+        "cli/export_backup",
+        "cli/increment",
+        "cli/live",
+        "cli/migrate",
+        "cli/restore",
+        "cli/superflags",
+        "cli/upgrade",
+        "cli/zero"
+      ]
+    },
+    "dgraph-glossary",
+    "releases/index"
+  ]
+}
