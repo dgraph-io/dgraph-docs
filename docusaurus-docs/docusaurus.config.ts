@@ -43,7 +43,9 @@ const config: Config = {
         path: 'docs',
         routeBasePath: '',
         sidebarPath: './sidebars.ts',
-        editUrl: 'https://github.com/dgraph-io/dgraph-docs/tree/main/',
+        editUrl: ({versionDocsDirPath, docPath}) => {
+          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs'}/${docPath}`;
+        },
       },
     ],
     [
@@ -53,7 +55,9 @@ const config: Config = {
         path: 'docs-graphql',
         routeBasePath: 'graphql',
         sidebarPath: './sidebars-graphql.ts',
-        editUrl: 'https://github.com/dgraph-io/dgraph-docs/tree/main/',
+        editUrl: ({versionDocsDirPath, docPath}) => {
+          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs-graphql'}/${docPath}`;
+        },
       },
     ],
     [
@@ -63,7 +67,9 @@ const config: Config = {
         path: 'docs-ratel',
         routeBasePath: 'ratel',
         sidebarPath: './sidebars-ratel.ts',
-        editUrl: 'https://github.com/dgraph-io/dgraph-docs/tree/main/',
+        editUrl: ({versionDocsDirPath, docPath}) => {
+          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs-ratel'}/${docPath}`;
+        },
       },
     ],
     [
@@ -73,7 +79,9 @@ const config: Config = {
         path: 'docs-learn',
         routeBasePath: 'learn',
         sidebarPath: './sidebars-learn.ts',
-        editUrl: 'https://github.com/dgraph-io/dgraph-docs/tree/main/',
+        editUrl: ({versionDocsDirPath, docPath}) => {
+          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs-learn'}/${docPath}`;
+        },
       },
     ],
   ],
