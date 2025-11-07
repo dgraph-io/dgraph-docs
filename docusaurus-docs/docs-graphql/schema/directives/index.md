@@ -65,7 +65,7 @@ Reference: [Identity](ids)
 
 The `@include` directive can be used to include a field based on the value of an `if` argument.
 
-Reference: [Include directive](/graphql/[skip-include](skip-include))
+Reference: [Include directive](/graphql/queries/skip-include)
 
 ### @lambda
 

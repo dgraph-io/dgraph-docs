@@ -221,7 +221,7 @@ You can filter query results within an inclusive range of indexed and typed
 scalar values using the `between` keyword.
 
 :::tipThis keyword is also supported for DQL; to learn more, see
-[DQL Functions: `between`](/graphql/[functions/#between](functions/#between)).:::
+[DQL Functions: `between`](/dql/query/functions#between).:::
 
 
 For example, you might start with the following example schema used to track

@@ -50,7 +50,7 @@ A Lambda Field resolver can use a combination of `parents`, `parent`, `dql`, or 
 :::
 
 :::tip
-This example uses `parent` for the resolver function. You can find additional resolver examples using `dql` in the [Lambda queries article](/graphql/[query](query)), and using `graphql` in the [Lambda mutations article](/graphql/[mutation](mutation)).
+This example uses `parent` for the resolver function. You can find additional resolver examples using `dql` in the [Lambda queries article](/graphql/lambda/query), and using `graphql` in the [Lambda mutations article](/graphql/lambda/mutation).
 :::
 
 For example, to define JavaScript lambda functions for... 

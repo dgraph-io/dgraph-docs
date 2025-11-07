@@ -7,11 +7,11 @@ This is a simple tutorial that will take you through making a basic to-do list a
 
 ### Steps
 
-- [Schema Design]([todo-schema-design](todo-schema-design))
-- [Basic UI]([todo-ui](todo-ui))
-- [Add Auth Rules]([todo-auth-rules](todo-auth-rules))
-- [Use Auth0's JWT]([todo-auth0-jwt](todo-auth0-jwt))
-- [Use Firebase's JWT]([todo-firebase-jwt](todo-firebase-jwt))
+- [Schema Design](./todo-schema-design)
+- [Basic UI](./todo-UI)
+- [Add Auth Rules](./todo-auth-rules)
+- [Use Auth0's JWT](./todo-auth0-jwt)
+- [Use Firebase's JWT](./todo-firebase-jwt)
 - Deploy
 
 ---

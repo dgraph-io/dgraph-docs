@@ -5,7 +5,7 @@ description: Dgraph client libraries in various programming languages.
 
 Dgraph client libraries allow you to run DQL transactions, queries and mutations in various programming languages.
 
-If you are interested in clients for GraphQL endpoint, please refer to [GraphQL clients](/graphql/graphql-clients/index) section.
+If you are interested in clients for GraphQL endpoint, please refer to [GraphQL clients](/graphql/graphql-clients) section.
 
 
 Go, python, Java, C# and JavaScript clients are using **[gRPC](http://www.grpc.io/):** protocol and [Protocol
@@ -48,7 +48,7 @@ transactions conflict when both transactions:
 - write values to the same scalar predicate of the same node (e.g both
   attempting to set a particular node's `address` predicate); or
 - write to a singular `uid` predicate of the same node (changes to `[uid]` predicates can be concurrently written); or
-- write a value that conflicts on an index for a predicate with `@upsert` set in the schema (see [upserts](dql/upserts)).
+- write a value that conflicts on an index for a predicate with `@upsert` set in the schema (see [upserts](/dql/upserts)).
 
 When a transaction is aborted, all its changes are discarded.  Transactions can be manually aborted.
 

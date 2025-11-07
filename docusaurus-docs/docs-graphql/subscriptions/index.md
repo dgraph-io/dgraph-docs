@@ -25,7 +25,7 @@ type Todo @withSubscription {
 
 ## @withSubscription with @auth
 
-You can use [@auth](/graphql/[graphql/schema/directives/auth](graphql/schema/directives/auth)) access control rules in conjunction with `@withSubscription`.
+You can use [@auth](/graphql/schema/directives/auth) access control rules in conjunction with `@withSubscription`.
 
 
 Consider following Schema that has both the `@withSubscription` and `@auth` directives defined on type `Todo`. 
@@ -52,7 +52,7 @@ The generated GraphQL API expects a JWT token in the `X-Dgraph-AuthToken` header
 ## WebSocket client
 Dgraph uses the websocket subprotocol `subscription-transport-ws`.
 
-Clients must be instantiated using the WebSocket URL of the GraphQL API which is your [Dgraph GraphQL endpoint](/graphql/[graphql/graphql-clients/endpoint/_index](graphql/graphql-clients/endpoint/_index)) with ``https`` replaced by ``wss``.
+Clients must be instantiated using the WebSocket URL of the GraphQL API which is your [Dgraph GraphQL endpoint](/graphql/graphql-clients/endpoint/) with ``https`` replaced by ``wss``.
 
 If your Dgraph endpoint is ``https://blue-surf-0033.us-east-1.aws.cloud.dgraph.io/graphql``
 the WebSocket URL is ``wss://blue-surf-0033.us-east-1.aws.cloud.dgraph.io/graphql``
@@ -95,7 +95,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 In this example, 
   
-- **process.env.REACT_APP_DGRAPH_ENDPOINT** is your [Dgraph GraphQL endpoint](/graphql/[graphql/graphql-clients/endpoint/_index](graphql/graphql-clients/endpoint/_index)) 
+- **process.env.REACT_APP_DGRAPH_ENDPOINT** is your [Dgraph GraphQL endpoint](/graphql/graphql-clients/endpoint/) 
 - **process.env.REACT_APP_DGRAPH_WSS** is the WebSocket URL
 - **props.token** is the JWT token of the logged-in user.
 

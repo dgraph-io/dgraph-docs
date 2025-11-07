@@ -7,7 +7,7 @@ title: "GraphQL data migration"
 
 When deploying a new version of your GraphQL Schema, Dgraph will update the underlying DQL Schema but will not alter the data.
 
-As explained in [GraphQL and DQL Schemas](/graphql/[graphql-dql-schema](graphql-dql-schema)) overview, Dgraph has no constraints at the database level and any node with predicates is valid. 
+As explained in [GraphQL and DQL Schemas](/graphql/graphql-dql/graphql-dql-schema) overview, Dgraph has no constraints at the database level and any node with predicates is valid. 
 
 You may face with several data GraphQL API and data discrepancies.
 
@@ -35,7 +35,7 @@ The data you have previously created is still in the graph database !
 
 Moreover if you delete the `TestDataMigration` object using its `id`, the GraphQL API delete operation will be successful.
 
-If you followed the [GraphQL - DQL Schema mapping](/graphql/[graphql-dql-schema](graphql-dql-schema)), you understand that Dgraph has used the list the known list of predicates (id, someInfo) and removed them. In fact, Dgraph also removed the `dgraph.type` predicate and so this `TestDataMigration` node is not visible anymore to the GraphQL API.
+If you followed the [GraphQL - DQL Schema mapping](/graphql/graphql-dql/graphql-dql-schema), you understand that Dgraph has used the list the known list of predicates (id, someInfo) and removed them. In fact, Dgraph also removed the `dgraph.type` predicate and so this `TestDataMigration` node is not visible anymore to the GraphQL API.
 
 The point is that a node with this `uid` exists and has a predicate `someOtherInfo`. This is because this data has been created initially and nothing in the process of deploying a new version and then using a delete operation by ID instructed Dgraph to delete this predicate.
 

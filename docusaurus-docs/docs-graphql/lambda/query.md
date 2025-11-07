@@ -37,7 +37,7 @@ A Lambda Query resolver can use a combination of `parents`, `args`, `dql`, or `g
 :::
 
 :::tip
-This example uses `dql` for the resolver function. You can find additional resolver examples using `parent` in the [Lambda fields article](/graphql/[query](query)), and using `graphql` in the [Lambda mutations article](/graphql/[mutation](mutation)).
+This example uses `dql` for the resolver function. You can find additional resolver examples using `parent` in the [Lambda fields article](/graphql/lambda/field), and using `graphql` in the [Lambda mutations article](/graphql/lambda/mutation).
 :::
 
 For example, to define the JavaScript `authorsByName()` lambda function and add it as resolver:

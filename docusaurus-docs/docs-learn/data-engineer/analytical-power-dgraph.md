@@ -194,7 +194,7 @@ Dgraph's flexible graph model and powerful DQL capabilities make it a great choi
 
 ## Related Topics
 
-- [DQL Query Language](/dql/_index)
+- [DQL Query Language](/dql/)
 - [Aggregation Functions](/dql/query/aggregation)
 - [@groupby Directive](/dql/query/directive/groupby)
 - [Query Variables](/dql/query/variables)

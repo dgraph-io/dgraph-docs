@@ -3,9 +3,9 @@ title: "Get Started with Dgraph - Geolocation"
 ---
 **Welcome to the eight tutorial of getting started with Dgraph.**
 
-In the [previous tutorial]([tutorial-7/index](tutorial-7/index)),
+In the [previous tutorial](../tutorial-7/),
 we learned about building a twitter-like user-search feature using
-[Dgraph's fuzzy search]([functions#fuzzy-matching](functions#fuzzy-matching)).
+[Dgraph's fuzzy search](/dql/query/functions#fuzzy-matching).
 
 In this tutorial, we'll build a graph of tourist locations around San Francisco and
 help our Zoologist friend, Mary, and her team in their mission to conserve birds
@@ -1458,7 +1458,7 @@ Open Ratel, go to the mutate tab, paste the mutation, and click Run.
 ```
 
 _Note: If this mutation syntax is new to you, refer to the
-[first tutorial]([tutorial-1/index](tutorial-1/index)) to learn
+[first tutorial](../tutorial-1/) to learn
 the basics of mutations in Dgraph._
 
 Run the query below to fetch the entire graph:
@@ -1477,7 +1477,7 @@ Run the query below to fetch the entire graph:
 }
 ```
 
-_Note: Check the [second tutorial]([tutorial-2/index](tutorial-2/index))
+_Note: Check the [second tutorial](../tutorial-2/)
 if you want to learn more about traversal queries like the above one._
 
 
@@ -1499,7 +1499,7 @@ the schema tab, and the location predicate has been auto-assigned `geo` type.
 
 ![type detection](/images/tutorials/8/e-schema.png)
 
-_Note: Check out the [previous tutorial]([tutorial-3/index](tutorial-3/index))
+_Note: Check out the [previous tutorial](../tutorial-3/)
 to know more about data types in Dgraph._
 
 Before we start, please say Hello to `Mary`, a zoologist who has dedicated her
@@ -1560,7 +1560,7 @@ Wait! The search returns not just the hotels, but also all other locations
 within 7 Km from the point coordinate on the `Golden Gate Bridge`.
 
 Let's use the `@filter` function to filter for search results containing only the hotels.
-You can visit our [third tutorial]([tutorial-3/index](tutorial-3/index)) of the series
+You can visit our [third tutorial](../tutorial-3/) of the series
 to refresh our previous discussions around using the `@filter` directive.
 
 ```graphql
@@ -1584,7 +1584,7 @@ Let's add a `hash` index to the `loc_type` and re-run the query.
 
 ![geo-index](/images/tutorials/8/j-near-4.png)
 
-_Note: Refer to the [third tutorial]([tutorial-3/index](tutorial-3/index)) of
+_Note: Refer to the [third tutorial](../tutorial-3/) of
 the series to learn more about hash index and comparator functions in Dgraph._
 
 The search result still contains nodes representing locations which are not hotels.
@@ -1666,9 +1666,9 @@ our newsletter to get the latest tutorial right into your inbox.
 
 ## What's Next?
 
-- Go to [Clients]([clients](clients)) to see how to communicate
+- Go to [Clients](/clients) to see how to communicate
 with Dgraph from your application.
-- A wider range of queries can also be found in the [Query Language]([_index](_index)) reference.
+- A wider range of queries can also be found in the [Query Language](/dql/query/) reference.
 
 
 ## Need Help

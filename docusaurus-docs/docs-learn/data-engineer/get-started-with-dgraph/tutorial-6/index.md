@@ -3,7 +3,7 @@ title: "Get Started with Dgraph -  Advanced Text Search"
 ---
 **Welcome to the sixth tutorial of getting started with Dgraph.**
 
-In the [previous tutorial]([tutorial-5/index](tutorial-5/index)), we learned about building social graphs in Dgraph, by modeling tweets as an example.
+In the [previous tutorial](../tutorial-5/), we learned about building social graphs in Dgraph, by modeling tweets as an example.
 We queried the tweets using the `hash` and `exact` indices, and implemented a keyword-based search to find your favorite tweets using the `term` index and its functions.
 
 In this tutorial, we'll continue from where we left off and learn about advanced text search features in Dgraph.
@@ -23,7 +23,7 @@ Before we dive in, let's do a quick recap of how to model the tweets in Dgraph.
 
 In the previous tutorial, we took three real tweets as a sample dataset and stored them in Dgraph using the above graph as a model.
 
-In case you haven't stored the tweets from the [previous tutorial]([tutorial-5/index](tutorial-5/index)) into Dgraph, here's the sample dataset again.
+In case you haven't stored the tweets from the [previous tutorial](../tutorial-5/) into Dgraph, here's the sample dataset again.
 
 Copy the mutation below, go to the mutation tab and click Run.
 
@@ -125,13 +125,13 @@ Copy the mutation below, go to the mutation tab and click Run.
 }
 ```
 
-_Note: If you're new to Dgraph, and this is the first time you're running a mutation, we highly recommend reading the [first tutorial of the series before proceeding.]([tutorial-1/index](tutorial-1/index))_
+_Note: If you're new to Dgraph, and this is the first time you're running a mutation, we highly recommend reading the [first tutorial of the series before proceeding.](../tutorial-1/)_
 
 Voilà! Now you have a graph with `tweets`, `users`, and `hashtags`. It is ready for us to explore.
 
 ![tweet graph](/images/tutorials/5/x-all-tweets.png)
 
-_Note: If you're curious to know how we modeled the tweets in Dgraph, refer to [the previous tutorial.]([tutorial-5/index](tutorial-5/index))_
+_Note: If you're curious to know how we modeled the tweets in Dgraph, refer to [the previous tutorial.](../tutorial-5/)_
 
 Let's start by finding your favorite tweets using the full-text search feature first.
 
@@ -158,7 +158,7 @@ It's relatively hard to query these predicates.
 
 It's not practical to query such predicates using the `hash` or `exact` string indices.
 A keyword-based search using the `term` index is a good starting point to query such predicates.
-We used it in our [previous tutorial]([tutorial-5/index](tutorial-5/index)) to find the tweets with an exact match for keywords like `GraphQL`, `Graphs`, and `Go`.
+We used it in our [previous tutorial](../tutorial-5/) to find the tweets with an exact match for keywords like `GraphQL`, `Graphs`, and `Go`.
 
 But, for some of the use cases, just the keyword-based search may not be sufficient.
 You might need a more powerful search capability, and that's when you should consider using Full-text search.
@@ -171,7 +171,7 @@ Creating a `fulltext` index on any string predicate is similar to creating any o
 
 ![full text](/images/tutorials/6/a-set-index.png)
 
-_Note: Refer to the [previous tutorial]([tutorial-5/index](tutorial-5/index)) if you're not sure about creating an index on a string predicate._
+_Note: Refer to the [previous tutorial](../tutorial-5/) if you're not sure about creating an index on a string predicate._
 
 Now, let's do a Full-text search query to find tweets related to the following topic: `graph data and analyzing it in graphdb`.
 
@@ -228,7 +228,7 @@ Here are the steps to generate the `fulltext` tokens:
 - Reduce the tokens to their root form, this is called [stemming](https://en.wikipedia.org/wiki/Stemming) (running to run, faster to fast and so on).
 - Remove the [stop words](https://en.wikipedia.org/wiki/Stop_words).
 
-You would have seen in [the fourth tutorial]([tutorial-4/index](tutorial-4/index)) that Dgraph allows you to build multi-lingual apps.
+You would have seen in [the fourth tutorial](../tutorial-4/) that Dgraph allows you to build multi-lingual apps.
 
 The stemming and stop words removal are not supported for all the languages.
 Here is [the link to the docs](https://dgraph.io/docs/query-language/#full-text-search) that contains the list of languages and their support for stemming and stop words removal.
@@ -310,7 +310,7 @@ Let's first find all the hashtags in the database using the `has()` function.
 
 ![The hashtags](/images/tutorials/6/has-hashtag.png)
 
-_If you're not familiar with using the `has()` function, refer to [the first tutorial]([tutorial-1/index](tutorial-1/index)) of the series._
+_If you're not familiar with using the `has()` function, refer to [the first tutorial](../tutorial-1/) of the series._
 
 You can see that we have six hashtags in total, and four of them have the substring `graph` in them: `Dgraph`, `GraphQL`, `graphqlconf`, `graphDB`.
 
@@ -341,13 +341,13 @@ Again, setting a `trigram` index is similar to setting any other string index, l
 
 ![The hashtags](/images/tutorials/6/set-trigram.png)
 
-_Note: Refer to the [previous tutorial]([tutorial-5/index](tutorial-5/index)) if you're not sure about creating an index on a string predicate._
+_Note: Refer to the [previous tutorial](../tutorial-5/) if you're not sure about creating an index on a string predicate._
 
 Now, let's re-run the `regexp` query.
 
 ![regex-1](/images/tutorials/6/regex-query-1.png)
 
-_Note: Refer to [the first tutorial]([tutorial-1/index](tutorial-1/index)) if you're not familiar with the query structure in general_
+_Note: Refer to [the first tutorial](../tutorial-1/) if you're not familiar with the query structure in general_
 Success!
 
 But we only have the following hashtags in the result: `Dgraph` and `graphqlconf`.
@@ -382,7 +382,7 @@ Let's learn about the fuzzy search in our next tutorial.
 
 Sounds interesting?
 
-Check out our next tutorial of the getting started series [here]([tutorial-7/index](tutorial-7/index)).
+Check out our next tutorial of the getting started series [here](../tutorial-7/).
 
 ## Need Help
 

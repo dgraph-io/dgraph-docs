@@ -20,5 +20,5 @@ type Todo @withSubscription {
 }
 ```
 
-Refer to [GraphQL Subscriptions](/graphql/[graphql/subscriptions](graphql/subscriptions)) to learn how to use subscriptions in you client application.
+Refer to [GraphQL Subscriptions](/graphql/subscriptions) to learn how to use subscriptions in you client application.
 

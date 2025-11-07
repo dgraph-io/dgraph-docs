@@ -8,7 +8,7 @@ title: "Use DQL in GraphQL"
 Dgraph Query Language ([DQL](/dql/)) can be used to extend GraphQL API capabilities when writing:
 
 - [custom DQL resolvers](/graphql/custom)
-- [subscriptions on DQL queries](/graphql/schema/directive-withsubscription)
+- [subscriptions on DQL queries](/graphql/schema/directives/directive-withsubscription)
 
 
 

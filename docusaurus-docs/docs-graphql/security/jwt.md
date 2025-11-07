@@ -43,7 +43,7 @@ When the `# Dgraph.Authorization` line is present in the GraphQL schema, Dgraph 
 
 These claims will then be accessible to any @auth schema directives (a GraphQL schema directive specific to Dgraph) that are associated with GraphQL types in the schema file. 
 
-See the [RBAC rules](/graphql/[RBAC-rules](RBAC-rules)) and [Graph traversal rules](/graphql/[graphtraversal-rules](graphtraversal-rules) for details on how to restrict data access using the @auth directive on a per-type basis.
+See the [RBAC rules](/graphql/security/RBAC-rules) and [Graph traversal rules](/graphql/security/graphtraversal-rules) for details on how to restrict data access using the @auth directive on a per-type basis.
 
 ### Require JWT token
 To not only accept but to require the JWT token regardless of @auth directives in your GraphQL schema, set option "ClosedByDefault" to true in the `# Dgraph.Authorization` line.

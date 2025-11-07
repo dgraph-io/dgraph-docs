@@ -4,7 +4,7 @@ title: "Get Started with Dgraph -  Types and Operations"
 
 **Welcome to the third tutorial of getting started with Dgraph.**
 
-In the [previous tutorial]([tutorial-2/index](tutorial-2/index)), we learned about CRUD operations using UIDs. We also learned about traversals and recursive traversals.
+In the [previous tutorial](../tutorial-2/), we learned about CRUD operations using UIDs. We also learned about traversals and recursive traversals.
 
 In this tutorial, we'll learn about Dgraph's basic types and how to query for them. Specifically, we'll learn about:
 
@@ -218,7 +218,7 @@ First, let's query for all the Authors and their ratings:
 
 ![authors](/images/tutorials/3/a-find-rating-2.png)
 
-Refer to the [first episode]([tutorial-1/index](tutorial-1/index)) if you have any questions related to the structure of the query in general.
+Refer to the [first episode](../tutorial-1/) if you have any questions related to the structure of the query in general.
 
 We have 3 authors in total in our dataset. Now, let's find the best authors. Let's query for authors whose rating is 4.0 or more.
 
@@ -324,7 +324,7 @@ We already know that the `published` edge points from an `author` node to a `blo
 
 ![rating-blog-rating](/images/tutorials/3/e-rating-blog.png)
 
-_Check out our [previous tutorial]([tutorial-2/index](tutorial-2/index)) if you have questions around graph traversal queries._
+_Check out our [previous tutorial](../tutorial-2/) if you have questions around graph traversal queries._
 
 
 Similarly, let's extend our previous query to fetch the tags of these blog posts.
@@ -564,4 +564,4 @@ Did you know that Dgraph offers advanced text search capabilities? How about the
 
 Sounds interesting?
 
-Check out our next tutorial of the getting started series [here]([tutorial-4/index](tutorial-4/index)).
+Check out our next tutorial of the getting started series [here](../tutorial-4/).

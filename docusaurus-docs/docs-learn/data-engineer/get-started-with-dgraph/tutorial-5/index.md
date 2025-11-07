@@ -4,7 +4,7 @@ title: "Get Started with Dgraph -  String Indices"
 
 **Welcome to the fifth tutorial of getting started with Dgraph.**
 
-In the [previous tutorial]([tutorial-4/index](tutorial-4/index)), we learned about using multi-language strings and operations on them using [language tags](https://www.w3schools.com/tags/ref_language_codes.asp).
+In the [previous tutorial](../tutorial-4/), we learned about using multi-language strings and operations on them using [language tags](https://www.w3schools.com/tags/ref_language_codes.asp).
 
 In this tutorial, we'll model tweets in Dgraph and, using it, we'll learn more about string indices in Dgraph.
 
@@ -257,7 +257,7 @@ Open Ratel, go to the mutate tab, paste the mutation, and click Run.
 }
 ```
 
-_Note: If you're new to Dgraph, and yet to figure out how to run the database and use Ratel, we highly recommend reading the [first article of the series]([tutorial-1/index](tutorial-1/index))_
+_Note: If you're new to Dgraph, and yet to figure out how to run the database and use Ratel, we highly recommend reading the [first article of the series](../tutorial-1/)_
 
 Here is the graph we built.
 
@@ -281,7 +281,7 @@ Let's start our tweet exploration by querying for the twitter users in the datab
 
 ![tweet model](/images/tutorials/5/j-users.png)
 
-_Note: If the query syntax above looks not so familiar to you, check out the [first tutorial]([tutorial-1/index](tutorial-1/index))._
+_Note: If the query syntax above looks not so familiar to you, check out the [first tutorial](../tutorial-1/)._
 
 We have four twitter users: `@hackintoshrao`, `@francesc`, `@dgraphlabs`, and `@gopherpalooza`.
 
@@ -303,7 +303,7 @@ Now, let's find their tweets and hashtags too.
 
 ![tweet model](/images/tutorials/5/y-author-tweet.png)
 
-_Note: If the traversal query syntax in the above query is not familiar to you, [check out the third tutorial]([tutorial-3/index](tutorial-3/index)) of the series._
+_Note: If the traversal query syntax in the above query is not familiar to you, [check out the third tutorial](../tutorial-3/) of the series._
 
 Before we start querying our graph, let's learn a bit about database indices using a simple analogy.
 
@@ -359,7 +359,7 @@ Go to the query tab, type in the query, and click Run.
 
 ![tweet model](/images/tutorials/5/z-exact.png)
 
-_Note: Refer to [the third tutorial]([tutorial-3/index](tutorial-3/index)), if you want to know about comparator functions like `eq` in detail._
+_Note: Refer to [the third tutorial](../tutorial-3/), if you want to know about comparator functions like `eq` in detail._
 
 Let's extend the last query also to fetch the hashtags and the mentions.
 
@@ -382,7 +382,7 @@ Let's extend the last query also to fetch the hashtags and the mentions.
 
 ![tweet model](/images/tutorials/5/l-hash-query.png)
 
-_Note: If the traversal query syntax in the above query is not familiar to you, [check out the third tutorial]([tutorial-3/index](tutorial-3/index)) of the series._
+_Note: If the traversal query syntax in the above query is not familiar to you, [check out the third tutorial](../tutorial-3/) of the series._
 
 Did you know that string values in Dgraph can also be compared using comparators like greater-than or less-than?
 
@@ -390,7 +390,7 @@ In our next section, let's see how to run the comparison functions other than `e
 
 ### Exact Index
 
-We discussed in the [third tutorial]([tutorial-3/index](tutorial-3/index)) that there five comparator functions in Dgraph.
+We discussed in the [third tutorial](../tutorial-3/) that there five comparator functions in Dgraph.
 
 Here's a quick recap:
 
@@ -509,7 +509,7 @@ Here's the matched tweet from the query response:
 
 ![go graph set](/images/tutorials/5/s-go-graph.png)
 
-_Note: Check out [the first tutorial]([tutorial-1/index](tutorial-1/index)) if the query syntax, in general, is not familiar to you_
+_Note: Check out [the first tutorial](../tutorial-1/) if the query syntax, in general, is not familiar to you_
 
 The `anyofterms` function returns tweets which have either of `Go` or `Graph` keyword.
 
@@ -591,7 +591,7 @@ In the next tutorial, we'll explore these features and learn about more powerful
 Sounds interesting?
 Then see you all soon in the next tutorial. Till then, happy Graphing!
 
-Check out our next tutorial of the getting started series [here]([tutorial-6/index](tutorial-6/index)).
+Check out our next tutorial of the getting started series [here](../tutorial-6/).
 
 
 

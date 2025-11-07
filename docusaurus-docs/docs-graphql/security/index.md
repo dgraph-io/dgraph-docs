@@ -21,11 +21,11 @@ It is your responsibility to correctly configure the authorization for the ``/gr
 
 Refer to the following documentation to set your ``/graphql`` endpoint security :
 
-- [Handle JWT token](/graphql/[jwt](jwt))
+- [Handle JWT token](/graphql/security/jwt)
 
-- [RBAC rules](/graphql/[RBAC-rules](RBAC-rules))
+- [RBAC rules](/graphql/security/RBAC-rules)
 
-- [ABAC rules](/graphql/[graphtraversal-rules](graphtraversal-rules))
+- [ABAC rules](/graphql/security/graphtraversal-rules)
 
 ### ``/graphql`` security flow
 In summary, the Dgraph security flow on ``/graphql`` endpoint is as follow:
@@ -33,7 +33,7 @@ In summary, the Dgraph security flow on ``/graphql`` endpoint is as follow:
 ![graphql endpoint security](/images/graphql/RBAC.jpeg)
 
 ### CORS
-Additionally, you can [restrict the origins](/graphql/[cors](cors)) that ``/graphql`` endpoint responds to.
+Additionally, you can [restrict the origins](/graphql/security/cors) that ``/graphql`` endpoint responds to.
 
 This is a best practice to prevent XSS exploits.
 
@@ -47,7 +47,7 @@ You can use any authentication method that is capable of generating such JWT tok
 
 
 ### ACL
-Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs](/enterprise-features/access-control-lists/) section for details. The ACLs are a separate security mechanism.
+Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs](/admin/enterprise-features/access-control-lists/) section for details. The ACLs are a separate security mechanism.
 
 ### JWT Claims
 

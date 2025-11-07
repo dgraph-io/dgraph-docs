@@ -85,7 +85,7 @@ or
 
   If a predicate type isn't declared in the schema, then the type is inferred from the first mutation and added to the schema.
 
-  If the mutation is using [RDF format](/dql-rdf) with an RDF type, Dgraph uses this information to infer the predicate type.
+  If the mutation is using [RDF format](/dql/dql-rdf) with an RDF type, Dgraph uses this information to infer the predicate type.
 
   If no type can be inferred, the predicate type is set to  `default`.
 
@@ -244,7 +244,7 @@ email: string @index(exact) @noconflict .
 ### Predicate types from RDF Types
 
 As well as implying a schema type for a first mutation, an RDF type can override a schema type for storage.
-Dgraph supports a number of [RDF](/dql-rdf) types.
+Dgraph supports a number of [RDF](/dql/dql-rdf) types.
 
 If a predicate has a schema type and a mutation has an RDF type with a different underlying Dgraph type, the convertibility to schema type is checked, and an error is thrown if they are incompatible, but the value is stored in the RDF type's corresponding Dgraph type.  Query results are always returned in schema type.
 

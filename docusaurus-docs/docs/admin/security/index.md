@@ -14,8 +14,8 @@ Dgraph security configuration covers authentication, network security, and acces
 
 ## Enterprise Security Features
 
-For advanced security features, see [Enterprise Features](../enterprise-features/index):
+For advanced security features, see [Enterprise Features](/admin/enterprise-features/):
 
-- [Access Control Lists (ACL)](enterprise-features/access-control-lists) - Fine-grained access control
-- [Audit Logging](../observability/audit-logs) - Track and audit all requests
-- [Encryption at Rest](enterprise-features/encryption-at-rest) - Encrypt data on disk
+- [Access Control Lists (ACL)](/admin/enterprise-features/access-control-lists) - Fine-grained access control
+- [Audit Logging](/admin/observability/audit-logs) - Track and audit all requests
+- [Encryption at Rest](/admin/enterprise-features/encryption-at-rest) - Encrypt data on disk

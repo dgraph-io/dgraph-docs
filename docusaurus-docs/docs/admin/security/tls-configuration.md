@@ -362,7 +362,7 @@ Refer to the `curl` documentation for further information on its TLS options.
 
 ## Access Data Using a Client
 
-Some examples of connecting via a [Client](../../clients/index) when TLS is in use can be found below:
+Some examples of connecting via a [Client](/clients) when TLS is in use can be found below:
 
 - [dgraph4j](https://github.com/dgraph-io/dgraph4j#creating-a-secure-client-using-tls)
 - [dgraph-js](https://github.com/dgraph-io/dgraph-js/tree/master/examples/tls)

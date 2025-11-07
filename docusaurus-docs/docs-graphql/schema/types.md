@@ -55,7 +55,7 @@ A Float array can be used as a vector using `@embedding` directive. It denotes a
 
 Vectors are normaly used to store embeddings obtained from an ML model. 
 
-When a Float vector is indexed, the GraphQL `querySimilar<type name>ByEmbedding` and `querySimilar<type name>ById` functions can be used for [similarity search](/graphql/[vector-similarity](vector-similarity)).
+When a Float vector is indexed, the GraphQL `querySimilar<type name>ByEmbedding` and `querySimilar<type name>ById` functions can be used for [similarity search](/graphql/queries/vector-similarity).
 
 A simple example of adding a vector embedding on `name`  to `User` type is shown below. 
 

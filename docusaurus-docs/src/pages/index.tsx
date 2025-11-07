@@ -20,7 +20,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/dgraph-overview/overview">
+            to="/dgraph-overview">
             Get Started
           </Link>
         </div>

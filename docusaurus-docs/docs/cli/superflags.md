@@ -156,7 +156,7 @@ The `--tls` superflag configures [TLS](../admin/security/tls-configuration) sett
 
 ## Trace Superflag
 
-The `--trace` superflag configures [tracing](admin/observability/tracing) settings:
+The `--trace` superflag configures [tracing](/admin/observability/tracing) settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|

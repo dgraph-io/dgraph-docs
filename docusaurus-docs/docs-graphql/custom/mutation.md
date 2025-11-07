@@ -43,7 +43,7 @@ type Mutation {
 
 Find out more about how to turn off generated mutations and protecting mutations with authorization rules at:
 
-* Remote Types - Turning off Generated Mutations with `@remote` [Directive](/graphql/schema/directives/index.md#remote-types)
+* Remote Types - Turning off Generated Mutations with `@remote` [Directive](/graphql/schema/directives)
 * [Securing Mutations with the `@auth` Directive](/graphql/security/mutations)
 
 ---

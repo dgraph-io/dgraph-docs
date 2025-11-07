@@ -205,4 +205,4 @@ run the database, add new entities and predicates, and query them
 back.
 
 
-Check out our next tutorial of the getting started series [here]([tutorial-2/index](tutorial-2/index)).
+Check out our next tutorial of the getting started series [here](../tutorial-2/).
