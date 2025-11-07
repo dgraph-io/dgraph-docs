@@ -47,7 +47,7 @@ Download the sample dataset (movie data):
 
 ```bash
 wget https://github.com/dgraph-io/dgraph-benchmarks/raw/refs/heads/main/data/1million.rdf.gz
-wget https://raw.githubusercontent.com/dgraph-io/dgraph-benchmarks/refs/heads/main/data/21million.schema
+wget https://raw.githubusercontent.com/dgraph-io/dgraph-benchmarks/refs/heads/main/data/1million.schema
 ```
 
 Load the data into Dgraph:
@@ -55,7 +55,7 @@ Load the data into Dgraph:
 ```bash
 docker exec -it dgraph-play dgraph live \
   -f 1million.rdf.gz \
-  -s 21million.schema
+  -s 1million.schema
 ```
 
 This loads over 1 million movie-related facts into your database. The process takes about 15-30 seconds.
