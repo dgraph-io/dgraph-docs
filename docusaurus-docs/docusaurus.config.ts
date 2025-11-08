@@ -85,7 +85,23 @@ const config: Config = {
       },
     ],
   ],
-
+  themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        indexDocs: true,
+        // Index only docs, graphql, and ratel - exclude learn (tutorials)
+        docsRouteBasePath: ["/", "/graphql", "/ratel"],
+        searchContextByPaths: ["/", "/graphql", "/ratel"],
+        language: ["en"],
+        searchResultLimits: 8,
+        searchBarPosition: "auto",
+        forceIgnoreNoIndex: false,
+        hideSearchBarWithNoSearchContext: false,
+      },
+    ],
+  ],
   presets: [
     [
       'classic',
