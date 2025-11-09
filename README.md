@@ -1,11 +1,92 @@
 # Dgraph Documentation
 
 To read the official Dgraph documentation that is published from this repository,
-please see https://dgraph.io/docs/.
+please see https://docs.dgraph.io/.
 
+## Technology Stack
 
+This documentation site is built with [Docusaurus](https://docusaurus.io/), a modern static website generator optimized for documentation.
 
-## Contribution guidelines
+## Documentation Structure
+
+The documentation is organized into four main sections, each managed by its own Docusaurus content plugin:
+
+1. **Docs** (`/`) - Core Dgraph database documentation including DQL, administration, installation, and design concepts
+2. **GraphQL** (`/graphql`) - GraphQL API documentation, schema, queries, mutations, and custom resolvers
+3. **Ratel UI** (`/ratel`) - Documentation for the Ratel web-based UI tool
+4. **Tutorials** (`/learn`) - Step-by-step tutorials and learning paths for different user types
+
+Each section has its own sidebar navigation configured in:
+- `sidebars.ts` - Docs sidebar
+- `sidebars-graphql.ts` - GraphQL sidebar
+- `sidebars-ratel.ts` - Ratel sidebar
+- `sidebars-learn.ts` - Tutorials sidebar
+
+## Running Locally
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) version 20.0 or higher
+- npm or yarn package manager
+
+### Setup and Run
+
+1. Navigate to the Docusaurus directory:
+   ```bash
+   cd docusaurus-docs
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+The site will automatically reload when you make changes to the documentation files.
+
+### Build for Production
+
+To build a production-ready static site:
+
+```bash
+npm run build
+```
+
+The built site will be in the `build/` directory. You can serve it locally with:
+
+```bash
+npm run serve
+```
+
+## Versioning
+
+Docusaurus supports documentation versioning. Versioned documentation is stored in:
+- `docs_versioned_docs/` - Versioned docs content
+- `docs_versioned_sidebars/` - Versioned sidebar configurations
+- `docs_versions.json` - Version metadata
+
+The version dropdown in the navbar automatically detects which documentation section you're viewing and shows the appropriate versions. Currently, versioning is configured for the main `docs` section.
+
+To create a new version:
+1. Use the Docusaurus CLI: `npm run docusaurus docs:version <version>`
+2. This creates a new version snapshot of the current docs
+
+## Deployment
+
+The documentation site is automatically deployed to CloudFlare:
+
+- **Main branch** (`main`) → Deployed to production at `https://docs.dgraph.io`
+- **Preview branches** (`preview/*`) → Deployed as preview deployments for review
+
+The deployment process is handled automatically via CloudFlare Pages integration with GitHub.
+
+## Contribution Guidelines
 
 As a contributor to Dgraph documentation, we ask that you do the following:
 - **Label your PR for easy management**: Your PR title should be in the following format: **Topic (area): details**. The **topic** is either "Docs", "Nav" (aka, navigation), or "Chore" (for build fixes, cherry-picks, etc). The **area** is the feature (i.e. "GraphQL"), area of the docs (i.e., "Deployment"), or "Other" (for typo fixes and other bugfix PRs). So, example PR names include:
@@ -21,202 +102,52 @@ As a contributor to Dgraph documentation, we ask that you do the following:
 
 - **(Dgraph core team only)**: Include the ID of any issues/tickets related to your PR in the description (i.e., "Fixes DGRAPH-12345" or "Per DGRAPH-54321").
 
-### Technical writing style
+### Technical Writing Style
 
-Dgraph Labs uses a style guide for our documentation so that we can make it as easy to understand as possible. The [Dgraph Style Guide](https://discuss.dgraph.io/t/dgraph-developer-documentation-style-guide/10955) is a concise style reference for our documentation, but it isn't comprehensive. For anything not found in our style guide, use Google's [Developer Docs Style Guide](https://developers.google.com/style/highlights).
-
-#### Style tips for machine-translatable docs!
-
-Making our documentation easy to understand includes optimizing it for client-side machine translation into other languages. To help with this, please see the following technical writing style tips:
-- Generally, use the second person ("you") rather than the third-person ("the developer") when addressing the reader.
-- Always use the third person when describing Dgraph database or features (avoid "this lets us" in favor of "this lets Dgraph").
-- Write in present-tense, active voice when you can.
-- Prefer simple sentences to complex and complex-compound sentences.
+Please follow the [Dgraph Documentation Style Guide](documentation-style-guide.md) for writing conventions, formatting, and best practices.
 
 **Note:** Please don't let these style conventions stop you from creating a PR to share your contribution to Dgraph Docs! PR reviewers can help with style guide issues.
 
-### references ###
+### References
 
-Use hugo shortcode for relref.
-
-Example, to reference a term, use a relref to the glossary :
-```
->  [entity]({{< relref "dgraph-glossary.md#entity" >}})
-```
-
-### Staging doc updates locally
-
-We use [Hugo](https://gohugo.io/) for our documentation. You can use Hugo to locally stage doc updates before or after creating a PR.
-
-1. Download and install  hugo version v0.91 from [here](https://github.com/gohugoio/hugo/releases/tag/v0.91.0).
-
-On mac you may have to remove the quarantine attribute to be able to execute hugo
-'''
-sudo xattr -d com.apple.quarantine path/to/hugo
-'''
-
-2. Run `./scripts/local.sh` and visit [http://localhost:1313](http://localhost:1313) to see the documentation site running on your local machine.
-
-(Optional) To run queries _within_ the documentation using a different Dgraph instance, set the `DGRAPH_ENDPOINT` environment variable before starting the local web server:
-
-```bash
-DGRAPH_ENDPOINT="http://localhost:8080/query?latency=true" ./scripts/local.sh
-```
-
-Now you can make changes to the docs and see them being updated instantly, thanks to Hugo.
-
-**Note**: While running locally, the version selector does not work because you need to build the documentation and serve it behind a reverse proxy to have multiple versions. Also, formatting of lists is less fussy when running locally; so please precede lists with a blank line in your PR.
-
-### Testing for broken links
-
-We use [htmltest](https://github.com/wjdp/htmltest) to check for broken links in the generated documentation. To test for broken links after building the site:
-
-1. Build the Hugo site:
-   ```bash
-   hugo --destination=public --baseURL=http://example.com
-   ```
-
-2. Run htmltest:
-   ```bash
-   htmltest
-   ```
-
-   Or combine both steps:
-   ```bash
-   hugo --destination=public --baseURL=http://example.com && htmltest  2>&1
-   ```
-
-The htmltest configuration is in `.htmltest.yml` at the root of the repository. It automatically ignores development-only files like `livereload.js` and empty hash links used for JavaScript interactions.
-
-### Running docs locally with Docker
-
-Make sure you have docker-compose installed.
-
-Run:
-
-```sh
-sh scripts/docker.sh
-```
-
-### Branch
-
-Depending on what branch you are on, some code examples will dynamically change.
-For example, `go-grpc` code examples will have different import path depending
-on the branch name.
-
-## Runnable code examples
-
-Some code examples are runnable, allowing for reader interaction with a data set.
-
-### Custom example
-
-Pass custom Go-GRPC example to the runnable by passing a `customExampleGoGRPC` to the `runnable` shortcode.
-
-```
-{{< runnable
-  customExampleGoGRPC="this\nis\nan example"
->}}{
-  director(func:allofterms(name, "steven spielberg")) {
-    name@en
-    director.film (orderdesc: initial_release_date) {
-      name@en
-      initial_release_date
-    }
-  }
-}
-{{< /runnable >}}
-```
-
-**Note:** Runnable doesn't support passing a multiline string as an argument to a shortcode. Therefore, you have to create the whole custom example in a single line string by replacing newlines with `\n`.
-
-## Hints
-## Adding New Tabs and Sidebar Menus
-
-To add a new tab and configure its sidebar menu:
-
-### 1. Add Tab to Navigation
-Edit `themes/hugo-docs/layouts/partials/topbar.html` and add your tab to the `$tabs` slice:
-
-```go
-{{ $tabs := slice 
-  (dict "type" "docs" "url" "/dgraph-overview/" "label" "Docs")
-  (dict "type" "graphql" "url" "/graphql/" "label" "GraphQL") 
-  (dict "type" "learn" "url" "/learn/" "label" "Tutorials")
-  (dict "type" "ratel" "url" "/ratel/overview/" "label" "Ratel UI")
-  (dict "type" "yourtype" "url" "/your-section/" "label" "Your Tab")
-}}
-```
-
-### 2. Set Page Type and Menu
-For each page in your section, add to the frontmatter:
-
-```yaml
-+++
-title = "Your Page Title"
-type = "yourtype"  # Must match the type in the tab definition
-[menu.yourtype]   # Must match the type
-  parent = "your-section"
-  weight = 1
-+++
-```
-
-### 3. Update Sidebar
-Edit `themes/hugo-docs/layouts/partials/sidebar.html` and add:
-
-```go
-{{ if eq $menuType "yourtype" }}
-  {{ $menu = .Site.Menus.yourtype }}
-{{ end }}
-```
-
-## Multi-Version Documentation
-
-This repository uses a build script to generate documentation for multiple versions from different Git branches.
+In Docusaurus, use standard Markdown links for internal references. For example, to reference a term in the glossary:
 
 
-```bash
-./scripts/build.sh
-```
-
-This builds:
-- **Latest docs** from `main` branch → `/`
-- **Version docs** from release branches → `/v24.1/`, etc.
-
-## How It Works
-
-1. **Build Script** (`build.sh`) uses Git worktrees to temporarily check out each release branch
-2. **Hugo builds** each version into its own subdirectory with the appropriate base URL
-3. **Version selector** loads available versions from `versions.json` and displays a dropdown
-
-## Configuration
-
-Edit `build.sh` to add/remove versions:
-```bash
-VERSION_BRANCHES=("main" "release/v24.1")
-```
-
-```bash
-VERSION_BRANCHES=("release/v25.0" "release/v24.1")
+```markdown
+[UID](/dgraph-glossary#uid)
 ```
 
 ## File Structure
 
 ```
-layouts/partials/
-  └── version-selector.html    # Dropdown component
-scripts/
-  └── build.sh         # Build script
-public/                         # Generated output
-  ├── index.html               # Latest docs (main)
-  ├── versions.json            # Version metadata
-  ├── v24.1/                   # Version 24.1 docs
-  └── v24.2/                   # Version 24.2 docs
+docusaurus-docs/
+├── docs/              # Main documentation content
+├── docs-graphql/      # GraphQL documentation
+├── docs-ratel/        # Ratel UI documentation
+├── docs-learn/        # Tutorials and learning content
+├── docs_versioned_docs/    # Versioned documentation snapshots
+├── sidebars.ts        # Main docs sidebar configuration
+├── sidebars-graphql.ts     # GraphQL sidebar configuration
+├── sidebars-ratel.ts       # Ratel sidebar configuration
+├── sidebars-learn.ts       # Tutorials sidebar configuration
+├── docusaurus.config.ts    # Main Docusaurus configuration
+└── src/               # Custom components and styles
 ```
 
-### Version Selector
+## Testing
 
-In  layout 
+### Type Checking
 
-```html
-{{ partial "version-selector.html" . }}
+Run TypeScript type checking:
+
+```bash
+npm run typecheck
 ```
+
+### Link Checking
+
+After building the site, you can check for broken links using external tools or by manually testing the built site.
+
+## Runnable Code Examples
+
+Some code examples in the documentation are interactive and runnable, allowing readers to execute queries directly in the browser. These are implemented using custom Docusaurus components.

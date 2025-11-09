@@ -1,9 +1,0 @@
-{{ if eq .Site.Params.site "dgraph-docs" -}}
-  {{- with getenv "CURRENT_LATEST_TAG" -}}
-    {{- . -}}
-  {{- else -}}
-    main
-  {{- end -}}
-{{- else -}}
-  {{- getenv "CURRENT_VERSION" -}}
-{{- end }}
