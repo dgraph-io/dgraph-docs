@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
@@ -21,12 +21,15 @@ function extractCodeFromChildren(children: ReactNode): string {
     if (typeof child === 'string') {
       code += child;
     } else if (React.isValidElement(child)) {
+      const props = child.props as { children?: ReactNode; className?: string };
       // Check if it's a code element or has code in props
-      if (child.props && child.props.children) {
-        code += extractCodeFromChildren(child.props.children);
-      } else if (child.props && child.props.className && child.props.className.includes('language-')) {
+      if (props?.children) {
+        code += extractCodeFromChildren(props.children);
+      } else if (props?.className && props.className.includes('language-')) {
         // It's a code element with language class
-        code += extractCodeFromChildren(child.props.children);
+        if (props.children) {
+          code += extractCodeFromChildren(props.children);
+        }
       }
     }
   });
@@ -38,6 +41,11 @@ export default function RunnableCodeBlock({ children, vars }: RunnableCodeBlockP
   // Extract code content from children
   const codeContent = extractCodeFromChildren(children);
   
+  // State for query execution
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  
   // Escape backticks and dollar signs for template literals
   const escapeForTemplate = (str: string) => {
     return str.replace(/`/g, '\\`').replace(/\$/g, '\\$');
@@ -45,14 +53,53 @@ export default function RunnableCodeBlock({ children, vars }: RunnableCodeBlockP
   
   const escapedCode = escapeForTemplate(codeContent);
 
+  // Execute the query
+  const executeQuery = async () => {
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
+    try {
+      const response = await fetch('http://localhost:8080/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/dql',
+        },
+        body: codeContent,
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      const data = await response.json();
+      setResult(JSON.stringify(data, null, 2));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to execute query');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.runnable}>
-      <Tabs>
-        <TabItem value="query" label="Query" default>
+      <div className={styles.runnableContainer}>
+        <div className={styles.queryPanel}>
+          <div className={styles.queryHeader}>
+            <span className={styles.queryLabel}>Query</span>
+            <button
+              className={styles.runButton}
+              onClick={executeQuery}
+              disabled={loading}
+            >
+              {loading ? 'Running...' : 'Run Query'}
+            </button>
+          </div>
           <CodeBlock language="dql">{codeContent}</CodeBlock>
-        </TabItem>
-        <TabItem value="go-grpc" label="Go">
-          <CodeBlock language="go">
+          <Tabs>
+            <TabItem value="go-grpc" label="Go">
+              <CodeBlock language="go">
 {`package main
 
 import (
@@ -90,10 +137,10 @@ func main() {
     json.Unmarshal(resp.Json, &result)
     fmt.Printf("%+v\\n", result)
 }`}
-          </CodeBlock>
-        </TabItem>
-        <TabItem value="java" label="Java">
-          <CodeBlock language="java">
+              </CodeBlock>
+            </TabItem>
+            <TabItem value="java" label="Java">
+              <CodeBlock language="java">
 {`import io.dgraph.DgraphClient;
 import io.dgraph.DgraphGrpc;
 import io.dgraph.DgraphProto;
@@ -122,10 +169,10 @@ public class App {
         }
     }
 }`}
-          </CodeBlock>
-        </TabItem>
-        <TabItem value="python" label="Python">
-          <CodeBlock language="python">
+              </CodeBlock>
+            </TabItem>
+            <TabItem value="python" label="Python">
+              <CodeBlock language="python">
 {`import grpc
 from dgraph import DgraphClient, Txn
 
@@ -144,10 +191,10 @@ def main():
 
 if __name__ == "__main__":
     main()`}
-          </CodeBlock>
-        </TabItem>
-        <TabItem value="js-grpc" label="JavaScript (gRPC)">
-          <CodeBlock language="javascript">
+              </CodeBlock>
+            </TabItem>
+            <TabItem value="js-grpc" label="JavaScript (gRPC)">
+              <CodeBlock language="javascript">
 {`const dgraph = require("dgraph-js");
 const grpc = require("grpc");
 
@@ -173,10 +220,10 @@ async function main() {
 main().catch((e) => {
     console.error(e);
 });`}
-          </CodeBlock>
-        </TabItem>
-        <TabItem value="js-http" label="JavaScript (HTTP)">
-          <CodeBlock language="javascript">
+              </CodeBlock>
+            </TabItem>
+            <TabItem value="js-http" label="JavaScript (HTTP)">
+              <CodeBlock language="javascript">
 {`const fetch = require("node-fetch");
 
 async function main() {
@@ -197,16 +244,42 @@ async function main() {
 main().catch((e) => {
     console.error(e);
 });`}
-          </CodeBlock>
-        </TabItem>
-        <TabItem value="curl" label="Curl">
-          <CodeBlock language="bash">
+              </CodeBlock>
+            </TabItem>
+            <TabItem value="curl" label="Curl">
+              <CodeBlock language="bash">
 {`curl -X POST http://localhost:8080/query \\
   -H "Content-Type: application/dql" \\
   -d '${codeContent.replace(/'/g, "'\\''")}'`}
-          </CodeBlock>
-        </TabItem>
-      </Tabs>
+              </CodeBlock>
+            </TabItem>
+          </Tabs>
+        </div>
+        <div className={styles.resultPanel}>
+          <div className={styles.resultHeader}>
+            <span className={styles.resultLabel}>Result</span>
+          </div>
+          <div className={styles.resultContent}>
+            {loading && (
+              <div className={styles.loading}>Executing query...</div>
+            )}
+            {error && (
+              <div className={styles.error}>
+                <strong>Error:</strong>
+                <pre>{error}</pre>
+              </div>
+            )}
+            {result && !loading && (
+              <CodeBlock language="json">{result}</CodeBlock>
+            )}
+            {!result && !loading && !error && (
+              <div className={styles.placeholder}>
+                Click "Run Query" to execute the query and see results here.
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
