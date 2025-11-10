@@ -1,5 +1,5 @@
 ---
-title: HA Cluster Setup
+title: Helm Chart
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

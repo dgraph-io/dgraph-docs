@@ -101,7 +101,14 @@ const sidebars: SidebarsConfig = {
         'installation/dgraph-architecture',
         'installation/deployment-patterns',
         'installation/single-host-setup',
-        'installation/ha-cluster',
+        {
+          type: 'category',
+          label: 'HA Cluster setup',
+          items: [
+            'installation/ha-cluster/helm-chart',
+            'installation/ha-cluster/ha-cluster-k8s-kind',
+          ],
+        },
         'installation/lambda-server',
         'installation/production-checklist',
       ],
