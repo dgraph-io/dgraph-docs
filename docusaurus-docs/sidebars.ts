@@ -98,6 +98,7 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'installation/download',
+        'installation/configuration-options',
         'installation/dgraph-architecture',
         'installation/deployment-patterns',
         'installation/single-host-setup',
