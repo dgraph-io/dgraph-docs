@@ -126,21 +126,22 @@ public class App {
         </TabItem>
         <TabItem value="python" label="Python">
           <CodeBlock language="python">
-{`import grpc
-from dgraph import DgraphClient, Txn
+{`import pydgraph
 
 def main():
-    client_stub = DgraphClient("localhost:9080")
-    client = DgraphClient(client_stub)
+    client_stub = pydgraph.DgraphClientStub("localhost:9080")
+    client = pydgraph.DgraphClient(client_stub)
     
     query = """${escapedCode}"""
     
-    txn = client.txn()
+    txn = client.txn(read_only=True)
     try:
         response = txn.query(query)
         print(response.json)
     finally:
         txn.discard()
+        client_stub.close()
+
 
 if __name__ == "__main__":
     main()`}
