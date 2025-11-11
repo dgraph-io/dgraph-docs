@@ -3,6 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+// @ts-expect-error - process is available in Node.js runtime
+const dgraphEndpoint = process?.env?.DGRAPH_ENDPOINT || 'http://localhost:8080';
 
 const config: Config = {
   title: 'Dgraph Documentation',
@@ -87,6 +89,7 @@ const config: Config = {
   ],
   themes: [
     [
+      // @ts-expect-error - require is available in Node.js runtime
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         hashed: true,
@@ -115,9 +118,17 @@ const config: Config = {
     ],
   ],
 
+  // Custom fields accessible client-side
+  customFields: {
+    // Dgraph endpoint for Runnable component
+    // Set via environment variable DGRAPH_ENDPOINT at build time
+    // Defaults to localhost:8080 for local development
+    dgraphEndpoint,
+  },
+
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/dgraph-social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
     },
