@@ -1,10 +1,20 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
   title: 'Dgraph Documentation',
   tagline: 'The only open, complete graph database used at terabyte-scale to power real-time use cases',
   favicon: 'img/favicon-16x16.png',
@@ -43,6 +53,8 @@ const config: Config = {
         path: 'docs',
         routeBasePath: '',
         sidebarPath: './sidebars.ts',
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
         editUrl: ({versionDocsDirPath, docPath}) => {
           return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs'}/${docPath}`;
         },
@@ -176,6 +188,7 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
+      copyright: `<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=b3287675-27fa-47c4-9f9d-5e01b7c09838" />`,
       links: [
         
       ]
