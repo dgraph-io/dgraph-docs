@@ -88,10 +88,10 @@ op.setSchema(schema);
 await dgraphClient.alter(op);
 ```
 
-Starting Dgraph version 20.03.0, indexes can be computed in the background.
+Indexes can be computed in the background.
 You can set `setRunInBackground` field of the `Operation` object to `true`
 before passing it to the `DgraphClient#alter(Operation)` method. You can find more details
-[here](../../howto/update-dgraph-types#indexes-in-background).
+[here](/admin/admin-tasks/update-dgraph-types.md#indexes-in-background).
 
 ```js
 const schema = "name: string @index(exact) .";

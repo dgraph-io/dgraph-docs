@@ -67,10 +67,10 @@ op = pydgraph.Operation(schema=schema)
 client.alter(op)
 ```
 
-Starting with Dgraph version 20.03.0, indexes can be computed in the background.
+Indexes can be computed in the background.
 You can set the `run_in_background` field of `pydgraph.Operation` to `True`
 before passing it to the `Alter` function. You can find more details
-[here](../howto/update-dgraph-types#indexes-in-background).
+[here](/admin/admin-tasks/update-dgraph-types.md#indexes-in-background).
 
 ```python
 schema = 'name: string @index(exact) .'
