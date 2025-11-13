@@ -50,7 +50,8 @@ In DQL, you add data using a set mutation, identified by the `set` keyword.
 ```
 </TabItem>
 <TabItem value="rdf" label="RDF">
-```
+triples are in [RDF](dql-rdf) format.
+```sh
 {
   set {
     # triples in here
@@ -62,8 +63,8 @@ In DQL, you add data using a set mutation, identified by the `set` keyword.
   }
 }
 ```
-
-triples are in [RDF](dql-rdf) format.
+</TabItem>
+</Tabs>
 
 ###  Node reference
 A mutation can include a blank nodes as an identifier for the subject or object, or a known UID.
@@ -87,8 +88,7 @@ will add the `release_date` information to the node identified by UID `0x632ea2`
 }
 ```
 
-</TabItem>
-</Tabs>
+
 
 
 ## delete block
@@ -127,13 +127,8 @@ indexing) is removed with the pattern `S P *`.
 }
 ```
 
-The pattern `S * *` deletes all the known edges out of a node, any reverse edges
+The pattern `S * *` deletes all predicates from a node `S`, along with any reverse edges
 corresponding to the removed edges, and any indexing for the removed data.
-
-:::note For mutations that fit the `S * *` pattern, only
-predicates that are among the types associated with a given node (using
-`dgraph.type`) are deleted. Any predicates that don't match one of the
-node's types will remain after an `S * *` delete mutation.:::
 
 ```sh
 {
@@ -143,13 +138,29 @@ node's types will remain after an `S * *` delete mutation.:::
 }
 ```
 
-If the node `S` in the delete pattern `S * *` has only a few predicates with a
-type defined by `dgraph.type`, then only those triples with typed predicates are
-deleted. A node that contains untyped predicates will still exist after a
-`S * *` delete mutation.
+:::note
+When using the `S * *` pattern, Dgraph only deletes predicates that are defined in the types associated with the node via `dgraph.type`. 
 
-:::note The patterns `* P O` and `* * O` are not supported because
-it's inefficient to store and find all the incoming edges. :::
+For example, if a node has `dgraph.type: ["Person", "Author"]`, and the `Person` type defines predicates `name`, `age`, and `email`, while the `Author` type defines predicates `name` and `author.of`, then `S * *` will only delete triples for predicates that appear in at least one of these types (`name`, `age`, `email`, `author.of`).
+
+Any predicates on the node that are not defined in any of the node's types will remain after the `S * *` delete mutation. This means:
+- If a node has untyped predicates (predicates not in any `dgraph.type`), those predicates will not be deleted.
+- If a node has no `dgraph.type` assigned, `S * *` will have no effect.
+:::
+
+**Example:**
+
+Consider a node with UID `0x123` that has:
+- `dgraph.type: "Person"` (where `Person` type defines `name`, `age`, `email`)
+- Predicate `name: "Alice"` (typed - will be deleted)
+- Predicate `age: "30"` (typed - will be deleted)  
+- Predicate `custom_field: "value"` (untyped - will NOT be deleted)
+
+After executing `delete { <0x123> * * . }`, the node will still exist with only `custom_field: "value"` remaining.
+
+:::note
+The patterns `* P O` and `* * O` are not supported.
+:::
 
 ### Deletion of non-list predicates
 
