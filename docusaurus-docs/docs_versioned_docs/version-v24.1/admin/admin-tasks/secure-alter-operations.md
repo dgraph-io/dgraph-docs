@@ -8,8 +8,4 @@ You can secure alter operations using token authentication. See [Admin Endpoint 
 
 For enterprise-grade access control, see [Access Control Lists](../enterprise-features/access-control-lists).
 
-## Related Topics
-
-- [Restrict Mutation Operations](restrict-mutation-operations) - Control mutation permissions
-- [Admin Endpoint Security](../security/admin-endpoint-security) - Configure authentication for admin operations
 

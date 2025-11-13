@@ -100,12 +100,12 @@ A Dgraph instance is run as a single process from a single static binary. It doe
 
 A backup policy is a predefined, set schedule used to schedule backups of information from business applications. A backup policy helps to ensure data recoverability in the event of accidental data deletion, data corruption, or a system outage.
 
-For Dgraph, backups are created using the [backups feature](/admin/enterprise-features/binary-backups). You can also create full exports of your data and schema using [data exports](/admin/admin-tasks/export-database).
+For Dgraph, backups are created using the [backups feature](/admin/admin-tasks/binary-backups). You can also create full exports of your data and schema using [data exports](/admin/admin-tasks/export-database).
 
 We **strongly** recommend that you have a backup policy in place before moving your application to the production phase, and we also suggest that you have a backup policy even for pre-production apps supported by Dgraph database instances running in development, staging, QA or pre-production clusters.
 
 We suggest that your policy include frequent full and incremental backups. Accordingly, we suggest the following backup policy for your production apps:
-* [full backup](/admin/enterprise-features/binary-backups/#forcing-a-full-backup) every 24hrs
+* [full backup](/admin/admin-tasks/binary-backups/#force-a-full-backup) every 24hrs
 * incremental backup every 2/4hrs
 
 ### Supplementary Services

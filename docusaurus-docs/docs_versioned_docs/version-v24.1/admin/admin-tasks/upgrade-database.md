@@ -24,7 +24,7 @@ When the new cluster (that uses the upgraded version of Dgraph) is up and runnin
 
 ## Enterprise Upgrade Notes
 
-For enterprise customers, specific upgrade procedures may be required depending on your Dgraph version. The general upgrade process uses [binary backups](../enterprise-features/binary-backups) for data migration:
+For enterprise customers, specific upgrade procedures may be required depending on your Dgraph version. The general upgrade process uses [binary backups](binary-backups) for data migration:
 
 1. Use binary backup to export data from the old cluster
 2. Ensure the backup is successful
@@ -37,11 +37,4 @@ For enterprise customers, specific upgrade procedures may be required depending 
 :::note
 For specific version-to-version upgrade instructions, consult the release notes for your target Dgraph version. Always test upgrades in a non-production environment first.
 :::
-
-## Related Topics
-
-- [Export Database](export-database) - Export data before upgrade
-- [Shut Down Database](shut-down-database) - Clean shutdown during upgrade
-- [Binary Backups](../enterprise-features/binary-backups) - Enterprise backup solution for upgrades
-- [Restrict Mutation Operations](restrict-mutation-operations) - Put cluster in read-only mode during upgrade
 

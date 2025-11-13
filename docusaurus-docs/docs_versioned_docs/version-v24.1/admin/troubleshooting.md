@@ -19,7 +19,7 @@ See the [Production Checklist](../installation/production-checklist) for compreh
 ## Running out of memory (OOM)
 
 When you [bulk load](../migration/bulk-loader)
-or [backup](enterprise-features/binary-backups) your data,
+or [backup](admin-tasks/binary-backups) your data,
 Dgraph can consume more memory than usual due to a high volume of writes. This
 can cause OOM crashes.
 

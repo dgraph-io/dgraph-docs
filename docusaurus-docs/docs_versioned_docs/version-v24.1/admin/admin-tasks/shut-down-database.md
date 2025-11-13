@@ -22,9 +22,3 @@ mutation {
 
 This stops the Alpha on which the command is executed and not the entire cluster.
 
-## Related Topics
-
-- [Admin Endpoint Security](../security/admin-endpoint-security) - Configure IP whitelisting for shutdown operations
-- [Upgrade Database](upgrade-database) - Shutdown as part of the upgrade process
-- [Delete Database](delete-database) - Shutdown before deleting data
-

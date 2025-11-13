@@ -79,8 +79,4 @@ query {
 The same information (except `ongoing` and `indexing`) is available from the `/health` and `/health?all` HTTP endpoints.
 :::
 
-## Related Topics
-
-- [Dgraph Alpha API Reference](../dgraph-alpha) - Overview of Alpha endpoints
-- [Admin Endpoint Security](../security/admin-endpoint-security) - Configure authentication for admin operations
 

@@ -6,10 +6,6 @@ title: Backups
 
 Here you will find options to backup your server. 
 
-:::note
-This backup option is an [Enterprise feature](/admin/enterprise-features/binary-backups/).
-:::
-
 ![Ratel Backup](/images/ratel/ratel_backup.png)
 
 ### Creating a Backup

@@ -14,9 +14,3 @@ Alternatively, you could:
 Always [export your data](export-database) before deleting the database to ensure you have a backup.
 :::
 
-## Related Topics
-
-- [Export Database](export-database) - Create a backup before deletion
-- [Shut Down Database](shut-down-database) - Clean shutdown before deletion
-- [Secure Alter Operations](secure-alter-operations) - Protect against accidental drops
-

@@ -33,8 +33,3 @@ The `strict` mode enforces schema validation for mutations:
 dgraph alpha --limit "mutations=strict"
 ```
 
-## Related Topics
-
-- [Secure Alter Operations](secure-alter-operations) - Protect schema updates with authentication
-- [Admin Endpoint Security](../security/admin-endpoint-security) - Configure authentication for admin operations
-
