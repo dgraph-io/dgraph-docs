@@ -13,11 +13,13 @@ Password-protected private keys are **not supported**.
 To further improve TLS security, only TLS v1.2 cypher suites that use 128-bit or
 greater RSA or AES encryption are supported.
 
-:::tipIf you're generating encrypted private keys with `openssl`,
+:::tip
+If you're generating encrypted private keys with `openssl`,
 be sure to specify the encryption algorithm explicitly (like `-aes256`). This will
 force `openssl` to include `DEK-Info` header in private key, which is required
 to decrypt the key by Dgraph. When default encryption is used, `openssl` doesn't
-write that header and key can't be decrypted.:::
+write that header and key can't be decrypted.
+:::
 
 ## Dgraph Certificate Management Tool
 
@@ -90,9 +92,13 @@ generating the certificate.
 $ dgraph cert -n localhost,104.25.165.23,dgraph.io,2400:cb00:2048:1::6819:a417
 ```
 
-:::tipYou must delete the old node cert and key before you can generate a new pair.:::
+:::tip
+You must delete the old node cert and key before you can generate a new pair.
+:::
 
-:::noteWhen using host names for node certificates, including _localhost_, your clients must connect to the matching host name -- such as _localhost_ not 127.0.0.1. If you need to use IP addresses, then add them to the node certificate.:::
+:::note
+When using host names for node certificates, including _localhost_, your clients must connect to the matching host name -- such as _localhost_ not 127.0.0.1. If you need to use IP addresses, then add them to the node certificate.
+:::
 
 ### Certificate inspection
 
@@ -269,11 +275,13 @@ policy of the client certificate.
 for clients. When using this value, the value of `server-name` is matched
 against the certificate SANs values and the connection host.
 
-:::noteIf mTLS is enabled using `internal-port=true`,
+:::note
+If mTLS is enabled using `internal-port=true`,
 internal ports (by default, 5080 and 7080) use the `REQUIREANDVERIFY` setting.
 Unless otherwise configured, external ports (by default, 9080, 8080 and 6080)
 use the `VERIFYIFGIVEN` setting. Changing the `client-auth-type` option to
-another setting only affects client authentication on external ports.:::
+another setting only affects client authentication on external ports.
+:::
 
 ## Using Ratel UI with Client authentication
 
