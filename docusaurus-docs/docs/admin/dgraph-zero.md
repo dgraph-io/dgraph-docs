@@ -1,42 +1,11 @@
 ---
-title: Dgraph Zero API Reference
+title: Dgraph Zero Endpoints
 ---
 
-Dgraph Zero is the control plane that manages cluster coordination, membership, and data distribution. This reference documents Zero's HTTP API endpoints and administrative operations.
+Zero exposes HTTP endpoints on port 6080 (plus any ports specified by
+`--port_offset`). 
 
-For architectural overview, see [Architecture](../installation/dgraph-architecture). For comprehensive administrative operations like backup, export, and shutdown, see [Dgraph Administration](dgraph-administration).
-
-## Configuration
-
-Before you can run `dgraph alpha`, you must run at least one `dgraph zero` node.
-You can see the options available for `dgraph zero` by using the following command:
-
-```bash
-dgraph zero --help
-```
-
-### Replication Factor
-
-The `--replicas` option controls the replication factor: the number
-of replicas per data shard, including the original shard. For consensus, the
-replication factor must be set to an odd number, and the following error will
-occur if it is set to an even number (for example, `2`):
-
-```nix
-ERROR: Number of replicas must be odd for consensus. Found: 2
-```
-
-When a new Alpha joins the cluster, it is assigned to a group based on the replication factor. If the replication factor is set to `1`, then each Alpha
-node will serve a different group. If the replication factor is set to `3` and
-you then launch six Alpha nodes, the first three Alpha nodes will serve group 1
-and next three nodes will serve group 2. Zero monitors the space occupied by predicates in each group and moves predicates between groups as-needed to
-rebalance the cluster.
-
-## Endpoints
-
-Like Alpha, Zero also exposes HTTP on port 6080 (plus any ports specified by
-`--port_offset`). You can query this port using a **GET** request to access the
-following endpoints:
+Zero supports the following GET requests:
 
 * `/state` returns information about the nodes that are part of the cluster. This
 includes information about the size of predicates and which groups they belong

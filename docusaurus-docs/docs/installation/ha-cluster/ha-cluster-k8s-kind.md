@@ -1,5 +1,5 @@
 ---
-title: HA Cluster with Kubernetes using kind
+title: Kubernetes (kind)
 ---
 
 This guide walks you through installing a highly available Dgraph cluster on Kubernetes using [kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker). kind is ideal for local development and testing, as it creates multi-node Kubernetes clusters that closely simulate production environments.
@@ -777,7 +777,7 @@ helm install dgraph dgraph/dgraph -n dgraph -f dgraph-ha-values.yaml
 
 ## Next Steps
 
-- Learn about [Dgraph configuration options](/admin/dgraph-administration)
+- Learn about [Dgraph configuration options](/admin/admin-tasks)
 - Explore [production deployment patterns](/installation/deployment-patterns)
 - Set up [monitoring and observability](/admin/observability)
 - Configure [security and access control](/admin/security)

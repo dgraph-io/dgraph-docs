@@ -6,7 +6,7 @@ Dgraph administration covers the operational tasks needed to manage, monitor, an
 
 ## Core Administration Tasks
 
-**[Dgraph Administration](dgraph-administration)** - Main administrative operations including data export, cluster shutdown, database deletion, and upgrade procedures. Also covers basic security configuration like IP whitelisting and authentication tokens.
+**[Admin Tasks](admin-tasks/)** - Administrative operations including data export, cluster shutdown, database deletion, and upgrade procedures. Also covers basic security configuration like IP whitelisting and authentication tokens.
 
 **[Dgraph Alpha API Reference](dgraph-alpha)** - Alpha node HTTP and GraphQL endpoints for health monitoring, cluster management, and basic operations.
 

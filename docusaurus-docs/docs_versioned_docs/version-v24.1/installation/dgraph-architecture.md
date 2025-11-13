@@ -47,7 +47,7 @@ Alpha nodes store data and serve queries. Clusters need at least one Alpha node.
 **High Availability:**
 Deploy 3 Alphas per group for data replication. Each group forms a Raft quorum.
 
-See [Alpha API Reference](/admin/dgraph-alpha) for health monitoring and [Admin API](/admin/dgraph-administration) for backup, export, and other operations.
+See [Alpha API Reference](/admin/dgraph-alpha) for health monitoring and [Admin Tasks](/admin/admin-tasks) for backup, export, and other operations.
 
 ## Cluster Architecture
 
