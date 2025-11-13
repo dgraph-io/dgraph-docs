@@ -8,9 +8,6 @@ superflag's `compression` option. You can choose between the
 [Zstandard](https://github.com/facebook/zstd) compression algorithms, or choose
 not to compress data on disk.
 
-:::noteThis option replaces the  `--badger.compression_level` and
-`--badger.compression` options used in earlier Dgraph versions. :::
-
 The following disk compression settings are available:
 
 | Setting    | Notes                                                                |

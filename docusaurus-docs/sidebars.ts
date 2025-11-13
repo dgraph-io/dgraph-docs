@@ -121,7 +121,23 @@ const sidebars: SidebarsConfig = {
         id: 'admin/index',
       },
       items: [
-        'admin/dgraph-administration',
+        {
+          type: 'category',
+          label: 'Admin Tasks',
+          link: {
+            type: 'doc',
+            id: 'admin/admin-tasks/index',
+          },
+          items: [
+            'admin/admin-tasks/restrict-mutation-operations',
+            'admin/admin-tasks/secure-alter-operations',
+            'admin/admin-tasks/export-database',
+            'admin/admin-tasks/shut-down-database',
+            'admin/admin-tasks/delete-database',
+            'admin/admin-tasks/upgrade-database',
+            'admin/admin-tasks/binary-backups',
+          ],
+        },
         {
           type: 'category',
           label: 'Observability',
@@ -150,7 +166,6 @@ const sidebars: SidebarsConfig = {
             'admin/security/ports-usage',
           ],
         },
-        'admin/dgraph-alpha',
         'admin/dgraph-zero',
         'admin/data-compression',
         'admin/troubleshooting',
@@ -163,7 +178,6 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             'admin/enterprise-features/access-control-lists',
-            'admin/enterprise-features/binary-backups',
             'admin/enterprise-features/change-data-capture',
             'admin/enterprise-features/encryption-at-rest',
             'admin/enterprise-features/learner-nodes',

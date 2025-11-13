@@ -5,7 +5,7 @@ title: Encryption at Rest
 :::note
 This feature was introduced in [v1.1.1](https://github.com/dgraph-io/dgraph/releases/tag/v1.1.1).
 For migrating unencrypted data to a new Dgraph cluster with encryption enabled, you need to
-[export the database](../dgraph-administration#export-database) and [import data](../../migration/import-data),
+[export the database](../admin-tasks/export-database) and [import data](../../migration/import-data),
 preferably using the [bulk loader](../../migration/bulk-loader).
 :::
 
