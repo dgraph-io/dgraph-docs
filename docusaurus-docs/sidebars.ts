@@ -255,6 +255,7 @@ const sidebars: SidebarsConfig = {
         'howto/load-balancing-nginx',
         'howto/login-system',
         'howto/retrieving-debug-information',
+        'howto/similarity-search',
         'howto/using-debug-tool',
         'howto/using-increment-tool',
         {
