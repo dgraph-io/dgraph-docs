@@ -130,6 +130,7 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             'admin/admin-tasks/check-cluster-health',
+            'admin/admin-tasks/update-dgraph-types',
             'admin/admin-tasks/restrict-mutation-operations',
             'admin/admin-tasks/secure-alter-operations',
             'admin/admin-tasks/export-database',
