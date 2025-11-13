@@ -135,10 +135,10 @@ Operation operation = Operation.newBuilder().setSchema(schema).build();
 dgraphClient.alter(operation);
 ```
 
-Starting Dgraph version 20.03.0, indexes can be computed in the background.
+Indexes can be computed in the background.
 You can call the function `setRunInBackground(true)` as shown below before
 calling `alter`. You can find more details
-[here](../howto/update-dgraph-types#indexes-in-background).
+[here](/admin/admin-tasks/update-dgraph-types.md#indexes-in-background).
 
 ```java
 String schema = "name: string @index(exact) .";

@@ -129,6 +129,7 @@ const sidebars: SidebarsConfig = {
             id: 'admin/admin-tasks/index',
           },
           items: [
+            'admin/admin-tasks/check-cluster-health',
             'admin/admin-tasks/restrict-mutation-operations',
             'admin/admin-tasks/secure-alter-operations',
             'admin/admin-tasks/export-database',
@@ -253,7 +254,6 @@ const sidebars: SidebarsConfig = {
         'howto/load-balancing-nginx',
         'howto/login-system',
         'howto/retrieving-debug-information',
-        'howto/update-dgraph-types',
         'howto/using-debug-tool',
         'howto/using-increment-tool',
         {
