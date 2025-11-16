@@ -2,7 +2,9 @@
 title: Schema
 ---
 
-Here is an example of Dgraph types schema:
+The Dgraph schema contains information about [predicate types](#predicate-types) and [node types](#node-types).
+
+Here is an example of Dgraphschema:
 ```
 name: string @index(term) .
 release_date: datetime @index(year) .
@@ -29,47 +31,6 @@ type Film {
   description_vector
 }
 ```
-
-The schema contains information about [predicate types](#predicate-types) and [node types](#node-types).
-
-
-A [predicate](/dgraph-glossary#predicate) is the smallest piece of information about an object. A predicate can hold a literal value or a relation to another entity :
-- when we store that an entity name is "Alice". The predicate is ``name`` and predicate value is the string "Alice".
-- when we store that Alice knows Bob, we may use a predicate ``knows`` with the node representing Alice. The value of this predicate would be the [uid](../dgraph-glossary#uid) of the node representing Bob. In that case, ``knows`` is a relationship.
-
-
-Dgraph maintains a list of all predicates names and their type in the **Dgraph types schema**.
-
-
-
-## Predicates declaration
-
-The Dgraph Cluster **schema mode** defines if the Dgraph types must be declared before allowing mutations or not:
-- In ``strict`` mode, you must declare the predicates before you can run a mutation using those predicates.
-- In ``flexible`` mode (which is the default behavior), you can run a mutation without declaring the predicate in the DQL Schema.
-
-
-:::note
-When you deploy a [GraphQL API schema](/graphql), Dgraph generates all the underlying Dgraph types. 
-
-Refer to [GraphQL and DQL schemas](/graphql/graphql-dql/graphql-dql-schema) in the [GraphQL - DQL interoperability](/graphql/graphql-dql) section for use cases using both approaches.
-:::
-
-For example, you can run the following mutation (using the [RDF](/dql/dql-rdf) notation):
-```graphql
-{
-  set {
-    <_:jedi1> <character_name> "Luke Skywalker" .
-    <_:leia> <character_name> "Leia" .
-    <_:sith1> <character_name> "Anakin" (aka="Darth Vador",villain=true).
-    <_:sith1> <has_for_child> <_:jedi1> .
-    <_:sith1> <has_for_child> <_:leia> .
-  } 
-}
-```
-In ``strict`` mode, the mutation will return an error if the predicates are not present in the Dgraph types schema.
-
-In ``flexible`` mode, Dgraph will execute the mutation and adds the predicates “character_name” and “has_for_child” to the Dgraph types.
 
 
 ## Predicate types

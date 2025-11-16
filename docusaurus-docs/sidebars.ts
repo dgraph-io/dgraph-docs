@@ -12,6 +12,7 @@ const sidebars: SidebarsConfig = {
         id: 'dql/index',
       },
       items: [
+        'dql/dql-endpoints',
         'dql/dql-rdf',
         'dql/json-mutation-format',
         'dql/dql-schema',
@@ -121,6 +122,7 @@ const sidebars: SidebarsConfig = {
         id: 'admin/index',
       },
       items: [
+        'admin/admin-endpoints',
         {
           type: 'category',
           label: 'Admin Tasks',
@@ -130,6 +132,7 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             'admin/admin-tasks/check-cluster-health',
+            'admin/admin-tasks/view-cluster-state',
             'admin/admin-tasks/update-dgraph-types',
             'admin/admin-tasks/restrict-mutation-operations',
             'admin/admin-tasks/secure-alter-operations',
@@ -168,7 +171,6 @@ const sidebars: SidebarsConfig = {
             'admin/security/ports-usage',
           ],
         },
-        'admin/dgraph-zero',
         'admin/data-compression',
         'admin/troubleshooting',
         {
