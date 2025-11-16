@@ -66,71 +66,81 @@ Write descriptive link text that makes sense on its own:
 
 Avoid generic phrases like "click here" or "read more."
 
-### Internal Links with `relref`
+### Internal Links
 
-Use Hugo's `relref` shortcode for internal links to other documentation pages:
+Use standard Markdown links with relative or absolute paths. Docusaurus automatically resolves internal links within the documentation.
 
+**Relative paths** (from the current file):
 ```
-[link text]({{< relref "filename.md" >}})
-```
-
-For links to specific sections, include the anchor:
-```
-[link text]({{< relref "filename.md#section-anchor" >}})
+[link text](./filename.md)
+[link text](../parent-dir/filename.md)
 ```
 
-For files in subdirectories, use absolute paths from the `content` directory:
+**Absolute paths** (from the docs root):
 ```
-[link text]({{< relref "/path/to/file.md" >}})
+[link text](/path/to/filename.md)
+```
+
+**Links to specific sections** (using heading anchors):
+```
+[link text](./filename.md#section-anchor)
+[link text](/path/to/filename.md#section-anchor)
 ```
 
 **Examples:**
-- `{{< relref "dgraph-glossary.md#entity" >}}` - Links to the entity section in glossary
-- `{{< relref "/dql/query/functions.md#aggregation-functions" >}}` - Links to a section in a subdirectory
+- `[Dgraph Glossary](dgraph-glossary.md#entity)` - Links to the entity section in glossary
+- `[Query Functions](/dql/query/functions.md#aggregation-functions)` - Links to a section in a subdirectory
+- `[Admin Tasks](../admin/admin-tasks/index.md)` - Relative link from a subdirectory
 
 **Best practices:**
-- Always use `relref` for internal documentation links
+- Use relative paths when linking within the same section
+- Use absolute paths (starting with `/`) for cross-section links
+- Docusaurus automatically generates anchors from headings (lowercase, hyphens for spaces)
 - Use descriptive link text that makes sense without context
 - Test links after adding them to ensure they resolve correctly
 
 ## Images and Figures
 
-Use Hugo shortcodes to include images in documentation:
+Use standard Markdown image syntax or MDX components to include images in documentation.
 
-### Figure Shortcode
+### Standard Markdown Images
 
-Use the `figure` shortcode for images with captions and optional styling:
-
-```
-{{<figure class="medium image" src="/images/path/to/image.png" title="Image Title" alt="Alt text">}}
-```
-
-**Attributes:**
-- `src`: Path to image file (stored in `static/images/`)
-- `title`: Caption displayed with the image
-- `alt`: Alternative text for accessibility (required)
-- `class`: Optional styling class (e.g., `"medium image"`, `"large image"`)
-
-**Example:**
-```
-{{<figure class="medium image" src="/images/tutorials/graph-example.png" title="Example graph structure" alt="A graph showing nodes and relationships">}}
-```
-
-### Load-img Shortcode
-
-Use `load-img` for simple images without captions:
+For simple images, use standard Markdown syntax:
 
 ```
-{{% load-img "/images/path/to/image.png" "Alt text" %}}
+![Alt text](/img/path/to/image.png)
+```
+
+For images with titles (captions), use:
+
+```
+![Alt text](/img/path/to/image.png "Image Title")
+```
+
+### MDX Image Components
+
+For more control over image styling and layout, you can use MDX components in `.mdx` files:
+
+```jsx
+import Image from '@theme/IdealImage';
+
+<Image img={require('@site/static/img/path/to/image.png')} alt="Alt text" />
+```
+
+Or use standard HTML `<img>` tags with styling:
+
+```html
+<img src="/img/path/to/image.png" alt="Alt text" title="Image Title" style={{maxWidth: '600px'}} />
 ```
 
 **Best practices:**
-- Store images in `static/images/` directory
+- Store images in `static/img/` directory (or `static/images/` if that's your convention)
 - Always provide descriptive `alt` text for accessibility
 - Use descriptive file names (e.g., `graph-example.png` not `img1.png`)
 - Keep image file sizes reasonable for web performance
-- Use `figure` for images that need captions or explanations
-- Use `load-img` for simple inline images
+- Use absolute paths starting with `/img/` or `/images/` for images
+- For images that need captions, include the title in the image syntax or use HTML with a caption
+- Consider image dimensions and responsive design when embedding large images
 
 ## Grammar & Language
 
