@@ -26,8 +26,6 @@ Zero nodes manage cluster coordination and metadata. Each cluster requires at le
 **High Availability:**
 Deploy 3 Zero nodes for fault tolerance. They form a Raft group (group 0) for consensus.
 
-See [Zero API Reference](/admin/dgraph-zero) for HTTP endpoints and administrative operations.
-
 ### Dgraph Alpha (Data Plane)
 
 Alpha nodes store data and serve queries. Clusters need at least one Alpha node.

@@ -35,9 +35,8 @@ follows:
  cluster, and to support the [data import](../../migration/import-data)
  tools: Dgraph Live Loader and Dgraph Bulk Loader.
 
-<sup>2</sup>: Dgraph Zero uses port 6080 for
-[administrative](../dgraph-zero) operations. Dgraph
-clients cannot access this port.
+<sup>2</sup>: Dgraph Zero uses port 6080 for administrative operations.
+Dgraph clients cannot access this port.
 
 Users must modify security rules or open firewall ports depending upon their
 underlying network to allow communication between cluster nodes, between the

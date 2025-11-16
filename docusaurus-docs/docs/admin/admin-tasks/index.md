@@ -10,9 +10,8 @@ For security configuration including authentication, IP whitelisting, and token-
 
 Dgraph Alpha provides the following administrative endpoints:
 
-### HTTP Endpoints
+### HTTP Admin Endpoints
 
-- **`/admin`** - GraphQL endpoint for cluster management operations
 - **`/admin/config/cache_mb`** - Configure cache size
 - **`/admin/draining`** - Drain connections from a node
 - **`/admin/shutdown`** - Shutdown a single Alpha node
@@ -20,7 +19,11 @@ Dgraph Alpha provides the following administrative endpoints:
 - **`/admin/schema/validate`** - Validate schema
 - **`/alter`** - Apply schema updates and drop predicates
 - **`/login`** - Authenticate ACL users
+- **`/health`** - health status
+- **`/health?all`** - health status of all servers in the cluster
 
+### GraphQL ADmin Endpoints
+- **`/admin`** - GraphQL endpoint for cluster management operations
  By default, the `/admin` endpoint is only accessible from the same machine as the Alpha server. For detailed information about endpoint security and authentication, see [Admin Endpoint Security](../security/admin-endpoint-security).
 
 ## Admin Tasks

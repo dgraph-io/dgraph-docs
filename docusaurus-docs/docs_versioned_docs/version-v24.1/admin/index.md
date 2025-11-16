@@ -9,7 +9,7 @@ Dgraph administration covers the operational tasks needed to manage, monitor, an
 **[Admin Tasks](admin-tasks/)** - Administrative operations including data export, cluster shutdown, database deletion, and upgrade procedures. Also covers basic security configuration like IP whitelisting and authentication tokens.
 
 
-**[Dgraph Zero Endpoints](dgraph-zero)** - Zero node configuration, cluster coordination, and administrative endpoints for managing cluster membership and data distribution.
+**[View Cluster State](admin-tasks/view-cluster-state)** - View cluster state, group membership, and predicate distribution (sharding) information.
 
 ## Security & Access Control
 
