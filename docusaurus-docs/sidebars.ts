@@ -116,6 +116,7 @@ const sidebars: SidebarsConfig = {
           label: 'Configuration',
           items: [
             'installation/configuration/enable-acl',
+            'installation/configuration/change-data-capture',
             'installation/configuration/learner-nodes',
 
           ],
@@ -191,7 +192,6 @@ const sidebars: SidebarsConfig = {
             id: 'admin/enterprise-features/index',
           },
           items: [
-            'admin/enterprise-features/change-data-capture',
             'admin/enterprise-features/encryption-at-rest',
             'admin/enterprise-features/license',
             'admin/enterprise-features/lsbackup',
