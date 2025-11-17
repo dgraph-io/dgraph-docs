@@ -62,7 +62,7 @@ To facilitate debugging, [debug mode](#debug-mode) can be enabled for a client.
 
 ### Multi-tenancy
 
-In [multi-tenancy](../../admin/enterprise-features/multitenancy) environments, `dgraph-js` provides a new method `loginIntoNamespace()`,
+In [multi-tenancy](../../../admin/enterprise-features/multitenancy) environments, `dgraph-js` provides a new method `loginIntoNamespace()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a JavaScript client, and make the client login into namespace `123`:
@@ -91,7 +91,7 @@ await dgraphClient.alter(op);
 Indexes can be computed in the background.
 You can set `setRunInBackground` field of the `Operation` object to `true`
 before passing it to the `DgraphClient#alter(Operation)` method. You can find more details
-[here](/admin/admin-tasks/update-dgraph-types.md#indexes-in-background).
+[here](../../admin/admin-tasks/update-dgraph-types.md#indexes-in-background).
 
 ```js
 const schema = "name: string @index(exact) .";

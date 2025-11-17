@@ -5,7 +5,7 @@ import RunnableCodeBlock from '@site/src/components/RunnableCodeBlock';
 
 
 
-The `@filter` directive allows you to apply additional filtering conditions to nodes in a query block. Filters use [functions](/dql/query/functions) to test node attributes or relationships and can be applied to both root query blocks and nested blocks.
+The `@filter` directive allows you to apply additional filtering conditions to nodes in a query block. Filters use [functions](../functions) to test node attributes or relationships and can be applied to both root query blocks and nested blocks.
 
 ## Using @filter
 
@@ -40,11 +40,11 @@ For relationships to fetch, nested blocks may specify filters to apply on the re
 }
 ```
 
-Nested blocks may also specify criteria on the relationships attributes using [filtering on facets](/dql/query/facets#filtering-on-facets).
+Nested blocks may also specify criteria on the relationships attributes using [filtering on facets](../facets#filtering-on-facets).
 
 ## Filter Functions
 
-Filters use the same [functions](/dql/query/functions) that are available for root criteria. These functions can test:
+Filters use the same [functions](../functions) that are available for root criteria. These functions can test:
 
 - **String attributes**: term matching, regular expressions, fuzzy matching, full-text search
 - **Attribute values**: equality, inequalities, ranges
@@ -54,14 +54,14 @@ Filters use the same [functions](/dql/query/functions) that are available for ro
 
 Common functions include:
 
-- String matching: [allofterms](/dql/query/functions#allofterms), [anyofterms](/dql/query/functions#anyofterms), [regexp](/dql/query/functions#regular-expressions), [match](/dql/query/functions#fuzzy-matching), [alloftext](/dql/query/functions#full-text-search)
-- Value comparisons: [eq](/dql/query/functions#equal-to), [le, lt, ge, gt](/dql/query/functions#less-than-less-than-or-equal-to-greater-than-and-greater-than-or-equal-to), [between](/dql/query/functions#between)
-- Node tests: [has](/dql/query/functions#has), [uid](/dql/query/functions#uid), [uid_in](/dql/query/functions#uid_in), `type()`
-- Geolocation: [near](/dql/query/functions#near), [within](/dql/query/functions#within), [contains](/dql/query/functions#contains), [intersects](/dql/query/functions#intersects)
+- String matching: [allofterms](../functions#allofterms), [anyofterms](../functions#anyofterms), [regexp](../functions#regular-expressions), [match](../functions#fuzzy-matching), [alloftext](../functions#full-text-search)
+- Value comparisons: [eq](../functions#equal-to), [le, lt, ge, gt](../functions#less-than-less-than-or-equal-to-greater-than-and-greater-than-or-equal-to), [between](../functions#between)
+- Node tests: [has](../functions#has), [uid](../functions#uid), [uid_in](../functions#uid_in), `type()`
+- Geolocation: [near](../functions#near), [within](../functions#within), [contains](../functions#contains), [intersects](../functions#intersects)
 
-Variables may be used as function parameters in filters. See [query variables](/dql/query/variables#query-variables) and [value variables](/dql/query/variables#value-variables) for more information.
+Variables may be used as function parameters in filters. See [query variables](../variables#query-variables) and [value variables](../variables#value-variables) for more information.
 
-Filters can also be combined with directives like [@cascade](/dql/query/directive/cascade-directive) to create pattern matching queries where only nodes matching the complete query structure are returned.
+Filters can also be combined with directives like [@cascade](cascade-directive) to create pattern matching queries where only nodes matching the complete query structure are returned.
 
 ## Connecting Filters
 

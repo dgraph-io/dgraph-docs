@@ -19,14 +19,16 @@ For multi-tenant environments, consider setting a query timeout using `--limit q
 
 ## Access Control Roles
 
-**Guardians of the Galaxy** (Super Admins of namespace `0x00`):
+### Guardians of the Galaxy
+Super Admins of namespace `0x00`
+
 - Create and delete namespaces
 - Reset passwords across namespaces
 - Query and mutate the default namespace (`0x00`)
 - Trigger cluster-wide backups and exports
 - Export all namespaces or specific namespaces
 
-**Guardians of a Namespace**:
+### Guardians of a Namespace
 - Create users and groups within the namespace
 - Assign users to groups and predicates to groups
 - Export the namespace

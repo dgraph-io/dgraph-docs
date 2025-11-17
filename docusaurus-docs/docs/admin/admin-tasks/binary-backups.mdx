@@ -404,7 +404,7 @@ Online restore operations return immediately after the request is sent. The rest
 :::note
 When using backups made from a Dgraph cluster that uses encryption (so backups are encrypted),
 you need to use the same key from that original cluster when doing a restore process.
-Dgraph's [Encryption at Rest](/admin/enterprise-features/encryption-at-rest) uses a symmetric-key
+Dgraph's [Encryption at Rest](../enterprise-features/encryption-at-rest) uses a symmetric-key
 algorithm where the same key is used for both encryption and decryption, so the encryption key from that
 cluster is needed for the restore process.
 :::
@@ -592,7 +592,7 @@ Use the `--encryption key-file=value` flag to decrypt encrypted backups. The spe
 
 - `--encryption key-file=value`: Required when restoring a backup from an encrypted cluster. The file path must point to the same key file used to run the original cluster.
 
-- `--vault` [superflag](/cli/superflags): Specifies the [HashiCorp Vault](https://www.vaultproject.io/) server address (`addr`), role ID file (`role-id-file`), secret ID file (`secret-id-file`), and the field containing the encryption key (`enc-field`) used to encrypt the backup.
+- `--vault` [superflag](../../cli/superflags): Specifies the [HashiCorp Vault](https://www.vaultproject.io/) server address (`addr`), role ID file (`role-id-file`), secret ID file (`secret-id-file`), and the field containing the encryption key (`enc-field`) used to encrypt the backup.
 
 The restore operation creates a cluster structure with as many groups as the original cluster had at the time of the last backup. For each group, `dgraph restore` creates a posting directory (`p<N>`) that corresponds to the backup group ID. For example, a backup for Dgraph Alpha group 2 (named `.../r32-g2.backup`) is loaded to posting directory `p2`.
 

@@ -39,7 +39,7 @@ Alpha nodes store data and serve queries. Clusters need at least one Alpha node.
 - `8080` - External HTTP (client queries, admin)
 - `9080` - External gRPC (client connections)
 
-See [Admin Tasks](/admin/admin-tasks) for health monitoring, backup, export, and other operations.
+See [Admin Tasks](../admin/admin-tasks) for health monitoring, backup, export, and other operations.
 
 ## Cluster Architecture
 
@@ -228,7 +228,7 @@ Key metrics to monitor:
 - Transaction throughput
 - Pending proposals (write backpressure)
 
-See [Monitoring](/admin/observability/monitoring) for Prometheus/Grafana setup.
+See [Monitoring](../admin/observability/monitoring) for Prometheus/Grafana setup.
 
 ## Security Considerations
 

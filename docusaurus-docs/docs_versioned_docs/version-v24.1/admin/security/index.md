@@ -17,6 +17,6 @@ Dgraph security configuration covers authentication, network security, and acces
 
 **[User Management and Access Control](../admin-tasks/user-management-access-control)** -  Manage users, groups, and ACL rules
 
-**[Audit Logging](/admin/observability/audit-logs)** - Track and audit all requests
+**[Audit Logging](../observability/audit-logs)** - Track and audit all requests
 
-**[Encryption at Rest](/admin/enterprise-features/encryption-at-rest)**  - Encrypt data on disk
+**[Encryption at Rest](../enterprise-features/encryption-at-rest)**  - Encrypt data on disk

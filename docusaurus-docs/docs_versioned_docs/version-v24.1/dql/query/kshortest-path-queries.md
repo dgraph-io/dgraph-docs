@@ -101,7 +101,7 @@ We can return more paths by specifying `numpaths`. Setting `numpaths: 2` returns
 }
 ```
 
-:::noteIn the query above, instead of using UID literals, we query both people using var blocks and the `uid()` function. You can also combine it with [GraphQL Variables](/dql/query/graphql-variables).:::
+:::noteIn the query above, instead of using UID literals, we query both people using var blocks and the `uid()` function. You can also combine it with [GraphQL Variables](graphql-variables).:::
 
 ## Edge weight
 

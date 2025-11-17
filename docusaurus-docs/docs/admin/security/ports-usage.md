@@ -63,5 +63,3 @@ then the Alpha node binds to port 7082 (`gRPC-internal-private`), 8082
 
 **Ratel UI** by default listens on port 8000. You can use the `-port` flag to
 configure it to listen on any other port.
-
-For information about configuring High Availability clusters, see [Architecture](../../installation/dgraph-architecture#ha-cluster-configuration).

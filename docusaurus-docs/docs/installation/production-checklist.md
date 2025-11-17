@@ -13,7 +13,7 @@ A **Dgraph cluster** is comprised of multiple **Dgraph instances** or nodes conn
 
 Once installed you may also install or use a **Dgraph client** to communicate with the database and perform queries, mutations, alter schema operations and so on. Pure HTTP calls from curl, Postman, or another program are also possible without a specific client, but there are a range of clients that provide higher-level language bindings, and which use optimized gRPC for communications to the database. Any standards-compliant GraphQL client will work with Dgraph to run GraphQL operations. To run DQL and other Dgraph-specific operations, use a Dgraph client.
 
-Dgraph provides official clients for Go, Java, Python, and JavaScript, and C#, and the JavaScript client supports both gRPC and HTTP to run more easily in a browser. Community-developed Dgraph clients for other languages are also available. The full list of clients can be found in [Clients](/clients) page. One particular client, Dgraph Ratel, is a more sophisticated UI tool used to visualize queries, run mutations, and manage schemas in both GraphQL and DQL. Note that clients are not part of a database cluster, and simply connect to one or more Dgraph Alpha instances.
+Dgraph provides official clients for Go, Java, Python, and JavaScript, and C#, and the JavaScript client supports both gRPC and HTTP to run more easily in a browser. Community-developed Dgraph clients for other languages are also available. The full list of clients can be found in [Clients](../clients) page. One particular client, Dgraph Ratel, is a more sophisticated UI tool used to visualize queries, run mutations, and manage schemas in both GraphQL and DQL. Note that clients are not part of a database cluster, and simply connect to one or more Dgraph Alpha instances.
 
 ### Cluster Requirements
 
@@ -72,11 +72,11 @@ Additional recommendations:
 
 ### Firewall Rules
 
-Dgraph instances communicate over several ports. Firewall rules should be configured appropriately for the ports documented in [Ports Usage](/admin/security/ports-usage).
+Dgraph instances communicate over several ports. Firewall rules should be configured appropriately for the ports documented in [Ports Usage](../admin/security/ports-usage).
 
 Internal ports must be accessible by all Zero and Alpha peers for proper cluster-internal communication. Database clients must be able to connect to Dgraph Alpha external ports either directly or through a load balancer.
 
-Dgraph Zeros can be set up in a private network where communication is only with Dgraph Alphas, database administrators, internal services (such as Prometheus or Jaeger), and possibly developers (see note below). Dgraph Zero's 6080 external port is only necessary for database administrators. For example, it can be used to inspect the cluster metadata (/state), allocate UIDs or set txn timestamps (/assign), move data shards (/moveTablet), or remove cluster nodes (/removeNode). The full docs about Zero's administrative tasks are in [More About Dgraph Zero](/admin/dgraph-zero).
+Dgraph Zeros can be set up in a private network where communication is only with Dgraph Alphas, database administrators, internal services (such as Prometheus or Jaeger), and possibly developers (see note below). Dgraph Zero's 6080 external port is only necessary for database administration.
 
 :::note
 Developers using Dgraph Live Loader or Dgraph Bulk Loader require access to both Dgraph Zero port 5080 and Dgraph Alpha port 9080. When using those tools, consider using them within your environment that has network access to both ports of the cluster.

@@ -29,9 +29,9 @@ Query Example: The number of films acted in by each actor with `Orlando` in thei
 
 </RunnableCodeBlock>
 
-Count can be used at root and [aliased](/dql/query/alias).
+Count can be used at root and [aliased](alias).
 
-Query Example: Count of directors who have directed more than five films.  When used at the query root, the [count index](/dql/predicate-indexing#count-index) is required.
+Query Example: Count of directors who have directed more than five films.  When used at the query root, the [count index](../predicate-indexing#count-index) is required.
 
 <RunnableCodeBlock>
 
@@ -46,7 +46,7 @@ Query Example: Count of directors who have directed more than five films.  When 
 </RunnableCodeBlock>
 
 
-Count can be assigned to a [value variable](/dql/query/variables#value-variables).
+Count can be assigned to a [value variable](variables#value-variables).
 
 Query Example: The actors of Ang Lee's "Eat Drink Man Woman" ordered by the number of movies acted in.
 

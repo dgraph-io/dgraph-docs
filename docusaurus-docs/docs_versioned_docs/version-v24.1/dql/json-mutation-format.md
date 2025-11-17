@@ -4,12 +4,12 @@ title: JSON Data Format
 import Highlight from '@site/src/components/Highlight';
 
 
-Dgraph supports [Mutations](/dql/dql-mutation) in JSON or [RDF](/dql/dql-rdf) format.
+Dgraph supports [Mutations](dql-mutation) in JSON or [RDF](dql-rdf) format.
 When using JSON format Dgraph creates nodes and relationships from the JSON structure and assigns UIDs to nodes.
 
 ## Quick Start Example
 
-If you followed the [Quick Start guide](/quick-start), you added data to your graph using RDF format. The same data can also be added using JSON format. Here's an example of how to create the movie data from the quick start using JSON:
+If you followed the [Quick Start guide](../quick-start), you added data to your graph using RDF format. The same data can also be added using JSON format. Here's an example of how to create the movie data from the quick start using JSON:
 
 ```dql
 {
@@ -41,13 +41,13 @@ If you followed the [Quick Start guide](/quick-start), you added data to your gr
 }
 ```
 
-The sample JSON data is an array of two movies with some attributes. These are stored as [nodes](/dgraph-glossary#node) in Dgraph.
+The sample JSON data is an array of two movies with some attributes. These are stored as [nodes](../dgraph-glossary#node) in Dgraph.
 
-The "Star Wars" movie has a `director` field which is a JSON object and a `starring` field which is an array of JSON objects. Each object is also stored as a node in Dgraph. The `director` and `starring` are stored as [relationships](/dgraph-glossary#relationship).
+The "Star Wars" movie has a `director` field which is a JSON object and a `starring` field which is an array of JSON objects. Each object is also stored as a node in Dgraph. The `director` and `starring` are stored as [relationships](../dgraph-glossary#relationship).
 
 ## Specifying node UIDs
 
-When you create nodes using JSON mutations, Dgraph automatically assigns a [UID](/dgraph-glossary#uid) to each new node. Dgraph also generates an internal identifier during the transaction, which is then converted to the final UID.
+When you create nodes using JSON mutations, Dgraph automatically assigns a [UID](../dgraph-glossary#uid) to each new node. Dgraph also generates an internal identifier during the transaction, which is then converted to the final UID.
 
 For example, this mutation creates a single node:
 
@@ -280,7 +280,7 @@ deletes only one `food` relationship.
 
 To delete all predicates of a given node:
 - make sure the node has a `dgraph.type` predicate
-- the type is defined in the [Dgraph types schema](/dql/dql-schema)
+- the type is defined in the [Dgraph types schema](dql-schema)
 - run a delete mutation specifying only the uid field
 
 

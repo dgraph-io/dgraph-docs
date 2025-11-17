@@ -3,8 +3,8 @@ title: Update Dgraph types
 ---
 
 You modify Dgraph types (node types and predicates types) by 
-- issuing a request to the ``/alter`` endpoint using the [HTTP Client](/clients/raw-http#alter-the-dql-schema)
-- using an ``alter`` operation of any [DQL client library](/clients).
+- issuing a request to the ``/alter`` endpoint using the [HTTP Client](../../clients/raw-http#alter-the-dql-schema)
+- using an ``alter`` operation of any [DQL client library](../../clients).
 - using [Ratel UI](/ratel/schema)
 
 
@@ -54,7 +54,7 @@ notifying that a given predicate is not indexed or doesn't have reverse edges.
 
 In a multi-node cluster, it is possible that the alphas will finish computing indexes at different times. Alphas may return different schema in such a case until all the indexes are done computing on all the Alphas.
 
-You can check the background indexing status using the [Health](/admin/admin-tasks/check-cluster-health) query on the `/admin` endpoint.
+You can check the background indexing status using the [Health](check-cluster-health) query on the `/admin` endpoint.
 
 
 An alter operation will fail if one is already in progress with an error

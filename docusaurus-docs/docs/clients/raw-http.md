@@ -254,7 +254,7 @@ curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?respFormat
 ```
 ### Running Read-Only Queries
 
-You can set the query parameter `ro=true` to `/query` to set it as a [read-only](/dql/index.md#read-only-transactions) query:
+You can set the query parameter `ro=true` to `/query` to set it as a [read-only](../dql/index.md#read-only-transactions) query:
 
 ```sh
 curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?ro=true" -d $'
@@ -269,7 +269,7 @@ curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?ro=true" -
 
 ### Running Best-Effort Queries
 
-You can set the query parameter `be=true` to `/query` to set it as a [best-effort](/dql/index.md#read-only-transactions) query:
+You can set the query parameter `be=true` to `/query` to set it as a [best-effort](../dql/index.md#read-only-transactions) query:
 
 ```sh
 curl -H "Content-Type: application/dql" -X POST "localhost:8080/query?be=true" -d $'
