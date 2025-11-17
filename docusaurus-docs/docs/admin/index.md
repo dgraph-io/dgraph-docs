@@ -13,13 +13,13 @@ Dgraph administration covers the operational tasks needed to manage, monitor, an
 
 ## Security & Access Control
 
-**[Security Configuration](/admin/security/)** - TLS configuration, port usage, and network security settings.
+**[Security Configuration](security/)** - TLS configuration, port usage, and network security settings.
 
-For enterprise security features including Access Control Lists (ACL), audit logging, and encryption at rest, see [Enterprise Features](/admin/enterprise-features/).
+**[User Management and Access Control](admin-tasks/user-management-access-control.md)** - manage users, groups, and configure access control rules to protect your data.
 
 ## Monitoring & Observability
 
-**[Observability](/admin/observability/)** - Monitoring with Prometheus/Grafana, metrics collection, distributed tracing, and log format documentation.
+**[Observability](observability/)** - Monitoring with Prometheus/Grafana, metrics collection, distributed tracing, and log format documentation.
 
 **[Troubleshooting](troubleshooting)** - Common issues, OOM handling, file descriptor limits, and cluster setup verification.
 

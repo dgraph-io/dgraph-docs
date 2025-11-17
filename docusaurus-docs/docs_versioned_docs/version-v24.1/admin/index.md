@@ -15,7 +15,7 @@ Dgraph administration covers the operational tasks needed to manage, monitor, an
 
 **[Security Configuration](/admin/security/)** - TLS configuration, port usage, and network security settings.
 
-For enterprise security features including Access Control Lists (ACL), audit logging, and encryption at rest, see [Enterprise Features](/admin/enterprise-features/).
+**[User Management and Access Control](/admin/admin-tasks/user-management-access-control.md)** - manage users, groups, and configure access control rules to protect your data.
 
 ## Monitoring & Observability
 

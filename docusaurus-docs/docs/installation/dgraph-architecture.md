@@ -23,9 +23,6 @@ Zero nodes manage cluster coordination and metadata. Each cluster requires at le
 - `5080` - Internal gRPC (Alpha ↔ Zero communication, Live/Bulk Loader)
 - `6080` - HTTP admin endpoint (cluster state, assignments)
 
-**High Availability:**
-Deploy 3 Zero nodes for fault tolerance. They form a Raft group (group 0) for consensus.
-
 ### Dgraph Alpha (Data Plane)
 
 Alpha nodes store data and serve queries. Clusters need at least one Alpha node.
@@ -41,9 +38,6 @@ Alpha nodes store data and serve queries. Clusters need at least one Alpha node.
 - `7080` - Internal gRPC (Alpha ↔ Alpha, Alpha ↔ Zero)
 - `8080` - External HTTP (client queries, admin)
 - `9080` - External gRPC (client connections)
-
-**High Availability:**
-Deploy 3 Alphas per group for data replication. Each group forms a Raft quorum.
 
 See [Admin Tasks](/admin/admin-tasks) for health monitoring, backup, export, and other operations.
 
@@ -146,29 +140,35 @@ Zero continuously monitors disk usage across groups and automatically rebalances
 
 ### Replication and Consistency
 
-Dgraph uses **Raft consensus** for replication. Both Zero and Alpha nodes form Raft consensus groups:
+Dgraph uses **Raft consensus** for replication. A Dgraph cluster is divided into Raft groups: Zero nodes form group 0, and each Alpha shard is a subsequent numbered group (group 1, group 2, etc.). Nodes of the same type (all Zeros or all Alphas in a group) form a Raft group.
 
-- **Raft Groups**: Nodes of the same type (all Zeros or all Alphas in a group) form a Raft group
-- **Leader Election**: Each Raft group elects a single leader among its peers
-- **Followers**: Non-leader nodes in a group are called followers
-- **Automatic Failover**: If the leader becomes unavailable (network partition, machine shutdown), the group automatically elects a new leader to continue operations
-- **Replication**: Each Alpha group uses Raft consensus for replication
-- The `--replicas` flag on Zero controls replication factor per group
+**Raft Consensus:**
+- Each Raft group elects a single leader among its peers
+- Non-leader nodes are followers
+- If the leader becomes unavailable, the group automatically elects a new leader
 - Writes require majority (quorum) acknowledgment
 - Linearizable reads and writes
 - Snapshot isolation for transactions
 
 **Replica Configuration:**
 
-The `--replicas` flag determines how many nodes serve the same group:
+The `--replicas` flag on Zero controls how many nodes serve each Alpha group. Use odd numbers (1, 3, 5) to maintain proper quorum:
 
 - `--replicas=1`: No replication (single node per group)
 - `--replicas=3`: 3 nodes per group, tolerates 1 node failure (recommended)
 - `--replicas=5`: 5 nodes per group, tolerates 2 node failures
 
 :::tip
-Always use odd numbers for replicas (1, 3, 5) to maintain proper quorum. Even numbers (2, 4) don't provide additional fault tolerance.
+If the number of replicas in a Raft group is **2N + 1**, up to **N** nodes can go offline without any impact on reads or writes. With 3 replicas, 1 can fail; with 5 replicas, 2 can fail.
 :::
+
+**HA Setup:**
+
+**Zero nodes:** Deploy 3 Zero nodes for fault tolerance. Assign a unique integer ID to each using `--raft idx`, and pass the address of any healthy Zero instance using `--peer`.
+
+**Alpha nodes:** Set `--replicas=3` on Zero. You can run as many Alpha nodes as needed. Manually set `--raft idx` or leave it empty for Zero to auto-assign an ID (persists in write-ahead log). New Alpha nodes automatically detect each other via Zero. If you don't have a proxy or load balancer for Zero, provide Zero addresses with `--zero=zero1,zero2,zero3`.
+
+Zero first attempts to replicate existing groups by assigning new Alphas to the same group. After a group reaches the `--replicas` count, Zero creates new groups. Ensure the number of Alpha nodes is a multiple of the replication setting (e.g., 3, 6, or 9 Alphas with `--replicas=3`).
 
 ## Scaling Strategies
 
@@ -180,15 +180,12 @@ Always use odd numbers for replicas (1, 3, 5) to maintain proper quorum. Even nu
 ### Horizontal Scaling
 
 **Add Replicas (No Sharding):**
-Start with `--replicas=3`, add 3 more Alphas → still 1 group, more replication (6x)
+Start with `--replicas=3`, add 3 more Alphas → still 1 group, increased replication (6x)
 
 **Add Groups (Sharding):**
-Start with 3 Alphas (group 1), add 3 more Alphas → Zero creates group 2, rebalances predicates
+Start with 3 Alphas (group 1), add 3 more Alphas → Zero creates group 2 and rebalances predicates
 
-**Best Practice:**
-- Keep Alpha count as multiple of `--replicas` setting
-- 6 Alphas with `--replicas=3` = 2 groups with 3x replication each
-- 9 Alphas with `--replicas=3` = 3 groups with 3x replication each
+**Best Practice:** Keep Alpha count as a multiple of `--replicas`. With `--replicas=3`: 6 Alphas = 2 groups, 9 Alphas = 3 groups.
 
 ## Query Flow
 
@@ -211,7 +208,7 @@ Start with 3 Alphas (group 1), add 3 more Alphas → Zero creates group 2, rebal
 
 ### Fault Tolerance
 
-With 3 replicas per group:
+With `--replicas=3`:
 - **1 node down**: Cluster fully operational
 - **2 nodes down**: Read-only mode (no quorum for writes)
 - **3 nodes down**: Group unavailable

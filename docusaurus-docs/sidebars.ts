@@ -111,6 +111,15 @@ const sidebars: SidebarsConfig = {
           ],
         },
         'installation/lambda-server',
+        {
+          type: 'category',
+          label: 'Configuration',
+          items: [
+            'installation/configuration/enable-acl',
+            'installation/configuration/learner-nodes',
+
+          ],
+        },
         'installation/production-checklist',
       ],
     },
@@ -133,6 +142,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'admin/admin-tasks/check-cluster-health',
             'admin/admin-tasks/view-cluster-state',
+            'admin/admin-tasks/user-management-access-control',
             'admin/admin-tasks/update-dgraph-types',
             'admin/admin-tasks/restrict-mutation-operations',
             'admin/admin-tasks/secure-alter-operations',
@@ -181,10 +191,8 @@ const sidebars: SidebarsConfig = {
             id: 'admin/enterprise-features/index',
           },
           items: [
-            'admin/enterprise-features/access-control-lists',
             'admin/enterprise-features/change-data-capture',
             'admin/enterprise-features/encryption-at-rest',
-            'admin/enterprise-features/learner-nodes',
             'admin/enterprise-features/license',
             'admin/enterprise-features/lsbackup',
             'admin/enterprise-features/multitenancy',

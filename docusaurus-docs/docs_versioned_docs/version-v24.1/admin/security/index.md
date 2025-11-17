@@ -12,10 +12,11 @@ Dgraph security configuration covers authentication, network security, and acces
 
 **[TLS Configuration](tls-configuration)** - Encrypting communications between Dgraph nodes and clients using TLS/mTLS.
 
-## Enterprise Security Features
 
-For advanced security features, see [Enterprise Features](/admin/enterprise-features/):
+**[Enable ACL](../../installation/configuration/enable-acl)** - Configure and enable Access Control Lists
 
-- [Access Control Lists (ACL)](/admin/enterprise-features/access-control-lists) - Fine-grained access control
-- [Audit Logging](/admin/observability/audit-logs) - Track and audit all requests
-- [Encryption at Rest](/admin/enterprise-features/encryption-at-rest) - Encrypt data on disk
+**[User Management and Access Control](../admin-tasks/user-management-access-control)** -  Manage users, groups, and ACL rules
+
+**[Audit Logging](/admin/observability/audit-logs)** - Track and audit all requests
+
+**[Encryption at Rest](/admin/enterprise-features/encryption-at-rest)**  - Encrypt data on disk
