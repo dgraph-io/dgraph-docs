@@ -28,7 +28,7 @@ var client = new DgraphClient(new Channel("127.0.0.1:9080", ChannelCredentials.I
 
 ### Multi-tenancy
 
-In [multi-tenancy](../admin/enterprise-features/multitenancy) environments, Dgraph provides a new method `LoginRequest()`,
+In multi-tenants environments, Dgraph provides a method `LoginRequest()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a Dgraph client, and make the client login into namespace `123`:

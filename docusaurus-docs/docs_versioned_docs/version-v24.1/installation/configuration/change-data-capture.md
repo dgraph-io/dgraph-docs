@@ -89,7 +89,7 @@ The `operation` field specifies the drop operation: `attribute`, `type`, `data`,
 
 ## Multi-Tenancy
 
-In a [multi-tenant environment](../../admin/enterprise-features/multitenancy), CDC events streamed to Kafka are distributed across Kafka partitions by the Kafka client based on the multi-tenancy namespace.
+In multi-tenants environment, CDC events streamed to Kafka are distributed across Kafka partitions by the Kafka client based on the multi-tenancy namespace.
 
 ## Limitations
 

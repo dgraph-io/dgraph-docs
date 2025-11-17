@@ -39,7 +39,7 @@ client = pydgraph.DgraphClient(client_stub)
 
 ### Multi-tenancy
 
-In [multi-tenancy](../admin/enterprise-features/multitenancy) environments, PyDgraph provides a new method `login_into_namespace()`,
+In multi-tenants environments, PyDgraph provides the method `login_into_namespace()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a python client, and make the client login into namespace `123`:
