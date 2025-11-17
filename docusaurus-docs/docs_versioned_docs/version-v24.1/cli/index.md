@@ -36,7 +36,7 @@ The Dgraph CLI includes the following command groups:
 - [**`dgraph decrypt`**](decrypt) - Decrypt exported files
 - [**`dgraph export_backup`**](export_backup) - Export binary backups
 - [**`dgraph increment`**](increment) - Test with transactional counter
-- [**`dgraph lsbackup`**](../admin/enterprise-features/lsbackup) - List backup information
+- [**`dgraph lsbackup`**](lsbackup) - List backup information
 - [**`dgraph migrate`**](migrate) - Migrate from MySQL to Dgraph
 - [**`dgraph upgrade`**](upgrade) - Upgrade Dgraph versions
 

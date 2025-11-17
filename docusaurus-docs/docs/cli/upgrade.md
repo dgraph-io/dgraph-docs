@@ -249,10 +249,4 @@ If the upgrade fails:
 - Requires guardian/admin user credentials
 - Cannot downgrade versions (one-way migration)
 
-## See Also
-
-- [Access Control Lists](../admin/enterprise-features/access-control-lists) - ACL documentation
-- [Binary Backups](../admin/admin-tasks/binary-backups) - Backup before upgrading
-- [Release Notes](../releases) - Version-specific changes
-- [Migration Guide](../migration) - Data migration strategies
 

@@ -59,7 +59,7 @@ DgraphClient dgraphClient = new DgraphClient(stub1, stub2, stub3);
 ```
 ### Login using ACL
 
-If [ACL](../admin/enterprise-features/access-control-lists) is enabled then you can log-in to the default namespace (`0`) with the following method:
+If ACL is enabled then you can log-in to the default namespace (`0`) with the following method:
 
 ```java
 dgraphClient.login(USER_ID, USER_PASSWORD);

@@ -36,7 +36,7 @@ You should encapsulate the options for a superflag in double-quotes (`"`) if any
 
 ## ACL Superflag
 
-The `--acl` superflag configures [Access Control List](../admin/enterprise-features/access-control-lists) settings:
+The `--acl` superflag configures **Access Control List** settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|

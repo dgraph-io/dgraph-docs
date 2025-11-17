@@ -194,7 +194,6 @@ const sidebars: SidebarsConfig = {
           items: [
             'admin/enterprise-features/encryption-at-rest',
             'admin/enterprise-features/license',
-            'admin/enterprise-features/lsbackup',
           ],
         },
       ],
@@ -302,6 +301,7 @@ const sidebars: SidebarsConfig = {
         'cli/export_backup',
         'cli/increment',
         'cli/live',
+        'cli/lsbackup',
         'cli/migrate',
         'cli/restore',
         'cli/superflags',

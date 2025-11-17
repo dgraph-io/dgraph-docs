@@ -190,8 +190,7 @@
           },
           "items": [
             "admin/enterprise-features/encryption-at-rest",
-            "admin/enterprise-features/license",
-            "admin/enterprise-features/lsbackup"
+            "admin/enterprise-features/license"
           ]
         }
       ]
@@ -298,6 +297,7 @@
         "cli/export_backup",
         "cli/increment",
         "cli/live",
+        "cli/lsbackup",
         "cli/migrate",
         "cli/restore",
         "cli/superflags",
