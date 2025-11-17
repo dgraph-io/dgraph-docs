@@ -1,148 +1,66 @@
 ---
 title: Multi-Tenancy
+description: Enable multiple tenants to share a Dgraph cluster using logically separated namespaces
 ---
 
-Multi-tenancy is an enterprise-only feature that allows various tenants to co-exist in the same Dgraph
-Cluster using `uint64` namespaces. With multi-tenancy, each tenant can only log into their own
-namespace and operate in their own namespace.
+Multi-tenancy enables multiple tenants to coexist in the same Dgraph cluster using `uint64` namespaces. Each tenant operates in its own namespace with logical data separation—data is stored in the same `p` directory but is not accessible across namespaces.
 
 :::note
-Multi-tenancy is an enterprise feature and needs [Access Control Lists](access-control-lists) (ACL) enabled to work.
+**Enterprise Feature**: Multi-tenancy requires [Access Control Lists](access-control-lists) (ACL) to be enabled. See [License](license) for details.
 :::
 
-## Overview
+Multi-tenancy builds upon ACL and scopes ACL policies to individual tenants. Access controls are applied per tenant to specific predicates or all predicates within that tenant. Tenants are logically separated; each client must authenticate within a tenant and can only access data as allowed by the tenant's ACL rules.
 
-Multi-tenancy is built upon [Access Control Lists](access-control-lists) (ACL),
-and enables multiple tenants to share a Dgraph Cluster using unique namespaces.
-The tenants are logically separated, and their data lies in the same `p` directory.
-Each namespace has a group guardian, which has root access to that namespace.
+The default namespace (`0x00`) is called a `galaxy`. [Guardians of the Galaxy](#guardians-of-the-galaxy) are super-admins with special privileges to create or delete namespaces and reset passwords across namespaces. Each namespace has a guardian group with root access to that namespace. Users belong to a single namespace; to access multiple namespaces, create separate user accounts for each.
 
-The default namespace is called a `galaxy`. [Guardians of the Galaxy](#guardians-of-the-galaxy) get
-special access to create or delete namespaces and change passwords of
-users of other namespaces.
-
-:::note
-Dgraph provides a timeout limit per query that's configurable using the `--limit` superflag's `query-limit` option.
-There's no time limit for queries by default, but you can override it when running Dgraph Alpha.
-For multi-tenant environments a suggested `query-limit` value is 500ms.
+:::tip
+For multi-tenant environments, consider setting a query timeout using `--limit query-limit=500ms` when starting Dgraph Alpha.
 :::
 
-## FAQ
+## Access Control Roles
 
-- How access controls and policies are handled among different tenants?
-
-    In previous versions of Dgraph, the [Access Control Lists](access-control-lists) (ACL) feature
-    offered a unified control solution across the entire database.
-    With the new multi-tenancy feature, the ACL policies are now scoped down to individual tenants in the database.
-
-:::note
-Only super-admins ([Guardians of the galaxy](#guardians-of-the-galaxy)) have access across tenants.
-The super admin is used only for database administration operations, such as exporting data of all tenants. _Guardian_ of the _Galaxy_ group cannot read across tenants.
-:::
-
-- What's the ACL granularity in a multi-tenancy environment? Is it per tenant?
-
-    The access controls are applied per tenant to either specific predicates or all predicates that exist for the tenant.
-    For example, the user `John Smith` belonging to the group `Data Approvers` for a tenant `Accounting` may only have read-only access over predicates while user `Jane Doe`, belonging to the group `Data Editors` within that same tenant, may have access to modify those predicates.
-    All the ACL rules need to be defined for each tenant in your backend. The level of granularity available allows for defining rules over specific predicates or all predicates belonging to that tenant.
-
-- Are tenants a physical separation or a logical one?
-
-    Tenants are a logical separation. In this example, data needs to be written twice for 2 different tenants.
-    Each client must authenticate within a tenant, and can only modify data within the tenant as allowed by the configured ACLs.
-
-- Can data be copied from one tenant to the other?
-
-    Yes, but not by breaking any ACL or tenancy constraints.
-    This can be done by exporting data from one tenant and importing data to another.
-
-## Namespace
-
-A multi-tenancy Namespace acts as a logical silo, so data stored in one namespace is not accessible from another namespace.
-Each namespace has a group guardian (with root access to that namespace), and a unique `uint64` identifier.
-Users are members of a single namespace, and cross-namespace queries are not allowed.
-
-:::note
-If a user wants to access multiple namespaces, the user needs to be created separately for each namespace.
-:::
-
-The default namespace (`0x00`) is called a `galaxy`. A [Guardian of the Galaxy](#guardians-of-the-galaxy) has
-special access to create or delete namespaces and change passwords of
-users of other namespaces.
-
-## Access Control Lists
-
-Multi-tenancy defines certain ACL roles for the shared Cluster:
-
-- [Guardians of the Galaxy](#guardians-of-the-galaxy) (Super Admins)
-- Guardians of the namespace can perform the following operations:
-  - create users and groups within the namespace
-  - assign users to groups within the namespace
-  - assign predicates to groups within the namespace
-  - add users to groups within the namespace
-  - export namespace
-  - drop data within the namespace
-  - query and mutate within the namespace
-
-  :::note
- Guardians of the namespace cannot query or mutate across namespaces.
-:::
-
-- Normal users can perform the following operations:
-  - login into a namespace
-  - query within the namespace
-  - mutate within the namespace
-
-  :::note
-Normal users cannot query or mutate across namespaces.
-:::
-
-### Guardians of the Galaxy
-
-A _Guardian of the Galaxy_ is a Super Admin of the default namespace (`0x00`).
-
-As a super-admin, a _Guardian of the Galaxy_ can:
-- [Create](#create-a-namespace) and [delete](#delete-a-namespace) namespaces
-- Reset the passwords
+**Guardians of the Galaxy** (Super Admins of namespace `0x00`):
+- Create and delete namespaces
+- Reset passwords across namespaces
 - Query and mutate the default namespace (`0x00`)
-- Trigger Cluster-wide [backups](#backups) (no namespace-specific backup)
-- Trigger Cluster-wide or namespace-specific [exports](#exports) (exports contain information about the namespace)
+- Trigger cluster-wide backups and exports
+- Export all namespaces or specific namespaces
 
-For example, if the user `rocket` is part of the _Guardians of the Galaxy_ group (namespace `0x00`),
-he can only read/write on namespace `0x00`.
+**Guardians of a Namespace**:
+- Create users and groups within the namespace
+- Assign users to groups and predicates to groups
+- Export the namespace
+- Drop data within the namespace
+- Query and mutate within the namespace
 
-## Create a Namespace
-
-Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can create a namespace.
-A namespace can be created by calling `/admin` with the `addNamespace` mutation,
-and will return the assigned number for the new namespace.
+**Normal Users**:
+- Login into a namespace
+- Query and mutate within the namespace as permitted by ACL rules
 
 :::note
-To create a namespace, the _Guardian_ must send the JWT access token in the `X-Dgraph-AccessToken` header.
+Guardians of the Galaxy cannot read across tenants. They are used only for database administration operations such as exporting data of all tenants.
 :::
 
-For example, to create a new namespace:
+## Namespace Operations
+
+### Create a Namespace
+
+Only [Guardians of the Galaxy](#guardians-of-the-galaxy) can create namespaces. Send the JWT access token in the `X-Dgraph-AccessToken` header:
 
 ```graphql
 mutation {
- addNamespace(input: {password: "mypass"})
-  {
+  addNamespace(input: {password: "mypass"}) {
     namespaceId
     message
   }
 }
 ```
 
-By sending the mutation above, a namespace is created. A _Guardian group_ is also automatically created for that namespace.
-A `groot` user with password `mypass` (default is `password`) is created in the guardian group.
-You can then use these credentials to login into the namespace and perform operations like [`addUser`](access-control-lists#create-a-regular-user).
+This creates a namespace, automatically creates a guardian group for that namespace, and creates a `groot` user with the specified password (default is `password`) in the guardian group. Use these credentials to login and perform operations like [`addUser`](access-control-lists#create-a-regular-user).
 
-## List Namespaces
+### List Namespaces
 
-Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can list active namespaces.
-You can check available namespaces using the `/state` endpoint.
-
-For example, if you have a multi-tenant Cluster with multiple namespaces, as a _Guardian of the Galaxy_ you can query `state` from GraphQL:
+Only [Guardians of the Galaxy](#guardians-of-the-galaxy) can list active namespaces using the GraphQL `state` query:
 
 ```graphql
 query {
@@ -152,57 +70,38 @@ query {
 }
 ```
 
-In the response, namespaces that are available and active are listed.
+Response:
 
 ```json
 {
   "data": {
     "state": {
-      "namespaces": [
-        2,
-        1,
-        0
-      ]
+      "namespaces": [2, 1, 0]
     }
   }
 }
 ```
 
-## Delete a Namespace
+### Delete a Namespace
 
-Only members of the [Guardians of the Galaxy](#guardians-of-the-galaxy) group can delete a namespace.
-A namespace can be dropped by calling `/admin` with the `deleteNamespace` mutation.
-
-:::note
-To delete a namespace, the _Guardian_ must send the JWT access token in the `X-Dgraph-AccessToken` header.
-:::
-
-For example, to drop the namespace `123`:
+Only [Guardians of the Galaxy](#guardians-of-the-galaxy) can delete namespaces. Send the JWT access token in the `X-Dgraph-AccessToken` header:
 
 ```graphql
 mutation {
-  deleteNamespace(input: {namespaceId: 123})
-  {
+  deleteNamespace(input: {namespaceId: 123}) {
     namespaceId
     message
   }
 }
 ```
 
-:::note
-Members of `namespace-guardians` can't delete namespaces, they can only perform queries and mutations.
-:::
+### Reset Passwords
 
-## Reset passwords
-
-Only members of the _Guardians of the Galaxy_ can reset passwords across namespaces.
-A password can be reset by calling `/admin` with the `resetPassword` mutation.
-
-For example, to reset the password for user `groot` from the namespace `100`:
+Only [Guardians of the Galaxy](#guardians-of-the-galaxy) can reset passwords across namespaces:
 
 ```graphql
 mutation {
-  resetPassword(input: {userId: "groot", password:"newpassword", namespace: 100}) {
+  resetPassword(input: {userId: "groot", password: "newpassword", namespace: 100}) {
     userId
     message
   }
@@ -211,53 +110,37 @@ mutation {
 
 ## Drop Operations
 
-The `drop all` operations can be triggered only by a [Guardian of the Galaxy](#guardians-of-the-galaxy).
-They're executed at Cluster level and delete data across namespaces.
-All other `drop` operations run at namespace level and are namespace specific. For information about other drop operations, see [Alter the database](../../clients/raw-http#alter-the-dql-schema).
+The `drop all` operation can only be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy) and deletes data and schema across all namespaces. All other drop operations run at namespace level. Guardians of a namespace can trigger `drop data` within their namespace, which deletes all data but retains the schema.
 
+For example, to drop data within a namespace:
 
-:::note
-`drop all` operation is executed at Cluster level and the operation deletes data and schema across namespaces. Guardian of the namespace can trigger `drop data` operation within the namespace. The `drop data` operation deletes all the data but retains the schema only.
-:::
-
-For example:
-
-```
+```bash
 curl 'http://localhost:8080/alter' \
   -H 'X-Dgraph-AccessToken: <your-access-token>' \
-  --data-raw '{"drop_op":"DATA"}' \
-  --compressed
+  --data-raw '{"drop_op":"DATA"}'
 ```
 
-## Backups
+For information about other drop operations, see [Alter the database](../../clients/raw-http#alter-the-dql-schema).
 
-Backups are currently Cluster-wide only, but [exports](#exports) can be created by namespace.
-Only a [Guardian of the Galaxy](#guardians-of-the-galaxy) can trigger a backup.
+## Backups and Exports
 
-### Data import
+Backups are cluster-wide only and can only be triggered by a [Guardian of the Galaxy](#guardians-of-the-galaxy). Exports can be generated cluster-wide or at namespace level.
 
 [Initial import](../../migration/bulk-loader) and [Live import](../../migration/live-loader) tools support multi-tenancy.
 
 
-## Exports
+### Exports
 
-Exports can be generated Cluster-wide or at namespace level.
-These exported sets of `.rdf` or `.json` files and schemas include the multi-tenancy namespace information.
+Exports generate `.rdf` or `.json` files and schemas that include namespace information. If a Guardian of the Galaxy exports the whole cluster, a single folder contains export data of all namespaces in a single file with a single schema.
 
-If a _Guardian of the Galaxy_ exports the whole Cluster, a single folder containing the export data of all the namespaces in a single `.rdf` or `.json` file and a single schema will be generated.
-
-:::note
-Guardians of a Namespace can trigger an Export for their namespace.
-:::
-
-A namespace-specific export will contain the namespace value in the generated `.rdf` file:
+Namespace-specific exports contain the namespace value in the generated `.rdf` file:
 
 ```rdf
-<0x01> "name" "ibrahim" <0x12> .     -> this belongs to namespace 0x12
-<0x01> "name" "ibrahim" <0x0> .      -> this belongs to namespace 0x00
+<0x01> "name" "ibrahim" <0x12> .     -> belongs to namespace 0x12
+<0x01> "name" "ibrahim" <0x0> .      -> belongs to namespace 0x00
 ```
 
-For example, when the _Guardian of the Galaxy_ user is used to export the namespace `0x1234` to a folder in the export directory (by default this directory is `export`):
+**Export a specific namespace** (Guardian of the Galaxy):
 
 ```graphql
 mutation {
@@ -268,11 +151,12 @@ mutation {
   }
 }
 ```
-When using the _Guardian of the Namespace_, there's no need to specify the namespace in the GraphQL mutation, as they can only export within their own namespace:
+
+**Export current namespace** (Guardian of a Namespace - no namespace parameter needed):
 
 ```graphql
 mutation {
-  export(input: {format: "rdf") {
+  export(input: {format: "rdf"}) {
     response {
       message
     }
@@ -280,7 +164,7 @@ mutation {
 }
 ```
 
-To export all the namespaces: (this is only valid for _Guardians of the Galaxy_)
+**Export all namespaces** (Guardian of the Galaxy only):
 
 ```graphql
 mutation {
