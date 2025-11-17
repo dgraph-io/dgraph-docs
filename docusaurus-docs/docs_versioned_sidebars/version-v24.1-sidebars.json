@@ -140,10 +140,10 @@
           "items": [
             "admin/admin-tasks/check-cluster-health",
             "admin/admin-tasks/view-cluster-state",
-            "admin/admin-tasks/user-management-access-control",
             "admin/admin-tasks/update-dgraph-types",
+            "admin/admin-tasks/user-management-access-control",
+            "admin/admin-tasks/multitenancy",
             "admin/admin-tasks/restrict-mutation-operations",
-            "admin/admin-tasks/secure-alter-operations",
             "admin/admin-tasks/export-database",
             "admin/admin-tasks/shut-down-database",
             "admin/admin-tasks/delete-database",
@@ -191,8 +191,7 @@
           "items": [
             "admin/enterprise-features/encryption-at-rest",
             "admin/enterprise-features/license",
-            "admin/enterprise-features/lsbackup",
-            "admin/enterprise-features/multitenancy"
+            "admin/enterprise-features/lsbackup"
           ]
         }
       ]

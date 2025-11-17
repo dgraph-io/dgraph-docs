@@ -6,7 +6,7 @@ description: Enable multiple tenants to share a Dgraph cluster using logically s
 Multi-tenancy enables multiple tenants to coexist in the same Dgraph cluster using `uint64` namespaces. Each tenant operates in its own namespace with logical data separation—data is stored in the same `p` directory but is not accessible across namespaces.
 
 :::note
-**Enterprise Feature**: Multi-tenancy requires [Access Control Lists](access-control-lists) (ACL) to be enabled. See [License](license) for details.
+**Enterprise Feature**: Multi-tenancy requires [Access Control Lists](../../installation/configuration/enable-acl) (ACL) to be enabled.
 :::
 
 Multi-tenancy builds upon ACL and scopes ACL policies to individual tenants. Access controls are applied per tenant to specific predicates or all predicates within that tenant. Tenants are logically separated; each client must authenticate within a tenant and can only access data as allowed by the tenant's ACL rules.
@@ -58,7 +58,7 @@ mutation {
 }
 ```
 
-This creates a namespace, automatically creates a guardian group for that namespace, and creates a `groot` user with the specified password (default is `password`) in the guardian group. Use these credentials to login and perform operations like [`addUser`](access-control-lists#create-a-regular-user).
+This creates a namespace, automatically creates a guardian group for that namespace, and creates a `groot` user with the specified password (default is `password`) in the guardian group. Use these credentials to login and perform[`user management opertions`](user-management-access-control).
 
 ### List Namespaces
 

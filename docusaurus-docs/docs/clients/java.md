@@ -67,8 +67,7 @@ dgraphClient.login(USER_ID, USER_PASSWORD);
 
 ### Multi-tenancy
 
-If [multi-tenancy](../admin/enterprise-features/multitenancy) is enabled, by default the login method on client will login into the namespace `0`.
-In order to login into some other namespace, use the `loginIntoNamespace` method on the client:
+In multi-tenants environments, use the `loginIntoNamespace` method on the client:
 
 ```java
 dgraphClient.loginIntoNamespace(USER_ID, USER_PASSWORD, NAMESPACE);

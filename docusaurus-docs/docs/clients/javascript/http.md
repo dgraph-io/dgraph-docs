@@ -78,8 +78,7 @@ await clientStub.login();
 
 Some Dgraph configurations require extra access tokens.
 
-
-Alpha servers can be configured with [Secure Alter Operations](../../admin/admin-tasks/secure-alter-operations).
+Alpha servers can be configured with [Secure Alter Operations](../../admin/security/admin-endpoint-security).
    In this case the token needs to be set on the client instance:
 
 ```js

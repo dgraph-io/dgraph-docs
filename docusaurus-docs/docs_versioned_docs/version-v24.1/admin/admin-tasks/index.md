@@ -15,8 +15,6 @@ Dgraph Alpha provides the following administrative endpoints:
 - **`/admin/config/cache_mb`** - Configure cache size
 - **`/admin/draining`** - Drain connections from a node
 - **`/admin/shutdown`** - Shutdown a single Alpha node
-- **`/admin/schema`** - Schema management
-- **`/admin/schema/validate`** - Validate schema
 - **`/alter`** - Apply schema updates and drop predicates
 - **`/login`** - Authenticate ACL users
 - **`/health`** - health status
@@ -33,7 +31,6 @@ The following administrative tasks are available:
 ### Data Management
 
 - **[Restrict Mutation Operations](restrict-mutation-operations)** - Control mutation permissions and enforce strict schema validation
-- **[Secure Alter Operations](secure-alter-operations)** - Protect schema updates and predicate drops with authentication
 - **[Export Database](export-database)** - Export data from Dgraph for backup, migration, or sharing
 - **[Delete Database](delete-database)** - Drop all data from the database
 
