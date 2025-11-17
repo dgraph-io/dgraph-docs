@@ -30,7 +30,6 @@ The following administrative tasks are available:
 
 ### Data Management
 
-- **[Restrict Mutation Operations](restrict-mutation-operations)** - Control mutation permissions and enforce strict schema validation
 - **[Export Database](export-database)** - Export data from Dgraph for backup, migration, or sharing
 - **[Delete Database](delete-database)** - Drop all data from the database
 

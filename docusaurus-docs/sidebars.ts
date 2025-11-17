@@ -115,6 +115,7 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Configuration',
           items: [
+            'installation/configuration/restrict-mutation-operations',
             'installation/configuration/enable-acl',
             'installation/configuration/change-data-capture',
             'installation/configuration/learner-nodes',
@@ -146,7 +147,6 @@ const sidebars: SidebarsConfig = {
             'admin/admin-tasks/update-dgraph-types',
             'admin/admin-tasks/user-management-access-control',
             'admin/admin-tasks/multitenancy',
-            'admin/admin-tasks/restrict-mutation-operations',
             'admin/admin-tasks/export-database',
             'admin/admin-tasks/shut-down-database',
             'admin/admin-tasks/delete-database',
