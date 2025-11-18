@@ -3,7 +3,7 @@ title: Learner Nodes
 description: Deploy read-only replica instances for low-latency best-effort queries in remote geographic regions
 ---
 :::note
-**Enterprise Feature**: Learner nodes require a Dgraph Enterprise license. See [License](../../admin/enterprise-features/license) for details.
+**Enterprise Feature**: Learner nodes require a Dgraph Enterprise license. See [License](license) for details.
 :::
 
 Learner nodes are read-only replica instances that serve best-effort queries with zero latency overhead. Use learner nodes to provide low-latency access for clients in remote geographic regions distant from your main Dgraph cluster.

@@ -4,7 +4,7 @@ description: Dgraph logs requests for queries and mutations, and also provides a
 ---
 
 Dgraph logs requests for queries and mutations, and also provides audit logging
-capabilities with a Dgraph [enterprise license](../enterprise-features/license).
+capabilities with a Dgraph [enterprise license](../../installation/configuration/license).
 
 Dgraph's log format comes from the glog library and is [formatted](https://github.com/golang/glog/blob/23def4e6c14b4da8ac2ed8007337bc5eb5007998/glog.go#L523-L533) as follows:
 

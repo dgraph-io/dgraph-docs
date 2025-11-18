@@ -19,4 +19,4 @@ Dgraph security configuration covers authentication, network security, and acces
 
 **[Audit Logging](../observability/audit-logs)** - Track and audit all requests
 
-**[Encryption at Rest](../enterprise-features/encryption-at-rest)**  - Encrypt data on disk
+**[Encryption at Rest](../../installation/configuration/encryption-at-rest)**  - Encrypt data on disk

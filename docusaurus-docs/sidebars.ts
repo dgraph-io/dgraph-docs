@@ -118,8 +118,9 @@ const sidebars: SidebarsConfig = {
             'installation/configuration/restrict-mutation-operations',
             'installation/configuration/enable-acl',
             'installation/configuration/change-data-capture',
+            'installation/configuration/encryption-at-rest',
             'installation/configuration/learner-nodes',
-
+            'installation/configuration/license',
           ],
         },
         'installation/production-checklist',
@@ -184,18 +185,6 @@ const sidebars: SidebarsConfig = {
         },
         'admin/data-compression',
         'admin/troubleshooting',
-        {
-          type: 'category',
-          label: 'Advanced Features',
-          link: {
-            type: 'doc',
-            id: 'admin/enterprise-features/index',
-          },
-          items: [
-            'admin/enterprise-features/encryption-at-rest',
-            'admin/enterprise-features/license',
-          ],
-        },
       ],
     },
    

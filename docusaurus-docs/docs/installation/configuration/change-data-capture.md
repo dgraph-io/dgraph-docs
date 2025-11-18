@@ -4,7 +4,7 @@ description: Stream database mutations and drop events to Kafka or local file si
 ---
 
 :::note
-**Enterprise Feature**: Change Data Capture requires a Dgraph Enterprise license. See [License](../../admin/enterprise-features/license) for details.
+**Enterprise Feature**: Change Data Capture requires a Dgraph Enterprise license. See [License](license) for details.
 :::
 
 Change Data Capture (CDC) streams database mutations and drop events to external sinks (Kafka or local files). CDC tracks all `set` and `delete` mutations except those affecting password fields, along with all drop events. Live Loader events are recorded; Bulk Loader events are not.

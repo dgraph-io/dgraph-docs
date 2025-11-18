@@ -6,7 +6,7 @@ title: Enable ACL
 Access Control List (ACL) provides access protection to your data stored in Dgraph. When the ACL feature is enabled, a client must authenticate with a username and password before executing any transactions, and is only allowed to access the data permitted by the ACL rules.
 
 :::note
-**Enterprise Feature**: ACL requires a Dgraph Enterprise license. See [License](../../admin/enterprise-features/license) for details.
+**Enterprise Feature**: ACL requires a Dgraph Enterprise license. See [License](license) for details.
 :::
 
 ## Enable Enterprise ACL Feature
