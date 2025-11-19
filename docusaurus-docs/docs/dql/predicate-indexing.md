@@ -53,14 +53,24 @@ The indices available for `float32vector` are as follows.
 `hnsw` (**Hierarchical Navigable Small World**) index supports the following parameters
 - metric : indicate the metric to use to compute vector similarity. One of `cosine`, `euclidean`, and `dotproduct`. Default is `euclidean`.
 
-- exponent : An integer, represented as a string, roughly representing the number of vectors expected in the index in power of 10. The exponent value,is used to set "reasonable defaults" for HNSW internal tuning parameters. Default is "4" (10^4 vectors).
+- exponent : an integer, represented as a string, roughly representing the number of vectors expected in the index in power of 10. The exponent value is used to set "reasonable defaults" for HNSW internal tuning parameters. The default is "3" (10^3 vectors). This is a high-level convenience parameter that acts as a "complexity knob" to scale multiple HNSW parameters simultaneously, namely the `maxlevels`, `efconstruction` and `efsearch`. When you set `exponent: "X"`, Dgraph automatically sets default values for three parameters (only if they're not explicitly specified):
+  ```
+  maxLevels = X - Number of hierarchical layers
+  efConstruction = 50 × X - Size of dynamic candidate list during index construction
+  efSearch = 30 × X - Size of dynamic candidate list during search
+  ```
+- maxLevels : an integer, represented as a string, that controls the maximum number of hierarchical layers in the HNSW. Defaults to the `exponent` parameter. More layers = faster search for large datasets but more memory overhead. Fewer layers = slower search but less memory usage.
 
+- efConstruction : an integer, represented as a string, that controls the size of the candidate list during index construction - higher values create better quality graphs but take longer to build. Defaults to 50 times the value of `maxLevels`.
+
+- efSearch : an integer, represented as a string, that controls the size of the candidate list during search queries - higher values improve recall/accuracy but make searches slower. Defaults to 30 times the value of `maxLevels`.
 
 Here are some examples:
 ```
 simple_vector: float32vector @index(hnsw) .
 description_vector: float32vector @index(hnsw(metric:"cosine")) .
-large_vector: float32vector @index(hnsw(metric:"euclidean",exponent:"6")) .
+large_vector: float32vector @index(hnsw(metric:"euclidean", exponent:"6")) .
+larger_vector: float32vector @index(hnsw(metric:"euclidean", maxLevels: "7", efConstruction: "250", efSearch: "80"))
 ```
 
 ## DateTime Indices
