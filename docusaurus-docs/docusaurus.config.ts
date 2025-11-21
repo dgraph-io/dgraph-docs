@@ -55,6 +55,18 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
+        includeCurrentVersion: true,
+        lastVersion: 'current',
+        versions: {
+          'current': {
+            label: 'v25.0 (latest)',
+            path: '',
+          },
+          'v24.1': {
+            label: 'v24.1',
+            path: 'v24.1',
+          },
+        },
         editUrl: ({versionDocsDirPath, docPath}) => {
           return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs'}/${docPath}`;
         },
@@ -67,6 +79,18 @@ const config: Config = {
         path: 'docs-graphql',
         routeBasePath: 'graphql',
         sidebarPath: './sidebars-graphql.ts',
+        includeCurrentVersion: true,
+        lastVersion: 'current',
+        versions: {
+          'current': {
+            label: 'v25.0 (latest)',
+            path: '',
+          },
+          'v24.1': {
+            label: 'v24.1',
+            path: 'v24.1',
+          },
+        },
         editUrl: ({versionDocsDirPath, docPath}) => {
           return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs-graphql'}/${docPath}`;
         },
