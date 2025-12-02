@@ -62,7 +62,7 @@ To facilitate debugging, [debug mode](#debug-mode) can be enabled for a client.
 
 ### Multi-tenancy
 
-In [multi-tenancy](../../../admin/enterprise-features/multitenancy) environments, `dgraph-js` provides a new method `loginIntoNamespace()`,
+In [multi-tenancy](../../../admin/admin-tasks/multitenancy) environments, `dgraph-js` provides a new method `loginIntoNamespace()`,
 which will allow the users to login to a specific namespace.
 
 In order to create a JavaScript client, and make the client login into namespace `123`:

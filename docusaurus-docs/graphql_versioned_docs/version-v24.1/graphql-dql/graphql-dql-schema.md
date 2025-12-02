@@ -157,7 +157,7 @@ In particular, you can
 - use Dgraph DQL mutations but also Dgraph's [import tools](/migration/import-data) to populate the graph after you have deployed a GraphQL Schema. See [GraphQL data loading](/graphql/graphql-dql/graphql-data-loading)
 - use DQL to query the graph in the context of authorization rules and custom resolvers.
 - add knowledge to your graph such as meta-data, score, annotations, ...,  but also relationships or relationships attributes (facets) that could be the result of similarity computation, threat detection a.s.o. The added data could be hidden from your GraphQL API clients but be available to logic written with DQL clients.
-- break things using DQL: DQL is powerful and is bypassing constraints expressed in the GraphQL schema. You can for example delete a node predicate that is mandatory in the GraphQL API! Hopefully there are ways to secure who can read/write/delete predicates. ( see the [ACL](/admin/enterprise-features/access-control-lists/)) section.
+- break things using DQL: DQL is powerful and is bypassing constraints expressed in the GraphQL schema. You can for example delete a node predicate that is mandatory in the GraphQL API! Hopefully there are ways to secure who can read/write/delete predicates. ( see the [ACL](/admin/admin-tasks/user-management-access-control)) section.
 - fix things using DQL: this is especially useful when doing GraphQL Schema updates which require some [data migrations](/graphql/graphql-dql/graphql-data-migration). 
 
 

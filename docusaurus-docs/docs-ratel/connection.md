@@ -27,7 +27,7 @@ Under the input box you have tree icons which gives you the status of the connec
 - Logging in: a "lock" icon.
 
 :::tip
-To connect to a standard Dgraph instance, you only need to click on `Connect`. There's a specific section to [login using ACL](#acl-account) ([Enterprise feature](/admin/enterprise-features/access-control-lists/)).
+To connect to a standard Dgraph instance, you only need to click on `Connect`. There's a specific section to [login using ACL](#acl-account).
 :::
 
 ## Cluster Settings

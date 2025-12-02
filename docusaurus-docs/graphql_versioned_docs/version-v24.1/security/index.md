@@ -47,7 +47,7 @@ You can use any authentication method that is capable of generating such JWT tok
 
 
 ### ACL
-Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs](/admin/enterprise-features/access-control-lists/) section for details. The ACLs are a separate security mechanism.
+Note that another token may be needed to access the system if ACL security is also enabled. See the [ACLs](/installation/configuration/enable-acl) section for details. The ACLs are a separate security mechanism.
 
 ### JWT Claims
 

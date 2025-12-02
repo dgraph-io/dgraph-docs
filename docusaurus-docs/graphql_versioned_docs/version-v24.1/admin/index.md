@@ -28,25 +28,6 @@ When you start Dgraph, two GraphQL endpoints are served.
 
 At `/graphql` you'll find the GraphQL API for the types you've added.  That's what your app would access and is the GraphQL entry point to Dgraph.  If you need to know more about this, see the [quick start](https://dgraph.io/docs/graphql/quick-start/) and [schema docs](https://dgraph.io/docs/graphql/schema/).
 
-### /admin
-
-At `/admin` you'll find an admin API for administering your GraphQL instance.  The admin API is a GraphQL API that serves POST and GET as well as compressed data, much like the `/graphql` endpoint.
-
-
-* The `health` query lets you know if everything is connected and if there's a schema currently being served at `/graphql`.
-* The `state`  query returns the current state of the cluster and group membership information. For more information about `state` see [here](/admin/dgraph-zero#more-about-the-state-endpoint).
-* The `config` query returns the configuration options of the cluster set at the time of starting it.
-* The `getGQLSchema` query gets the current GraphQL schema served at `/graphql`, or returns null if there's no such schema.
-* The `updateGQLSchema` mutation allows you to change the schema currently served at `/graphql`.
-
-## Enterprise features
-
-Enterprise Features like ACL, Backups and Restore are also available using the GraphQL API at `/admin` endpoint.
-
-* [ACL](/admin/enterprise-features/access-control-lists#accessing-secured-dgraph)
-* [Backups](/admin/admin-tasks/binary-backups#create-a-backup)
-* [Restore](/admin/admin-tasks/binary-backups#online-restore)
-
 ## First start
 
 On first starting with a blank database:

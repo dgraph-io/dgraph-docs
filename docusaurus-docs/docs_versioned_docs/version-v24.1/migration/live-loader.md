@@ -195,13 +195,13 @@ dgraph live \
 
 ## Enterprise Features
 
-### Multi-tenancy (Enterprise Feature)
+### Multi-tenancy
 
-Since [multi-tenancy](/admin/enterprise-features/multitenancy) requires ACL,
+Since multi-tenancy requires ACL,
 when using the Live loader you must provide the login credentials using the `--creds` flag.
 By default, Live loader loads the data into the user's namespace.
 
-[Guardians of the Galaxy](/admin/enterprise-features/multitenancy#guardians-of-the-galaxy) can load the data into multiple namespaces.
+[Guardians of the Galaxy](/admin/admin-tasks/multitenancy#guardians-of-the-galaxy) can load the data into multiple namespaces.
 Using `--force-namespace`, a _Guardian_ can load the data into the namespace specified in the data and schema files.
 
 :::note
