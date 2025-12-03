@@ -67,7 +67,6 @@
 
 /* Sidebar - istari-documentation style */
 .menu__link {
-  color: var(--ifm-color-primary-darkest);
   font-size: 0.8rem;
   font-weight: normal;
 }
