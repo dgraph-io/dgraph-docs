@@ -47,6 +47,12 @@ const config: Config = {
 
   plugins: [
     [
+      require.resolve('docusaurus-gtm-plugin'),
+      {
+        id: 'GTM-TZTPBZBZ',
+      }
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'docs',
@@ -222,12 +228,6 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
-  scripts: [
-    {
-      src: 'https://www.googletagmanager.com/gtag/js?id=GTM-TZTPBZBZ',
-      async: true,
-    },
-  ],
 };
 
 export default config;
