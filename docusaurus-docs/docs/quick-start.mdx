@@ -13,9 +13,19 @@ Welcome to Dgraph! This guide will get you up and running in minutes. You'll lea
 - A terminal window
 - About 5 minutes
 
-## Step 1: Start Dgraph
+## Step 1: Create Quickstart Working Directory 
 
-Run Dgraph using the official Docker image:
+Create a directory to work from while following the guide, and open a terminal session in that directory. 
+
+For example: 
+
+```bash
+mkdir ~/Desktop/dgraph-quickstart
+cd ~/Desktop/dgraph-quickstart
+``
+## Step 2: Start Dgraph
+
+From the directory you created, run Dgraph using the official Docker image:
 
 ```bash
 docker run --detach --name dgraph-play \
@@ -24,7 +34,6 @@ docker run --detach --name dgraph-play \
   -p "9080:9080" \
   dgraph/standalone:v24.1.4
 ```
-
 This command:
 - Starts Dgraph in the background (`--detach`)
 - Names the container `dgraph-play` for easy management
@@ -34,21 +43,27 @@ This command:
 **Verify it's running:**
 
 ```bash
-curl http://localhost:8080/health | jq
+curl http://localhost:8080/health  | jq '.[0].status'
 ```
 
-You should see a healthy status response. If you don't have `jq` installed, you can remove it from the command.
-
-<!-- Image placeholder: Docker container running successfully -->
-
-## Step 2: Load Sample Data
-
-Download the sample dataset (movie data):
+Or, if `jq` is *not* installed on your system:
 
 ```bash
-wget https://github.com/dgraph-io/dgraph-benchmarks/raw/refs/heads/main/data/1million.rdf.gz
-wget https://raw.githubusercontent.com/dgraph-io/dgraph-benchmarks/refs/heads/main/data/1million.schema
+(curl http://localhost:8080/health 2>/dev/null | grep -q '"status":"healthy"' && echo "healthy")  || echo "NOT healthy"
 ```
+
+Either will output `healthy` if everything is OK.
+
+## Step 3: Download Sample Data
+
+Download the sample dataset (movie data) to your quickstart working directory: 
+
+```bash
+curl -LO https://github.com/dgraph-io/dgraph-benchmarks/raw/refs/heads/main/data/1million.rdf.gz
+curl -LO https://raw.githubusercontent.com/dgraph-io/dgraph-benchmarks/refs/heads/main/data/1million.schema
+```
+
+## Step 4: Load Sample Data
 
 Load the data into Dgraph:
 
@@ -62,7 +77,7 @@ This loads over 1 million movie-related facts into your database. The process ta
 
 <!-- Image placeholder: Data loading progress/output -->
 
-## Step 3: Open Ratel UI
+## Step 5: Open Ratel UI
 
 [Ratel](dgraph-glossary#ratel) is Dgraph's visual query interface. Start it with:
 
@@ -70,15 +85,19 @@ This loads over 1 million movie-related facts into your database. The process ta
 docker run --rm -it -p 8000:8000 dgraph/ratel:latest
 ```
 
-Then:
-1. Open `http://localhost:8000` in your browser
-2. Enter `http://localhost:8080` as the Dgraph connection string
-3. Click **Connect**
+And then navigate to [http://localhost:8000](http://localhost:8000) in your browser.
+
+Ratel should start already configured to connect to your local Dgraph instance.  
+You can confirm by verifying that the text underneath the 'lightning' connection button at the top of left side toolbar shows "http://localhost:8080".
+
+If it does not:
+   1. Click on the connection icon.
+   1. Enter `http://localhost:8080` as the Dgraph connection string
+   2. Click **Connect**
 
 <!-- Image placeholder: Ratel connection screen -->
 
 You're now connected! Click **Continue** to access the console.
-
 
 ## Step 4: Run Your First Query
 
