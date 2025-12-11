@@ -123,6 +123,8 @@ const config: Config = {
         path: 'docs-learn',
         routeBasePath: 'learn',
         sidebarPath: './sidebars-learn.ts',
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
         editUrl: ({versionDocsDirPath, docPath}) => {
           return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs-learn'}/${docPath}`;
         },
@@ -202,7 +204,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'learnSidebar',
           position: 'left',
-          label: 'Tutorials',
+          label: 'Learn',
           docId: 'index',
           docsPluginId: 'learn',
         },

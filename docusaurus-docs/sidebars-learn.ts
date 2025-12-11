@@ -110,6 +110,40 @@ const sidebars: SidebarsConfig = {
         'administrator/index',
       ],
     },
+    {
+      type: 'category',
+      label: 'How To',
+      link: {
+        type: 'doc',
+        id: 'howto/index',
+      },
+      items: [
+        'howto/completion',
+        'howto/concurrent-modification-java-multithreaded',
+        'howto/dgraph-sentry-integration',
+        'howto/dql-schema-request',
+        'howto/drop-data',
+        'howto/jepsen-tests',
+        'howto/load-balancing-nginx',
+        'howto/login-system',
+        'howto/retrieving-debug-information',
+        'howto/similarity-search',
+        'howto/using-debug-tool',
+        'howto/using-increment-tool',
+        {
+          type: 'category',
+          label: 'Command Line',
+          link: {
+            type: 'doc',
+            id: 'howto/commandline/index',
+          },
+          items: [
+            'howto/commandline/about-cli',
+            'howto/commandline/create-cli',
+          ],
+        },
+      ],
+    },
   ],
 };
 
