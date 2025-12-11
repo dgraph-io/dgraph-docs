@@ -1,2 +1,4 @@
 /tour /quick-start 302
 /tour/* /quick-start 302
+/howto/* /learn/howto/{match} 302
+https://tour.dgraph.io/* https://docs.dgraph.io/:splat 301
