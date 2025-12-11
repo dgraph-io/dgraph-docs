@@ -2,24 +2,22 @@
 title: Changelog
 ---
 
-The latest Dgraph release is the v24 series.
+The latest Dgraph release is the v25 series.
 
-Dgraph releases starting v22.0.0 is following semver
-[See the post here](https://discuss.dgraph.io/t/dgraph-v22-0-0-rc1-20221003-release-candidate/).
+Dgraph releases are following semver
 
 To learn about the latest releases and other important announcements, watch the
-[Announce][] category on Discuss.
+[announcements][] category on Github discussions.
 
-[Announce]: https://discuss.dgraph.io/c/announce
+[announcements]: https://github.com/orgs/dgraph-io/discussions/categories/announcements
 
 ## Release series
 
- Release               | First Release Date | End of Life
------------------------|--------------------|--------------
- [v24.0][]             | June 2024          | December 2025
- [v23.1][]             | October 2023       | April 2025
+ Release               | First Release Date |
+-----------------------|--------------------|
+ [v25.0.0][]             | Oct 2026           |
+ [v24.1.4][]             | Aug 2026           |
 
-
-[v24.0]: https://discuss.dgraph.io/t/dgraph-release-v24-0-0-is-now-available/19346
-[v23.1]: https://discuss.dgraph.io/t/dgraph-23-1-0-is-generally-available-on-dgraph-cloud-dockerhub-and-github/18980
+[v25.0.0]: https://github.com/dgraph-io/dgraph/releases/tag/v25.0.0
+[v24.1.4]: https://github.com/dgraph-io/dgraph/releases/tag/v24.1.4
 
