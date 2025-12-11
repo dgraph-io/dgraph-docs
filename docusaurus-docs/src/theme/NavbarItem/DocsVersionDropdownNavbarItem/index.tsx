@@ -3,16 +3,20 @@ import {useLocation} from '@docusaurus/router';
 import DocsVersionDropdownNavbarItemType from '@theme-original/NavbarItem/DocsVersionDropdownNavbarItem';
 import type {Props} from '@theme/NavbarItem/DocsVersionDropdownNavbarItem';
 
+// Plugins that have versioning configured
+const VERSIONED_PLUGINS = ['docs', 'graphql'];
+
 /**
  * A context-aware version dropdown that automatically detects which plugin
  * the current page belongs to based on the URL path.
  * 
  * This is a swizzled version of DocsVersionDropdownNavbarItem that detects
  * the plugin ID from the current URL path instead of using a hardcoded value.
+ * It hides the dropdown for plugins without versioning (ratel, learn).
  */
 export default function DocsVersionDropdownNavbarItem(
   props: Props,
-): JSX.Element {
+): JSX.Element | null {
   const location = useLocation();
   
   // Detect which plugin the current page belongs to based on the path
@@ -24,12 +28,12 @@ export default function DocsVersionDropdownNavbarItem(
       return 'graphql';
     }
     
-    // Check for Ratel pages
+    // Check for Ratel pages (no versioning)
     if (pathname.startsWith('/ratel')) {
       return 'ratel';
     }
     
-    // Check for Learn/Tutorials pages
+    // Check for Learn/Tutorials pages (no versioning)
     if (pathname.startsWith('/learn')) {
       return 'learn';
     }
@@ -43,12 +47,6 @@ export default function DocsVersionDropdownNavbarItem(
       if (afterVersion.startsWith('/graphql')) {
         return 'graphql';
       }
-      if (afterVersion.startsWith('/ratel')) {
-        return 'ratel';
-      }
-      if (afterVersion.startsWith('/learn')) {
-        return 'learn';
-      }
       // If version prefix exists but no plugin path, it's the docs plugin
       return 'docs';
     }
@@ -59,6 +57,11 @@ export default function DocsVersionDropdownNavbarItem(
 
   // Use the detected plugin ID, but allow override from props if provided
   const finalPluginId = props.docsPluginId || detectedPluginId;
+
+  // Hide the dropdown for plugins without versioning
+  if (!VERSIONED_PLUGINS.includes(finalPluginId)) {
+    return null;
+  }
 
   return <DocsVersionDropdownNavbarItemType {...props} docsPluginId={finalPluginId} />;
 }

@@ -61,16 +61,17 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
-        includeCurrentVersion: true,
-        lastVersion: 'current',
+        includeCurrentVersion: false,
+        lastVersion: 'v25',
         versions: {
-          'current': {
+          'v25': {
             label: 'v25.0 (latest)',
             path: '',
           },
           'v24.1': {
             label: 'v24.1',
             path: 'v24.1',
+            banner: 'none',
           },
         },
         editUrl: ({versionDocsDirPath, docPath}) => {
@@ -85,16 +86,17 @@ const config: Config = {
         path: 'docs-graphql',
         routeBasePath: 'graphql',
         sidebarPath: './sidebars-graphql.ts',
-        includeCurrentVersion: true,
-        lastVersion: 'current',
+        includeCurrentVersion: false,
+        lastVersion: 'v25',
         versions: {
-          'current': {
+          'v25': {
             label: 'v25.0 (latest)',
             path: '',
           },
           'v24.1': {
             label: 'v24.1',
             path: 'v24.1',
+            banner: 'none',
           },
         },
         editUrl: ({versionDocsDirPath, docPath}) => {
