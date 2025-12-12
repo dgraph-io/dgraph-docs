@@ -63,6 +63,14 @@ The built site will be in the `build/` directory. You can serve it locally with:
 ```bash
 npm run serve
 ```
+### Testing the current version
+When testing locally you can set 
+```
+        includeCurrentVersion: true,
+```
+in the docs or graphql plugin in `docusaurus.config.ts`.
+
+This will expose `next` in the version selector, so you can view the current (non versioned) documentation.
 
 ## Versioning
 
@@ -71,11 +79,15 @@ Docusaurus supports documentation versioning. Versioned documentation is stored 
 - `docs_versioned_sidebars/` - Versioned sidebar configurations
 - `docs_versions.json` - Version metadata
 
-The version dropdown in the navbar automatically detects which documentation section you're viewing and shows the appropriate versions. Currently, versioning is configured for the main `docs` section.
+The version dropdown in the navbar automatically detects which documentation section you're viewing and shows the appropriate versions. Currently, versioning is configured for 
+-  `docs` section
+- `graphql` section
 
 To create a new version:
 1. Use the Docusaurus CLI: `npm run docusaurus docs:version <version>`
 2. This creates a new version snapshot of the current docs
+
+
 
 ## Deployment
 
@@ -129,6 +141,4 @@ docusaurus-docs/
 ```
 
 
-## Runnable Code Examples
 
-Some code examples in the documentation are interactive and runnable, allowing readers to execute queries directly in the browser. These are implemented using custom Docusaurus components.
