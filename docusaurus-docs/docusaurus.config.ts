@@ -163,7 +163,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/dgraph-social.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
