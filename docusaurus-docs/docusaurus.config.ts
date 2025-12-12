@@ -65,7 +65,7 @@ const config: Config = {
         lastVersion: 'v25',
         versions: {
           'v25': {
-            label: 'v25.0 (latest)',
+            label: 'v25.1 (latest)',
             path: '',
           },
           'v24.1': {
@@ -90,7 +90,7 @@ const config: Config = {
         lastVersion: 'v25',
         versions: {
           'v25': {
-            label: 'v25.0 (latest)',
+            label: 'v25.1 (latest)',
             path: '',
           },
           'v24.1': {
