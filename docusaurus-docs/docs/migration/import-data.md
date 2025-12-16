@@ -8,8 +8,10 @@ As an `Administrator` you can initialize a new Dgraph cluster by doing an [Initi
 Initial import is **considerably faster** than the live import but can only be used to load data into a new cluster (without prior data) and is executed before starting the Alpha nodes.
 
 
-:::note Both options accept [RDF N-Quad/Triple
-data](https://www.w3.org/TR/n-quads/) or JSON format. Refers to [data migration](import-data) to see how to convert other data formats.:::
+:::note
+Both options accept [RDF N-Quad/Triple
+data](https://www.w3.org/TR/n-quads/) or JSON format. Refers to [data migration](import-data) to see how to convert other data formats.
+:::
 
 
 To load CSV-formatted data or SQL data into Dgraph,

@@ -196,9 +196,9 @@ const sidebars: SidebarsConfig = {
         id: 'migration/index',
       },
       items: [
+        'migration/import-data',
         'migration/bulk-loader',
         'migration/live-loader',
-        'migration/import-data',
         'migration/export-data',
         'migration/loading-csv-data',
         'migration/migrate-tool',
