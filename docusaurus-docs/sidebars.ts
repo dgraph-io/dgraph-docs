@@ -13,9 +13,9 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'dql/dql-endpoints',
+        'dql/dql-schema',
         'dql/dql-rdf',
         'dql/json-mutation-format',
-        'dql/dql-schema',
         'dql/predicate-indexing',
         'dql/indexing-custom-tokenizers',
         {
