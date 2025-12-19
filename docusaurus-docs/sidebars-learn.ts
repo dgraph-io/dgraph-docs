@@ -3,6 +3,7 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   learnSidebar: [
     'index',
+    'tour',
     {
       type: 'category',
       label: 'Developer',
@@ -144,6 +145,7 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    'experimental',
   ],
 };
 
