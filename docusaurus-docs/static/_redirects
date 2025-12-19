@@ -1,4 +1,4 @@
-/tour /quick-start 302
-/tour/* /quick-start 302
+/tour /learn/tour 302
+/tour/* /learn/tour 302
 /howto/* /learn/howto/:splat 302
 https://tour.dgraph.io/* https://docs.dgraph.io/:splat 301
