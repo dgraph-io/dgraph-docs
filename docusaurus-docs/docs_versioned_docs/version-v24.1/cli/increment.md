@@ -4,7 +4,7 @@ title: dgraph increment
 
 This command increments a counter transactionally, so that you can confirm that
 an Alpha node is able to handle both query and mutation requests. To learn more,
-see [Using the Increment Tool](../howto/using-increment-tool).
+see [Using the Increment Tool](/learn/howto/using-increment-tool).
 The following replicates the help listing shown when you run `dgraph increment --help`:
 
 ```shell
