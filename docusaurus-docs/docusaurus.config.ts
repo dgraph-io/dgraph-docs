@@ -61,16 +61,17 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
-        includeCurrentVersion: true,
-        lastVersion: 'current',
+        includeCurrentVersion: false,
+        lastVersion: 'v25',
         versions: {
-          'current': {
-            label: 'v25.0 (latest)',
+          'v25': {
+            label: 'v25.1 (latest)',
             path: '',
           },
           'v24.1': {
             label: 'v24.1',
             path: 'v24.1',
+            banner: 'none',
           },
         },
         editUrl: ({versionDocsDirPath, docPath}) => {
@@ -85,16 +86,17 @@ const config: Config = {
         path: 'docs-graphql',
         routeBasePath: 'graphql',
         sidebarPath: './sidebars-graphql.ts',
-        includeCurrentVersion: true,
-        lastVersion: 'current',
+        includeCurrentVersion: false,
+        lastVersion: 'v25',
         versions: {
-          'current': {
-            label: 'v25.0 (latest)',
+          'v25': {
+            label: 'v25.1 (latest)',
             path: '',
           },
           'v24.1': {
             label: 'v24.1',
             path: 'v24.1',
+            banner: 'none',
           },
         },
         editUrl: ({versionDocsDirPath, docPath}) => {
@@ -121,6 +123,8 @@ const config: Config = {
         path: 'docs-learn',
         routeBasePath: 'learn',
         sidebarPath: './sidebars-learn.ts',
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
         editUrl: ({versionDocsDirPath, docPath}) => {
           return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs-learn'}/${docPath}`;
         },
@@ -159,7 +163,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/dgraph-social.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -200,7 +204,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'learnSidebar',
           position: 'left',
-          label: 'Tutorials',
+          label: 'Learn',
           docId: 'index',
           docsPluginId: 'learn',
         },

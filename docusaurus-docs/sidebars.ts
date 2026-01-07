@@ -13,9 +13,9 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'dql/dql-endpoints',
+        'dql/dql-schema',
         'dql/dql-rdf',
         'dql/json-mutation-format',
-        'dql/dql-schema',
         'dql/predicate-indexing',
         'dql/indexing-custom-tokenizers',
         {
@@ -196,9 +196,9 @@ const sidebars: SidebarsConfig = {
         id: 'migration/index',
       },
       items: [
+        'migration/import-data',
         'migration/bulk-loader',
         'migration/live-loader',
-        'migration/import-data',
         'migration/export-data',
         'migration/loading-csv-data',
         'migration/migrate-tool',
@@ -237,36 +237,6 @@ const sidebars: SidebarsConfig = {
         'design-concepts/transactions-concept',
         'design-concepts/wal-memtable-concept',
         'design-concepts/workers-concept',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'How To',
-      items: [
-        'howto/completion',
-        'howto/concurrent-modification-java-multithreaded',
-        'howto/dgraph-sentry-integration',
-        'howto/dql-schema-request',
-        'howto/drop-data',
-        'howto/jepsen-tests',
-        'howto/load-balancing-nginx',
-        'howto/login-system',
-        'howto/retrieving-debug-information',
-        'howto/similarity-search',
-        'howto/using-debug-tool',
-        'howto/using-increment-tool',
-        {
-          type: 'category',
-          label: 'Command Line',
-          link: {
-            type: 'doc',
-            id: 'howto/commandline/index',
-          },
-          items: [
-            'howto/commandline/about-cli',
-            'howto/commandline/create-cli',
-          ],
-        },
       ],
     },
     {
