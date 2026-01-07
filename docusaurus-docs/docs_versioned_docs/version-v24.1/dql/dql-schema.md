@@ -54,6 +54,7 @@ A predicate holds either a literal value ([scalar type](#scalar-types)) or a rel
 | `default` | string | Default when type cannot be inferred |
 | `int` | int64 | |
 | `float` | float | |
+| `bigfloat` | big.Float| from math/big |
 | `string` | string | |
 | `bool` | bool | |
 | `dateTime` | time.Time | RFC3339 format (e.g., `2006-01-02T15:04:05.999999999+10:00`) |
@@ -272,6 +273,7 @@ Facets cannot be indexed or used in root query functions.
 | `bool` | `true` or `false` |
 | `int` | 32-bit signed integer |
 | `float` | 64-bit floating point |
+| `bigfloat` | big.Float from math/big |
 | `dateTime` | RFC3339 timestamp |
 
 ### Facets Are Not in Schema
