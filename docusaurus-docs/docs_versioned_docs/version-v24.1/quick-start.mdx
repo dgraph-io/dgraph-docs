@@ -32,7 +32,7 @@ docker run --detach --name dgraph-play \
   -v $(pwd):/dgraph \
   -p "8080:8080" \
   -p "9080:9080" \
-  dgraph/standalone:v24.1.4
+  --pull always dgraph/standalone:latest
 ```
 This command:
 - Starts Dgraph in the background (`--detach`)
