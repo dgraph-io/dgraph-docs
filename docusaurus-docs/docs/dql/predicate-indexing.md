@@ -33,6 +33,8 @@ The indices available for strings are as follows.
 | `allofterms`, `anyofterms` | `term`                                 | Allows searching by a term in a sentence.                |
 | `alloftext`, `anyoftext`   | `fulltext`                             | Matching with language specific stemming and stopwords.  |
 | `regexp`                   | `trigram`                              | Regular expression matching. Can also be used for equality checking. |
+| `ngram`                    | `ngram`                                | Contiguous sequence matching (shingles) with stop word removal and stemming. |
+
 
 :::warning
 Incorrect index choice can impose performance penalties and an increased

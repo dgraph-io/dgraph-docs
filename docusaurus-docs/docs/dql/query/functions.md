@@ -116,6 +116,48 @@ Query Example: All Steven Spielberg movies that contain `war` or `spies`.  The `
 
 </RunnableCodeBlock>
 
+### ngram
+
+Syntax Examples: `ngram(predicate, "quick brown fox")`
+
+Schema Types: `string`
+
+Index Required: `ngram`
+
+The `ngram` function matches strings that contain the given sequence of terms with support for stop word removal and stemming.
+
+#### Usage at root
+
+Query example: all nodes that have a `name` predicate containing a sequence of terms `frankly` and `dear`.
+
+<RunnableCodeBlock>
+
+```dql
+{
+  me(func: ngram(name@en, "frankly dear")) {
+    name@en
+  }
+}
+```
+</RunnableCodeBlock>
+
+#### Usage as filter
+
+Query example: all nodes that have a `description` predicate containing a sequence of terms `brown` and `fox`.
+
+<RunnableCodeBlock>
+
+```dql
+{
+  me(func: has(description)) @filter(ngram(description, "brown fox")) {
+    uid
+    description
+  }
+}
+```
+
+</RunnableCodeBlock>
+
 ## Regular Expressions
 
 
