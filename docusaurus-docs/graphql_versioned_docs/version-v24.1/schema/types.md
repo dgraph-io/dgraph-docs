@@ -68,6 +68,7 @@ type User {
 ```
 
 In this schema, the field `name_v` is an embedding on which the [@search ](/graphql/schema/directives/search/#vector-embedding) directive for vector embeddings is used.
+For a full description of the supported arguments to the embedding index definition, see [this document](/v24.1/dql/predicate-indexing#vector-indices).
 
 ### The `ID` type
 
