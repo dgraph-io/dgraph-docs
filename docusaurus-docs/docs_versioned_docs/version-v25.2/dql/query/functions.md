@@ -116,6 +116,48 @@ Query Example: All Steven Spielberg movies that contain `war` or `spies`.  The `
 
 </RunnableCodeBlock>
 
+### ngram
+
+Syntax Examples: `ngram(predicate, "quick brown fox")`
+
+Schema Types: `string`
+
+Index Required: `ngram`
+
+The `ngram` function matches strings that contain the given sequence of terms with support for stop word removal and stemming.
+
+#### Usage at root
+
+Query example: all nodes that have a `name` predicate containing a sequence of terms `frankly` and `dear`.
+
+<RunnableCodeBlock>
+
+```dql
+{
+  me(func: ngram(name@en, "frankly dear")) {
+    name@en
+  }
+}
+```
+</RunnableCodeBlock>
+
+#### Usage as filter
+
+Query example: all nodes that have a `description` predicate containing a sequence of terms `brown` and `fox`.
+
+<RunnableCodeBlock>
+
+```dql
+{
+  me(func: has(description)) @filter(ngram(description, "brown fox")) {
+    uid
+    description
+  }
+}
+```
+
+</RunnableCodeBlock>
+
 ## Regular Expressions
 
 
@@ -203,24 +245,17 @@ Same query with a Levenshtein distance of 3.
 
 ## Vector Similarity Search
 
-Syntax Examples: 
+Syntax Examples: `similar_to(predicate, 3, "[0.9, 0.8, 0, 0]")`
 
-```
-similar_to(p_vec, 5, $vec) # here, $vec is a supplied query parameter
-similar_to(vec, 3, "[0.9, 0.8, 0, 0]", ef: 128, distance_threshold: 0.5)`
-```
+Alternatively the vector can be passed as a variable: `similar_to(predicate, 3, $vec)`
 
-This function finds nodes that have the named vector predicate (first parameter) similar to the provided vector (third parameter). The search is based on the distance metric specified in the [index](../predicate-indexing#vector-indices) (`cosine`, `euclidean`, or `dotproduct`).
-The second parameter specifies the number of matches (top-k) be returned.
-
-Two optional parameters control the accuracy and speed of the search:
-
-* ef (search effort): Controls how many candidates the HNSW algorithm explores during search. Higher values improve recall (finding true nearest neighbors) at the cost of increased latency. Use this to tune the speed/accuracy tradeoff for individual queries when the index-level `efSearch` default doesn't fit your needs
-* distance_threshold: Filters results to only return vectors within the specified distance (for euclidean) or above the specified similarity score (for cosine/dot product). Use this when you need results that meet a minimum quality threshold rather than just the top-k nearest. Note: Since filtering is applied after the top-k search (second parameter), specifying a small topk may limit the pool of candidates before filtering, potentially returning fewer results than expected. Consider increasing topk when using distance_threshold to ensure enough candidates are evaluated.
+This function finds the nodes that have  `predicate` close to the provided vector. The search is based on the distance metric specified in the index (`cosine`, `euclidean`, or `dotproduct`). The shorter distance indicates more similarity.
+The second parameter, `3` specifies that top 3 matches be returned.
 
 Schema Types: `float32vector`
 
 Index Required: `hnsw`
+
 
 
 ## Full-Text Search

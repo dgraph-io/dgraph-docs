@@ -4,7 +4,7 @@ description: "Dgraph Query Language (DQL) is Dgraph's proprietary language to ad
 
 ---
 
-As a GraphQL developer, you can deploy a GraphQL Schema in Dgraph and immediately get a GraphQL API served on ``/graphql`` endpoint and a backend; you don't need to concern yourself with the powerful graph database running in the background. 
+As aGraphQL developer, you can deploy a GraphQL Schema in Dgraph and immediately get a GraphQL API served on ``/graphql`` endpoint and a backend; you don't need to concern yourself with the powerful graph database running in the background. 
 
 However, by leveraging the graph database and using Dgraph Query Language (DQL), the Dgraph’s proprietary language, you can address advanced use cases and overcome some limitations of the GraphQL specification.
 

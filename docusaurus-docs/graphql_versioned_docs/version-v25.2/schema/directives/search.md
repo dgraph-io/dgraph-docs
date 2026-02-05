@@ -199,6 +199,7 @@ Strings allow a wider variety of search options than other types.  For strings, 
 | `regexp` | `regexp` (regular expressions) |
 | `term` | `allofterms` and `anyofterms` |
 | `fulltext` | `alloftext` and `anyoftext` |
+| `ngram` | `ngram` |
 
 * *Schema rule*: `hash` and `exact` can't be used together.
 
@@ -261,6 +262,33 @@ query {
     queryPost(filter: { title: { `alloftext: "fantastic GraphQL tutorials"` } } ) { ... }
 }
 ```
+
+#### String ngram search
+
+The `ngram` index tokenizes a string into contiguous sequences of n words, with
+support for stop word removal and stemming. N-gram search matches if the indexed
+string contains the given sequence of terms.
+
+If the schema has
+
+```graphql
+type Post {
+    title: String @search(by: [ngram])
+    ...
+}
+```
+
+then
+
+```graphql
+query {
+    queryPost(filter: { title: { ngram: "quick brown fox" } } ) { ... }
+}
+```
+
+will match all posts that contain the contiguous sequence "quick brown fox" in
+the title.
+
 
 #### Strings with multiple searches
 
