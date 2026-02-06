@@ -84,7 +84,9 @@ The version dropdown in the navbar automatically detects which documentation sec
 - `graphql` section
 
 To create a new version:
-1. Use the Docusaurus CLI: `npm run docusaurus docs:version <version>`
+1. Use the Docusaurus CLI: 
+`npm run docusaurus docs:version:docs <version>`
+`npm run docusaurus docs:version:graphql <version>`
 2. This creates a new version snapshot of the current docs
 
 
