@@ -438,4 +438,3 @@ For new projects that will use both GraphQL and DQL:
 For GraphQL-only projects:
 
 - Use `@hasInverse` for simpler syntax and automatic consistency management
-
