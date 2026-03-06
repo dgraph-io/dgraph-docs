@@ -96,6 +96,9 @@ Flags:
                                        key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
                                     (default "key-file=;")
       --export string              Folder in which to store exports. (default "export")
+      --feature-flags string       Feature flags to enable various experimental features
+                                       enable-detailed-metrics=false; Enable metrics about disk reads and cache per predicate
+                                       log-slow-query-threshold=0; Queries that take longer than this threshold will be logged with structured fields including trace ID for correlation with distributed traces. Disabled by default (0). Note: enabling this logs query text which may contain sensitive data; do not enable in deployments with strict data privacy requirements.
       --graphql string             GraphQL options
                                        debug=false; Enables debug mode in GraphQL. This returns auth errors to clients, and we do not recommend turning it on for production.
                                        extensions=true; Enables extensions in GraphQL response body.
