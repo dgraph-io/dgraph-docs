@@ -93,9 +93,10 @@ Flags:
                                           use-system-ca=true; Includes System CA into CA Certs.
                                        (default "use-system-ca=true; client-auth-type=VERIFYIFGIVEN; internal-port=false;")
       --trace string                  Trace options
-                                          datadog=; URL of Datadog to send OpenCensus traces. As of now, the trace exporter does not support annotation logs and discards them.
-                                          jaeger=; URL of Jaeger to send OpenCensus traces.
+                                          datadog=; URL of Datadog to send OpenTelemetry traces.
+                                          jaeger=; URL of Jaeger to send OpenTelemetry traces.
                                           ratio=0.01; The ratio of queries to trace.
+                                          service=; Custom service name for tracing. If set, overrides the default (dgraph.zero).
                                        (default "ratio=0.01; jaeger=; datadog=;")
   -w, --wal string                    Directory storing WAL. (default "zw")
 
