@@ -28,7 +28,6 @@ Via Maven:
 
 | Dgraph version | dgraph4j version  | Java version |
 | -------------- | ----------------- | ------------ |
-| dgraph 23.X.Y  | dgraph4j 21.12.X  | 8            |
 | dgraph 24.X.Y  | dgraph4j 24.X.Y   | 11           |
 | dgraph 25.X.Y  | dgraph4j 25.X.Y   | 11           |
 
