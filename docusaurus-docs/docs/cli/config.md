@@ -31,7 +31,7 @@ The following example shows how to use superflags when running the `dgraph alpha
 dgraph alpha --my=alpha.example.com:7080 --zero=zero.example.com:5080 \
   --badger "compression=zstd:1" \
   --block_rate "10" \
-  --trace "jaeger=http://jaeger:14268" \
+  --trace "jaeger=http://jaeger:4318" \
   --tls "ca-cert=/dgraph/tls/ca.crt;client-auth-type=REQUIREANDVERIFY;server-cert=/dgraph/tls/node.crt;server-key=/dgraph/tls/node.key;use-system-ca=true;internal-port=true;client-cert=/dgraph/tls/client.dgraphuser.crt;client-key=/dgraph/tls/client.dgraphuser.key"
   --security "whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
@@ -47,7 +47,7 @@ The following is an example of environment variables for `dgraph alpha`:
 ```bash
 DGRAPH_ALPHA_BADGER="compression=zstd:1"
 DGRAPH_ALPHA_BLOCK_RATE="10"
-DGRAPH_ALPHA_TRACE="jaeger=http://jaeger:14268"
+DGRAPH_ALPHA_TRACE="jaeger=http://jaeger:4318"
 DGRAPH_ALPHA_TLS="ca-cert=/dgraph/tls/ca.crt;client-auth-type=REQUIREANDVERIFY;server-cert=/dgraph/tls/node.crt;server-key=/dgraph/tls/node.key;use-system-ca=true;internal-port=true;client-cert=/dgraph/tls/client.dgraphuser.crt;client-key=/dgraph/tls/client.dgraphuser.key"
 DGRAPH_ALPHA_SECURITY="whitelist=10.0.0.0/8,172.0.0.0/8,192.168.0.0/16"
 ```
@@ -82,7 +82,7 @@ The following example JSON config file (`config.json`) using *kebab-case*:
 ```json
 {
   "badger": { "compression": "zstd:1" },
-  "trace": { "jaeger": "http://jaeger:14268" },
+  "trace": { "jaeger": "http://jaeger:4318" },
   "security": { "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" },
   "tls": {
     "ca-cert": "/dgraph/tls/ca.crt",
@@ -102,7 +102,7 @@ The following example JSON config file (`config.json`) using *snake_case*:
 ```json
 {
   "badger": { "compression": "zstd:1" },
-  "trace": { "jaeger": "http://jaeger:14268" },
+  "trace": { "jaeger": "http://jaeger:4318" },
   "security": { "whitelist": "10.0.0.0/8,172.0.0.0/8,192.168.0.0/16" },
   "tls": {
     "ca_cert": "/dgraph/tls/ca.crt",
@@ -135,7 +135,7 @@ The following example YAML config file (`config.yml`) uses *kebab-case*:
 badger:
   compression: zstd:1
 trace:
-  jaeger: http://jaeger:14268
+  jaeger: http://jaeger:4318
 security:
   whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
 tls:
@@ -155,7 +155,7 @@ The following example YAML config file (`config.yml`) uses *snake_case*:
 badger:
   compression: zstd:1
 trace:
-  jaeger: http://jaeger:14268
+  jaeger: http://jaeger:4318
 security:
   whitelist: 10.0.0.0/8,172.0.0.0/8,192.168.0.0/16
 tls:
