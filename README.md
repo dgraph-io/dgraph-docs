@@ -74,14 +74,18 @@ This will expose `next` in the version selector, so you can view the current (no
 
 ## Versioning
 
-Docusaurus supports documentation versioning. Versioned documentation is stored in:
-- `docs_versioned_docs/` - Versioned docs content
-- `docs_versioned_sidebars/` - Versioned sidebar configurations
-- `docs_versions.json` - Version metadata
+Documentation is versioned for the **docs** and **graphql** sections. Versioned content lives in:
+- `docs_versioned_docs/` and `docs_versioned_sidebars/` (and `docs_versions.json`)
+- `graphql_versioned_docs/` and `graphql_versioned_sidebars/` (and `graphql_versions.json`)
 
-The version dropdown in the navbar automatically detects which documentation section you're viewing and shows the appropriate versions. Currently, versioning is configured for 
--  `docs` section
-- `graphql` section
+The folders `docs/` and `docs-graphql/` are the **“next”** (unreleased) content. They appear in the version dropdown as **“next”** only when running the site locally with `includeCurrentVersion: true` in `docusaurus.config.ts`. **When deployed, the site serves only versioned documentation** (e.g. v25.2, v25.1, v24.1); the “next” content is not shown on the live site.
+
+**Where to edit:**
+
+- **For the next release:** Edit the page in `docs/` or `docs-graphql/`. Those are the only places that represent the upcoming release.
+- **For the current release (what’s live):** Apply the same change in the corresponding versioned folder (e.g. `docs_versioned_docs/version-v25.2/...` or `graphql_versioned_docs/version-v25.2/...` for the latest). If a fix or clarification should be in the current release, duplicate the change there.
+
+**Note for reviewers:** The “Edit this page” link always points to the “next” page (`docs/` or `docs-graphql/`). When reviewing PRs, check whether the change should also be ported back to the current version’s versioned folder.
 
 To create a new version:
 1. Use the Docusaurus CLI: 

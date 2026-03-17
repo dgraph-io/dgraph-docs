@@ -78,8 +78,8 @@ const config: Config = {
             banner: 'none',
           },
         },
-        editUrl: ({versionDocsDirPath, docPath}) => {
-          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs'}/${docPath}`;
+        editUrl: ({docPath}) => {
+          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/docs/${docPath}`;
         },
       },
     ],
@@ -107,8 +107,8 @@ const config: Config = {
             banner: 'none',
           },
         },
-        editUrl: ({versionDocsDirPath, docPath}) => {
-          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/${versionDocsDirPath || 'docs-graphql'}/${docPath}`;
+        editUrl: ({docPath}) => {
+          return `https://github.com/dgraph-io/dgraph-docs/edit/main/docusaurus-docs/docs-graphql/${docPath}`;
         },
       },
     ],
