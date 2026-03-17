@@ -161,8 +161,9 @@ The `--trace` superflag configures [tracing](/admin/observability/tracing) setti
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|
 | `ratio` | float64 | `alpha`, `zero` | The ratio of queries to trace |
-| `jaeger` | string | `alpha`, `zero` | URL of Jaeger to send OpenCensus traces |
-| `datadog` | string | `alpha`, `zero` | URL of Datadog to send OpenCensus traces |
+| `jaeger` | string | `alpha`, `zero` | URL of Jaeger to send OpenTelemetry traces |
+| `datadog` | string | `alpha`, `zero` | URL of Datadog to send OpenTelemetry traces |
+| `service` | string | `alpha`, `zero` | Custom service name for tracing. If set, overrides the default (dgraph.alpha/dgraph.zero) |
 
 ## Vault Superflag
 

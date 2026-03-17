@@ -96,6 +96,9 @@ Flags:
                                        key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
                                     (default "key-file=;")
       --export string              Folder in which to store exports. (default "export")
+      --feature-flags string       Feature flags to enable various experimental features
+                                       enable-detailed-metrics=false; Enable metrics about disk reads and cache per predicate
+                                       log-slow-query-threshold=0; Queries that take longer than this threshold will be logged with structured fields including trace ID for correlation with distributed traces. Disabled by default (0). Note: enabling this logs query text which may contain sensitive data; do not enable in deployments with strict data privacy requirements.
       --graphql string             GraphQL options
                                        debug=false; Enables debug mode in GraphQL. This returns auth errors to clients, and we do not recommend turning it on for production.
                                        extensions=true; Enables extensions in GraphQL response body.
@@ -149,9 +152,10 @@ Flags:
                                     (default "use-system-ca=true; client-auth-type=VERIFYIFGIVEN; internal-port=false;")
       --tmp string                 Directory to store temporary buffers. (default "t")
       --trace string               Trace options
-                                       datadog=; URL of Datadog to send OpenCensus traces. As of now, the trace exporter does not support annotation logs and discards them.
-                                       jaeger=; URL of Jaeger to send OpenCensus traces.
+                                       datadog=; URL of Datadog to send OpenTelemetry traces. As of now, the trace exporter does not support annotation logs and discards them.
+                                       jaeger=; URL of Jaeger or other OpenTelemetry-compatible trace collector to send OpenTelemetry traces.
                                        ratio=0.01; The ratio of queries to trace.
+                                       service=; Custom service name for tracing. If set, overrides the default (dgraph.alpha/dgraph.zero).
                                     (default "ratio=0.01; jaeger=; datadog=;")
       --vault string               Vault options
                                        acl-field=; Vault field containing ACL key.

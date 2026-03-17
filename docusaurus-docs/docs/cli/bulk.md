@@ -142,6 +142,7 @@ Flags:
       --encryption string          [Enterprise Feature] Encryption At Rest options
                                        key-file=; The file that stores the symmetric key of length 16, 24, or 32 bytes. The key size determines the chosen AES cipher (AES-128, AES-192, and AES-256 respectively).
                                     (default "key-file=;")
+      --error_log string           path to error log file when --log_errors is set (default "bulk_errors.log")
   -f, --files string               Location of *.rdf(.gz) or *.json(.gz) file(s) to load.
       --force-namespace uint       Namespace onto which to load the data. If not set, will preserve the namespace. (default 18446744073709551615)
       --format string              Specify file format (rdf or json) instead of getting it from filename.
@@ -149,6 +150,7 @@ Flags:
   -h, --help                       help for bulk
       --http string                Address to serve http (pprof). (default "localhost:8080")
       --ignore_errors              ignore line parsing errors in rdf files
+      --log_errors                 log parsing errors to a file (requires --ignore_errors)
       --map_shards int             Number of map output shards. Must be greater than or equal to the number of reduce shards. Increasing allows more evenly sized reduce shards, at the expense of increased memory usage. (default 1)
       --mapoutput_mb int           The estimated size of each map file output. Increasing this increases memory usage. (default 2048)
       --new_uids                   Ignore UIDs in load files and assign new ones.
@@ -160,6 +162,7 @@ Flags:
       --replace_out                Replace out directory and its contents if it exists.
   -s, --schema string              Location of schema file.
       --skip_map_phase             Skip the map phase (assumes that map output files already exist).
+      --skip_reduce_phase          Skip the reduce phase (stops after map phase completion).
       --store_xids                 Generate an xid edge for each node.
       --tls string                 TLS Client options
                                        ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
