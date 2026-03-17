@@ -62,11 +62,15 @@ const config: Config = {
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
         includeCurrentVersion: false,
-        lastVersion: 'v25.2',
+        lastVersion: 'v25.3',
         versions: {
-          'v25.2': {
-            label: 'v25.2 (latest)',
+          'v25.3': {
+            label: 'v25.3 (latest)',
             path: '',
+          },
+          'v25.2': {
+            label: 'v25.2',
+            path: 'v25.2',
           },
           'v25.1': {
             label: 'v25.1',
