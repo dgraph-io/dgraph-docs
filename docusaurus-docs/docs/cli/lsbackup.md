@@ -6,17 +6,25 @@ The `lsbackup` command-line tool prints information about the stored backups in 
 
 ## Parameters
 
-The `lsbackup` command has two flags:
+The `lsbackup` command supports the following flags:
 
 ```txt
 Flags:
-  -h, --help              help for lsbackup
-  -l, --location string   Sets the source location URI (required).
-      --verbose           Outputs additional info in backup list.
+  -h, --help                    help for lsbackup
+  -l, --location string         Sets the source location URI (required).
+      --verbose                 Outputs additional info in backup list.
+      --since-date string       Only list backups taken on or after this date (YYYY-MM-DD or RFC 3339).
+      --until-date string       Only list backups taken on or before this date (YYYY-MM-DD or RFC 3339).
+      --last-n-days int         Only list backups from the last N calendar days. Cannot be combined with --since-date.
+      --summary                 Print a summary block after the backup listing.
 ```
 
 - `--location`: indicates a [source URI](#source-uri) with Dgraph backup objects. This URI supports all the schemes used for backup.
-- `--verbose`: if enabled will print additional information about the selected backup.
+- `--verbose`: if enabled will print additional information about the selected backup, including predicate groups and DROP operations. Reads the full `manifest.json` instead of the lightweight summary.
+- `--since-date`: filters results to backups taken on or after the given date. Accepts `YYYY-MM-DD` (interpreted as start of that day UTC) or RFC 3339 (e.g. `2024-06-15T08:00:00Z`).
+- `--until-date`: filters results to backups taken on or before the given date. Accepts `YYYY-MM-DD` (interpreted as end of that day UTC, i.e. 23:59:59.999) or RFC 3339.
+- `--last-n-days`: shorthand for `--since-date` set to N calendar days ago at midnight UTC. Cannot be combined with `--since-date`.
+- `--summary`: prints a human-readable summary block to stderr after the JSON output (total count, oldest/newest backup, last full/incremental).
 
 For example, you can execute the `lsbackup` command as follows:
 
@@ -104,6 +112,31 @@ If the `--verbose` flag was enabled, the output would look like this:
 
 - `backup_id`: is a unique ID assigned to all the backups in the same series.
 
+
+## Date Filtering
+
+Both `--since-date` / `--until-date` and `--last-n-days` can be used to narrow results to a specific time window.
+
+- `YYYY-MM-DD` dates are **inclusive**: `--until-date 2024-06-15` captures all backups taken any time on 15 June.
+- `--last-n-days 7` is equivalent to setting `--since-date` to 7 days ago at midnight UTC.
+- `--last-n-days` and `--since-date` are mutually exclusive.
+
+```sh
+# Last 7 days
+dgraph lsbackup -l /data/backups --last-n-days 7
+
+# A specific month with a summary
+dgraph lsbackup -l /data/backups --since-date 2024-03-01 --until-date 2024-03-31 --summary
+
+# Backups before a specific incident time
+dgraph lsbackup -l /data/backups --until-date "2024-06-15T13:59:59Z"
+```
+
+## Performance Note
+
+By default, `lsbackup` reads `manifest_summary.json` — a lightweight file that omits predicate groups and DROP operations. On clusters with large vector schemas, `manifest.json` can exceed 500 MB; the summary keeps listing fast regardless of cluster size.
+
+Use `--verbose` only when you need predicate-level detail, such as when diagnosing a restore or auditing schema changes.
 
 ## Examples
 

@@ -459,6 +459,25 @@ Here are the important types, queries, and mutations from the `admin` schema.
 		Whether the destination doesn't require credentials (e.g. S3 public bucket).
 		"""
 		anonymous: Boolean
+		"""
+		Only return backups taken on or after this date. Accepts YYYY-MM-DD or RFC 3339.
+		"""
+		sinceDate: String
+		"""
+		Only return backups taken on or before this date. Accepts YYYY-MM-DD or RFC 3339.
+		"""
+		untilDate: String
+		"""
+		Only return backups from the last N calendar days. Cannot be combined with sinceDate.
+		"""
+		lastNDays: Int
+		"""
+		When true, reads the full manifest.json and populates groups and drop_operations.
+		When false (default), reads the lightweight manifest_summary.json for faster listing.
+		Note: groups are also populated automatically when the query selection set includes the
+		groups field, even without setting fullManifest: true.
+		"""
+		fullManifest: Boolean
 	}
 	type BackupGroup {
 		"""
@@ -485,6 +504,7 @@ Here are the important types, queries, and mutations from the `admin` schema.
 		encrypted: Boolean
 		"""
 		List of groups and the predicates they store in this backup.
+		Populated when fullManifest: true, or when groups is included in the query selection set.
 		"""
 		groups: [BackupGroup]
 		"""
