@@ -33,9 +33,28 @@ Zero uses several [superflags](superflags) for advanced configuration:
 - `--audit` - Audit logging configuration
 - `--limit` - UID lease and admin endpoint settings
 - `--raft` - Raft consensus options
+- `--security` - Authentication token and IP whitelist for the admin HTTP endpoints
 - `--telemetry` - Telemetry and crash reporting
 - `--tls` - TLS configuration
 - `--trace` - Distributed tracing
+
+## Securing the admin HTTP endpoints
+
+Zero exposes administrative endpoints over its HTTP port (default `6080`): `/state`, `/assign`, `/removeNode`, and `/moveTablet`. These control cluster membership and coordination, so the HTTP port is an internal control-plane port and should not be reachable from untrusted networks.
+
+Use the `--security` superflag to authenticate callers of these endpoints:
+
+```bash
+# Require a token in the X-Dgraph-AuthToken header
+dgraph zero --security "token=<authtokenstring>"
+
+# Allow specific source IPs, IP ranges, CIDR blocks, or hostnames (loopback is always allowed)
+dgraph zero --security "whitelist=10.0.0.0/8,192.168.1.1"
+```
+
+The destructive endpoints (`/removeNode`, `/moveTablet`) are restricted to loopback by default; set a `whitelist` or `token` to reach them from another host. The `/state` and `/assign` endpoints are enforced only once a `token` or `whitelist` is configured. To turn the admin HTTP endpoints off entirely, set `--limit "disable-admin-http=true"`.
+
+See [Admin Endpoint Security](../admin/security/admin-endpoint-security#zero-admin-endpoints) for details.
 
 ## Full Reference
 
@@ -74,6 +93,10 @@ Flags:
                                        (default "idx=1; learner=false;")
       --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
       --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
+      --security string               Security options
+                                          token=; If set, all requests to Zero's administrative HTTP endpoints must present this token in the X-Dgraph-AuthToken header.
+                                          whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames that are allowed to reach Zero's administrative HTTP endpoints (loopback is always allowed). e.g. --security "whitelist=127.0.0.1,192.168.0.0/16,host.docker.internal".
+                                       (default "token=; whitelist=;")
       --survive string                Choose between "process" or "filesystem".
                                           If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                           If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
