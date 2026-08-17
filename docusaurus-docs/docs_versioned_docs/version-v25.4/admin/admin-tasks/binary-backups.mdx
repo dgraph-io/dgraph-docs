@@ -382,6 +382,21 @@ The key size (16, 24, or 32 bytes) determines the AES cipher: AES-128, AES-192, 
 
 During backup, a 16-byte initialization vector (IV) is prepended to the ciphertext after encryption.
 
+## Securing the backup location
+
+Restore reads a manifest from the backup location and uses the `path` field it finds there to locate the backup files. Anyone who can write to the backup location can therefore influence what a later restore reads, which makes the backup location part of your trust boundary.
+
+Treat it accordingly:
+
+* Grant write access only to the Alpha servers that create backups. For S3 and MinIO, scope the credentials to the backup bucket and prefix rather than reusing a general-purpose key.
+* Keep restore operators and backup writers separate where your storage supports it, so a compromised writer cannot stage a manifest for someone else to restore.
+* Prefer a dedicated bucket or NFS export over a shared directory that other workloads can write to.
+
+Dgraph anchors every path it reads from a manifest to the backup location root, so a tampered `path` value cannot steer a restore into an unrelated part of the filesystem or bucket. This containment applies to the file, S3, and MinIO handlers.
+
+:::note
+Path containment was added in v25.4.0. On earlier releases, restricting write access to the backup location is the only control.
+:::
 
 ## Online Restore
 
