@@ -126,8 +126,10 @@ The `--security` superflag configures security settings:
 
 | Option | Type | Applies to | Description |
 |--------|------|------------|-------------|
-| `token` | string | `alpha` | Authentication token |
-| `whitelist` | string | `alpha` | A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames for administration |
+| `token` | string | `alpha`, `zero` | Authentication token. When set, admin requests must present it in the `X-Dgraph-AuthToken` header |
+| `whitelist` | string | `alpha`, `zero` | A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames for administration |
+
+On Zero, `--security` protects the administrative endpoints exposed over the HTTP port (`/state`, `/assign`, `/removeNode`, `/moveTablet`). See [Admin Endpoint Security](../admin/security/admin-endpoint-security#zero-admin-endpoints).
 
 ## Telemetry Superflag
 

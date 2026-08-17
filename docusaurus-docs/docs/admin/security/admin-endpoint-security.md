@@ -103,3 +103,31 @@ See the [Token Authentication](#token-authentication) section above for setup in
 
 For enterprise-grade access control, see [Enable ACL](../../installation/configuration/enable-acl) and [User Management and Access Control](../admin-tasks/user-management-access-control).
 
+## Zero admin endpoints
+
+Dgraph Zero exposes its own administrative endpoints over its HTTP port (default `6080`):
+
+* `/state` - cluster topology and tablet placement
+* `/assign` - allocate UIDs, transaction timestamps, and namespace IDs
+* `/removeNode` - remove a node from a Raft group
+* `/moveTablet` - move a predicate (tablet) between groups
+
+These endpoints drive cluster membership and coordination. Zero's HTTP port is an internal control-plane port and should not be reachable from untrusted networks. Restrict access to it with firewall rules or network policies, alongside the authentication described below.
+
+Zero authenticates callers with the same `--security` superflag `token` and `whitelist` options used by Alpha:
+
+* **Token authentication** - Set `--security "token=<authtokenstring>"` on Zero. Callers must then pass the token in the `X-Dgraph-AuthToken` header.
+* **IP whitelisting** - Set `--security "whitelist=..."` on Zero to allow specific source IPs, IP ranges, CIDR blocks, or hostnames. Loopback is always allowed.
+
+Protection applies in two tiers:
+
+* The destructive endpoints (`/removeNode`, `/moveTablet`) are always guarded. With neither a token nor a whitelist configured, only loopback callers are allowed, so a remote caller cannot disrupt the control plane by default.
+* The informational and allocation endpoints (`/state`, `/assign`) are enforced only once a `token` or `whitelist` is configured, so existing tooling that reads them over HTTP is unaffected until you opt in.
+
+```sh
+# Require a token, and allow an internal subnet to reach all admin endpoints
+dgraph zero --security "whitelist=10.0.0.0/8;token=<authtokenstring>"
+```
+
+To disable the Zero admin HTTP endpoints entirely, set `--limit "disable-admin-http=true"`. The `/health` endpoint stays available.
+
