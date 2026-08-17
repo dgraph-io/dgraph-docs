@@ -280,7 +280,7 @@ Query Example: _"Movies containing both Angelina Jolie and Morgan Freeman sorted
 
 ### Combining multiple `var` blocks
 
-You could get the same query results by logically combining both both `var` blocks
+You could get the same query results by logically combining both `var` blocks
 in the films block, as follows:
 ```
 {

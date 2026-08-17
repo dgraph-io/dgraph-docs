@@ -354,7 +354,7 @@ But we only have the following hashtags in the result: `Dgraph` and `graphqlconf
 
 That's because `regexp` function is case-sensitive by default.
 
-Add the character `i` at the the end of the second argument of the `regexp` function to make it case insensitive: `regexp(predicate, /regular-expression/i)`
+Add the character `i` at the end of the second argument of the `regexp` function to make it case insensitive: `regexp(predicate, /regular-expression/i)`
 
 ![regex-2](/images/tutorials/6/regex-query-2.png)
 

@@ -143,7 +143,7 @@ type Post {
 GraphQL schemas are always under-specified in this way. It's left up to the
 documentation and implementation to make a two-way connection, if it exists.
 There might be multiple connections between two types; for example, an author
-might also be linked to the the posts they have commented on. So, it makes sense
+might also be linked to the posts they have commented on. So, it makes sense
 that you need something other than just the types as defined above to specify
 two-way edges.
 

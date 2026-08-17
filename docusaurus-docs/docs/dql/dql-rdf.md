@@ -69,7 +69,7 @@ The supported [RDF datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Data
 
 ### Facets
 
-Dgraph is more expressive than RDF in that it allows properties to be stored on every relation. These properties are called Facets in Dgraph, and dgraph allows an extension to RDF where facet values are incuded in any triple.
+Dgraph is more expressive than RDF in that it allows properties to be stored on every relation. These properties are called Facets in Dgraph, and dgraph allows an extension to RDF where facet values are included in any triple.
 ####  Creating a list with facets
 
 The following set operation uses a sequence of RDF statements with additional facet information:

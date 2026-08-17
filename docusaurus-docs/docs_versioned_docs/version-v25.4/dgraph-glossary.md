@@ -41,7 +41,7 @@ A mutation is a request to modify the database. Mutations include insert, update
 ### Node ###
 Conceptually, a node is "a thing" or an object of the business domain. For every node, Dgraph stores and maintains a universal identifier [UID](#uid), a list of properties, and the [relationships](#relationship) the node has with other nodes.
 
-The term "node" is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. See [Aplha node](#alpha) and [Zero node](#zero).
+The term "node" is also used in software architecture to reference a physical computer or a virtual machine running a module of Dgraph in a cluster. See [Alpha node](#alpha) and [Zero node](#zero).
 
 ### Predicate ###
 In [RDF](#rdf) terminology, a predicate is the smallest piece of information about an object. A predicate can hold a literal value or can describe a relation to another entity :
@@ -73,7 +73,7 @@ A UID is the Universal Identifier of a node. `uid` is a reserved property holdin
 
 
 ### Upsert ###
-An upsert operation combines a Query with a [Mutation](#mutation). Typically, a node is searched for, and then depending on if it is found or not, a new node is created with associated predicates or the exixting node relationships are updated. Upsert operations are important to implement uniqueness of predicates.
+An upsert operation combines a Query with a [Mutation](#mutation). Typically, a node is searched for, and then depending on if it is found or not, a new node is created with associated predicates or the existing node relationships are updated. Upsert operations are important to implement uniqueness of predicates.
 
 ### Zero ###
 Dgraph consists of Zero and [Alpha](#alpha) nodes. Zero nodes control the Dgraph database cluster. It assigns Alpha nodes to groups, re-balances data between groups, handles transaction timestamp and UID assignment.

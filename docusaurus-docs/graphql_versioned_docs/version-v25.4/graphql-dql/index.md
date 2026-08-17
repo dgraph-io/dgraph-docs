@@ -8,7 +8,7 @@ As aGraphQL developer, you can deploy a GraphQL Schema in Dgraph and immediately
 
 However, by leveraging the graph database and using Dgraph Query Language (DQL), the Dgraph’s proprietary language, you can address advanced use cases and overcome some limitations of the GraphQL specification.
 
-This section covers how to use DQL in the conjunction with GraphQL API, what are the best parctices and the points of attention.
+This section covers how to use DQL in the conjunction with GraphQL API, what are the best practices and the points of attention.
 
 ### In this section
 
