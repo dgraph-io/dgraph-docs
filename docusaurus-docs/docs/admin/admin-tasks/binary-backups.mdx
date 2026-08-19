@@ -232,18 +232,14 @@ mutation {
 
 ## List Backups
 
-The GraphQL admin interface provides the `listBackups` query that lists backups in a specified location along with information from the `manifest.json` file. The following example lists backups in the `/data/backup` location:
+The GraphQL admin interface provides the `listBackups` query that lists backups in a specified location along with information from the manifest file. The following example lists backups in the `/data/backup` location:
 
-```
-query backup() {
+```graphql
+query {
 	listBackups(input: {location: "/data/backup"}) {
 		backupId
 		backupNum
 		encrypted
-		groups {
-			groupId
-			predicates
-		}
 		path
 		since
 		type
@@ -253,7 +249,7 @@ query backup() {
 
 The `ListBackupsInput` type supports the following fields. Only the `location` field is required.
 
-```
+```graphql
 input ListBackupsInput {
 	"""
 	Destination for the backup: e.g. Minio or S3 bucket.
@@ -279,12 +275,33 @@ input ListBackupsInput {
 	Whether the destination doesn't require credentials (e.g. S3 public bucket).
 	"""
 	anonymous: Boolean
+
+	"""
+	Only return backups taken on or after this date. Accepts YYYY-MM-DD or RFC 3339.
+	"""
+	sinceDate: String
+
+	"""
+	Only return backups taken on or before this date. Accepts YYYY-MM-DD or RFC 3339.
+	"""
+	untilDate: String
+
+	"""
+	Only return backups from the last N calendar days. Cannot be combined with sinceDate.
+	"""
+	lastNDays: Int
+
+	"""
+	When true, reads the full manifest.json and populates groups and drop_operations.
+	When false (default), reads the lightweight manifest_summary.json for faster listing.
+	"""
+	fullManifest: Boolean
 }
 ```
 
-The query returns an array of `Manifest` objects. The fields in the `Manifest` type correspond to the fields in the `manifest.json` file.
+The query returns an array of `Manifest` objects. By default the response omits `groups` and `drop_operations` for performance — set `fullManifest: true` to include them.
 
-```
+```graphql
 type Manifest {
 	"""
 	Unique ID for the backup series.
@@ -303,11 +320,12 @@ type Manifest {
 
 	"""
 	List of groups and the predicates they store in this backup.
+	Populated when fullManifest: true, or when groups is included in the query selection set.
 	"""
 	groups: [BackupGroup]
 
 	"""
-	Path to the manifest file.
+	Path to the backup directory.
 	"""
 	path: String
 
@@ -333,6 +351,57 @@ type BackupGroup {
 	List of predicates assigned to the group.
 	"""
 	predicates: [String]
+}
+```
+
+### Date filtering
+
+Use `sinceDate`, `untilDate`, or `lastNDays` to narrow results to a specific time window:
+
+```graphql
+# Last 30 days
+query {
+	listBackups(input: { location: "/data/backup", lastNDays: 30 }) {
+		backupId backupNum type path
+	}
+}
+
+# A specific date range
+query {
+	listBackups(input: {
+		location:  "/data/backup"
+		sinceDate: "2024-06-01"
+		untilDate: "2024-06-30"
+	}) {
+		backupId backupNum type path
+	}
+}
+```
+
+`YYYY-MM-DD` values are inclusive: `untilDate: "2024-06-15"` captures all backups taken any time on 15 June. `lastNDays` and `sinceDate` are mutually exclusive.
+
+### Full manifest
+
+By default `listBackups` reads `manifest_summary.json`, a lightweight file that omits predicate groups and DROP operations. Groups are included in the response in two ways:
+
+- **Automatic**: include `groups` in the query selection set — the resolver detects this and reads the full manifest automatically, with no input change required.
+- **Explicit**: set `fullManifest: true` to always read the complete `manifest.json`, regardless of the selection set.
+
+```graphql
+# Groups returned automatically because 'groups' is in the selection set
+query {
+	listBackups(input: { location: "/data/backup" }) {
+		backupId type path
+		groups { groupId predicates }
+	}
+}
+
+# Equivalent explicit form
+query {
+	listBackups(input: { location: "/data/backup", fullManifest: true }) {
+		backupId type path
+		groups { groupId predicates }
+	}
 }
 ```
 
