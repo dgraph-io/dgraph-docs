@@ -17,3 +17,9 @@ jobs:
           stale-issue-message: 'This issue has been stale for 60 days and will be closed automatically in 7 days. Comment to keep it open.'
           stale-pr-message: 'This PR has been stale for 60 days and will be closed automatically in 7 days. Comment to keep it open.'
           operations-per-run: 100
+          # Labels that mark deliberate, still-wanted work. Anything carrying one
+          # of these is never marked stale, so a quiet backlog is not mistaken for
+          # an abandoned one. Dependabot PRs are deliberately not exempt: they are
+          # superseded by the next bump, so closing them is the correct outcome.
+          exempt-issue-labels: 'bug,accepted,RFC,help wanted,good first issue,investigate,triage:delayed,reviewing'
+          exempt-pr-labels: 'accepted,RFC,reviewing,triage:delayed,cherry-pick'

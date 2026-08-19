@@ -53,7 +53,7 @@ Scalar lists in Dgraph act more like sets, so `tags: [String]` would always cont
 
 A Float array can be used as a vector using `@embedding` directive. It denotes a vector of floating point numbers, i.e an ordered array of float32. A type can contain more than one vector predicate.
 
-Vectors are normaly used to store embeddings obtained from an ML model. 
+Vectors are normally used to store embeddings obtained from an ML model. 
 
 When a Float vector is indexed, the GraphQL `querySimilar<type name>ByEmbedding` and `querySimilar<type name>ById` functions can be used for [similarity search](/graphql/queries/vector-similarity).
 

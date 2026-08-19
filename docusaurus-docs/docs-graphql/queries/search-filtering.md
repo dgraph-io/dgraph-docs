@@ -95,7 +95,7 @@ Users are advised to use the `query` API instead.
 
 ### Query a list of objects
 
-You can query a list of objects using GraphQL. For example, the following query fetches the `title`, `text` and and `datePublished` for all posts:
+You can query a list of objects using GraphQL. For example, the following query fetches the `title`, `text` and `datePublished` for all posts:
 
 ```graphql
 query {

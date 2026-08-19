@@ -1489,7 +1489,7 @@ Our graph has:
 
 - One blue `city node`.
 We just have one node which represents the city of `San Francisco`.
-- The green ones are the the `location` nodes.
+- The green ones are the `location` nodes.
 We have a total of 13 locations.
 - The pink nodes represent the `location types`.
 We have four kinds of locations in our dataset: `museum`, `zoo`, `hotel`, and `tourist attractions`.

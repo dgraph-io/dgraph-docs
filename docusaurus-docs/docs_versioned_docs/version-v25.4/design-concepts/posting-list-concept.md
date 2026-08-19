@@ -44,7 +44,7 @@ person4 | friend   | person3
 
 &nbsp;
 
-The corrsponding posting lists would be something like:
+The corresponding posting lists would be something like:
 
 ```
 person1UID+friend->[person2UID, person4UID]
@@ -94,6 +94,6 @@ If other types such as Pets or Cities also have a name property, their data will
 ### Performance implications
 
 A key advantage of grouping data into predicate-based shards is that we have all the data to do one join in one `tablet` on one server/shard. This means, one RPC to
-the machine serving that `tablet` will be adequate, as documented in [How Dgraph Minmizes Network Calls](minimizing-network-calls).
+the machine serving that `tablet` will be adequate, as documented in [How Dgraph Minimizes Network Calls](minimizing-network-calls).
 
 Posting lists are the unit of data access and caching in Dgraph. The underlying key-value store stores and retrieves posting lists as a unit. Queries that access larger posting lists will use more cache and may incur more disk access for un-cached posting lists.

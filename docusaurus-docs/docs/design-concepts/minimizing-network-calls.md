@@ -33,7 +33,7 @@ Approach 2:
 * Find all their friends (call this `result set 2`).
 * Intersect `result set 1` with `result set 2`.
 
-Both approaches wouild result in a lot of data moving back and forth between database and
+Both approaches would result in a lot of data moving back and forth between database and
 application; would be slow to execute, and may require running an offline job.
 
 ### Dgraph Approach
