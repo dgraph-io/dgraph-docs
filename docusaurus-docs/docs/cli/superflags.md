@@ -135,7 +135,7 @@ The `anonymous` option takes one of three values:
 | Value | Effect on a caller that presents no verified credential |
 |-------|---------------------------------------------------------|
 | `full` | No change. The `whitelist`, `token`, and ACL settings decide, as in earlier releases. This is the default. |
-| `data` | Queries, mutations, and commits are allowed. Every administrative operation is denied, regardless of `whitelist`. |
+| `data` | Queries, mutations, and commits are allowed. Every administrative operation, including schema changes and drops, is denied, regardless of `whitelist`. |
 | `none` | Only login, version checks, and the health and readiness endpoints are allowed. |
 
 `data` and `none` need a `token` or ACL, otherwise no caller can be identified and the cluster cannot be administered.

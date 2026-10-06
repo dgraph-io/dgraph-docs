@@ -41,7 +41,7 @@ The `anonymous` option makes that decision explicit. It answers a fourth questio
 | Posture | Anonymous callers can | Anonymous callers cannot | When to use it |
 |---------|----------------------|--------------------------|----------------|
 | `full` (default) | Do whatever the whitelist, token, and ACL settings allow. | Nothing changes from earlier releases. | Existing clusters, and clusters that rely on network isolation alone. |
-| `data` | Run queries, mutations, and commits. Log in. Read `/health`. | Perform any administrative operation, no matter what the whitelist allows. | Clusters that serve application traffic without credentials but must protect the control plane. |
+| `data` | Run queries, mutations, and commits. Log in. Read `/health`. | Perform any administrative operation, including schema changes and drops, no matter what the whitelist allows. | Clusters that serve application traffic without credentials but must protect the control plane. |
 | `none` | Log in, call `CheckVersion`, and read the health and readiness endpoints. | Run queries, mutations, or commits, or perform any administrative operation. | Clusters where every client authenticates. |
 
 The value is not case-sensitive. Alpha and Zero refuse to start on any other value:
@@ -82,16 +82,21 @@ This table lists the operations the posture affects. "Unchanged" means the opera
 | Mutation | `/mutate` | `Query` with mutations, `RunDQL` | Unchanged | Unchanged | Requires identity |
 | Commit or abort | `/commit` | `CommitOrAbort` | Unchanged | Unchanged | Requires identity |
 | GraphQL queries and mutations | `/graphql` | | Unchanged | Unchanged | Requires identity |
-| Schema change (no drop) | `/alter` | `Alter` | Unchanged | Unchanged | Unchanged |
-
-Schema changes keep their existing rule under every posture. `/alter` has always required a whitelisted address and, when one is configured, the token.
 
 ### Administrative operations
 
 Every operation in this table requires an identified caller under `data` and `none`.
 
+Every request to `/alter` counts as administrative, schema changes included. Dgraph has always treated `/alter` as an admin operation: it requires a whitelisted address and, when one is configured, the token. Under `data`, it additionally requires a credential, so an application that changes its own schema at startup needs to send the token.
+
+:::caution
+Dropping is not limited to `drop_all`. `drop_op: DATA` removes every node in a namespace in one request. Under `data` and `none`, all of these require an identified caller.
+:::
+
 | Operation | Where | `full` |
 |-----------|-------|--------|
+| Schema change | `/alter`, gRPC `Alter` | Unchanged |
+| Drop a predicate, a type, or all data in a namespace | `/alter` with `drop_attr` or `drop_op`, gRPC `Alter` | Unchanged |
 | Drop all data | `/alter` with `drop_all`, gRPC `Alter` | Unchanged |
 | Create, drop, or list namespaces | gRPC `CreateNamespace`, `DropNamespace`, `ListNamespaces`; `/admin` `addNamespace`, `deleteNamespace` | Unchanged |
 | Lease UIDs | gRPC `AllocateIDs` | Unchanged |
@@ -129,7 +134,7 @@ Use the scenario that matches your deployment.
 Keep `full`. The empty whitelist already limits administrative operations to loopback.
 
 **You widened the whitelist so other hosts or containers can reach Alpha, and you have no ACL.**
-Set a token and move to `data`. Application traffic keeps working without credentials, and administration requires the token.
+Set a token and move to `data`. Queries and mutations keep working without credentials. Administration, including schema changes, requires the token.
 
 ```sh
 dgraph alpha --security "whitelist=0.0.0.0/0; token=<authtokenstring>; anonymous=data"
@@ -294,7 +299,7 @@ Follow these steps to move an existing cluster from `full` to `data` without an 
 
 1. **Upgrade every Alpha and Zero** to a release that supports the `anonymous` option. A node on an older release refuses to start with it.
 2. **Choose a credential.** Set a token on every Alpha and Zero with `--security "token=..."`, or enable ACL. Restart the nodes.
-3. **Update your tooling.** Send the token from every script, dashboard, and probe that performs administrative operations or reads `/state`. Leave the posture at `full` while you do this, so nothing breaks yet.
+3. **Update your tooling.** Send the token from every script, dashboard, and probe that performs administrative operations, changes the schema, or reads `/state`. Leave the posture at `full` while you do this, so nothing breaks yet.
 4. **Check the tools that load data.** `dgraph live` leases UIDs through an administrative operation. See [Known limitations](#known-limitations) before you continue.
 5. **Set `anonymous=data`** on every Zero, then every Alpha, and restart them one at a time.
 6. **Confirm the result.** An anonymous request to `/state` returns `Unauthenticated`, a request with the token succeeds, and the startup log has no `SECURITY:` warnings.

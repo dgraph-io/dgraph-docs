@@ -118,6 +118,8 @@ You can configure Dgraph to only allow alter operations when the client provides
 
 See the [Token Authentication](#token-authentication) section above for setup instructions. Once configured, all alter operations require the `X-Dgraph-AuthToken` header.
 
+The token only applies once you configure it. To require a credential for every alter operation, including from whitelisted addresses, set `--security "anonymous=data"`. See [Anonymous Access](anonymous-access#administrative-operations).
+
 For enterprise-grade access control, see [Enable ACL](../../installation/configuration/enable-acl) and [User Management and Access Control](../admin-tasks/user-management-access-control).
 
 ## Zero admin endpoints
