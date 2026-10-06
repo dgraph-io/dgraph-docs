@@ -12,6 +12,16 @@ Admin endpoints require authentication through three layers:
 2. **Token Authentication** - If Dgraph Alpha is started with the `--security` superflag's `token` option, you must pass the token as an `X-Dgraph-AuthToken` header when making HTTP requests.
 3. **ACL Guardian Access** - If ACL is enabled, you must pass the ACL-JWT of a Guardian user using the `X-Dgraph-AccessToken` header when making HTTP requests.
 
+Each layer applies only when you configure it. A layer you leave unset passes every request, so your protection is whatever you configured rather than the combination of all three:
+
+| Layer | Unset by default? | Behavior when unset |
+|-------|-------------------|---------------------|
+| IP whitelisting | Yes | Loopback callers pass. Every other address is rejected. |
+| Token authentication | Yes | No token is required. |
+| ACL Guardian access | Yes | Guardian checks succeed for everyone. |
+
+The IP whitelist checks where a request came from, not who sent it. If you widen it, for example to `0.0.0.0/0`, without also setting a token or enabling ACL, every address in the range can run admin operations without a credential. To deny admin operations to any caller that presents no credential, regardless of the whitelist, use the `--security` superflag's `anonymous` option. See [Anonymous Access](anonymous-access).
+
 ## Admin Endpoints
 
 An admin endpoint is any HTTP endpoint which provides admin functionality. Admin endpoints usually start with the `/admin` path. The current list of admin endpoints includes:
@@ -55,7 +65,14 @@ dgraph alpha --security whitelist=admin-bastion,host.docker.internal ...
 
 # Allow all IPs (not recommended for production)
 dgraph alpha --security whitelist=0.0.0.0/0 ...
+
+# Allow all IPs, but require the token for every admin operation
+dgraph alpha --security "whitelist=0.0.0.0/0; token=<authtokenstring>; anonymous=data" ...
 ```
+
+:::caution
+Whitelisting is not authentication. A whitelist entry lets every address in its range run admin operations. Pair a widened whitelist with a token or ACL, and consider [`anonymous=data`](anonymous-access).
+:::
 
 For detailed network security configuration including TLS and port usage, see [Ports Usage](ports-usage) and [TLS Configuration](tls-configuration).
 
@@ -101,6 +118,8 @@ You can configure Dgraph to only allow alter operations when the client provides
 
 See the [Token Authentication](#token-authentication) section above for setup instructions. Once configured, all alter operations require the `X-Dgraph-AuthToken` header.
 
+The token only applies once you configure it. To require a credential for every alter operation, including from whitelisted addresses, set `--security "anonymous=data"`. See [Anonymous Access](anonymous-access#administrative-operations).
+
 For enterprise-grade access control, see [Enable ACL](../../installation/configuration/enable-acl) and [User Management and Access Control](../admin-tasks/user-management-access-control).
 
 ## Zero admin endpoints
@@ -130,4 +149,6 @@ dgraph zero --security "whitelist=10.0.0.0/8;token=<authtokenstring>"
 ```
 
 To disable the Zero admin HTTP endpoints entirely, set `--limit "disable-admin-http=true"`. The `/health` endpoint stays available.
+
+To require the token on every Zero admin endpoint, including `/state` and `/assign`, and to stop a whitelisted address from standing in for the token, set `--security "anonymous=data"` on Zero. See [Anonymous Access](anonymous-access#dgraph-zero).
 
