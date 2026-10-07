@@ -153,6 +153,57 @@ Copy `p` directories directly for faster deployment:
 3. Start all Alphas simultaneously
 4. Verify all Alphas create snapshots with matching index values
 
+## Predicate Placement
+
+By default, Bulk Loader packs predicates into reduce shards by size, so which group serves a given predicate varies between runs. The `--tablet_placement` flag pins chosen predicates to specific groups, so the cluster starts with a deterministic, operator-chosen layout.
+
+Create a placement file containing a JSON array of entries:
+
+```json
+[
+  {"predicate": "payload", "group": 2},
+  {"predicate": "friend",  "group": 3, "namespace": 0}
+]
+```
+
+| Field | Description |
+|-------|-------------|
+| `predicate` | Predicate name, without a namespace prefix |
+| `group` | Target Alpha group, from 1 to `--reduce_shards`. Group N's data is written to `out/<N-1>/p` |
+| `namespace` | Optional namespace the predicate belongs to (default: `0`) |
+
+Pass the file to the loader:
+
+```sh
+dgraph bulk \
+  --files data.rdf.gz \
+  --schema schema.txt \
+  --zero localhost:5080 \
+  --map_shards 6 \
+  --reduce_shards 3 \
+  --tablet_placement placement.json
+```
+
+### Behavior
+
+- A pinned predicate's data, index, and schema keys are all written to its group's output directory. This includes predicates that appear only in the schema and carry no data in the load.
+- Predicates not listed in the file keep the default size-balanced packing. Use `--map_shards` greater than `--reduce_shards` for this: with equal values every map shard is dedicated to a group and size balancing is disabled (the loader logs a notice).
+- The loader logs the routing of every pinned predicate, for example `pinned: 0-payload -> map shard 1 -> out/1/p (group 2)`, and warns after the map phase about pinned predicates that matched nothing in the schema or data — usually a typo in the placement file.
+
+### Validation
+
+The loader exits with an error before loading any data if the placement file contains:
+
+- a group below 1 or above `--reduce_shards`
+- duplicate entries for the same namespace and predicate
+- reserved (`dgraph.*`) predicates — these are always served by group 1
+- unknown fields, or a document that isn't a JSON array
+- entries for namespaces that can never match when `--force-namespace` is also set
+
+:::note
+Placement is applied at load time only. Once the cluster is running, Zero's automatic rebalancer (`--rebalance_interval`, default 8 minutes) may move tablets between groups; set a large rebalance interval on your Zeros to preserve the layout. `/moveTablet` can also move tablets at any time.
+:::
+
 ## Multi-tenancy
 
 By default, Bulk Loader preserves namespace information from data files. Without namespace info, data loads into the default namespace.
@@ -267,6 +318,7 @@ Increase if you have RAM to spare:
 | `--xidmap` | Directory for XID→UID mappings |
 | `--format` | Force format (`rdf` or `json`) |
 | `--force-namespace` | Load into specific namespace |
+| `--tablet_placement` | JSON file pinning predicates to groups |
 | `--encryption` | Encryption key file |
 | `--encrypted` | Input files are encrypted |
 | `--encrypted_out` | Encrypt output (default: true if key provided) |
