@@ -130,7 +130,7 @@ Group 3: location, company
 
 Zero continuously monitors disk usage across groups and automatically rebalances predicates to maintain even distribution:
 
-- Runs rebalancing checks every 8-10 minutes
+- Runs rebalancing checks every 8-10 minutes (interval set by Zero's `--rebalance_interval` flag; `0` disables automatic rebalancing)
 - Moves predicates from high-usage groups to lower-usage groups
 - During a predicate move:
   - The predicate becomes temporarily read-only

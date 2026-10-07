@@ -23,7 +23,7 @@ dgraph zero [flags]
 | `-o, --port_offset` | Value added to all listening port numbers [Grpc=5080, HTTP=6080] | `0` |
 | `-w, --wal` | Directory storing WAL | `"zw"` |
 | `--replicas` | How many Dgraph Alpha replicas to run per data shard group | `1` |
-| `--rebalance_interval` | Interval for trying a predicate move | `8m0s` |
+| `--rebalance_interval` | Interval for trying a predicate move; `0` disables automatic tablet rebalancing | `8m0s` |
 | `--enterprise_license` | Path to the enterprise license file | |
 
 ## Superflags
@@ -91,7 +91,7 @@ Flags:
                                           idx=1; Provides an optional Raft ID that this Alpha would use to join Raft groups.
                                           learner=false; Make this Zero a "learner" node. In learner mode, this Zero will not participate in Raft elections. This can be used to achieve a read-only replica.
                                        (default "idx=1; learner=false;")
-      --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
+      --rebalance_interval duration   Interval for trying a predicate move. Set to 0 to disable automatic tablet rebalancing. (default 8m0s)
       --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
       --security string               Security options
                                           token=; If set, all requests to Zero's administrative HTTP endpoints must present this token in the X-Dgraph-AuthToken header.
