@@ -164,6 +164,7 @@ Flags:
       --skip_map_phase             Skip the map phase (assumes that map output files already exist).
       --skip_reduce_phase          Skip the reduce phase (stops after map phase completion).
       --store_xids                 Generate an xid edge for each node.
+      --tablet_placement string    Path to a JSON file pinning predicates to groups, as an array of {"predicate", "group", "namespace"} entries. Pinned predicates are written to the output shard of their group (group N is out/<N-1>); everything else is packed as usual. Placement is applied at load time only; until the cluster enforces pins, Zero's rebalancer may later move tablets. Use map_shards > reduce_shards so unpinned predicates still balance by size.
       --tls string                 TLS Client options
                                        ca-cert=; The CA cert file used to verify server certificates. Required for enabling TLS.
                                        client-cert=; (Optional) The Cert file provided by the client to the server.
