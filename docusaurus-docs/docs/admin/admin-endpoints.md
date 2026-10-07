@@ -33,7 +33,7 @@ Dgraph Zero exposes the following HTTP endpoints on port `6080` (plus optional p
 Before using the `/removeNode` endpoint, ensure that the node is down and ensure that it doesn't come back up ever again. Do not use the same `idx` of a node that was removed earlier.
 :::
 
-- **`/moveTablet?tablet=name&group=2`** - Moves a tablet to a group. Zero already rebalances shards every 8 mins, but this endpoint can be used to force move a tablet.
+- **`/moveTablet?tablet=name&group=2`** - Moves a tablet to a group. Zero already rebalances shards every 8 mins by default (configurable with `--rebalance_interval`; set to `0` to disable automatic rebalancing), but this endpoint can be used to force move a tablet. Manual moves work even when automatic rebalancing is disabled.
 
 ### POST Endpoints
 
