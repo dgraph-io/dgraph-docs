@@ -201,7 +201,7 @@ The loader exits with an error before loading any data if the placement file con
 - entries for namespaces that can never match when `--force-namespace` is also set
 
 :::note
-Placement is applied at load time only. Once the cluster is running, Zero's automatic rebalancer (`--rebalance_interval`, default 8 minutes) may move tablets between groups; set a large rebalance interval on your Zeros to preserve the layout. `/moveTablet` can also move tablets at any time.
+Placement is applied at load time only. Once the cluster is running, Zero's automatic rebalancer (`--rebalance_interval`, default 8 minutes) may move tablets between groups; set `--rebalance_interval=0` on every Zero to disable automatic rebalancing and preserve the layout. `/moveTablet` can still move tablets at any time.
 :::
 
 ## Multi-tenancy
