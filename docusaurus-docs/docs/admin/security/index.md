@@ -8,6 +8,8 @@ Dgraph security configuration covers authentication, network security, and acces
 
 **[Admin Endpoint Security](admin-endpoint-security)** - Authentication layers for admin endpoints, IP whitelisting, and token-based authentication.
 
+**[Anonymous Access](anonymous-access)** - Decide what a caller with no verified credential can do, using the `--security` superflag's `anonymous` option.
+
 **[Ports Usage](ports-usage)** - Understanding Dgraph's port configuration and network security requirements.
 
 **[TLS Configuration](tls-configuration)** - Encrypting communications between Dgraph nodes and clients using TLS/mTLS.

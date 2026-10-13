@@ -40,7 +40,7 @@ Alpha uses several [superflags](superflags) for advanced configuration:
 - `--graphql` - GraphQL settings
 - `--limit` - Query and mutation limits
 - `--raft` - Raft consensus options
-- `--security` - Security settings (token, whitelist)
+- `--security` - Security settings (token, whitelist, anonymous). See [Anonymous Access](../admin/security/anonymous-access)
 - `--telemetry` - Telemetry and crash reporting
 - `--tls` - TLS configuration
 - `--trace` - Distributed tracing
@@ -129,9 +129,10 @@ Flags:
                                        snapshot-after-entries=10000; Create a new Raft snapshot after N number of Raft entries. The lower this number, the more frequent snapshot creation will be. Snapshots are created only if both snapshot-after-duration and snapshot-after-entries threshold are crossed.
                                     (default "learner=false; snapshot-after-entries=10000; snapshot-after-duration=30m; pending-proposals=256; idx=; group=;")
       --security string            Security options
+                                       anonymous=full; [full, data, none] What a caller that presents no verified credential may do. full (default) leaves authorization to whatever the whitelist, token, and ACL settings decide, which is the behavior of every earlier release. data allows queries, mutations, commits, and login while denying every administrative operation, including schema changes and drops, regardless of the whitelist. none additionally denies queries, mutations, and commits, leaving only login and the health endpoints. data and none require token= or ACL, otherwise no caller can ever be identified.
                                        token=; If set, all Admin requests to Dgraph will need to have this token. The token can be passed as follows: for HTTP requests, in the X-Dgraph-AuthToken header. For Grpc, in auth-token key in the context.
-                                       whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames you wish to whitelist for performing admin actions (i.e., --security "whitelist=144.142.126.254,127.0.0.1:127.0.0.3,192.168.0.0/16,host.docker.internal").
-                                    (default "token=; whitelist=;")
+                                       whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames you wish to whitelist for performing admin actions (i.e., --security "whitelist=144.142.126.254,127.0.0.1:127.0.0.3,192.168.0.0/16,host.docker.internal"). Empty by default, which admits loopback only. This is a network location check, NOT authentication: every address in the range can run privileged operations without a credential unless you also set token= or enable ACL.
+                                    (default "token=; whitelist=; anonymous=full;")
       --survive string             Choose between "process" or "filesystem".
                                        If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                        If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
