@@ -33,7 +33,7 @@ Zero uses several [superflags](superflags) for advanced configuration:
 - `--audit` - Audit logging configuration
 - `--limit` - UID lease and admin endpoint settings
 - `--raft` - Raft consensus options
-- `--security` - Authentication token and IP whitelist for the admin HTTP endpoints
+- `--security` - Authentication token, IP whitelist, and anonymous access for the admin HTTP endpoints
 - `--telemetry` - Telemetry and crash reporting
 - `--tls` - TLS configuration
 - `--trace` - Distributed tracing
@@ -53,6 +53,14 @@ dgraph zero --security "whitelist=10.0.0.0/8,192.168.1.1"
 ```
 
 The destructive endpoints (`/removeNode`, `/moveTablet`) are restricted to loopback by default; set a `whitelist` or `token` to reach them from another host. The `/state` and `/assign` endpoints are enforced only once a `token` or `whitelist` is configured. To turn the admin HTTP endpoints off entirely, set `--limit "disable-admin-http=true"`.
+
+To require the token on every admin endpoint, set the `anonymous` option to `data` or `none`. A whitelisted address, including loopback, then no longer stands in for the token:
+
+```bash
+dgraph zero --security "token=<authtokenstring>; anonymous=data"
+```
+
+The `anonymous` option is unreleased. See [Anonymous Access](../admin/security/anonymous-access#dgraph-zero).
 
 See [Admin Endpoint Security](../admin/security/admin-endpoint-security#zero-admin-endpoints) for details.
 
@@ -94,9 +102,10 @@ Flags:
       --rebalance_interval duration   Interval for trying a predicate move. (default 8m0s)
       --replicas int                  How many Dgraph Alpha replicas to run per data shard group. The count includes the original shard. (default 1)
       --security string               Security options
+                                          anonymous=full; [full, data, none] What a caller that presents no verified credential may do. full (default) is the behavior of every earlier release. Any other value requires the token= option on every administrative HTTP endpoint, including /state and /assign, and stops a whitelisted source IP from standing in for a credential.
                                           token=; If set, all requests to Zero's administrative HTTP endpoints must present this token in the X-Dgraph-AuthToken header.
-                                          whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames that are allowed to reach Zero's administrative HTTP endpoints (loopback is always allowed). e.g. --security "whitelist=127.0.0.1,192.168.0.0/16,host.docker.internal".
-                                       (default "token=; whitelist=;")
+                                          whitelist=; A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames that are allowed to reach Zero's administrative HTTP endpoints (loopback is always allowed). e.g. --security "whitelist=127.0.0.1,192.168.0.0/16,host.docker.internal". This is a network location check, NOT authentication.
+                                       (default "token=; whitelist=; anonymous=full;")
       --survive string                Choose between "process" or "filesystem".
                                           If set to "process", there would be no data loss in case of process crash, but the behavior would be nondeterministic in case of filesystem crash.
                                           If set to "filesystem", blocking sync would be called after every write, hence guaranteeing no data loss in case of hard reboot.
