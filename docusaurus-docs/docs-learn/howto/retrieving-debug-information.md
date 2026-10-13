@@ -6,7 +6,7 @@ Each Dgraph data node exposes profile over `/debug/pprof` endpoint and metrics o
 
 ## Metrics Information
 
-If you are collecting these metrics from outside the Dgraph instance you need to pass `--expose_trace=true` flag, otherwise there metrics can be collected by connecting to the instance over localhost.
+The `/debug/vars` endpoint is served on the Alpha or Zero HTTP port and is not restricted by source IP, so any client that can reach that port can read these metrics. No flag is required to collect them remotely. If you don't want them publicly readable, restrict access to the HTTP port at the network layer.
 
 ```
 curl http://<IP>:<HTTP_PORT>/debug/vars
