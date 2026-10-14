@@ -128,7 +128,7 @@ The `--security` superflag configures security settings:
 |--------|------|------------|-------------|
 | `token` | string | `alpha`, `zero` | Authentication token. When set, admin requests must present it in the `X-Dgraph-AuthToken` header |
 | `whitelist` | string | `alpha`, `zero` | A comma separated list of IP addresses, IP ranges, CIDR blocks, or hostnames for administration. Empty by default, which admits loopback only. This is a network location check, not authentication |
-| `anonymous` | string | `alpha`, `zero` | What a caller with no verified credential can do: `full` (default), `data`, or `none`. **Unreleased.** See [Anonymous Access](../admin/security/anonymous-access) |
+| `anonymous` | string | `alpha`, `zero` | What a caller with no verified credential can do: `full` (default), `data`, or `none`. See [Anonymous Access](../admin/security/anonymous-access) |
 
 The `anonymous` option takes one of three values:
 
