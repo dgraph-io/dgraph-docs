@@ -3,10 +3,6 @@ title: Anonymous Access
 description: Use the --security anonymous option to decide what a caller with no verified credential can do on Dgraph Alpha and Zero.
 ---
 
-:::info Unreleased feature
-The `anonymous` option of the `--security` superflag is not yet part of a released version of Dgraph. This page describes the behavior that ships with it. On a release that predates it, Dgraph Alpha and Dgraph Zero refuse to start if you set it. See [Upgrades and mixed versions](#upgrades-and-mixed-versions).
-:::
-
 The `anonymous` option of the `--security` superflag sets what a caller with no verified credential can do. You choose one of three postures: `full`, `data`, or `none`. The default is `full`, which keeps the behavior of every earlier release.
 
 ```sh
