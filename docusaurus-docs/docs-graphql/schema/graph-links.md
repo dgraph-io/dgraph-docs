@@ -107,4 +107,4 @@ type Post {
 }
 ```
 
-Now, Dgraph will manage the connection between posts and authors and you can get on with concentrating on what your app needs to to - suggesting them interesting content.
+Now, Dgraph will manage the connection between posts and authors and you can get on with concentrating on what your app needs to do - suggesting them interesting content.

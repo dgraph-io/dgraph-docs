@@ -110,7 +110,7 @@ type Todo @auth(
 }
 ```
 
-The @auth query rule will only return ``Todos`` having an owner matching the condition: the owner ``username`` must be equal the the JWT claim ``USER``.
+The @auth query rule will only return ``Todos`` having an owner matching the condition: the owner ``username`` must be equal to the JWT claim ``USER``.
 
 All blocks must return some data for the query to succeed. You may want to use the field `__typename` in the most inner block to ensure a data match at this level.
 

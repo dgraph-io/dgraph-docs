@@ -53,7 +53,7 @@ type Person {
 }
 ```
 
-will lead the the declaration of 3 predicates in the DQL Schema:
+will lead to the declaration of 3 predicates in the DQL Schema:
 
 - ``Person.id default``
 - ``Person.name string``
@@ -83,7 +83,7 @@ type Person {
     name: String @search(by: [hash])
     ...
 ```
-Is simply translated into a prediate index specification in the Dgraph schema:
+Is simply translated into a predicate index specification in the Dgraph schema:
 ```
 Person.name: string @index(hash) .
 ```

@@ -2,7 +2,7 @@
 title: Export data
 ---
 
-As an `Administrator` you can export data from Dgraph to an an object store, NFS, or a file path.
+As an `Administrator` you can export data from Dgraph to an object store, NFS, or a file path.
 
 When you export data, three files are generated:
 

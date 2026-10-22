@@ -179,6 +179,7 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             'admin/security/admin-endpoint-security',
+            'admin/security/anonymous-access',
             'admin/security/tls-configuration',
             'admin/security/ports-usage',
           ],

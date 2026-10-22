@@ -19,7 +19,7 @@ Firstly, add all the GraphQL Code Generator dependencies as development dependen
 yarn add -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/add @graphql-codegen/near-operation-file-preset @graphql-codegen/named-operations-object
 ```
 
-You can then run the following command to to set up GraphQL Code Generator for
+You can then run the following command to set up GraphQL Code Generator for
 the project:
 
 ```sh

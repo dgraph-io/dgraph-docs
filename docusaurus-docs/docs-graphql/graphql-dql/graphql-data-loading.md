@@ -10,7 +10,7 @@ After you have deployed your first GraphQL Schema, you get a GraphQL API served 
 A more efficient way to populate the database is to use the Dgraph's [import tools](/migration/import-data).
 
 The first step is to understand the [schema mapping](/graphql/graphql-dql/graphql-dql-schema) and to prepare your RDF files or JSON files to follow the internal Dgraph predicates names. 
-You also have to make sure that you properly generate data for the `dgraph.type` predicate so that each node is asscociated with it's type.
+You also have to make sure that you properly generate data for the `dgraph.type` predicate so that each node is associated with it's type.
 
 If you are using the [initial import](/migration/bulk-loader) tool, you can provide the GraphQL schema along with the data to import when executing the bulk load.
 

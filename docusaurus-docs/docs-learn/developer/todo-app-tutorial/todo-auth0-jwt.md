@@ -12,7 +12,7 @@ So we can use something known as "Rules" (left sidebar on dashboard page under "
 
 ![Rule](/images/graphql/tutorial/todo/rule.png)
 
-Replace the content with the the following -
+Replace the content with the following -
 ```javascript
 function (user, context, callback) {
   const namespace = "https://dgraph.io/jwt/claims";

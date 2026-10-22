@@ -62,11 +62,15 @@ const config: Config = {
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
         includeCurrentVersion: false,
-        lastVersion: 'v25.3',
+        lastVersion: 'v25.4',
         versions: {
-          'v25.3': {
-            label: 'v25.3 (latest)',
+          'v25.4': {
+            label: 'v25.4 (latest)',
             path: '',
+          },
+          'v25.3': {
+            label: 'v25.3',
+            path: 'v25.3',
           },
           'v25.2': {
             label: 'v25.2',
@@ -95,11 +99,19 @@ const config: Config = {
         routeBasePath: 'graphql',
         sidebarPath: './sidebars-graphql.ts',
         includeCurrentVersion: false,
-        lastVersion: 'v25.2',
+        lastVersion: 'v25.4',
         versions: {
-          'v25.2': {
-            label: 'v25.2 (latest)',
+          'v25.4': {
+            label: 'v25.4 (latest)',
             path: '',
+          },
+          'v25.3': {
+            label: 'v25.3',
+            path: 'v25.3',
+          },
+          'v25.2': {
+            label: 'v25.2',
+            path: 'v25.2',
           },
           'v25.1': {
             label: 'v25.1',

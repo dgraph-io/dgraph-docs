@@ -2,42 +2,61 @@ name: ci-spell-checking
 
 on:
   push:
-    branches: 
-    - main
+    branches:
+      - main
   pull_request:
     types:
-    - opened
-    - reopened
-    - synchronize
-    - ready_for_review
-    branches: 
-    - main
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  # Pinned so a new Vale release cannot change what CI accepts without a commit.
+  VALE_VERSION: "3.7.1"
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Get changed files in the content folder
-        id: changed-files-specific
+      - uses: actions/checkout@v4
+        with:
+          # changed-files needs history to diff against the base ref.
+          fetch-depth: 0
+
+      # Only the "next" content is linted. The *_versioned_docs snapshots are
+      # frozen copies of past releases, so they are not edited in place and a
+      # version cut copies this content forward already spell-checked.
+      - name: Get changed documentation files
+        id: changed-files
         uses: tj-actions/changed-files@v46
         with:
-          files: ./content/
+          files: |
+            docusaurus-docs/docs/**/*.{md,mdx}
+            docusaurus-docs/docs-graphql/**/*.{md,mdx}
+            docusaurus-docs/docs-ratel/**/*.{md,mdx}
+            docusaurus-docs/docs-learn/**/*.{md,mdx}
+
       - name: Install Vale
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          sudo apt-get update
-          sudo apt-get install curl
-          curl -Ls https://api.github.com/repos/errata-ai/vale/releases/latest \
-            | grep "browser_download_url.*vale_[0-9.]*_Linux_64-bit.tar.gz" \
-            | cut -d : -f 2,3 \
-            | tr -d \" \
-            | xargs curl -Ls \
-            | tar xz
-            sudo mv ./vale /usr/bin/vale
-            vale --config=./.github/.vale.ini sync
+          curl -fsSL -o vale.tar.gz \
+            "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz"
+          tar -xzf vale.tar.gz vale
+          sudo mv vale /usr/local/bin/vale
+          vale --config=./.github/.vale.ini sync
+
       - name: Run Vale
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
-        run: vale --config=./.github/.vale.ini ${{ steps.changed-files-specific.outputs.all_changed_files }}
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          # Passed through the environment rather than interpolated into the
+          # shell, so a crafted filename cannot inject commands.
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          echo "$ALL_CHANGED_FILES" | tr ' ' '\n' \
+            | xargs --no-run-if-empty vale --config=./.github/.vale.ini

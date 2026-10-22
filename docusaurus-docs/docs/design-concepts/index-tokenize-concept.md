@@ -10,4 +10,4 @@ Typically, Dgraph query access is optimized for forward access. When other acces
 
 Tokenizers are simply small algorithms that create indexed values from some Node property. E.g. if a Book Node has a Title attribute, and you add a "term" index, each word (term) in the text will be indexed. The word "Tokenizer" derives its name from tokenizing operations to create this index type.
 
-Similary if the Book has a publicationDateTime you can add a day or year index. The "tokenizer" here extracts the value to be indexed, which may be the day or hour of the dateTime, or only the year.
+Similarly if the Book has a publicationDateTime you can add a day or year index. The "tokenizer" here extracts the value to be indexed, which may be the day or hour of the dateTime, or only the year.

@@ -42,7 +42,7 @@ Each definition of custom logic must include:
 
 Optionally, the custom logic definition can also include:
 
-* a `body` definition that can be used to construct a HTTP body from from arguments or fields.
+* a `body` definition that can be used to construct a HTTP body from arguments or fields.
 * a list of `forwardHeaders` to take from the incoming request and add to the outgoing HTTP call.
 Used, for example, if the incoming request contains an auth token that must be passed to the custom logic.
 * a list of `secretHeaders` to take from the `Dgraph.Secret` defined in the schema file and add to the outgoing HTTP call.
@@ -378,7 +378,7 @@ For example, a query from a custom HTTP endpoint will return an error in the fol
 
 ## How custom fields are resolved
 
-When evaluating a request that includes custom fields, Dgraph might run multiple resolution stages to resolve all the fields.  Dgraph must also ensure it requests enough data to forfull the custom fields.  For example, given the `User` type defined as:
+When evaluating a request that includes custom fields, Dgraph might run multiple resolution stages to resolve all the fields.  Dgraph must also ensure it requests enough data to fulfill the custom fields.  For example, given the `User` type defined as:
 
 ```graphql
 type User {

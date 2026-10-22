@@ -326,7 +326,7 @@ To remove one value from the list:
 }
 ```
 
-To remove multiple multiple values:
+To remove multiple values:
 ```JSON
 {
   "delete": {

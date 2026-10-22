@@ -199,7 +199,7 @@ as follows:
 ```
 
 
-That sets up the the `addPost` function to run the `addPost` mutation, and on
+That sets up the `addPost` function to run the `addPost` mutation, and on
 completion inserts the new post into the cache.
 
 ## Layout for the mutation
@@ -218,7 +218,7 @@ const [createPost, setCreatePost] = useState(false)
 </Button>
 ```
 
-The state for the the new post data is again controlled by React state. The
+The state for the new post data is again controlled by React state. The
 modal gives the user input options to update that data, as follows:
 
 ```js

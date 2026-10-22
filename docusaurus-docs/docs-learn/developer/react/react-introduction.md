@@ -12,7 +12,7 @@ subscriptions.
 
 ## The App
 
-This app is designed to manage lists of posts in in different categories. A home
+This app is designed to manage lists of posts in different categories. A home
 page lets each user view a feed of posts, as follows:
 
 
