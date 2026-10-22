@@ -70,6 +70,10 @@ carried as a `"<code>: <detail>"` prefix on the gRPC `ABORTED` status message
   groups so commits on it are blocked, or it finished moving while the
   transaction was open. Retrying once the move completes succeeds.
 
+The full message reads `<code>: Transaction has been aborted. Please retry. <detail>`.
+Every abort message, with or without a category, contains
+`Transaction has been aborted. Please retry`, as it did before categories existed.
+
 :::note[Not every abort has a category]
 Some aborts carry **no** prefix, and that is deliberate. Where the server cannot
 map a cause onto one of the categories above, it sends the explanation without a
@@ -116,8 +120,8 @@ common source of surprising conflicts in upsert-heavy ingest.
 Reverse edges (`@reverse`) never cause conflicts, and predicates marked
 `@noconflict` are excluded from conflict detection entirely.
 
-The official [Java](/clients/java) and [Python](/clients/python) clients parse
-this category into a typed enum; see those pages for the API.
+The official [Go](/clients/go), [Java](/clients/java) and [Python](/clients/python)
+clients parse this category into a typed value; see those pages for the API.
 
 
 ### In this section

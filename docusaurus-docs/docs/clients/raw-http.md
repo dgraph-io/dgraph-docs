@@ -417,7 +417,7 @@ aborted, so a client can react appropriately. The `<code>` is one of:
 | `predicate-move` | A predicate the transaction wrote is being moved between groups so commits on it are blocked, or it finished moving mid-transaction. Retry after the move completes. |
 
 For example, a blocked predicate move reports
-`predicate-move: Commits on predicate <name> are blocked due to predicate move`.
+`predicate-move: Transaction has been aborted. Please retry. Commits on predicate <name> are blocked due to predicate move`.
 
 :::caution[Match the code, do not match the whole message]
 The category appears *within* the `message`, not at the start of it: the HTTP

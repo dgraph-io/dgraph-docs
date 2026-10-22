@@ -83,6 +83,37 @@ if err := dc.LoginIntoNamespace(ctx, "groot", "password", 123); err != nil {
 
 Once logged in, the client can perform all operations allowed for that user in the specified namespace.
 
+## Handling aborted transactions
+
+When a commit aborts, `Txn.Commit` (and `Txn.Mutate` or `Txn.Do` with mutations) returns a
+`*dgo.AbortedError`. It wraps `dgo.ErrAborted` and exposes the
+[abort reason](/clients#abort-reasons) as a typed `dgo.AbortReason`, so you can branch on *why*
+the commit aborted:
+
+```go
+err := txn.Commit(ctx)
+
+var ae *dgo.AbortedError
+if errors.As(err, &ae) {
+    switch ae.Reason {
+    case dgo.AbortReasonConflict, dgo.AbortReasonStaleStartTs:
+        // Safe to retry with a fresh transaction.
+    case dgo.AbortReasonPredicateMove:
+        // A predicate is being moved between groups; retry after a short backoff.
+    default: // dgo.AbortReasonUnknown
+        // No category reported. ae.Error() still explains what happened. Reached against an
+        // older server, and also when a current server declines to categorize a cause.
+    }
+}
+```
+
+Test for an abort with `errors.Is(err, dgo.ErrAborted)`. A direct `err == dgo.ErrAborted`
+comparison does not match an `AbortedError`. `status.Code(err)` reports `codes.Aborted`.
+
+`Reason` is `dgo.AbortReasonUnknown` whenever the server reports no category or one this client
+doesn't recognize, so the code above works unchanged against older Dgraph servers and newer ones
+that add categories.
+
 ## Documentation
 
 For complete API documentation, examples, and advanced usage:
