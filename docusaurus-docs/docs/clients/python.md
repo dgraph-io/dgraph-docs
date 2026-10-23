@@ -82,6 +82,44 @@ client.login_into_namespace("groot", "password", "123")
 
 Once logged in, the client can perform all operations allowed for that user in the specified namespace.
 
+## Handling aborted transactions
+
+When a commit aborts, the client raises `pydgraph.AbortedError`. In addition to
+the full server message, the error exposes the [abort reason](/clients#abort-reasons)
+as a typed `pydgraph.AbortReason`, so you can branch on *why* the commit aborted:
+
+```python
+import pydgraph
+
+txn = client.txn()
+try:
+    txn.mutate(set_obj={"name": "Alice"})
+    txn.commit()
+except pydgraph.AbortedError as e:
+    if e.reason in (pydgraph.AbortReason.CONFLICT, pydgraph.AbortReason.STALE_STARTTS):
+        # Safe to retry with a fresh transaction.
+        ...
+    elif e.reason == pydgraph.AbortReason.PREDICATE_MOVE:
+        # A predicate is being moved between groups; retry after a short backoff.
+        ...
+    else:  # pydgraph.AbortReason.UNKNOWN
+        # No category reported. Fall back to the message, which still explains
+        # what happened. Reached against an older server, and also when a
+        # current server declines to categorize a cause.
+        ...
+    print("commit aborted:", e)
+finally:
+    txn.discard()
+```
+
+`AbortedError.reason` is `pydgraph.AbortReason.UNKNOWN` whenever the server
+reports no category, so the code above works unchanged against older Dgraph
+servers — and also against current ones, which deliberately leave some causes
+uncategorized rather than implying the wrong remedy (see
+[abort reasons](/clients#abort-reasons)). Always keep the `UNKNOWN` branch; the
+message still carries the explanation. An unrecognized category also degrades to
+`UNKNOWN`, so a newer server can add categories without breaking this code.
+
 ## Documentation
 
 For complete API documentation, examples, and advanced usage:

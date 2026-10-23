@@ -399,13 +399,54 @@ If another client were to perform another transaction concurrently affecting the
   "errors": [
     {
       "code": "Error",
-      "message": "Transaction has been aborted. Please retry."
+      "message": "rpc error: code = Aborted desc = conflict: Transaction has been aborted. Please retry. Another transaction committed to one of the same keys. The conflicting key cannot be identified: it may be the data key written directly, or an index or count key derived from it. On an @upsert predicate the uid is excluded, so any two transactions writing the same value conflict"
     }
   ]
 }
 ```
 
 In this case, it should be up to the user of the client to decide if they wish to retry the transaction.
+
+The `message` embeds a `"<code>: <detail>"` category describing why the commit
+aborted, so a client can react appropriately. The `<code>` is one of:
+
+| Code             | Meaning                                                                                   |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| `conflict`       | Write-write conflict with another concurrent transaction. Retrying typically succeeds.    |
+| `stale-startts`  | The transaction's start timestamp is older than the oldest timestamp the server can still validate against — after a Zero leader change, or when Zero trims its conflict map at a snapshot. Retry with a fresh transaction. |
+| `predicate-move` | A predicate the transaction wrote is being moved between groups so commits on it are blocked, or it finished moving mid-transaction. Retry after the move completes. |
+
+For example, a blocked predicate move reports
+`predicate-move: Transaction has been aborted. Please retry. Commits on predicate <name> are blocked due to predicate move`.
+
+:::caution[Match the code, do not match the whole message]
+The category appears *within* the `message`, not at the start of it: the HTTP
+layer renders the underlying gRPC error, so the string also carries an
+`rpc error: code = Aborted desc = ` preamble ahead of the category. Search for
+the category within the message rather than anchoring to the beginning.
+
+Better still, treat the presence of an error response as the signal that the
+commit aborted, and use the category only to decide how to react. Message text
+differs per category and is not a stable contract — it may be reworded or
+extended between releases, and it is considerably longer than the examples here.
+:::
+
+:::note[Not every abort has a category]
+Some aborts carry no category, deliberately: where the server cannot map a cause
+onto one of the codes above, it sends the explanation alone rather than
+borrowing a code that would imply the wrong remedy. Treat a missing or
+unrecognized category as *unknown* rather than failing to parse.
+
+This covers aborts from **older servers**, which do not categorize at all, and
+causes a **current** server declines to categorize — for example a transaction
+already aborted out of band by a schema change or the idle-transaction reaper, a
+cancelled or timed-out request, or a predicate no group currently serves. An
+uncategorized abort does not mean your server is out of date.
+:::
+
+See [abort reasons](/clients#abort-reasons) for what a `conflict` can and cannot
+tell you — in particular, why an index, count or `@upsert` key derived from the
+data you wrote may be the one that actually collided.
 
 ### Abort the Transaction
 
