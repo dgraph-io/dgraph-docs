@@ -60,7 +60,7 @@ To require the token on every admin endpoint, set the `anonymous` option to `dat
 dgraph zero --security "token=<authtokenstring>; anonymous=data"
 ```
 
-The `anonymous` option is unreleased. See [Anonymous Access](../admin/security/anonymous-access#dgraph-zero).
+For the `anonymous` option, see [Anonymous Access](../admin/security/anonymous-access#dgraph-zero).
 
 See [Admin Endpoint Security](../admin/security/admin-endpoint-security#zero-admin-endpoints) for details.
 
