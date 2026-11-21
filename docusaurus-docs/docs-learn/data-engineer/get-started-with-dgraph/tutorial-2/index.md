@@ -7,7 +7,8 @@ In the [previous tutorial](../tutorial-1/) of getting started,
 we learned some of the basics of Dgraph. 
 Including how to run the database, add new nodes and predicates, and query them back.
 
-![Graph](/images/tutorials/2/graph-1.jpg)
+![Graph](../../../../static/images/tutorials/2/graph-1.jpg)
+
 
 In this tutorial, we'll build the above Graph and learn more about operations using the UID (Universal Identifier) of the nodes.
 Specifically, we'll learn about:

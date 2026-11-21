@@ -13,7 +13,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-1/index](tutorial-1/index)">
+            <a href="tutorial-1/index">
               1 - Introduction
             </a>
           </div>
@@ -25,7 +25,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-2/index](tutorial-2/index)">
+            <a href="tutorial-2/index">
               2 - Basic Operations
             </a>
           </div>
@@ -37,7 +37,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-3/index](tutorial-3/index)">
+            <a href="tutorial-3/index">
               3 - Basic Types and Operations on them
             </a>
           </div>
@@ -49,7 +49,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-4/index](tutorial-4/index)">
+            <a href="tutorial-4/index">
               4 - Multi-Language Strings
             </a>
           </div>
@@ -61,7 +61,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-5/index](tutorial-5/index)">
+            <a href="tutorial-5/index">
               5 - String Indices and Modeling Tweet Graph
             </a>
           </div>
@@ -73,7 +73,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-6/index](tutorial-6/index)">
+            <a href="tutorial-6/index">
               6 - Advanced Text Search on Social Graphs
             </a>
           </div>
@@ -85,7 +85,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-7/index](tutorial-7/index)">
+            <a href="tutorial-7/index">
               7 - Fuzzy Search on Social Graphs
             </a>
           </div>
@@ -97,7 +97,7 @@ description: "From learning the basics of graph databases to advanced functions 
       <div class="col-12 col-sm-12">
         <div class="section-item">
           <div class="section-name">
-            <a href="[tutorial-8/index](tutorial-8/index)">
+            <a href="tutorial-8/index">
               8 - Native Geolocation Features
             </a>
           </div>

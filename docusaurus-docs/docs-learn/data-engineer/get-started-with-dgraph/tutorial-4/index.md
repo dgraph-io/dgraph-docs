@@ -3,7 +3,7 @@ title: "Get Started with Dgraph -  Multi-language strings"
 ---
 **Welcome to the fourth tutorial of getting started with Dgraph.**
 
-In the [previous tutorial](../tutorial-3/), we learned about Datatypes, Indexing, Filtering, and Reverse traversals in Dgraph.
+In the [previous tutorial](../tutorial-3/index.md), we learned about Datatypes, Indexing, Filtering, and Reverse traversals in Dgraph.
 
 In this tutorial, we'll learn about using multi-language strings and operations on them using the language tags.
 
@@ -24,7 +24,7 @@ Let's learn more about them!
 Let's start with building a simple food review Graph.
 Here's the Graph model.
 
-![model](/images/tutorials/4/a-graph-model.jpg)
+![model](../../../../static/images/tutorials/4/a-graph-model.jpg)
 
 The above Graph has three entities: Food, Comment, and Country.
 
@@ -171,7 +171,7 @@ Now, Let's fetch only the food items and their reviews,
 
 As expected, these comments are in different languages.
 
-![full graph](/images/tutorials/4/b-comments.png)
+![full graph](../../../../static/images/tutorials/4/b-comments.png)
 
 But can we fetch the reviews based on their language?
 Can we write a query which says: _Hey Dgraph, can you give me only the reviews written in Chinese?_
@@ -223,13 +223,13 @@ In the above mutation:
 
 In the mutation above, Dgraph creates a new node for the reviews, and stores `comment`, `comment@ru`, and `comment@jp` in different predicates inside the same node.
 
-_Note: If you're not clear about basic terminology like `predicates`, do read the [first tutorial](../tutorial-1/)._
+_Note: If you're not clear about basic terminology like `predicates`, do read the [first tutorial](../tutorial-1/index.md)._
 
 Let's run the above mutation.
 
 Go to the mutate tab, paste the mutation, and click Run.
 
-![lang error](/images/tutorials/4/d-lang-error.png)
+![lang error](../../../../static/images/tutorials/4/d-lang-error.png)
 
 We got an error! Using the language tag requires you to add the `@lang` directive to the schema.
 
@@ -240,11 +240,11 @@ Follow the instructions below to add the `@lang` directive to the `comment` pred
 - Tick mark the `lang` directive.
 - Click on the `Update` button.
 
-![lang error](/images/tutorials/4/e-update-lang.png)
+![lang error](../../../../static/images/tutorials/4/e-update-lang.png)
 
 Let's re-run the mutation.
 
-![lang error](/images/tutorials/4/f-mutation-success.png)
+![lang error](../../../../static/images/tutorials/4/f-mutation-success.png)
 
 Success!
 
@@ -281,11 +281,11 @@ In our next section, let's make use of the language tags in our queries.
 
 Let's obtain the review comments only for `Sushi`.
 
-In the [previous article](../tutorial-3/), we learned about using the `eq` operator and the `hash` index to query for string predicate values.
+In the [previous article](../tutorial-3/index.md), we learned about using the `eq` operator and the `hash` index to query for string predicate values.
 
 Using that knowledge, let's first add the `hash` index for the `food_name` predicate.
 
-![hash index](/images/tutorials/4/g-hash.png)
+![hash index](../../../../static/images/tutorials/4/g-hash.png)
 
 Now, go to the query tab, paste the query in the text area, and click Run.
 
@@ -300,7 +300,7 @@ Now, go to the query tab, paste the query in the text area, and click Run.
 }
 ```
 
-![hash index](/images/tutorials/4/h-comment.png)
+![hash index](../../../../static/images/tutorials/4/h-comment.png)
 
 By default, the query only returns the untagged comment.
 
@@ -318,7 +318,7 @@ Let's query for a review for `Sushi` in Japanese.
 }
 ```
 
-![Japanese](/images/tutorials/4/i-japanese.png)
+![Japanese](../../../../static/images/tutorials/4/i-japanese.png)
 
 Now, let's query for a review for `Sushi` in Russian.
 
@@ -333,7 +333,7 @@ Now, let's query for a review for `Sushi` in Russian.
 }
 ```
 
-![Russian](/images/tutorials/4/j-russian.png)
+![Russian](../../../../static/images/tutorials/4/j-russian.png)
 
 You can also fetch all the comments for `Sushi` written in any language.
 
@@ -348,7 +348,7 @@ You can also fetch all the comments for `Sushi` written in any language.
 }
 ```
 
-![Russian](/images/tutorials/4/k-star.png)
+![Russian]/../../../../static/images/tutorials/4/k-star.png)
 
 Here is the table with the syntax for various ways of making use of language tags while querying.
 
@@ -365,7 +365,7 @@ Here is the table with the syntax for various ways of making use of language tag
 
 If you remember, we had initially added a Russian dish `Borscht` with its review in `Russian`.
 
-![Russian](/images/tutorials/4/l-russian.png)
+![Russian](../../../../static/images/tutorials/4/l-russian.png)
 
 If you notice, we haven't used the language tag `@ru` for the review written in Russian.
 
@@ -373,7 +373,7 @@ Hence, if we query for all the reviews written in `Russian`, the review for `Bor
 
 Only the review for `Sushi,` written in `Russian`, makes it to the list.
 
-![Russian](/images/tutorials/4/m-sushi.png)
+![Russian](../../../../static/images/tutorials/4/m-sushi.png)
 
 So, here's the lesson of the day!
 
@@ -391,6 +391,6 @@ We'll explore the string type indices in detail.
 
 Sounds interesting?
 
-Check out our next tutorial of the getting started series [here](../tutorial-5/).
+Check out our next tutorial of the getting started series [here](../tutorial-5/index.md).
 
 
